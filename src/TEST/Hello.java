@@ -13,12 +13,12 @@
  * Program		: kr.co.himedia.ecommerce
  * Description	:
  * Environment	: JRE 1.7 or more
- * File			: Hello0.java
+ * File			: Hello.java
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20240923143706][cydgate4957@gmail.com][CREATE: Initial Release]
+ *				: [20240923152218][cydgate4957@gmail.com][CREATE: Initial Release]
  */
-package com.github.ecommerce7th.saturn;
+package TEST;
 
 /**
  * @version 1.0.0
