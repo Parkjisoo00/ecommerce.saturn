@@ -47,12 +47,12 @@ public class MessageServer {
 			server = new ServerSocket(port);
 			
 			logger.info("---------------------------------------------------------------------------");
-			logger.info("kr.co.bravomylife.util.messenger.MessageServer has started at " + port + " port");
+			logger.info("com.bravomylife.util.messenger.MessageServer has started at " + port + " port");
 			logger.info("---------------------------------------------------------------------------");
 			
 			while (true) {
 				client = server.accept();
-				logger.info("A new client has connected... " + client.getInetAddress().getHostAddress() +" at kr.co.bravomylife.util.messenger.MessageServer");
+				logger.info("A new client has connected... " + client.getInetAddress().getHostAddress() +" at com.bravomylife.util.messenger.MessageServer");
 				
 				ClientHandler clientHandler = new ClientHandler(client);
 				clientHandler.start();

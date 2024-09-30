@@ -138,7 +138,7 @@ public class PagingHandler {
 		
 		
 		if (pageNavInfo == null) {
-			logger.error("[kr.co.bravomylife.util.paging.PagingHandler.getPageNavigator()] Can not found page style '" + styleId + "'.");
+			logger.error("[com.bravomylife.util.paging.PagingHandler.getPageNavigator()] Can not found page style '" + styleId + "'.");
 			return null;
 		}
 		
@@ -218,8 +218,8 @@ public class PagingHandler {
 			
 		}
 		catch (Exception e) {
-			logger.error("[kr.co.bravomylife.util.paging.PagingHandler.getPageNavigator()] Error occured during generate page navigator: " + e.getMessage(), e);
-			throw new Exception("[kr.co.bravomylife.util.paging.PagingHandler.getPageNavigator()] Error occured during generate page navigator: " + e.getMessage());
+			logger.error("[com.bravomylife.util.paging.PagingHandler.getPageNavigator()] Error occured during generate page navigator: " + e.getMessage(), e);
+			throw new Exception("[com.bravomylife.util.paging.PagingHandler.getPageNavigator()] Error occured during generate page navigator: " + e.getMessage());
 		}
 		
 		return pages.toString();
