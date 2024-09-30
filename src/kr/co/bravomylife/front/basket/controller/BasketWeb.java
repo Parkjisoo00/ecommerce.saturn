@@ -61,7 +61,7 @@ public class BasketWeb {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			mav.setViewName("front/basket/index");
+			mav.setViewName("front/basket/shop-cart");
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".index()] " + e.getMessage(), e);
