@@ -13,11 +13,11 @@
 	</appender>
 	
 	<!-- 1-2. COM.PLUOZONE.CORE File Appender -->
-	<appender name="KR.CO.HIMEDIA" class="org.apache.log4j.DailyRollingFileAppender">
+	<appender name="KR.CO.BRAVOMYLIFE" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="encoding" value="UTF-8" />
 		<param name="threshold" value="debug" />
 		<param name="ImmediateFlush" value="true" />
-		<param name="File" value="D:/Business/Eclipse/_dirLog/kr.co.himedia.sn.ecommerce7th.moon/kr.co.himedia.sn.ecommerce7th.moon.log" />
+		<param name="File" value="D:/Business/Eclipse/_dirLog/com.github.ecommerce7th.saturn/com.github.ecommerce7th.saturn.log" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
 		<param name="Append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -26,9 +26,9 @@
 	</appender>	
 	
 	<!-- 2-1. This Application Loggers -->
-	<logger name="kr.co.himedia">
+	<logger name="kr.co.bravomylife">
 		<level value="debug" />
-		<appender-ref ref="KR.CO.HIMEDIA" />
+		<appender-ref ref="KR.CO.BRAVOMYLIFE" />
 	</logger>	
 	<!-- 2-2. Other 3rdparty Loggers -->
 	<logger name="org.apache">
@@ -60,7 +60,7 @@
 	
 	<!-- 3. Define Loggers -->
 	<root>
-		<!-- [2015-12-23][pluto@plutozone.com][REPORT: Define Logger Priority Level(all > trace > debug > info > warn > error > fatal > off)] -->
+		<!-- [2024-09-30][REPORT: Define Logger Priority Level(all > trace > debug > info > warn > error > fatal > off)] -->
 		<priority value="all" />
 		<!-- <priority value="warn" /> -->
 		
