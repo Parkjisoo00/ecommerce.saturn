@@ -56,13 +56,13 @@ public class SaleWeb {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/basket/setBasketIframe.web")
+	@RequestMapping(value = "/front/sale/list.web")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			mav.setViewName("front/sale/index");
+			mav.setViewName("front/sale/list");
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".index()] " + e.getMessage(), e);

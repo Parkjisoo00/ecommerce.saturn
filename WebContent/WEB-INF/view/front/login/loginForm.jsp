@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="kor">
 
 <head>
-		<%@ include file="/include/front/header.jsp" %>
+	<%@ include file="/include/front/header.jsp" %>
+	
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
 	rel="stylesheet">
 
 	<!-- Css Styles -->
-		<%@ include file="/include/front/css.jsp" %>
+	<%@ include file="/include/front/css.jsp" %>
 </head>
 
 <body>
@@ -20,10 +21,12 @@
 
 	<!-- Offcanvas Menu Begin -->
 		<%@ include file="/include/front/leftgnb.jsp" %>
+		
 	<!-- Offcanvas Menu End -->
 
 	<!-- Header Section Begin -->
 		<%@ include file="/include/front/maingnb.jsp" %>
+		
 	<!-- Header Section End -->
 
 	<!-- Breadcrumb Begin -->
@@ -322,6 +325,7 @@
 
 		<!-- Js Plugins -->
 		<%@ include file="/include/front/js.jsp" %>
+		
 	</body>
 
 	</html>

@@ -55,7 +55,7 @@ public class BuyWeb {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/basket/setBasketIframe.web")
+	@RequestMapping(value = "/front/buy/writeForm.web")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");

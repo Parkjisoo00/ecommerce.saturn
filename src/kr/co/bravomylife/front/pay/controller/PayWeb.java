@@ -56,7 +56,7 @@ public class PayWeb {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/basket/setBasketIframe.web")
+	@RequestMapping(value = "/front/pay/index.web")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");

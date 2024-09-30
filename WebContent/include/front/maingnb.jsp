@@ -13,12 +13,12 @@
                             <li class="active"><a href="#">Home</a></li>
                             <li><a href="#">Womenâs</a></li>
                             <li><a href="#">Menâs</a></li>
-                            <li><a href="#">Shop</a></li>
+                            <li><a href="/front/sale/list.web">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
-                                    <li><a href="#">Product Details</a></li>
+                                    <li><a href="/front/buy/writeForm.web">Product Details</a></li>
                                     <li><a href="/front/basket/setBasketIframe.web">Shop Cart</a></li>
-                                    <li><a href="/front/basket/index.web">Checkout</a></li>
+                                    <li><a href="/front/pay/index.web">Checkout</a></li>
                                     <li><a href="#">Blog Details</a></li>
                                 </ul>
                             </li>
