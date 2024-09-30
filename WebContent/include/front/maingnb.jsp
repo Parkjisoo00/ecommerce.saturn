@@ -18,7 +18,7 @@
                                 <ul class="dropdown">
                                     <li><a href="#">Product Details</a></li>
                                     <li><a href="/front/basket/setBasketIframe.web">Shop Cart</a></li>
-                                    <li><a href="#">Checkout</a></li>
+                                    <li><a href="/front/basket/index.web">Checkout</a></li>
                                     <li><a href="#">Blog Details</a></li>
                                 </ul>
                             </li>

@@ -20,6 +20,17 @@
  */
 package kr.co.bravomylife.front.pay.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import kr.co.bravomylife.front.basket.controller.BasketWeb;
+
 /**
  * @version 1.0.0
  * @author cydgate4957@gmail.com
@@ -28,6 +39,36 @@ package kr.co.bravomylife.front.pay.controller;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
+@Controller("kr.co.bravomylife.front.pay.controller.PayWeb")
 public class PayWeb {
 
+	
+	/** Logger */
+	private static Logger logger = LoggerFactory.getLogger(BasketWeb.class);
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-09-30
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/basket/setBasketIframe.web")
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			mav.setViewName("front/pay/index");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".index()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 }
