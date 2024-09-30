@@ -34,7 +34,7 @@
 	<logger name="org.apache">
 		<level value="warn" />
 	</logger>
-	<!-- [2015-12-23][pluto@plutozone.com][DELETE: Default]
+	<!-- [2015-12-23][cydgate4957@gmail.com][DELETE: Default]
 	<logger name="org.springframework.core">
 		<level value="info" />
 	</logger>
