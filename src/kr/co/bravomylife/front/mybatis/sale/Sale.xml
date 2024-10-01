@@ -2,90 +2,211 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.sale.Sale">
 
-	<select id="functionList" parameterType="saleDto" resultType="saleDto">
+	<select id="totalCount" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
-			ROWNUM rnum
-			, searched.*
+			COUNT(ROWNUM)
 		FROM
-			(SELECT
-				SEQ_SLE
-				, SLE_NM
-				, PRICE_SALE
-				, CD_CTG_B
-				, IMG
-				, RATE_STAR
-				, CORP_NM
-			FROM
-				TB_SLE tb_sle
-			WHERE
-				COUNT_STOCK > 0 and
-				FLG_DELETE		= 'N'	and
-				CD_CTG_M		= 1		and
-				CD_STATE_SALE	= 2
-				<![CDATA[
-				AND SYSDATE >= DT_SALE_START AND SYSDATE <= DT_SALE_END
-				]]>
-			ORDER BY
-				SEQ_SLE DESC
-			) searched
+			TB_SLE
+		WHERE
+			<include refid="totalwhere" />
 	</select>
-	
-	<select id="ingredientList" parameterType="saleDto" resultType="saleDto">
+
+	<select id="totalList" parameterType="pagingDto" resultType="saleDto">
 		SELECT
-			ROWNUM rnum
-			, searched.*
+			*
 		FROM
-			(SELECT
-				SEQ_SLE
+			(
+			SELECT
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
+				, SEQ_SLE
 				, SLE_NM
+				, IMG
 				, PRICE_SALE
 				, CD_CTG_B
 				, CD_CTG_M
-				, IMG
 				, RATE_STAR
+				, PRD_TYPE
 				, CORP_NM
+				, DISCOUNT
+				, TO_CHAR(DT_REG, 'YYYY-MM-DD') DT_REG
 			FROM
-				TB_SLE tb_sle
+				TB_SLE
 			WHERE
-				COUNT_STOCK > 0 and
-				FLG_DELETE		= 'N'	and
-				CD_CTG_M		= 2		and
-				CD_STATE_SALE	= 2
-				<![CDATA[
-				AND SYSDATE >= DT_SALE_START AND SYSDATE <= DT_SALE_END
-				]]>
-			ORDER BY
-				SEQ_SLE DESC
-			) searched
+				<include refid="totalwhere" />
+			)
+		<![CDATA[
+		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+		]]> 
+		ORDER BY rnum
 	</select>
 	
-	<select id="genderList" parameterType="saleDto" resultType="saleDto">
+	<sql id="totalwhere">
+		CD_STATE_SALE = 2
+		AND FLG_DELETE = 'N'
+		<![CDATA[
+		AND COUNT_STOCK > 0
+		]]> 
+		<if test="searchWord != null and searchWord != ''">
+			<if test="searchKey == 'prd_nm'">
+				AND PRD_NM LIKE '%' || #{searchWord} || '%'
+			</if>
+		</if>
+	</sql>
+	
+	<select id="functionList" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
-			ROWNUM rnum
-			, searched.*
+			COUNT(ROWNUM)
 		FROM
-			(SELECT
-				SEQ_SLE
+			TB_SLE
+		WHERE
+			<include refid="functionwhere" />
+	</select>
+	
+	<select id="functionList" parameterType="pagingDto" resultType="saleDto">
+		SELECT
+			*
+		FROM
+			(
+			SELECT
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
+				, SEQ_SLE
 				, SLE_NM
+				, IMG
 				, PRICE_SALE
 				, CD_CTG_B
 				, CD_CTG_M
-				, IMG
 				, RATE_STAR
+				, PRD_TYPE
 				, CORP_NM
+				, DISCOUNT
+				, TO_CHAR(DT_REG, 'YYYY-MM-DD') DT_REG
 			FROM
-				TB_SLE tb_sle
+				TB_SLE
 			WHERE
-				COUNT_STOCK > 0 and
-				FLG_DELETE		= 'N'	and
-				CD_CTG_M		= 3		and
-				CD_STATE_SALE	= 2
-				<![CDATA[
-				AND SYSDATE >= DT_SALE_START AND SYSDATE <= DT_SALE_END
-				]]>
-			ORDER BY
-				SEQ_SLE DESC
-			) searched
+				<include refid="functionwhere" />
+			)
+		<![CDATA[
+		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+		]]> 
+		ORDER BY rnum
 	</select>
+	
+	<sql id="functionwhere">
+		CD_STATE_SALE = 2
+		AND FLG_DELETE = 'N'
+		AND CD_CTG_B = 1
+		<![CDATA[
+		AND COUNT_STOCK > 0
+		]]> 
+		<if test="searchWord != null and searchWord != ''">
+			<if test="searchKey == 'prd_nm'">
+				AND PRD_NM LIKE '%' || #{searchWord} || '%'
+			</if>
+		</if>
+	</sql>
+	
+	<select id="ingredientCount" parameterType="pagingDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(ROWNUM)
+		FROM
+			TB_SLE
+		WHERE
+			<include refid="ingredientwhere" />
+	</select>
+	
+	<select id="ingredientList" parameterType="pagingDto" resultType="saleDto">
+		SELECT
+			*
+		FROM
+			(
+			SELECT
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
+				, SEQ_SLE
+				, SLE_NM
+				, IMG
+				, PRICE_SALE
+				, CD_CTG_B
+				, CD_CTG_M
+				, RATE_STAR
+				, PRD_TYPE
+				, CORP_NM
+				, DISCOUNT
+				, TO_CHAR(DT_REG, 'YYYY-MM-DD') DT_REG
+			FROM
+				TB_SLE
+			WHERE
+				<include refid="ingredientwhere" />
+			)
+		<![CDATA[
+		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+		]]> 
+		ORDER BY rnum
+	</select>
+	
+	<sql id="ingredientwhere">
+		CD_STATE_SALE = 2
+		AND FLG_DELETE = 'N'
+		AND CD_CTG_B = 2
+		<![CDATA[
+		AND COUNT_STOCK > 0
+		]]> 
+		<if test="searchWord != null and searchWord != ''">
+			<if test="searchKey == 'prd_nm'">
+				AND PRD_NM LIKE '%' || #{searchWord} || '%'
+			</if>
+		</if>
+	</sql>
+	
+	<select id="genderCount" parameterType="pagingDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(ROWNUM)
+		FROM
+			TB_SLE
+		WHERE
+			<include refid="genderwhere" />
+	</select>
+	
+	<select id="genderList" parameterType="pagingDto" resultType="saleDto">
+		SELECT
+			*
+		FROM
+			(
+			SELECT
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
+				, SEQ_SLE
+				, SLE_NM
+				, IMG
+				, PRICE_SALE
+				, CD_CTG_B
+				, CD_CTG_M
+				, RATE_STAR
+				, PRD_TYPE
+				, CORP_NM
+				, DISCOUNT
+				, TO_CHAR(DT_REG, 'YYYY-MM-DD') DT_REG
+			FROM
+				TB_SLE
+			WHERE
+				<include refid="genderwhere" />
+			)
+		<![CDATA[
+		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+		]]> 
+		ORDER BY rnum
+	</select>
+	
+	<sql id="genderwhere">
+		CD_STATE_SALE = 2
+		AND FLG_DELETE = 'N'
+		AND CD_CTG_B = 3
+		<![CDATA[
+		AND COUNT_STOCK > 0
+		]]> 
+		<if test="searchWord != null and searchWord != ''">
+			<if test="searchKey == 'prd_nm'">
+				AND PRD_NM LIKE '%' || #{searchWord} || '%'
+			</if>
+		</if>
+	</sql>
 		
 </mapper>

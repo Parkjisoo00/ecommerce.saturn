@@ -14,7 +14,7 @@
 			var frmMain = document.getElementById("frmMain");
 			
 			frmMain.currentPage.setAttribute("value", value);
-			frmMain.action="/front/sale/list.web";
+			frmMain.action="/front/sale/total_list.web";
 			frmMain.submit();
 		}
 	</script>

@@ -20,8 +20,6 @@
  */
 package kr.co.bravomylife.front.sale.service;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -29,7 +27,6 @@ import org.springframework.stereotype.Service;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.sale.dao.SaleDao;
-import kr.co.bravomylife.front.sale.dto.SaleDto;
 
 /**
  * @version 1.0.0
@@ -44,31 +41,67 @@ public class SaleSrvc {
 	
 	@Inject
 	SaleDao saleDao;
-	
-	public List<SaleDto> functionList(SaleDto saleDto) {
-		return saleDao.functionList(saleDto);
-	}
-	
-	public List<SaleDto> ingredientList(SaleDto saleDto) {
-		return saleDao.ingredientList(saleDto);
-	}
-	
-	public List<SaleDto> genderList(SaleDto saleDto) {
-		return saleDao.genderList(saleDto);
-	}
-	
-	public PagingListDto list(PagingDto pagingDto) {
+		
+	public PagingListDto functionList(PagingDto pagingDto) {
 		
 		PagingListDto pagingListDto = new PagingListDto();
 		
-		int totalLine = saleDao.count(pagingDto);
+		int totalLine = saleDao.functionCount(pagingDto);
 		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
 		pagingDto.setTotalLine(totalLine);
 		pagingDto.setTotalPage(totalPage);
 		if (totalPage == 0) pagingDto.setCurrentPage(1);
 		
 		pagingListDto.setPaging(pagingDto);
-		pagingListDto.setList(saleDao.list(pagingDto));
+		pagingListDto.setList(saleDao.functionList(pagingDto));
+		
+		return pagingListDto;
+	}
+	
+	public PagingListDto ingredientList(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		int totalLine = saleDao.ingredientCount(pagingDto);
+		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(saleDao.ingredientList(pagingDto));
+		
+		return pagingListDto;
+	}
+	
+	public PagingListDto genderList(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		int totalLine = saleDao.genderCount(pagingDto);
+		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(saleDao.genderList(pagingDto));
+		
+		return pagingListDto;
+	}
+	
+	public PagingListDto totalList(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		int totalLine = saleDao.totalCount(pagingDto);
+		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(saleDao.totalList(pagingDto));
 		
 		return pagingListDto;
 	}

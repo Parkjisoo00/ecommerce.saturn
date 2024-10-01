@@ -20,8 +20,6 @@
  */
 package kr.co.bravomylife.front.sale.controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -67,14 +65,15 @@ public class SaleWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/sale/function_list.web")
-	public ModelAndView index1(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+	public ModelAndView functionList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			List<SaleDto> list = saleSrvc.functionList(saleDto);
 			
-			mav.addObject("list", list);
+			PagingListDto pagingListDto = saleSrvc.functionList(pagingDto);
+			mav.addObject("paging"	, pagingListDto.getPaging());
+			mav.addObject("list"	, pagingListDto.getList());
 			
 			mav.setViewName("front/sale/function_list");
 		}
@@ -97,14 +96,15 @@ public class SaleWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/sale/ingredient_list.web")
-	public ModelAndView index2(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+	public ModelAndView ingredientList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			List<SaleDto> list = saleSrvc.ingredientList(saleDto);
 			
-			mav.addObject("list", list);
+			PagingListDto pagingListDto = saleSrvc.ingredientList(pagingDto);
+			mav.addObject("paging"	, pagingListDto.getPaging());
+			mav.addObject("list"	, pagingListDto.getList());
 			
 			mav.setViewName("front/sale/ingredient_list");
 		}
@@ -127,14 +127,15 @@ public class SaleWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/sale/gender_list.web")
-	public ModelAndView index3(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+	public ModelAndView genderList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			List<SaleDto> list = saleSrvc.genderList(saleDto);
 			
-			mav.addObject("list", list);
+			PagingListDto pagingListDto = saleSrvc.genderList(pagingDto);
+			mav.addObject("paging"	, pagingListDto.getPaging());
+			mav.addObject("list"	, pagingListDto.getList());
 			
 			mav.setViewName("front/sale/gender_list");
 		}
@@ -157,17 +158,17 @@ public class SaleWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/sale/total_list.web")
-	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto) {
+	public ModelAndView totalList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
 			
-			PagingListDto pagingListDto = saleSrvc.list(pagingDto);
+			PagingListDto pagingListDto = saleSrvc.totalList(pagingDto);
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
 			
-			mav.setViewName("front/sale/list");
+			mav.setViewName("front/sale/total_list");
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".search()] " + e.getMessage(), e);

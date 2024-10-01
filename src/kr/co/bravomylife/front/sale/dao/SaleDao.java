@@ -38,24 +38,36 @@ import kr.co.bravomylife.front.sale.dto.SaleDto;
  */
 @Repository("kr.co.bravomylife.front.sale.dao.SaleDao")
 public class SaleDao extends BaseDao {
-
-	public List<SaleDto> functionList(SaleDto saleDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.functionList", saleDto);
+	
+	public List<SaleDto> functionList(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.functionList", pagingDto);
 	}
 	
-	public List<SaleDto> ingredientList(SaleDto saleDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.ingredientList", saleDto);
+	public int functionCount(PagingDto pagingDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.functionCount", pagingDto);
 	}
 	
-	public List<SaleDto> genderList(SaleDto saleDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.genderList", saleDto);
+	public List<SaleDto> ingredientList(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.ingredientList", pagingDto);
 	}
 	
-	public List<SaleDto> list(PagingDto pagingDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.list", pagingDto);
+	public int ingredientCount(PagingDto pagingDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.ingredientCount", pagingDto);
 	}
 	
-	public int count(PagingDto pagingDto) {
-		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.count", pagingDto);
+	public List<SaleDto> genderList(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.genderList", pagingDto);
+	}
+	
+	public int genderCount(PagingDto pagingDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.genderCount", pagingDto);
+	}
+	
+	public List<SaleDto> totalList(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.totalList", pagingDto);
+	}
+	
+	public int totalCount(PagingDto pagingDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.totalCount", pagingDto);
 	}
 }

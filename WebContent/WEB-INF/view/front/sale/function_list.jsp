@@ -8,7 +8,17 @@
 
 <head>
 	<%@ include file="/include/front/header.jsp" %>
-
+	<script>
+		function goPages(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.currentPage.setAttribute("value", value);
+			frmMain.action="/front/sale/function_list.web";
+			frmMain.submit();
+		}
+	</script>
+	
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
@@ -20,7 +30,7 @@
 
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" name="seq_sle" id="seq_sle" />
+<input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -159,7 +169,9 @@
 							</c:otherwise>
 						</c:choose>
 					</div>
-					
+				<br/>
+				<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
+				<br/>
 				</div>
 			</div>
 		</div>
