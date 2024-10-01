@@ -11,6 +11,28 @@
 			EMAIL = #{email}
 	</select>
 
+	<select id="select" parameterType="memberDto" resultType="memberDto">
+		SELECT
+			mst.SEQ_MBR
+			, mst.EMAIL
+			, mst.MBR_NM
+			, mst.GENDER
+			, mst.PHONE
+			, dtl.POST
+			, dtl.ADDR1
+			, dtl.ADDR2
+			, dtl.FLG_EMAIL
+			, dtl.FLG_SMS
+		FROM
+			TB_MBR_MST mst
+		INNER JOIN
+			TB_MBR_DTL dtl
+		ON
+			mst.SEQ_MBR = dtl.SEQ_MBR
+		WHERE
+			mst.SEQ_MBR = #{seq_mbr}
+	</select>
+
 	<insert id="insertMaster" parameterType="memberDto">
 		INSERT INTO TB_MBR_MST
 			(SEQ_MBR, EMAIL, PASSWD, FLG_SUR, CD_STATE, MBR_NM, AGE, GENDER, PHONE, DT_REG, REGISTER)
