@@ -129,11 +129,31 @@
 											<div class="product__item__text">
 												<h6><a href="#" style="font-size: 16px;">${list.sle_nm}</a></h6>
 													<div class="rating">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
+														<c:if test="${list.rate_star == 1}">
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${list.rate_star == 2}">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${list.rate_star == 3}">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${list.rate_star == 4}">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
+														<c:if test="${list.rate_star == 5}">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</c:if>
 													</div>
 												<div class="product__price">${list.price_sale} -${list.discount}%</div>
 											</div>
