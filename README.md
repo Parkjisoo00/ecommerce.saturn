@@ -1,5 +1,3 @@
-test
-
 # ecommerce7th
 
 <summary>
