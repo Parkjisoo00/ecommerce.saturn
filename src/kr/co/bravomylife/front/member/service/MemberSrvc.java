@@ -22,6 +22,7 @@ package kr.co.bravomylife.front.member.service;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
@@ -38,9 +39,9 @@ import kr.co.bravomylife.front.member.dto.TermAgreeDto;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
+@Service("kr.co.bravomylife.front.member.service.MemberSrvc")
 public class MemberSrvc {
 
-	
 	@Inject
 	MemberDao memberDao;
 	
