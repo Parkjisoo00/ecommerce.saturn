@@ -1,72 +1,56 @@
-/**
- * @author alstjsrla28@himedia.co.kr
- * @since 2024-10-01
- *
- * <p>DESCRIPTION: 개인정보 수정
- * <p>IMPORTANT:</p>
- */
 function checkModify() {
-	
-	var isSubmit	= true;
-	var frmMain		= document.getElementById("frmMain");
-	
-	// 휴대폰번호 확인(3자리-4자리-4자리)
-	var regExpPhone = /^\d{3}-\d{4}-\d{4}$/;
-	var phone = document.getElementById("phone1").value + "-" + document.getElementById("phone2").value + "-" + document.getElementById("phone3").value;
-	if (!regExpPhone.test(phone)) {
-		alert("연락처를 확인해 주세요!");
-		isSubmit = false;
-	}
-	
-	if (document.getElementById("phone1").value == ""
-			|| document.getElementById("phone2").value == ""
-			|| document.getElementById("phone3").value == ""
-			|| document.getElementById("post").value == ""
-			|| document.getElementById("addr1").value == ""
-			|| document.getElementById("addr2").value == "") {
-		alert("필수 항목을 입력하세요!");
-		isSubmit = false;
-	}
-	
-	if (isSubmit) {
-	
-		document.getElementById("phone").value = 
-			document.getElementById("phone1").value
-			+ "-" + document.getElementById("phone2").value
-			+ "-" + document.getElementById("phone3").value;
-			
-		frmMain.action = "/front/member/modifyProc.web";
-		frmMain.submit();
-	}
-	document.addEventListener('DOMContentLoaded', function() {
-		const birthDateInput = document.getElementById('birthDate');
+    var isSubmit = true;
+    var frmMain = document.getElementById("frmMain");
 
-		// 사용자가 미래 날짜를 선택하지 않도록 제한
-		birthDateInput.addEventListener('change', function() {
-			const birthDate = new Date(birthDateInput.value);
-			const today = new Date();
+    // 휴대폰번호 확인(3자리-4자리-4자리)
+    var regExpPhone = /^\d{3}-\d{4}-\d{4}$/;
+    var phone = document.getElementById("phone1").value + "-" + document.getElementById("phone2").value + "-" + document.getElementById("phone3").value;
+    if (!regExpPhone.test(phone)) {
+        alert("연락처를 확인해 주세요!");
+        isSubmit = false;
+    }
 
-			// 미래 날짜를 선택하면 경고 메시지와 함께 필드를 비움
-			if (birthDate > today) {
-				alert('미래의 날짜를 선택할 수 없습니다.');
-				birthDateInput.value = '';
-			}
-		});
-	});
+    if (document.getElementById("phone1").value == ""
+        || document.getElementById("phone2").value == ""
+        || document.getElementById("phone3").value == ""
+        || document.getElementById("post").value == ""
+        || document.getElementById("addr1").value == ""
+        || document.getElementById("addr2").value == "") {
+        alert("필수 항목을 입력하세요!");
+        isSubmit = false;
+    }
 
+    if (isSubmit) {
+        document.getElementById("phone").value =
+            document.getElementById("phone1").value
+            + "-" + document.getElementById("phone2").value
+            + "-" + document.getElementById("phone3").value;
+
+        frmMain.action = "/front/member/modifyProc.web";
+        frmMain.submit();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const birthDateInput = document.getElementById('birthDate');
+
+        // 사용자가 미래 날짜를 선택하지 않도록 제한
+        birthDateInput.addEventListener('change', function () {
+            const birthDate = new Date(birthDateInput.value);
+            const today = new Date();
+
+            // 미래 날짜를 선택하면 경고 메시지와 함께 필드를 비움
+            if (birthDate > today) {
+                alert('미래의 날짜를 선택할 수 없습니다.');
+                birthDateInput.value = '';
+            }
+        });
+    });
 }
 
-/**
- * @author pluto@himedia.co.kr
- * @since 2023-11-02
- *
- * <p>DESCRIPTION: 다음 우편번호 찾기(https://postcode.map.daum.net/guide)</p>
- * <p>IMPORTANT:</p>
- */
 function execDaumPostcode() {
 	
-	var width	= 500; //팝업의 너비
-	var height	= 600; //팝업의 높이
+	var width = 500; //팝업의 너비
+	var height = 600; //팝업의 높이
 	
 	new daum.Postcode({
 		width: width,
@@ -94,9 +78,9 @@ function execDaumPostcode() {
 			}
 			
 			// 우편번호와 주소 정보를 해당 필드에 넣는다.
-			document.getElementById("post").value		= data.zonecode;
-			document.getElementById("addr1").value		= roadAddr;
-			document.getElementById("jibunAdd").value	= data.jibunAddress;
+			document.getElementById("postcode").value		= data.zonecode;
+			document.getElementById("roadAddr").value		= roadAddr;
+			document.getElementById("addr1").value			= data.jibunAddress;
 			
 			// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
 			if(roadAddr !== ''){
@@ -130,151 +114,124 @@ function execDaumPostcode() {
 	});
 }
 
-/**
- * @author pluto@himedia.co.kr
- * @since 2024-05-28
- *
- * <p>DESCRIPTION:</p>
- * <p>IMPORTANT:</p>
- */
 function checkEmail(email) {
-	
-	var isEmail = true;
-	
-	// 0. 정규식
-	//alert(email);
-	var regExpEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-	if (!regExpEmail.test(email)) return false;
-	
-	// 1. 자리수
-	//alert("자리수=" + email.length);
-	if (email.length <= 7) return false;
-	
-	// 2. @
-	//alert("@의 인덱스=" + email.indexOf("@"));
-	if (email.indexOf("@") <= 0) return false;
-	
-	// 3. 도메인
-	var isExist = false;
-	var arrDomain	= [".co.kr", ".com", ".net", ".or.kr", ".go.kr"];
-	for (var i = 0; i < arrDomain.length; i++) {
-		if (email.indexOf(arrDomain[i]) > 0 ) {
-			//alert("도메인=" + arrDomain[i]);
-			isExist = true;
-			break;
-		}
-	}
-	if (!isExist) return false;
-	
-	var arrValue = email.split("@");
-	//alert("ID=" + arrValue[0].toLowerCase());
-	
-	// 4. 아이디에 처음시작 1자리는 영문, 5자이상 16자 이하, 영문, 영문+숫자, 특수문자는 '_'만 가능
-	var regularExpression = /^[a-zA-Z]{1}[a-zA-Z0-9_]{4,16}$/;
-	var isExist = regularExpression.test(arrValue[0]) ? false : true;
-	//alert("특수문자 여부=" + isExist);
-	if (isExist) return false;
-	
-	// 5. 제외할 아이디(소문자 기준)
-	isExist = false;
-	var IRREGULAR_KEYWORD = "super|root|administrator|admin|console"
-	+ "|sys|system|sa|owner"
-	+ "|document|html|iframe|div|span|img|src|type"
-	+ "|javascript|vbscript|script|alert"
-	+ "|id|member|customer|www";
-	if (IRREGULAR_KEYWORD.indexOf(arrValue[0].toLowerCase()) >= 0 ) {
-		//alert("제외할 아이디=" + arrValue[0].toLowerCase());
-		isExist = true;
-	}
-	if (isExist) return false;
-	
-	return isEmail;
+    var isEmail = true;
+    var regExpEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+    if (!regExpEmail.test(email)) return false;
+    if (email.length <= 7) return false;
+    if (email.indexOf("@") <= 0) return false;
+
+    var arrDomain = [".co.kr", ".com", ".net", ".or.kr", ".go.kr"];
+    var isExist = arrDomain.some(function (domain) {
+        return email.indexOf(domain) > 0;
+    });
+
+    if (!isExist) return false;
+
+    var arrValue = email.split("@");
+    var regularExpression = /^[a-zA-Z]{1}[a-zA-Z0-9_]{4,16}$/;
+    if (!regularExpression.test(arrValue[0])) return false;
+
+    var IRREGULAR_KEYWORD = "super|root|administrator|admin|console"
+        + "|sys|system|sa|owner"
+        + "|document|html|iframe|div|span|img|src|type"
+        + "|javascript|vbscript|script|alert"
+        + "|id|member|customer|www";
+    if (IRREGULAR_KEYWORD.indexOf(arrValue[0].toLowerCase()) >= 0) {
+        return false;
+    }
+
+    return isEmail;
 }
 
-/**
- * @author pluto@himedia.co.kr
- * @since 2024-05-28
- *
- * <p>DESCRIPTION:</p>
- * <p>IMPORTANT:</p>
- */
 function checkRegister() {
-	
-	var isSubmit	= true;
-	var frmMain		= document.getElementById("frmMain");
-	
-	if (!document.getElementById("term_1").checked) {
-		alert("필수 약관에 동의하셔야 합니다!");
-		return;
-	}
-	
-	var email = document.getElementById("email").value;
-	//alert("이메일=" + email);
-	
-	// 정상적인 이메일이 아니면(checkEmail = false)
-	if (!checkEmail(email)) {
-		alert("이메일을 확인하세요!");
-		document.getElementById("email").focus();
-		return;
-	}
-	
-	// 이메일 중복 여부 확인
-	if (isDuplicate) {
-		alert("이메일 중복을 확인하세요!");
-		document.getElementById("btnId").focus();
-		return;
-	}
-	
-	// 비밀번호 확인
-	//alert(document.getElementById("passwd").value);
-	//alert(document.getElementById("passwd_").value);
-	if (document.getElementById("passwd").value != document.getElementById("passwd_").value) {
-		alert("비밀번호를 확인하세요!");
-		isSubmit = false;
-		document.getElementById("passwd").focus();
-	}
-	var regExpPasswd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
-	if (!regExpPasswd.test(document.getElementById("passwd").value)) {
-		alert("비밀번호는 영문/숫자/특수기호를 조합하여 8자 이상을 입력하세요!");
-		isSubmit = false;
-	}
-	
-	// 성명 확인(한글만 입력 가능)
-	var regExpName = /^[가-힣]*$/;
-	if (!regExpName.test(document.getElementById("mbr_nm").value)) {
-		alert("성명은 한글만 입력하세요!");
-		isSubmit = false;
-	}
-	
-	// 휴대폰번호 확인(3자리-4자리-4자리)
-	var regExpPhone = /^\d{3}-\d{4}-\d{4}$/;
-	var phone = document.getElementById("phone1").value + "-" + document.getElementById("phone2").value + "-" + document.getElementById("phone3").value;
-	if (!regExpPhone.test(phone)) {
-		alert("연락처를 확인해 주세요!");
-		isSubmit = false;
-	}
-	
-	if (document.getElementById("mbr_nm").value == ""
-			|| document.getElementById("phone1").value == ""
-			|| document.getElementById("phone2").value == ""
-			|| document.getElementById("phone3").value == ""
-			|| document.getElementById("post").value == ""
-			|| document.getElementById("addr1").value == ""
-			|| document.getElementById("addr2").value == "") {
-		alert("필수 항목을 입력하세요!");
-		isSubmit = false;
-	}
-	
-	if (isSubmit) {
-		alert("정상적으로 "
-				+ email
-				+ "로 인증 URL이 전송되었습니다.\n반드시 가입 후 10분 이내에 인증 URL을 클릭하셔야 정상적으로 서비스를 이용할 수 있습니다.");
-		document.getElementById("phone").value = 
-			document.getElementById("phone1").value
-			+ "-" + document.getElementById("phone2").value
-			+ "-" + document.getElementById("phone3").value;
-			
-		frmMain.action = "/front/member/registerProc.web";
-		frmMain.submit();
-	}
+    var isSubmit = true;
+    var frmMain = document.getElementById("frmMain");
+
+    if (!document.getElementById("term_1").checked) {
+        alert("필수 약관에 동의하셔야 합니다!");
+        return;
+    }
+
+    var email = document.getElementById("email").value;
+
+    if (!checkEmail(email)) {
+        alert("이메일을 확인하세요!");
+        document.getElementById("email").focus();
+        return;
+    }
+
+    if (isDuplicate) {
+        alert("이메일 중복을 확인하세요!");
+        document.getElementById("btnId").focus();
+        return;
+    }
+
+    if (document.getElementById("passwd").value != document.getElementById("passwd").value) {
+        alert("비밀번호를 확인하세요!");
+        isSubmit = false;
+        document.getElementById("passwd").focus();
+    }
+
+    var regExpPasswd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+    if (!regExpPasswd.test(document.getElementById("passwd").value)) {
+        alert("비밀번호는 영문/숫자/특수기호를 조합하여 8자 이상을 입력하세요!");
+        isSubmit = false;
+    }
+
+    var regExpName = /^[가-힣]*$/;
+    if (!regExpName.test(document.getElementById("mbr_nm").value)) {
+        alert("성명은 한글만 입력하세요!");
+        isSubmit = false;
+    }
+
+    var regExpPhone = /^\d{3}-\d{4}-\d{4}$/;
+    var phone = document.getElementById("phone1").value + "-" + document.getElementById("phone2").value + "-" + document.getElementById("phone3").value;
+    if (!regExpPhone.test(phone)) {
+        alert("연락처를 확인해 주세요!");
+        isSubmit = false;
+    }
+
+    if (document.getElementById("mbr_nm").value == ""
+        || document.getElementById("phone1").value == ""
+        || document.getElementById("phone2").value == ""
+        || document.getElementById("phone3").value == ""
+        || document.getElementById("post").value == ""
+        || document.getElementById("addr1").value == ""
+        || document.getElementById("addr2").value == "") {
+        alert("필수 항목을 입력하세요!");
+        isSubmit = false;
+    }
+
+    if (isSubmit) {
+        alert("정상적으로 "
+            + email
+            + "로 인증 URL이 전송되었습니다.\n반드시 가입 후 10분 이내에 인증 URL을 클릭하셔야 정상적으로 서비스를 이용할 수 있습니다.");
+        document.getElementById("phone").value =
+            document.getElementById("phone1").value
+            + "-" + document.getElementById("phone2").value
+            + "-" + document.getElementById("phone3").value;
+
+        frmMain.action = "/front/member/registerProc.web";
+        frmMain.submit();
+    }
 }
+
+// $(document).ready()로 이벤트 핸들러 추가
+$(document).ready(function () {
+    // 우편번호 찾기 버튼 클릭 이벤트
+    $("#btnPostcode").click(function () {
+        execDaumPostcode();
+    });
+
+    // 이메일 중복 체크 버튼 클릭 이벤트
+    $("#btnId").click(function () {
+        // 중복 찾기 로직
+    });
+
+    // 이메일 인증 버튼 클릭 이벤트
+    $("#btnConfirm").click(function () {
+        // 이메일 인증 로직
+    });
+});
