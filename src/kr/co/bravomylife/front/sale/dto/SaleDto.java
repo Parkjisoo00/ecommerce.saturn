@@ -50,11 +50,18 @@ public class SaleDto {
 	private int register			= 0;
 	private String dt_upt			= "";
 	private int updater				= 0;
+	private int discount_sale		= 0;
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
+	public int getDiscount_sale() {
+		return discount_sale;
+	}
+	public void setDiscount_sale(int discount_sale) {
+		this.discount_sale = discount_sale;
+	}
 	public int getRnum() {
 		return rnum;
 	}

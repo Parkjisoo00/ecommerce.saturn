@@ -28,6 +28,7 @@
 				, PRD_TYPE
 				, CORP_NM
 				, DISCOUNT
+				, PRICE_SALE * (1 - (DISCOUNT / 100)) as discount_sale
 				, TO_CHAR(DT_REG, 'YYYY-MM-DD') DT_REG
 			FROM
 				TB_SLE

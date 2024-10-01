@@ -155,7 +155,9 @@
 															<i class="fa fa-star"></i>
 														</c:if>
 													</div>
-												<div class="product__price">${list.price_sale} -${list.discount}%</div>
+												<c:if test="${list.discount_sale == null || < 0}">
+													<div class="product__price">${list.price_sale}</div>
+												</c:if>
 											</div>
 										</div>
 									</div>
