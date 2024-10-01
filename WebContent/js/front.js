@@ -197,7 +197,7 @@ function checkRegister() {
         || document.getElementById("phone1").value == ""
         || document.getElementById("phone2").value == ""
         || document.getElementById("phone3").value == ""
-        //|| document.getElementById("post").value == ""
+        || document.getElementById("post").value == ""
         || document.getElementById("addr1").value == ""
         || document.getElementById("addr2").value == "") {
         alert("필수 항목을 입력하세요!");
@@ -218,20 +218,4 @@ function checkRegister() {
     }
 }
 
-// $(document).ready()로 이벤트 핸들러 추가
-$(document).ready(function () {
-    // 우편번호 찾기 버튼 클릭 이벤트
-    $("#btnPostcode").click(function () {
-        execDaumPostcode();
-    });
 
-    // 이메일 중복 체크 버튼 클릭 이벤트
-    $("#btnId").click(function () {
-        // 중복 찾기 로직
-    });
-
-    // 이메일 인증 버튼 클릭 이벤트
-    $("#btnConfirm").click(function () {
-        // 이메일 인증 로직
-    });
-});
