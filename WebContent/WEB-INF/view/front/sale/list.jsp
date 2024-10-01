@@ -122,9 +122,11 @@
 					<div class="row">
 						<div class="col-lg-4 col-md-6">
 							<div class="product__item">
+								<!-- 상품 이미지 칸 -->
 								<div class="product__item__pic set-bg" data-setbg="/img/shop/shop-1.jpg">
 									<div class="label new">New</div>
 									<ul class="product__hover">
+										<!-- 상품에 커서가 있을시 출력되는 팝업 칸 -->
 										<li><a href="img/shop/shop-1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
 										<li><a href="#"><span class="icon_heart_alt"></span></a></li>
 										<li><a href="#"><span class="icon_bag_alt"></span></a></li>

@@ -20,6 +20,9 @@
  */
 package kr.co.bravomylife.front.sale.controller;
 
+import java.util.List;
+
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,6 +33,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.front.basket.controller.BasketWeb;
+import kr.co.bravomylife.front.common.Common;
+import kr.co.bravomylife.front.sale.service.SaleSrvc;
+import kr.co.bravomylife.front.sale.dto.SaleDto;
 
 /**
  * @version 1.0.0
@@ -40,11 +46,13 @@ import kr.co.bravomylife.front.basket.controller.BasketWeb;
  * <p>IMPORTANT:</p>
  */
 @Controller("kr.co.bravomylife.front.sale.controller.SaleWeb")
-public class SaleWeb {
-
+public class SaleWeb extends Common {
 	
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(BasketWeb.class);
+	
+	@Inject
+	private SaleSrvc saleSrvc;
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -57,15 +65,19 @@ public class SaleWeb {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/sale/list.web")
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			List<SaleDto> list = saleSrvc.search(saleDto);
+			
+			mav.addObject("list", list);
+			
 			mav.setViewName("front/sale/list");
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".index()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".search()] " + e.getMessage(), e);
 		}
 		finally {}
 		
