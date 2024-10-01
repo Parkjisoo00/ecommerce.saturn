@@ -157,10 +157,10 @@
 													</div>
 												<c:choose>
 												<c:when test="${list.discount == null || list.discount <= 0}">
-												<div class="product__price"><strong style="font-size: 1.5em">${list.price_sale}</strong>원</div>
+												<div class="product__price"><span style="text-decoration: none; font-size: 1.3em; color: black;">${list.price_sale}</span>원</div>
 												</c:when>
 												<c:otherwise>
-												<div class="product__price"><span>${list.price_sale}</span> <span style="text-decoration: none; color : red">-${list.discount}%</span> <strong style="font-size: 1.5em">${list.discount_sale}</strong>원</div>
+												<div class="product__price"><span>${list.price_sale}</span> <span style="text-decoration: none; color : red">-${list.discount}%</span> <span style="text-decoration: none; color: black; font-size: 1.3em">${list.discount_sale}</span>원</div>
 												</c:otherwise>
 												</c:choose>
 											</div>
