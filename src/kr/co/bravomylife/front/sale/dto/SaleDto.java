@@ -53,11 +53,18 @@ public class SaleDto {
 	private String dt_upt			= "";
 	private int updater				= 0;
 	private int discount_sale		= 0;
+	private String flg_best			= "";
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
+	public String getFlg_best() {
+		return flg_best;
+	}
+	public void setFlg_best(String flg_best) {
+		this.flg_best = flg_best;
+	}
 	public int getAverage_rate() {
 		return average_rate;
 	}

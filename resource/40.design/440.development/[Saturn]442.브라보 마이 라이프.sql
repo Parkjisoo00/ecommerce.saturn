@@ -30,7 +30,7 @@ COMMENT ON COLUMN "TB_SLE"."IMG" IS '이미지(대표)';
 
 COMMENT ON COLUMN "TB_SLE"."PRICE_SALE" IS '판매 가격';
 
-COMMENT ON COLUMN "TB_SLE"."CD_CTG_B" IS '상품 카테고리 : 1(기능별), 2(성분별), 3(대상별)\';
+COMMENT ON COLUMN "TB_SLE"."CD_CTG_B" IS '상품 카테고리 : 1(기능별), 2(성분별), 3(대상별)';
 
 COMMENT ON COLUMN "TB_SLE"."CD_CTG_M" IS '상품 카테고리 중분류 : 1-9';
 
@@ -522,6 +522,7 @@ CREATE TABLE "TB_BEST" (
 	"SEQ_SLE"	NUMBER(10)		NULL,
 	"CD_CTG_B"	CHAR(1)		NOT NULL,
 	"CD_CTG_M"	CHAR(1)		NOT NULL,
+	"FLG_BEST"	CHAR(1)		NULL,
 	"REGISTER"	NUMBER(10)		NOT NULL,
 	"DT_REG"	DATE		NOT NULL,
 	"DT_UPT"	DATE		NULL,
@@ -532,9 +533,11 @@ COMMENT ON COLUMN "TB_BEST"."SEQ_BEST" IS '베스트 상품 일련번호';
 
 COMMENT ON COLUMN "TB_BEST"."SEQ_SLE" IS '판매 상품 일련번호';
 
-COMMENT ON COLUMN "TB_BEST"."CD_CTG_B" IS '상품 카테고리 : 1(기능별), 2(성분별), 3(대상별)\';
+COMMENT ON COLUMN "TB_BEST"."CD_CTG_B" IS '상품 카테고리 : 1(기능별), 2(성분별), 3(대상별)';
 
 COMMENT ON COLUMN "TB_BEST"."CD_CTG_M" IS '상품 카테고리 중분류 : 1-9';
+
+COMMENT ON COLUMN "TB_BEST"."FLG_BEST" IS '베스트 상품 여부';
 
 COMMENT ON COLUMN "TB_BEST"."REGISTER" IS '등록자';
 

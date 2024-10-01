@@ -78,7 +78,7 @@ public class SaleWeb extends Common {
 			mav.setViewName("front/sale/function_list");
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".search()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".functionList()] " + e.getMessage(), e);
 		}
 		finally {}
 		
@@ -109,7 +109,7 @@ public class SaleWeb extends Common {
 			mav.setViewName("front/sale/ingredient_list");
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".search()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".ingredientList()] " + e.getMessage(), e);
 		}
 		finally {}
 		
@@ -140,7 +140,7 @@ public class SaleWeb extends Common {
 			mav.setViewName("front/sale/gender_list");
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".search()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".genderList()] " + e.getMessage(), e);
 		}
 		finally {}
 		
@@ -171,7 +171,7 @@ public class SaleWeb extends Common {
 			mav.setViewName("front/sale/total_list");
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".search()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".totalList()] " + e.getMessage(), e);
 		}
 		finally {}
 		

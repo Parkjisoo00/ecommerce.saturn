@@ -117,8 +117,12 @@
 										<input type="hidden" name="prd_type" id="prd_type" value="${list.corp_nm}" />
 										<div class="product__item">
 											<div class="product__item__pic set-bg" data-setbg="${list.img}">
-												<div class="label new">베스트</div>
-												<div class="label stockout stockblue">품절</div>
+												<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
+													<div class="label new">베스트</div>
+												</c:if>
+												<c:if test="${list.count_stock == null || list.count_stock == 0}">
+													<div class="label stockout stockblue">품절</div>
+												</c:if>
 												<ul class="product__hover">
 													<li><a href="${list.seq_sle}" class="image-popup"><span class="arrow_expand"></span></a></li>
 													<li><a href="#"><span class="icon_heart_alt"></span></a></li>
