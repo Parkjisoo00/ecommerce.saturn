@@ -53,7 +53,7 @@
 		</if>
 	</sql>
 	
-	<select id="functionList" parameterType="pagingDto" resultType="java.lang.Integer">
+	<select id="functionCount" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
 			COUNT(ROWNUM)
 		FROM
@@ -94,7 +94,7 @@
 	<sql id="functionwhere">
 		CD_STATE_SALE = 2
 		AND FLG_DELETE = 'N'
-		AND CD_CTG_B = 1
+		AND CD_CTG_B = '1'
 		<![CDATA[
 		AND COUNT_STOCK > 0
 		]]> 
@@ -146,7 +146,7 @@
 	<sql id="ingredientwhere">
 		CD_STATE_SALE = 2
 		AND FLG_DELETE = 'N'
-		AND CD_CTG_B = 2
+		AND CD_CTG_B = '2'
 		<![CDATA[
 		AND COUNT_STOCK > 0
 		]]> 
@@ -198,7 +198,7 @@
 	<sql id="genderwhere">
 		CD_STATE_SALE = 2
 		AND FLG_DELETE = 'N'
-		AND CD_CTG_B = 3
+		AND CD_CTG_B = '3'
 		<![CDATA[
 		AND COUNT_STOCK > 0
 		]]> 
