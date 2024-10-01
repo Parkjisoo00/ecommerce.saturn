@@ -114,14 +114,11 @@
 										<input type="hidden" name="cd_ctg_b" id="cd_ctg_b" value="${list.cd_ctg_b}" />
 										<input type="hidden" name="cd_ctg_m" id="cd_ctg_m" value="${list.cd_ctg_m}" />
 										<input type="hidden" name="prd_type" id="prd_type" value="${list.prd_type}" />
-										<input type="hidden" name="prd_type" id="prd_type" value="${list.corp_nm}" />
+										<input type="hidden" name="corp_nm" id="corp_nm" value="${list.corp_nm}" />
 										<div class="product__item">
 											<div class="product__item__pic set-bg" data-setbg="${list.img}">
 												<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
 													<div class="label new">베스트</div>
-												</c:if>
-												<c:if test="${list.count_stock == null || list.count_stock == 0}">
-													<div class="label stockout stockblue">품절</div>
 												</c:if>
 												<ul class="product__hover">
 													<li><a href="${list.seq_sle}" class="image-popup"><span class="arrow_expand"></span></a></li>
@@ -172,10 +169,10 @@
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
+						<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
+							<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
+						</div>
 					</div>
-				<br/>
-				<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
-				<br/>
 				</div>
 			</div>
 		</div>
@@ -186,44 +183,44 @@
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
 	<div class="instagram">
 		<div class="container-fluid">
-			<div class="row flex-row-reverse">
+			<div class="row justify-content-center">
 				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-					<div class="instagram__item set-bg" data-setbg="">
+					<div class="instagram__item set-bg" data-setbg="/image/footerpic/old5.png">
 						<div class="instagram__text">
 							<i class="fa fa-instagram"></i>
-							<a href="#">우리 상품 이미지</a>
+							<a href="#">임시</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-					<div class="instagram__item set-bg" data-setbg="">
+					<div class="instagram__item set-bg" data-setbg="/image/footerpic/old4.png">
 						<div class="instagram__text">
 							<i class="fa fa-instagram"></i>
-							<a href="#">우리 상품 이미지</a>
+							<a href="#">임시</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-					<div class="instagram__item set-bg" data-setbg="">
+					<div class="instagram__item set-bg" data-setbg="/image/footerpic/old3.png">
 						<div class="instagram__text">
 							<i class="fa fa-instagram"></i>
-							<a href="#">우리 상품 이미지</a>
+							<a href="#">임시</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-					<div class="instagram__item set-bg" data-setbg="">
+					<div class="instagram__item set-bg" data-setbg="/image/footerpic/old2.png">
 						<div class="instagram__text">
 							<i class="fa fa-instagram"></i>
-							<a href="#">우리 상품 이미지</a>
+							<a href="#">임시</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-					<div class="instagram__item set-bg" data-setbg="">
+					<div class="instagram__item set-bg" data-setbg="/image/footerpic/old1.png">
 						<div class="instagram__text">
 							<i class="fa fa-instagram"></i>
-							<a href="#">우리 상품 이미지</a>
+							<a href="#">임시</a>
 						</div>
 					</div>
 				</div>
