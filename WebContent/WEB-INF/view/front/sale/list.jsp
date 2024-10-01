@@ -2,7 +2,7 @@
 <%@ page info="/WEB-INF/view/front/buy/list.jsp" %>
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="bravomylifeTag"	uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
+<%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
 <!DOCTYPE html>
 <html lang="kor">
 
@@ -19,6 +19,8 @@
 </head>
 
 <body>
+<form id="frmMain" method="POST">
+<input type="hidden" name="seq_sle" id="seq_sle" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -121,21 +123,20 @@
 				<div class="col-lg-9 col-md-9">
 					<div class="row">
 						<c:choose>
-							<!-- 상품 리스트가 비어있는 경우 -->
 							<c:when test="${empty list}">
-								<div class="col-12">
+								<div class="col-12 d-flex justify-content-center align-items-center" style="height: 600px;">
 									<p>상품이 없습니다.</p>
 								</div>
 							</c:when>
-							<!-- 상품 리스트가 있는 경우 -->
+							
 							<c:otherwise>
 								<c:forEach var="list" items="${list}">
 									<div class="col-lg-4 col-md-6">
 										<div class="product__item">
-											<!-- 상품 이미지 칸 -->
+											
 											<div class="product__item__pic set-bg" data-setbg="${list.img}">
 												<ul class="product__hover">
-												<!-- 상품에 커서가 있을시 출력되는 팝업 칸 -->
+												
 													<li><a href="#" class="image-popup"><span class="arrow_expand"></span></a></li>
 													<li><a href="#"><span class="icon_heart_alt"></span></a></li>
 													<li><a href="#"><span class="icon_bag_alt"></span></a></li>
@@ -143,12 +144,13 @@
 											</div>
 											<div class="product__item__text">
 												<h6><a href="#">${list.sle_nm}</a></h6>
-												<div class="rating">
-													<!-- rating 값을 활용하여 별점 출력 -->
-													<c:forEach var="i" begin="1" end="${list.rate_star}">
+													<div class="rating">
 														<i class="fa fa-star"></i>
-													</c:forEach>
-												</div>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+													</div>
 												<div class="product__price">${list.price_sale}</div>
 											</div>
 										</div>
@@ -157,7 +159,7 @@
 							</c:otherwise>
 						</c:choose>
 					</div>
-					<!-- 페이징 -->
+					
 				</div>
 			</div>
 		</div>
@@ -238,20 +240,8 @@
 	</footer>
 	<!-- Footer Section End -->
 
-	<!-- Search Begin -->
-	<div class="search-model">
-		<div class="h-100 d-flex align-items-center justify-content-center">
-			<div class="search-close-switch">+</div>
-			<form class="search-model-form">
-				<input type="text" id="search-input" placeholder="Search here.....">
-			</form>
-		</div>
-	</div>
-	<!-- Search End -->
-
 	<!-- Js Plugins -->
 	<%@ include file="/include/front/js.jsp" %>
-	
+</form>
 </body>
-
 </html>
