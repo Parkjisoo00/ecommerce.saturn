@@ -30,7 +30,6 @@ package kr.co.bravomylife.front.sale.dto;
  */
 public class SaleDto {
 
-	private int rnum				= 0;
 	private int seq_sle				= 0;
 	private String sle_nm			= "";
 	private String desces			= "";
@@ -53,12 +52,6 @@ public class SaleDto {
 	private int updater				= 0;
 	
 	
-	public int getRnum() {
-		return rnum;
-	}
-	public void setRnum(int rnum) {
-		this.rnum = rnum;
-	}
 	public int getSeq_sle() {
 		return seq_sle;
 	}
