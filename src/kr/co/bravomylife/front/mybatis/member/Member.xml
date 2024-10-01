@@ -2,7 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.member.Member">
 
-<insert id="insertMaster" parameterType="memberDto">
+	<select id="selectDuplicate" parameterType="memberDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(EMAIL)
+		FROM
+			TB_MBR_MST
+		WHERE
+			EMAIL = #{email}
+	</select>
+
+	<insert id="insertMaster" parameterType="memberDto">
 		INSERT INTO TB_MBR_MST
 			(SEQ_MBR, EMAIL, PASSWD, FLG_SUR, CD_STATE, MBR_NM, AGE, GENDER, PHONE, DT_REG, REGISTER)
 		VALUES
@@ -15,5 +24,9 @@
 		VALUES
 			(#{seq_mbr}, #{post}, #{addr1}, #{addr2}, #{flg_sms}, #{flg_email}, SYSDATE, SYSDATE)
 	</insert>
+	
+	<select id="sequence" resultType="java.lang.Integer">
+		SELECT SQ_SEQ_MBR.NEXTVAL FROM DUAL
+	</select>
 
 </mapper> 

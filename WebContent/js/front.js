@@ -197,7 +197,7 @@ function checkRegister() {
         || document.getElementById("phone1").value == ""
         || document.getElementById("phone2").value == ""
         || document.getElementById("phone3").value == ""
-        || document.getElementById("post").value == ""
+        //|| document.getElementById("post").value == ""
         || document.getElementById("addr1").value == ""
         || document.getElementById("addr2").value == "") {
         alert("필수 항목을 입력하세요!");

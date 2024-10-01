@@ -20,6 +20,7 @@
  */
 package kr.co.bravomylife.front.member.controller;
 
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Properties;
 
@@ -32,8 +33,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.common.component.EmailCmpn;
@@ -75,8 +78,131 @@ public class MemberWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
+	 * @since 2024-09-19
+	 * <p>DESCRIPTION: 이메일 인증</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	/*
+	@SuppressWarnings("deprecation")
+	@RequestMapping(value = "/front/member/confirmEmail.web")
+	public ModelAndView confirmEmail(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			memberDto.setEmail(URLDecoder.decode(memberDto.getEmail()));
+			
+			if (memberSrvc.updateState(memberDto)) {
+				request.setAttribute("script"	, "alert('이메일 인증이 완료되어 정상적으로 서비스를 이용할 있습니다.');");
+				request.setAttribute("redirect"	, "/front/login/loginForm.web");
+			}
+			else {
+				// [2024-10-01][TODO: 10분 이내에 인증되지 않은 이메일이므로 '#' + SEQ_MBR + '_' + EMAIL 패턴으로 업데이트]
+				request.setAttribute("script"	, "alert('회원 가입 재시도 또는 고객센터에 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".confirmEmail()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	*/
+	/*
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
 	 * @since 2024-10-01
-	 * <p>DESCRIPTION:회원가입 페이지 jsp로만 가게</p>
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT: 이메일 인증은 가입(registerProc) 시로 변경함</p>
+	 * <p>EXAMPLE:</p>
+	 
+	@SuppressWarnings("deprecation")
+	@RequestMapping(value = "/front/member/checkEmail.json", method = RequestMethod.POST, headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
+	public @ResponseBody boolean checkEmail(@RequestBody MemberDto memberDto) {
+		
+		boolean isDuplicate = true;
+		
+		try {
+			// 대칭키 암호화(AES-256)
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+			
+			// 인증 이메일 발송
+			EmailDto emailDto = new EmailDto();
+			
+			emailDto.setSender(dynamicProperties.getMessage("email.sender.mail"));
+			emailDto.setTo(new String[] {memberDto.getEmail()});
+			emailDto.setSubject("이메일 인증");
+			emailDto.setMessage("<b>가입</b>을 축하합니다.</br>"
+						+ "하기 인증하기를 클릭하셔야 가입이 완료됩니다.</br></br>"
+						+ "http://127.0.0.1:8080/front/member/confirmEmail.web?email=" + URLEncoder.encode(aes.encode(memberDto.getEmail())));
+			
+			emailCmpn.send(emailDto);
+			
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".checkEmail()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return isDuplicate;
+	}*/
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-01
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	 
+	@RequestMapping(value = "/front/member/checkDuplicate.json", method = RequestMethod.POST, headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
+	public @ResponseBody boolean checkDuplicate(@RequestBody MemberDto memberDto) {
+		
+		boolean isDuplicate = true;
+		
+		try {
+			// 대칭키 암호화(AES-256)
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+			
+			memberDto.setEmail(aes.encode(memberDto.getEmail()));
+			
+			int count = memberSrvc.selectDuplicate(memberDto);
+			
+			if (count == 0) isDuplicate = false;
+			
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".checkDuplicate()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return isDuplicate;
+	}
+	
+	
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-01
+	 * <p>DESCRIPTION:회원가입 페이지</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
