@@ -30,7 +30,6 @@
 		</article>
 	</section>
 	<footer>
-		<%@ include file="/include/common/footer.jsp" %>
 	</footer>
 </div>
 </body>
