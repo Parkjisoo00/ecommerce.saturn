@@ -59,11 +59,6 @@
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
 		]]> 
-		<if test="searchWord != null and searchWord != ''">
-			<if test="searchKey == 'prd_nm'">
-				AND sle.CORP_NM LIKE '%' || #{searchWord} || '%'
-			</if>
-		</if>
 	</sql>
 	
 	<select id="ingredientCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -124,11 +119,6 @@
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
 		]]> 
-		<if test="searchWord != null and searchWord != ''">
-			<if test="searchKey == 'prd_nm'">
-				AND sle.CORP_NM LIKE '%' || #{searchWord} || '%'
-			</if>
-		</if>
 	</sql>
 	
 	<select id="functionCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -189,11 +179,6 @@
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
 		]]> 
-		<if test="searchWord != null and searchWord != ''">
-			<if test="searchKey == 'prd_nm'">
-				AND sle.CORP_NM LIKE '%' || #{searchWord} || '%'
-			</if>
-		</if>
 	</sql>
 	
 	<select id="genderCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -253,11 +238,9 @@
 		AND sle.CD_CTG_B = '3'
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
-		]]> 
-		<if test="searchWord != null and searchWord != ''">
-			<if test="searchKey == 'prd_nm'">
-				AND sle.CORP_NM LIKE '%' || #{searchWord} || '%'
-			</if>
+		]]>
+		<if test="cd_ctg_m != null and cd_ctg_m != ''">
+			AND sle.CD_CTG_M = #{cd_ctg_m}
 		</if>
 	</sql>
 		

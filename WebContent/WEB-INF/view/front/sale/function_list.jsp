@@ -9,6 +9,15 @@
 <head>
 	<%@ include file="/include/front/header.jsp" %>
 	<script>
+		function goType(type) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.type.setAttribute("value", type);
+			frmMain.action = "#";
+			frmMain.submit();
+		}
+	
 		function goPages(value) {
 			
 			var frmMain = document.getElementById("frmMain");
@@ -30,8 +39,8 @@
 
 <body>
 <form id="frmMain" method="POST">
+<input type="hidden" id="type"			name="type" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
-<input type="hidden" name="cd_ctg_b"	id="cd_ctg_b" value="${paging.cd_ctg_b}" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -83,7 +92,7 @@
 								<div class="accordion" id="accordionExample">
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseOne" href="#" style="color : black">혈당/혈행/혈압</a>
+											<a data-toggle="collapse" data-target="#collapseOne" href="javascript:goType('blood');" style="color : black">혈당/혈행/혈압</a>
 										</div>
 									</div>
 									<div class="card">
