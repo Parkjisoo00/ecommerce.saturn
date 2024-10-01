@@ -90,7 +90,7 @@ public class SaleWeb extends Common {
 	 * @return ModelAndView
 	 * 
 	 * @since 2024-10-01
-	 * <p>DESCRIPTION:기능별</p>
+	 * <p>DESCRIPTION:성분별</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
@@ -120,7 +120,7 @@ public class SaleWeb extends Common {
 	 * @return ModelAndView
 	 * 
 	 * @since 2024-10-01
-	 * <p>DESCRIPTION:기능별</p>
+	 * <p>DESCRIPTION:대상별</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
