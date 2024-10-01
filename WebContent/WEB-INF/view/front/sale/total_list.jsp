@@ -112,18 +112,22 @@
 							<c:otherwise>
 								<c:forEach var="list" items="${list}">
 									<div class="col-lg-4 col-md-6">
+										<input type="hidden" name="cd_ctg_b" id="cd_ctg_b" value="${list.cd_ctg_b}" />
+										<input type="hidden" name="cd_ctg_m" id="cd_ctg_m" value="${list.cd_ctg_m}" />
+										<input type="hidden" name="prd_type" id="prd_type" value="${list.prd_type}" />
+										<input type="hidden" name="prd_type" id="prd_type" value="${list.corp_nm}" />
 										<div class="product__item">
 											
 											<div class="product__item__pic set-bg" data-setbg="${list.img}">
 												<ul class="product__hover">
 												
-													<li><a href="#" class="image-popup"><span class="arrow_expand"></span></a></li>
+													<li><a href="${list.seq_sle}" class="image-popup"><span class="arrow_expand"></span></a></li>
 													<li><a href="#"><span class="icon_heart_alt"></span></a></li>
 													<li><a href="#"><span class="icon_bag_alt"></span></a></li>
 												</ul>
 											</div>
 											<div class="product__item__text">
-												<h6><a href="#">${list.sle_nm}</a></h6>
+												<h6><a href="#" style="font-size: 16px;">${list.sle_nm}</a></h6>
 													<div class="rating">
 														<i class="fa fa-star"></i>
 														<i class="fa fa-star"></i>
@@ -131,7 +135,7 @@
 														<i class="fa fa-star"></i>
 														<i class="fa fa-star"></i>
 													</div>
-												<div class="product__price">${list.price_sale}</div>
+												<div class="product__price">${list.price_sale} -${list.discount}%</div>
 											</div>
 										</div>
 									</div>
