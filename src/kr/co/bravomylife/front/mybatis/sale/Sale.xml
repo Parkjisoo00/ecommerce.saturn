@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.sale.Sale">
 
-	<select id="search1" parameterType="saleDto" resultType="saleDto">
+	<select id="functionList" parameterType="saleDto" resultType="saleDto">
 		SELECT
 			ROWNUM rnum
 			, searched.*
@@ -30,7 +30,7 @@
 			) searched
 	</select>
 	
-	<select id="search2" parameterType="saleDto" resultType="saleDto">
+	<select id="ingredientList" parameterType="saleDto" resultType="saleDto">
 		SELECT
 			ROWNUM rnum
 			, searched.*
@@ -59,7 +59,7 @@
 			) searched
 	</select>
 	
-	<select id="search3" parameterType="saleDto" resultType="saleDto">
+	<select id="genderList" parameterType="saleDto" resultType="saleDto">
 		SELECT
 			ROWNUM rnum
 			, searched.*

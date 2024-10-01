@@ -6,6 +6,7 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="kr.co.bravomylife.front.sale.dto.SaleDto"						alias="saleDto" />
+		<typeAlias type="kr.co.bravomylife.front.common.dto.PagingDto"					alias="pagingDto" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="kr/co/bravomylife/front/mybatis/sale/Sale.xml" />

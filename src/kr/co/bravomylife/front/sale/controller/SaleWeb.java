@@ -34,6 +34,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.front.basket.controller.BasketWeb;
 import kr.co.bravomylife.front.common.Common;
+import kr.co.bravomylife.front.common.dto.PagingDto;
+import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.sale.service.SaleSrvc;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
 
@@ -70,7 +72,7 @@ public class SaleWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			List<SaleDto> list = saleSrvc.search1(saleDto);
+			List<SaleDto> list = saleSrvc.functionList(saleDto);
 			
 			mav.addObject("list", list);
 			
@@ -100,7 +102,7 @@ public class SaleWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			List<SaleDto> list = saleSrvc.search2(saleDto);
+			List<SaleDto> list = saleSrvc.ingredientList(saleDto);
 			
 			mav.addObject("list", list);
 			
@@ -130,11 +132,42 @@ public class SaleWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			List<SaleDto> list = saleSrvc.search3(saleDto);
+			List<SaleDto> list = saleSrvc.genderList(saleDto);
 			
 			mav.addObject("list", list);
 			
 			mav.setViewName("front/sale/gender_list");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".search()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-01
+	 * <p>DESCRIPTION:대상별</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/sale/total_list.web")
+	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			PagingListDto pagingListDto = saleSrvc.list(pagingDto);
+			mav.addObject("paging"	, pagingListDto.getPaging());
+			mav.addObject("list"	, pagingListDto.getList());
+			
+			mav.setViewName("front/sale/list");
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".search()] " + e.getMessage(), e);

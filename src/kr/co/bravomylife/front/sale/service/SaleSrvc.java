@@ -26,6 +26,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import kr.co.bravomylife.front.common.dto.PagingDto;
+import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.sale.dao.SaleDao;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
 
@@ -43,15 +45,31 @@ public class SaleSrvc {
 	@Inject
 	SaleDao saleDao;
 	
-	public List<SaleDto> search1(SaleDto saleDto) {
-		return saleDao.search1(saleDto);
+	public List<SaleDto> functionList(SaleDto saleDto) {
+		return saleDao.functionList(saleDto);
 	}
 	
-	public List<SaleDto> search2(SaleDto saleDto) {
-		return saleDao.search2(saleDto);
+	public List<SaleDto> ingredientList(SaleDto saleDto) {
+		return saleDao.ingredientList(saleDto);
 	}
 	
-	public List<SaleDto> search3(SaleDto saleDto) {
-		return saleDao.search3(saleDto);
+	public List<SaleDto> genderList(SaleDto saleDto) {
+		return saleDao.genderList(saleDto);
+	}
+	
+	public PagingListDto list(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		int totalLine = saleDao.count(pagingDto);
+		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(saleDao.list(pagingDto));
+		
+		return pagingListDto;
 	}
 }

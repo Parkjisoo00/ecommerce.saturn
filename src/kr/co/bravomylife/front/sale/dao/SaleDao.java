@@ -25,6 +25,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import kr.co.bravomylife.front.common.dao.BaseDao;
+import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
 
 /**
@@ -38,15 +39,23 @@ import kr.co.bravomylife.front.sale.dto.SaleDto;
 @Repository("kr.co.bravomylife.front.sale.dao.SaleDao")
 public class SaleDao extends BaseDao {
 
-	public List<SaleDto> search1(SaleDto saleDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.search1", saleDto);
+	public List<SaleDto> functionList(SaleDto saleDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.functionList", saleDto);
 	}
 	
-	public List<SaleDto> search2(SaleDto saleDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.search2", saleDto);
+	public List<SaleDto> ingredientList(SaleDto saleDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.ingredientList", saleDto);
 	}
 	
-	public List<SaleDto> search3(SaleDto saleDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.search3", saleDto);
+	public List<SaleDto> genderList(SaleDto saleDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.genderList", saleDto);
+	}
+	
+	public List<SaleDto> list(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.list", pagingDto);
+	}
+	
+	public int count(PagingDto pagingDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.count", pagingDto);
 	}
 }
