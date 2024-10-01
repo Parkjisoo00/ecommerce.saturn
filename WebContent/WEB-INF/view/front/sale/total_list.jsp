@@ -108,7 +108,6 @@
 									<p>상품이 없습니다.</p>
 								</div>
 							</c:when>
-							
 							<c:otherwise>
 								<c:forEach var="list" items="${list}">
 									<div class="col-lg-4 col-md-6">
@@ -117,51 +116,51 @@
 										<input type="hidden" name="prd_type" id="prd_type" value="${list.prd_type}" />
 										<input type="hidden" name="prd_type" id="prd_type" value="${list.corp_nm}" />
 										<div class="product__item">
-											
 											<div class="product__item__pic set-bg" data-setbg="${list.img}">
+												<div class="label new">베스트</div>
+												<div class="label stockout stockblue">품절</div>
 												<ul class="product__hover">
-												
 													<li><a href="${list.seq_sle}" class="image-popup"><span class="arrow_expand"></span></a></li>
 													<li><a href="#"><span class="icon_heart_alt"></span></a></li>
 													<li><a href="#"><span class="icon_bag_alt"></span></a></li>
 												</ul>
 											</div>
 											<div class="product__item__text">
-												<h6><a href="#" style="font-size: 16px;">${list.sle_nm}</a></h6>
+												<h6 style="line-height: 1.5em; min-height: 3em;"><a href="#" style="font-size: 15px;">${list.sle_nm}</a></h6>
 													<div class="rating">
-														<c:if test="${list.rate_star == 1}">
-															<i class="fa fa-star"></i>
+														<c:if test="${list.average_rate == 1}">
+															<i class="fa fa-star"></i>(${list.count})
 														</c:if>
-														<c:if test="${list.rate_star == 2}">
+														<c:if test="${list.average_rate == 2}">
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>(${list.count})
 														</c:if>
-														<c:if test="${list.rate_star == 3}">
+														<c:if test="${list.average_rate == 3}">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>(${list.count})
 														</c:if>
-														<c:if test="${list.rate_star == 4}">
+														<c:if test="${list.average_rate == 4}">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>(${list.count})
 														</c:if>
-														<c:if test="${list.rate_star == 5}">
+														<c:if test="${list.average_rate == 5}">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>(${list.count})
 														</c:if>
 													</div>
 												<c:choose>
-												<c:when test="${list.discount == null || list.discount <= 0}">
-												<div class="product__price"><span style="text-decoration: none; font-size: 1.3em; color: black;">${list.price_sale}</span>원</div>
-												</c:when>
-												<c:otherwise>
-												<div class="product__price"><span>${list.price_sale}</span> <span style="text-decoration: none; color : red">-${list.discount}%</span> <span style="text-decoration: none; color: black; font-size: 1.3em">${list.discount_sale}</span>원</div>
-												</c:otherwise>
+													<c:when test="${list.discount == null || list.discount == 0}">
+														<div class="product__price"><span style="text-decoration: none; font-size: 1.3em; color: black;">${list.price_sale}</span>원</div>
+													</c:when>
+													<c:otherwise>
+														<div class="product__price"><span>${list.price_sale}</span> <span style="text-decoration: none; color : red">-${list.discount}%</span><span style="text-decoration: none; color: black; font-size: 1.3em">${list.discount_sale}</span>원</div>
+													</c:otherwise>
 												</c:choose>
 											</div>
 										</div>
@@ -183,15 +182,7 @@
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
 	<div class="instagram">
 		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-					<div class="instagram__item set-bg" data-setbg="">
-						<div class="instagram__text">
-							<i class="fa fa-instagram"></i>
-							<a href="#">우리 상품 이미지</a>
-						</div>
-					</div>
-				</div>
+			<div class="row flex-row-reverse">
 				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
 					<div class="instagram__item set-bg" data-setbg="">
 						<div class="instagram__text">

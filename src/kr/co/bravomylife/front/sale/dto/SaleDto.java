@@ -39,6 +39,8 @@ public class SaleDto {
 	private String cd_ctg_m			= "";
 	private String cd_state_sale	= "";
 	private int rate_star			= 0;
+	private int count				= 0;
+	private int average_rate		= 0;
 	private String prd_type			= "";
 	private int count_stock			= 0;
 	private String corp_nm			= "";
@@ -56,6 +58,18 @@ public class SaleDto {
 	private String searchWord		= "";
 	
 	
+	public int getAverage_rate() {
+		return average_rate;
+	}
+	public void setAverage_rate(int average_rate) {
+		this.average_rate = average_rate;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public int getDiscount_sale() {
 		return discount_sale;
 	}
