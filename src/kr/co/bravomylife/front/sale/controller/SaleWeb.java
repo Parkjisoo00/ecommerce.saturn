@@ -59,22 +59,82 @@ public class SaleWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-09-30
-	 * <p>DESCRIPTION:</p>
+	 * @since 2024-10-01
+	 * <p>DESCRIPTION:기능별 상품 페이지</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/sale/list.web")
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+	@RequestMapping(value = "/front/sale/function_list.web")
+	public ModelAndView index1(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			List<SaleDto> list = saleSrvc.search(saleDto);
+			List<SaleDto> list = saleSrvc.search1(saleDto);
 			
 			mav.addObject("list", list);
 			
-			mav.setViewName("front/sale/list");
+			mav.setViewName("front/sale/function_list");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".search()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-01
+	 * <p>DESCRIPTION:기능별</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/sale/ingredient_list.web")
+	public ModelAndView index2(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			List<SaleDto> list = saleSrvc.search2(saleDto);
+			
+			mav.addObject("list", list);
+			
+			mav.setViewName("front/sale/ingredient_list");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".search()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-01
+	 * <p>DESCRIPTION:기능별</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/sale/gender_list.web")
+	public ModelAndView index3(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			List<SaleDto> list = saleSrvc.search3(saleDto);
+			
+			mav.addObject("list", list);
+			
+			mav.setViewName("front/sale/gender_list");
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".search()] " + e.getMessage(), e);

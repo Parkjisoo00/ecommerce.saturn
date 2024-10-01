@@ -43,7 +43,15 @@ public class SaleSrvc {
 	@Inject
 	SaleDao saleDao;
 	
-	public List<SaleDto> search(SaleDto saleDto) {
-		return saleDao.search(saleDto);
+	public List<SaleDto> search1(SaleDto saleDto) {
+		return saleDao.search1(saleDto);
+	}
+	
+	public List<SaleDto> search2(SaleDto saleDto) {
+		return saleDao.search2(saleDto);
+	}
+	
+	public List<SaleDto> search3(SaleDto saleDto) {
+		return saleDao.search3(saleDto);
 	}
 }

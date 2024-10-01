@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<%@ page info="/WEB-INF/view/front/buy/list.jsp" %>
+<%@ page info="/WEB-INF/view/front/buy/ingredient_list.jsp" %>
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
@@ -66,53 +66,53 @@
 					<div class="shop__sidebar">
 						<div class="sidebar__categories">
 							<div class="section-title">
-								<h4>기 능 별</h4>
+								<h4>성 분 별</h4>
 							</div>
 							<div class="categories__accordion">
 								<div class="accordion" id="accordionExample">
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseOne" href="#" style="color : black">혈당/혈행/혈압</a>
+											<a data-toggle="collapse" data-target="#collapseOne" href="#" style="color : black">폴리코사놀</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseTwo" href="#" style="color : black">황산화/면연력</a>
+											<a data-toggle="collapse" data-target="#collapseTwo" href="#" style="color : black">오메가-3</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseThree" href="#" style="color : black">염증/항염</a>
+											<a data-toggle="collapse" data-target="#collapseThree" href="#" style="color : black">비타민/미네랄</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseFour" href="#" style="color : black">관절/뼈/치아</a>
+											<a data-toggle="collapse" data-target="#collapseFour" href="#" style="color : black">유산균</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseFive" href="#" style="color : black">피로회복</a>
+											<a data-toggle="collapse" data-target="#collapseFive" href="#" style="color : black">글루코사민/MSM</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseFour" href="#" style="color : black">눈 건강</a>
+											<a data-toggle="collapse" data-target="#collapseFour" href="#" style="color : black">루테인</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseFour" href="#" style="color : black">장 건강</a>
+											<a data-toggle="collapse" data-target="#collapseFour" href="#" style="color : black">코큐텐</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseFour" href="#" style="color : black">두뇌/기억력</a>
+											<a data-toggle="collapse" data-target="#collapseFour" href="#" style="color : black">아르기닌</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseFour" href="#" style="color : black">위/간/갑상선</a>
+											<a data-toggle="collapse" data-target="#collapseFour" href="#" style="color : black">밀크씨슬</a>
 										</div>
 									</div>
 								</div>

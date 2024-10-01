@@ -38,7 +38,15 @@ import kr.co.bravomylife.front.sale.dto.SaleDto;
 @Repository("kr.co.bravomylife.front.sale.dao.SaleDao")
 public class SaleDao extends BaseDao {
 
-	public List<SaleDto> search(SaleDto saleDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.search", saleDto);
+	public List<SaleDto> search1(SaleDto saleDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.search1", saleDto);
+	}
+	
+	public List<SaleDto> search2(SaleDto saleDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.search2", saleDto);
+	}
+	
+	public List<SaleDto> search3(SaleDto saleDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.search3", saleDto);
 	}
 }

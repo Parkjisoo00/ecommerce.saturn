@@ -2,7 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.sale.Sale">
 
-	<select id="search" parameterType="saleDto" resultType="saleDto">
+	<select id="search1" parameterType="saleDto" resultType="saleDto">
+		SELECT
+			ROWNUM rnum
+			, searched.*
+		FROM
+			(SELECT
+				SEQ_SLE
+				, SLE_NM
+				, PRICE_SALE
+				, CD_CTG_B
+				, IMG
+				, RATE_STAR
+				, CORP_NM
+			FROM
+				TB_SLE tb_sle
+			WHERE
+				COUNT_STOCK > 0 and
+				FLG_DELETE		= 'N'	and
+				CD_CTG_M		= 1		and
+				CD_STATE_SALE	= 2
+				<![CDATA[
+				AND SYSDATE >= DT_SALE_START AND SYSDATE <= DT_SALE_END
+				]]>
+			ORDER BY
+				SEQ_SLE DESC
+			) searched
+	</select>
+	
+	<select id="search2" parameterType="saleDto" resultType="saleDto">
 		SELECT
 			ROWNUM rnum
 			, searched.*
@@ -20,8 +48,38 @@
 				TB_SLE tb_sle
 			WHERE
 				COUNT_STOCK > 0 and
-				FLG_DELETE = 'N' and
-				CD_STATE_SALE = 2
+				FLG_DELETE		= 'N'	and
+				CD_CTG_M		= 2		and
+				CD_STATE_SALE	= 2
+				<![CDATA[
+				AND SYSDATE >= DT_SALE_START AND SYSDATE <= DT_SALE_END
+				]]>
+			ORDER BY
+				SEQ_SLE DESC
+			) searched
+	</select>
+	
+	<select id="search3" parameterType="saleDto" resultType="saleDto">
+		SELECT
+			ROWNUM rnum
+			, searched.*
+		FROM
+			(SELECT
+				SEQ_SLE
+				, SLE_NM
+				, PRICE_SALE
+				, CD_CTG_B
+				, CD_CTG_M
+				, IMG
+				, RATE_STAR
+				, CORP_NM
+			FROM
+				TB_SLE tb_sle
+			WHERE
+				COUNT_STOCK > 0 and
+				FLG_DELETE		= 'N'	and
+				CD_CTG_M		= 3		and
+				CD_STATE_SALE	= 2
 				<![CDATA[
 				AND SYSDATE >= DT_SALE_START AND SYSDATE <= DT_SALE_END
 				]]>
