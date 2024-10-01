@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="kor">
 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+
 <head>
 	<%@ include file="/include/front/header.jsp" %>
 	
@@ -36,7 +38,7 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb__links">
 						<a href="./index.html"><i class="fa fa-home"></i> Home</a>
-						<span>Shopping cart</span>
+						<span>회원가입</span>
 					</div>
 				</div>
 			</div>
@@ -47,141 +49,161 @@
 	<!-- Checkout Section Begin -->
 	<section class="checkout spad">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1 class="coupon__link"><span class="icon_tag_alt"></span> <a href="#">Have a coupon?</a> Click
-					here to enter your code.</h1>
-				</div>
-			</div>
 			<form action="#" class="checkout__form">
 				<div class="row">
 					<div class="col-lg-8">
-						<h5>Billing detail</h5>
+						<h5>회원가입</h5>
 						<div class="row">
-							<div class="col-lg-6 col-md-6 col-sm-6">
-								<div class="checkout__form__input">
-									<p>First Name <span>*</span></p>
-									<input type="text">
-								</div>  
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6">
-								<div class="checkout__form__input">
-									<p>Last Name <span>*</span></p>
-									<input type="text">
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="checkout__form__input">
-									<p>Country <span>*</span></p>
-									<input type="text">
-								</div>  
-								<div class="checkout__form__input">
-									<p>Address <span>*</span></p>
-									<input type="text" placeholder="Street Address">
-									<input type="text" placeholder="Apartment. suite, unite ect ( optinal )">
-								</div>
-								<div class="checkout__form__input">
-									<p>Town/City <span>*</span></p>
-									<input type="text">
-								</div>
-								<div class="checkout__form__input">
-									<p>Country/State <span>*</span></p>
-									<input type="text">
-								</div>
-								<div class="checkout__form__input">
-									<p>Postcode/Zip <span>*</span></p>
-									<input type="text">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6">
-								<div class="checkout__form__input">
-									<p>Phone <span>*</span></p>
-									<input type="text">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6">
-								<div class="checkout__form__input">
-									<p>Email <span>*</span></p>
-									<input type="text">
-								</div>
-							</div>
-							<div class="col-lg-12">
-								<div class="checkout__form__checkbox">
-									<label for="acc">
-										Create an acount?
-										<input type="checkbox" id="acc">
-										<span class="checkmark"></span>
-									</label>
-									<p>Create am acount by entering the information below. If you are a returing
-										customer login at the <br />top of the page</p>
+										<div class="col-lg-6 col-md-6 col-sm-6">
+											<div class="checkout__form__input">
+												<p>이메일 <span>*</span></p>
+												<input type="text" id="email" name="email" required />
+											</div>
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-6">
+											<div class="checkout__form__input">
+												<p>중복 확인<span>*</span></p>
+												<input type="button" value="중복 찾기" style="width:120px" id="btnId" />
+												 <input type="hidden" value="인증 하기" id="btnConfirm" style="width:100px" disabled />
+											</div>
+										</div>
+										<div class="col-lg-12">
+											<div class="checkout__form__input">
+												<p>비밀번호 (영문 대/소문자, 숫자, 특수문자 포함 8~16자 필수 입력)<span>*</span></p>
+												<input type="password" id="passwd" name="passwd"
+													pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}"
+													required />
+											</div>
+											<div class="checkout__form__input">
+												<p>비밀번호 확인 <span>*</span></p>
+												<input type="password" id="passwd_confirm" name="passwd_confirm"
+													pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}"
+													required />
+											</div>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6">
+													<div class="checkout__form__input">
+														<p>성명 <span>*</span></p>
+														<input type="text" id="mbr_nm" name="mbr_nm" required />
+													</div>
+												</div>
+												<div class="col-lg-6 col-md-6 col-sm-6">
+													<div class="gender-option">
+														<p>성별<span>*</span></p>
+														<div class="checkbox_container">
+															<label><input type="radio" name="gender" value="M"
+																	checked /> 남</label>
+															<label><input type="radio" name="gender" value="F" />
+																여</label>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 col-md-6 col-sm-6">
+													<div class="checkout__form__input">
+														<p>생년월일 <span>*</span></p>
+														<input type="date" id="birthDate" name="birthDate" />
+													</div>
+												</div>
+												
+												<div class="col-lg-6 col-md-6 col-sm-6">
+													<div class="checkout__form__input">
+														<p>연락처 <span>*</span></p>
+														<input value="010" type="text" id="phone1" name="phone1"
+															maxlength="3" style="text-align:center;width:50px" required
+															oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+														- <input value="1111" type="text" id="phone2" name="phone2"
+															maxlength="4" style="text-align:center;width:60px" required
+															oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+														- <input value="2222" type="text" id="phone3" name="phone3"
+															maxlength="4" style="text-align:center;width:60px" required
+															oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+													</div>
+												</div>
+												<div class="col-lg-12">
+													<div class="checkout__form__input">
+														<p>주소 <span>*</span></p>
+														<input value="우편번호" type="text" maxlength="5"
+															style="text-align:center;width:100px;" id="post" name="post"
+															required readonly />
+														도로명 <input value="주소1" type="text" size="40" required id="addr1"
+															name="addr1" readonly />
+														<input type="hidden" id="jibunAdd" />
+														<input type="hidden" id="extraAddress" />
+														<span id="guide" style="color:#999; display:none"></span>
+														상세 <input value="주소2" type="text" placeholder="상세 주소" required
+															id="addr2" name="addr2" />
+														<input type="button" value="우편번호 찾기" style="width:120px"
+															onClick="execDaumPostcode();" />
+													</div>
+												</div>
+												<div class="col-lg-6">
+						                            <div class="checkout__form__input">
+						                                <p>마케팅 수신 동의</p>
+						                                SMS <input type="checkbox" name="flg_sms" value="Y" />
+						                                Email <input type="checkbox" name="flg_email" value="Y" />
+						                            </div>
+						                        </div>
+												<div class="col-lg-12">
+													<div class="checkout__form__checkbox">
+														<input type="checkbox" id="term_1" name="term_1">
+														[필수]'브라보 마이 라이프' 이용 약관 동의
+														<div class="terms-container">
+															제1장 총칙<br>
+															제 1 조 (목적)<br>
+															이 약관은 쿠팡 주식회사(이하 “회사”)가 운영하는 사이버몰에서 제공하는 서비스와 이를 이용하는 회원의
+															권리·의무 및 책임사항을 규정함을 목적으로 합니다.
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-12">
+													<div class="checkout__form__checkbox">
+														<input type="checkbox" id="term_2" name="term_2">
+														[필수]개인정보 수집 및 이용동의
+														<div class="terms-container">
+															제1장 총칙<br>
+															제 1 조 (목적)<br>
+															이 약관은 쿠팡 주식회사(이하 “회사”)가 운영하는 사이버몰에서 제공하는 서비스와 이를 이용하는 회원의
+															권리·의무 및 책임사항을 규정함을 목적으로 합니다.
+															제1장 총칙<br>
+															제 1 조 (목적)<br>
+															이 약관은 쿠팡 주식회사(이하 “회사”)가 운영하는 사이버몰에서 제공하는 서비스와 이를 이용하는 회원의
+															권리·의무 및 책임사항을 규정함을 목적으로
+															제1장 총칙<br>
+															제 1 조 (목적)<br>
+															이 약관은 쿠팡 주식회사(이하 “회사”)가 운영하는 사이버몰에서 제공하는 서비스와 이를 이용하는 회원의
+															권리·의무 및 책임사항을 규정함을 목적으로
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-12">
+													<div class="checkout__form__checkbox">
+														<input type="checkbox" id="term_3" name="term_3">
+														[선택]개인정보 제3자 제공 동의
+														<div class="terms-container">
+															제1장 총칙<br>
+															제 1 조 (목적)<br>
+															이 약관은 쿠팡 주식회사(이하 “회사”)가 운영하는 사이버몰에서 제공하는 서비스와 이를 이용하는 회원의
+															권리·의무 및 책임사항을 규정함을 목적으로 합니다.
+														</div>
+													</div>
+												</div>
+												
+												
+												<div class="col-lg-12">
+													<div class="checkout__form__input">
+														<input type="button" value="회원가입"
+															style="width:800px;text-align: center;" id="registerId" />
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
-									<div class="checkout__form__input">
-										<p>Account Password <span>*</span></p>
-										<input type="text">
-									</div>
-									<div class="checkout__form__checkbox">
-										<label for="note">
-											Note about your order, e.g, special noe for delivery
-											<input type="checkbox" id="note">
-											<span class="checkmark"></span>
-										</label>
-									</div>
-									<div class="checkout__form__input">
-										<p>Oder notes <span>*</span></p>
-										<input type="text"
-										placeholder="Note about your order, e.g, special noe for delivery">
-									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="checkout__order">
-								<h5>Your order</h5>
-								<div class="checkout__order__product">
-									<ul>
-										<li>
-											<span class="top__text">Product</span>
-											<span class="top__text__right">Total</span>
-										</li>
-										<li>01. Chain buck bag <span>$ 300.0</span></li>
-										<li>02. Zip-pockets pebbled<br /> tote briefcase <span>$ 170.0</span></li>
-										<li>03. Black jean <span>$ 170.0</span></li>
-										<li>04. Cotton shirt <span>$ 110.0</span></li>
-									</ul>
-								</div>
-								<div class="checkout__order__total">
-									<ul>
-										<li>Subtotal <span>$ 750.0</span></li>
-										<li>Total <span>$ 750.0</span></li>
-									</ul>
-								</div>
-								<div class="checkout__order__widget">
-									<label for="o-acc">
-										Create an acount?
-										<input type="checkbox" id="o-acc">
-										<span class="checkmark"></span>
-									</label>
-									<p>Create am acount by entering the information below. If you are a returing customer
-									login at the top of the page.</p>
-									<label for="check-payment">
-										Cheque payment
-										<input type="checkbox" id="check-payment">
-										<span class="checkmark"></span>
-									</label>
-									<label for="paypal">
-										PayPal
-										<input type="checkbox" id="paypal">
-										<span class="checkmark"></span>
-									</label>
-								</div>
-								<button type="submit" class="site-btn">Place oder</button>
-							</div>
-						</div>
+						</form>
 					</div>
-				</form>
-			</div>
-		</section>
-		<!-- Checkout Section End -->
+				</section>
+
 
 		<!-- Instagram Begin -->
 		<div class="instagram">
