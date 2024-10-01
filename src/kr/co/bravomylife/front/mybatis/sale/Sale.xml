@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.himedia.ecommerce.front.mybatis.sale.Sale">
+
+	<select id="search" parameterType="saleDto" resultType="saleDto">
+		SELECT
+			ROWNUM rnum
+			, searched.*
+		FROM
+			(SELECT
+				SEQ_SLE
+				, SLE_NM
+				, PRICE_SALE
+				, CD_CTG_B
+				, CD_CTG_M
+				, IMG
+				, RATE_STAR
+				, CORP_NM
+			FROM
+				TB_SLE tb_sle
+			WHERE
+				COUNT_STOCK > 0 and
+				FLG_DELETE = 'N' and
+				CD_STATE_SALE = 2
+				<![CDATA[
+				AND SYSDATE >= DT_SALE_START AND SYSDATE <= DT_SALE_END
+				]]>
+				<if test="searchWord != null and searchWord != ''">
+					AND UPPER(SLE_NM) LIKE UPPER('%' || #{searchWord} || '%')
+				</if>
+			ORDER BY
+				SEQ_SLE DESC
+			) searched
+	</select>
+		
+</mapper>
