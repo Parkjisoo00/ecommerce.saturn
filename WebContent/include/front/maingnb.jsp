@@ -31,7 +31,7 @@
 					<div class="header__right">
 						<div class="header__right__auth">
 							<a href="/front/login/loginForm.web">Login</a>
-							<a href="/front/login/loginForm.web">Register</a>
+							<a href="/front/member/registerForm.web">Register</a>
 						</div>
 						<ul class="header__right__widget">
 							<li><span class="icon_search search-switch"></span></li>
