@@ -144,7 +144,7 @@
 		</div>
 
 		<!-- Offcanvas Menu Begin -->
-		<%@ include file="/include/front/leftgnb.jsp" %>
+		<%@ include file="/include/front/mainsubgnb.jsp" %>
 
 			<!-- Offcanvas Menu End -->
 
