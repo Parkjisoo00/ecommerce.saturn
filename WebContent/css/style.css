@@ -2336,6 +2336,7 @@ ol {
 
 .coupon__link ul li:hover .dropdown {
 	top: 30px;
+	background: rgba(0, 0, 0, 0.8);
 	opacity: 1;
 	visibility: visible;
 }
