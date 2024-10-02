@@ -20,6 +20,7 @@
  */
 package kr.co.bravomylife.front.member.controller;
 
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Properties;
 
@@ -83,7 +84,7 @@ public class MemberWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	
-	/*
+	
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/front/member/confirmEmail.web")
 	public ModelAndView confirmEmail(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
@@ -113,8 +114,8 @@ public class MemberWeb extends Common {
 		return mav;
 	}
 	
-	*/
-	/*
+	
+	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
@@ -124,7 +125,7 @@ public class MemberWeb extends Common {
 	 * <p>DESCRIPTION:</p>
 	 * <p>IMPORTANT: 이메일 인증은 가입(registerProc) 시로 변경함</p>
 	 * <p>EXAMPLE:</p>
-	 
+	 **/
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/front/member/checkEmail.json", method = RequestMethod.POST, headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
 	public @ResponseBody boolean checkEmail(@RequestBody MemberDto memberDto) {
@@ -155,7 +156,7 @@ public class MemberWeb extends Common {
 		finally {}
 		
 		return isDuplicate;
-	}*/
+	}
 	
 	/**
 	 * @param request [요청 서블릿]
