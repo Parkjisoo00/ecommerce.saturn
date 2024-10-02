@@ -93,8 +93,8 @@
 	<section class="shop spad">
 		<div class="container">
 			<div class="row">
-				<%@ include file="/include/front/lowmenu.jsp" %>
-				<%@ include file="/include/front/subleftgnb.jsp" %>
+				<%@ include file="/include/front/lowgnb.jsp" %>
+				<%@ include file="/include/front/subgnb.jsp" %>
 				<div class="col-lg-9 col-md-9">
 					<div class="row">
 						<c:choose>
