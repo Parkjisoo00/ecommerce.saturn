@@ -32,9 +32,17 @@
 /*----------------------------------------*/
 
 html,
+
+font-face {
+    font-family: 'GyeonggiFont';
+    src: url('/fonts/경기천년제목OTF_Light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
 	height: 100%;
-	font-family: "Montserrat", sans-serif;
+	font-family: 'GyeonggiFont', sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
 
