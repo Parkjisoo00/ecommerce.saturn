@@ -36,7 +36,7 @@ public class MemberDto {
 	private String flg_sur		= "";
 	private int	cd_state	= 0;
 	private String	mbr_nm		= "";
-	private String	age			= "";
+	private String 	age			= "";
 	private String	gender		= "";
 	private String	phone		= "";
 	private String	post		= "";
@@ -52,7 +52,6 @@ public class MemberDto {
 	private String	dt_upt		= "";
 	private int	register	= 0;
 	private int	updater		= 0;
-	
 	
 	public int getSeq_mbr() {
 		return seq_mbr;
@@ -90,6 +89,7 @@ public class MemberDto {
 	public void setMbr_nm(String mbr_nm) {
 		this.mbr_nm = mbr_nm;
 	}
+	
 	public String getAge() {
 		return age;
 	}
@@ -185,5 +185,5 @@ public class MemberDto {
 	}
 	public void setUpdater(int updater) {
 		this.updater = updater;
-	}
+	}	
 }

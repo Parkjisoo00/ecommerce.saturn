@@ -143,19 +143,8 @@ function checkRegister() {
 		alert("연락처를 확인해 주세요!");
 		isSubmit = false;
 	}
+		
 	
-	var birth = new Date(document.getElementById("age").value);
-	var today = new Date();
-	var age = today.getFullYear() - birth.getFullYear();
-
-	// 생일이 지나지 않았으면 나이를 1살 줄임
-	if (today.getMonth() < birth.getMonth() || 
-		(today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate())) {
-		age--;
-	}
-			
-	var age = document.getElementById("age").value;
-
 	if (document.getElementById("mbr_nm").value == ""
 		|| document.getElementById("phone1").value == ""
 		|| document.getElementById("phone2").value == ""
@@ -166,7 +155,23 @@ function checkRegister() {
 		alert("필수 항목을 입력하세요!");
 		isSubmit = false;
 	}
-
+	/*정규식으로 어떻게든 해도 반영이 안된다고 그럼 html에서 수정하기
+	var regExpDate = /^\d{4}-\d{2}-\d{2}$/;
+	var age =  document.getElementById("age").value; // 입력된 값 가져오기
+	
+	// 입력값이 비어 있지 않은지 확인
+	if (age === "") {
+	    alert("생년월일을 입력해 주세요!");
+	    isSubmit = false;
+	} else {
+		// 정규 표현식 대신 날짜 형식 체크
+		var regExpDate = /^\d{4}-\d{2}-\d{2}$/; // yyyy-mm-dd 형식
+		if (!regExpDate.test(age)) {
+			alert("생년월일을 확인해 주세요!");
+			isSubmit = false;
+		}
+	}
+*/
 	if (isSubmit) {
 		alert("정상적으로 "
 			+ email
