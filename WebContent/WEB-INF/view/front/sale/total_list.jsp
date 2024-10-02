@@ -9,6 +9,33 @@
 <head>
 	<%@ include file="/include/front/header.jsp" %>
 	<script>
+		function goTypeF(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.type.setAttribute("value", value);
+			frmMain.action = "/front/sale/function_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeI(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.type.setAttribute("value", value);
+			frmMain.action = "/front/sale/ingredient_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeG(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.type.setAttribute("value", value);
+			frmMain.action = "/front/sale/gender_list.web";
+			frmMain.submit();
+		}
+	
 		function goPages(value) {
 			
 			var frmMain = document.getElementById("frmMain");
@@ -30,6 +57,7 @@
 
 <body>
 <form id="frmMain" method="POST">
+<input type="hidden" id="type"			name="type" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -66,34 +94,7 @@
 		<div class="container">
 			<div class="row">
 				<%@ include file="/include/front/lowmenu.jsp" %>
-				<div class="col-lg-3 col-md-3">
-					<div class="shop__sidebar">
-						<div class="sidebar__categories">
-							<div class="section-title">
-								<h4>전체 상품</h4>
-							</div>
-							<div class="categories__accordion">
-								<div class="accordion" id="accordionExample">
-									<div class="card">
-										<div>
-											<a href="/front/sale/function_list.web" style="color : black">기 능 별</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="/front/sale/ingredient_list.web" style="color : black">성 분 별</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="/front/sale/gender_list.web" style="color : black">대 상 별</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<%@ include file="/include/front/subleftgnb.jsp" %>
 				<div class="col-lg-9 col-md-9">
 					<div class="row">
 						<c:choose>
@@ -106,7 +107,6 @@
 								<c:forEach var="list" items="${list}">
 									<div class="col-lg-4 col-md-6">
 										<input type="hidden" name="cd_ctg_b" id="cd_ctg_b" value="${list.cd_ctg_b}" />
-										<input type="hidden" name="cd_ctg_m" id="cd_ctg_m" value="${list.cd_ctg_m}" />
 										<input type="hidden" name="prd_type" id="prd_type" value="${list.prd_type}" />
 										<input type="hidden" name="corp_nm" id="corp_nm" value="${list.corp_nm}" />
 										<div class="product__item">
