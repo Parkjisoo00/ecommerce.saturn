@@ -96,6 +96,18 @@
 							});
 						});
 					});
+					 function checkRegister() {
+					        alert("회원가입을 처리합니다.");
+					        // 실제 회원가입 로직을 추가하세요.
+					    }
+					 function execDaumPostcode() {
+					        new daum.Postcode({
+					            oncomplete: function(data) {
+					                document.getElementById('postcode').value = data.zonecode;  // 우편번호
+					                document.getElementById('addr1').value = data.roadAddress;  // 도로명 주소
+					            }
+					        }).open();
+					    }
 				</script>
 	</head>
 
@@ -160,14 +172,14 @@
 										<div class="col-lg-12">
 											<div class="checkout__form__input">
 												<p>비밀번호 (영문 대/소문자, 숫자, 특수문자 포함 8~16자 필수 입력) <span>*</span></p>
-												<input type="password" id="passwd" name="passwd">
+												<input value = "12345678!a" type="password" id="passwd" name="passwd">
 													<!-- pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}"
 													required style="width: 100%;" /> -->
 											</div>
 
 											<div class="checkout__form__input">
 												<p>비밀번호 확인 <span>*</span></p>
-												<input type="password" id="passwd_conFirm" name="passwd_conFirm">
+												<input value = "12345678!a" type="password" id="passwd_conFirm" name="passwd_conFirm">
 													<!-- pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}"
 													required style="width: 100%;" /> -->
 											</div>
@@ -369,7 +381,8 @@
 								<div class="footer__about">
 									<div class="footer__logo">
 										<a href="./index.html">
-											<img=" /img/logo.png" alt="">
+											<img src="/img/logo.png" alt="Logo">
+
 										</a>
 									</div>
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -453,7 +466,7 @@
 
 				<!-- Js Plugins -->
 				<%@ include file="/include/front/js.jsp" %>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
 	</body>
 
 </html>
