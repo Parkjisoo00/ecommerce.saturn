@@ -58,7 +58,7 @@
 		AND sle.FLG_DELETE = 'N'
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
-		]]> 
+		]]>
 	</sql>
 	
 	<select id="ingredientCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -118,7 +118,15 @@
 		AND sle.CD_CTG_B = '2'
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
-		]]> 
+		]]>
+		<choose>
+			<when test="cd_ctg_m != null and cd_ctg_m != ''">
+				AND sle.CD_CTG_M = #{cd_ctg_m}
+			</when>
+			<otherwise>
+				AND sle.CD_CTG_M IN (1, 2, 3, 4, 5, 6, 7, 8, 9)
+			</otherwise>
+		</choose>
 	</sql>
 	
 	<select id="functionCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -178,7 +186,15 @@
 		AND sle.CD_CTG_B = '1'
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
-		]]> 
+		]]>
+		<choose>
+			<when test="cd_ctg_m != null and cd_ctg_m != ''">
+				AND sle.CD_CTG_M = #{cd_ctg_m}
+			</when>
+			<otherwise>
+				AND sle.CD_CTG_M IN (1, 2, 3, 4, 5, 6, 7, 8, 9)
+			</otherwise>
+		</choose>
 	</sql>
 	
 	<select id="genderCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -239,9 +255,14 @@
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
 		]]>
-		<if test="cd_ctg_m != null and cd_ctg_m != ''">
-			AND sle.CD_CTG_M = #{cd_ctg_m}
-		</if>
+		<choose>
+			<when test="cd_ctg_m != null and cd_ctg_m != ''">
+				AND sle.CD_CTG_M = #{cd_ctg_m}
+			</when>
+			<otherwise>
+				AND sle.CD_CTG_M IN (1, 2)
+			</otherwise>
+		</choose>
 	</sql>
 		
 </mapper>

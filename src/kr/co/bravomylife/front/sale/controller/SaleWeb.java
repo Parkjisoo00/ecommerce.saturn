@@ -65,11 +65,31 @@ public class SaleWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/sale/function_list.web")
-	public ModelAndView functionList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto) {
+	public ModelAndView functionList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto, String type) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			
+			if ("bld".equals(type)) {
+				pagingDto.setCd_ctg_m("1");
+			} else if ("imu".equals(type)) {
+				pagingDto.setCd_ctg_m("2");
+			} else if ("inf".equals(type)) {
+				pagingDto.setCd_ctg_m("3");
+			} else if ("jnt".equals(type)) {
+				pagingDto.setCd_ctg_m("4");
+			} else if ("rec".equals(type)) {
+				pagingDto.setCd_ctg_m("5");
+			} else if ("eye".equals(type)) {
+				pagingDto.setCd_ctg_m("6");
+			} else if ("col".equals(type)) {
+				pagingDto.setCd_ctg_m("7");
+			} else if ("brn".equals(type)) {
+				pagingDto.setCd_ctg_m("8");
+			} else if ("stm".equals(type)) {
+				pagingDto.setCd_ctg_m("9");
+			}
 			
 			PagingListDto pagingListDto = saleSrvc.functionList(pagingDto);
 			mav.addObject("paging"	, pagingListDto.getPaging());
@@ -96,11 +116,31 @@ public class SaleWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/sale/ingredient_list.web")
-	public ModelAndView ingredientList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto) {
+	public ModelAndView ingredientList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto, String type) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			
+			if ("pol".equals(type)) {
+				pagingDto.setCd_ctg_m("1");
+			} else if ("omg".equals(type)) {
+				pagingDto.setCd_ctg_m("2");
+			} else if ("min".equals(type)) {
+				pagingDto.setCd_ctg_m("3");
+			} else if ("bac".equals(type)) {
+				pagingDto.setCd_ctg_m("4");
+			} else if ("msm".equals(type)) {
+				pagingDto.setCd_ctg_m("5");
+			} else if ("rut".equals(type)) {
+				pagingDto.setCd_ctg_m("6");
+			} else if ("kou".equals(type)) {
+				pagingDto.setCd_ctg_m("7");
+			} else if ("arg".equals(type)) {
+				pagingDto.setCd_ctg_m("8");
+			} else if ("mik".equals(type)) {
+				pagingDto.setCd_ctg_m("9");
+			}
 			
 			PagingListDto pagingListDto = saleSrvc.ingredientList(pagingDto);
 			mav.addObject("paging"	, pagingListDto.getPaging());
@@ -127,11 +167,17 @@ public class SaleWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/sale/gender_list.web")
-	public ModelAndView genderList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto) {
+	public ModelAndView genderList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto, String type) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			
+			if ("M".equals(type)) {
+				pagingDto.setCd_ctg_m("1");
+			} else if ("F".equals(type)) {
+				pagingDto.setCd_ctg_m("2");
+			}
 			
 			PagingListDto pagingListDto = saleSrvc.genderList(pagingDto);
 			mav.addObject("paging"	, pagingListDto.getPaging());

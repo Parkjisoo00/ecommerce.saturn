@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<%@ page info="/WEB-INF/view/front/buy/list.jsp" %>
+<%@ page info="/WEB-INF/view/front/sale/gender_list.jsp" %>
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
@@ -9,12 +9,12 @@
 <head>
 	<%@ include file="/include/front/header.jsp" %>
 	<script>
-		function goType(type) {
+		function goType(value) {
 			
 			var frmMain = document.getElementById("frmMain");
 			
-			frmMain.type.setAttribute("value", type);
-			frmMain.action = "/front/sale/function_list.web";
+			frmMain.type.setAttribute("value", value);
+			frmMain.action = "/front/sale/gender_list.web";
 			frmMain.submit();
 		}
 	
@@ -23,7 +23,7 @@
 			var frmMain = document.getElementById("frmMain");
 			
 			frmMain.currentPage.setAttribute("value", value);
-			frmMain.action="/front/sale/total_list.web";
+			frmMain.action="/front/sale/gender_list.web";
 			frmMain.submit();
 		}
 	</script>
@@ -39,8 +39,8 @@
 
 <body>
 <form id="frmMain" method="POST">
+<input type="hidden" id="type"			name="type" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
-<input type="hidden" name="cd_ctg_b"	id="cd_ctg_b" value="${paging.cd_ctg_b}" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -86,12 +86,12 @@
 								<div class="accordion" id="accordionExample">
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseOne" href="#" style="color : black">남성</a>
+											<a href="javascript:goType('M');" style="color : black">남성</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseTwo" href="#" style="color : black">여성</a>
+											<a href="javascript:goType('F');" style="color : black">여성</a>
 										</div>
 									</div>
 								</div>
@@ -111,7 +111,6 @@
 								<c:forEach var="list" items="${list}">
 									<div class="col-lg-4 col-md-6">
 										<input type="hidden" name="cd_ctg_b" id="cd_ctg_b" value="${list.cd_ctg_b}" />
-										<input type="hidden" name="cd_ctg_m" id="cd_ctg_m" value="${list.cd_ctg_m}" />
 										<input type="hidden" name="prd_type" id="prd_type" value="${list.prd_type}" />
 										<input type="hidden" name="corp_nm" id="corp_nm" value="${list.corp_nm}" />
 										<div class="product__item">
