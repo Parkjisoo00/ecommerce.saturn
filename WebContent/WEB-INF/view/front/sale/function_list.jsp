@@ -75,13 +75,7 @@
 	<section class="shop spad">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12">
-					<h6 class="coupon__link">
-						<a href="#" style="margin-left: 150px;margin-right: 150px;">낮은 가격순</a>
-						<a href="#" style="margin-right: 150px;">높은 가격순</a>
-						<a href="#" style="margin-right: 150px;">등록일 순</a>
-					</h6>
-				</div>
+				<%@ include file="/include/front/lowmenu.jsp" %>
 				<div class="col-lg-3 col-md-3">
 					<div class="shop__sidebar">
 						<div class="sidebar__categories">

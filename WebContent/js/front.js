@@ -1,52 +1,3 @@
-function checkModify() {
-    var isSubmit = true;
-    var frmMain = document.getElementById("frmMain");
-
-    // 휴대폰번호 확인(3자리-4자리-4자리)
-    var regExpPhone = /^\d{3}-\d{4}-\d{4}$/;
-    var phone = document.getElementById("phone1").value + "-" + document.getElementById("phone2").value + "-" + document.getElementById("phone3").value;
-    if (!regExpPhone.test(phone)) {
-        alert("연락처를 확인해 주세요!");
-        isSubmit = false;
-    }
-
-    if (document.getElementById("phone1").value == ""
-        || document.getElementById("phone2").value == ""
-        || document.getElementById("phone3").value == ""
-        || document.getElementById("post").value == ""
-        || document.getElementById("addr1").value == ""
-        || document.getElementById("addr2").value == "") {
-        alert("필수 항목을 입력하세요!");
-        isSubmit = false;
-    }
-
-    if (isSubmit) {
-        document.getElementById("phone").value =
-            document.getElementById("phone1").value
-            + "-" + document.getElementById("phone2").value
-            + "-" + document.getElementById("phone3").value;
-
-        frmMain.action = "/front/member/modifyProc.web";
-        frmMain.submit();
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const birthDateInput = document.getElementById('birthDate');
-
-        // 사용자가 미래 날짜를 선택하지 않도록 제한
-        birthDateInput.addEventListener('change', function () {
-            const birthDate = new Date(birthDateInput.value);
-            const today = new Date();
-
-            // 미래 날짜를 선택하면 경고 메시지와 함께 필드를 비움
-            if (birthDate > today) {
-                alert('미래의 날짜를 선택할 수 없습니다.');
-                birthDateInput.value = '';
-            }
-        });
-    });
-}
-
 function execDaumPostcode() {
 	
 	var width = 500; //팝업의 너비
@@ -115,83 +66,83 @@ function execDaumPostcode() {
 }
 
 function checkEmail(email) {
-    var isEmail = true;
-    var regExpEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	var isEmail = true;
+	var regExpEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
-    if (!regExpEmail.test(email)) return false;
-    if (email.length <= 7) return false;
-    if (email.indexOf("@") <= 0) return false;
+	if (!regExpEmail.test(email)) return false;
+	if (email.length <= 7) return false;
+	if (email.indexOf("@") <= 0) return false;
 
-    var arrDomain = [".co.kr", ".com", ".net", ".or.kr", ".go.kr"];
-    var isExist = arrDomain.some(function (domain) {
-        return email.indexOf(domain) > 0;
-    });
+	var arrDomain = [".co.kr", ".com", ".net", ".or.kr", ".go.kr"];
+	var isExist = arrDomain.some(function (domain) {
+		return email.indexOf(domain) > 0;
+	});
 
-    if (!isExist) return false;
+	if (!isExist) return false;
 
-    var arrValue = email.split("@");
-    var regularExpression = /^[a-zA-Z]{1}[a-zA-Z0-9_]{4,16}$/;
-    if (!regularExpression.test(arrValue[0])) return false;
+	var arrValue = email.split("@");
+	var regularExpression = /^[a-zA-Z]{1}[a-zA-Z0-9_]{4,16}$/;
+	if (!regularExpression.test(arrValue[0])) return false;
 
-    var IRREGULAR_KEYWORD = "super|root|administrator|admin|console"
-        + "|sys|system|sa|owner"
-        + "|document|html|iframe|div|span|img|src|type"
-        + "|javascript|vbscript|script|alert"
-        + "|id|member|customer|www";
-    if (IRREGULAR_KEYWORD.indexOf(arrValue[0].toLowerCase()) >= 0) {
-        return false;
-    }
+	var IRREGULAR_KEYWORD = "super|root|administrator|admin|console"
+		+ "|sys|system|sa|owner"
+		+ "|document|html|iframe|div|span|img|src|type"
+		+ "|javascript|vbscript|script|alert"
+		+ "|id|member|customer|www";
+	if (IRREGULAR_KEYWORD.indexOf(arrValue[0].toLowerCase()) >= 0) {
+		return false;
+	}
 
-    return isEmail;
+	return isEmail;
 }
 
 function checkRegister() {
-    var isSubmit = true;
-    var frmMain = document.getElementById("frmMain");
+	var isSubmit = true;
+	var frmMain = document.getElementById("frmMain");
 
-    if (!document.getElementById("term_1").checked) {
-        alert("필수 약관에 동의하셔야 합니다!");
-        return;
-    }
+	if (!document.getElementById("term_1").checked) {
+		alert("필수 약관에 동의하셔야 합니다!");
+		return;
+	}
 
-    var email = document.getElementById("email").value;
+	var email = document.getElementById("email").value;
 
-    if (!checkEmail(email)) {
-        alert("이메일을 확인하세요!");
-        document.getElementById("email").focus();
-        return;
-    }
+	if (!checkEmail(email)) {
+		alert("이메일을 확인하세요!");
+		document.getElementById("email").focus();
+		return;
+	}
 
-    if (isDuplicate) {
-        alert("이메일 중복을 확인하세요!");
-        document.getElementById("btnId").focus();
-        return;
-    }
+	if (isDuplicate) {
+		alert("이메일 중복을 확인하세요!");
+		document.getElementById("btnId").focus();
+		return;
+	}
 
-    if (document.getElementById("passwd").value != document.getElementById("passwd").value) {
-        alert("비밀번호를 확인하세요!");
-        isSubmit = false;
-        document.getElementById("passwd").focus();
-    }
+	if (document.getElementById("passwd").value != document.getElementById("passwd").value) {
+		alert("비밀번호를 확인하세요!");
+		isSubmit = false;
+		document.getElementById("passwd").focus();
+	}
 
-    var regExpPasswd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
-    if (!regExpPasswd.test(document.getElementById("passwd").value)) {
-        alert("비밀번호는 영문/숫자/특수기호를 조합하여 8자 이상을 입력하세요!");
-        isSubmit = false;
-    }
+	var regExpPasswd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+	if (!regExpPasswd.test(document.getElementById("passwd").value)) {
+		alert("비밀번호는 영문/숫자/특수기호를 조합하여 8자 이상을 입력하세요!");
+		isSubmit = false;
+	}
 
-    var regExpName = /^[가-힣]*$/;
-    if (!regExpName.test(document.getElementById("mbr_nm").value)) {
-        alert("성명은 한글만 입력하세요!");
-        isSubmit = false;
-    }
+	var regExpName = /^[가-힣]*$/;
+	if (!regExpName.test(document.getElementById("mbr_nm").value)) {
+		alert("성명은 한글만 입력하세요!");
+		isSubmit = false;
+	}
 
-    var regExpPhone = /^\d{3}-\d{4}-\d{4}$/;
-    var phone = document.getElementById("phone1").value + "-" + document.getElementById("phone2").value + "-" + document.getElementById("phone3").value;
-    if (!regExpPhone.test(phone)) {
-        alert("연락처를 확인해 주세요!");
-        isSubmit = false;
-    }
+	var regExpPhone = /^\d{3}-\d{4}-\d{4}$/;
+	var phone = document.getElementById("phone1").value + "-" + document.getElementById("phone2").value + "-" + document.getElementById("phone3").value;
+	if (!regExpPhone.test(phone)) {
+		alert("연락처를 확인해 주세요!");
+		isSubmit = false;
+	}
 	
 	var birth = new Date(document.getElementById("age").value);
 	var today = new Date();
@@ -199,8 +150,8 @@ function checkRegister() {
 
 	// 생일이 지나지 않았으면 나이를 1살 줄임
 	if (today.getMonth() < birth.getMonth() || 
-	    (today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate())) {
-	    age--;
+		(today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate())) {
+		age--;
 	}
 	
 	document.getElementById("age").value = age;
@@ -208,27 +159,27 @@ function checkRegister() {
 	
 	
 
-    if (document.getElementById("mbr_nm").value == ""
-        || document.getElementById("phone1").value == ""
-        || document.getElementById("phone2").value == ""
-        || document.getElementById("phone3").value == ""
-        //|| document.getElementById("post").value == ""
-        || document.getElementById("addr1").value == ""
-        || document.getElementById("addr2").value == "") {
-        alert("필수 항목을 입력하세요!");
-        isSubmit = false;
-    }
+	if (document.getElementById("mbr_nm").value == ""
+		|| document.getElementById("phone1").value == ""
+		|| document.getElementById("phone2").value == ""
+		|| document.getElementById("phone3").value == ""
+		//|| document.getElementById("post").value == ""
+		|| document.getElementById("addr1").value == ""
+		|| document.getElementById("addr2").value == "") {
+		alert("필수 항목을 입력하세요!");
+		isSubmit = false;
+	}
 
-    if (isSubmit) {
-        alert("정상적으로 "
-            + email
-            + "로 인증 URL이 전송되었습니다.\n반드시 가입 후 10분 이내에 인증 URL을 클릭하셔야 정상적으로 서비스를 이용할 수 있습니다.");
-        document.getElementById("phone").value =
-            document.getElementById("phone1").value
-            + "-" + document.getElementById("phone2").value
-            + "-" + document.getElementById("phone3").value;
+	if (isSubmit) {
+		alert("정상적으로 "
+			+ email
+			+ "로 인증 URL이 전송되었습니다.\n반드시 가입 후 10분 이내에 인증 URL을 클릭하셔야 정상적으로 서비스를 이용할 수 있습니다.");
+		document.getElementById("phone").value =
+			document.getElementById("phone1").value
+			+ "-" + document.getElementById("phone2").value
+			+ "-" + document.getElementById("phone3").value;
 
-        frmMain.action = "/front/member/registerProc.web";
-        frmMain.submit();
-    }
+		frmMain.action = "/front/member/registerProc.web";
+		frmMain.submit();
+	}
 }
