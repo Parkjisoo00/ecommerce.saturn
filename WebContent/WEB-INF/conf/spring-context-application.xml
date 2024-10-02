@@ -69,6 +69,10 @@
 		
 		<interceptor>
 			<mvc:mapping path="/front/**" />
+			<exclude-mapping path="/front/sale/function_list.web" />
+			<exclude-mapping path="/front/sale/ingredient_list.web" />
+			<exclude-mapping path="/front/sale/gender_list.web" />
+			<exclude-mapping path="/front/sale/total_list.web" />
 			<exclude-mapping path="/front/index.web" />
 			<exclude-mapping path="/front/member/registerForm.web" />
 			<exclude-mapping path="/front/member/registerProc.web" />
