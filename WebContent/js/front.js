@@ -192,12 +192,27 @@ function checkRegister() {
         alert("연락처를 확인해 주세요!");
         isSubmit = false;
     }
+	
+	var birth = new Date(document.getElementById("age").value);
+	var today = new Date();
+	var age = today.getFullYear() - birth.getFullYear();
+
+	// 생일이 지나지 않았으면 나이를 1살 줄임
+	if (today.getMonth() < birth.getMonth() || 
+	    (today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate())) {
+	    age--;
+	}
+	
+	document.getElementById("age").value = age;
+	//alert(age);
+	
+	
 
     if (document.getElementById("mbr_nm").value == ""
         || document.getElementById("phone1").value == ""
         || document.getElementById("phone2").value == ""
         || document.getElementById("phone3").value == ""
-        || document.getElementById("post").value == ""
+        //|| document.getElementById("post").value == ""
         || document.getElementById("addr1").value == ""
         || document.getElementById("addr2").value == "") {
         alert("필수 항목을 입력하세요!");
@@ -217,5 +232,3 @@ function checkRegister() {
         frmMain.submit();
     }
 }
-
-

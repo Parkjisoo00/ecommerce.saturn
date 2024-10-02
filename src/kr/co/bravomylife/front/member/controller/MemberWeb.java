@@ -240,6 +240,8 @@ public class MemberWeb extends Common {
 			, String term_2
 			, String term_3) {
 		
+		logger.debug(memberDto.getAge()+"");
+		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
