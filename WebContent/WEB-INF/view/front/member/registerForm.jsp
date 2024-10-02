@@ -100,6 +100,7 @@
 	</head>
 
 	<body>
+	<input type="hidden" name="phone" id="phone" />
 		<!-- Page Preloder -->
 		<div id="preloder">
 			<div class="loader"></div>
@@ -134,7 +135,7 @@
 				<!-- Checkout Section Begin -->
 				<section class="checkout spad">
 					<div class="container">
-						<form action="#" class="checkout__form" id="frmMain">
+						<form action="/front/member/registerProc.web" class="checkout__form" id="frmMain" method="POST">
 							<div class="row">
 								<div class="col-lg-8">
 									<h5>회원가입</h5>
@@ -166,7 +167,7 @@
 
 											<div class="checkout__form__input">
 												<p>비밀번호 확인 <span>*</span></p>
-												<input type="password" id="passwd" name="passwd">
+												<input type="password" id="passwd_conFirm" name="passwd_conFirm">
 													<!-- pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}"
 													required style="width: 100%;" /> -->
 											</div>
@@ -197,7 +198,7 @@
 										<div class="col-lg-6 col-md-6 col-sm-6">
 											<div class="checkout__form__input">
 												<p>생년월일 <span>*</span></p>
-												<input type="date" id="birthDate" name="birthDate"
+												<input type="date" id="age" name="age"
 													style="width: 100%;" />
 											</div>
 										</div>
