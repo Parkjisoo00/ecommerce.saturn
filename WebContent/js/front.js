@@ -143,21 +143,8 @@ function checkRegister() {
 		alert("연락처를 확인해 주세요!");
 		isSubmit = false;
 	}
-	
-	var birth = new Date(document.getElementById("age").value);
-	var today = new Date();
-	var age = today.getFullYear() - birth.getFullYear();
-
-	// 생일이 지나지 않았으면 나이를 1살 줄임
-	if (today.getMonth() < birth.getMonth() || 
-		(today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate())) {
-		age--;
-	}
-	
-	document.getElementById("age").value = age;
-	//alert(age);
-	
-	
+		
+	var age = document.getElementById("age").value;
 
 	if (document.getElementById("mbr_nm").value == ""
 		|| document.getElementById("phone1").value == ""

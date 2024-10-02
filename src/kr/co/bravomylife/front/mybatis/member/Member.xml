@@ -50,7 +50,7 @@
 		INSERT INTO TB_MBR_MST
 			(SEQ_MBR, EMAIL, PASSWD, FLG_SUR, CD_STATE, MBR_NM, AGE, GENDER, PHONE, DT_REG, REGISTER)
 		VALUES
-			(#{seq_mbr}, #{email}, #{passwd}, #{flg_sur}, 0, #{mbr_nm}, TO_NUMBER(TO_CHAR(#{age}, 'YYYYMMDD')), #{gender}, #{phone}, SYSDATE, #{register})
+			(#{seq_mbr}, #{email}, #{passwd}, #{flg_sur}, 0, #{mbr_nm}, TO_DATE(#{age}, 'YYYY-MM-DD'), #{gender}, #{phone}, SYSDATE, #{register})
 	</insert>
 	
 	<insert id="insertDetail" parameterType="memberDto">
