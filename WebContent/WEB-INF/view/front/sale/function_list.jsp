@@ -14,7 +14,7 @@
 			var frmMain = document.getElementById("frmMain");
 			
 			frmMain.type.setAttribute("value", type);
-			frmMain.action = "#";
+			frmMain.action = "/front/sale/function_list.web";
 			frmMain.submit();
 		}
 	
@@ -97,42 +97,42 @@
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseTwo" href="#" style="color : black">황산화/면연력</a>
+											<a data-toggle="collapse" data-target="#collapseTwo" href="javascript:goType('immunity');" style="color : black">황산화/면연력</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseThree" href="#" style="color : black">염증/항염</a>
+											<a data-toggle="collapse" data-target="#collapseThree" href="javascript:goType('infection');" style="color : black">염증/항염</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseFour" href="#" style="color : black">관절/뼈/치아</a>
+											<a data-toggle="collapse" data-target="#collapseFour" href="javascript:goType('joint');" style="color : black">관절/뼈/치아</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseFive" href="#" style="color : black">피로회복</a>
+											<a data-toggle="collapse" data-target="#collapseFive" href="javascript:goType('recovery');" style="color : black">피로회복</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseFour" href="#" style="color : black">눈 건강</a>
+											<a data-toggle="collapse" data-target="#collapseFour" href="javascript:goType('eye');" style="color : black">눈 건강</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseFour" href="#" style="color : black">장 건강</a>
+											<a data-toggle="collapse" data-target="#collapseFour" href="javascript:goType('colon');" style="color : black">장 건강</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseFour" href="#" style="color : black">두뇌/기억력</a>
+											<a data-toggle="collapse" data-target="#collapseFour" href="javascript:goType('brain');" style="color : black">두뇌/기억력</a>
 										</div>
 									</div>
 									<div class="card">
 										<div>
-											<a data-toggle="collapse" data-target="#collapseFour" href="#" style="color : black">위/간/갑상선</a>
+											<a data-toggle="collapse" data-target="#collapseFour" href="javascript:goType('stomach');" style="color : black">위/간/갑상선</a>
 										</div>
 									</div>
 								</div>
