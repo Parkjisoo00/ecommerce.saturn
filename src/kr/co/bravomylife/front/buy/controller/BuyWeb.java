@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.front.buy.dto.BuyDto;
 import kr.co.bravomylife.front.buy.service.BuySrvc;
+import kr.co.bravomylife.front.common.Common;
 /**
  * @version 1.0.0
  * @author cydgate4957@gmail.com
@@ -41,21 +42,20 @@ import kr.co.bravomylife.front.buy.service.BuySrvc;
  * <p>IMPORTANT:</p>
  */
 @Controller("kr.co.bravomylife.front.buy.controller.BuyWeb")
-public class BuyWeb {
-
-	@Inject
-	BuySrvc buySrvc;
-	
+public class BuyWeb extends Common {
 	
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(BuyWeb.class);
+	
+	@Inject
+	BuySrvc buySrvc;
 	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-09-30
+	 * @since 2024-10-02
 	 * <p>DESCRIPTION:</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>

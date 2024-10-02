@@ -51,6 +51,5 @@ public class BuySrvc {
 	 */
 	public BuyDto select(BuyDto buyDto) {
 		return buyDao.select(buyDto);
-		
 	}
 }

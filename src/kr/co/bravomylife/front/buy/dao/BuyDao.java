@@ -33,7 +33,7 @@ import kr.co.bravomylife.front.common.dao.BaseDao;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-@Repository("kr.co.bravomylife.front.sale.dao.SaleDao")
+@Repository("kr.co.bravomylife.front.buy.dao.SaleDao")
 public class BuyDao extends BaseDao {
 	
 	public BuyDto select(BuyDto buyDto) {
