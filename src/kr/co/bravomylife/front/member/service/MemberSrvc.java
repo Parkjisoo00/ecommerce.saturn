@@ -41,7 +41,7 @@ import kr.co.bravomylife.front.member.dto.TermAgreeDto;
  */
 @Service("kr.co.bravomylife.front.member.service.MemberSrvc")
 public class MemberSrvc {
-
+	
 	@Inject
 	MemberDao memberDao;
 	
@@ -56,15 +56,12 @@ public class MemberSrvc {
 		if (result == 1) {
 			return true;
 		}
-		
 		else if (result == 0) {
 			memberDao.updateStateM(memberDto);
 			return false;
 		}
-		
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return false;
-		
 	}
 	
 	public int selectDuplicate(MemberDto memberDto) {
@@ -72,7 +69,6 @@ public class MemberSrvc {
 	}
 	
 	/*약관*/
-	
 	@Transactional("txFront")
 	public boolean insert(MemberDto memberDto, String[] arrTermAgreement, String post) {
 		

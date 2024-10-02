@@ -1,8 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html lang="kor">
 
 <head>
-	<%@ include file="/include/front/header.jsp" %>
+	<%@ include file="/include/common/header.jsp" %>
 
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
@@ -10,7 +11,7 @@
 	rel="stylesheet">
 
 	<!-- Css Styles -->
-	<%@ include file="/include/front/css.jsp" %>
+	<%@ include file="/include/common/css.jsp" %>
 </head>
 
 <body>
@@ -20,13 +21,11 @@
 	</div>
 
 	<!-- Offcanvas Menu Begin -->
-		<%@ include file="/include/front/leftgnb.jsp" %>
-
+		<%@ include file="/include/front/mainsubgnb.jsp" %>
 	<!-- Offcanvas Menu End -->
 
 	<!-- Header Section Begin -->
 		<%@ include file="/include/front/maingnb.jsp" %>
-
 	<!-- Header Section End -->
 
 	<!-- Breadcrumb Begin -->
@@ -183,134 +182,59 @@
 		</section>
 		<!-- Checkout Section End -->
 
-		<!-- Instagram Begin -->
-		<div class="instagram">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-						<div class="instagram__item set-bg" data-setbg="/img/instagram/insta-1.jpg">
-							<div class="instagram__text">
-								<i class="fa fa-instagram"></i>
-								<a href="#">@ ashion_shop</a>
-							</div>
+	<!-- Instagram Begin -->
+	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
+	<div class="instagram">
+		<div class="container-fluid">
+			<div class="row justify-content-center">
+				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
+					<div class="instagram__item set-bg" data-setbg="/img/footerpic/old5.png">
+						<div class="instagram__text">
+							<i class="fa fa-instagram"></i>
+							<a href="#">임시</a>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-						<div class="instagram__item set-bg" data-setbg="/img/instagram/insta-2.jpg">
-							<div class="instagram__text">
-								<i class="fa fa-instagram"></i>
-								<a href="#">@ ashion_shop</a>
-							</div>
+				</div>
+				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
+					<div class="instagram__item set-bg" data-setbg="/img/footerpic/old4.png">
+						<div class="instagram__text">
+							<i class="fa fa-instagram"></i>
+							<a href="#">임시</a>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-						<div class="instagram__item set-bg" data-setbg="/img/instagram/insta-3.jpg">
-							<div class="instagram__text">
-								<i class="fa fa-instagram"></i>
-								<a href="#">@ ashion_shop</a>
-							</div>
+				</div>
+				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
+					<div class="instagram__item set-bg" data-setbg="/img/footerpic/old3.png">
+						<div class="instagram__text">
+							<i class="fa fa-instagram"></i>
+							<a href="#">임시</a>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-						<div class="instagram__item set-bg" data-setbg="/img/instagram/insta-4.jpg">
-							<div class="instagram__text">
-								<i class="fa fa-instagram"></i>
-								<a href="#">@ ashion_shop</a>
-							</div>
+				</div>
+				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
+					<div class="instagram__item set-bg" data-setbg="/img/footerpic/old2.png">
+						<div class="instagram__text">
+							<i class="fa fa-instagram"></i>
+							<a href="#">임시</a>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-						<div class="instagram__item set-bg" data-setbg="/img/instagram/insta-5.jpg">
-							<div class="instagram__text">
-								<i class="fa fa-instagram"></i>
-								<a href="#">@ ashion_shop</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-						<div class="instagram__item set-bg" data-setbg="/img/instagram/insta-6.jpg">
-							<div class="instagram__text">
-								<i class="fa fa-instagram"></i>
-								<a href="#">@ ashion_shop</a>
-							</div>
+				</div>
+				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
+					<div class="instagram__item set-bg" data-setbg="/img/footerpic/old1.png">
+						<div class="instagram__text">
+							<i class="fa fa-instagram"></i>
+							<a href="#">임시</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- Instagram End -->
+	</div>
+	<!-- Instagram End -->
 
-		<!-- Footer Section Begin -->
-		<footer class="footer">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-md-6 col-sm-7">
-						<div class="footer__about">
-							<div class="footer__logo">
-								<a href="./index.html"><img src="/img/logo.png" alt=""></a>
-							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-							cilisis.</p>
-							<div class="footer__payment">
-								<a href="#"><img src="/img/payment/payment-1.png" alt=""></a>
-								<a href="#"><img src="/img/payment/payment-2.png" alt=""></a>
-								<a href="#"><img src="/img/payment/payment-3.png" alt=""></a>
-								<a href="#"><img src="/img/payment/payment-4.png" alt=""></a>
-								<a href="#"><img src="/img/payment/payment-5.png" alt=""></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-5">
-						<div class="footer__widget">
-							<h6>Quick links</h6>
-							<ul>
-								<li><a href="#">About</a></li>
-								<li><a href="#">Blogs</a></li>
-								<li><a href="#">Contact</a></li>
-								<li><a href="#">FAQ</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-4">
-						<div class="footer__widget">
-							<h6>Account</h6>
-							<ul>
-								<li><a href="#">My Account</a></li>
-								<li><a href="#">Orders Tracking</a></li>
-								<li><a href="#">Checkout</a></li>
-								<li><a href="#">Wishlist</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-8 col-sm-8">
-						<div class="footer__newslatter">
-							<h6>NEWSLETTER</h6>
-							<form action="#">
-								<input type="text" placeholder="Email">
-								<button type="submit" class="site-btn">Subscribe</button>
-							</form>
-							<div class="footer__social">
-								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-youtube-play"></i></a>
-								<a href="#"><i class="fa fa-instagram"></i></a>
-								<a href="#"><i class="fa fa-pinterest"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-lg-12">
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						<div class="footer__copyright__text">
-							<p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-						</div>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					</div>
-				</div>
-			</div>
-		</footer>
-		<!-- Footer Section End -->
+	<!-- Footer Section Begin -->
+	<%@ include file="/include/common/footer.jsp" %>
+	<!-- Footer Section End -->
 
 		<!-- Search Begin -->
 		<div class="search-model">
@@ -324,8 +248,6 @@
 		<!-- Search End -->
 
 	<!-- Js Plugins -->
-	<%@ include file="/include/front/js.jsp" %>
-	
-	</body>
-
-	</html>
+	<%@ include file="/include/common/js.jsp" %>
+</body>
+</html>

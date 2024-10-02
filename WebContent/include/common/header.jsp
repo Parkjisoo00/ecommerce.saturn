@@ -6,6 +6,7 @@
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="건강기능식품, 건강, 맞춤 건강, 건강 분석">
 	<title>브라보 My Life</title>
 	<!-- Google tag (gtag.js) [2024-06-27][pluto@himedia.co.kr][INSERT: Google GA] -->
 	<script async=true src="https://www.googletagmanager.com/gtag/js?id=G-WKLKPH7FVD"></script>

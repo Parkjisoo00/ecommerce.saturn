@@ -53,6 +53,7 @@ public class MemberDto {
 	private int	register	= 0;
 	private int	updater		= 0;
 	
+	
 	public int getSeq_mbr() {
 		return seq_mbr;
 	}

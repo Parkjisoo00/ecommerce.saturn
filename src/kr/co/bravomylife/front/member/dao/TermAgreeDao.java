@@ -43,6 +43,4 @@ public class TermAgreeDao extends BaseDao {
 	public int insert(TermAgreeDto termAgreeDto) {
 		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.member.TermAgree.insert", termAgreeDto);
 	}
-	
-
 }

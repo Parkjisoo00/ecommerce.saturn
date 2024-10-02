@@ -85,7 +85,6 @@ public class MemberWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	
-	
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/front/member/confirmEmail.web")
 	public ModelAndView confirmEmail(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
@@ -97,8 +96,6 @@ public class MemberWeb extends Common {
 			SKwithAES aes		= new SKwithAES(staticKey);
 			
 			memberDto.setEmail(URLDecoder.decode(memberDto.getEmail()));
-			
-		
 			
 			if (memberSrvc.updateState(memberDto)) {
 				request.setAttribute("script"	, "alert('이메일 인증이 완료되어 정상적으로 서비스를 이용할 있습니다.');");
@@ -119,8 +116,6 @@ public class MemberWeb extends Common {
 		
 		return mav;
 	}
-	
-	
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -155,17 +150,16 @@ public class MemberWeb extends Common {
 			
 			//emailCmpn.send(emailDto);
 			// 이메일 전송 시도 및 예외 처리
-	        try {
-	            emailCmpn.send(emailDto);
-	            logger.info("Email sent successfully to: " + memberDto.getEmail());
-	        } catch (MailAuthenticationException e) {
-	            logger.error("SMTP Authentication failed: " + e.getMessage(), e);
-	            throw e;  // 예외를 다시 던져 처리할 수 있도록 함
-	        } catch (Exception e) {
-	            logger.error("Failed to send email to: " + memberDto.getEmail(), e);
-	            throw e;
-	        }
-
+			try {
+				emailCmpn.send(emailDto);
+				logger.info("Email sent successfully to: " + memberDto.getEmail());
+			} catch (MailAuthenticationException e) {
+				logger.error("SMTP Authentication failed: " + e.getMessage(), e);
+				throw e;  // 예외를 다시 던져 처리할 수 있도록 함
+			} catch (Exception e) {
+				logger.error("Failed to send email to: " + memberDto.getEmail(), e);
+				throw e;
+			}
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".checkEmail()] " + e.getMessage(), e);
@@ -201,7 +195,6 @@ public class MemberWeb extends Common {
 			int count = memberSrvc.selectDuplicate(memberDto);
 			
 			if (count == 0) isDuplicate = false;
-			
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".checkDuplicate()] " + e.getMessage(), e);
@@ -210,8 +203,6 @@ public class MemberWeb extends Common {
 		
 		return isDuplicate;
 	}
-	
-	
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -351,6 +342,5 @@ public class MemberWeb extends Common {
 		finally {}
 		
 		return mav;
-		
 	}
 }
