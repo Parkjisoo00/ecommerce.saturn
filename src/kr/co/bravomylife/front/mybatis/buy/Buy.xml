@@ -1,6 +1,95 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.buy.Buy">
-
+	
+	<select id="#" parameterType="#" resultType="#">
+		SELECT
+			*
+		FROM
+			(
+			SELECT
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY best.FLG_BEST, sle.DT_REG DESC) rnum
+				, sle.SEQ_SLE
+				, sle.SLE_NM
+				, sle.IMG
+				, sle.PRICE_SALE
+				, sle.CD_CTG_B
+				, sle.CD_CTG_M
+				, rate.RATE_STAR
+				, rate.COUNT
+				, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
+				, sle.PRD_TYPE
+				, sle.CORP_NM
+				, sle.DISCOUNT
+				, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+				, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') DT_REG
+				, best.FLG_BEST
+			FROM
+				TB_SLE sle
+			LEFT JOIN
+				TB_RATE rate
+			ON
+				sle.SEQ_SLE = rate.SEQ_SLE
+			LEFT JOIN
+				TB_BEST best
+			on
+				sle.SEQ_SLE = best.SEQ_SLE
+			WHERE
+				<include refid="#" />
+			)
+	</select>
+	
+	<sql id="#">
+		sle.SEQ_SLE = #{seq_sle}
+		AND sle.FLG_DELETE = 'N'
+		<![CDATA[
+		AND sle.COUNT_STOCK > 0
+		]]>
+	</sql>
+	
+	SELECT
+    sle.SEQ_SLE
+    , sle.SLE_NM
+    , sle.IMG
+    , sle.PRICE_SALE
+    , rate.RATE_STAR
+    , rate.COUNT
+    , CASE WHEN rate.COUNT > 0 THEN ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) ELSE 0 END average_rate
+    , sle.PRD_TYPE
+    , sle.CORP_NM
+    , sle.DISCOUNT
+    , sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+    , best.FLG_BEST
+    , sle.desces
+    , sle.CD_CTG_B
+    , sle.CD_CTG_M
+    , likee.FLG_LIKE
+FROM
+    TB_SLE sle
+LEFT OUTER JOIN
+    TB_RATE rate
+ON
+    sle.SEQ_SLE = rate.SEQ_SLE
+LEFT OUTER JOIN
+    TB_BEST best
+ON
+    sle.SEQ_SLE = best.SEQ_SLE
+LEFT OUTER JOIN
+    TB_LIKE likee
+ON
+    sle.SEQ_SLE = likee.SEQ_SLE
+LEFT OUTER JOIN
+    TB_MBR mbr
+ON
+    likee.SEQ_MBR = mbr.SEQ_MBR
+WHERE
+    sle.flg_delete = 'N'
+    AND sle.SEQ_SLE = #{seq_sle}
+    <if test="likee.FLG_LIKE == 'Y'">
+        AND mbr.SEQ_MBR = #{seq_mbr}
+    </if>
+	
+	
+	
 	
 </mapper>
