@@ -264,7 +264,7 @@
 										<!-- 약관 동의 -->
 										<div class="col-lg-12">
 											<div class="checkout__form__checkbox">
-												<input type="checkbox" id="term_1" name="term_1">
+												<input type="checkbox" id="term_1" name="term_1" value="Y">
 												[필수] '브라보 마이 라이프' 이용 약관 동의
 												<div class="terms-container"
 													style="border: 1px solid #ccc; padding: 10px; margin-top: 5px; max-height: 100px; overflow-y: auto;">
@@ -276,7 +276,7 @@
 
 										<div class="col-lg-12">
 											<div class="checkout__form__checkbox">
-												<input type="checkbox" id="term_2" name="term_2">
+												<input type="checkbox" id="term_2" name="term_2" value="Y">
 												[필수] 개인정보 수집 및 이용동의
 												<div class="terms-container"
 													style="border: 1px solid #ccc; padding: 10px; margin-top: 5px; max-height: 100px; overflow-y: auto;">
@@ -288,7 +288,7 @@
 
 										<div class="col-lg-12">
 											<div class="checkout__form__checkbox">
-												<input type="checkbox" id="term_3" name="term_3">
+												<input type="checkbox" id="term_3" name="term_3" value="Y">
 												[선택] 개인정보 제3자 제공 동의
 												<div class="terms-container"
 													style="border: 1px solid #ccc; padding: 10px; margin-top: 5px; max-height: 100px; overflow-y: auto;">
