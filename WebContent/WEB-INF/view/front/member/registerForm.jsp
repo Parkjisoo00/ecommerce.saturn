@@ -96,10 +96,6 @@
 							});
 						});
 					});
-					 function checkRegister() {
-					        alert("회원가입을 처리합니다.");
-					        // 실제 회원가입 로직을 추가하세요.
-					    }
 					 function execDaumPostcode() {
 					        new daum.Postcode({
 					            oncomplete: function(data) {

@@ -32,6 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.mail.MailAuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -92,7 +93,10 @@ public class MemberWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			memberDto.setEmail(URLDecoder.decode(memberDto.getEmail()));
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+			
+			memberDto.setEmail(URLDecoder.decode(aes.decode(memberDto.getEmail())));
 			
 			if (memberSrvc.updateState(memberDto)) {
 				request.setAttribute("script"	, "alert('이메일 인증이 완료되어 정상적으로 서비스를 이용할 있습니다.');");
@@ -147,8 +151,19 @@ public class MemberWeb extends Common {
 						+ "하기 인증하기를 클릭하셔야 가입이 완료됩니다.</br></br>"
 						+ "http://127.0.0.1:8080/front/member/confirmEmail.web?email=" + URLEncoder.encode(aes.encode(memberDto.getEmail())));
 			
-			emailCmpn.send(emailDto);
-			
+			//emailCmpn.send(emailDto);
+			// 이메일 전송 시도 및 예외 처리
+	        try {
+	            emailCmpn.send(emailDto);
+	            logger.info("Email sent successfully to: " + memberDto.getEmail());
+	        } catch (MailAuthenticationException e) {
+	            logger.error("SMTP Authentication failed: " + e.getMessage(), e);
+	            throw e;  // 예외를 다시 던져 처리할 수 있도록 함
+	        } catch (Exception e) {
+	            logger.error("Failed to send email to: " + memberDto.getEmail(), e);
+	            throw e;
+	        }
+
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".checkEmail()] " + e.getMessage(), e);
