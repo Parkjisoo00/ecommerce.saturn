@@ -9,9 +9,11 @@
 	<meta name="keywords" content="건강기능식품, 건강, 맞춤 건강, 건강 분석">
 	<title>브라보 My Life</title>
 	<script async=true src="https://www.googletagmanager.com/gtag/js?id=G-N9WL51RMHE"></script>
+	<!-- Google tag (gtag.js) -->
+	<script async=true src="https://www.googletagmanager.com/gtag/js?id=G-H07C72GGY5"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
 		gtag('js', new Date());
-		gtag('config', 'G-N9WL51RMHE');
+		gtag('config', 'G-H07C72GGY5');
 	</script>
