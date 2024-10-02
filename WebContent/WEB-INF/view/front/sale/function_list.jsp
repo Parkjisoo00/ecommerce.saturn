@@ -44,6 +44,16 @@
 			frmMain.action="/front/sale/function_list.web";
 			frmMain.submit();
 		}
+		
+		function goView(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			document.getElementById("seq_sle").value = value;
+			
+			frmMain.action="/front/buy/view.web";
+			frmMain.submit();
+		}
 	</script>
 
 	<!-- Google Font -->
@@ -115,7 +125,7 @@
 													<div class="label new">베스트</div>
 												</c:if>
 												<ul class="product__hover">
-													<li><a href="${list.seq_sle}" class="image-popup"><span class="arrow_expand"></span></a></li>
+													<li><a href="javascript:goView(${list.seq_sle});"><span class="arrow_expand"></span></a></li>
 													<li><a href="#"><span class="icon_heart_alt"></span></a></li>
 													<li><a href="#"><span class="icon_bag_alt"></span></a></li>
 												</ul>

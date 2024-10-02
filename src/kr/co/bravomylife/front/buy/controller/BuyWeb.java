@@ -20,6 +20,7 @@
  */
 package kr.co.bravomylife.front.buy.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,8 +30,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.co.bravomylife.front.basket.controller.BasketWeb;
-
+import kr.co.bravomylife.front.buy.dto.BuyDto;
+import kr.co.bravomylife.front.buy.service.BuySrvc;
 /**
  * @version 1.0.0
  * @author cydgate4957@gmail.com
@@ -42,8 +43,12 @@ import kr.co.bravomylife.front.basket.controller.BasketWeb;
 @Controller("kr.co.bravomylife.front.buy.controller.BuyWeb")
 public class BuyWeb {
 
+	@Inject
+	BuySrvc buySrvc;
+	
+	
 	/** Logger */
-	private static Logger logger = LoggerFactory.getLogger(BasketWeb.class);
+	private static Logger logger = LoggerFactory.getLogger(BuyWeb.class);
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -55,13 +60,17 @@ public class BuyWeb {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/buy/writeForm.web")
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/front/buy/view.web")
+	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, BuyDto buyDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			mav.setViewName("front/buy/writeForm");
+			BuyDto _buyDto = buySrvc.select(buyDto);
+			
+			mav.addObject("view", _buyDto);
+			
+			mav.setViewName("front/buy/view");
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".index()] " + e.getMessage(), e);
