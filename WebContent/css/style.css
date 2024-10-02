@@ -131,8 +131,8 @@ ol {
 	left: 0;
 	bottom: -4px;
 	height: 2px;
-	width: 75px;
-	background: #045724;
+	width: 70px;
+	background: #ca1515;
 	content: "";
 }
 
@@ -416,7 +416,7 @@ ol {
 	bottom: 0;
 	width: 100%;
 	height: 2px;
-	background: #045724;
+	background: #ca1515;
 	content: "";
 	-webkit-transition: all, 0.5s;
 	-o-transition: all, 0.5s;
@@ -2303,6 +2303,8 @@ ol {
 .checkout {
 	padding-top: 80px;
 	padding-bottom: 70px;
+	padding-left: 300px;  /* 좌측 패딩 */
+	padding-right: 300px; /* 우측 패딩 */
 }
 
 .coupon__link {
@@ -2310,7 +2312,7 @@ ol {
 	color: #444444;
 	padding: 14px 0;
 	background: #f5f5f5;
-	border-top: 2px solid #045724;
+	border-top: 2px solid #ca1515;
 	text-align: center;
 	margin-bottom: 50px;
 }
@@ -2407,8 +2409,9 @@ ol {
 	border-radius: 2px;
 	margin-bottom: 25px;
 	font-size: 14px;
-	padding-left: 20px;
+	padding: 0px;
 	color: #666666;
+	text-align: center;
 }
 
 .checkout__form .checkout__form__input input::-webkit-input-placeholder {
@@ -2438,7 +2441,7 @@ ol {
 .checkout__form .checkout__form__checkbox label {
 	display: block;
 	padding-left: 24px;
-	font-size: 14px;
+	font-size: 16px;
 	color: #444444;
 	font-weight: 500;
 	position: relative;

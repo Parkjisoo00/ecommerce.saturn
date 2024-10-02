@@ -14,9 +14,38 @@
 			<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 			<script type="text/javascript" src="/js/front.js"></script>
 			<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-			
+			<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
+			<script type="text/javascript" src="/js/package/tinymce.js"></script>
 
 				<script>
+				
+				$(function() {
+					$('#age').datepicker({
+						dateFormat: 'yy-mm-dd',
+						changeMonth: true,
+						changeYear: true,
+						yearRange: "1900:" + new Date().getFullYear(),
+						onClose: function() {
+							$(this).focus();
+						},
+						onSelect: function(dateText) {
+							//alert("선택된 생년월일: " + dateText); // 날짜 선택 시 자동 처리
+						}
+					});
+
+					$('#age').on('input', function() {
+						// 숫자만 남기고 자릿수 제한
+						var value = $(this).val().replace(/[^0-9]/g, '').slice(0, 8);
+						$(this).val(value);
+
+						if (value.length === 8) {
+							var formattedDate = value.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
+							$(this).val(formattedDate);
+							//alert("입력된 생년월일: " + $(this).val()); // 자동 처리
+						}
+					});
+				});
+					
 					// 이메일 중복 여부
 					var isDuplicate = true;
 
@@ -97,13 +126,13 @@
 						});
 					});
 					 function execDaumPostcode() {
-					        new daum.Postcode({
-					            oncomplete: function(data) {
-					                document.getElementById('postcode').value = data.zonecode;  // 우편번호
-					                document.getElementById('addr1').value = data.roadAddress;  // 도로명 주소
-					            }
-					        }).open();
-					    }
+							new daum.Postcode({
+								oncomplete: function(data) {
+									document.getElementById('postcode').value = data.zonecode;  // 우편번호
+									document.getElementById('addr1').value = data.roadAddress;  // 도로명 주소
+								}
+							}).open();
+						}
 				</script>
 	</head>
 
@@ -115,7 +144,7 @@
 		</div>
 
 		<!-- Offcanvas Menu Begin -->
-		<%@ include file="/include/front/mainsubgnb.jsp" %>
+		<%@ include file="/include/front/leftgnb.jsp" %>
 
 			<!-- Offcanvas Menu End -->
 
@@ -132,7 +161,6 @@
 								<div class="breadcrumb__links">
 									<a href="./index.html"><i class="fa fa-home"></i> Home</a>
 									<span>회원가입</span>
-
 								</div>
 							</div>
 						</div>
@@ -144,13 +172,12 @@
 				<section class="checkout spad">
 					<div class="container">
 						<form action="/front/member/registerProc.web" class="checkout__form" id="frmMain" method="POST">
-							<div class="row">
-								<div class="col-lg-8">
+							<div class="row2">
 									<h5>회원가입</h5>
 
 									<div class="row">
 										<!-- 이메일 -->
-										<div class="col-lg-6 col-md-6 col-sm-6">
+										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="checkout__form__input">
 												<p>이메일 <span>*</span></p>
 												<div style="display: flex; align-items: center; gap: 10px;">
@@ -165,28 +192,37 @@
 										</div>
 
 										<!-- 비밀번호 -->
-										<div class="col-lg-12">
+										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="checkout__form__input">
 												<p>비밀번호 (영문 대/소문자, 숫자, 특수문자 포함 8~16자 필수 입력) <span>*</span></p>
-												<input value = "12345678!a" type="password" id="passwd" name="passwd">
+												<input value = "12345678!a" type="password" id="passwd" name="passwd" required>
 													<!-- pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}"
 													required style="width: 100%;" /> -->
 											</div>
-
+										</div>
+										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="checkout__form__input">
 												<p>비밀번호 확인 <span>*</span></p>
-												<input value = "12345678!a" type="password" id="passwd_conFirm" name="passwd_conFirm">
+												<input value = "12345678!a" type="password" id="passwd_conFirm" name="passwd_conFirm" required>
 													<!-- pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}"
 													required style="width: 100%;" /> -->
 											</div>
 										</div>
 
 										<!-- 성명 -->
-										<div class="col-lg-6 col-md-6 col-sm-6">
+										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="checkout__form__input">
 												<p>성명 <span>*</span></p>
 												<input type="text" id="mbr_nm" name="mbr_nm" required
 													style="width: 100%;" />
+											</div>
+										</div>
+
+										<!-- 생년월일 -->
+										<div class="col-lg-6 col-md-6 col-sm-6">
+											<div class="checkout__form__input">
+												<p>생년월일 <span>*</span></p>
+												<input type="text" id="age" name="age" placeholder="생년월일" maxlength="10" style="width: 100%;" required/>
 											</div>
 										</div>
 
@@ -202,69 +238,62 @@
 											</div>
 										</div>
 
-										<!-- 생년월일 -->
-										<div class="col-lg-6 col-md-6 col-sm-6">
-											<div class="checkout__form__input">
-												<p>생년월일 <span>*</span></p>
-												<input type="date" id="age" name="age"
-													style="width: 100%;" />
-											</div>
-										</div>
-
 										<!-- 연락처 -->
-										<div class="col-lg-6 col-md-6 col-sm-6">
+										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="checkout__form__input">
 												<p>연락처 <span>*</span></p>
 												<div style="display: flex; gap: 5px;">
 													<input value="010" type="text" id="phone1" name="phone1"
-														maxlength="3" style="text-align:center;width:50px" required
+														maxlength="3" required
 														oninput="this.value = this.value.replace(/[^0-9.]/g, '')" />
 													-
 													<input value="1111" type="text" id="phone2" name="phone2"
-														maxlength="4" style="text-align:center;width:60px" required
+														maxlength="4" required
 														oninput="this.value = this.value.replace(/[^0-9.]/g, '')" />
 													-
 													<input value="2222" type="text" id="phone3" name="phone3"
-														maxlength="4" style="text-align:center;width:60px" required
+														maxlength="4" required
 														oninput="this.value = this.value.replace(/[^0-9.]/g, '')" />
 												</div>
 											</div>
 										</div>
 
 										<!-- 주소 -->
-										<div class="col-lg-12">
+										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="checkout__form__input">
 												<p>주소 <span>*</span></p>
 												<input type="text" id="postcode" name="postcode" size="5" />
 						
-						<label for="addr1">도로명</label>
-						<input type="text"		id="addr1"			name="addr1" size="40" />
-						<input type="hidden"	id="roadAddr"		name="roadAddr" />
-						
-						<span id="guide" style="color:#999; display:none"></span>
-						
-						<label for="addr2">상세</label>
-						<input type="text"		id="addr2"			name="addr2" size="20" placeholder="상세 주소" >
-						<input type="hidden"	id="extraAddress"	name="extraAddress" />
-						
-						<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
+													<label for="addr1">도로명</label>
+													<input type="text"		id="addr1"			name="addr1" size="40" />
+													<input type="hidden"	id="roadAddr"		name="roadAddr" />
+													
+													<span id="guide" style="color:#999; display:none"></span>
+													
+													<label for="addr2">상세</label>
+													<input type="text"		id="addr2"			name="addr2" size="20" placeholder="상세 주소" >
+													<input type="hidden"	id="extraAddress"	name="extraAddress" />
+													
+													<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
 											</div>
 										</div>
 
 										<!-- 마케팅 수신 동의 -->
-										<div class="col-lg-6">
-											<div class="checkout__form__input" style="font-size: 0.9em; padding: 10px;">
-												<p style="margin-bottom: 5px;">마케팅 수신 동의</p>
-												<label style="margin-right: 10px;">SMS <input type="checkbox" name="flg_sms" value="Y" /></label>
-												<label>Email <input type="checkbox" name="flg_email" value="Y" /></label>
+										<div class="col-lg-12 col-md-12 col-sm-12">
+											<div class="checkout__form__checkbox" >
+												<p>마케팅 수신 동의</p>
+													<br>
+														<input type = "checkbox" id="flg_sms" name="flg_sms">
+														SMS
+														<input type = "checkbox" id="flg_email" name="flg_email">
+														EMAIL
 											</div>
 										</div>
-										
 
 										<!-- 약관 동의 -->
-										<div class="col-lg-12">
+										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="checkout__form__checkbox">
-												<input type="checkbox" id="term_1" name="term_1" value="Y">
+												<input type="checkbox" id="term_1" name="term_1">
 												[필수] '브라보 마이 라이프' 이용 약관 동의
 												<div class="terms-container"
 													style="border: 1px solid #ccc; padding: 10px; margin-top: 5px; max-height: 100px; overflow-y: auto;">
@@ -274,9 +303,9 @@
 											</div>
 										</div>
 
-										<div class="col-lg-12">
+										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="checkout__form__checkbox">
-												<input type="checkbox" id="term_2" name="term_2" value="Y">
+												<input type="checkbox" id="term_2" name="term_2">
 												[필수] 개인정보 수집 및 이용동의
 												<div class="terms-container"
 													style="border: 1px solid #ccc; padding: 10px; margin-top: 5px; max-height: 100px; overflow-y: auto;">
@@ -286,9 +315,9 @@
 											</div>
 										</div>
 
-										<div class="col-lg-12">
+										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="checkout__form__checkbox">
-												<input type="checkbox" id="term_3" name="term_3" value="Y">
+												<input type="checkbox" id="term_3" name="term_3">
 												[선택] 개인정보 제3자 제공 동의
 												<div class="terms-container"
 													style="border: 1px solid #ccc; padding: 10px; margin-top: 5px; max-height: 100px; overflow-y: auto;">
@@ -299,7 +328,7 @@
 										</div>
 
 										<!-- 회원가입 버튼 -->
-										<div class="col-lg-12">
+										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="checkout__form__input">
 												<input type="button" value="회원가입"
 													style="width: 100%; text-align: center;" id="registerId" onClick="checkRegister();"/>
@@ -307,6 +336,7 @@
 										</div>
 									</div>
 								</div>
+							</div>
 							</div>
 						</form>
 					</div>
