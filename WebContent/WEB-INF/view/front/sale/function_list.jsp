@@ -9,12 +9,30 @@
 <head>
 	<%@ include file="/include/front/header.jsp" %>
 	<script>
-		function goType(value) {
+		function goTypeF(value) {
 			
 			var frmMain = document.getElementById("frmMain");
 			
 			frmMain.type.setAttribute("value", value);
 			frmMain.action = "/front/sale/function_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeI(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.type.setAttribute("value", value);
+			frmMain.action = "/front/sale/ingredient_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeG(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.type.setAttribute("value", value);
+			frmMain.action = "/front/sale/gender_list.web";
 			frmMain.submit();
 		}
 		
@@ -57,7 +75,7 @@
 	</div>
 
 	<!-- Offcanvas Menu Begin -->
-		<%@ include file="/include/front/leftgnb.jsp" %>
+		<%@ include file="/include/front/mainsubgnb.jsp" %>
 
 	<!-- Offcanvas Menu End -->
 
@@ -86,64 +104,7 @@
 		<div class="container">
 			<div class="row">
 				<%@ include file="/include/front/lowmenu.jsp" %>
-				<div class="col-lg-3 col-md-3">
-					<div class="shop__sidebar">
-						<div class="sidebar__categories">
-							<div class="section-title">
-								<h4>기 능 별</h4>
-							</div>
-							<div class="categories__accordion">
-								<div class="accordion" id="accordionExample">
-									<div class="card">
-										<div>
-											<a href="javascript:goType('bld');" style="color : black">혈당/혈행/혈압</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('imu');" style="color : black">황산화/면연력</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('inf');" style="color : black">염증/항염</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('jnt');" style="color : black">관절/뼈/치아</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('rec');" style="color : black">피로회복</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('eye');" style="color : black">눈 건강</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('col');" style="color : black">장 건강</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('brn');" style="color : black">두뇌/기억력</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('stm');" style="color : black">위/간/갑상선</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<%@ include file="/include/front/subleftgnb.jsp" %>
 				<div class="col-lg-9 col-md-9">
 					<div class="row">
 						<c:choose>

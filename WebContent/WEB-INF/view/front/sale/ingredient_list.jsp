@@ -9,12 +9,30 @@
 <head>
 	<%@ include file="/include/front/header.jsp" %>
 	<script>
-		function goType(value) {
+		function goTypeF(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.type.setAttribute("value", value);
+			frmMain.action = "/front/sale/function_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeI(value) {
 			
 			var frmMain = document.getElementById("frmMain");
 			
 			frmMain.type.setAttribute("value", value);
 			frmMain.action = "/front/sale/ingredient_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeG(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.type.setAttribute("value", value);
+			frmMain.action = "/front/sale/gender_list.web";
 			frmMain.submit();
 		}
 	
@@ -47,7 +65,7 @@
 	</div>
 
 	<!-- Offcanvas Menu Begin -->
-		<%@ include file="/include/front/leftgnb.jsp" %>
+		<%@ include file="/include/front/mainsubgnb.jsp" %>
 
 	<!-- Offcanvas Menu End -->
 
@@ -76,64 +94,7 @@
 		<div class="container">
 			<div class="row">
 			<%@ include file="/include/front/lowmenu.jsp" %>
-				<div class="col-lg-3 col-md-3">
-					<div class="shop__sidebar">
-						<div class="sidebar__categories">
-							<div class="section-title">
-								<h4>성 분 별</h4>
-							</div>
-							<div class="categories__accordion">
-								<div class="accordion" id="accordionExample">
-									<div class="card">
-										<div>
-											<a href="javascript:goType('pol');" style="color : black">폴리코사놀</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('omg');" style="color : black">오메가-3</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('min');" style="color : black">비타민/미네랄</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('bac');" style="color : black">유산균</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('msm');" style="color : black">글루코사민/MSM</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('rut');" style="color : black">루테인</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('kou');" style="color : black">코큐텐</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('arg');" style="color : black">아르기닌</a>
-										</div>
-									</div>
-									<div class="card">
-										<div>
-											<a href="javascript:goType('mik');" style="color : black">밀크씨슬</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+			<%@ include file="/include/front/subleftgnb.jsp" %>
 				<div class="col-lg-9 col-md-9">
 					<div class="row">
 						<c:choose>

@@ -10,7 +10,7 @@
 				<div class="col-xl-6 col-lg-7">
 					<nav class="header__menu">
 						<ul>
-							<li class="active"><a href="/front/sale/total_list.web">전체 카테고리</a></li>
+							<li class="active"><a href="/front/sale/total_list.web">전체 상품</a></li>
 							<li><a href="/front/sale/function_list.web">기능별</a></li>
 							<li><a href="/front/sale/ingredient_list.web">성분별</a></li>
 							<li><a href="/front/sale/gender_list.web">대상별</a></li>
