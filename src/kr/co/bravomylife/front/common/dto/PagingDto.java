@@ -1,4 +1,3 @@
-
 package kr.co.bravomylife.front.common.dto;
 
 /**
@@ -11,19 +10,33 @@ package kr.co.bravomylife.front.common.dto;
  */
 public class PagingDto {
 	
-	private int totalLine		= 0;	// 전체 라인(행) 수
-	private int totalPage		= 0;	// 전체 페이지 수 = 전체 라인(행) 수 / 페이징할 라인수
-	private int linePerPage		= 12;	// 페이징할 라인수
-	private int currentPage		= 1;	// 현재 페이지
+	private int totalLine		= 0;
+	private int totalPage		= 0;
+	private int linePerPage		= 12;
+	private int currentPage		= 1;
 	
-	private String searchKey	= "";	// 검색키(예: 타이틀, 내용, 타이틀+내용)
-	private String searchWord	= "";	// 검색어
+	private String searchKey	= "";
+	private String searchWord	= "";
 	
-	private int cd_bbs_type		= 0;	// [게시판] 공지사항(1), 자주 찾는 질문(2), 질의 응답(3)
-	private int cd_ctg			= 0;	// [게시판] 자주 찾는 질문의 카테고리
-	private int register		= 0;	// [등록자]
+	private int cd_bbs_type		= 0;
+	private int cd_ctg			= 0;
+	private int register		= 0;
+	private String cd_ctg_b		= "";
+	private String cd_ctg_m		= "";
 	
 	
+	public String getCd_ctg_b() {
+		return cd_ctg_b;
+	}
+	public void setCd_ctg_b(String cd_ctg_b) {
+		this.cd_ctg_b = cd_ctg_b;
+	}
+	public String getCd_ctg_m() {
+		return cd_ctg_m;
+	}
+	public void setCd_ctg_m(String cd_ctg_m) {
+		this.cd_ctg_m = cd_ctg_m;
+	}
 	public int getCd_ctg() {
 		return cd_ctg;
 	}

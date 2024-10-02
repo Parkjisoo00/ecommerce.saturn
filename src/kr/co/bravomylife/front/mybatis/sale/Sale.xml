@@ -6,7 +6,7 @@
 		SELECT
 			COUNT(ROWNUM)
 		FROM
-			TB_SLE
+			TB_SLE sle
 		WHERE
 			<include refid="totalwhere" />
 	</select>
@@ -17,100 +17,55 @@
 		FROM
 			(
 			SELECT
-				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
-				, SEQ_SLE
-				, SLE_NM
-				, IMG
-				, PRICE_SALE
-				, CD_CTG_B
-				, CD_CTG_M
-				, RATE_STAR
-				, PRD_TYPE
-				, CORP_NM
-				, DISCOUNT
-				, PRICE_SALE * (1 - (DISCOUNT / 100)) as discount_sale
-				, TO_CHAR(DT_REG, 'YYYY-MM-DD') DT_REG
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY best.FLG_BEST, sle.DT_REG DESC) rnum
+				, sle.SEQ_SLE
+				, sle.SLE_NM
+				, sle.IMG
+				, sle.PRICE_SALE
+				, sle.CD_CTG_B
+				, sle.CD_CTG_M
+				, rate.RATE_STAR
+				, rate.COUNT
+				, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
+				, sle.PRD_TYPE
+				, sle.CORP_NM
+				, sle.DISCOUNT
+				, sle.COUNT_STOCK
+				, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+				, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') DT_REG
+				, best.FLG_BEST
 			FROM
-				TB_SLE
+				TB_SLE sle
+			LEFT JOIN
+				TB_RATE rate
+			ON
+				sle.SEQ_SLE = rate.SEQ_SLE
+			LEFT JOIN
+				TB_BEST best
+			on
+				sle.SEQ_SLE = best.SEQ_SLE
 			WHERE
 				<include refid="totalwhere" />
 			)
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]> 
-		ORDER BY rnum
+		ORDER BY FLG_BEST, rnum
 	</select>
 	
 	<sql id="totalwhere">
-		CD_STATE_SALE = 2
-		AND FLG_DELETE = 'N'
+		sle.CD_STATE_SALE = 2
+		AND sle.FLG_DELETE = 'N'
 		<![CDATA[
-		AND COUNT_STOCK > 0
+		AND sle.COUNT_STOCK > 0
 		]]> 
-		<if test="searchWord != null and searchWord != ''">
-			<if test="searchKey == 'prd_nm'">
-				AND PRD_NM LIKE '%' || #{searchWord} || '%'
-			</if>
-		</if>
-	</sql>
-	
-	<select id="functionCount" parameterType="pagingDto" resultType="java.lang.Integer">
-		SELECT
-			COUNT(ROWNUM)
-		FROM
-			TB_SLE
-		WHERE
-			<include refid="functionwhere" />
-	</select>
-	
-	<select id="functionList" parameterType="pagingDto" resultType="saleDto">
-		SELECT
-			*
-		FROM
-			(
-			SELECT
-				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
-				, SEQ_SLE
-				, SLE_NM
-				, IMG
-				, PRICE_SALE
-				, CD_CTG_B
-				, CD_CTG_M
-				, RATE_STAR
-				, PRD_TYPE
-				, CORP_NM
-				, DISCOUNT
-				, TO_CHAR(DT_REG, 'YYYY-MM-DD') DT_REG
-			FROM
-				TB_SLE
-			WHERE
-				<include refid="functionwhere" />
-			)
-		<![CDATA[
-		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
-		]]> 
-		ORDER BY rnum
-	</select>
-	
-	<sql id="functionwhere">
-		CD_STATE_SALE = 2
-		AND FLG_DELETE = 'N'
-		AND CD_CTG_B = '1'
-		<![CDATA[
-		AND COUNT_STOCK > 0
-		]]> 
-		<if test="searchWord != null and searchWord != ''">
-			<if test="searchKey == 'prd_nm'">
-				AND PRD_NM LIKE '%' || #{searchWord} || '%'
-			</if>
-		</if>
 	</sql>
 	
 	<select id="ingredientCount" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
 			COUNT(ROWNUM)
 		FROM
-			TB_SLE
+			TB_SLE sle
 		WHERE
 			<include refid="ingredientwhere" />
 	</select>
@@ -121,48 +76,116 @@
 		FROM
 			(
 			SELECT
-				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
-				, SEQ_SLE
-				, SLE_NM
-				, IMG
-				, PRICE_SALE
-				, CD_CTG_B
-				, CD_CTG_M
-				, RATE_STAR
-				, PRD_TYPE
-				, CORP_NM
-				, DISCOUNT
-				, TO_CHAR(DT_REG, 'YYYY-MM-DD') DT_REG
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY best.FLG_BEST, sle.DT_REG DESC) rnum
+				, sle.SEQ_SLE
+				, sle.SLE_NM
+				, sle.IMG
+				, sle.PRICE_SALE
+				, sle.CD_CTG_B
+				, sle.CD_CTG_M
+				, rate.RATE_STAR
+				, rate.COUNT
+				, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
+				, sle.PRD_TYPE
+				, sle.CORP_NM
+				, sle.DISCOUNT
+				, sle.COUNT_STOCK
+				, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+				, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') DT_REG
+				, best.FLG_BEST
 			FROM
-				TB_SLE
+				TB_SLE sle
+			LEFT JOIN
+				TB_RATE rate
+			ON
+				sle.SEQ_SLE = rate.SEQ_SLE
+			LEFT JOIN
+				TB_BEST best
+			on
+				sle.SEQ_SLE = best.SEQ_SLE
 			WHERE
 				<include refid="ingredientwhere" />
 			)
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]> 
-		ORDER BY rnum
+		ORDER BY FLG_BEST, rnum
 	</select>
 	
 	<sql id="ingredientwhere">
-		CD_STATE_SALE = 2
-		AND FLG_DELETE = 'N'
-		AND CD_CTG_B = '2'
+		sle.CD_STATE_SALE = 2
+		AND sle.FLG_DELETE = 'N'
+		AND sle.CD_CTG_B = '2'
 		<![CDATA[
-		AND COUNT_STOCK > 0
+		AND sle.COUNT_STOCK > 0
 		]]> 
-		<if test="searchWord != null and searchWord != ''">
-			<if test="searchKey == 'prd_nm'">
-				AND PRD_NM LIKE '%' || #{searchWord} || '%'
-			</if>
-		</if>
+	</sql>
+	
+	<select id="functionCount" parameterType="pagingDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(ROWNUM)
+		FROM
+			TB_SLE sle
+		WHERE
+			<include refid="functionwhere" />
+	</select>
+	
+	<select id="functionList" parameterType="pagingDto" resultType="saleDto">
+		SELECT
+			*
+		FROM
+			(
+			SELECT
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY best.FLG_BEST, sle.DT_REG DESC) rnum
+				, sle.SEQ_SLE
+				, sle.SLE_NM
+				, sle.IMG
+				, sle.PRICE_SALE
+				, sle.CD_CTG_B
+				, sle.CD_CTG_M
+				, rate.RATE_STAR
+				, rate.COUNT
+				, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
+				, sle.PRD_TYPE
+				, sle.CORP_NM
+				, sle.DISCOUNT
+				, sle.COUNT_STOCK
+				, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+				, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') DT_REG
+				, best.FLG_BEST
+			FROM
+				TB_SLE sle
+			LEFT JOIN
+				TB_RATE rate
+			ON
+				sle.SEQ_SLE = rate.SEQ_SLE
+			LEFT JOIN
+				TB_BEST best
+			on
+				sle.SEQ_SLE = best.SEQ_SLE
+			WHERE
+				<include refid="functionwhere" />
+			)
+		<![CDATA[
+		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+		]]> 
+		ORDER BY FLG_BEST, rnum
+	</select>
+	
+	<sql id="functionwhere">
+		sle.CD_STATE_SALE = 2
+		AND sle.FLG_DELETE = 'N'
+		AND sle.CD_CTG_B = '1'
+		<![CDATA[
+		AND sle.COUNT_STOCK > 0
+		]]> 
 	</sql>
 	
 	<select id="genderCount" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
 			COUNT(ROWNUM)
 		FROM
-			TB_SLE
+			TB_SLE sle
 		WHERE
 			<include refid="genderwhere" />
 	</select>
@@ -173,40 +196,51 @@
 		FROM
 			(
 			SELECT
-				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
-				, SEQ_SLE
-				, SLE_NM
-				, IMG
-				, PRICE_SALE
-				, CD_CTG_B
-				, CD_CTG_M
-				, RATE_STAR
-				, PRD_TYPE
-				, CORP_NM
-				, DISCOUNT
-				, TO_CHAR(DT_REG, 'YYYY-MM-DD') DT_REG
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY best.FLG_BEST, sle.DT_REG DESC) rnum
+				, sle.SEQ_SLE
+				, sle.SLE_NM
+				, sle.IMG
+				, sle.PRICE_SALE
+				, sle.CD_CTG_B
+				, sle.CD_CTG_M
+				, rate.RATE_STAR
+				, rate.COUNT
+				, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
+				, sle.PRD_TYPE
+				, sle.CORP_NM
+				, sle.DISCOUNT
+				, sle.COUNT_STOCK
+				, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+				, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') DT_REG
+				, best.FLG_BEST
 			FROM
-				TB_SLE
+				TB_SLE sle
+			LEFT JOIN
+				TB_RATE rate
+			ON
+				sle.SEQ_SLE = rate.SEQ_SLE
+			LEFT JOIN
+				TB_BEST best
+			on
+				sle.SEQ_SLE = best.SEQ_SLE
 			WHERE
 				<include refid="genderwhere" />
 			)
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]> 
-		ORDER BY rnum
+		ORDER BY FLG_BEST, rnum
 	</select>
 	
 	<sql id="genderwhere">
-		CD_STATE_SALE = 2
-		AND FLG_DELETE = 'N'
-		AND CD_CTG_B = '3'
+		sle.CD_STATE_SALE = 2
+		AND sle.FLG_DELETE = 'N'
+		AND sle.CD_CTG_B = '3'
 		<![CDATA[
-		AND COUNT_STOCK > 0
-		]]> 
-		<if test="searchWord != null and searchWord != ''">
-			<if test="searchKey == 'prd_nm'">
-				AND PRD_NM LIKE '%' || #{searchWord} || '%'
-			</if>
+		AND sle.COUNT_STOCK > 0
+		]]>
+		<if test="cd_ctg_m != null and cd_ctg_m != ''">
+			AND sle.CD_CTG_M = #{cd_ctg_m}
 		</if>
 	</sql>
 		
