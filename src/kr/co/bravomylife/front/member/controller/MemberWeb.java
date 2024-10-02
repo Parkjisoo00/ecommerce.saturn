@@ -96,7 +96,9 @@ public class MemberWeb extends Common {
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
 			
-			memberDto.setEmail(URLDecoder.decode(aes.decode(memberDto.getEmail())));
+			memberDto.setEmail(URLDecoder.decode(memberDto.getEmail()));
+			
+		
 			
 			if (memberSrvc.updateState(memberDto)) {
 				request.setAttribute("script"	, "alert('이메일 인증이 완료되어 정상적으로 서비스를 이용할 있습니다.');");

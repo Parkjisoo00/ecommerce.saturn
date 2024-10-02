@@ -51,11 +51,20 @@ public class MemberSrvc {
 	@Transactional("txFront")
 	public boolean updateState(MemberDto memberDto) {
 		
-		if (memberDao.updateState(memberDto) == 1) return true;
-		else {
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		int result = memberDao.updateState(memberDto);
+		
+		if (result == 1) {
+			return true;
+		}
+		
+		else if (result == 0) {
+			memberDao.updateStateM(memberDto);
 			return false;
 		}
+		
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		
 	}
 	
 	public int selectDuplicate(MemberDto memberDto) {
