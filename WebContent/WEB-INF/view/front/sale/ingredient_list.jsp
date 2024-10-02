@@ -9,6 +9,15 @@
 <head>
 	<%@ include file="/include/front/header.jsp" %>
 	<script>
+		function goType(type) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.type.setAttribute("value", type);
+			frmMain.action = "/front/sale/function_list.web";
+			frmMain.submit();
+		}
+	
 		function goPages(value) {
 			
 			var frmMain = document.getElementById("frmMain");
