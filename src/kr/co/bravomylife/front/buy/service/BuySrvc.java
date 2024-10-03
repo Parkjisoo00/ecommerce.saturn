@@ -20,6 +20,8 @@
  */
 package kr.co.bravomylife.front.buy.service;
 
+import org.springframework.stereotype.Service;
+
 /**
  * @version 1.0.0
  * @author cydgate4957@gmail.com
@@ -28,6 +30,7 @@ package kr.co.bravomylife.front.buy.service;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
+@Service("kr.co.bravomylife.front.buy.service.BuySrvc")
 public class BuySrvc {
 
 }

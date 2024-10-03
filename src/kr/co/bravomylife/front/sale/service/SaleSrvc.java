@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.sale.dao.SaleDao;
+import kr.co.bravomylife.front.sale.dto.SaleDto;
 
 /**
  * @version 1.0.0
@@ -41,7 +42,11 @@ public class SaleSrvc {
 	
 	@Inject
 	SaleDao saleDao;
-		
+	
+	public SaleDto select(SaleDto saleDto) {
+		return saleDao.select(saleDto);
+	}
+	
 	public PagingListDto functionList(PagingDto pagingDto) {
 		
 		PagingListDto pagingListDto = new PagingListDto();

@@ -20,6 +20,21 @@
  */
 package kr.co.bravomylife.front.buy.controller;
 
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import kr.co.bravomylife.front.buy.service.BuySrvc;
+import kr.co.bravomylife.front.common.Common;
+import kr.co.bravomylife.front.sale.dto.SaleDto;
+import kr.co.bravomylife.front.sale.service.SaleSrvc;
+
 /**
  * @version 1.0.0
  * @author cydgate4957@gmail.com
@@ -28,6 +43,37 @@ package kr.co.bravomylife.front.buy.controller;
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-public class BuyWeb {
+@Controller("kr.co.bravomylife.front.buy.controller.BuyWeb")
+public class BuyWeb extends Common {
 
+	/** Logger */
+	private static Logger logger = LoggerFactory.getLogger(BuyWeb.class);
+	
+	@Inject
+	BuySrvc buySrvc;
+	
+	@Inject
+	SaleSrvc saleSrvc;
+	
+	@RequestMapping(value = "/front/buy/writeForm.web")
+	public ModelAndView writeForm(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			/*
+			SaleDto _saleDto	= saleSrvc.select(saleDto);
+			
+			mav.addObject("saleDto"		, _saleDto);
+			*/
+			mav.setViewName("/front/buy/writeForm");
+			
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".writeForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 }

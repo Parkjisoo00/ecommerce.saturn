@@ -16,5 +16,7 @@
 		<mapper resource="kr/co/bravomylife/front/mybatis/member/TermAgree.xml" />
 		<mapper resource="kr/co/bravomylife/front/mybatis/sale/Sale.xml" />
 		<mapper resource="kr/co/bravomylife/front/mybatis/buy/Buy.xml" />
+		<mapper resource="kr/co/bravomylife/front/mybatis/buy/BuyDetail.xml" />
+		<mapper resource="kr/co/bravomylife/front/mybatis/buy/BuyMaster.xml" />
 	</mappers>
 </configuration>

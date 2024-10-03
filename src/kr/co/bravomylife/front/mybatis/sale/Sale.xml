@@ -2,6 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.sale.Sale">
 
+	<select id="select" parameterType="saleDto" resultType="saleDto">
+		SELECT
+			sle.SEQ_SLE
+			, sle.SLE_NM
+			, sle.DESCES
+			, sle.IMG
+			, sle.PRICE_SALE
+			, sle.PRD_TYPE
+			, sle.CORP_NM
+			, like.flg_like
+			, rate.RATE_STAR
+			, rate.COUNT
+			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
+			, sle.DISCOUNT
+			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, best.FLG_BEST
+		FROM
+			TB_SLE sle
+		LEFT JOIN
+			TB_LIKE like
+		ON
+			sle.SEQ_SLE = like.SEQ_SLE
+		LEFT JOIN
+			TB_MBR mbr
+		ON
+			mbr.SEQ_MBR = like.SEQ_MBR
+		LEFT JOIN
+			TB_RATE rate
+		ON
+			sle.SEQ_SLE = rate.SEQ_SLE
+		LEFT JOIN
+			TB_BEST best
+		ON
+			sle.SEQ_SLE = best.SEQ_SLE
+		WHERE
+			mbr.SEQ_MBR = #{seq_mbr}
+			AND sle.SEQ_SLE = #{seq_sle}
+			AND sle.CD_STATE_SALE = 2
+	</select>
+
 	<select id="totalCount" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
 			COUNT(ROWNUM)
@@ -58,6 +98,9 @@
 		AND sle.FLG_DELETE = 'N'
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
+		]]>
+		<![CDATA[
+		AND SYSDATE >= sle.DT_SALE_START AND SYSDATE <= sle.DT_SALE_END
 		]]>
 	</sql>
 	
@@ -118,6 +161,9 @@
 		AND sle.CD_CTG_B = '2'
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
+		]]>
+		<![CDATA[
+		AND SYSDATE >= sle.DT_SALE_START AND SYSDATE <= sle.DT_SALE_END
 		]]>
 		<choose>
 			<when test="cd_ctg_m != null and cd_ctg_m != ''">
@@ -187,6 +233,9 @@
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
 		]]>
+		<![CDATA[
+		AND SYSDATE >= sle.DT_SALE_START AND SYSDATE <= sle.DT_SALE_END
+		]]>
 		<choose>
 			<when test="cd_ctg_m != null and cd_ctg_m != ''">
 				AND sle.CD_CTG_M = #{cd_ctg_m}
@@ -254,6 +303,9 @@
 		AND sle.CD_CTG_B = '3'
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
+		]]>
+		<![CDATA[
+		AND SYSDATE >= sle.DT_SALE_START AND SYSDATE <= sle.DT_SALE_END
 		]]>
 		<choose>
 			<when test="cd_ctg_m != null and cd_ctg_m != ''">
