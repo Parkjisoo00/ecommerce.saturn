@@ -11,34 +11,34 @@
 			, sle.PRICE_SALE
 			, sle.PRD_TYPE
 			, sle.CORP_NM
-			, like.flg_like
+			, likeT.flg_like
 			, rate.RATE_STAR
 			, rate.COUNT
-			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
+			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) AS average_rate
 			, sle.DISCOUNT
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) AS discount_sale
 			, best.FLG_BEST
 		FROM
 			TB_SLE sle
-		LEFT JOIN
-			TB_LIKE like
+		LEFT OUTER JOIN
+			TB_LIKE likeT
 		ON
-			sle.SEQ_SLE = like.SEQ_SLE
-		LEFT JOIN
-			TB_MBR mbr
+			sle.SEQ_SLE = likeT.SEQ_SLE
+		LEFT OUTER JOIN
+			TB_MBR_MST mbr
 		ON
-			mbr.SEQ_MBR = like.SEQ_MBR
-		LEFT JOIN
+			mbr.SEQ_MBR = likeT.SEQ_MBR
+			AND mbr.SEQ_MBR = #{seq_mbr}
+		LEFT OUTER JOIN
 			TB_RATE rate
 		ON
 			sle.SEQ_SLE = rate.SEQ_SLE
-		LEFT JOIN
+		LEFT OUTER JOIN
 			TB_BEST best
 		ON
 			sle.SEQ_SLE = best.SEQ_SLE
 		WHERE
-			mbr.SEQ_MBR = #{seq_mbr}
-			AND sle.SEQ_SLE = #{seq_sle}
+			sle.SEQ_SLE = #{seq_sle}
 			AND sle.CD_STATE_SALE = 2
 	</select>
 

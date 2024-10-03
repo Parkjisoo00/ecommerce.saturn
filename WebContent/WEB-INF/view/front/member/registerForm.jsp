@@ -57,6 +57,7 @@
 
 				$.ajax({
 					type: "POST",
+					async: false,
 					url: "/front/member/checkEmail.json",
 					dataType: "json",
 					contentType: "application/json; charset=UTF-8",

@@ -87,15 +87,20 @@ public class MemberWeb extends Common {
 	
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/front/member/confirmEmail.web")
-	public ModelAndView confirmEmail(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+	public ModelAndView confirmEmail(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto, String email) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			// String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
-			// SKwithAES aes		= new SKwithAES(staticKey);
 			
-			memberDto.setEmail(URLDecoder.decode(memberDto.getEmail()));
+			memberDto.setEmail(URLDecoder.decode(memberDto.getDt_email()));
+			
+			/*
+			 *URLDecoder로 %2B가 +로 변환되어야 하는데 제대로 작동하지 않고 공백 ""으로 인식함
+			memberDto.setEmail(URLDecoder.decode(email));
+			String emailC = memberDto.getEmail();
+			logger.debug("이메일" + emailC);
+			*/
 			
 			if (memberSrvc.updateState(memberDto)) {
 				request.setAttribute("script"	, "alert('이메일 인증이 완료되어 정상적으로 서비스를 이용할 있습니다.');");
@@ -137,6 +142,10 @@ public class MemberWeb extends Common {
 			// 대칭키 암호화(AES-256)
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
+			
+			String email = URLEncoder.encode(aes.encode(memberDto.getEmail()));
+			
+			logger.debug("이메일" + email);
 			
 			// 인증 이메일 발송
 			EmailDto emailDto = new EmailDto();
