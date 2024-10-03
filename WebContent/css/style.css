@@ -39,21 +39,21 @@
 }
 
 html,
-
-
+/*
 body {
 	height: 100%;
 	font-family: 'Pretendard-Regular', sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
+*/
 
-/*
 body {
 	height: 100%;
+	font-weight: 400;
 	font-family: 'Noto Sans KR', sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
-*/
+
 h1,
 h2,
 h3,
@@ -479,9 +479,9 @@ ol {
 .header__right__auth a:after {
 	position: absolute;
 	right: -8px;
-	top: -2px;
+	top: 2px;
 	content: "|";
-	font-size: 13px;
+	font-size: 10px;
 }
 
 .header__right__widget {

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ page info="/WEB-INF/view/front/buy/view.jsp" %>
 <!DOCTYPE html>
 <html lang="kor">
 
@@ -16,7 +17,8 @@
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
-
+	</div>
+	
 	<!-- Header Section Begin -->
 		<%@ include file="/include/front/maingnb.jsp" %>
 	<!-- Header Section End -->

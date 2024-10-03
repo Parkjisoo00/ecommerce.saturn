@@ -95,11 +95,6 @@
 												<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
 													<div class="label new">베스트</div>
 												</c:if>
-												<ul class="product__hover">
-													<li><a href="${list.seq_sle}" class="image-popup"><span class="arrow_expand"></span></a></li>
-													<li><a href="#"><span class="icon_heart_alt"></span></a></li>
-													<li><a href="#"><span class="icon_bag_alt"></span></a></li>
-												</ul>
 											</div>
 											<div class="product__item__text">
 												<h6 style="line-height: 1.5em; min-height: 3em;"><a href="#" style="font-size: 15px;">${list.sle_nm}</a></h6>

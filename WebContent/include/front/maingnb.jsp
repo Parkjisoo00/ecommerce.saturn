@@ -11,8 +11,8 @@
 </div>
 <div class="header__right" style="position: absolute; bottom: -10px; right: 395px;">
 	<div class="header__right__auth">
-		<a href="/front/login/loginForm.web" style="color: white; font-size: 15px;">로 그 인</a>
-		<a href="/front/member/registerForm.web" style="color: white; font-size: 15px;">회 원 가 입</a>
+		<a href="/front/login/loginForm.web" style="color: white; font-size: 15px;">로그인</a>
+		<a href="/front/member/registerForm.web" style="color: white; font-size: 15px;">회원가입</a>
 	</div>
 		<ul class="header__right__widget">
 			<li><span class="icon_search search-switch"></span></li>

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ page info="/WEB-INF/view/front/member/registerForm.jsp" %>
 <!DOCTYPE html>
 <html lang="kor">
 
