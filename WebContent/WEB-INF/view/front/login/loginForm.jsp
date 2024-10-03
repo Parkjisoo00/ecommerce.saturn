@@ -6,9 +6,7 @@
 	<%@ include file="/include/common/header.jsp" %>
 	
 	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
-	rel="stylesheet">
+	<%@ include file="/include/common/webfont.jsp" %>
 
 	<!-- Css Styles -->
 	<%@ include file="/include/common/css.jsp" %>
@@ -20,27 +18,12 @@
 		<div class="loader"></div>
 	</div>
 
-	<!-- Offcanvas Menu Begin -->
-		<%@ include file="/include/front/mainsubgnb.jsp" %>
-	<!-- Offcanvas Menu End -->
-
 	<!-- Header Section Begin -->
 		<%@ include file="/include/front/maingnb.jsp" %>
 	<!-- Header Section End -->
 
 	<!-- Breadcrumb Begin -->
-	<div class="breadcrumb-option">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="breadcrumb__links">
-						<a href="./index.html"><i class="fa fa-home"></i> Home</a>
-						<span>Shopping cart</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+		<%@ include file="/include/front/middlegnb.jsp" %>
 	<!-- Breadcrumb End -->
 
 	<!-- Checkout Section Begin -->
@@ -184,52 +167,7 @@
 
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
-	<div class="instagram">
-		<div class="container-fluid">
-			<div class="row justify-content-center">
-				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-					<div class="instagram__item set-bg" data-setbg="/img/footerpic/old5.png">
-						<div class="instagram__text">
-							<i class="fa fa-instagram"></i>
-							<a href="#">임시</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-					<div class="instagram__item set-bg" data-setbg="/img/footerpic/old4.png">
-						<div class="instagram__text">
-							<i class="fa fa-instagram"></i>
-							<a href="#">임시</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-					<div class="instagram__item set-bg" data-setbg="/img/footerpic/old3.png">
-						<div class="instagram__text">
-							<i class="fa fa-instagram"></i>
-							<a href="#">임시</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-					<div class="instagram__item set-bg" data-setbg="/img/footerpic/old2.png">
-						<div class="instagram__text">
-							<i class="fa fa-instagram"></i>
-							<a href="#">임시</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-4 col-sm-4 p-0">
-					<div class="instagram__item set-bg" data-setbg="/img/footerpic/old1.png">
-						<div class="instagram__text">
-							<i class="fa fa-instagram"></i>
-							<a href="#">임시</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<%@ include file="/include/common/footerpic.jsp" %>
 	<!-- Instagram End -->
 
 	<!-- Footer Section Begin -->

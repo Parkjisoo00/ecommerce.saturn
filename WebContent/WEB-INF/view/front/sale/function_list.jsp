@@ -57,9 +57,7 @@
 	</script>
 
 	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
-	rel="stylesheet">
+	<%@ include file="/include/common/webfont.jsp" %>
 
 	<!-- Css Styles -->
 	<%@ include file="/include/common/css.jsp" %>
@@ -83,7 +81,7 @@
 	<!-- Breadcrumb End -->
 
 	<!-- Shop Section Begin -->
-	<section class="shop spad" style="position: relative;">
+	<section class="shop spad">
 		<div class="container">
 			<div class="row">
 				<%@ include file="/include/front/subgnb.jsp" %>

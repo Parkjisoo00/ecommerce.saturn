@@ -7,17 +7,15 @@
 	<!-- Css Styles -->
 	<%@ include file="/include/common/css.jsp" %>
 	
-		<!-- Google Font -->
-		<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script type="text/javascript" src="/js/front.js"></script>
-		<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-		<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
-		<script type="text/javascript" src="/js/package/tinymce.js"></script>
-			
+	<!-- Google Font -->
+	<%@ include file="/include/common/webfont.jsp" %>
+		
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+	<script type="text/javascript" src="/js/front.js"></script>
+	<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
+	<script type="text/javascript" src="/js/package/tinymce.js"></script>		
 	<script>
-	
 	$(function() {
 		$('#age').datepicker({
 			dateFormat: 'yy-mm-dd',

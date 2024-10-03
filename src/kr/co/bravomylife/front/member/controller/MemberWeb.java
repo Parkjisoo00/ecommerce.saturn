@@ -92,8 +92,8 @@ public class MemberWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
-			SKwithAES aes		= new SKwithAES(staticKey);
+			// String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			// SKwithAES aes		= new SKwithAES(staticKey);
 			
 			memberDto.setEmail(URLDecoder.decode(memberDto.getEmail()));
 			

@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ page info="/WEB-INF/index.jsp" %>
+<%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
 <!DOCTYPE html>
 <html lang="kor">
 
@@ -6,22 +10,10 @@
 	<%@ include file="/include/common/header.jsp" %>
 
 	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
-	rel="stylesheet">
+	<%@ include file="/include/common/webfont.jsp" %>
 
 	<!-- Css Styles -->
 	<%@ include file="/include/common/css.jsp" %>
-	
-	<style>
-	.banner {
-		margin-bottom: 100px; /* 배너 섹션 아래에 50px의 여백 추가 */
-	}
-
-	.instagram {
-		margin-top: 100px; /* 인스타그램 섹션 위에 50px의 여백 추가 */
-	}
-</style>
 </head>
 
 <body>
@@ -37,6 +29,40 @@
 	<!-- Breadcrumb Begin -->
 		<%@ include file="/include/front/middlegnb.jsp" %>
 	<!-- Breadcrumb End -->
+
+	<!-- Banner Section Begin -->
+	<section class="banner set-bg" data-setbg="img/banner/banner-1.jpg">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-7 col-lg-8 m-auto">
+					<div class="banner__slider owl-carousel">
+						<div class="banner__item">
+							<div class="banner__text">
+								<span>The Chloe Collection</span>
+								<h1>이벤트</h1>
+								<a href="#">Shop now</a>
+							</div>
+						</div>
+						<div class="banner__item">
+							<div class="banner__text">
+								<span>The Chloe Collection</span>
+								<h1>맞춤 건강 관리</h1>
+								<a href="#">Shop now</a>
+							</div>
+						</div>
+						<div class="banner__item">
+							<div class="banner__text">
+								<span>The Chloe Collection</span>
+								<h1>ARS 전화주문</h1>
+								<a href="#">Shop now</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Banner Section End -->
 
 	<!-- Categories Section Begin -->
 	<section class="categories">
@@ -98,23 +124,13 @@
 <!-- Categories Section End -->
 
 <!-- Product Section Begin -->
-<section class="product spad">
-	<div class="container">
+<section class="product" style="width: 70%; margin-left: auto; margin-right: auto;">
+	 <div class="container-fluid p-0">
 		<div class="row">
 			<div class="col-lg-4 col-md-4">
 				<div class="section-title">
 					<h4>New product</h4>
 				</div>
-			</div>
-			<div class="col-lg-8 col-md-8">
-				<ul class="filter__controls">
-					<li class="active" data-filter="*">All</li>
-					<li data-filter=".women">Womenâs</li>
-					<li data-filter=".men">Menâs</li>
-					<li data-filter=".kid">Kidâs</li>
-					<li data-filter=".accessories">Accessories</li>
-					<li data-filter=".cosmetic">Cosmetics</li>
-				</ul>
 			</div>
 		</div>
 		<div class="row property__gallery">
@@ -302,40 +318,6 @@
 	</div>
 </section>
 <!-- Product Section End -->
-
-<!-- Banner Section Begin -->
-<section class="banner set-bg" data-setbg="img/banner/banner-1.jpg">
-	<div class="container">
-		<div class="row">
-			<div class="col-xl-7 col-lg-8 m-auto">
-				<div class="banner__slider owl-carousel">
-					<div class="banner__item">
-						<div class="banner__text">
-							<span>The Chloe Collection</span>
-							<h1>이벤트</h1>
-							<a href="#">Shop now</a>
-						</div>
-					</div>
-					<div class="banner__item">
-						<div class="banner__text">
-							<span>The Chloe Collection</span>
-							<h1>맞춤 건강 관리</h1>
-							<a href="#">Shop now</a>
-						</div>
-					</div>
-					<div class="banner__item">
-						<div class="banner__text">
-							<span>The Chloe Collection</span>
-							<h1>ARS 전화주문</h1>
-							<a href="#">Shop now</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- Banner Section End -->
 
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
