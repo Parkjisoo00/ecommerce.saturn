@@ -132,7 +132,6 @@ ol {
 	bottom: -4px;
 	height: 2px;
 	width: 70px;
-	background: #ca1515;
 	content: "";
 }
 
@@ -359,7 +358,7 @@ ol {
 
 .header__menu ul li:hover .dropdown {
 	top: 27px;
-	opacity: 1;
+	opacity: 0.8;
 	visibility: visible;
 }
 
@@ -416,7 +415,6 @@ ol {
 	bottom: 0;
 	width: 100%;
 	height: 2px;
-	background: #ca1515;
 	content: "";
 	-webkit-transition: all, 0.5s;
 	-o-transition: all, 0.5s;
@@ -455,7 +453,7 @@ ol {
 	position: absolute;
 	right: -8px;
 	top: -2px;
-	content: "/";
+	content: "|";
 	font-size: 13px;
 }
 
@@ -1166,6 +1164,7 @@ ol {
 	height: 360px;
 	position: relative;
 	overflow: hidden;
+	border: 1px solid #e0e0e0
 }
 
 .product__item__pic .label {
@@ -1314,8 +1313,20 @@ ol {
 -----------------------*/
 
 .shop {
-	padding-top: 70px;
+	padding-top: 40px;
 	padding-bottom: 80px;
+}
+
+.shop.spad::before {
+	content: "";
+	display: block;
+	width: 1135px;
+	height: 1px;
+	background-color: #e0e0e0;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .sidebar__categories {
@@ -1334,7 +1345,7 @@ ol {
 	border: none;
 	border-radius: 0;
 	padding-bottom: 12px;
-	border-bottom: 1px solid #f2f2f2 !important;
+	border-bottom: 1px solid #e0e0e0 !important;
 	margin-bottom: 12px;
 }
 
@@ -2308,13 +2319,13 @@ ol {
 }
 
 .coupon__link {
-	font-size: 14px;
+	font-size: 10px;
 	color: #444444;
-	padding: 14px 0;
+	padding: 10px 0;
 	background: #f5f5f5;
-	border-top: 2px solid #ca1515;
+	border-top: 2px solid
 	text-align: center;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 }
 
 .coupon__link ul  {
@@ -2337,7 +2348,7 @@ ol {
 .coupon__link ul li:hover .dropdown {
 	top: 30px;
 	background: rgba(0, 0, 0, 0.8);
-	opacity: 1;
+	opacity: 0.9;
 	visibility: visible;
 }
 
