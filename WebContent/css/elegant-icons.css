@@ -196,6 +196,7 @@ you can use the generic selector below, but it's slower:
 }
 .icon_search:before {
 	content: "\55";
+	color: white;
 }
 .icon_box-empty:before {
 	content: "\56";
@@ -379,6 +380,7 @@ you can use the generic selector below, but it's slower:
 }
 .icon_bag_alt:before {
 	content: "\e013";
+	color: white;
 }
 .icon_creditcard:before {
 	content: "\e014";
@@ -466,6 +468,7 @@ you can use the generic selector below, but it's slower:
 }
 .icon_heart_alt:before {
 	content: "\e030";
+	color: white;
 }
 .icon_star_alt:before {
 	content: "\e031";
