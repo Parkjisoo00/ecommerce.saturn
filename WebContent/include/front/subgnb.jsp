@@ -2,8 +2,9 @@
 				<div class="col-lg-3 col-md-3">
 					<div class="shop__sidebar">
 						<div class="sidebar__categories" style="width: 150px">
-							<div class="section-title" style="border-bottom: 1px solid #e0e0e0; padding-bottom: 12px; margin-bottom: 12px;">
-								<h4>전 체 상 품</h4>
+							<!-- <div class="section-title" style="border-bottom: 1px solid #e0e0e0; padding-bottom: 12px; margin-bottom: 12px; display: inline-block;"> -->
+							<div class="section-title" style="padding-bottom: 12px; margin-bottom: 12px;">
+								<h4 style="font-size: 20px; letter-spacing: 1px;">전 체 상 품</h4>
 							</div>
 							<div class="categories__accordion">
 								<div class="accordion" id="accordionExample">
