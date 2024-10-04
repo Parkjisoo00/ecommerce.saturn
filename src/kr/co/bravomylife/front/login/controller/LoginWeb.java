@@ -88,7 +88,7 @@ import kr.co.bravomylife.util.servlet.Request;
 			session.invalidate();
 			
 			request.setAttribute("script"	, "alert('" + dt_login + "에 로그인한 " + name + "님 안녕히 가세요.')");
-			request.setAttribute("redirect"	, "/front/");
+			request.setAttribute("redirect"	, "/index.jsp");
 			
 			mav.setViewName("forward:/servlet/result.web");
 		}
