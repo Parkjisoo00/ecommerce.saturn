@@ -1722,6 +1722,13 @@ ol {
 	margin-left: 20px;
 }
 
+.product__details__slider__content2 {
+	width: calc(78% - 20px);
+	float: left;
+	margin-left: 54px;
+}
+
+
 .product__details__pic__slider.owl-carousel .owl-nav button {
 	position: absolute;
 	left: 10px;
@@ -1760,6 +1767,61 @@ ol {
 
 .product__details__text .rating {
 	margin-bottom: 16px;
+}
+
+.product__details__text .rating ul {
+	float: right;
+}
+
+.product__details__text .rating ul li {
+	list-style: none;
+	display: inline-block;
+	margin-right: 5px;
+	position: relative;
+}
+
+.product__details__text .rating ul li a span {
+	font-size: 18px;
+	color: #666666;
+}
+
+.product__details__text .rating ul li a {
+	display: inline-block;
+	height: 50px;
+	width: 50px;
+	border: 1px solid #ebebeb;
+	border-radius: 50%;
+	line-height: 50px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.product__details__text .rating li:nth-child(1) {
+	-webkit-transition: all 0.4s ease 0.1s;
+	-o-transition: all 0.4s ease 0.1s;
+	transition: all 0.4s ease 0.1s;
+} 
+
+.product__details__text .rating li:hover a {
+	background: #ca1515;
+}
+
+.product__details__text .rating li:hover a span {
+	color: #ffffff;
+	-webkit-transform: rotate(360deg);
+	-ms-transform: rotate(360deg);
+	transform: rotate(360deg);
+}
+
+.product__details__text .rating li a span {
+	position: relative;
+	-webkit-transform: rotate(0);
+	-ms-transform: rotate(0);
+	transform: rotate(0);
+	-webkit-transition: all, 0.3s;
+	-o-transition: all, 0.3s;
+	transition: all, 0.3s;
+	display: inline-block;
 }
 
 .product__details__text .rating i {
@@ -1888,8 +1950,15 @@ ol {
 	color: #666666;
 }
 
+
+
 .product__details__widget {
 	border-top: 1px solid #ebebeb;
+	padding-top: 35px;
+}
+
+.product__details__widget1 {
+	border-top: 1px solid #eeecec;
 	padding-top: 35px;
 }
 
