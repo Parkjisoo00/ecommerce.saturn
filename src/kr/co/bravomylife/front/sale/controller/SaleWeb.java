@@ -167,11 +167,19 @@ public class SaleWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/sale/gender_list.web")
-	public ModelAndView genderList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto, String type) {
+	public ModelAndView genderList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto, String type, String filter) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			
+			logger.debug("type 확인" + " = " + type);
+			logger.debug("중분류 확인" + " = " + saleDto.getCd_ctg_m());
+			logger.debug("필터 확인" + " = " + filter);
+			logger.debug("브랜드명 확인" + " = " + saleDto.getCorp_nm());
+			logger.debug("제품 타입 확인" + " = " + saleDto.getPrd_type());
+			
+			pagingDto.setFilter(filter);
 			
 			if ("M".equals(type)) {
 				pagingDto.setCd_ctg_m("1");

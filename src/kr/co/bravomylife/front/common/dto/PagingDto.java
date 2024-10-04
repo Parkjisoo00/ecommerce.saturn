@@ -23,8 +23,29 @@ public class PagingDto {
 	private int register		= 0;
 	private String cd_ctg_b		= "";
 	private String cd_ctg_m		= "";
+	private String filter		= "";
+	private String corp_nm		= "";
+	private String prd_type		= "";
+		
 	
-	
+	public String getPrd_type() {
+		return prd_type;
+	}
+	public void setPrd_type(String prd_type) {
+		this.prd_type = prd_type;
+	}
+	public String getCorp_nm() {
+		return corp_nm;
+	}
+	public void setCorp_nm(String corp_nm) {
+		this.corp_nm = corp_nm;
+	}
+	public String getFilter() {
+		return filter;
+	}
+	public void setFilter(String filter) {
+		this.filter = filter;
+	}
 	public String getCd_ctg_b() {
 		return cd_ctg_b;
 	}

@@ -35,6 +35,36 @@
 			frmMain.action = "/front/sale/gender_list.web";
 			frmMain.submit();
 		}
+		
+		function goTypeGs(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.filter.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/gender_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeGn(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.corp_nm.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/gender_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeGt(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.prd_type.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/gender_list.web";
+			frmMain.submit();
+		}
 	
 		function goPages(value) {
 			
@@ -55,6 +85,10 @@
 
 <body>
 <form id="frmMain" method="POST">
+<input type="hidden" id="corp_nm"		name="corp_nm" />
+<input type="hidden" id="prd_type"		name="prd_type" />
+<input type="hidden" id="filter"		name="filter" />
+<input type="hidden" id="cd_ctg_m"		name="cd_ctg_m" />
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
 	<!-- Page Preloder -->
@@ -76,7 +110,7 @@
 			<div class="row">
 				<%@ include file="/include/front/subgnb.jsp" %>
 				<div class="col-lg-9 col-md-9">
-					<%@ include file="/include/front/lowgnb.jsp" %>
+					<%@ include file="/include/front/lowgnbG.jsp" %>
 					<div class="row">
 						<c:choose>
 							<c:when test="${empty list}">
@@ -88,8 +122,6 @@
 								<c:forEach var="list" items="${list}">
 									<div class="col-lg-4 col-md-6">
 										<input type="hidden" name="cd_ctg_b" id="cd_ctg_b" value="${list.cd_ctg_b}" />
-										<input type="hidden" name="prd_type" id="prd_type" value="${list.prd_type}" />
-										<input type="hidden" name="corp_nm" id="corp_nm" value="${list.corp_nm}" />
 										<div class="product__item">
 											<div class="product__item__pic set-bg" data-setbg="${list.img}">
 												<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">

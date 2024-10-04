@@ -86,7 +86,7 @@
 			<div class="row">
 				<%@ include file="/include/front/subgnb.jsp" %>
 				<div class="col-lg-9 col-md-9">
-				<%@ include file="/include/front/lowgnb.jsp" %>
+				<%@ include file="/include/front/lowgnbF.jsp" %>
 					<div class="row">
 						<c:choose>
 							<c:when test="${empty list}">
@@ -97,7 +97,6 @@
 							<c:otherwise>
 								<c:forEach var="list" items="${list}">
 									<div class="col-lg-4 col-md-6">
-										<input type="hidden" name="cd_ctg_b" id="cd_ctg_b" value="${list.cd_ctg_b}" />
 										<input type="hidden" name="prd_type" id="prd_type" value="${list.prd_type}" />
 										<input type="hidden" name="corp_nm" id="corp_nm" value="${list.corp_nm}" />
 										<div class="product__item">

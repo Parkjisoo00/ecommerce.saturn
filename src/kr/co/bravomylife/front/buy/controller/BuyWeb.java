@@ -61,11 +61,11 @@ public class BuyWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			/*
+			
 			SaleDto _saleDto	= saleSrvc.select(saleDto);
 			
 			mav.addObject("saleDto"		, _saleDto);
-			*/
+			
 			mav.setViewName("/front/buy/writeForm");
 			
 		}
