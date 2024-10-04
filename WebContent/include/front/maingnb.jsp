@@ -11,8 +11,14 @@
 </div>
 <div class="header__right" style="position: absolute; bottom: -10px; right: 395px;">
 	<div class="header__right__auth">
+	<c:if test="${not empty sessionScope.SEQ_MBR}">
+		<a href="/front/myPage/" title="<%=session.getAttribute("NAME")%>" style="color: white; font-size: 15px;">[마이페이지]</a>
+		 <a href="/front/login/logout.web" style="color: white; font-size: 15px;">[로그아웃]</a>
+	</c:if>	 
+	<c:if test="${empty sessionScope.SEQ_MBR}">
 		<a href="/front/login/loginForm.web" style="color: white; font-size: 15px;">로그인</a>
 		<a href="/front/member/registerForm.web" style="color: white; font-size: 15px;">회원가입</a>
+	</c:if>	
 	</div>
 		<ul class="header__right__widget">
 			<li><span class="icon_search search-switch"></span></li>

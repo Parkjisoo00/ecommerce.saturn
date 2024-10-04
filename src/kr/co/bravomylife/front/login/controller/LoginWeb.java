@@ -181,18 +181,19 @@ import kr.co.bravomylife.util.servlet.Request;
 												+ session.getAttribute("DT_LOGIN")
 												+ "반갑습니다."
 												+ "')");
-				mav.setViewName("redirect:/index.jsp");
+				
+				request.setAttribute("redirect"	, "/index.jsp");
 
 
 
 			}
 			else {
 				// logger.debug("해당 회원이 없거나 암호가 일치하지 않음");
-				request.setAttribute("scriptSRC", "<script type=\"text/javascript\" src=\"/js/front.js\"></script>");
-				request.setAttribute("script"	, "alert(MSG_ERR_ID_PASSWD);");
-				request.setAttribute("redirect"	, "/");
-			}
+				request.setAttribute("script", "alert('이메일(아이디)과 비밀번호를 확인하세요!')");
+				request.setAttribute("redirect"	, "/front/login/loginForm.web");
+			}			
 			
+			mav.setViewName("forward:/servlet/result.web");
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".loginProc()] " + e.getMessage(), e);
