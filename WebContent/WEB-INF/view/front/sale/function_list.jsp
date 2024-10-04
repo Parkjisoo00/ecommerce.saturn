@@ -18,11 +18,71 @@
 			frmMain.submit();
 		}
 		
+		function goTypeFs(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.filter.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/function_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeFn(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.corp_nm.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/function_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeFt(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.prd_type.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/function_list.web";
+			frmMain.submit();
+		}
+		
 		function goTypeI(value) {
 			
 			var frmMain = document.getElementById("frmMain");
 			
 			frmMain.type.setAttribute("value", value);
+			frmMain.action = "/front/sale/ingredient_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeIs(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.filter.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/ingredient_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeIn(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.corp_nm.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/ingredient_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeIt(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.prd_type.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
 			frmMain.action = "/front/sale/ingredient_list.web";
 			frmMain.submit();
 		}
@@ -36,22 +96,42 @@
 			frmMain.submit();
 		}
 		
+		function goTypeGs(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.filter.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/gender_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeGn(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.corp_nm.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/gender_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeGt(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.prd_type.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/gender_list.web";
+			frmMain.submit();
+		}
+	
 		function goPages(value) {
 			
 			var frmMain = document.getElementById("frmMain");
 			
 			frmMain.currentPage.setAttribute("value", value);
-			frmMain.action="/front/sale/function_list.web";
-			frmMain.submit();
-		}
-		
-		function goView(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			document.getElementById("seq_sle").value = value;
-			
-			frmMain.action="/front/buy/view.web";
+			frmMain.action="/front/sale/ingredient_list.web";
 			frmMain.submit();
 		}
 	</script>
@@ -65,6 +145,10 @@
 
 <body>
 <form id="frmMain" method="POST">
+<input type="hidden" id="corp_nm"		name="corp_nm" />
+<input type="hidden" id="prd_type"		name="prd_type" />
+<input type="hidden" id="filter"		name="filter" />
+<input type="hidden" id="cd_ctg_m"		name="cd_ctg_m" />
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
 	<!-- Page Preloder -->
@@ -97,8 +181,7 @@
 							<c:otherwise>
 								<c:forEach var="list" items="${list}">
 									<div class="col-lg-4 col-md-6">
-										<input type="hidden" name="prd_type" id="prd_type" value="${list.prd_type}" />
-										<input type="hidden" name="corp_nm" id="corp_nm" value="${list.corp_nm}" />
+										<input type="hidden" name="cd_ctg_b" id="cd_ctg_b" value="${list.cd_ctg_b}" />
 										<div class="product__item">
 											<div class="product__item__pic set-bg" data-setbg="${list.img}">
 												<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">

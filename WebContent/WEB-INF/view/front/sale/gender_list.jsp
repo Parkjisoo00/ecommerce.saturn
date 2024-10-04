@@ -18,11 +18,71 @@
 			frmMain.submit();
 		}
 		
+		function goTypeFs(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.filter.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/function_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeFn(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.corp_nm.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/function_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeFt(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.prd_type.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/function_list.web";
+			frmMain.submit();
+		}
+		
 		function goTypeI(value) {
 			
 			var frmMain = document.getElementById("frmMain");
 			
 			frmMain.type.setAttribute("value", value);
+			frmMain.action = "/front/sale/ingredient_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeIs(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.filter.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/ingredient_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeIn(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.corp_nm.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/ingredient_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeIt(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.prd_type.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
 			frmMain.action = "/front/sale/ingredient_list.web";
 			frmMain.submit();
 		}
@@ -71,7 +131,7 @@
 			var frmMain = document.getElementById("frmMain");
 			
 			frmMain.currentPage.setAttribute("value", value);
-			frmMain.action="/front/sale/gender_list.web";
+			frmMain.action="/front/sale/ingredient_list.web";
 			frmMain.submit();
 		}
 	</script>

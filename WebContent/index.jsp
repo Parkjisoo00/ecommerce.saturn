@@ -8,7 +8,133 @@
 
 					<head>
 						<%@ include file="/include/common/header.jsp" %>
-
+						<script>
+							function goTypeF(value) {
+								
+								var frmMain = document.getElementById("frmMain");
+								
+								frmMain.type.setAttribute("value", value);
+								frmMain.action = "/front/sale/function_list.web";
+								frmMain.submit();
+							}
+							
+							function goTypeFs(value, ctgm) {
+								
+								var frmMain = document.getElementById("frmMain");
+								
+								frmMain.filter.setAttribute("value", value);
+								frmMain.cd_ctg_m.setAttribute("value", ctgm);
+								frmMain.action = "/front/sale/function_list.web";
+								frmMain.submit();
+							}
+							
+							function goTypeFn(value, ctgm) {
+								
+								var frmMain = document.getElementById("frmMain");
+								
+								frmMain.corp_nm.setAttribute("value", value);
+								frmMain.cd_ctg_m.setAttribute("value", ctgm);
+								frmMain.action = "/front/sale/function_list.web";
+								frmMain.submit();
+							}
+							
+							function goTypeFt(value, ctgm) {
+								
+								var frmMain = document.getElementById("frmMain");
+								
+								frmMain.prd_type.setAttribute("value", value);
+								frmMain.cd_ctg_m.setAttribute("value", ctgm);
+								frmMain.action = "/front/sale/function_list.web";
+								frmMain.submit();
+							}
+							
+							function goTypeI(value) {
+								
+								var frmMain = document.getElementById("frmMain");
+								
+								frmMain.type.setAttribute("value", value);
+								frmMain.action = "/front/sale/ingredient_list.web";
+								frmMain.submit();
+							}
+							
+							function goTypeIs(value, ctgm) {
+								
+								var frmMain = document.getElementById("frmMain");
+								
+								frmMain.filter.setAttribute("value", value);
+								frmMain.cd_ctg_m.setAttribute("value", ctgm);
+								frmMain.action = "/front/sale/ingredient_list.web";
+								frmMain.submit();
+							}
+							
+							function goTypeIn(value, ctgm) {
+								
+								var frmMain = document.getElementById("frmMain");
+								
+								frmMain.corp_nm.setAttribute("value", value);
+								frmMain.cd_ctg_m.setAttribute("value", ctgm);
+								frmMain.action = "/front/sale/ingredient_list.web";
+								frmMain.submit();
+							}
+							
+							function goTypeIt(value, ctgm) {
+								
+								var frmMain = document.getElementById("frmMain");
+								
+								frmMain.prd_type.setAttribute("value", value);
+								frmMain.cd_ctg_m.setAttribute("value", ctgm);
+								frmMain.action = "/front/sale/ingredient_list.web";
+								frmMain.submit();
+							}
+							
+							function goTypeG(value) {
+								
+								var frmMain = document.getElementById("frmMain");
+								
+								frmMain.type.setAttribute("value", value);
+								frmMain.action = "/front/sale/gender_list.web";
+								frmMain.submit();
+							}
+							
+							function goTypeGs(value, ctgm) {
+								
+								var frmMain = document.getElementById("frmMain");
+								
+								frmMain.filter.setAttribute("value", value);
+								frmMain.cd_ctg_m.setAttribute("value", ctgm);
+								frmMain.action = "/front/sale/gender_list.web";
+								frmMain.submit();
+							}
+							
+							function goTypeGn(value, ctgm) {
+								
+								var frmMain = document.getElementById("frmMain");
+								
+								frmMain.corp_nm.setAttribute("value", value);
+								frmMain.cd_ctg_m.setAttribute("value", ctgm);
+								frmMain.action = "/front/sale/gender_list.web";
+								frmMain.submit();
+							}
+							
+							function goTypeGt(value, ctgm) {
+								
+								var frmMain = document.getElementById("frmMain");
+								
+								frmMain.prd_type.setAttribute("value", value);
+								frmMain.cd_ctg_m.setAttribute("value", ctgm);
+								frmMain.action = "/front/sale/gender_list.web";
+								frmMain.submit();
+							}
+						
+							function goPages(value) {
+								
+								var frmMain = document.getElementById("frmMain");
+								
+								frmMain.currentPage.setAttribute("value", value);
+								frmMain.action="/front/sale/ingredient_list.web";
+								frmMain.submit();
+							}
+								</script>
 							<!-- Google Font -->
 							<%@ include file="/include/common/webfont.jsp" %>
 
@@ -31,6 +157,12 @@
 					</head>
 
 					<body>
+					<form id="frmMain" method="POST">
+					<input type="hidden" id="corp_nm"		name="corp_nm" />
+					<input type="hidden" id="prd_type"		name="prd_type" />
+					<input type="hidden" id="filter"		name="filter" />
+					<input type="hidden" id="cd_ctg_m"		name="cd_ctg_m" />
+					<input type="hidden" id="type"			name="type" />
 						<!-- Page Preloder -->
 						<div id="preloder">
 							<div class="loader"></div>
@@ -388,6 +520,7 @@
 
 										<!-- Js Plugins -->
 										<%@ include file="/include/common/js.jsp" %>
+					</form>
 					</body>
 
 					</html>

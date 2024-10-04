@@ -55,6 +55,9 @@
 
 <body>
 <form id="frmMain" method="POST">
+<input type="hidden" id="corp_nm"		name="corp_nm" />
+<input type="hidden" id="prd_type"		name="prd_type" />
+<input type="hidden" id="filter"		name="filter" />
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
 	<!-- Page Preloder -->

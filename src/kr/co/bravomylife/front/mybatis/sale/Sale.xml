@@ -152,7 +152,17 @@
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]> 
-		ORDER BY FLG_BEST, rnum
+		ORDER BY FLG_BEST
+		<if test="filter == 'LowP'">
+			, PRICE_SALE ASC
+		</if>
+		<if test="filter == 'HighP'">
+			, PRICE_SALE DESC
+		</if>
+		<if test="filter == 'DtReg'">
+			, DT_REG DESC
+		</if>
+		, rnum
 	</select>
 	
 	<sql id="ingredientwhere">
@@ -173,6 +183,12 @@
 				AND sle.CD_CTG_M IN (1, 2, 3, 4, 5, 6, 7, 8, 9)
 			</otherwise>
 		</choose>
+		<if test="corp_nm != null and corp_nm != ''">
+			AND sle.CORP_NM = #{corp_nm}
+		</if>
+		<if test="prd_type != null and prd_type != ''">
+			AND sle.PRD_TYPE = #{prd_type}
+		</if>
 	</sql>
 	
 	<select id="functionCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -223,7 +239,17 @@
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]> 
-		ORDER BY FLG_BEST, rnum
+		ORDER BY FLG_BEST
+		<if test="filter == 'LowP'">
+			, PRICE_SALE ASC
+		</if>
+		<if test="filter == 'HighP'">
+			, PRICE_SALE DESC
+		</if>
+		<if test="filter == 'DtReg'">
+			, DT_REG DESC
+		</if>
+		, rnum
 	</select>
 	
 	<sql id="functionwhere">
@@ -244,6 +270,12 @@
 				AND sle.CD_CTG_M IN (1, 2, 3, 4, 5, 6, 7, 8, 9)
 			</otherwise>
 		</choose>
+		<if test="corp_nm != null and corp_nm != ''">
+			AND sle.CORP_NM = #{corp_nm}
+		</if>
+		<if test="prd_type != null and prd_type != ''">
+			AND sle.PRD_TYPE = #{prd_type}
+		</if>
 	</sql>
 	
 	<select id="genderCount" parameterType="pagingDto" resultType="java.lang.Integer">
