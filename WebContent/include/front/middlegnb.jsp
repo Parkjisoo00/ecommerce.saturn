@@ -18,15 +18,15 @@
 			<li style="display: inline-block; margin: 0 57px; position: relative;">
 				<a href="/front/sale/function_list.web" style="font-size: 18px; font-weight: bold;">기능별</a>
 				<ul class="dropdown" style="position: absolute; top: 100%; left: 0; list-style: none;">
-					<li><a href="javascript:goTypeF('bld');">폴리코사놀</a></li>
-					<li><a href="javascript:goTypeF('imu');">오메가-3</a></li>
-					<li><a href="javascript:goTypeF('inf');">비타민/미네랄</a></li>
-					<li><a href="javascript:goTypeF('jnt');">유산균</a></li>
-					<li><a href="javascript:goTypeF('rec');">글루코사민/MSM</a></li>
-					<li><a href="javascript:goTypeF('eye');">루테인</a></li>
-					<li><a href="javascript:goTypeF('col');">코큐텐</a></li>
-					<li><a href="javascript:goTypeF('brn');">아르기닌</a></li>
-					<li><a href="javascript:goTypeF('stm');">밀크씨슬</a></li>
+					<li><a href="javascript:goTypeF('bld');">혈당/혈행/혈압</a></li>
+					<li><a href="javascript:goTypeF('imu');">항산화/면역력</a></li>
+					<li><a href="javascript:goTypeF('inf');">염증/항염</a></li>
+					<li><a href="javascript:goTypeF('jnt');">관절/뼈/치아</a></li>
+					<li><a href="javascript:goTypeF('rec');">피로회복</a></li>
+					<li><a href="javascript:goTypeF('eye');">눈 건강</a></li>
+					<li><a href="javascript:goTypeF('col');">장 건강</a></li>
+					<li><a href="javascript:goTypeF('brn');">두뇌/기억력</a></li>
+					<li><a href="javascript:goTypeF('stm');">위/간/갑상선</a></li>
 				</ul>
 			</li>
 			<li style="display: inline-block; margin: 0 57px; position: relative;">
