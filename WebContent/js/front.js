@@ -119,12 +119,11 @@ function checkRegister() {
 		return;
 	}
 
-	if (document.getElementById("passwd").value != document.getElementById("passwd").value) {
+	if (document.getElementById("passwd").value != document.getElementById("passwd_").value) {
 		alert("비밀번호를 확인하세요!");
 		isSubmit = false;
 		document.getElementById("passwd").focus();
 	}
-
 	var regExpPasswd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 	if (!regExpPasswd.test(document.getElementById("passwd").value)) {
 		alert("비밀번호는 영문/숫자/특수기호를 조합하여 8자 이상을 입력하세요!");
@@ -190,13 +189,13 @@ function checkLogin() {
 			
 			var frmMain = document.getElementById("frmMain");
 			
-			alert("이메일(아이디)=" + document.getElementById("email").value + "\n"
+			/*alert("이메일(아이디)=" + document.getElementById("email").value + "\n"
 					+ "비밀번호=" + document.getElementById("passwd").value);
 			
 			
 			alert("이메일(아이디)=" + document.frmMain.email.value + "\n"
 					+ "비밀번호=" + document.frmMain.passwd.value);
-			
+			*/
 			// if (document.getElementById("email").value == "") {
 			if (document.getElementById("email").value.length < 6
 					|| document.getElementById("email").value.length > 32) {

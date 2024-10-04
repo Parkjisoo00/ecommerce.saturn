@@ -97,7 +97,7 @@
 
 				$.ajax({
 					type: "POST",
-					// async: false,
+					async: false,
 					url: "/front/member/checkDuplicate.json",
 					dataType: "json",
 					contentType: "application/json; charset=UTF-8",
@@ -168,21 +168,17 @@
 											</div>
 										</div>
 
-										<!-- 비밀번호 -->
 										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="checkout__form__input">
 												<p>비밀번호 (영문 대/소문자, 숫자, 특수문자 포함 8~16자 필수 입력) <span>*</span></p>
-												<input value = "12345678!a" type="password" id="passwd" name="passwd" required autocomplete="off"/>
-													<!-- pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}"
-													required style="width: 100%;" /> -->
+												<input type="password" id="passwd" name="passwd" required autocomplete="off" />
 											</div>
 										</div>
+										
 										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="checkout__form__input">
-												<p>비밀번호 확인 <span>*</span></p>
-												<input value = "12345678!a" type="password" id="passwd_conFirm" name="passwd_conFirm" required autocomplete="off"/>
-													<!-- pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}"
-													required style="width: 100%;" /> -->
+												<p>비밀번호 (영문 대/소문자, 숫자, 특수문자 포함 8~16자 필수 입력) <span>*</span></p>
+												<input type="password" id="passwd_" name="passwd_" required autocomplete="off" />
 											</div>
 										</div>
 
