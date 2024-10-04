@@ -32,6 +32,7 @@ public class LoginDto {
 	
 	private String email	= "";
 	private String passwd	= "";
+	
 	public String getEmail() {
 		return email;
 	}

@@ -40,7 +40,6 @@ import kr.co.bravomylife.front.member.dto.MemberDto;
  */
 @Service("kr.co.bravomylife.front.login.service.LoginSrvc")
 public class LoginSrvc {
-
 	
 	@Inject
 	LoginDao loginDao;
