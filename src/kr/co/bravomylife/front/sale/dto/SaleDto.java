@@ -61,9 +61,6 @@ public class SaleDto {
 	private String searchWord		= "";
 	
 	
-	
-	
-	
 	public int getSeq_mbr() {
 		return seq_mbr;
 	}

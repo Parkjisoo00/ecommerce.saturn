@@ -66,7 +66,7 @@ public class BuyWeb extends Common {
 			
 			mav.addObject("saleDto"		, _saleDto);
 			
-			mav.setViewName("/front/buy/writeForm");
+			mav.setViewName("front/buy/writeForm");
 			
 		}
 		catch (Exception e) {

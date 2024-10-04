@@ -119,7 +119,7 @@
 		FROM
 			(
 			SELECT
-				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY sle.DT_REG DESC) rnum
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY best.FLG_BEST, sle.DT_REG DESC) rnum
 				, sle.SEQ_SLE
 				, sle.SLE_NM
 				, sle.IMG
@@ -206,7 +206,7 @@
 		FROM
 			(
 			SELECT
-				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY sle.DT_REG DESC) rnum
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY best.FLG_BEST, sle.DT_REG DESC) rnum
 				, sle.SEQ_SLE
 				, sle.SLE_NM
 				, sle.IMG
@@ -293,7 +293,7 @@
 		FROM
 			(
 			SELECT
-				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY sle.DT_REG DESC) rnum
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY best.FLG_BEST, sle.DT_REG DESC) rnum
 				, sle.SEQ_SLE
 				, sle.SLE_NM
 				, sle.IMG
