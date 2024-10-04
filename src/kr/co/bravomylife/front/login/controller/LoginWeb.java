@@ -70,6 +70,41 @@ import kr.co.bravomylife.util.servlet.Request;
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
+	 * @since 2024-10-04
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/login/logout.web")
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			HttpSession session = request.getSession(false);
+			
+			String name		= (String) session.getAttribute("NAME");
+			String dt_login	= (String) session.getAttribute("DT_LOGIN");
+			session.invalidate();
+			
+			request.setAttribute("script"	, "alert('" + dt_login + "에 로그인한 " + name + "님 안녕히 가세요.')");
+			request.setAttribute("redirect"	, "/front/");
+			
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".logout()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
 	 * @since 2024-09-30
 	 * <p>DESCRIPTION:로그인 페이지 jsp로만 가게</p>
 	 * <p>IMPORTANT:</p>
