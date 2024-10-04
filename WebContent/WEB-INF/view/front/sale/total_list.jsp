@@ -9,11 +9,68 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
+		function goTypeTs(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.filter.setAttribute("value", value);
+			frmMain.action = "/front/sale/total_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeTn(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.corp_nm.setAttribute("value", value);
+			frmMain.action = "/front/sale/total_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeTt(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.prd_type.setAttribute("value", value);
+			frmMain.action = "/front/sale/total_list.web";
+			frmMain.submit();
+		}
+		
 		function goTypeF(value) {
 			
 			var frmMain = document.getElementById("frmMain");
 			
 			frmMain.type.setAttribute("value", value);
+			frmMain.action = "/front/sale/function_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeFs(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.filter.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/function_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeFn(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.corp_nm.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/function_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeFt(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.prd_type.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
 			frmMain.action = "/front/sale/function_list.web";
 			frmMain.submit();
 		}
@@ -27,11 +84,71 @@
 			frmMain.submit();
 		}
 		
+		function goTypeIs(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.filter.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/ingredient_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeIn(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.corp_nm.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/ingredient_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeIt(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.prd_type.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/ingredient_list.web";
+			frmMain.submit();
+		}
+		
 		function goTypeG(value) {
 			
 			var frmMain = document.getElementById("frmMain");
 			
 			frmMain.type.setAttribute("value", value);
+			frmMain.action = "/front/sale/gender_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeGs(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.filter.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/gender_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeGn(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.corp_nm.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
+			frmMain.action = "/front/sale/gender_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeGt(value, ctgm) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.prd_type.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", ctgm);
 			frmMain.action = "/front/sale/gender_list.web";
 			frmMain.submit();
 		}
@@ -41,7 +158,16 @@
 			var frmMain = document.getElementById("frmMain");
 			
 			frmMain.currentPage.setAttribute("value", value);
-			frmMain.action="/front/sale/total_list.web";
+			frmMain.action="/front/sale/ingredient_list.web";
+			frmMain.submit();
+		}
+		
+		function goWriteForm(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.seq_sle.setAttribute("value", value);
+			frmMain.action="/front/buy/writeForm.web";
 			frmMain.submit();
 		}
 	</script>
@@ -58,6 +184,7 @@
 <input type="hidden" id="corp_nm"		name="corp_nm" />
 <input type="hidden" id="prd_type"		name="prd_type" />
 <input type="hidden" id="filter"		name="filter" />
+<input type="hidden" id="cd_ctg_m"		name="cd_ctg_m" />
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
 	<!-- Page Preloder -->
@@ -91,46 +218,41 @@
 								<c:forEach var="list" items="${list}">
 									<div class="col-lg-4 col-md-6">
 										<input type="hidden" name="cd_ctg_b" id="cd_ctg_b" value="${list.cd_ctg_b}" />
-										<input type="hidden" name="prd_type" id="prd_type" value="${list.prd_type}" />
-										<input type="hidden" name="corp_nm" id="corp_nm" value="${list.corp_nm}" />
 										<div class="product__item">
-											<div class="product__item__pic set-bg" data-setbg="${list.img}">
+											<a href="javascript:goWriteForm(${list.seq_sle});">
+												<div class="product__item__pic set-bg" data-setbg="${list.img}">
 												<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
 													<div class="label new">베스트</div>
 												</c:if>
-												<ul class="product__hover">
-													<li><a href="${list.seq_sle}" class="image-popup"><span class="arrow_expand"></span></a></li>
-													<li><a href="#"><span class="icon_heart_alt"></span></a></li>
-													<li><a href="#"><span class="icon_bag_alt"></span></a></li>
-												</ul>
-											</div>
+												</div>
+											</a>
 											<div class="product__item__text">
 												<h6 style="line-height: 1.5em; min-height: 3em;"><a href="#" style="font-size: 15px;">${list.sle_nm}</a></h6>
 													<div class="rating">
 														<c:if test="${list.average_rate == 1}">
-															<i class="fa fa-star"></i>(${list.count})
+															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${saleDto.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 2}">
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>(${list.count})
+															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${saleDto.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 3}">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>(${list.count})
+															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${saleDto.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 4}">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>(${list.count})
+															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${saleDto.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 5}">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>(${list.count})
+															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${saleDto.count}개 상품평</span>
 														</c:if>
 													</div>
 												<c:choose>

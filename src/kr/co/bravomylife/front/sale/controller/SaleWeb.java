@@ -229,11 +229,17 @@ public class SaleWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/sale/total_list.web")
-	public ModelAndView totalList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto) {
+	public ModelAndView totalList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto, String filter) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			
+			logger.debug("필터 확인" + " = " + filter);
+			logger.debug("브랜드명 확인" + " = " + saleDto.getCorp_nm());
+			logger.debug("제품 타입 확인" + " = " + saleDto.getPrd_type());
+			
+			pagingDto.setFilter(filter);
 			
 			PagingListDto pagingListDto = saleSrvc.totalList(pagingDto);
 			mav.addObject("paging"	, pagingListDto.getPaging());

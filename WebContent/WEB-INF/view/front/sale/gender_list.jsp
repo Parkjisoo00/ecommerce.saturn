@@ -9,6 +9,33 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
+		function goTypeTs(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.filter.setAttribute("value", value);
+			frmMain.action = "/front/sale/total_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeTn(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.corp_nm.setAttribute("value", value);
+			frmMain.action = "/front/sale/total_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeTt(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.prd_type.setAttribute("value", value);
+			frmMain.action = "/front/sale/total_list.web";
+			frmMain.submit();
+		}
+		
 		function goTypeF(value) {
 			
 			var frmMain = document.getElementById("frmMain");
@@ -203,29 +230,29 @@
 												<h6 style="line-height: 1.5em; min-height: 3em;"><a href="#" style="font-size: 15px;">${list.sle_nm}</a></h6>
 													<div class="rating">
 														<c:if test="${list.average_rate == 1}">
-															<i class="fa fa-star"></i>(${list.count})
+															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${saleDto.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 2}">
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>(${list.count})
+															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${saleDto.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 3}">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>(${list.count})
+															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${saleDto.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 4}">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>(${list.count})
+															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${saleDto.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 5}">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>(${list.count})
+															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${saleDto.count}개 상품평</span>
 														</c:if>
 													</div>
 												<c:choose>

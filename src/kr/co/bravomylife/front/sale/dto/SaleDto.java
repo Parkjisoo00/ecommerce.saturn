@@ -33,7 +33,7 @@ public class SaleDto {
 	private int seq_mbr				= 0;
 	private String flg_like			= "";
 	private int rnum				= 0;
-	private int seq_sle				= 0;
+	private Integer seq_sle			= null;
 	private String sle_nm			= "";
 	private String img				= "";
 	private int price_sale			= 0;
@@ -61,6 +61,13 @@ public class SaleDto {
 	private String searchWord		= "";
 	
 	
+	
+	public Integer getSeq_sle() {
+		return seq_sle;
+	}
+	public void setSeq_sle(Integer seq_sle) {
+		this.seq_sle = seq_sle;
+	}
 	public int getSeq_mbr() {
 		return seq_mbr;
 	}
@@ -102,13 +109,7 @@ public class SaleDto {
 	}
 	public void setRnum(int rnum) {
 		this.rnum = rnum;
-	}
-	public int getSeq_sle() {
-		return seq_sle;
-	}
-	public void setSeq_sle(int seq_sle) {
-		this.seq_sle = seq_sle;
-	}
+	}	
 	public String getSle_nm() {
 		return sle_nm;
 	}

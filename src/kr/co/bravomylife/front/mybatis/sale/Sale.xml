@@ -57,7 +57,7 @@
 		FROM
 			(
 			SELECT
-				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY sle.DT_REG DESC) rnum
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY best.FLG_BEST, sle.DT_REG DESC) rnum
 				, sle.SEQ_SLE
 				, sle.SLE_NM
 				, sle.IMG
@@ -90,7 +90,17 @@
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]> 
-		ORDER BY FLG_BEST, rnum
+		ORDER BY FLG_BEST
+		<if test="filter == 'LowP'">
+			, PRICE_SALE ASC
+		</if>
+		<if test="filter == 'HighP'">
+			, PRICE_SALE DESC
+		</if>
+		<if test="filter == 'DtReg'">
+			, DT_REG DESC
+		</if>
+		, rnum
 	</select>
 	
 	<sql id="totalwhere">
@@ -102,6 +112,12 @@
 		<![CDATA[
 		AND SYSDATE >= sle.DT_SALE_START AND SYSDATE <= sle.DT_SALE_END
 		]]>
+		<if test="corp_nm != null and corp_nm != ''">
+			AND sle.CORP_NM = #{corp_nm}
+		</if>
+		<if test="prd_type != null and prd_type != ''">
+			AND sle.PRD_TYPE = #{prd_type}
+		</if>
 	</sql>
 	
 	<select id="ingredientCount" parameterType="pagingDto" resultType="java.lang.Integer">
