@@ -16,18 +16,17 @@
 								<%@ include file="/include/common/css.jsp" %>
 
 									<style>
-										.categories__text {
-											background-color: rgba(255, 255, 255, 0.5);
-											padding: 10px;
-											/* 텍스트 주변에 여백 추가 */
-											display: inline-block;
-											/* 텍스트만 감싸는 배경 */
-										}
+										.categories__text.special-background {
+										background-color: rgba(255, 255, 255, 0.5);
+										padding: 10px;
+										display: inline-block;
+									}
+									
+									.categories__text.special-background h1,
+									.categories__text.special-background p {
+										color: black;
+									}
 
-										.categories__text h1 .categories__text p {
-											color: white;
-											/* 텍스트 색상을 흰색으로 변경 */
-										}
 									</style>
 					</head>
 
@@ -86,12 +85,14 @@
 											<div class="col-lg-6 p-0">
 												<div class="categories__item categories__large__item set-bg"
 													data-setbg="img/categories/home1.jpg">
-													<div class="categories__text">
+													<div class="categories__text" style="text-align: left;">
+													<div class="categories__text special-background">
 														<h1 style="font-weight: bold;">나만의 맞춤 <br> 건강 추천</h1>
 														<p style="font-weight: bold; font-size: 20px;">건강 설문을 진행하고 나에게 맞는 영양제를 추천받아 보세요!</p>
 														<a href="#" style="font-size: 20px;">바로가기</a>
 													</div>
 												</div>
+											</div>
 											</div>
 											<div class="col-lg-6">
 												<div class="row">
@@ -99,11 +100,13 @@
 														<div class="categories__item set-bg"
 															data-setbg="img/categories/home3.jpg">
 															<div class="categories__text">
+															<div class="categories__text special-background">
 																<h4 style="font-weight: bold;">안심 조회 서비스</h4>
 																<p style="font-weight: bold;">구매하고 싶은 영양제가 인증 허가를 받은 <br> 안심상품인지 확인하세요</p>
 																<a href="#">바로가기</a>
 															</div>
 														</div>
+													</div>
 													</div>
 													<div class="col-lg-6 col-md-6 col-sm-6 p-0">
 														<div class="categories__item"
