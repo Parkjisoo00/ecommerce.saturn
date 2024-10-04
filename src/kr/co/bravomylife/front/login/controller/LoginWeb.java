@@ -20,14 +20,29 @@
  */
 package kr.co.bravomylife.front.login.controller;
 
+import java.util.Properties;
+
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import kr.co.bravomylife.front.common.Common;
+import kr.co.bravomylife.front.login.dto.LoginDto;
+import kr.co.bravomylife.front.login.service.LoginSrvc;
+import kr.co.bravomylife.front.member.dto.MemberDto;
+import kr.co.bravomylife.util.Datetime;
+import kr.co.bravomylife.util.security.HSwithSHA;
+import kr.co.bravomylife.util.security.SKwithAES;
+import kr.co.bravomylife.util.servlet.Request;
 
 /**
  * @version 1.0.0
@@ -39,7 +54,13 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller("kr.co.bravomylife.front.login.controller.LoginWeb")
 
-	public class LoginWeb {
+	public class LoginWeb extends Common {
+	
+	@Autowired
+	Properties staticProperties;
+	
+	@Inject
+	LoginSrvc loginSrvc;
 	
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(LoginWeb.class);
@@ -65,6 +86,78 @@ import org.springframework.web.servlet.ModelAndView;
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".loginForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param loginDto [로그인 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-04
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/login/loginProc.web", method = RequestMethod.POST)
+	public ModelAndView loginProc(HttpServletRequest request, HttpServletResponse response, LoginDto loginDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			// 대칭키 암호화(AES-256)
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+		
+			loginDto.setEmail(aes.encode(loginDto.getEmail()));
+			logger.debug("암호화 후(Email): " + loginDto.getEmail());
+			
+			MemberDto memberDto = loginSrvc.exist(loginDto);
+			
+			if (memberDto != null
+					&& HSwithSHA.encode(loginDto.getPasswd()).equals(memberDto.getPasswd())) {
+				//logger.debug("이메일과 암호가 일치함");
+				
+				/** 최종 접속한 IP와 시간을 업데이트 */
+				memberDto.setLast_ip(Request.getRemoteAddr(request));
+				
+				if (!loginSrvc.updateLast(memberDto))
+					logger.info("[ERROR] 최종 접속한 IP와 시간을 업데이트에 실패하였습니다!");
+				
+				
+				/** 정상적인 회원일 경우 세션에 이름과 아이디를 저장 */
+				HttpSession session = request.getSession(true);
+				//logger.debug(memberDto.getMbr_nm());
+				//logger.debug(memberDto.getSeq_mbr() + "");
+				//logger.debug(memberDto.getPasswd());
+				//logger.debug("복호화 후(Name): " + aes.decode(memberDto.getMbr_nm()));
+				//logger.debug("복호화 후(Email): " + aes.decode(memberDto.getEmail()));
+				session.setAttribute("SEQ_MBR", Integer.toString(memberDto.getSeq_mbr()));
+				session.setAttribute("NAME", aes.decode(memberDto.getMbr_nm()));
+				session.setAttribute("EMAIL", aes.decode(memberDto.getEmail()));
+				session.setAttribute("DT_LOGIN", Datetime.getNow("yyyy-MM-dd HH:mm:ss"));
+				
+				request.setAttribute("script", "alert('" + session.getAttribute("NAME")
+												+ "님 "
+												+ session.getAttribute("DT_LOGIN")
+												+ "반갑습니다."
+												+ "')");
+			}
+			else {
+				// logger.debug("해당 회원이 없거나 암호가 일치하지 않음");
+				request.setAttribute("script", "alert('이메일과 비밀번호를 확인하세요!')");
+			}
+			
+			request.setAttribute("redirect"	, "/front/login/loginForm.web");
+			
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".loginProc()] " + e.getMessage(), e);
 		}
 		finally {}
 		

@@ -42,17 +42,17 @@
 			<form id="frmMain" method="POST" class="checkout__form">
 				<div class="row3">
 					<div class="col-lg-12">
-						<h5>회원 로그인</h5>
+						<h5 >회원 로그인</h5>
 						<div class="row3">
 							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
-									<input type="text" id="email" name="email" placeholder="이메일(아이디)" maxlength="32" required>
-								</div>  
+									<input type="text" id="email" name="email" placeholder="이메일" maxlength="32" autocomplete="off" required>
+								</div>
 							</div>
 							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
-									<input type="text" id="passwd" name="passwd" placeholder="비밀번호" maxlength="16" required>
-								</div>  
+									<input type="password" id="passwd" name="passwd" placeholder="비밀번호" autocomplete="off" required>
+								</div>
 							</div>
 							<div class="col-lg-12">
 								<div class="checkout__form__checkbox">
@@ -61,22 +61,26 @@
 										<input type="checkbox" id="acc">
 										<span class="checkmark"></span>
 									</label>
-									</div>
+								</div>
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12">
 								<div class="checkout__form__input">
-									<input type="button" value="로그인" id="loginId" onClick="checkLogin();"/>
+									<input type="submit" value="로그인" id="loginId" onClick="checkLogin();"/>
+								</div>
+								<hr style="border: 1px solid #ccc; margin: 0;">
+								<br>
+							</div>
+							<div class="col-lg-4 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
+								<div class="checkout__form__input">
+									<input type="button" value="회원가입" id="registerId"  onClick="checkRegister();"/>
 								</div>
 							</div>
-							<div class="col-lg-4 col-md-12 col-sm-12">
-								<div class="checkout__form__input">
-									<input type="button" value="회원가입" id="registerId" onClick="checkRegister();"/>
-								</div>
-							</div><div class="col-lg-4 col-md-12 col-sm-12">
+							<div class="col-lg-4 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
 								<div class="checkout__form__input">
 									<input type="button" value="아이디 찾기" id="findId" onClick="checkId();"/>
 								</div>
-							</div><div class="col-lg-4 col-md-12 col-sm-12">
+							</div>
+							<div class="col-lg-4 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
 								<div class="checkout__form__input">
 									<input type="button" value="비밀번호 찾기" id="findPasswd" onClick="checkPasswd();"/>
 								</div>
