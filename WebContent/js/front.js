@@ -185,3 +185,34 @@ function checkRegister() {
 		frmMain.submit();
 	}
 }
+
+function checkLogin() {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			alert("이메일(아이디)=" + document.getElementById("email").value + "\n"
+					+ "비밀번호=" + document.getElementById("passwd").value);
+			
+			
+			alert("이메일(아이디)=" + document.frmMain.email.value + "\n"
+					+ "비밀번호=" + document.frmMain.passwd.value);
+			
+			// if (document.getElementById("email").value == "") {
+			if (document.getElementById("email").value.length < 6
+					|| document.getElementById("email").value.length > 32) {
+				alert("이메일(아이디)를 6 ~ 16자 이내로 입력하세요!");
+				document.getElementById("email").focus();
+				// document.getElementById("email").select();
+				return;
+			}
+			
+			if (document.getElementById("passwd").value.length < 8
+					|| document.getElementById("passwd").value.length > 16) {
+				alert("비밀번호를 8 ~ 16자 이내로 입력하세요!");
+				document.getElementById("passwd").focus();
+				return;
+			}
+			
+			frmMain.action = "/front/login/loginProc.web";
+			frmMain.submit();
+		}
