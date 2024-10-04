@@ -170,14 +170,14 @@
 
 										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="checkout__form__input">
-												<p>비밀번호 (영문 대/소문자, 숫자, 특수문자 포함 8~16자 필수 입력) <span>*</span></p>
+												<p>비밀번호 (영문 대/소문자 구분, 숫자, 특수문자 포함 8~16자 필수 입력) <span>*</span></p>
 												<input type="password" id="passwd" name="passwd" required autocomplete="off" />
 											</div>
 										</div>
 										
 										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="checkout__form__input">
-												<p>비밀번호 (영문 대/소문자, 숫자, 특수문자 포함 8~16자 필수 입력) <span>*</span></p>
+												<p>비밀번호 (확인을 위해 새 비밀번호를 다시 입력해주세요.) <span>*</span></p>
 												<input type="password" id="passwd_" name="passwd_" required autocomplete="off" />
 											</div>
 										</div>
