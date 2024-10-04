@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ page info="/WEB-INF/view/front/buy/writeForm.jsp" %>
-<!-- 이 부분은 필요에 따라 추가하는 것이 맞으므로 개별 판단에 따라 추가하거나 삭제해도 되고 사용하지 않더라도 그대로 넣어둬도 무방하다고 판단 -->
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
@@ -24,6 +23,13 @@
 
 <body>
 <form id="frmMain" method="POST">
+<input type="hidden" id="item" name="item" />
+
+<input type="hidden" id="seq_sle"	value="${saleDto.seq_sle}" />
+<input type="hidden" id="sle_nm"	value="${saleDto.sle_nm}" />
+<input type="hidden" id="price"		value="${saleDto.price_sale}" />
+
+<input type="hidden" name="buyList[0].seq_sle" value="${saleDto.seq_sle}" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -47,24 +53,41 @@
 					<div class="product__details__pic">
 						<div class="product__details__slider__content">
 							<div class="product__details__pic__slider owl-carousel">
-								<img data-hash="product-1" class="product__big__img" src="img/product/details/product-1.jpg" alt="">
-								<img data-hash="product-2" class="product__big__img" src="img/product/details/product-3.jpg" alt="">
-								<img data-hash="product-3" class="product__big__img" src="img/product/details/product-2.jpg" alt="">
-								<img data-hash="product-4" class="product__big__img" src="img/product/details/product-4.jpg" alt="">
+								<img data-hash="product-1" class="product__big__img" src="${saleDto.img}" alt="">
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="product__details__text">
-						<h3>제품<span>브랜드:</span></h3>
+						<h6 style="line-height: 1.5em; min-height: 3em; font-size: 18px; font-weight: bold;">${saleDto.sle_nm}</h6>
+						<span>판매자 : ${saleDto.corp_nm}</span>
 						<div class="rating">
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<span>( 리뷰 숫자 )</span>
+							<c:if test="${salDto.average_rate == 1}">
+								<i class="fa fa-star"></i><span style="margin-left: 10px;">${saleDto.count}개 상품평</span>
+							</c:if>
+							<c:if test="${saleDto.average_rate == 2}">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i><span style="margin-left: 10px;">${saleDto.count}개 상품평</span>
+							</c:if>
+							<c:if test="${saleDto.average_rate == 3}">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i><span style="margin-left: 10px;">${saleDto.count}개 상품평</span>
+							</c:if>
+							<c:if test="${saleDto.average_rate == 4}">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 12px;">${saleDto.count}개 상품평</span>
+							</c:if>
+							<c:if test="${saleDto.average_rate == 5}">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i><span style="margin-left: 10px;">${saleDto.count}개 상품평</span>
+							</c:if>
 						</div>
 						<div class="product__details__price">$ 75.0 <span>$ 83.0</span></div>
 						<p>제품 설명</p>
