@@ -30,6 +30,8 @@ package kr.co.bravomylife.front.sale.dto;
  */
 public class SaleDto {
 
+	private int seq_mbr				= 0;
+	private String flg_like			= "";
 	private int rnum				= 0;
 	private int seq_sle				= 0;
 	private String sle_nm			= "";
@@ -59,6 +61,21 @@ public class SaleDto {
 	private String searchWord		= "";
 	
 	
+	
+	
+	
+	public int getSeq_mbr() {
+		return seq_mbr;
+	}
+	public void setSeq_mbr(int seq_mbr) {
+		this.seq_mbr = seq_mbr;
+	}
+	public String getFlg_like() {
+		return flg_like;
+	}
+	public void setFlg_like(String flg_like) {
+		this.flg_like = flg_like;
+	}
 	public String getFlg_best() {
 		return flg_best;
 	}
