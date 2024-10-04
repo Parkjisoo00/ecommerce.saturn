@@ -104,7 +104,12 @@ function checkRegister() {
 		alert("필수 약관에 동의하셔야 합니다!");
 		return;
 	}
-
+	
+	if (!document.getElementById("term_2").checked) {
+		alert("필수 약관에 동의하셔야 합니다!");
+		return;
+	}
+	
 	var email = document.getElementById("email").value;
 
 	if (!checkEmail(email)) {
@@ -112,7 +117,7 @@ function checkRegister() {
 		document.getElementById("email").focus();
 		return;
 	}
-
+	
 	if (isDuplicate) {
 		alert("이메일 중복을 확인하세요!");
 		document.getElementById("btnId").focus();
@@ -124,6 +129,7 @@ function checkRegister() {
 		isSubmit = false;
 		document.getElementById("passwd").focus();
 	}
+	
 	var regExpPasswd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 	if (!regExpPasswd.test(document.getElementById("passwd").value)) {
 		alert("비밀번호는 영문/숫자/특수기호를 조합하여 8자 이상을 입력하세요!");
@@ -142,7 +148,6 @@ function checkRegister() {
 		alert("연락처를 확인해 주세요!");
 		isSubmit = false;
 	}
-		
 	
 	if (document.getElementById("mbr_nm").value == ""
 		|| document.getElementById("phone1").value == ""
@@ -154,23 +159,7 @@ function checkRegister() {
 		alert("필수 항목을 입력하세요!");
 		isSubmit = false;
 	}
-	/*정규식으로 어떻게든 해도 반영이 안된다고 그럼 html에서 수정하기
-	var regExpDate = /^\d{4}-\d{2}-\d{2}$/;
-	var age =  document.getElementById("age").value; // 입력된 값 가져오기
 	
-	// 입력값이 비어 있지 않은지 확인
-	if (age === "") {
-	    alert("생년월일을 입력해 주세요!");
-	    isSubmit = false;
-	} else {
-		// 정규 표현식 대신 날짜 형식 체크
-		var regExpDate = /^\d{4}-\d{2}-\d{2}$/; // yyyy-mm-dd 형식
-		if (!regExpDate.test(age)) {
-			alert("생년월일을 확인해 주세요!");
-			isSubmit = false;
-		}
-	}
-*/
 	if (isSubmit) {
 		alert("정상적으로 "
 			+ email
