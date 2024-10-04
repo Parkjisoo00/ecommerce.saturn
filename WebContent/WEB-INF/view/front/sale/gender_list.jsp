@@ -154,7 +154,6 @@
 
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" name="seq_sle"		id="seq_sle" />
 <input type="hidden" id="corp_nm"		name="corp_nm" />
 <input type="hidden" id="prd_type"		name="prd_type" />
 <input type="hidden" id="filter"		name="filter" />

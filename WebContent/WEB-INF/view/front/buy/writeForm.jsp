@@ -64,32 +64,40 @@
 						<span>판매자 : ${saleDto.corp_nm}</span>
 						<div class="rating">
 							<c:if test="${salDto.average_rate == 1}">
-								<i class="fa fa-star"></i><span style="margin-left: 10px;">${saleDto.count}개 상품평</span>
+								<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 14px; font-weight: bold;">${saleDto.count}개 상품평</span>
 							</c:if>
 							<c:if test="${saleDto.average_rate == 2}">
 								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i><span style="margin-left: 10px;">${saleDto.count}개 상품평</span>
+								<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 14px; font-weight: bold;">${saleDto.count}개 상품평</span>
 							</c:if>
 							<c:if test="${saleDto.average_rate == 3}">
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i><span style="margin-left: 10px;">${saleDto.count}개 상품평</span>
+								<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 14px; font-weight: bold;">${saleDto.count}개 상품평</span>
 							</c:if>
 							<c:if test="${saleDto.average_rate == 4}">
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 12px;">${saleDto.count}개 상품평</span>
+								<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 14px; font-weight: bold;">${saleDto.count}개 상품평</span>
 							</c:if>
 							<c:if test="${saleDto.average_rate == 5}">
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i><span style="margin-left: 10px;">${saleDto.count}개 상품평</span>
+								<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 14px; font-weight: bold;">${saleDto.count}개 상품평</span>
 							</c:if>
 						</div>
-						<div class="product__details__price">$ 75.0 <span>$ 83.0</span></div>
+						<c:choose>
+							<c:when test="${list.discount == null || list.discount == 0}">
+								<div class="product__details__price">${salDto.price_sale}<span>$ 83.0</span></div>
+								<span style="text-decoration: none; font-size: 1.3em; color: black;">${list.price_sale}</span>원</div>
+							</c:when>
+							<c:otherwise>
+								
+							</c:otherwise>
+						</c:choose>
 						<p>제품 설명</p>
 						<div class="product__details__button">
 							<div class="quantity">
