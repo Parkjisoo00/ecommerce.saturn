@@ -174,33 +174,45 @@ function checkRegister() {
 	}
 }
 
+// 페이지 로드 시 저장된 이메일 불러오기
+document.addEventListener("DOMContentLoaded", function() {
+	var savedEmail = localStorage.getItem("savedEmail");
+	if (savedEmail) {
+		document.getElementById("email").value = savedEmail;
+		document.getElementById("rememberMe").checked = true; // 체크박스 체크
+	}
+});
+
 function checkLogin() {
 			
-			var frmMain = document.getElementById("frmMain");
-			
-			/*alert("이메일(아이디)=" + document.getElementById("email").value + "\n"
-					+ "비밀번호=" + document.getElementById("passwd").value);
-			
-			
-			alert("이메일(아이디)=" + document.frmMain.email.value + "\n"
-					+ "비밀번호=" + document.frmMain.passwd.value);
-			*/
-			// if (document.getElementById("email").value == "") {
-			if (document.getElementById("email").value.length < 6
-					|| document.getElementById("email").value.length > 32) {
-				alert("이메일(아이디)를 6 ~ 16자 이내로 입력하세요!");
-				document.getElementById("email").focus();
-				// document.getElementById("email").select();
-				return;
-			}
-			
-			if (document.getElementById("passwd").value.length < 8
-					|| document.getElementById("passwd").value.length > 16) {
-				alert("비밀번호를 8 ~ 16자 이내로 입력하세요!");
-				document.getElementById("passwd").focus();
-				return;
-			}
-			
-			frmMain.action = "/front/login/loginProc.web";
-			frmMain.submit();
+	var frmMain = document.getElementById("frmMain");
+	
+	if (document.getElementById("email").value.length < 6
+			|| document.getElementById("email").value.length > 32) {
+		alert("이메일(아이디)를 6 ~ 16자 이내로 입력하세요!");
+		document.getElementById("email").focus();
+		// document.getElementById("email").select();
+		return;
+	}
+	
+	if (document.getElementById("passwd").value.length < 8
+			|| document.getElementById("passwd").value.length > 16) {
+		alert("비밀번호를 8 ~ 16자 이내로 입력하세요!");
+		document.getElementById("passwd").focus();
+		return;
+	}
+	
+	// 아이디 저장 체크 로직
+		if (document.getElementById("rememberMe").checked) {
+			localStorage.setItem("savedEmail", document.getElementById("email").value);
+		} else {
+			localStorage.removeItem("savedEmail"); // 체크 해제 시 저장된 아이디 삭제
 		}
+		
+		frmMain.action = "/front/login/loginProc.web";
+		frmMain.submit();
+}
+
+function goToRegister() {
+	window.location.href = "/front/member/registerForm.web"; // 회원가입 페이지 URL
+}

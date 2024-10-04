@@ -22,6 +22,7 @@
 </head>
 
 <body>
+
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -46,21 +47,17 @@
 						<div class="row3">
 							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
-									<input type="text" id="email" name="email" placeholder="이메일" maxlength="32" autocomplete="off" required>
+									<input type="text" id="email" name="email" placeholder="이메일을 입력해주세요." maxlength="32" autocomplete="off" required>
 								</div>
 							</div>
 							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
-									<input type="password" id="passwd" name="passwd" placeholder="비밀번호" autocomplete="off" required>
+									<input type="password" id="passwd" name="passwd" placeholder="비밀번호를 입력해주세요." autocomplete="off" required>
 								</div>
 							</div>
 							<div class="col-lg-12">
 								<div class="checkout__form__checkbox">
-									<label for="acc">
-										아이디 저장
-										<input type="checkbox" id="acc">
-										<span class="checkmark"></span>
-									</label>
+									<input type="checkbox" id="rememberMe" name="rememberMe"> 아이디 저장
 								</div>
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12">
@@ -72,7 +69,7 @@
 							</div>
 							<div class="col-lg-4 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
 								<div class="checkout__form__input">
-									<input type="button" value="회원가입" id="registerId"  onClick="checkRegister();"/>
+									<input type="button" value="회원가입" id="registerId" onClick="goToRegister();"/>
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
