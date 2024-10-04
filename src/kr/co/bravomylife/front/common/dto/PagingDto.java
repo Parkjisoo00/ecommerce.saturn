@@ -18,9 +18,10 @@ public class PagingDto {
 	private String searchKey	= "";
 	private String searchWord	= "";
 	
-	private int cd_bbs_type		= 0;
+	private Integer cd_bbs_type	= 0;
 	private int cd_ctg			= 0;
 	private int register		= 0;
+	
 	private String cd_ctg_b		= "";
 	private String cd_ctg_m		= "";
 	private String filter		= "";
@@ -106,10 +107,11 @@ public class PagingDto {
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
 	}
-	public int getCd_bbs_type() {
+	public Integer getCd_bbs_type() {
 		return cd_bbs_type;
 	}
-	public void setCd_bbs_type(int cd_bbs_type) {
+	public void setCd_bbs_type(Integer cd_bbs_type) {
 		this.cd_bbs_type = cd_bbs_type;
 	}
+	
 }

@@ -134,6 +134,16 @@
 								frmMain.action="/front/sale/ingredient_list.web";
 								frmMain.submit();
 							}
+							
+							function goList(value) {
+								
+								var frmMain = document.getElementById("frmMain");
+								
+								frmMain.cd_bbs_type.setAttribute("value", value);
+								frmMain.action = "/front/center/list.web";
+								frmMain.submit();
+							}
+							
 								</script>
 							<!-- Google Font -->
 							<%@ include file="/include/common/webfont.jsp" %>
@@ -163,6 +173,7 @@
 					<input type="hidden" id="filter"		name="filter" />
 					<input type="hidden" id="cd_ctg_m"		name="cd_ctg_m" />
 					<input type="hidden" id="type"			name="type" />
+					<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" />
 						<!-- Page Preloder -->
 						<div id="preloder">
 							<div class="loader"></div>
