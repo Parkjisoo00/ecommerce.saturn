@@ -230,7 +230,7 @@
 												<div class="row">
 													<div class="col-lg-6 col-md-6 col-sm-6 p-0">
 														<div class="categories__item set-bg"
-															data-setbg="img/categories/home3.jpg">
+															data-setbg="img/categories/home4.jpg">
 															<div class="categories__text">
 															<div class="categories__text special-background">
 																<h4 style="font-weight: bold;">안심 조회 서비스</h4>
