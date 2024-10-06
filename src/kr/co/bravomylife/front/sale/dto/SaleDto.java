@@ -30,11 +30,10 @@ package kr.co.bravomylife.front.sale.dto;
  */
 public class SaleDto {
 
-	private int seq_mbr				= 0;
-	private String flg_like			= "";
 	private int rnum				= 0;
-	private Integer seq_sle			= null;
+	private int seq_mbr				= 0;
 	private String sle_nm			= "";
+	private Integer seq_sle				= 0;
 	private String img				= "";
 	private int price_sale			= 0;
 	private String cd_ctg_b			= "";
@@ -56,17 +55,17 @@ public class SaleDto {
 	private int updater				= 0;
 	private int discount_sale		= 0;
 	private String flg_best			= "";
+	private String flg_like			= "";
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
-	
-	public Integer getSeq_sle() {
-		return seq_sle;
+	public int getRnum() {
+		return rnum;
 	}
-	public void setSeq_sle(Integer seq_sle) {
-		this.seq_sle = seq_sle;
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	public int getSeq_mbr() {
 		return seq_mbr;
@@ -74,47 +73,17 @@ public class SaleDto {
 	public void setSeq_mbr(int seq_mbr) {
 		this.seq_mbr = seq_mbr;
 	}
-	public String getFlg_like() {
-		return flg_like;
-	}
-	public void setFlg_like(String flg_like) {
-		this.flg_like = flg_like;
-	}
-	public String getFlg_best() {
-		return flg_best;
-	}
-	public void setFlg_best(String flg_best) {
-		this.flg_best = flg_best;
-	}
-	public int getAverage_rate() {
-		return average_rate;
-	}
-	public void setAverage_rate(int average_rate) {
-		this.average_rate = average_rate;
-	}
-	public int getCount() {
-		return count;
-	}
-	public void setCount(int count) {
-		this.count = count;
-	}
-	public int getDiscount_sale() {
-		return discount_sale;
-	}
-	public void setDiscount_sale(int discount_sale) {
-		this.discount_sale = discount_sale;
-	}
-	public int getRnum() {
-		return rnum;
-	}
-	public void setRnum(int rnum) {
-		this.rnum = rnum;
-	}	
 	public String getSle_nm() {
 		return sle_nm;
 	}
 	public void setSle_nm(String sle_nm) {
 		this.sle_nm = sle_nm;
+	}
+	public Integer getSeq_sle() {
+		return seq_sle;
+	}
+	public void setSeq_sle(Integer seq_sle) {
+		this.seq_sle = seq_sle;
 	}
 	public String getImg() {
 		return img;
@@ -151,6 +120,18 @@ public class SaleDto {
 	}
 	public void setRate_star(int rate_star) {
 		this.rate_star = rate_star;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getAverage_rate() {
+		return average_rate;
+	}
+	public void setAverage_rate(int average_rate) {
+		this.average_rate = average_rate;
 	}
 	public String getPrd_type() {
 		return prd_type;
@@ -217,6 +198,24 @@ public class SaleDto {
 	}
 	public void setUpdater(int updater) {
 		this.updater = updater;
+	}
+	public int getDiscount_sale() {
+		return discount_sale;
+	}
+	public void setDiscount_sale(int discount_sale) {
+		this.discount_sale = discount_sale;
+	}
+	public String getFlg_best() {
+		return flg_best;
+	}
+	public void setFlg_best(String flg_best) {
+		this.flg_best = flg_best;
+	}
+	public String getFlg_like() {
+		return flg_like;
+	}
+	public void setFlg_like(String flg_like) {
+		this.flg_like = flg_like;
 	}
 	public String getSearchKey() {
 		return searchKey;

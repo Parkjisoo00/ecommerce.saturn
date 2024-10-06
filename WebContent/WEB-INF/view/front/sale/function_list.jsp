@@ -9,167 +9,79 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
-		function goTypeTs(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.filter.setAttribute("value", value);
-			frmMain.action = "/front/sale/total_list.web";
-			frmMain.submit();
-		}
+	function goTypeT(value, value2, value3, value4, value5) {
 		
-		function goTypeTn(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.corp_nm.setAttribute("value", value);
-			frmMain.action = "/front/sale/total_list.web";
-			frmMain.submit();
-		}
+		var frmMain = document.getElementById("frmMain");
 		
-		function goTypeTt(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.prd_type.setAttribute("value", value);
-			frmMain.action = "/front/sale/total_list.web";
-			frmMain.submit();
-		}
-		
-		function goTypeF(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.type.setAttribute("value", value);
-			frmMain.action = "/front/sale/function_list.web";
-			frmMain.submit();
-		}
-		
-		function goTypeFs(value, ctgm) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.filter.setAttribute("value", value);
-			frmMain.cd_ctg_m.setAttribute("value", ctgm);
-			frmMain.action = "/front/sale/function_list.web";
-			frmMain.submit();
-		}
-		
-		function goTypeFn(value, ctgm) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.corp_nm.setAttribute("value", value);
-			frmMain.cd_ctg_m.setAttribute("value", ctgm);
-			frmMain.action = "/front/sale/function_list.web";
-			frmMain.submit();
-		}
-		
-		function goTypeFt(value, ctgm) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.prd_type.setAttribute("value", value);
-			frmMain.cd_ctg_m.setAttribute("value", ctgm);
-			frmMain.action = "/front/sale/function_list.web";
-			frmMain.submit();
-		}
-		
-		function goTypeI(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.type.setAttribute("value", value);
-			frmMain.action = "/front/sale/ingredient_list.web";
-			frmMain.submit();
-		}
-		
-		function goTypeIs(value, ctgm) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.filter.setAttribute("value", value);
-			frmMain.cd_ctg_m.setAttribute("value", ctgm);
-			frmMain.action = "/front/sale/ingredient_list.web";
-			frmMain.submit();
-		}
-		
-		function goTypeIn(value, ctgm) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.corp_nm.setAttribute("value", value);
-			frmMain.cd_ctg_m.setAttribute("value", ctgm);
-			frmMain.action = "/front/sale/ingredient_list.web";
-			frmMain.submit();
-		}
-		
-		function goTypeIt(value, ctgm) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.prd_type.setAttribute("value", value);
-			frmMain.cd_ctg_m.setAttribute("value", ctgm);
-			frmMain.action = "/front/sale/ingredient_list.web";
-			frmMain.submit();
-		}
-		
-		function goTypeG(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.type.setAttribute("value", value);
-			frmMain.action = "/front/sale/gender_list.web";
-			frmMain.submit();
-		}
-		
-		function goTypeGs(value, ctgm) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.filter.setAttribute("value", value);
-			frmMain.cd_ctg_m.setAttribute("value", ctgm);
-			frmMain.action = "/front/sale/gender_list.web";
-			frmMain.submit();
-		}
-		
-		function goTypeGn(value, ctgm) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.corp_nm.setAttribute("value", value);
-			frmMain.cd_ctg_m.setAttribute("value", ctgm);
-			frmMain.action = "/front/sale/gender_list.web";
-			frmMain.submit();
-		}
-		
-		function goTypeGt(value, ctgm) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.prd_type.setAttribute("value", value);
-			frmMain.cd_ctg_m.setAttribute("value", ctgm);
-			frmMain.action = "/front/sale/gender_list.web";
-			frmMain.submit();
-		}
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
 	
-		function goPages(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.currentPage.setAttribute("value", value);
-			frmMain.action="/front/sale/ingredient_list.web";
-			frmMain.submit();
-		}
+	function goTypeF(value, value2, value3, value4, value5) {
 		
-		function goWriteForm(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.seq_sle.setAttribute("value", value);
-			frmMain.action="/front/buy/writeForm.web";
-			frmMain.submit();
-		}
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		frmMain.action = "/front/sale/function_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeI(value, value2, value3, value4, value5) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		frmMain.action = "/front/sale/ingredient_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeG(value, value2, value3, value4, value5) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		frmMain.action = "/front/sale/gender_list.web";
+		frmMain.submit();
+	}
+
+	function goPages(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.currentPage.setAttribute("value", value);
+		frmMain.action="/front/sale/function_list.web";
+		frmMain.submit();
+	}
+	
+	function goWriteForm(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.seq_sle.setAttribute("value", value);
+		frmMain.action="/front/buy/writeForm.web";
+		frmMain.submit();
+	}
 	</script>
 
 	<!-- Google Font -->
@@ -182,9 +94,9 @@
 <body>
 <form id="frmMain" method="POST">
 <input type="hidden" id="seq_sle"		name="seq_sle" />
-<input type="hidden" id="corp_nm"		name="corp_nm" />
-<input type="hidden" id="prd_type"		name="prd_type" />
-<input type="hidden" id="filter"		name="filter" />
+<input type="hidden" id="corp_nm"		name="corp_nm" value="${paging.corp_nm}"/>
+<input type="hidden" id="prd_type"		name="prd_type" value="${paging.prd_type}"/>
+<input type="hidden" id="filter"		name="filter" value="${paging.filter}"/>
 <input type="hidden" id="cd_ctg_m"		name="cd_ctg_m" />
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
@@ -204,10 +116,9 @@
 	<!-- Shop Section Begin -->
 	<section class="shop spad">
 		<div class="container">
+			<%@ include file="/include/front/lowgnbF.jsp" %>
 			<div class="row">
-				<%@ include file="/include/front/subgnb.jsp" %>
 				<div class="col-lg-9 col-md-9">
-				<%@ include file="/include/front/lowgnbF.jsp" %>
 					<div class="row">
 						<c:choose>
 							<c:when test="${empty list}">
@@ -231,29 +142,29 @@
 												<h6 style="line-height: 1.5em; min-height: 3em;"><a href="#" style="font-size: 15px;">${list.sle_nm}</a></h6>
 													<div class="rating">
 														<c:if test="${list.average_rate == 1}">
-															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${saleDto.count}개 상품평</span>
+															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${list.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 2}">
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${saleDto.count}개 상품평</span>
+															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${list.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 3}">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${saleDto.count}개 상품평</span>
+															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${list.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 4}">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${saleDto.count}개 상품평</span>
+															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${list.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 5}">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${saleDto.count}개 상품평</span>
+															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${list.count}개 상품평</span>
 														</c:if>
 													</div>
 												<c:choose>

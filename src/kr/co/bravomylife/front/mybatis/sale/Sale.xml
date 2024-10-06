@@ -47,6 +47,12 @@
 			COUNT(ROWNUM)
 		FROM
 			TB_SLE sle
+		<if test="filter == 'BestP'">
+			LEFT JOIN
+				TB_BEST best
+			ON
+				sle.SEQ_SLE = best.SEQ_SLE
+		</if>
 		WHERE
 			<include refid="totalwhere" />
 	</select>
@@ -62,7 +68,6 @@
 				, sle.SLE_NM
 				, sle.IMG
 				, sle.PRICE_SALE
-				, sle.CD_CTG_B
 				, sle.CD_CTG_M
 				, rate.RATE_STAR
 				, rate.COUNT
@@ -92,10 +97,10 @@
 		]]> 
 		ORDER BY FLG_BEST
 		<if test="filter == 'LowP'">
-			, PRICE_SALE ASC
+			, DISCOUNT_SALE ASC
 		</if>
 		<if test="filter == 'HighP'">
-			, PRICE_SALE DESC
+			, DISCOUNT_SALE DESC
 		</if>
 		<if test="filter == 'DtReg'">
 			, DT_REG DESC
@@ -118,6 +123,9 @@
 		<if test="prd_type != null and prd_type != ''">
 			AND sle.PRD_TYPE = #{prd_type}
 		</if>
+		<if test="filter == 'BestP'">
+			AND best.FLG_BEST IS NOT NULL AND best.FLG_BEST = 'Y'
+		</if>
 	</sql>
 	
 	<select id="ingredientCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -125,6 +133,12 @@
 			COUNT(ROWNUM)
 		FROM
 			TB_SLE sle
+		<if test="filter == 'BestP'">
+			LEFT JOIN
+				TB_BEST best
+			ON
+				sle.SEQ_SLE = best.SEQ_SLE
+		</if>
 		WHERE
 			<include refid="ingredientwhere" />
 	</select>
@@ -140,7 +154,6 @@
 				, sle.SLE_NM
 				, sle.IMG
 				, sle.PRICE_SALE
-				, sle.CD_CTG_B
 				, sle.CD_CTG_M
 				, rate.RATE_STAR
 				, rate.COUNT
@@ -170,10 +183,10 @@
 		]]> 
 		ORDER BY FLG_BEST
 		<if test="filter == 'LowP'">
-			, PRICE_SALE ASC
+			, DISCOUNT_SALE ASC
 		</if>
 		<if test="filter == 'HighP'">
-			, PRICE_SALE DESC
+			, DISCOUNT_SALE DESC
 		</if>
 		<if test="filter == 'DtReg'">
 			, DT_REG DESC
@@ -205,6 +218,9 @@
 		<if test="prd_type != null and prd_type != ''">
 			AND sle.PRD_TYPE = #{prd_type}
 		</if>
+		<if test="filter == 'BestP'">
+			AND best.FLG_BEST IS NOT NULL AND best.FLG_BEST = 'Y'
+		</if>
 	</sql>
 	
 	<select id="functionCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -212,6 +228,12 @@
 			COUNT(ROWNUM)
 		FROM
 			TB_SLE sle
+		<if test="filter == 'BestP'">
+			LEFT JOIN
+				TB_BEST best
+			ON
+				sle.SEQ_SLE = best.SEQ_SLE
+		</if>
 		WHERE
 			<include refid="functionwhere" />
 	</select>
@@ -227,7 +249,6 @@
 				, sle.SLE_NM
 				, sle.IMG
 				, sle.PRICE_SALE
-				, sle.CD_CTG_B
 				, sle.CD_CTG_M
 				, rate.RATE_STAR
 				, rate.COUNT
@@ -257,10 +278,10 @@
 		]]> 
 		ORDER BY FLG_BEST
 		<if test="filter == 'LowP'">
-			, PRICE_SALE ASC
+			, DISCOUNT_SALE ASC
 		</if>
 		<if test="filter == 'HighP'">
-			, PRICE_SALE DESC
+			, DISCOUNT_SALE DESC
 		</if>
 		<if test="filter == 'DtReg'">
 			, DT_REG DESC
@@ -292,6 +313,9 @@
 		<if test="prd_type != null and prd_type != ''">
 			AND sle.PRD_TYPE = #{prd_type}
 		</if>
+		<if test="filter == 'BestP'">
+			AND best.FLG_BEST IS NOT NULL AND best.FLG_BEST = 'Y'
+		</if>
 	</sql>
 	
 	<select id="genderCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -299,6 +323,12 @@
 			COUNT(ROWNUM)
 		FROM
 			TB_SLE sle
+		<if test="filter == 'BestP'">
+			LEFT JOIN
+				TB_BEST best
+			ON
+				sle.SEQ_SLE = best.SEQ_SLE
+		</if>
 		WHERE
 			<include refid="genderwhere" />
 	</select>
@@ -314,7 +344,6 @@
 				, sle.SLE_NM
 				, sle.IMG
 				, sle.PRICE_SALE
-				, sle.CD_CTG_B
 				, sle.CD_CTG_M
 				, rate.RATE_STAR
 				, rate.COUNT
@@ -344,16 +373,15 @@
 		]]> 
 		ORDER BY FLG_BEST
 		<if test="filter == 'LowP'">
-			, PRICE_SALE ASC
+			, DISCOUNT_SALE ASC
 		</if>
 		<if test="filter == 'HighP'">
-			, PRICE_SALE DESC
+			, DISCOUNT_SALE DESC
 		</if>
 		<if test="filter == 'DtReg'">
 			, DT_REG DESC
 		</if>
 		, rnum
-		
 	</select>
 	
 	<sql id="genderwhere">
@@ -379,6 +407,9 @@
 		</if>
 		<if test="prd_type != null and prd_type != ''">
 			AND sle.PRD_TYPE = #{prd_type}
+		</if>
+		<if test="filter == 'BestP'">
+			AND best.FLG_BEST IS NOT NULL AND best.FLG_BEST = 'Y'
 		</if>
 	</sql>
 		
