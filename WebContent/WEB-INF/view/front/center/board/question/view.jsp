@@ -19,7 +19,7 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.cd_bbs_type.setAttribute("value", value);
-		frmMain.action = "/front/center/list.web";
+		frmMain.action = "/front/center/board/list.web";
 		frmMain.submit();
 	}
 	
