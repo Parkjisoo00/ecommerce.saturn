@@ -158,6 +158,7 @@
 								<c:forEach var="list" items="${list}">
 									<div class="col-lg-4 col-md-6">
 										<input type="hidden" name="cd_ctg_b" id="cd_ctg_b" value="${list.cd_ctg_b}" />
+										<input type="hidden" name="cd_ctg_b" id="cd_ctg_b" value="${list.cd_ctg_m}" />
 										<div class="product__item">
 											<a href="javascript:goWriteForm(${list.seq_sle});">
 												<div class="product__item__pic set-bg" data-setbg="${list.img}">

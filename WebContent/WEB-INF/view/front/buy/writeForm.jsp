@@ -59,6 +59,7 @@
 				<div class="col-lg-6">
 					<div class="product__details__text">
 						<h6 style="line-height: 1.5em; min-height: 3em; font-size: 20px; font-weight: bold;">${saleDto.sle_nm}</h6>
+						</br>
 						<div class="rating">
 							<c:if test="${salDto.average_rate == 1}">
 								<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 14px; font-weight: bold;">${saleDto.count}개 상품평</span>
@@ -102,9 +103,16 @@
 									<input type="text" value="1">
 								</div>
 							</div>
-							<a href="#" class="cart-btn"><span class="icon_bag_alt"></span> 장바구니에 담기</a>
+							<a href="#" class="cart-btn"><span class="icon_bag_alt"></span> 장바구니에 담기${saleDto.flg_like}</a>
 							<ul>
-								<li><a href="#"><span class="icon_heart_alt"></span></a></li>
+								<c:choose>
+									<c:when test="${saleDto.flg_like == 'Y'}">
+										<li><a href="#" style="background-color: #ca1515;"><span class="icon_heart_alt" style="color: white;"></span></a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="#"><span class="icon_heart_alt"></span></a></li>
+									</c:otherwise>
+								</c:choose>
 							</ul>
 						</div>
 						<div class="product__details__widget">
@@ -163,7 +171,37 @@
 								</div>
 							</div>
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
-								<p>리뷰 작성</p>
+								<div class="row">
+									<div class="col-lg-12 col-md-12">
+									<table class="headTop_01" style=" margin-left: auto; margin-right: auto; width: 100%">
+									<c:choose>
+										<c:when test="${empty list}">
+											<tr>
+												<td colspan="4">등록된 리뷰가 없습니다.</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<c:forEach items="${list}" var="list">
+												<tr>
+													<td>
+														평점
+													</td>
+													<td style="text-align: left">
+														내용
+													</td>
+													<td>
+														등록자
+													</td>
+													<td>
+														등록일
+													</td>
+												</tr>
+											</c:forEach>
+										</c:otherwise>
+										</c:choose>
+									</table>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -181,7 +219,7 @@
 						<div class="product__item__pic set-bg" data-setbg="img/product/related/rp-1.jpg">
 						</div>
 						<div class="product__item__text">
-							<h6><a href="#">상품명r</a></h6>
+							<h6><a href="#">상품명</a></h6>
 							<div class="rating">
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>

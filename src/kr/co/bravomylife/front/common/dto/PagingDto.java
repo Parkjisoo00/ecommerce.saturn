@@ -23,12 +23,26 @@ public class PagingDto {
 	private int register		= 0;
 	
 	private Integer seq_sle			= 0;
+	private Integer	seq_mbr			= 0;
 	private String cd_ctg_m		= "";
+	private String cd_ctg_b		= "";
 	private String filter		= "";
 	private String corp_nm		= "";
 	private String prd_type		= "";
 	
 	
+	public Integer getSeq_mbr() {
+		return seq_mbr;
+	}
+	public void setSeq_mbr(Integer seq_mbr) {
+		this.seq_mbr = seq_mbr;
+	}
+	public String getCd_ctg_b() {
+		return cd_ctg_b;
+	}
+	public void setCd_ctg_b(String cd_ctg_b) {
+		this.cd_ctg_b = cd_ctg_b;
+	}
 	public int getTotalLine() {
 		return totalLine;
 	}

@@ -102,11 +102,13 @@
 		frmMain.submit();
 	}
 	
-	function goWriteForm(value) {
+	function goWriteForm(value, value2, value3) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.seq_sle.setAttribute("value", value);
+		frmMain.cd_ctg_m.setAttribute("value", value2);
+		frmMain.cd_ctg_b.setAttribute("value", value3);
 		frmMain.action="/front/buy/writeForm.web";
 		frmMain.submit();
 	}
@@ -126,6 +128,7 @@
 <input type="hidden" id="prd_type"		name="prd_type" value="${paging.prd_type}"/>
 <input type="hidden" id="filter"		name="filter" value="${paging.filter}"/>
 <input type="hidden" id="cd_ctg_m"		name="cd_ctg_m" />
+<input type="hidden" id="cd_ctg_b"		name="cd_ctg_b" />
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
 	<!-- Page Preloder -->
@@ -157,9 +160,8 @@
 							<c:otherwise>
 								<c:forEach var="list" items="${list}">
 									<div class="col-lg-4 col-md-6">
-										<input type="hidden" name="cd_ctg_b" id="cd_ctg_b" value="${list.cd_ctg_b}" />
 										<div class="product__item">
-											<a href="javascript:goWriteForm(${list.seq_sle});">
+											<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_b}', '${list.cd_ctg_m}');">
 												<div class="product__item__pic set-bg" data-setbg="${list.img}">
 												<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
 													<div class="label new">베스트</div>
