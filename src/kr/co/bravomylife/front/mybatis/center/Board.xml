@@ -23,6 +23,7 @@
 				, (SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = TB_BBS.SEQ_BBS) seq_reply
 				, DECODE(CD_CTG, 1, '가입탈퇴', 2, '상품', 3, '구매', 4, '결제', 5, '배송', 6, '환불', 9, '기타', '미정') CTG_NM
 				, TITLE
+				, CD_BBS_TYPE
 				, FILE_ORIG
 				, DECODE(LOWER(SUBSTR(FILE_ORIG, INSTR(FILE_ORIG, '.', -1, 1) + 1))
 					, 'xlsx', 'xls'
