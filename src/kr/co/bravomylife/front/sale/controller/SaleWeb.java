@@ -189,6 +189,8 @@ public class SaleWeb extends Common {
 		
 		try {
 			
+			logger.debug("페이지당 게시글 수" + " = " + pagingDto.getLinePerPage());
+			
 			pagingDto.setFilter(filter);
 			
 			/* [TODO] front/sale/~.list.Jsp의 자바 스크립트 함수들을 대체하는 코드 추후 작업

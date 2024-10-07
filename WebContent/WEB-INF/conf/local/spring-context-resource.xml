@@ -122,8 +122,13 @@
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.naver.com" />
 		<property name="port" value="465" />
+<<<<<<< HEAD
 		<property name="username" value="" />
 		<property name="password" value="" />
+=======
+		<property name="username" value="@" />
+		<property name="password" value="@" />
+>>>>>>> branch 'main' of https://github.com/JYH93/ecommerce7th.git
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.auth">true</prop>
