@@ -152,6 +152,7 @@
 								<%@ include file="/include/common/css.jsp" %>
 
 									<style>
+									/*
 										.categories__text.special-background {
 										background-color: rgba(255, 255, 255, 0.5);
 										padding: 10px;
@@ -162,7 +163,7 @@
 									.categories__text.special-background p {
 										color: black;
 									}
-
+*/
 									</style>
 					</head>
 
@@ -227,11 +228,11 @@
 										<div class="row">
 											<div class="col-lg-6 p-0">
 												<div class="categories__item categories__large__item set-bg"
-													data-setbg="img/categories/home1.jpg">
+													data-setbg="img/categories/home8.jpg">
 													<div class="categories__text" style="text-align: left;">
 													<div class="categories__text special-background">
-														<h1 style="font-weight: bold;">나만의 맞춤 <br> 건강 추천</h1>
-														<p style="font-weight: bold; font-size: 20px;">건강 설문을 진행하고 나에게 맞는 영양제를 추천받아 보세요!</p>
+														<h1 style="font-weight: bold; color: #341d08;">나만의 맞춤 <br> 건강 추천</h1>
+														<p style="font-weight: bold; font-size: 20px; ">건강 설문을 진행하고 나에게 맞는 영양제를 추천받아 보세요!</p>
 														<a href="#" style="font-size: 20px;">바로가기</a>
 													</div>
 												</div>
