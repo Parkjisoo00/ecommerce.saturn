@@ -164,13 +164,17 @@ public class MemberWeb extends Common {
 			
 				// 아이디 찾기에 성공했을 때
 				mav.addObject("findId", memberDto);
-				mav.setViewName("front/member/findIdResult"); // 또는 "findIdResult"와 같은 적절한 뷰 이름
+				mav.setViewName("front/member/findIdResult");
+				//request.setAttribute("front/member/findIdResult");
 			}
 			else {
 				request.setAttribute("script"	, "alert('일치하는 이메일이 없습니다!');");
-				mav.setViewName("front/member/findIdResult"); // 또는 "findIdResult"와 같은 적절한 뷰 이름
+				request.setAttribute("redirect"	, "/front/member/findIdForm.web");
+				//mav.setViewName("front/member/findIdForm");
+				//mav.setViewName("forward:/front/member/findIdForm.web");
+				
+				mav.setViewName("forward:/servlet/result.web");
 			}
-			mav.setViewName("forward:/servlet/result.web");
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".findIdForm()] " + e.getMessage(), e);
