@@ -395,6 +395,7 @@ ol {
 .header__menu {
 	padding: 15px 0 15px;
 	position: relative;
+	text-align: center;
 }
 
 .header__menu::after {
@@ -463,6 +464,7 @@ ol {
 	font-weight: 400;
 	padding: 8px 20px;
 	text-transform: capitalize;
+	position: relative;
 }
 
 .header__menu ul li .dropdown li a:after {
@@ -3619,6 +3621,7 @@ ol {
 	}
 	.header__menu {
 		display: none;
+		
 	}
 	.header__right {
 		display: none;
@@ -3787,6 +3790,7 @@ ol {
 	}
 	.header__menu {
 		display: none;
+		text-align: left;
 	}
 	.header__right {
 		display: none;
