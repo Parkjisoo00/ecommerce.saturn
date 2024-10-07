@@ -7,9 +7,9 @@
 <html lang="kor">
 <head>
 	<%@ include file="/include/common/header.jsp" %>
-	<script type="text/javascript" src="/js/front.js"></script>
-	<%@ include file="/include/common/webfont.jsp" %>
 	<%@ include file="/include/common/css.jsp" %>
+	<%@ include file="/include/common/webfont.jsp" %>
+	<script type="text/javascript" src="/js/front.js"></script>
 </head>
 <body>
 	<!-- Page Preloder -->
@@ -29,20 +29,19 @@
 
 	<section class="checkout spad">
 		<div class="container">
-			<form action="/front/member/findPasswdForm.web" id="frmMain" method="POST" class="checkout__form">
+			<form action="/front/member/findPasswdResult.web" id="frmMain" method="POST" class="checkout__form">
 				<div class="row3">
 					<div class="col-lg-12">
 						<h5 >회원 비밀번호 찾기</h5>
 						<div class="row3">
 							<div class="col-lg-12 col-md-12 col-sm-12">
 								<div class="checkout__form__input">
-									<input type="text" id="mbr_email" name="mbr_email" placeholder="이메일" required autocomplete="off"/>
-									<span>${find.passwd}</span>
+									<input type="text" id="email" name="email" placeholder="이메일" required autocomplete="off"/>
 								</div>
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12">
 								<div class="checkout__form__input">
-									<input type="submit" value="비밀번호 찾기"/>
+									<input type="submit" value="비밀번호 찾기"id = "findPasswd"/>
 								</div>
 								<hr style="border: 1px solid #ccc; margin: 0;">
 								<br>

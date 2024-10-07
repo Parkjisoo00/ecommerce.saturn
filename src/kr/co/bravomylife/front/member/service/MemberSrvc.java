@@ -64,6 +64,10 @@ public class MemberSrvc {
 			return false;
 	}
 	
+	public MemberDto findPasswd(MemberDto memberDto) {
+		return memberDao.findPasswd(memberDto);
+	}
+			
 	public MemberDto findId(MemberDto memberDto) {
 		return memberDao.findId(memberDto);
 	}
@@ -106,10 +110,6 @@ public class MemberSrvc {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return false;
 		}
-	}
-	
-	public MemberDto selectPasswd(MemberDto memberDto) {
-		return memberDao.selectPasswd(memberDto);
 	}
 	
 	@Transactional("txFront")

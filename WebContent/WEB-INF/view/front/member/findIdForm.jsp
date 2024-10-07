@@ -42,7 +42,7 @@
 							<div class="col-lg-12 col-md-12 col-sm-12">
 								<div class="checkout__form__input">
 									<input type="submit" value="아이디 찾기" id = "findId"/>
-									<span>${find.email}</span>
+									<span>${findId.email}</span>
 								</div>
 								<hr style="border: 1px solid #ccc; margin: 0;">
 								<br>

@@ -30,22 +30,25 @@
 
 	<section class="checkout spad">
 		<div class="container">
-			<form id="frmMain" method="POST" class="checkout__form">
+			<form action="/front/member/resetPassword.web" method="POST" id="frmMain" class="checkout__form">
 				<div class="row3">
 					<div class="col-lg-12">
-						<h5 >회원 아이디 찾기</h5>
+						<h5 >회원 비밀번호 재설정</h5>
 						<div class="row3">
 							<div class="col-lg-12 col-md-12 col-sm-12">
-								<p style="font-size: 20px;">회원님의 이메일은: ${findId.email} 입니다</p>
-							</div>
-							<div class="col-lg-6 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
 								<div class="checkout__form__input">
-									<input type="button" value="비밀번호 찾기" id="findPasswd" onClick="moveToFindPasswd();"/>
+									<p><span>*</span>(영문 대/소문자 구분, 숫자, 특수문자 포함 8~16자 필수 입력) </p>
+									<input type="password" id="newPasswd" name="newPasswd" placeholder="새비밀번호 입력" required autocomplete="off" />
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
+							<div class="col-lg-12 col-md-12 col-sm-12">
 								<div class="checkout__form__input">
-									<input type="button" value="회원가입" id="registerId" onClick="goToRegister();"/>
+									<input type="password" id="newPasswd_" name="newPasswd_" placeholder="새비밀번호 확인" required autocomplete="off" />
+								</div>
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
+								<div class="checkout__form__input">
+									<input type="submit" value="확인" id="updatePasswd"/>
 								</div>
 							</div>
 						</div>
