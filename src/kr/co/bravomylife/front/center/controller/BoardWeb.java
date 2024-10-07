@@ -20,6 +20,7 @@
  */
 package kr.co.bravomylife.front.center.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,6 +32,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.bravomylife.front.center.service.BoardSrvc;
 import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.common.component.SessionCmpn;
 import kr.co.bravomylife.front.common.dto.PagingDto;
@@ -55,6 +57,8 @@ public class BoardWeb extends Common {
 	@Autowired
 	SessionCmpn sessionCmpn;
 	
+	@Inject
+	BoardSrvc boardSrvc;
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -73,6 +77,26 @@ public class BoardWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			
+			/*
+			if (pagingDto.getCd_bbs_type() == 3 && !SessionCmpn.isSession(request)) {
+				request.setAttribute("script"	, "alert('로그인이 필요합니다!');");
+				request.setAttribute("redirect"	, "/front/login/loginForm.web?url=/front/center/board/list.web");
+				mav.setViewName("forward:/servlet/result.web");
+			}
+			
+			
+			else {
+				
+				if (pagingDto.getCd_bbs_type() == 3)
+					pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+				
+				PagingListDto pagingListDto = boardSrvc.list(pagingDto);
+				
+				mav.addObject("paging"	, pagingListDto.getPaging());
+				mav.addObject("list"	, pagingListDto.getList());
+			
+			*/
 			
 				if ("1".equals(cd_bbs_type)) {
 					pagingDto.setCd_bbs_type(1);
@@ -103,5 +127,6 @@ public class BoardWeb extends Common {
 		finally {}
 		
 		return mav;
+
 	}
 }
