@@ -9,7 +9,7 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
-	function goTypeT(value, value2, value3, value4, value5) {
+	function goTypeT(value, value2, value3, value4, value5, selectOrValue) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
@@ -19,11 +19,18 @@
 		frmMain.corp_nm.setAttribute("value", value3);
 		frmMain.prd_type.setAttribute("value", value4);
 		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		if (selectOrValue instanceof HTMLElement && selectOrValue.tagName === 'SELECT') {
+			frmMain.elements["linePerPage"].value = selectOrValue.value;
+		} else {
+			frmMain.elements["linePerPage"].value = selectOrValue;
+		}
+		
 		frmMain.action = "/front/sale/total_list.web";
 		frmMain.submit();
 	}
 	
-	function goTypeF(value, value2, value3, value4, value5) {
+	function goTypeF(value, value2, value3, value4, value5, selectOrValue) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
@@ -33,11 +40,18 @@
 		frmMain.corp_nm.setAttribute("value", value3);
 		frmMain.prd_type.setAttribute("value", value4);
 		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		if (selectOrValue instanceof HTMLElement && selectOrValue.tagName === 'SELECT') {
+			frmMain.elements["linePerPage"].value = selectOrValue.value;
+		} else {
+			frmMain.elements["linePerPage"].value = selectOrValue;
+		}
+		
 		frmMain.action = "/front/sale/function_list.web";
 		frmMain.submit();
 	}
 	
-	function goTypeI(value, value2, value3, value4, value5) {
+	function goTypeI(value, value2, value3, value4, value5, selectOrValue) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
@@ -47,11 +61,18 @@
 		frmMain.corp_nm.setAttribute("value", value3);
 		frmMain.prd_type.setAttribute("value", value4);
 		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		if (selectOrValue instanceof HTMLElement && selectOrValue.tagName === 'SELECT') {
+			frmMain.elements["linePerPage"].value = selectOrValue.value;
+		} else {
+			frmMain.elements["linePerPage"].value = selectOrValue;
+		}
+		
 		frmMain.action = "/front/sale/ingredient_list.web";
 		frmMain.submit();
 	}
 	
-	function goTypeG(value, value2, value3, value4, value5) {
+	function goTypeG(value, value2, value3, value4, value5, selectOrValue) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
@@ -61,6 +82,13 @@
 		frmMain.corp_nm.setAttribute("value", value3);
 		frmMain.prd_type.setAttribute("value", value4);
 		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		if (selectOrValue instanceof HTMLElement && selectOrValue.tagName === 'SELECT') {
+			frmMain.elements["linePerPage"].value = selectOrValue.value;
+		} else {
+			frmMain.elements["linePerPage"].value = selectOrValue;
+		}
+		
 		frmMain.action = "/front/sale/gender_list.web";
 		frmMain.submit();
 	}
