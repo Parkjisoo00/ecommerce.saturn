@@ -79,6 +79,112 @@ public class MemberWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
+	 * @since 2024-10-06
+	 * <p>DESCRIPTION:비밀번호 찾기 페이지</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	@RequestMapping(value = "/front/member/findPasswdForm.web")
+	public ModelAndView findPasswdForm(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			mav.setViewName("front/member/findPasswdForm");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".registerForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-06
+	 * <p>DESCRIPTION:아이디 찾기</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	@RequestMapping(value = "/front/member/findIdForm.web")
+	public ModelAndView findIdForm(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			mav.setViewName("front/member/findIdForm");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".registerForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-06
+	 * <p>DESCRIPTION:아이디 찾기 페이지</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	@RequestMapping(value = "/front/member/findIdResult.web")
+	public ModelAndView findId(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			logger.debug("받아온 이름" + " = " + memberDto.getMbr_nm());
+			
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+			
+			memberDto.setMbr_nm(aes.encode(memberDto.getMbr_nm()));
+			
+			MemberDto memberDto_ = memberSrvc.findId(memberDto);
+			
+			//memberDto.setEmail(aes.decode(memberDto_.getEmail()));
+			//logger.debug("JSP에 보내는 이메일" + " = " + memberDto.getEmail());
+			
+			if (memberDto_ != null && memberDto_.getEmail() != null) {
+				// 이메일 복호화 후 DTO에 설정
+				memberDto.setEmail(aes.decode(memberDto_.getEmail()));
+				logger.debug("JSP에 보내는 이메일 = " + memberDto.getEmail());
+			
+				// 아이디 찾기에 성공했을 때
+				mav.addObject("findId", memberDto);
+				mav.setViewName("front/member/findIdResult"); // 또는 "findIdResult"와 같은 적절한 뷰 이름
+			}
+			else {
+				request.setAttribute("script"	, "alert('일치하는 이메일이 없습니다!');");
+				mav.setViewName("front/member/findIdResult"); // 또는 "findIdResult"와 같은 적절한 뷰 이름
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".findIdForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
 	 * @since 2024-09-19
 	 * <p>DESCRIPTION: 이메일 인증</p>
 	 * <p>IMPORTANT:</p>
@@ -93,6 +199,7 @@ public class MemberWeb extends Common {
 		
 		try {
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			@SuppressWarnings("unused")
 			SKwithAES aes		= new SKwithAES(staticKey);
 			
 			memberDto.setEmail(URLDecoder.decode(memberDto.getEmail()));
