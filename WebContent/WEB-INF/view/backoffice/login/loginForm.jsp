@@ -23,8 +23,7 @@
 		<%@ include file="/include/front/maingnb.jsp" %>
 	<!-- Header Section End -->
 
-	<!-- Breadcrumb Begin -->
-		<%@ include file="/include/front/middlegnb.jsp" %>
+	<!-- Breadcrumb Begin -->p" %>
 	<!-- Breadcrumb End -->
 
 	<!-- Checkout Section Begin -->

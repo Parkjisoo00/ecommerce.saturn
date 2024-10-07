@@ -24,8 +24,6 @@
 	<!-- Header Section End -->
 
 	<!-- Breadcrumb Begin -->
-	<!-- 페이지의 상단 로고 바로 밑에 출력되는 전체 상품 / 기능별 / 성분별 / 대상별 / 맞춤 건강 / 고객센터 / 소개 메뉴 -->
-		<%@ include file="/include/front/middlegnb.jsp" %>
 	<!-- Breadcrumb End -->
 
 	<section class="checkout spad">

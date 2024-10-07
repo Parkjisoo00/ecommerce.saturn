@@ -94,7 +94,6 @@
 	<!-- Header Section End -->
 
 	<!-- Breadcrumb Begin -->
-	<%@ include file="/include/front/middlegnb.jsp" %>
 	<!-- Breadcrumb End -->
 
 	<!-- Banner Section Begin -->

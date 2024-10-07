@@ -22,7 +22,6 @@ package kr.co.bravomylife.front.center.dao;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
@@ -42,8 +41,6 @@ import kr.co.bravomylife.front.common.dto.PagingDto;
 @Repository("kr.co.bravomylife.front.center.dao.BoardDao")
 public class BoardDao extends BaseDao{
 	
-
-
 	/*
 	public BoardDto selectReply(BoardDto boardDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.center.Board.selectReply", boardDto);
@@ -89,7 +86,4 @@ public class BoardDao extends BaseDao{
 	public int sequence() {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.center.Board.sequence");
 	}
-
 }
-
-

@@ -2,8 +2,7 @@
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
-
-	<div class="offcanvas-menu-overlay"></div>
+<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
 		<div class="offcanvas__close">+</div>
 		<ul class="offcanvas__widget">
@@ -24,7 +23,6 @@
 			<a href="#">Register</a>
 		</div>
 	</div>
-
 <header class="header" style="background-color: #341d08; height: 160px; position: relative;">
 <div class="container-fluid">
 	<div class="row">
@@ -132,7 +130,7 @@
 			</li>
 		</ul>
 	</nav>
-		<div class="canvas__open">
-				<i class="fa fa-bars"></i>
-		</div>
+	<div class="canvas__open">
+			<i class="fa fa-bars"></i>
+	</div>
 </div>
