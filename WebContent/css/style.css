@@ -2022,7 +2022,7 @@ ol {
 	display: inline-block;
 	font-size: 14px;
 	color: #ffffff;
-	background: #ca1515;
+	background: #346aff;
 	font-weight: 600;
 	text-transform: uppercase;
 	padding: 14px 30px 15px;
@@ -2066,7 +2066,7 @@ ol {
 
 .product__details__widget {
 	border-top: 1px solid #ebebeb;
-	padding-top: 35px;
+	padding-top: 16px;
 }
 
 .product__details__widget1 {
