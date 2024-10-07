@@ -50,6 +50,29 @@
 			FLG_TOP, rnum
 	</select>
 	
+	<sql id="where">
+			CD_BBS_TYPE = #{cd_bbs_type}
+			AND FLG_DELETE IS NULL
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchKey == 'title'">
+					AND TITLE LIKE '%' || #{searchWord} || '%'
+				</if>
+				<if test="searchKey == 'contents'">
+					AND CONTENT LIKE '%' || #{searchWord} || '%'
+				</if>
+				<if test="searchKey == 'title+contents'">
+					AND (TITLE LIKE '%' || #{searchWord} || '%' OR CONTENT LIKE '%' || #{searchWord} || '%')
+				</if>
+			</if>
+			<if test="cd_ctg != 0">
+				AND CD_CTG = #{cd_ctg}
+			</if>
+			<if test="cd_bbs_type == 3">
+				AND SEQ_BBS_PARENT IS NULL
+				AND REGISTER = #{register}
+			</if>
+	</sql>
+	
 	<select id="sequence" resultType="java.lang.Integer">
 		SELECT SQ_SEQ_BBS.NEXTVAL FROM DUAL
 	</select>
