@@ -10,6 +10,7 @@
 		<typeAlias type="kr.co.bravomylife.front.login.dto.LoginDto"					alias="loginDto" />
 		<typeAlias type="kr.co.bravomylife.front.sale.dto.SaleDto"						alias="saleDto" />
 		<typeAlias type="kr.co.bravomylife.front.buy.dto.BuyDto"						alias="buyDto" />
+		<typeAlias type="kr.co.bravomylife.front.center.dto.BoardDto"						alias="boardDto" />
 		<typeAlias type="kr.co.bravomylife.front.common.dto.PagingDto"					alias="pagingDto" />
 	</typeAliases>
 	<mappers>
@@ -20,5 +21,6 @@
 		<mapper resource="kr/co/bravomylife/front/mybatis/buy/Buy.xml" />
 		<mapper resource="kr/co/bravomylife/front/mybatis/buy/BuyDetail.xml" />
 		<mapper resource="kr/co/bravomylife/front/mybatis/buy/BuyMaster.xml" />
+		<mapper resource="kr/co/bravomylife/front/mybatis/center/Board.xml" />
 	</mappers>
 </configuration>
