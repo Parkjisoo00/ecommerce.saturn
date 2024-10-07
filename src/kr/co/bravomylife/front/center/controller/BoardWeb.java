@@ -20,16 +20,19 @@
  */
 package kr.co.bravomylife.front.center.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.bravomylife.front.center.service.BoardSrvc;
 import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.common.component.SessionCmpn;
 import kr.co.bravomylife.front.common.dto.PagingDto;
@@ -48,20 +51,41 @@ public class BoardWeb extends Common {
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(BoardWeb.class);
 	
-	@RequestMapping(value = "/front/center/list.web")
+	@Autowired
+	private MessageSourceAccessor dynamicProperties;
+	
+	@Autowired
+	SessionCmpn sessionCmpn;
+	
+	@Inject
+	BoardSrvc boardSrvc;
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-07
+	 * <p>DESCRIPTION: 고객센터 목록</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/center/board/list.web")
 	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto,String cd_bbs_type) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			
 			/*
 			if (pagingDto.getCd_bbs_type() == 3 && !SessionCmpn.isSession(request)) {
 				request.setAttribute("script"	, "alert('로그인이 필요합니다!');");
 				request.setAttribute("redirect"	, "/front/login/loginForm.web?url=/front/center/board/list.web");
 				mav.setViewName("forward:/servlet/result.web");
 			}
-			*/
-			/*
+			
+			
 			else {
 				
 				if (pagingDto.getCd_bbs_type() == 3)
@@ -71,6 +95,7 @@ public class BoardWeb extends Common {
 				
 				mav.addObject("paging"	, pagingListDto.getPaging());
 				mav.addObject("list"	, pagingListDto.getList());
+			
 			*/
 			
 				if ("1".equals(cd_bbs_type)) {
@@ -102,5 +127,6 @@ public class BoardWeb extends Common {
 		finally {}
 		
 		return mav;
+
 	}
 }
