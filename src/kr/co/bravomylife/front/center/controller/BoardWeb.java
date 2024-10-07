@@ -36,6 +36,7 @@ import kr.co.bravomylife.front.center.service.BoardSrvc;
 import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.common.component.SessionCmpn;
 import kr.co.bravomylife.front.common.dto.PagingDto;
+import kr.co.bravomylife.front.common.dto.PagingListDto;
 
 /**
  * @version 1.0.0
@@ -78,8 +79,18 @@ public class BoardWeb extends Common {
 		
 		try {
 			
-			/*
-			if (pagingDto.getCd_bbs_type() == 3 && !SessionCmpn.isSession(request)) {
+			//logger.debug("게시판 타입 확인" + " + " + cd_bbs_type);
+			//logger.debug("게시판 타입 확인" + " + " + pagingDto.getCd_bbs_type());
+			
+			if ("1".equals(cd_bbs_type)) {
+				pagingDto.setCd_bbs_type(1);
+			} else if ("2".equals(cd_bbs_type)) {
+				pagingDto.setCd_bbs_type(2);
+			} else if ("3".equals(cd_bbs_type)) {
+				pagingDto.setCd_bbs_type(3);
+			}
+			
+			if (pagingDto.getCd_bbs_type() == 3 && !sessionCmpn.isSession(request)) {
 				request.setAttribute("script"	, "alert('로그인이 필요합니다!');");
 				request.setAttribute("redirect"	, "/front/login/loginForm.web?url=/front/center/board/list.web");
 				mav.setViewName("forward:/servlet/result.web");
@@ -93,19 +104,11 @@ public class BoardWeb extends Common {
 				
 				PagingListDto pagingListDto = boardSrvc.list(pagingDto);
 				
+				//logger.debug("등록자 번호 확인" + " + " + pagingDto.getRegister());
+				
 				mav.addObject("paging"	, pagingListDto.getPaging());
 				mav.addObject("list"	, pagingListDto.getList());
-			
-			*/
-			
-				if ("1".equals(cd_bbs_type)) {
-					pagingDto.setCd_bbs_type(1);
-				} else if ("2".equals(cd_bbs_type)) {
-					pagingDto.setCd_bbs_type(2);
-				} else if ("3".equals(cd_bbs_type)) {
-					pagingDto.setCd_bbs_type(3);
-				}
-			
+			}
 				if (pagingDto.getCd_bbs_type() == 1) {
 					mav.setViewName("front/center/board/notice/list");
 				}

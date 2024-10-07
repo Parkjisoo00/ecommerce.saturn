@@ -196,7 +196,6 @@ you can use the generic selector below, but it's slower:
 }
 .icon_search:before {
 	content: "\55";
-	color: white;
 	top: 2px;
 	position: relative;
 }

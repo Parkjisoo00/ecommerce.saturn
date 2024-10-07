@@ -36,6 +36,14 @@ import kr.co.bravomylife.front.member.dto.MemberDto;
 @Repository("kr.co.bravomylife.front.member.dao.MemberDao")
 public class MemberDao extends BaseDao {
 	
+	public int updatePasswd(MemberDao memberDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.member.Member.updatePasswd", memberDto);
+	}
+	
+	public MemberDto findPasswd(MemberDto memberDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.findPasswd", memberDto);
+	}
+	
 	public MemberDto findId(MemberDto memberDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.findId", memberDto);
 	}
