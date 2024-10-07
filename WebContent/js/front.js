@@ -174,14 +174,22 @@ function checkRegister() {
 	}
 }
 
-// 페이지 로드 시 저장된 이메일 불러오기
-document.addEventListener("DOMContentLoaded", function() {
+function loadSavedEmail() {
 	var savedEmail = localStorage.getItem("savedEmail");
 	if (savedEmail) {
-		document.getElementById("email").value = savedEmail;
-		document.getElementById("rememberMe").checked = true; // 체크박스 체크
+		var emailInput = document.getElementById("email");
+		var rememberMeCheckbox = document.getElementById("rememberMe");
+
+		if (emailInput) {
+			emailInput.value = savedEmail;
+		}
+
+		if (rememberMeCheckbox) {
+			rememberMeCheckbox.checked = true;
+		}
 	}
-});
+}
+
 
 function checkLogin() {
 			
@@ -215,4 +223,19 @@ function checkLogin() {
 
 function goToRegister() {
 	window.location.href = "/front/member/registerForm.web"; // 회원가입 페이지 URL
+}
+
+function moveToFindId() {
+	window.location.href ="/front/member/findIdForm.web"; // findIdForm.jsp로 이동
+}
+function validateForm() {
+	var mbrNm = document.getElementById("mbr_nm").value;
+	if (!mbrNm) {
+		alert("성명을 입력하세요.");
+		return false; // 폼 제출 중지
+	}
+	return true; // 폼 제출 진행
+}
+function moveToFindPasswd() {
+	window.location.href ="/front/member/findPasswdForm.web"; // findPasswdForm.jsp로 이동
 }

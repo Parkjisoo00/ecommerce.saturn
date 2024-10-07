@@ -1,4 +1,4 @@
-<!-- html 설정 -->
+	<!-- html 설정 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <!-- JSP 파일이 위치한 경로 입력 -->
 <%@ page info="/WEB-INF/view/front/sale/function_list.jsp" %>

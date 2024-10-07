@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.member.Member">
 
+	<select id="findId" parameterType="memberDto" resultType="memberDto">
+	SELECT
+		email
+	FROM
+		TB_MBR_MST
+	WHERE
+		mbr_nm = #{mbr_nm}
+	</select>
+
 	<update id="updateStateM" parameterType="memberDto">
 		UPDATE
 			TB_MBR_MST

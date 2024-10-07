@@ -64,6 +64,10 @@ public class MemberSrvc {
 			return false;
 	}
 	
+	public MemberDto findId(MemberDto memberDto) {
+		return memberDao.findId(memberDto);
+	}
+	
 	public int selectDuplicate(MemberDto memberDto) {
 		return memberDao.selectDuplicate(memberDto);
 	}

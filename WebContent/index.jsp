@@ -50,7 +50,11 @@
 			var frmMain = document.getElementById("frmMain");
 			
 			frmMain.cd_bbs_type.setAttribute("value", value);
+<<<<<<< HEAD
+			frmMain.action = "/front/center/board/list.web";
+=======
 			frmMain.action = "/front/center/list.web";
+>>>>>>> branch 'main' of https://github.com/JYH93/ecommerce7th.git
 			frmMain.submit();
 		}
 	</script>
