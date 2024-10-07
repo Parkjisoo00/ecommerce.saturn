@@ -37,7 +37,6 @@
 	<!-- Breadcrumb End -->
 
 	<!-- Checkout Section Begin -->
-	<!-- Checkout Section Begin -->
 	<section class="checkout spad">
 		<div class="container">
 			<form id="frmMain" method="POST" class="checkout__form">
@@ -74,12 +73,12 @@
 							</div>
 							<div class="col-lg-4 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
 								<div class="checkout__form__input">
-									<input type="button" value="아이디 찾기" id="findId" onClick="checkId();"/>
+									<input type="button" value="아이디 찾기" id="findId" onClick="moveToFindId();"/>
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
 								<div class="checkout__form__input">
-									<input type="button" value="비밀번호 찾기" id="findPasswd" onClick="checkPasswd();"/>
+									<input type="button" value="비밀번호 찾기" id="findPasswd" onClick="moveToFindPasswd();"/>
 								</div>
 							</div>
 						</div>

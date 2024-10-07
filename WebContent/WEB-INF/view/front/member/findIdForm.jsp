@@ -1,37 +1,17 @@
-<!-- html 설정 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<!-- JSP 파일이 위치한 경로 입력 -->
-<%@ page info="/WEB-INF/view/front/sale/function_list.jsp" %>
-<!-- 이 부분은 필요에 따라 추가하는 것이 맞으므로 개별 판단에 따라 추가하거나 삭제해도 되고 사용하지 않더라도 그대로 넣어둬도 무방하다고 판단 -->
+<%@ page info="/WEB-INF/view/front/member/findIdForm.jsp" %>
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
 <!DOCTYPE html>
 <html lang="kor">
-
 <head>
 	<%@ include file="/include/common/header.jsp" %>
-	<script>
-	
-	function checkLogin() {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.action="/front/member/findForm.web";
-		frmMain.submit();
-	}
-	
-	</script>
-
-	<!-- Google Font -->
-	<%@ include file="/include/common/webfont.jsp" %>
-
-	<!-- Css Styles -->
 	<%@ include file="/include/common/css.jsp" %>
+	<%@ include file="/include/common/webfont.jsp" %>
+	<script type="text/javascript" src="/js/front.js"></script>
 </head>
-
 <body>
-<form id="frmMain" method="POST">
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -47,10 +27,42 @@
 		<%@ include file="/include/front/middlegnb.jsp" %>
 	<!-- Breadcrumb End -->
 
-	<div>
-	<input type="submit" value="진유혁" name="mbr_nm" onClick="checkLogin();"/>
-	<span>${find.email}</span>
-	</div>
+	<section class="checkout spad">
+		<div class="container">
+			<form action="/front/member/findIdResult.web" id="frmMain" method="POST" class="checkout__form">
+				<div class="row3">
+					<div class="col-lg-12">
+						<h5 >회원 아이디 찾기</h5>
+						<div class="row3">
+							<div class="col-lg-12 col-md-12 col-sm-12">
+								<div class="checkout__form__input">
+									<input type="text" id="mbr_nm" name="mbr_nm" placeholder="성명" required autocomplete="off"/>
+								</div>
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12">
+								<div class="checkout__form__input">
+									<input type="submit" value="아이디 찾기" id = "findId"/>
+									<span>${find.email}</span>
+								</div>
+								<hr style="border: 1px solid #ccc; margin: 0;">
+								<br>
+							</div>
+							<div class="col-lg-6 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
+								<div class="checkout__form__input">
+									<input type="button" value="비밀번호 찾기" id="findPasswd" onClick="moveToFindPasswd();"/>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
+								<div class="checkout__form__input">
+									<input type="button" value="회원가입" id="registerId" onClick="goToRegister();"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
 
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
@@ -63,6 +75,5 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
-</form>
 </body>
 </html>
