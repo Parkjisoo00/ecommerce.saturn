@@ -16,8 +16,11 @@
 			, rate.COUNT
 			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) AS average_rate
 			, sle.DISCOUNT
+			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
+			, sle.COUNT_STOCK
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) AS discount_sale
 			, best.FLG_BEST
+			, likeT.like_review
 		FROM
 			TB_SLE sle
 		LEFT OUTER JOIN

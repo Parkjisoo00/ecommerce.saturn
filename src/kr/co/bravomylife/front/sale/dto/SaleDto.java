@@ -33,9 +33,10 @@ public class SaleDto {
 	private int rnum				= 0;
 	private int seq_mbr				= 0;
 	private String sle_nm			= "";
-	private Integer seq_sle				= 0;
+	private Integer seq_sle			= 0;
 	private String img				= "";
 	private int price_sale			= 0;
+	private String desces			= "";
 	private String cd_ctg_b			= "";
 	private String cd_ctg_m			= "";
 	private String cd_state_sale	= "";
@@ -61,6 +62,12 @@ public class SaleDto {
 	private String searchWord		= "";
 	
 	
+	public String getDesces() {
+		return desces;
+	}
+	public void setDesces(String desces) {
+		this.desces = desces;
+	}
 	public int getRnum() {
 		return rnum;
 	}
