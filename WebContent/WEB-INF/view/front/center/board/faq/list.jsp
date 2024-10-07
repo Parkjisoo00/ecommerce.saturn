@@ -1,8 +1,5 @@
-<!-- html 설정 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<!-- JSP 파일이 위치한 경로 입력 -->
 <%@ page info="/WEB-INF/view/front/center/board/faq/list.jsp" %>
-<!-- 이 부분은 필요에 따라 추가하는 것이 맞으므로 개별 판단에 따라 추가하거나 삭제해도 되고 사용하지 않더라도 그대로 넣어둬도 무방하다고 판단 -->
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
@@ -62,7 +59,7 @@
 	<section class="shop spad">
 		<div class="container">
 			<div class="col-lg-12" style="padding: 0 !important;">
-		<div>
+			<div>
 			<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">자주 찾는 질문</h6>
 			<h6 class="coupon__link" style="text-align: center; letter-spacing: 1.5px; border: none">
 			<c:choose>
@@ -121,8 +118,9 @@
 					</c:otherwise>
 					</c:choose>
 				</table>
-					<div class="row">
-					</div>
+				<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
+					<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
+				</div>
 				</div>
 			</div>
 		</div>
