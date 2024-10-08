@@ -78,8 +78,7 @@
 		<property name="dataSource" ref="dsFront" />
 		<qualifier value="txFront" />
 	</bean>
-	
-	<!--
+
 	<bean name="dsBackoffice" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${backoffice.driver}" />
 		<property name="url" value="${backoffice.url}" />
@@ -97,7 +96,6 @@
 		<property name="dataSource" ref="dsBackoffice" />
 		<qualifier value="txBackoffice" />
 	</bean>
-	-->
 	
 	<!--
 	<bean name="dsCommon" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
@@ -123,7 +121,7 @@
 		<property name="host" value="smtp.naver.com" />
 		<property name="port" value="465" />
 		<property name="username" value="@naver.com" />
-		<property name="password" value="password" />
+		<property name="password" value="" />
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.auth">true</prop>
