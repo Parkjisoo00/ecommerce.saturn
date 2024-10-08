@@ -106,11 +106,13 @@
 					<a href="javascript:goList(2);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
 					<a href="javascript:goList(3);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">1:1 문의</a>
 					</c:if>
-
 		</h6>
 		</div>
 			</div>
 			
+			<!-- 세션에 로그인 정보가 있는지 확인 -->
+		<c:if test="${not empty sessionUser}">
+			<!-- 로그인 상태일 때만 보이는 영역 -->
 			<div class="brdSearchArea">
 			<div style="display: flex; justify-content: flex-end;margin-bottom: 10px;">
 				<select name="searchKey">
@@ -121,6 +123,7 @@
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> 
 				<input type="submit" value="검색"/>
 			</div>
+			<!-- 게시글 목록 -->
 			<div class="row">
 				<div class="col-lg-12 col-md-12">
 				<div class="brdInfo">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</div>
@@ -172,6 +175,7 @@
 						<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goList" />
 					</div>
 					<br/>
+					<!-- 문의 등록 버튼 -->
 					<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center; margin-top: 30px;">
 						<a href="/front/center/board/writeForm.web?cd_bbs_type=3" class="btnBasic" style="display: inline-block; padding: 10px 20px; background-color: #c7b199; color: black; border: 1px solid #cccccc; border-radius: 10px; text-decoration: none;">문의 등록</a>
 					</div>
@@ -179,8 +183,13 @@
 				</div>
 			</div>
 		</div>
-		</div>
-	</section>
+	</c:if>
+		<!-- 세션에 로그인 정보가 없을 때 -->
+	<c:if test="${empty sessionUser}">
+		<p style="text-align: center;">로그인이 필요합니다. 1:1 문의를 이용하시려면 로그인해주세요.</p>
+	</c:if>
+	</div>
+</section>
 
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
