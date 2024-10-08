@@ -41,11 +41,11 @@ import kr.co.bravomylife.front.common.dto.PagingDto;
 @Repository("kr.co.bravomylife.front.center.dao.BoardDao")
 public class BoardDao extends BaseDao{
 	
-	/*
+	
 	public BoardDto selectReply(BoardDto boardDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.center.Board.selectReply", boardDto);
 	}
-	*/
+	
 	public int count(PagingDto pagingDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.center.Board.count", pagingDto);
 	}
@@ -64,11 +64,12 @@ public class BoardDao extends BaseDao{
 	public int update(BoardDto boardDto) {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.center.Board.update", boardDto);
 	}
+	*/
 	public BoardDto select(BoardDto boardDto) {
 		
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.center.Board.select", boardDto);
 	}
-	*/
+	
 	public List<BoardDto> list(PagingDto pagingDto) {
 		
 		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.center.Board.list", pagingDto);

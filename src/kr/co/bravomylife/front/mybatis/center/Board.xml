@@ -2,6 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.center.Board">
 	
+	<select id="selectReply" parameterType="boardDto" resultType="boardDto">
+		SELECT
+			SEQ_BBS
+			, TITLE
+			, CONTENT
+			, FILE_SAVE
+			, FILE_ORIG
+			, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
+		FROM
+			TB_BBS
+		WHERE
+			CD_BBS_TYPE			= #{cd_bbs_type}
+			AND SEQ_BBS_PARENT	= #{seq_bbs}
+	</select>
+	
+	<select id="select" parameterType="boardDto" resultType="boardDto">
+		SELECT
+			SEQ_BBS
+			, TITLE
+			, (SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = TB_BBS.SEQ_BBS) seq_reply
+			, CD_CTG
+			, CONTENT
+			, FILE_SAVE
+			, FILE_ORIG
+			, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
+		FROM
+			TB_BBS
+		WHERE
+			CD_BBS_TYPE		= #{cd_bbs_type}
+			AND SEQ_BBS		= #{seq_bbs}
+			
+	</select>
+	
 	<insert id="insert" parameterType="boardDto">
 		INSERT INTO TB_BBS
 			(SEQ_BBS, CD_BBS_TYPE, TITLE, CD_CTG, CONTENT, FILE_SAVE, FILE_ORIG, READED, DT_REG, REGISTER)

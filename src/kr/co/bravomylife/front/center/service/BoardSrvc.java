@@ -45,6 +45,31 @@ public class BoardSrvc {
 	@Inject 
 	BoardDao boardDao;
 
+	/**
+	 * @param boardDto [게시판 빈]
+	 * @return BoardDto
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 보기(답변)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public BoardDto selectReply(BoardDto boardDto) {
+		return boardDao.selectReply(boardDto);
+	}
+	
+	/**
+	 * @param boardDto [게시판 빈]
+	 * @return BoardDto
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 보기</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public BoardDto select(BoardDto boardDto) {
+		return boardDao.select(boardDto);
+	}
 	
 	/**
 	 * @param boardDto [게시판 빈]

@@ -70,6 +70,55 @@ public class BoardWeb extends Common {
 	@Inject
 	BoardSrvc boardSrvc;
 	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 보기</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/center/board/view.web", method = RequestMethod.POST)
+	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			BoardDto _boardDto = boardSrvc.select(boardDto);
+			
+			mav.addObject("boardDto", _boardDto);
+			
+			if (boardDto.getCd_bbs_type() == 1) {
+				mav.setViewName("front/center/board/notice/view");
+			}
+			else if (boardDto.getCd_bbs_type() == 2) {
+				mav.setViewName("front/center/board/faq/view");
+			}
+			else if (boardDto.getCd_bbs_type() == 3) {
+				
+				// DB 부하 감소를 위해 답변이 있을 때만
+				if (_boardDto.getSeq_reply() > 0) {
+					BoardDto boardReplyDto = boardSrvc.selectReply(boardDto);
+					mav.addObject("boardReplyDto", boardReplyDto);
+				}
+				
+				mav.setViewName("front/center/board/question/view");
+			}
+			else {
+				request.setAttribute("redirect"	, "/");
+				mav.setViewName("forward:/servlet/result.web");
+			}
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".view()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]

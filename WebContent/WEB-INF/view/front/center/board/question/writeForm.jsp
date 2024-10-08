@@ -8,14 +8,12 @@
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
 <!DOCTYPE html>
 <html lang="kor">
-	<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
-	<script type="text/javascript" src="/js/package/tinymce.js"></script>
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<style></style>
+	<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
+	<script type="text/javascript" src="/js/package/tinymce.js"></script>
 	<script>
-	
-	
 	window.onload = function () {
 		// HTML Editor
 		tinymce.init({selector:'textarea'});
@@ -51,7 +49,7 @@
 </head>
 <body>
 
-<form id="frmMain" method="POST" enctype="multipart/form-data" >
+<form id="frmMain" method="POST" enctype="multipart/form-data" class="checkout__form">
 <input type="hidden" id="cd_bbs_type" name="cd_bbs_type" />
 
 	<!-- Page Preloder -->
@@ -64,19 +62,18 @@
 	<!-- Header Section End -->
 	<section class="shop spad">
 		<div class="container">
-			<section class="content">
 				<article class="txtCenter">
-			<table class="headLeft_01" style="width: 900px; margin-left: auto; margin-right: auto">
-				<tr>
-					<th style="width: 150px;">제목(*)</th>
-					<td>
-						<input type="text" id="title" name="title" style="width: 700px;" required />
-					</td>
-				</tr>
-				<tr>
-					<th>카테고리(*)</th>
-					<td>
-						<select id="cd_ctg" name="cd_ctg" required>
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="checkout__form__input">
+							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">제목 <span>*</span></p>
+							<input type="text" id="title" name="title" required style="width: 40%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;"/>
+						</div>
+					</div>
+					<br/>
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="checkout__form__input">
+							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">카테고리 <span>*</span></p>
+							<select id="cd_ctg" name="cd_ctg" required>
 							<option value="0">선택</option>
 							<option value="1">가입 및 탈퇴</option>
 							<option value="2">상품</option>
@@ -85,30 +82,34 @@
 							<option value="5">배송</option>
 							<option value="6">환불</option>
 							<option value="9">기타</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<th>내용(*)</th>
-					<td>
-						<textarea id="content" name="content" required></textarea>
-					</td>
-				</tr>
-				<tr>
-					<th>첨부 파일</th>
-					<td>
-						
-							<input type="file" id="files[0]" name="files[0]" />
-						
-					</td>
-				</tr>
-			</table>
-			<div style="width: 900px; margin-left: auto; margin-right: auto">
-				<input type="button" value="등록" style="width:100px" onclick="javascript:writeProc(3);" />
-				 <input type="button" value="목록" style="width:100px" onclick="javascript:goList(3);"/>
-			</div>
-		</article>
-			</section>
+							</select>
+						</div>
+					</div>
+					<br/>
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="checkout__form__input">
+							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">내용 <span>*</span></p>
+								<textarea id="content" name="content" required></textarea>
+						</div>
+					</div>
+					<br/>
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="checkout__form__input">
+							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">첨부 파일 <span>*</span></p>
+								<input type="file" id="files[0]" name="files[0]" />
+						</div>
+					</div>
+					<br/>
+					<br/>
+					<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="checkout__form__input">
+							<input type="button" value="등록" style="width:100px; font-weight: bold;" onclick="javascript:writeProc(3);" />
+					 		<input type="button" value="목록" style="width:100px; font-weight: bold;" onclick="javascript:goList(3);"/>
+						</div>
+					</div>
+				</div>
+			</article>
 		</div>
 	</section>	
 	
