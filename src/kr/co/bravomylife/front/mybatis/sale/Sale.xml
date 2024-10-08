@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.sale.Sale">
-<!-- 
+
 	<select id="detailCount" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
 			COUNT(ROWNUM)
 		FROM
 			TB_SLE sle
 		WHERE
-			<include refid="reviewwhere" />
+			<include refid="detailwhere" />
 	</select>
 
 	<select id="detailList" parameterType="pagingDto" resultType="saleDto">
@@ -23,6 +23,8 @@
 				, sle.IMG
 				, sle.PRICE_SALE
 				, rate.RATE_STAR
+				, sle.cd_ctg_b
+				, sle.cd_ctg_m
 				, rate.COUNT
 				, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
 				, sle.DISCOUNT
@@ -50,6 +52,8 @@
 	<sql id="detailwhere">
 		sle.CD_STATE_SALE = 2
 		AND sle.FLG_DELETE = 'N'
+		AND sle.CD_CTG_B = #{cd_ctg_b}
+		AND sle.CD_CTG_M = #{cd_ctg_m}
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
 		]]>
@@ -57,7 +61,7 @@
 		AND SYSDATE >= sle.DT_SALE_START AND SYSDATE <= sle.DT_SALE_END
 		]]>
 	</sql>
- -->
+	
 	<select id="select" parameterType="saleDto" resultType="saleDto">
 		SELECT
 			sle.SEQ_SLE
@@ -65,7 +69,8 @@
 			, sle.DESCES
 			, sle.IMG
 			, sle.PRICE_SALE
-			, sle.PRD_TYPE
+			, sle.PRICE_SALE, (sle.PRICE_SALE * 0.02) AS point_value
+			, DECODE(sle.PRD_TYPE, 1, '액상', 2, '정', 3, '캡슐', 4, '베지캡슐', 5, '젤리', 6, '분말', 7, '츄어블', '미정') PRD_TYPE
 			, sle.CORP_NM
 			, rate.RATE_STAR
 			, rate.COUNT

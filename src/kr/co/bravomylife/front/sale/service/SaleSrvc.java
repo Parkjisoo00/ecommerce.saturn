@@ -47,6 +47,9 @@ public class SaleSrvc {
 		
 		PagingListDto pagingListDto = new PagingListDto();
 		
+		pagingDto.setLinePerPage(5);
+		pagingDto.setTotalPage(1);
+		
 		int totalLine = saleDao.detailCount(pagingDto);
 		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
 		pagingDto.setTotalLine(totalLine);

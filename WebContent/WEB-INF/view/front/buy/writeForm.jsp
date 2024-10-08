@@ -23,13 +23,13 @@
 
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" id="item" name="item" />
-
-<input type="hidden" id="seq_sle"	value="${saleDto.seq_sle}" />
-<input type="hidden" id="sle_nm"	value="${saleDto.sle_nm}" />
-<input type="hidden" id="price"		value="${saleDto.price_sale}" />
-
-<input type="hidden" name="buyList[0].seq_sle" value="${saleDto.seq_sle}" />
+	<input type="hidden" id="item" name="item" />
+	
+	<input type="hidden" id="seq_sle"	value="${saleDto.seq_sle}" />
+	<input type="hidden" id="sle_nm"	value="${saleDto.sle_nm}" />
+	<input type="hidden" id="price"		value="${saleDto.price_sale}" />
+	
+	<input type="hidden" name="buyList[0].seq_sle" value="${saleDto.seq_sle}" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -85,68 +85,62 @@
 							</div>
 							<ul>
 								<li>
-									
 									<div>
 									<span class="pd-title">원가</span>
 										<label for="stockin">
-											<span class="pd-text">${saleDto.price_sale}원</span>
+											<span class="pd-text" style="width: 55px;">${saleDto.price_sale}</span>
+											<span class="pd-text">원</span>
 										</label>
 									</div>
 								</li>
 								<li>
-									
 									<div>
-									<span>판매가</span>
+									<span class="pd-title">판매가</span>
 										<label for="stockin">
-											<c:choose>
-												<c:when test="${saleDto.discount == null || saleDto.discount == 0}">
-													<span class="pd-text">${saleDto.price_sale}원</span>
-												</c:when>
-												<c:otherwise>
-													<span>${saleDto.price_sale}</span> <span style="text-decoration: none; color : red">-${saleDto.discount}%</span><span style="text-decoration: none; color: black; font-size: 1.3em">${saleDto.discount_sale}</span>
-												</c:otherwise>
-											</c:choose>
+											<span class="pd-text" style="color: #ff4c2e !important; width: 55px;">${saleDto.discount_sale}</span>
+											<span class="pd-text" style="width: 20px !important;">원</span>
+											<span class="pd-text" style="color: #ff4c2e !important; font-size: 14px !important; padding-top: 3px;">(${saleDto.discount}%)</span>
 										</label>
 									</div>
 								</li>
 								<li>
-									<span>적립 포인트</span>
 									<div>
+									<span class="pd-title">적립 포인트</span>
 										<label for="stockin">
-											100
+											<span class="pd-text" style="width: 65px;">${saleDto.point_value} 적립</span>
+											<span class="pd-text" style="color: #346aff !important; font-size: 14px !important; padding-top: 3px;">(2%)</span>
 										</label>
 									</div>
 								</li>
 								<li>
-									<span>브랜드</span>
 									<div>
+									<span class="pd-title">브랜드</span>
 										<label for="stockin">
-											100
+											${saleDto.corp_nm}
 										</label>
 									</div>
 								</li>
 								<li>
-									<span>제품타입</span>
 									<div>
+									<span class="pd-title">제품타입</span>
 										<label for="stockin">
-											100
-											
+											${saleDto.prd_type}
 										</label>
 									</div>
 								</li>
 								<li>
-									<span>재고</span>
 									<div>
+									<span class="pd-title">재고</span>
 										<label for="stockin">
-											100
+											${saleDto.count_stock}
 										</label>
 									</div>
 								</li>
 								<li>
-									<span>등록일</span>
 									<div>
+									<span class="pd-title">등록일</span>
 										<label for="stockin">
-											100
+											${saleDto.dt_reg}
 										</label>
 									</div>
 								</li>
@@ -234,80 +228,63 @@
 				</div>
 			</div>
 			<!-- 리스트 형태로 이 페이지의 상품과 같은 대분류의 중분류 상품들을 넣기 -->
+			<div class="col-lg-12 text-center">
+				<div class="related__title">
+					<h5>함께 보면 좋은 상품</h5>
+				</div>
+			</div>
 			<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="related__title">
-						<h5>함께 보면 좋은 상품</h5>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
+			<c:forEach var="list" items="${list}">
+				<div class="col-lg-3 col-md-6">
 					<div class="product__item">
-						<div class="product__item__pic set-bg" data-setbg="img/product/related/rp-1.jpg">
-						</div>
-						<div class="product__item__text">
-							<h6><a href="#">상품명</a></h6>
-							<div class="rating">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
+						<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_b}', '${list.cd_ctg_m}');">
+							<div class="product__item__pic set-bg" data-setbg="${list.img}">
+							<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
+								<div class="label new">베스트</div>
+							</c:if>
 							</div>
-							<div class="product__price">가격</div>
+						</a>
+						<div class="product__item__text">
+							<h6 style="line-height: 1.5em; min-height: 3em;"><a href="#" style="font-size: 15px;">${list.sle_nm}</a></h6>
+								<div class="rating">
+									<c:if test="${list.average_rate == 1}">
+										<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+									</c:if>
+									<c:if test="${list.average_rate == 2}">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+									</c:if>
+									<c:if test="${list.average_rate == 3}">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+									</c:if>
+									<c:if test="${list.average_rate == 4}">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+									</c:if>
+									<c:if test="${list.average_rate == 5}">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+									</c:if>
+								</div>
+							<c:choose>
+								<c:when test="${list.discount == null || list.discount == 0}">
+									<div class="product__price"><span style="text-decoration: none; font-size: 1.3em; color: black;">${list.price_sale}</span>원</div>
+								</c:when>
+								<c:otherwise>
+									<div class="product__price"><span>${list.price_sale}</span> <span style="text-decoration: none; color : #ff4c2e">-${list.discount}%</span><span style="text-decoration: none; color: black; font-size: 1.3em">${list.discount_sale}</span>원</div>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="product__item">
-						<div class="product__item__pic set-bg" data-setbg="img/product/related/rp-2.jpg">
-						</div>
-						<div class="product__item__text">
-							<h6><a href="#">상품명</a></h6>
-							<div class="rating">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-							</div>
-							<div class="product__price">가격</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="product__item">
-						<div class="product__item__pic set-bg" data-setbg="img/product/related/rp-3.jpg">
-						</div>
-						<div class="product__item__text">
-							<h6><a href="#">상품명</a></h6>
-							<div class="rating">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-							</div>
-							<div class="product__price">가격</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="product__item">
-						<div class="product__item__pic set-bg" data-setbg="img/product/related/rp-4.jpg">
-						</div>
-						<div class="product__item__text">
-							<h6><a href="#">상품명</a></h6>
-							<div class="rating">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-							</div>
-							<div class="product__price">가격</div>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</section>

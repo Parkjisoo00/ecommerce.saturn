@@ -63,17 +63,16 @@ public class BuyWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			/*
-			logger.debug("SEQ_MBR 번호 확인" + " = " + pagingDto.getSeq_mbr());
-			logger.debug("SEQ_SLE 번호 확인" + " = " + pagingDto.getSeq_sle());
-			logger.debug("CD_CTB_B 번호 확인" + " = " + pagingDto.getCd_ctg_b());
-			logger.debug("CD_CTB_M 번호 확인" + " = " + pagingDto.getCd_ctg_m());
-			*/
 			
-			logger.debug("SEQ_MBR 번호 확인" + " = " + saleDto.getSeq_mbr());
-			logger.debug("SEQ_SLE 번호 확인" + " = " + saleDto.getSeq_sle());
-			logger.debug("CD_CTB_B 번호 확인" + " = " + saleDto.getCd_ctg_b());
-			logger.debug("CD_CTB_M 번호 확인" + " = " + saleDto.getCd_ctg_m());
+			logger.debug("paging SEQ_MBR 번호 확인" + " = " + pagingDto.getSeq_mbr());
+			logger.debug("paging SEQ_SLE 번호 확인" + " = " + pagingDto.getSeq_sle());
+			logger.debug("paging CD_CTB_B 번호 확인" + " = " + pagingDto.getCd_ctg_b());
+			logger.debug("paging CD_CTB_M 번호 확인" + " = " + pagingDto.getCd_ctg_m());
+			
+			logger.debug("sale SEQ_MBR 번호 확인" + " = " + saleDto.getSeq_mbr());
+			logger.debug("sale SEQ_SLE 번호 확인" + " = " + saleDto.getSeq_sle());
+			logger.debug("sale CD_CTB_B 번호 확인" + " = " + saleDto.getCd_ctg_b());
+			logger.debug("sale CD_CTB_M 번호 확인" + " = " + saleDto.getCd_ctg_m());
 			
 			pagingDto.setSeq_mbr(101);
 			saleDto.setSeq_mbr(101);
@@ -83,12 +82,10 @@ public class BuyWeb extends Common {
 			logger.debug("SEQ_MBR 번호 확인" + " = " + saleDto.getSeq_mbr());
 			logger.debug("FLG_LIKE 번호 확인" + " = " + saleDto.getFlg_like());
 			
-			/*
 			PagingListDto pagingListDto = saleSrvc.detailList(pagingDto);
 			
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
-			*/
 			mav.addObject("saleDto"		, _saleDto);
 			
 			mav.setViewName("front/buy/writeForm");

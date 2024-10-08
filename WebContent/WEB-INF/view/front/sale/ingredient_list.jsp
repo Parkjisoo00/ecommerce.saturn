@@ -128,6 +128,7 @@
 <input type="hidden" id="prd_type"		name="prd_type" value="${paging.prd_type}"/>
 <input type="hidden" id="filter"		name="filter" value="${paging.filter}"/>
 <input type="hidden" id="cd_ctg_m"		name="cd_ctg_m" />
+<input type="hidden" id="cd_ctg_b"		name="cd_ctg_b" />
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
 	<!-- Page Preloder -->
@@ -159,7 +160,7 @@
 								<c:forEach var="list" items="${list}">
 									<div class="col-lg-4 col-md-6">
 										<div class="product__item">
-											<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_b}', '${list.cd_ctg_m}');">
+											<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
 												<div class="product__item__pic set-bg" data-setbg="${list.img}">
 												<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
 													<div class="label new">베스트</div>
@@ -170,29 +171,29 @@
 												<h6 style="line-height: 1.5em; min-height: 3em;"><a href="#" style="font-size: 15px;">${list.sle_nm}</a></h6>
 													<div class="rating">
 														<c:if test="${list.average_rate == 1}">
-															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${list.count}개 상품평</span>
+															<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 2}">
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${list.count}개 상품평</span>
+															<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 3}">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${list.count}개 상품평</span>
+															<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 4}">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${list.count}개 상품평</span>
+															<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
 														</c:if>
 														<c:if test="${list.average_rate == 5}">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${list.count}개 상품평</span>
+															<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
 														</c:if>
 													</div>
 												<c:choose>
