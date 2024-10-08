@@ -20,6 +20,7 @@
  */
 package kr.co.bravomylife.front.buy.controller;
 
+import java.util.List;
 import java.util.Properties;
 
 import javax.inject.Inject;
@@ -72,6 +73,18 @@ public class BuyWeb extends Common {
 		
 		try {
 			
+			String check = "[UNDEFINED]";
+			
+			if (check.equals(getSession(request, "SEQ_MBR"))) {
+				
+				reviewpagingDto.setRegister(0);
+				saleDto.setRegister(0);
+			} else {
+				
+				reviewpagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+				saleDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			}
+			
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
 						
@@ -82,22 +95,27 @@ public class BuyWeb extends Common {
 			mav.addObject("paging"	, _pagingListDto.getPaging());
 			mav.addObject("list"	, _pagingListDto.getList());
 			
-			PagingListDto pagingListDto = saleSrvc.reviewList(reviewpagingDto);
+			PagingListDto _reviewpagingDto = saleSrvc.reviewList(reviewpagingDto);
 			
-			/*
-			List<SaleDto> reviewList = (List<SaleDto>) pagingListDto.getList();
+			List<SaleDto> reviewList = (List<SaleDto>) _reviewpagingDto.getList();
 			
 			for (int loop = 0; loop < reviewList.size(); loop++) {
-			
-				reviewList.get(loop).setSeq_buy_dtl(buyDao.sequenceDetail());
-			
-			
+				SaleDto _reviewList = reviewList.get(loop);
+				_reviewList.setMbr_nm(aes.decode(_reviewList.getMbr_nm()));
+				
+				logger.debug("LOOP 크기 확인" + " = " + reviewList.size());
+				logger.debug("LOOP 돌린 복호화 값 확인" + " = " + aes.decode(_reviewList.getMbr_nm()));
+				logger.debug("LOOP 돌린 복호화 Set 뒤의 값 확인" + " = " + _reviewList.getMbr_nm());
 			}
 			
-			pagingDto.setMbr_nm(aes.decode(pagingListDto.getPaging().getMbr_nm()));
-			pagingListDto.setPaging(pagingDto);
+			_reviewpagingDto.setList(reviewList);
 			
-			mav.addObject("reviewList"	, reviewList);
+			if (_reviewpagingDto.getPaging().getMbr_nm() == null || _reviewpagingDto.getPaging().getMbr_nm().equals("")) {
+				
+				mav.addObject("reviewList", "");
+			} else {
+				mav.addObject("reviewList", _reviewpagingDto);
+			}
 			
 			mav.setViewName("front/buy/writeForm");
 		}

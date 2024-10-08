@@ -18,7 +18,6 @@
 		(
 		SELECT
 			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY sle.DT_REG DESC) rnum
-			, sle.SEQ_SLE
 			, rate.COUNT
 			, rate.RATE_STAR
 			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate

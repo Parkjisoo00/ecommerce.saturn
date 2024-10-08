@@ -201,7 +201,7 @@
 											<c:forEach items="${reviewList}" var="reviewList">
 												<tr>
 													<td>
-														${reviewList.average_rate}
+														
 													</td>
 													<td style="text-align: left">
 														${reviewList.rate_review}
