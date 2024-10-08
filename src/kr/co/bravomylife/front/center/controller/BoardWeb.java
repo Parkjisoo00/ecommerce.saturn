@@ -140,6 +140,16 @@ public class BoardWeb extends Common {
 		
 		try {
 			
+			String contents = boardDto.getContent();
+			
+			contents = contents.replace("<p>", "").replace("</p>", "");
+			
+			logger.debug("작성 내용 확인" + " = " + contents);
+			
+			boardDto.setContent(contents);
+			
+			logger.debug("작성 내용 확인" + " = " + boardDto.getContent());
+			
 			boardDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
 			// **************************

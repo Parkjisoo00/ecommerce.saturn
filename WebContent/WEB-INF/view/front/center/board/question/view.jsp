@@ -80,7 +80,7 @@
 			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="checkout__form__input">
 					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">내용 <span></span></p>
-					<input type="text" id="title" name="title" value="${boardDto.content}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
+					<input type="text" id="content" name="content" value="${boardDto.content}sdfsdfsdf" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
 				</div>
 			</div>
 			<br/>
@@ -96,7 +96,7 @@
 			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="checkout__form__input">
 					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">등록 일자 <span></span></p>
-					<input type="text" id="title" name="title" value="${boardDto.dt_reg}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
+					<input type="text" id="dt_reg" name="dt_reg" value="${boardDto.dt_reg}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
 				</div>
 			</div>
 			<br/>
