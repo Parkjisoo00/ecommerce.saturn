@@ -20,6 +20,9 @@
  */
 package kr.co.bravomylife.front.center.controller;
 
+import java.util.Hashtable;
+import java.util.LinkedList;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,8 +31,10 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.front.center.service.BoardSrvc;
@@ -37,6 +42,10 @@ import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.common.component.SessionCmpn;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
+import kr.co.bravomylife.common.dto.FileDto;
+import kr.co.bravomylife.common.dto.FileUploadDto;
+import kr.co.bravomylife.common.file.FileUpload;
+import kr.co.bravomylife.front.center.dto.BoardDto;
 
 /**
  * @version 1.0.0
@@ -53,10 +62,158 @@ public class BoardWeb extends Common {
 	private static Logger logger = LoggerFactory.getLogger(BoardWeb.class);
 	
 	@Autowired
+	private MessageSourceAccessor dynamicProperties;
+	
+	@Autowired
 	SessionCmpn sessionCmpn;
 	
 	@Inject
 	BoardSrvc boardSrvc;
+	
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 쓰기 처리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@SuppressWarnings({ "rawtypes", "unused", "unchecked" })
+	@RequestMapping(value = "/front/center/board/writeProc.web", method = RequestMethod.POST)
+	public ModelAndView writeProc(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto, FileUploadDto fileUploadDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		String message	= "";
+		
+		try {
+			
+			boardDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			// **************************
+			// For Board File
+			// **************************
+			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]") + "/bbs/";
+			String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
+			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+			
+			int countFile = 0;
+			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
+			
+			FileDto[] fileDto = new FileDto[countFile];
+			LinkedList<Object> uploadResult = FileUpload.upload(fileUploadDto, pathBase, maxSize, allowedExt, countFile);
+			
+			message	= (String)((Hashtable)uploadResult.getLast()).get("resultID");
+			
+			if (message.equals("success")) {
+				
+				Hashtable<String, String> hashtable	= (Hashtable<String, String>)uploadResult.getLast();
+				
+				String fileNameSrc	= "";
+				String fileNameSve	= "";
+				String fileSize		= "";
+				long totalSize		= 0;
+				
+				logger.debug("countFile=" + countFile);
+				for (int loop = 0; loop < countFile; loop++) {
+					fileNameSrc		= (String)hashtable.get("files[" + loop + "]_fileSrcName");
+					fileNameSve		= (String)hashtable.get("files[" + loop + "]_fileSveNameRelative");
+					fileSize		= (String)hashtable.get("files[" + loop + "]_fileSveSize");
+					if (fileSize == null || fileSize == "") fileSize = "0";
+					
+					fileDto[loop] = new FileDto();
+					fileDto[loop].setFileNameOriginal(fileNameSrc);
+					fileDto[loop].setFileNameSave(fileNameSve);
+					fileDto[loop].setFileSize((Long.parseLong(fileSize)));
+					logger.debug("fileNameSrc=" + fileNameSrc);
+					logger.debug("fileNameSve=" + fileNameSve);
+					logger.debug("fileSize=" + fileSize);
+					
+					totalSize += Long.parseLong(fileSize);
+				}
+				
+				
+				boardDto.setFile_orig(fileNameSrc);
+				boardDto.setFile_save("bbs\\" + fileNameSve);
+				
+				if (boardSrvc.insert(boardDto)) {
+					// GET에서 POST로 변경
+					String[] arrName = new String[1];
+					String[] arrValue = new String[1];
+					
+					arrName[0] = "cd_bbs_type";
+					arrValue[0] = "3";
+					
+					request.setAttribute("script"	, "alert('등록되었습니다.');");
+					request.setAttribute("post"		, "/front/center/board/list.web");
+					request.setAttribute("name"		, arrName);
+					request.setAttribute("value"	, arrValue);
+					
+					// request.setAttribute("script"	, "alert('등록되었습니다.');");
+					// request.setAttribute("redirect"	, "/front/center/board/list.web?cd_bbs_type=" + boardDto.getCd_bbs_type());
+				}
+				else {
+					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+					request.setAttribute("redirect"	, "/");
+				}
+			}
+			else {
+				request.setAttribute("script"	, "alert('" + message + "');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".writeProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 쓰기 폼</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	//GET 방식으로는 사용자가 게시글 작성 폼을 열 수 있고, POST 방식은 작성한 게시글을 저장
+	@RequestMapping(value = "/front/center/board/writeForm.web", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView writeForm(HttpServletRequest request, HttpServletResponse response, kr.co.bravomylife.front.center.dto.BoardDto boardDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		
+		try {
+			if ("GET".equalsIgnoreCase(request.getMethod())) {
+				mav.setViewName("front/center/board/question/writeForm");
+			}
+			else if ("POST".equalsIgnoreCase(request.getMethod())) {
+			if (boardDto.getCd_bbs_type() == 3) {
+				mav.setViewName("front/center/board/question/writeForm");
+			}
+			else {
+				request.setAttribute("redirect"	, "/");
+				mav.setViewName("forward:/servlet/result.web");
+				}
+			}
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".writeForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]
