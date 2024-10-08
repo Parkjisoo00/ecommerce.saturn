@@ -29,8 +29,15 @@ public class PagingDto {
 	private String filter		= "";
 	private String corp_nm		= "";
 	private String prd_type		= "";
+	private int point_value		= 0;
 	
 	
+	public int getPoint_value() {
+		return point_value;
+	}
+	public void setPoint_value(int point_value) {
+		this.point_value = point_value;
+	}
 	public Integer getSeq_mbr() {
 		return seq_mbr;
 	}

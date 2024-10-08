@@ -132,14 +132,18 @@ table.headTop_01 th {
 
 .pd-text {
 	font-weight: 450 !important;
-	font-size: 14px !important;
+	font-size: 16px !important;
 	color: #555 !important;
+	display: flex;
+	align-items: center;
 }
 
 .pd-title {
-	font-weight: bold !important;
-	font-size: 14px !important;
-	color: #555 !important;
+	font-weight: 450 !important;
+	font-size: 16px !important;
+	color: #333 !important;
+	display: flex;
+	align-items: center;
 }
 
 /*----------------------------------------*/
@@ -1345,7 +1349,7 @@ ol {
 }
 
 .product__item__pic {
-	height: 360px;
+	height: 300px;
 	position: relative;
 	overflow: hidden;
 	border: 1px solid #e0e0e0
@@ -2115,7 +2119,7 @@ ol {
 	font-size: 14px;
 	font-weight: 600;
 	color: #111111;
-	width: 150px;
+	width: 200px;
 	float: left;
 }
 

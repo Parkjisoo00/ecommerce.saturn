@@ -57,11 +57,18 @@ public class SaleDto {
 	private int discount_sale		= 0;
 	private String flg_best			= "";
 	private String flg_like			= "";
+	private int point_value			= 0;
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
+	public int getPoint_value() {
+		return point_value;
+	}
+	public void setPoint_value(int point_value) {
+		this.point_value = point_value;
+	}
 	public String getDesces() {
 		return desces;
 	}
