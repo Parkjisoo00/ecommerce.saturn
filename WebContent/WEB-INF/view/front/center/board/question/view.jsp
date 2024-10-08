@@ -34,7 +34,11 @@
 
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" />
+<input type="hidden" id="type"			name="type" />
+<input type="hidden" id="sequence"		name="sequence" />
+<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
+<input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${boardDto.seq_bbs}" />
+
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -47,11 +51,106 @@
 
 	<!-- Breadcrumb Begin -->
 	<!-- Breadcrumb End -->
-
-	<div>
-	페이지에 구현할 코드
+<section class="shop spad">
+	<div class="container">
+		<article class="txtCenter">
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="checkout__form__input">
+					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">제목 <span></span></p>
+					<input type="text" id="title" name="title" value="${boardDto.title}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
+				</div>
+			</div>
+			<br/>
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="checkout__form__input">
+					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">카테고리 <span></span></p>
+						<select id="cd_ctg" name="cd_ctg" style="margin-left: 300px;" disabled >
+							<option value="0"<c:if test="${boardDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
+							<option value="1"<c:if test="${boardDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
+							<option value="2"<c:if test="${boardDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
+							<option value="3"<c:if test="${boardDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
+							<option value="4"<c:if test="${boardDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
+							<option value="5"<c:if test="${boardDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
+							<option value="6"<c:if test="${boardDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
+							<option value="9"<c:if test="${boardDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
+						</select>
+				</div>
+			</div>
+			<br/>
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="checkout__form__input">
+					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">내용 <span></span></p>
+					<input type="text" id="title" name="title" value="${boardDto.content}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
+				</div>
+			</div>
+			<br/>
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="checkout__form__input">
+					<c:if test="${boardDto.file_orig != ''}">
+						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">첨부 파일 <span></span></p>
+							<a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});" style="margin-left: 300px;" >다운로드</a>
+					</c:if>		
+				</div>
+			</div>
+			<br/>
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="checkout__form__input">
+					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">등록 일자 <span></span></p>
+					<input type="text" id="title" name="title" value="${boardDto.dt_reg}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
+				</div>
+			</div>
+			<br/>
+			<br/>
+			<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="checkout__form__input">
+				<c:if test="${boardDto.seq_reply == 0}">
+					<input type="button" value="삭제" style="width:100px" onclick="javascript:remove(3);" />
+					 <input type="button" value="수정" style="width:100px" onclick="javascript:modifyForm(3);" /> 
+				</c:if>
+					<input type="button" value="목록" style="width:100px" onclick="javascript:goList(3);"/>
+				</div>
+			</div>
+			</div>
+			
+	<!-- 답변 부분 추후 작업 
+				<c:if test="${boardDto.seq_reply > 0}">
+				<br/>
+				<div style="color: #369; font-size: 10pt; font-weight: bold;">[답변]</div>
+				<table class="headLeft_01" style="width: 900px; margin-left: auto; margin-right: auto">
+					<tr>
+						<th style="width: 150px;">제목</th>
+						<td>
+							${boardReplyDto.title}
+						</td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td>
+							${boardReplyDto.content}
+						</td>
+					</tr>
+					<c:if test="${boardReplyDto.file_orig != ''}">
+					<tr>
+						<th>첨부 파일</th>
+						<td>
+							<a href="javascript:download('BbsQuestion', ${boardReplyDto.seq_bbs});">다운로드</a>
+						</td>
+					</tr>
+					</c:if>
+					<tr>
+						<th>등록 일시</th>
+						<td>
+							${boardReplyDto.dt_reg}
+						</td>
+					</tr>
+				</table>
+			</c:if>
+	 -->
+		</article>
 	</div>
-
+</section>
+	<iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
 	<%@ include file="/include/common/footerpic.jsp" %>
