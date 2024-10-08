@@ -22,7 +22,6 @@ package kr.co.bravomylife.front.center.dao;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
@@ -42,8 +41,6 @@ import kr.co.bravomylife.front.common.dto.PagingDto;
 @Repository("kr.co.bravomylife.front.center.dao.BoardDao")
 public class BoardDao extends BaseDao{
 	
-
-
 	/*
 	public BoardDto selectReply(BoardDto boardDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.center.Board.selectReply", boardDto);
@@ -56,40 +53,26 @@ public class BoardDao extends BaseDao{
 	public int delete(BoardDto boardDto) {
 		return sqlSessionFront.delete("kr.co.bravomylife.front.mybatis.center.Board.delete", boardDto);
 	}
-	
-	
 	public int insert(BoardDto boardDto) {
 		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.center.Board.insert", boardDto);
 	}
-	
-	
 	public int deleteFlag(BoardDto boardDto) {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.center.Board.deleteFlag", boardDto);
 	}
-	
-	
 	public int update(BoardDto boardDto) {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.center.Board.update", boardDto);
 	}
-	
-	
 	public BoardDto select(BoardDto boardDto) {
 		
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.center.Board.select", boardDto);
-		
-		
 	}
 	*/
 	public List<BoardDto> list(PagingDto pagingDto) {
 		
 		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.center.Board.list", pagingDto);
-		
 	}
 	
 	public int sequence() {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.center.Board.sequence");
 	}
-
 }
-
-

@@ -2,8 +2,7 @@
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
-
-	<div class="offcanvas-menu-overlay"></div>
+<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
 		<div class="offcanvas__close">+</div>
 		<ul class="offcanvas__widget">
@@ -24,7 +23,6 @@
 			<a href="#">Register</a>
 		</div>
 	</div>
-
 <header class="header" style="background-color: #341d08; height: 160px; position: relative;">
 <div class="container-fluid">
 	<div class="row">
@@ -59,13 +57,13 @@
 </header>
 <!-- "javascript:location.href='front/sale/gender_list.web';" -->
 <div class="col-xl-12 col-lg-12" style="margin: 0 auto; float: none; width: 90%;">
-	<nav class="header__menu" style="text-align: center;">
+	<nav class="header__menu" >
 		<ul style="display: inline-block; width: 90%; list-style: none;">
 			<li class="active" style="display: inline-block; margin: 0 57px;">
 				<a href="javascript:goTypeT('', '', '', '', '', '');">
 					<img src="/img/icon/ctg.png" alt="전체 상품" style="width: 24px; height: 24px;">
 				</a>
-				<ul class="dropdown" style="position: absolute; top: 100%; left: 0; list-style: none;">
+				<ul class="dropdown" style="top: 100%; left: 0; list-style: none;">
 					<li><a href="javascript:goTypeF('', '', '', '', '', '');">기능별</a></li>
 					<li><a href="javascript:goTypeI('', '', '', '', '', '');">성분별</a></li>
 					<li><a href="javascript:goTypeG('', '', '', '', '', '');">대상별</a></li>
@@ -76,7 +74,7 @@
 			</li>
 			<li style="display: inline-block; margin: 0 57px; position: relative;">
 				<a href="javascript:goTypeF('', '', '', '', '', '');" style="font-size: 18px; font-weight: bold;">기능별</a>
-				<ul class="dropdown" style="position: absolute; top: 100%; left: 0; list-style: none;">
+				<ul class="dropdown" style="top: 100%; left: 0; list-style: none;">
 					<li><a href="javascript:goTypeF('bld', '', '', '', ''${paging.cd_ctg_m}'', '');">혈당/혈행/혈압</a></li>
 					<li><a href="javascript:goTypeF('imu', '', '', '', '${paging.cd_ctg_m}', '');">항산화/면역력</a></li>
 					<li><a href="javascript:goTypeF('inf', '', '', '', '${paging.cd_ctg_m}', '');">염증/항염</a></li>
@@ -90,7 +88,7 @@
 			</li>
 			<li style="display: inline-block; margin: 0 57px; position: relative;">
 				<a href="javascript:goTypeI('', '', '', '', '', '');" style="font-size: 18px; font-weight: bold;">성분별</a>
-				<ul class="dropdown" style="position: absolute; top: 100%; left: 0; list-style: none;">
+				<ul class="dropdown" style="top: 100%; left: 0; list-style: none;">
 					<li><a href="javascript:goTypeI('pol', '', '', '', '${paging.cd_ctg_m}', '');">폴리코사놀</a></li>
 					<li><a href="javascript:goTypeI('omg', '', '', '', '${paging.cd_ctg_m}', '');">오메가-3</a></li>
 					<li><a href="javascript:goTypeI('min', '', '', '', '${paging.cd_ctg_m}', '');">비타민/미네랄</a></li>
@@ -104,14 +102,14 @@
 			</li>
 			<li style="display: inline-block; margin: 0 57px; position: relative;">
 				<a href="javascript:goTypeG('', '', '', '', '', '');" style="font-size: 18px; font-weight: bold;">대상별</a>
-				<ul class="dropdown" style="position: absolute; top: 100%; left: 0; list-style: none;">
+				<ul class="dropdown" style="top: 100%; left: 0; list-style: none;">
 					<li><a href="javascript:goTypeG('M', '', '', '', '${paging.cd_ctg_m}', '');">남성</a></li>
 					<li><a href="javascript:goTypeG('F', '', '', '', '${paging.cd_ctg_m}', '');">여성</a></li>
 				</ul>
 			</li>
 			<li style="display: inline-block; margin: 0 57px; position: relative;">
 				<a href="#" style="font-size: 18px; font-weight: bold;">맞춤 건강 관리</a>
-				<ul class="dropdown" style="position: absolute; top: 100%; left: 0; list-style: none;">
+				<ul class="dropdown" style="top: 100%; left: 0; list-style: none;">
 					<li><a href="#">맞춤 건강 추천</a></li>
 					<li><a href="#">안심 조회 서비스</a></li>
 					<li><a href="#">건강 정보</a></li>
@@ -121,7 +119,7 @@
 			</li>
 			<li style="display: inline-block; margin: 0 57px; position: relative;">
 				<a href="#" style="font-size: 18px; font-weight: bold;">고객 센터</a>
-				<ul class="dropdown" style="position: absolute; top: 100%; left: 0; list-style: none;">
+				<ul class="dropdown" style="top: 100%; left: 0; list-style: none;">
 					<li><a href="javascript:goList(1);" >공지사항</a></li>
 					<li><a href="javascript:goList(2);" >자주 묻는 질문</a></li>
 					<li><a href="javascript:goList(3);" >1대1 문의 사항</a></li>
@@ -132,7 +130,7 @@
 			</li>
 		</ul>
 	</nav>
-		<div class="canvas__open">
-				<i class="fa fa-bars"></i>
-		</div>
+	<div class="canvas__open">
+			<i class="fa fa-bars"></i>
+	</div>
 </div>

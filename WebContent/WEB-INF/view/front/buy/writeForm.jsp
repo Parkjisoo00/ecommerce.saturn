@@ -41,8 +41,6 @@
 	<!-- Header Section End -->
 
 	<!-- Breadcrumb Begin -->
-	<!-- 페이지의 상단 로고 바로 밑에 출력되는 전체 상품 / 기능별 / 성분별 / 대상별 / 맞춤 건강 / 고객센터 / 소개 메뉴 -->
-		<%@ include file="/include/front/middlegnb.jsp" %>
 	<!-- Breadcrumb End -->
 	
 	<!-- Product Details Section Begin -->
@@ -51,9 +49,7 @@
 			<div class="row">
 				<div class="col-lg-6" style="border-right: 1px solid #e0e0e0; display: flex; justify-content: center; align-items: center;">
 					<div class="product__details__pic">
-							<div class="product__details__pic__slider owl-carousel">
-								<img data-hash="product-1" class="product__big__img" src="${saleDto.img}" alt="" style="width: 300px; height: 300px">
-						</div>
+						<img data-hash="product-1" class="product__big__img" src="${saleDto.img}" alt="" style="width: 400px; height: 400px;">
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -86,15 +82,67 @@
 								<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 14px; font-weight: bold;">${saleDto.count}개 상품평</span>
 							</c:if>
 						</div>
-					<c:choose>
-						<c:when test="${saleDto.discount == null || saleDto.discount == 0}">
-							<div style="font-weight: bold;"><span style="text-decoration: none; font-size: 20px; color: black;">${saleDto.price_sale}</span>원</div>
-						</c:when>
-						<c:otherwise>
-							<div style="font-weight: bold;"><span style="font-size: 16px; color: #b1b0b0; text-decoration: line-through; margin-left: 4px;">${saleDto.price_sale}</span> <span style="text-decoration: none; color : red">-${saleDto.discount}% </span><span style="text-decoration: none; color: black; font-size: 20px"> ${saleDto.discount_sale}</span>원</div>
-						</c:otherwise>
-					</c:choose>
-					</br>
+						<div class="product__details__widget">
+							<ul>
+								<li>
+									<span>원가</span>
+									<div class="stock__checkbox">
+										<label for="stockin">
+											100
+										</label>
+									</div>
+								</li>
+								<li>
+									<span>판매가</span>
+									<div class="stock__checkbox">
+										<label for="stockin">
+											100
+										</label>
+									</div>
+								</li>
+								<li>
+									<span>포인트</span>
+									<div class="stock__checkbox">
+										<label for="stockin">
+											100
+										</label>
+									</div>
+								</li>
+								<li>
+									<span>브랜드</span>
+									<div class="stock__checkbox">
+										<label for="stockin">
+											100
+										</label>
+									</div>
+								</li>
+								<li>
+									<span>제품타입</span>
+									<div class="stock__checkbox">
+										<label for="stockin">
+											100
+											
+										</label>
+									</div>
+								</li>
+								<li>
+									<span>재고</span>
+									<div class="stock__checkbox">
+										<label for="stockin">
+											100
+										</label>
+									</div>
+								</li>
+								<li>
+									<span>등록일</span>
+									<div class="stock__checkbox">
+										<label for="stockin">
+											100
+										</label>
+									</div>
+								</li>
+							</ul>
+						</div>
 						<div class="product__details__button">
 							<div class="quantity">
 								<span>구매 수량:</span>
@@ -104,44 +152,14 @@
 							</div>
 							<a href="#" class="cart-btn"><span class="icon_bag_alt"></span> 장바구니에 담기</a>
 							<ul>
-								<li><a href="#"><span class="icon_heart_alt"></span></a></li>
-							</ul>
-						</div>
-						<div class="product__details__widget">
-							<ul>
-								<li>
-									<span>재고</span>
-									<div class="stock__checkbox">
-										<label for="stockin">
-											${saleDto.count_stock}
-										</label>
-									</div>
-								</li>
-								<li>
-									<span>브랜드</span>
-									<div class="stock__checkbox">
-										<label for="stockin">
-											${saleDto.corp_nm}
-											
-										</label>
-									</div>
-								</li>
-								<li>
-									<span>제품 타입</span>
-									<div class="stock__checkbox">
-										<label for="stockin">
-											${saleDto.prd_type}
-										</label>
-									</div>
-								</li>
-								<li>
-									<span>등록일</span>
-									<div class="stock__checkbox">
-										<label for="stockin">
-											${saleDto.dt_reg}
-										</label>
-									</div>
-								</li>
+								<c:choose>
+									<c:when test="${saleDto.flg_like == 'Y'}">
+										<li><a href="#" style="background-color: #ca1515;"><span class="icon_heart_alt" style="color: white;"></span></a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="#"><span class="icon_heart_alt"></span></a></li>
+									</c:otherwise>
+								</c:choose>
 							</ul>
 						</div>
 					</div>
@@ -163,7 +181,37 @@
 								</div>
 							</div>
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
-								<p>리뷰 작성</p>
+								<div class="row">
+									<div class="col-lg-12 col-md-12">
+									<table class="headTop_01" style=" margin-left: auto; margin-right: auto; width: 100%">
+									<c:choose>
+										<c:when test="${empty list}">
+											<tr>
+												<td colspan="4">등록된 리뷰가 없습니다.</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<c:forEach items="${list}" var="list">
+												<tr>
+													<td>
+														평점
+													</td>
+													<td style="text-align: left">
+														내용
+													</td>
+													<td>
+														등록자
+													</td>
+													<td>
+														등록일
+													</td>
+												</tr>
+											</c:forEach>
+										</c:otherwise>
+										</c:choose>
+									</table>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -181,7 +229,7 @@
 						<div class="product__item__pic set-bg" data-setbg="img/product/related/rp-1.jpg">
 						</div>
 						<div class="product__item__text">
-							<h6><a href="#">상품명r</a></h6>
+							<h6><a href="#">상품명</a></h6>
 							<div class="rating">
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>

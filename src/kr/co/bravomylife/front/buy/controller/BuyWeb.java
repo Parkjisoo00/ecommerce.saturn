@@ -32,6 +32,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.front.buy.service.BuySrvc;
 import kr.co.bravomylife.front.common.Common;
+import kr.co.bravomylife.front.common.dto.PagingDto;
+import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
 import kr.co.bravomylife.front.sale.service.SaleSrvc;
 
@@ -56,18 +58,40 @@ public class BuyWeb extends Common {
 	SaleSrvc saleSrvc;
 	
 	@RequestMapping(value = "/front/buy/writeForm.web")
-	public ModelAndView writeForm(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+	public ModelAndView writeForm(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, SaleDto saleDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			/*
+			logger.debug("SEQ_MBR 번호 확인" + " = " + pagingDto.getSeq_mbr());
+			logger.debug("SEQ_SLE 번호 확인" + " = " + pagingDto.getSeq_sle());
+			logger.debug("CD_CTB_B 번호 확인" + " = " + pagingDto.getCd_ctg_b());
+			logger.debug("CD_CTB_M 번호 확인" + " = " + pagingDto.getCd_ctg_m());
+			*/
+			
+			logger.debug("SEQ_MBR 번호 확인" + " = " + saleDto.getSeq_mbr());
+			logger.debug("SEQ_SLE 번호 확인" + " = " + saleDto.getSeq_sle());
+			logger.debug("CD_CTB_B 번호 확인" + " = " + saleDto.getCd_ctg_b());
+			logger.debug("CD_CTB_M 번호 확인" + " = " + saleDto.getCd_ctg_m());
+			
+			pagingDto.setSeq_mbr(101);
+			saleDto.setSeq_mbr(101);
 			
 			SaleDto _saleDto	= saleSrvc.select(saleDto);
 			
+			logger.debug("SEQ_MBR 번호 확인" + " = " + saleDto.getSeq_mbr());
+			logger.debug("FLG_LIKE 번호 확인" + " = " + saleDto.getFlg_like());
+			
+			/*
+			PagingListDto pagingListDto = saleSrvc.detailList(pagingDto);
+			
+			mav.addObject("paging"	, pagingListDto.getPaging());
+			mav.addObject("list"	, pagingListDto.getList());
+			*/
 			mav.addObject("saleDto"		, _saleDto);
 			
 			mav.setViewName("front/buy/writeForm");
-			
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".writeForm()] " + e.getMessage(), e);
