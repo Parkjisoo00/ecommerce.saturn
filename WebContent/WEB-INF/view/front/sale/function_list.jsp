@@ -148,7 +148,7 @@
 		<div class="container">
 			<%@ include file="/include/front/lowgnbF.jsp" %>
 			<div class="row">
-				<div class="col-lg-9 col-md-9">
+				<div class="col-lg-9 col-md-9 m-auto">
 					<div class="row">
 						<c:choose>
 							<c:when test="${empty list}">

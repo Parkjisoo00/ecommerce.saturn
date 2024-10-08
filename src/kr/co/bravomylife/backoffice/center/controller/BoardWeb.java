@@ -22,6 +22,7 @@ package kr.co.bravomylife.backoffice.center.controller;
 
 
 
+import java.io.File;
 import java.util.Hashtable;
 import java.util.LinkedList;
 
@@ -34,7 +35,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.backoffice.center.dto.BoardDto;
@@ -43,6 +46,7 @@ import kr.co.bravomylife.backoffice.common.Common;
 import kr.co.bravomylife.backoffice.common.component.SessionCmpn;
 import kr.co.bravomylife.backoffice.common.dto.PagingDto;
 import kr.co.bravomylife.backoffice.common.dto.PagingListDto;
+import kr.co.bravomylife.common.dto.FileDownloadDto;
 import kr.co.bravomylife.common.dto.FileDto;
 import kr.co.bravomylife.common.dto.FileUploadDto;
 import kr.co.bravomylife.common.file.FileUpload;
@@ -72,6 +76,190 @@ public class BoardWeb extends Common{
 	@Inject
 	BoardSrvc boardSrvc;
 
+	/**
+	 * @param type
+	 * @param sequence
+	 * @param model
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 파일 다운로드</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/center/board/download.web", method = RequestMethod.POST)
+	public ModelAndView download(String type, long sequence, Model model) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			BoardDto boardDto = new BoardDto();
+			
+			FileDownloadDto fileDownloadDto = new FileDownloadDto();
+			File file = null;
+			
+			// [TODO-개선: 타입이 정의되어 있지 않을 경우 처리]
+			if (type.equals("BbsNotice")) boardDto.setCd_bbs_type(1);
+			else if (type.equals("BbsQuestion")) boardDto.setCd_bbs_type(3);
+			
+			boardDto.setSeq_bbs((int)sequence);
+			
+			boardDto	= boardSrvc.select(boardDto);
+			boardDto.setFile_orig(boardDto.getFile_orig());
+			boardDto.setFile_save(boardDto.getFile_save());
+			
+			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
+			
+			file = new File(pathBase + "" + File.separator + boardDto.getFile_save());
+			
+			fileDownloadDto.setFile_original(boardDto.getFile_orig());
+			fileDownloadDto.setFile_size(file.length());
+			
+			if (file == null || file.exists() == false ) {
+				mav.setViewName("redirect:/error.web?code=404");
+				
+				return mav;
+			}
+			else {
+				model.addAttribute("file", file);
+				model.addAttribute("filename", fileDownloadDto.getFile_original());
+				model.addAttribute("filesize", fileDownloadDto.getFile_size());
+				
+				mav.setViewName("fileDownloadView");
+			}
+			
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".download()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 삭제</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/center/board/remove.web")
+	public ModelAndView remove(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			boardDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			
+			if (boardSrvc.deleteFlag(boardDto)) {
+				request.setAttribute("script"	, "alert('삭제되었습니다.');");
+				request.setAttribute("redirect"	, "/console/center/board/list.web?cd_bbs_type=" + boardDto.getCd_bbs_type());
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".remove()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 수정 폼</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/center/board/modifyForm.web")
+	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			BoardDto _boardDto = boardSrvc.select(boardDto);
+			
+			mav.addObject("boardDto", _boardDto);
+			
+			if (boardDto.getCd_bbs_type() == 1) {
+				mav.setViewName("backoffice/center/board/notice/modifyForm");
+			}
+			else if (boardDto.getCd_bbs_type() == 2) {
+				mav.setViewName("backoffice/center/board/faq/modifyForm");
+			}
+			else if (boardDto.getCd_bbs_type() == 3) {
+				
+				BoardDto boardQuestionDto = boardSrvc.selectQuestion(_boardDto);
+				
+				mav.addObject("boardQuestionDto", boardQuestionDto);
+				mav.setViewName("backoffice/center/board/question/modifyForm");
+			}
+			else {
+				request.setAttribute("redirect"	, "/");
+				mav.setViewName("forward:/servlet/result.web");
+			}
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 수정 처리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/center/board/modifyProc.web")
+	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			boardDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			
+			if (boardSrvc.update(boardDto)) {
+				request.setAttribute("script"	, "alert('수정되었습니다.');");
+				request.setAttribute("redirect"	, "/console/center/board/list.web?cd_bbs_type=" + boardDto.getCd_bbs_type());
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -274,4 +462,64 @@ public class BoardWeb extends Common{
 		
 		return mav;
 	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 보기</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/center/board/view.web")
+	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			BoardDto _boardDto = boardSrvc.select(boardDto);
+			
+			// 조회수 증가 실패 시
+			if (_boardDto == null ) {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+				mav.setViewName("forward:/servlet/result.web");
+			}
+			else {
+				mav.addObject("boardDto", _boardDto);
+				
+				if (boardDto.getCd_bbs_type() == 1) {
+					mav.setViewName("backoffice/center/board/notice/view");
+				}
+				else if (boardDto.getCd_bbs_type() == 2) {
+					mav.setViewName("backoffice/center/board/faq/view");
+				}
+				else if (boardDto.getCd_bbs_type() == 3) {
+					
+					// DB 부하 감소를 위해 답변이 있을 때만
+					if (_boardDto.getSeq_reply() > 0) {
+						BoardDto boardReplyDto = boardSrvc.selectReply(boardDto);
+						mav.addObject("boardReplyDto", boardReplyDto);
+					}
+					
+					mav.setViewName("backoffice/center/board/question/view");
+				}
+				else {
+					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+					request.setAttribute("redirect"	, "/");
+					mav.setViewName("forward:/servlet/result.web");
+				}
+			}
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".view()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
 }

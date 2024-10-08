@@ -150,13 +150,13 @@
 			<div class="row">
 				<c:choose>
 					<c:when test="${empty list}">
-						<div class="col-lg-3 col-md-6 d-flex justify-content-center align-items-center" style="height: 600px;">
+						<div class="col-lg-3 col-md-6 d-flex justify-content-center align-items-center m-auto" style="height: 600px;">
 							<p>상품이 없습니다.</p>
 						</div>
 					</c:when>
 						<c:otherwise>
 							<c:forEach var="list" items="${list}">
-								<div class="col-lg-3 col-md-6">
+								<div class="col-lg-3 col-md-6 m-auto	">
 									<div class="product__item">
 										<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
 											<div class="product__item__pic set-bg" data-setbg="${list.img}">

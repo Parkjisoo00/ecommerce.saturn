@@ -199,7 +199,6 @@
 				</select>
 				</c:if>
 				<c:if test="${paging.filter == 'LowP' && paging.corp_nm == '' && paging.prd_type == ''}">
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
 					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-fontC">✔낮은가격순</a></li>
 					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
 					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>

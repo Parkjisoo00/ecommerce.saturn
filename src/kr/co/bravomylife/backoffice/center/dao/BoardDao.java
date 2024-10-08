@@ -67,6 +67,45 @@ public class BoardDao extends BaseDao {
 	
 	/**
 	 * @param boardDto [게시판 빈]
+	 * @return int
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 삭제(처리)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public int deleteFlag(BoardDto boardDto) {
+		return sqlSessionBackoffice.update("kr.co.himedia.ecommerce.backoffice.mybatis.center.Board.deleteFlag", boardDto);
+	}
+	
+	/**
+	 * @param boardDto [게시판 빈]
+	 * @return BoardDto
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 보기(질문) </p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public BoardDto selectQuestion(BoardDto boardDto) {
+		return sqlSessionBackoffice.selectOne("kr.co.himedia.ecommerce.backoffice.mybatis.center.Board.selectQuestion", boardDto);
+	}
+	
+	/**
+	 * @param boardDto [게시판 빈]
+	 * @return int
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 수정</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public int update(BoardDto boardDto) {
+		return sqlSessionBackoffice.update("kr.co.himedia.ecommerce.backoffice.mybatis.center.Board.update", boardDto);
+	}
+	
+	/**
+	 * @param boardDto [게시판 빈]
 	 * @return BoardDto
 	 * 
 	 * @since 2024-10-08
@@ -93,5 +132,18 @@ public class BoardDao extends BaseDao {
 	public BoardDto select(BoardDto boardDto) {
 		return sqlSessionBackoffice.selectOne("kr.co.bravomylife.backoffice.mybatis.center.Board.select", boardDto);
 	}
-
+	/**
+	 * @param boardDto [게시판 빈]
+	 * @return BoardDto
+	 * 
+	 * @since 2024-09-09
+	 * <p>DESCRIPTION: 고객센터 보기(답변) </p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public BoardDto selectReply(BoardDto boardDto) {
+		
+		return sqlSessionBackoffice.selectOne("kr.co.himedia.ecommerce.backoffice.mybatis.center.Board.selectReply", boardDto);
+	}
+	
 }

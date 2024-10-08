@@ -148,7 +148,7 @@
 		<div class="container">
 			<%@ include file="/include/front/lowgnbI.jsp" %>
 			<div class="row">
-				<div class="col-lg-9 col-md-9">
+				<div class="col-lg-9 col-md-9 m-auto">
 					<div class="row">
 						<c:choose>
 							<c:when test="${empty list}">
@@ -158,7 +158,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="list" items="${list}">
-									<div class="col-lg-4 col-md-6">
+									<div class="col-lg-4 col-md-6 m-auto">
 										<div class="product__item">
 											<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
 												<div class="product__item__pic set-bg" data-setbg="${list.img}">
