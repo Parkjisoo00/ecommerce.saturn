@@ -198,19 +198,19 @@
 											</tr>
 										</c:when>
 										<c:otherwise>
-											<c:forEach items="${list}" var="list">
+											<c:forEach items="${list}" var="reviewList">
 												<tr>
 													<td>
-														평점
+														${reviewList.average_rate}
 													</td>
 													<td style="text-align: left">
-														내용
+														${reviewList.rate_review}
 													</td>
 													<td>
-														등록자
+														${reviewList.mbr_nm}
 													</td>
 													<td>
-														등록일
+														${reviewList.dt_reg}
 													</td>
 												</tr>
 											</c:forEach>
@@ -221,7 +221,7 @@
 								</div>
 							</div>
 							<div class="tab-pane" id="tabs-2" role="tabpanel">
-								<p>링크</p>
+								<p>[TODO] 1대1 문의 게시판 코드 적용</p>
 							</div>
 						</div>
 					</div>

@@ -20,12 +20,15 @@
  */
 package kr.co.bravomylife.front.buy.controller;
 
+import java.util.Properties;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,6 +39,7 @@ import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
 import kr.co.bravomylife.front.sale.service.SaleSrvc;
+import kr.co.bravomylife.util.security.SKwithAES;
 
 /**
  * @version 1.0.0
@@ -51,6 +55,9 @@ public class BuyWeb extends Common {
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(BuyWeb.class);
 	
+	@Autowired
+	Properties staticProperties;
+	
 	@Inject
 	BuySrvc buySrvc;
 	
@@ -58,36 +65,27 @@ public class BuyWeb extends Common {
 	SaleSrvc saleSrvc;
 	
 	@RequestMapping(value = "/front/buy/writeForm.web")
-	public ModelAndView writeForm(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, SaleDto saleDto) {
+	public ModelAndView writeForm(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, PagingDto reviewpagingDto, SaleDto saleDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
 			
-			logger.debug("paging SEQ_MBR 번호 확인" + " = " + pagingDto.getSeq_mbr());
-			logger.debug("paging SEQ_SLE 번호 확인" + " = " + pagingDto.getSeq_sle());
-			logger.debug("paging CD_CTB_B 번호 확인" + " = " + pagingDto.getCd_ctg_b());
-			logger.debug("paging CD_CTB_M 번호 확인" + " = " + pagingDto.getCd_ctg_m());
+			logger.debug("SEQ_MBR 값 확인" + " = " + saleDto.getSeq_mbr());
 			
-			logger.debug("sale SEQ_MBR 번호 확인" + " = " + saleDto.getSeq_mbr());
-			logger.debug("sale SEQ_SLE 번호 확인" + " = " + saleDto.getSeq_sle());
-			logger.debug("sale CD_CTB_B 번호 확인" + " = " + saleDto.getCd_ctg_b());
-			logger.debug("sale CD_CTB_M 번호 확인" + " = " + saleDto.getCd_ctg_m());
-			
-			pagingDto.setSeq_mbr(101);
-			saleDto.setSeq_mbr(101);
-			
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+						
 			SaleDto _saleDto	= saleSrvc.select(saleDto);
-			
-			logger.debug("SEQ_MBR 번호 확인" + " = " + saleDto.getSeq_mbr());
-			logger.debug("FLG_LIKE 번호 확인" + " = " + saleDto.getFlg_like());
-			
-			PagingListDto pagingListDto = saleSrvc.detailList(pagingDto);
-			
-			mav.addObject("paging"	, pagingListDto.getPaging());
-			mav.addObject("list"	, pagingListDto.getList());
 			mav.addObject("saleDto"		, _saleDto);
 			
+			PagingListDto _pagingListDto = saleSrvc.detailList(pagingDto);
+			mav.addObject("paging"	, _pagingListDto.getPaging());
+			mav.addObject("list"	, _pagingListDto.getList());
+			/*
+			PagingListDto pagingListDto = saleSrvc.reviewList(reviewpagingDto);
+			mav.addObject("reviewList"	, pagingListDto.getList());
+			*/
 			mav.setViewName("front/buy/writeForm");
 		}
 		catch (Exception e) {

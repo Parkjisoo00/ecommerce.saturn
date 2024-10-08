@@ -58,11 +58,25 @@ public class SaleDto {
 	private String flg_best			= "";
 	private String flg_like			= "";
 	private int point_value			= 0;
+	private String rate_review		= "";
+	private String mbr_nm			= "";
+	
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
-	
+	public String getRate_review() {
+		return rate_review;
+	}
+	public void setRate_review(String rate_review) {
+		this.rate_review = rate_review;
+	}
+	public String getMbr_nm() {
+		return mbr_nm;
+	}
+	public void setMbr_nm(String mbr_nm) {
+		this.mbr_nm = mbr_nm;
+	}
 	public int getPoint_value() {
 		return point_value;
 	}
