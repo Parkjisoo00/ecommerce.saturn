@@ -116,6 +116,33 @@ table.headTop_01 th {
 }
 
 /*----------------------------------------*/
+/* Rate Star
+/*----------------------------------------*/
+
+.rate {
+	margin-left: 10px !important;
+	color: #346aff !important;
+	font-size: 14px !important;
+	font-weight: bold !important;
+}
+
+/*----------------------------------------*/
+/* Product Detail Text
+/*----------------------------------------*/
+
+.pd-text {
+	font-weight: 450 !important;
+	font-size: 14px !important;
+	color: #555 !important;
+}
+
+.pd-title {
+	font-weight: bold !important;
+	font-size: 14px !important;
+	color: #555 !important;
+}
+
+/*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
 
@@ -2065,7 +2092,7 @@ ol {
 
 
 .product__details__widget {
-	border-top: 1px solid #ebebeb;
+	border-top: 1px solid #707070;
 	padding-top: 16px;
 }
 
@@ -2251,8 +2278,8 @@ ol {
 	left: 0;
 	top: 13px;
 	height: 1px;
-	width: 335px;
-	background: #e1e1e1;
+	width: 360px;
+	background: #707070;
 	content: "";
 }
 
@@ -2261,8 +2288,8 @@ ol {
 	right: 0;
 	top: 13px;
 	height: 1px;
-	width: 335px;
-	background: #e1e1e1;
+	width: 360px;
+	background: #707070;
 	content: "";
 }
 

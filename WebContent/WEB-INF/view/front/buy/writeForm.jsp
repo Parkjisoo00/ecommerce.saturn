@@ -47,62 +47,71 @@
 	<section class="product-details spad">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-6" style="border-right: 1px solid #e0e0e0; display: flex; justify-content: center; align-items: center;">
+				<div class="col-lg-6" style="display: flex; justify-content: center; align-items: center;">
 					<div class="product__details__pic">
-						<img data-hash="product-1" class="product__big__img" src="${saleDto.img}" alt="" style="width: 400px; height: 400px;">
+						<img data-hash="product-1" class="product__big__img" src="${saleDto.img}" alt="" style="width: 450px; height: 450px;">
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="product__details__text">
 						<h6 style="line-height: 1.5em; min-height: 3em; font-size: 20px; font-weight: bold;">${saleDto.sle_nm}</h6>
-						<div class="rating">
-							<c:if test="${salDto.average_rate == 1}">
-								<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 14px; font-weight: bold;">${saleDto.count}개 상품평</span>
-							</c:if>
-							<c:if test="${saleDto.average_rate == 2}">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 14px; font-weight: bold;">${saleDto.count}개 상품평</span>
-							</c:if>
-							<c:if test="${saleDto.average_rate == 3}">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 14px; font-weight: bold;">${saleDto.count}개 상품평</span>
-							</c:if>
-							<c:if test="${saleDto.average_rate == 4}">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 14px; font-weight: bold;">${saleDto.count}개 상품평</span>
-							</c:if>
-							<c:if test="${saleDto.average_rate == 5}">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 14px; font-weight: bold;">${saleDto.count}개 상품평</span>
-							</c:if>
-						</div>
 						<div class="product__details__widget">
+							<div class="rating">
+								<c:if test="${salDto.average_rate == 1}">
+									<i class="fa fa-star"></i><span class="rate">${saleDto.count}개 상품평</span>
+								</c:if>
+								<c:if test="${saleDto.average_rate == 2}">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i><span class="rate">${saleDto.count}개 상품평</span>
+								</c:if>
+								<c:if test="${saleDto.average_rate == 3}">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i><span class="rate">${saleDto.count}개 상품평</span>
+								</c:if>
+								<c:if test="${saleDto.average_rate == 4}">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i><span class="rate">${saleDto.count}개 상품평</span>
+								</c:if>
+								<c:if test="${saleDto.average_rate == 5}">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i><span class="rate">${saleDto.count}개 상품평</span>
+								</c:if>
+							</div>
 							<ul>
 								<li>
-									<span>원가</span>
-									<div class="stock__checkbox">
+									
+									<div>
+									<span class="pd-title">원가</span>
 										<label for="stockin">
-											100
+											<span class="pd-text">${saleDto.price_sale}원</span>
 										</label>
 									</div>
 								</li>
 								<li>
+									
+									<div>
 									<span>판매가</span>
-									<div class="stock__checkbox">
 										<label for="stockin">
-											100
+											<c:choose>
+												<c:when test="${saleDto.discount == null || saleDto.discount == 0}">
+													<span class="pd-text">${saleDto.price_sale}원</span>
+												</c:when>
+												<c:otherwise>
+													<span>${saleDto.price_sale}</span> <span style="text-decoration: none; color : red">-${saleDto.discount}%</span><span style="text-decoration: none; color: black; font-size: 1.3em">${saleDto.discount_sale}</span>
+												</c:otherwise>
+											</c:choose>
 										</label>
 									</div>
 								</li>
 								<li>
-									<span>포인트</span>
-									<div class="stock__checkbox">
+									<span>적립 포인트</span>
+									<div>
 										<label for="stockin">
 											100
 										</label>
@@ -110,7 +119,7 @@
 								</li>
 								<li>
 									<span>브랜드</span>
-									<div class="stock__checkbox">
+									<div>
 										<label for="stockin">
 											100
 										</label>
@@ -118,7 +127,7 @@
 								</li>
 								<li>
 									<span>제품타입</span>
-									<div class="stock__checkbox">
+									<div>
 										<label for="stockin">
 											100
 											
@@ -127,7 +136,7 @@
 								</li>
 								<li>
 									<span>재고</span>
-									<div class="stock__checkbox">
+									<div>
 										<label for="stockin">
 											100
 										</label>
@@ -135,7 +144,7 @@
 								</li>
 								<li>
 									<span>등록일</span>
-									<div class="stock__checkbox">
+									<div>
 										<label for="stockin">
 											100
 										</label>
@@ -143,6 +152,7 @@
 								</li>
 							</ul>
 						</div>
+						</br>
 						<div class="product__details__button">
 							<div class="quantity">
 								<span>구매 수량:</span>
@@ -172,6 +182,9 @@
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">리뷰 (${saleDto.count})</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">상품 Q&A</a>
 							</li>
 						</ul>
 						<div class="tab-content">
@@ -212,6 +225,9 @@
 									</table>
 									</div>
 								</div>
+							</div>
+							<div class="tab-pane" id="tabs-2" role="tabpanel">
+								<p>링크</p>
 							</div>
 						</div>
 					</div>

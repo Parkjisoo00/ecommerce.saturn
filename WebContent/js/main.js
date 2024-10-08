@@ -74,7 +74,7 @@ Created: Colorib
     --------------------*/
     $('.collapse').on('shown.bs.collapse', function () {
         $(this).prev().addClass('active');
-    });ㅇㅇ
+    });
 
     $('.collapse').on('hidden.bs.collapse', function () {
         $(this).prev().removeClass('active');
