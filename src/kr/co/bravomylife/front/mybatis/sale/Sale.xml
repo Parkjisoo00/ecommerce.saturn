@@ -17,14 +17,15 @@
 		FROM
 		(
 		SELECT
-		/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY sle.DT_REG DESC) rnum
+			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY sle.DT_REG DESC) rnum
 			, sle.SEQ_SLE
-			, rate.RATE_STAR
 			, rate.COUNT
+			, rate.RATE_STAR
 			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
-			, rate.SEQ_MBR
-			, rate.RATE_REVIEW
-			, TO_CHAR(rate.DT_REG, 'YYYY-MM-DD') dt_reg
+			, review.SEQ_MBR
+			, review.FLG_DELETE
+			, review.RATE_REVIEW
+			, TO_CHAR(review.DT_REG, 'YYYY-MM-DD') AS dt_reg
 			, mbr.MBR_NM
 		FROM
 			TB_SLE sle
@@ -33,9 +34,13 @@
 		ON
 			sle.SEQ_SLE = rate.SEQ_SLE
 		LEFT JOIN
+			TB_REVIEW review
+		ON
+			sle.SEQ_SLE = review.SEQ_SLE
+		LEFT JOIN
 			TB_MBR_MST mbr
 		ON
-			rate.SEQ_MBR = mbr.SEQ_MBR
+			review.SEQ_MBR = mbr.SEQ_MBR
 		WHERE
 		<include refid="reviewwhere" />
 		)
@@ -47,10 +52,6 @@
 
 	<sql id="reviewwhere">
 		sle.SEQ_SLE = #{seq_sle}
-		AND rate.FLG_DELETE = 'N'
-		<![CDATA[
-		AND SYSDATE >= sle.DT_SALE_START AND SYSDATE <= sle.DT_SALE_END
-		]]>
 	</sql>
 
 	<select id="detailCount" parameterType="pagingDto" resultType="java.lang.Integer">

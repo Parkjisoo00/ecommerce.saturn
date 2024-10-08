@@ -192,13 +192,13 @@
 									<div class="col-lg-12 col-md-12">
 									<table class="headTop_01" style=" margin-left: auto; margin-right: auto; width: 100%">
 									<c:choose>
-										<c:when test="${empty list}">
+										<c:when test="${empty reviewList}">
 											<tr>
 												<td colspan="4">등록된 리뷰가 없습니다.</td>
 											</tr>
 										</c:when>
 										<c:otherwise>
-											<c:forEach items="${list}" var="reviewList">
+											<c:forEach items="${reviewList}" var="reviewList">
 												<tr>
 													<td>
 														${reviewList.average_rate}

@@ -30,8 +30,15 @@ public class PagingDto {
 	private String corp_nm		= "";
 	private String prd_type		= "";
 	private int point_value		= 0;
+	private String mbr_nm		= "";
 	
 	
+	public String getMbr_nm() {
+		return mbr_nm;
+	}
+	public void setMbr_nm(String mbr_nm) {
+		this.mbr_nm = mbr_nm;
+	}
 	public int getPoint_value() {
 		return point_value;
 	}

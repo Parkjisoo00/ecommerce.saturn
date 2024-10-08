@@ -64,14 +64,13 @@ public class BuyWeb extends Common {
 	@Inject
 	SaleSrvc saleSrvc;
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/front/buy/writeForm.web")
 	public ModelAndView writeForm(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, PagingDto reviewpagingDto, SaleDto saleDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			
-			logger.debug("SEQ_MBR 값 확인" + " = " + saleDto.getSeq_mbr());
 			
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
@@ -82,10 +81,24 @@ public class BuyWeb extends Common {
 			PagingListDto _pagingListDto = saleSrvc.detailList(pagingDto);
 			mav.addObject("paging"	, _pagingListDto.getPaging());
 			mav.addObject("list"	, _pagingListDto.getList());
-			/*
+			
 			PagingListDto pagingListDto = saleSrvc.reviewList(reviewpagingDto);
-			mav.addObject("reviewList"	, pagingListDto.getList());
-			*/
+			
+			/*
+			List<SaleDto> reviewList = (List<SaleDto>) pagingListDto.getList();
+			
+			for (int loop = 0; loop < reviewList.size(); loop++) {
+			
+				reviewList.get(loop).setSeq_buy_dtl(buyDao.sequenceDetail());
+			
+			
+			}
+			
+			pagingDto.setMbr_nm(aes.decode(pagingListDto.getPaging().getMbr_nm()));
+			pagingListDto.setPaging(pagingDto);
+			
+			mav.addObject("reviewList"	, reviewList);
+			
 			mav.setViewName("front/buy/writeForm");
 		}
 		catch (Exception e) {
