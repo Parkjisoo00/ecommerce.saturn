@@ -100,9 +100,14 @@ public class BuyWeb extends Common {
 			
 			List<SaleDto> reviewList = (List<SaleDto>) _reviewpagingDto.getList();
 			
-			for (int loop = 0; loop < reviewList.size(); loop++) {
+			if (reviewList.get(0).getRate_review().equals("") || reviewList.get(0).getRate_review() == null) {
 				
-				reviewList.get(loop).setMbr_nm(aes.decode(reviewList.get(loop).getMbr_nm()));
+				_reviewpagingDto.setList("");
+			} else {
+				for (int loop = 0; loop < reviewList.size(); loop++) {
+					
+					reviewList.get(loop).setMbr_nm(aes.decode(reviewList.get(loop).getMbr_nm()));
+				}
 			}
 			mav.addObject("reviewList"	, _reviewpagingDto.getList());
 			

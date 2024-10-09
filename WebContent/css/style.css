@@ -214,6 +214,43 @@ table.headTop_01 th {
 	color: #333 !important;
 }
 
+.pd-rbutton {
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.pd-rtext {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: white;
+	color: black;
+	border: 1px solid #cccccc;
+	border-radius: 10px;
+	text-decoration: none;
+}
+
+table.headTop_pd {
+	margin: 70px 10px;
+	border-collapse: collapse;
+	/* width: 95%; */
+	/* margin: 1rem auto; */
+	background-color: white
+	font-family: "Montserrat", sans-serif;
+}
+
+table.headTop_pd th, table.headTop_pd td {
+	padding: 3px;
+	text-align: left;
+	line-height: 3;
+	border-bottom: 1px solid #e0e0e0;
+	border-top: 1px solid #e0e0e0;
+	font-family: "Montserrat", sans-serif;
+	text-align: center
+}
+
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
