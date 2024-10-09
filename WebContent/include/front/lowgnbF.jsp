@@ -3,7 +3,7 @@
 <div class="col-lg-12" style="padding: 0 !important;">
 	<div>
 		<h6 class="lowgnb-title">기능별</h6>
-		<h6 class="coupon__link" style="text-align: center; letter-spacing: 1.5px; border: none">
+		<h6 class="coupon__link" style="letter-spacing: 1.5px; border: none">
 			<c:choose>
 				<c:when test="${paging.cd_ctg_m == 0}">
 					<a href="javascript:goTypeF('bld', '', '', '', '${paging.cd_ctg_m}', '');" class="ctg-link default">혈당/혈행/혈압</a>
@@ -120,15 +120,16 @@
 			</c:choose>
 		</h6>
 	</div>
+	<h5 class="lowgnb-h5">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</h5>
 	<h6 class="coupon__link" style="text-align: left; letter-spacing: 1.5px;">
 		<ul>
 		<c:choose>
 		<c:when test="${paging.filter == '' && paging.corp_nm == '' && paging.prd_type == ''}">
-			<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
-			<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
-			<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
-			<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
-			<li style="margin: 0 30px 0 0;"><a class="lowgnb-font">브랜드</a>
+			<li class="lowgnb-li-l"><a href="javascript:goTypeF('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
+			<li class="lowgnb-li"><a href="javascript:goTypeF('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
+			<li class="lowgnb-li"><a href="javascript:goTypeF('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
+			<li class="lowgnb-li"><a href="javascript:goTypeF('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
+			<li class="lowgnb-li"><a class="lowgnb-font">브랜드</a>
 				<ul class="dropdown">
 					<li><a href="javascript:goTypeF('', '', 'YS에코비팜', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">YS에코비팜</a></li>
 					<li><a href="javascript:goTypeF('', '', '나우푸드', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">나우푸드</a></li>
@@ -142,7 +143,7 @@
 					<li><a href="javascript:goTypeF('', '', '닥터스베스트', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">닥터스베스트</a></li>
 				</ul>
 			</li >
-			<li style="margin: 0 30px 0 0;"><a class="lowgnb-font">제품타입</a>
+			<li class="lowgnb-li"><a class="lowgnb-font">제품타입</a>
 				<ul class="dropdown">
 					<li><a href="javascript:goTypeF('', '', '', '1', '${paging.cd_ctg_m}', ${paging.linePerPage});">액상</a></li>
 					<li><a href="javascript:goTypeF('', '', '', '2', '${paging.cd_ctg_m}', ${paging.linePerPage});">정</a></li>
@@ -162,11 +163,11 @@
 			</c:when>
 			<c:otherwise>
 				<c:if test="${paging.filter == 'BestP' && paging.corp_nm == '' && paging.prd_type == ''}">
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-fontC">✔판매인기순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
-					<li style="margin: 0 30px 0 0;"><a class="lowgnb-font">브랜드</a>
+					<li class="lowgnb-li-l"><a href="javascript:goTypeF('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-fontC">✔판매인기순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
+					<li class="lowgnb-li"><a class="lowgnb-font">브랜드</a>
 						<ul class="dropdown">
 							<li><a href="javascript:goTypeF('', '', 'YS에코비팜', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">YS에코비팜</a></li>
 							<li><a href="javascript:goTypeF('', '', '나우푸드', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">나우푸드</a></li>
@@ -180,7 +181,7 @@
 							<li><a href="javascript:goTypeF('', '', '닥터스베스트', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">닥터스베스트</a></li>
 						</ul>
 					</li >
-					<li style="margin: 0 30px 0 0;"><a class="lowgnb-font">제품타입</a>
+					<li class="lowgnb-li"><a class="lowgnb-font">제품타입</a>
 						<ul class="dropdown">
 							<li><a href="javascript:goTypeF('', '', '', '1', '${paging.cd_ctg_m}', ${paging.linePerPage});">액상</a></li>
 							<li><a href="javascript:goTypeF('', '', '', '2', '${paging.cd_ctg_m}', ${paging.linePerPage});">정</a></li>
@@ -199,10 +200,10 @@
 				</select>
 				</c:if>
 				<c:if test="${paging.filter == 'LowP' && paging.corp_nm == '' && paging.prd_type == ''}">
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-fontC">✔낮은가격순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
-					<li style="margin: 0 30px 0 0;"><a class="lowgnb-font">브랜드</a>
+					<li class="lowgnb-li-l"><a href="javascript:goTypeF('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-fontC">✔낮은가격순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
+					<li class="lowgnb-li"><a class="lowgnb-font">브랜드</a>
 						<ul class="dropdown">
 							<li><a href="javascript:goTypeF('', '', 'YS에코비팜', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">YS에코비팜</a></li>
 							<li><a href="javascript:goTypeF('', '', '나우푸드', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">나우푸드</a></li>
@@ -216,7 +217,7 @@
 							<li><a href="javascript:goTypeF('', '', '닥터스베스트', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">닥터스베스트</a></li>
 						</ul>
 					</li >
-					<li style="margin: 0 30px 0 0;"><a class="lowgnb-font">제품타입</a>
+					<li class="lowgnb-li"><a class="lowgnb-font">제품타입</a>
 						<ul class="dropdown">
 							<li><a href="javascript:goTypeF('', '', '', '1', '${paging.cd_ctg_m}', ${paging.linePerPage});">액상</a></li>
 							<li><a href="javascript:goTypeF('', '', '', '2', '${paging.cd_ctg_m}', ${paging.linePerPage});">정</a></li>
@@ -235,11 +236,11 @@
 				</select>
 				</c:if>
 				<c:if test="${paging.filter == 'HighP' && paging.corp_nm == '' && paging.prd_type == ''}">
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-fontC">✔높은가격순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
-					<li style="margin: 0 30px 0 0;"><a class="lowgnb-font">브랜드</a>
+					<li class="lowgnb-li-l"><a href="javascript:goTypeF('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-fontC">✔높은가격순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
+					<li class="lowgnb-li"><a class="lowgnb-font">브랜드</a>
 						<ul class="dropdown">
 							<li><a href="javascript:goTypeF('', '', 'YS에코비팜', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">YS에코비팜</a></li>
 							<li><a href="javascript:goTypeF('', '', '나우푸드', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">나우푸드</a></li>
@@ -253,7 +254,7 @@
 							<li><a href="javascript:goTypeF('', '', '닥터스베스트', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">닥터스베스트</a></li>
 						</ul>
 					</li >
-					<li style="margin: 0 30px 0 0;"><a class="lowgnb-font">제품타입</a>
+					<li class="lowgnb-li"><a class="lowgnb-font">제품타입</a>
 						<ul class="dropdown">
 							<li><a href="javascript:goTypeF('', '', '', '1', '${paging.cd_ctg_m}', ${paging.linePerPage});">액상</a></li>
 							<li><a href="javascript:goTypeF('', '', '', '2', '${paging.cd_ctg_m}', ${paging.linePerPage});">정</a></li>
@@ -272,11 +273,11 @@
 				</select>
 				</c:if>
 				<c:if test="${paging.filter == 'DtReg' && paging.corp_nm == '' && paging.prd_type == ''}">
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-fontC">✔등록일순</a></li>
-					<li style="margin: 0 30px 0 0;"><a class="lowgnb-font">브랜드</a>
+					<li class="lowgnb-li-l"><a href="javascript:goTypeF('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-fontC">✔등록일순</a></li>
+					<li class="lowgnb-li"><a class="lowgnb-font">브랜드</a>
 						<ul class="dropdown">
 							<li><a href="javascript:goTypeF('', '', 'YS에코비팜', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">YS에코비팜</a></li>
 							<li><a href="javascript:goTypeF('', '', '나우푸드', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">나우푸드</a></li>
@@ -290,7 +291,7 @@
 							<li><a href="javascript:goTypeF('', '', '닥터스베스트', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">닥터스베스트</a></li>
 						</ul>
 					</li >
-					<li style="margin: 0 30px 0 0;"><a class="lowgnb-font">제품타입</a>
+					<li class="lowgnb-li"><a class="lowgnb-font">제품타입</a>
 						<ul class="dropdown">
 							<li><a href="javascript:goTypeF('', '', '', '1', '${paging.cd_ctg_m}', ${paging.linePerPage});">액상</a></li>
 							<li><a href="javascript:goTypeF('', '', '', '2', '${paging.cd_ctg_m}', ${paging.linePerPage});">정</a></li>
@@ -309,11 +310,11 @@
 				</select>
 				</c:if>
 				<c:if test="${paging.filter == '' && paging.corp_nm != '' && paging.prd_type == ''}">
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
-					<li style="margin: 0 30px 0 0;"><a class="lowgnb-fontC">✔브랜드</a>
+					<li class="lowgnb-li-l"><a href="javascript:goTypeF('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
+					<li class="lowgnb-li"><a class="lowgnb-fontC">✔브랜드</a>
 						<ul class="dropdown">
 							<li><a href="javascript:goTypeF('', '', 'YS에코비팜', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">YS에코비팜</a></li>
 							<li><a href="javascript:goTypeF('', '', '나우푸드', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">나우푸드</a></li>
@@ -327,7 +328,7 @@
 							<li><a href="javascript:goTypeF('', '', '닥터스베스트', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">닥터스베스트</a></li>
 						</ul>
 					</li >
-					<li style="margin: 0 30px 0 0;"><a class="lowgnb-font">제품타입</a>
+					<li class="lowgnb-li"><a class="lowgnb-font">제품타입</a>
 						<ul class="dropdown">
 							<li><a href="javascript:goTypeF('', '', '', '1', '${paging.cd_ctg_m}', ${paging.linePerPage});">액상</a></li>
 							<li><a href="javascript:goTypeF('', '', '', '2', '${paging.cd_ctg_m}', ${paging.linePerPage});">정</a></li>
@@ -346,11 +347,11 @@
 				</select>
 				</c:if>
 				<c:if test="${paging.filter == '' && paging.corp_nm == '' && paging.prd_type != ''}">
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
-					<li style="margin: 0 30px 0 0;"><a href="javascript:goTypeF('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
-					<li style="margin: 0 30px 0 0;"><a class="lowgnb-font">브랜드</a>
+					<li class="lowgnb-li-l"><a href="javascript:goTypeF('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
+					<li class="lowgnb-li"><a href="javascript:goTypeF('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
+					<li class="lowgnb-li"><a class="lowgnb-font">브랜드</a>
 						<ul class="dropdown">
 							<li><a href="javascript:goTypeF('', '', 'YS에코비팜', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">YS에코비팜</a></li>
 							<li><a href="javascript:goTypeF('', '', '나우푸드', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">나우푸드</a></li>
@@ -364,7 +365,7 @@
 							<li><a href="javascript:goTypeF('', '', '닥터스베스트', '', '${paging.cd_ctg_m}', ${paging.linePerPage});">닥터스베스트</a></li>
 						</ul>
 					</li >
-					<li style="margin: 0 30px 0 0;"><a class="lowgnb-fontC">✔제품타입</a>
+					<li class="lowgnb-li"><a class="lowgnb-fontC">✔제품타입</a>
 						<ul class="dropdown">
 							<li><a href="javascript:goTypeF('', '', '', '1', '${paging.cd_ctg_m}', ${paging.linePerPage});">액상</a></li>
 							<li><a href="javascript:goTypeF('', '', '', '2', '${paging.cd_ctg_m}', ${paging.linePerPage});">정</a></li>
