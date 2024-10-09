@@ -118,13 +118,12 @@
 	}
 	
 	function showReview() {
+		var reviewForm = document.getElementById('reviewForm');
 		
-		var inputContainer = document.getElementById('inputContainer');
-		
-		if (inputContainer.style.display === 'none' || inputContainer.style.display === '') {
-			inputContainer.style.display = 'block';
+		if (reviewForm.classList.contains('visible')) {
+			reviewForm.classList.remove('visible');
 		} else {
-			inputContainer.style.display = 'none';
+			reviewForm.classList.add('visible');
 		}
 	}
 	</script>
@@ -398,9 +397,8 @@
 										<div class="pd-rbutton">
 											<input type="button" class="hidden-review-t" onclick="showReview()" value="상품후기 작성" />
 										</div>
-										<div class="hidden-review" id="inputContainer">
-											<p class="hidden-review-p">상품후기를 작성해주세요</p>
-											<input type="text" required autocomplete="off" class="hidden-review-input"/>
+										<div class="hidden-review" id="reviewForm">
+											<textarea placeholder="여기에 상품후기를 작성해주세요" class="hidden-review-area"></textarea>
 										</div>
 									<table class="headTop_pd" style=" margin-left: auto; margin-right: auto; width: 100%">
 									<c:choose>

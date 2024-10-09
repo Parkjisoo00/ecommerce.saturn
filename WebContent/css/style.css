@@ -252,7 +252,12 @@ table.headTop_pd th, table.headTop_pd td {
 }
 
 .hidden-review {
-	display: none;
+	display: flex;
+	max-height: 0;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	transition: max-height 1s ease-out;
 }
 
 .hidden-review-p {
@@ -277,9 +282,9 @@ table.headTop_pd th, table.headTop_pd td {
 	color: #ca1515;
 }
 
-.hidden-review-input {
+.hidden-review-area {
 	height: 50px;
-	width: 100%;
+	width: 300px;
 	border: 1px solid #e1e1e1;
 	border-radius: 2px;
 	margin-bottom: 25px;
@@ -287,6 +292,10 @@ table.headTop_pd th, table.headTop_pd td {
 	padding: 0px;
 	color: #666666;
 	text-align: center;
+}
+
+.visible {
+	max-height: 200px;
 }
 
 /*----------------------------------------*/
