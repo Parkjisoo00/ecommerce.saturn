@@ -29,21 +29,28 @@ public class PagingDto {
 	private String filter		= "";
 	private String corp_nm		= "";
 	private String prd_type		= "";
-	private int point_value		= 0;
+	private int point_stack		= 0;
+	private int point_value			= 0;
 	private String mbr_nm		= "";
 	
 	
+	public int getPoint_value() {
+		return point_value;
+	}
+	public void setPoint_value(int point_value) {
+		this.point_value = point_value;
+	}
 	public String getMbr_nm() {
 		return mbr_nm;
 	}
 	public void setMbr_nm(String mbr_nm) {
 		this.mbr_nm = mbr_nm;
 	}
-	public int getPoint_value() {
-		return point_value;
+	public int getPoint_stack() {
+		return point_stack;
 	}
-	public void setPoint_value(int point_value) {
-		this.point_value = point_value;
+	public void setPoint_stack(int point_stack) {
+		this.point_stack = point_stack;
 	}
 	public Integer getSeq_mbr() {
 		return seq_mbr;

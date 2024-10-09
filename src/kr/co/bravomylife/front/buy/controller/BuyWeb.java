@@ -77,12 +77,12 @@ public class BuyWeb extends Common {
 			
 			if (check.equals(getSession(request, "SEQ_MBR"))) {
 				
-				reviewpagingDto.setRegister(0);
-				saleDto.setRegister(0);
+				reviewpagingDto.setSeq_mbr(0);
+				saleDto.setSeq_mbr(0);
 			} else {
 				
-				reviewpagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
-				saleDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+				reviewpagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+				saleDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			}
 			
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
@@ -97,25 +97,14 @@ public class BuyWeb extends Common {
 			
 			PagingListDto _reviewpagingDto = saleSrvc.reviewList(reviewpagingDto);
 			
+			
 			List<SaleDto> reviewList = (List<SaleDto>) _reviewpagingDto.getList();
 			
 			for (int loop = 0; loop < reviewList.size(); loop++) {
-				SaleDto _reviewList = reviewList.get(loop);
-				_reviewList.setMbr_nm(aes.decode(_reviewList.getMbr_nm()));
 				
-				logger.debug("LOOP 크기 확인" + " = " + reviewList.size());
-				logger.debug("LOOP 돌린 복호화 값 확인" + " = " + aes.decode(_reviewList.getMbr_nm()));
-				logger.debug("LOOP 돌린 복호화 Set 뒤의 값 확인" + " = " + _reviewList.getMbr_nm());
+				reviewList.get(loop).setMbr_nm(aes.decode(reviewList.get(loop).getMbr_nm()));
 			}
-			
-			_reviewpagingDto.setList(reviewList);
-			
-			if (_reviewpagingDto.getPaging().getMbr_nm() == null || _reviewpagingDto.getPaging().getMbr_nm().equals("")) {
-				
-				mav.addObject("reviewList", "");
-			} else {
-				mav.addObject("reviewList", _reviewpagingDto);
-			}
+			mav.addObject("reviewList"	, _reviewpagingDto.getList());
 			
 			mav.setViewName("front/buy/writeForm");
 		}

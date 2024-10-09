@@ -9,9 +9,76 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
+	function goTypeT(value, value2, value3, value4, value5) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
 	
-	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
+	function goTypeF(value, value2, value3, value4, value5) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		frmMain.action = "/front/sale/function_list.web";
+		frmMain.submit();
+	}
 	
+	function goTypeI(value, value2, value3, value4, value5) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		frmMain.action = "/front/sale/ingredient_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeG(value, value2, value3, value4, value5) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		frmMain.action = "/front/sale/gender_list.web";
+		frmMain.submit();
+	}
+	
+	function goWriteForm(value, value2, value3) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.seq_sle.setAttribute("value", value);
+		frmMain.cd_ctg_m.setAttribute("value", value2);
+		frmMain.cd_ctg_b.setAttribute("value", value3);
+		frmMain.action="/front/buy/writeForm.web";
+		frmMain.submit();
+	}
 	</script>
 
 	<!-- Google Font -->
@@ -23,13 +90,20 @@
 
 <body>
 <form id="frmMain" method="POST">
-	<input type="hidden" id="item" name="item" />
+<input type="hidden" id="item" name="item" />
+
+<input type="hidden" id="seq_sle"		name="seq_sle" />
+<input type="hidden" id="sle_nm"		name="sle_nm" value="${saleDto.sle_nm}" />
+<input type="hidden" id="price_sale"	name="price_sale" value="${saleDto.price_sale}" />
+<input type="hidden" id="cd_ctg_m"		name="cd_ctg_m" />
+<input type="hidden" id="cd_ctg_b"		name="cd_ctg_b" />
+<input type="hidden" id="corp_nm"		name="corp_nm" value="${paging.corp_nm}"/>
+<input type="hidden" id="prd_type"		name="prd_type" value="${paging.prd_type}"/>
+<input type="hidden" id="filter"		name="filter" value="${paging.filter}"/>
+<input type="hidden" id="type"			name="type" />
+<input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
 	
-	<input type="hidden" id="seq_sle"	value="${saleDto.seq_sle}" />
-	<input type="hidden" id="sle_nm"	value="${saleDto.sle_nm}" />
-	<input type="hidden" id="price"		value="${saleDto.price_sale}" />
-	
-	<input type="hidden" name="buyList[0].seq_sle" value="${saleDto.seq_sle}" />
+<input type="hidden" name="buyList[0].seq_sle" value="${saleDto.seq_sle}" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -52,11 +126,18 @@
 						<img data-hash="product-1" class="product__big__img" src="${saleDto.img}" alt="" style="width: 450px; height: 450px;">
 					</div>
 				</div>
-				<div class="col-lg-6">
+				<div class="col-lg-6" style="padding-right: 0;">
 					<div class="product__details__text">
-						<h6 style="line-height: 1.5em; min-height: 3em; font-size: 20px; font-weight: bold;">${saleDto.sle_nm}</h6>
+						<h6 class="pd-main">${saleDto.sle_nm}</h6>
 						<div class="product__details__widget">
 							<div class="rating">
+								<c:if test="${saleDto.average_rate == 0}">
+									<i class="fa fa-star" style="color: #e0e0e0;"></i>
+									<i class="fa fa-star" style="color: #e0e0e0;"></i>
+									<i class="fa fa-star" style="color: #e0e0e0;"></i>
+									<i class="fa fa-star" style="color: #e0e0e0;"></i>
+									<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${saleDto.count}개 상품평</span>
+								</c:if>
 								<c:if test="${salDto.average_rate == 1}">
 									<i class="fa fa-star"></i><span class="rate">${saleDto.count}개 상품평</span>
 								</c:if>
@@ -83,12 +164,12 @@
 									<i class="fa fa-star"></i><span class="rate">${saleDto.count}개 상품평</span>
 								</c:if>
 							</div>
-							<ul>
+							<ul class="pd-ul">
 								<li>
 									<div>
 									<span class="pd-title">원가</span>
-										<label for="stockin">
-											<span class="pd-text" style="width: 55px;">${saleDto.price_sale}</span>
+										<label for="stockin" class="pd-label">
+											<span class="pd-text"><fmt:formatNumber value="${saleDto.price_sale}" type="number" /></span>
 											<span class="pd-text">원</span>
 										</label>
 									</div>
@@ -96,26 +177,27 @@
 								<li>
 									<div>
 									<span class="pd-title">판매가</span>
-										<label for="stockin">
-											<span class="pd-text" style="color: #ff4c2e !important; width: 55px;">${saleDto.discount_sale}</span>
-											<span class="pd-text" style="width: 20px !important;">원</span>
-											<span class="pd-text" style="color: #ff4c2e !important; font-size: 14px !important; padding-top: 3px;">(${saleDto.discount}%)</span>
+										<label for="stockin" class="pd-label">
+											<span class="pd-text" style="color: #ff4c2e !important;"><fmt:formatNumber value="${saleDto.discount_sale}" type="number" /></span>
+											<span class="pd-text">원</span>
+											<span class="pd-text" style="color: #ff4c2e !important;">(${saleDto.discount}%)</span>
 										</label>
 									</div>
 								</li>
 								<li>
 									<div>
 									<span class="pd-title">적립 포인트</span>
-										<label for="stockin">
-											<span class="pd-text" style="width: 65px;">${saleDto.point_value} 적립</span>
-											<span class="pd-text" style="color: #346aff !important; font-size: 14px !important; padding-top: 3px;">(2%)</span>
+										<label for="stockin" class="pd-label">
+											<span class="pd-text">${saleDto.point_value}</span>
+											<span class="pd-text">적립</span>
+											<span class="pd-text" style="color: #346aff !important;">(${saleDto.point_stack}%)</span>
 										</label>
 									</div>
 								</li>
 								<li>
 									<div>
 									<span class="pd-title">브랜드</span>
-										<label for="stockin">
+										<label for="stockin" class="pd-label">
 											${saleDto.corp_nm}
 										</label>
 									</div>
@@ -123,7 +205,7 @@
 								<li>
 									<div>
 									<span class="pd-title">제품타입</span>
-										<label for="stockin">
+										<label for="stockin" class="pd-label">
 											${saleDto.prd_type}
 										</label>
 									</div>
@@ -131,7 +213,7 @@
 								<li>
 									<div>
 									<span class="pd-title">재고</span>
-										<label for="stockin">
+										<label for="stockin" class="pd-label">
 											${saleDto.count_stock}
 										</label>
 									</div>
@@ -139,7 +221,7 @@
 								<li>
 									<div>
 									<span class="pd-title">등록일</span>
-										<label for="stockin">
+										<label for="stockin" class="pd-label">
 											${saleDto.dt_reg}
 										</label>
 									</div>
@@ -168,7 +250,80 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-12">
+				<div class="col-lg-12 text-center">
+					<div class="related__title">
+						<h5 class="pd-h5">이런 상품은 어떠세요?</h5><h5 class=pd-subh5>지금 보고 계시는 상품과 관련된 상품들입니다.</h5>
+					</div>
+				</div>
+				<div class="row" style="justify-content: center;">
+				<c:forEach var="list" items="${list}">
+					<div class="col-lg-3 col-md-6" style="padding: 0px !important;">
+						<div class="product__item">
+							<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_b}', '${list.cd_ctg_m}');" style="display: flex; justify-content: center; align-items: center;">
+								<div class="product__item__pic set-bg" data-setbg="${list.img}" style="width: 180px; height: 180px;">
+								<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
+									<div class="label new">베스트</div>
+								</c:if>
+								</div>
+							</a>
+							<div class="product__item__text">
+								<h6 style="line-height: 1.5em; min-height: 3em;"><a href="#" style="font-size: 15px;">${list.sle_nm}</a></h6>
+									<div class="rating">
+										<c:if test="${list.average_rate == 0}">
+											<i class="fa fa-star" style="color: #e0e0e0;"></i>
+											<i class="fa fa-star" style="color: #e0e0e0;"></i>
+											<i class="fa fa-star" style="color: #e0e0e0;"></i>
+											<i class="fa fa-star" style="color: #e0e0e0;"></i>
+											<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.count}개 상품평</span>
+										</c:if>
+										<c:if test="${list.average_rate == 1}">
+											<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+										</c:if>
+										<c:if test="${list.average_rate == 2}">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+										</c:if>
+										<c:if test="${list.average_rate == 3}">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+										</c:if>
+										<c:if test="${list.average_rate == 4}">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+										</c:if>
+										<c:if test="${list.average_rate == 5}">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+										</c:if>
+									</div>
+								<c:choose>
+									<c:when test="${list.discount == null || list.discount == 0}">
+										<div class="product__price">
+											<span style="text-decoration: none; font-size: 1.3em; color: black;">
+												<fmt:formatNumber value="${list.price_sale}" type="number" />
+											</span>원</div>
+									</c:when>
+									<c:otherwise>
+										<div class="product__price">
+											<span><fmt:formatNumber value="${list.price_sale}" type="number" /></span>
+											 <span style="text-decoration: none; color : #ff4c2e">-${list.discount}%</span>
+											 <span style="text-decoration: none; color: black; font-size: 1.3em">
+											 	<fmt:formatNumber value="${list.discount_sale}" type="number" />
+											 </span>원</div>
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+				</div>
+				<div class="col-lg-12" style="padding: 0;">
 					<div class="product__details__tab">
 						<ul class="nav nav-tabs" role="tablist">
 							<li class="nav-item">
@@ -201,9 +356,9 @@
 											<c:forEach items="${reviewList}" var="reviewList">
 												<tr>
 													<td>
-														
+														${reviewList.average_rate}
 													</td>
-													<td style="text-align: left">
+													<td>
 														${reviewList.rate_review}
 													</td>
 													<td>
@@ -226,65 +381,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<!-- 리스트 형태로 이 페이지의 상품과 같은 대분류의 중분류 상품들을 넣기 -->
-			<div class="col-lg-12 text-center">
-				<div class="related__title">
-					<h5>함께 보면 좋은 상품</h5>
-				</div>
-			</div>
-			<div class="row">
-			<c:forEach var="list" items="${list}">
-				<div class="col-lg-3 col-md-6">
-					<div class="product__item">
-						<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_b}', '${list.cd_ctg_m}');">
-							<div class="product__item__pic set-bg" data-setbg="${list.img}">
-							<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
-								<div class="label new">베스트</div>
-							</c:if>
-							</div>
-						</a>
-						<div class="product__item__text">
-							<h6 style="line-height: 1.5em; min-height: 3em;"><a href="#" style="font-size: 15px;">${list.sle_nm}</a></h6>
-								<div class="rating">
-									<c:if test="${list.average_rate == 1}">
-										<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
-									</c:if>
-									<c:if test="${list.average_rate == 2}">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
-									</c:if>
-									<c:if test="${list.average_rate == 3}">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
-									</c:if>
-									<c:if test="${list.average_rate == 4}">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
-									</c:if>
-									<c:if test="${list.average_rate == 5}">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
-									</c:if>
-								</div>
-							<c:choose>
-								<c:when test="${list.discount == null || list.discount == 0}">
-									<div class="product__price"><span style="text-decoration: none; font-size: 1.3em; color: black;">${list.price_sale}</span>원</div>
-								</c:when>
-								<c:otherwise>
-									<div class="product__price"><span>${list.price_sale}</span> <span style="text-decoration: none; color : #ff4c2e">-${list.discount}%</span><span style="text-decoration: none; color: black; font-size: 1.3em">${list.discount_sale}</span>원</div>
-								</c:otherwise>
-							</c:choose>
-						</div>
-					</div>
-				</div>
-				</c:forEach>
 			</div>
 		</div>
 	</section>

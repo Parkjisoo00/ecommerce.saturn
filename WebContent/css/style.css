@@ -117,6 +117,17 @@ table.headTop_01 th {
 	padding-left: 1% !important;
 }
 
+.lowgnb-h5 {
+	font-weight: bold;
+	font-size: 14px !important;
+	color: #303030 !important;
+	list-style: none !important;
+	display: inline-block !important;
+	position: relative !important;
+	margin-bottom: 5px !important;
+	padding-left: 1% !important;
+}
+
 /*----------------------------------------*/
 /* SaleList Select CSS
 /*----------------------------------------*/
