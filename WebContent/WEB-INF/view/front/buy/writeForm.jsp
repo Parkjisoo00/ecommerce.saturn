@@ -8,6 +8,8 @@
 
 <head>
 	<%@ include file="/include/common/header.jsp" %>
+	<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
+	<script type="text/javascript" src="/js/package/tinymce.js"></script>
 	<script>
 	<c:if test="${empty sessionScope.SEQ_MBR}">
 	var isLogin = false;
@@ -113,6 +115,17 @@
 		frmMain.action = "/front/basket/setBasketIframe.web";
 		frmMain.target = "frmBlank";
 		frmMain.submit();
+	}
+	
+	function showReview() {
+		
+		var inputContainer = document.getElementById('inputContainer');
+		
+		if (inputContainer.style.display === 'none' || inputContainer.style.display === '') {
+			inputContainer.style.display = 'block';
+		} else {
+			inputContainer.style.display = 'none';
+		}
 	}
 	</script>
 
@@ -367,7 +380,7 @@
 								<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">상품상세정보</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">리뷰 (${saleDto.count})</a>
+								<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">상품후기 (${saleDto.count})</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">상품 Q&A</a>
@@ -382,11 +395,18 @@
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
 								<div class="row">
 									<div class="col-lg-12 col-md-12">
+										<div class="pd-rbutton">
+											<input type="button" class="hidden-review-t" onclick="showReview()" value="상품후기 작성" />
+										</div>
+										<div class="hidden-review" id="inputContainer">
+											<p class="hidden-review-p">상품후기를 작성해주세요</p>
+											<input type="text" required autocomplete="off" class="hidden-review-input"/>
+										</div>
 									<table class="headTop_pd" style=" margin-left: auto; margin-right: auto; width: 100%">
 									<c:choose>
 										<c:when test="${empty reviewList}">
 											<tr>
-												<td colspan="4">등록된 리뷰가 없습니다.</td>
+												<td colspan="4">등록된 상품후기가 없습니다.</td>
 											</tr>
 										</c:when>
 										<c:otherwise>
@@ -436,9 +456,6 @@
 									<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
 										<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
 									</div>
-										<div class="pd-rbutton">
-											<a href="#" class="pd-rtext">리뷰 등록</a>
-										</div>
 									</div>
 								</div>
 							</div>
