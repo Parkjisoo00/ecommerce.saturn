@@ -102,6 +102,21 @@ table.headTop_01 th {
 	font-weight: bold !important;
 }
 
+.lowgnb-li {
+	list-style: none !important;
+	display: inline-block !important;
+	position: relative !important;
+	margin: 0 30px 0 0 !important;
+}
+
+.lowgnb-li-l {
+	list-style: none !important;
+	display: inline-block !important;
+	position: relative !important;
+	margin: 0 30px 0 0 !important;
+	padding-left: 1% !important;
+}
+
 /*----------------------------------------*/
 /* SaleList Select CSS
 /*----------------------------------------*/
@@ -112,7 +127,7 @@ table.headTop_01 th {
 	border-radius: 5px;
 	font-size: 13px;
 	padding: 0;
-	margin: 0 30px 0 380px;
+	margin: 0 0 0 38.5%;
 }
 
 /*----------------------------------------*/
@@ -132,18 +147,60 @@ table.headTop_01 th {
 
 .pd-text {
 	font-weight: 450 !important;
-	font-size: 16px !important;
+	font-size: 15px !important;
 	color: #555 !important;
-	display: flex;
-	align-items: center;
+	display: inline-block !important;
+	width: auto !important;
+	height: auto !important;
 }
 
 .pd-title {
 	font-weight: 450 !important;
-	font-size: 16px !important;
+	font-size: 15px !important;
 	color: #333 !important;
 	display: flex;
 	align-items: center;
+}
+
+.pd-main {
+	line-height: 1.5em;
+	min-height: 3em;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.pd-label {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: flex-start !important;
+	gap: 10px !important;
+}
+
+.pd-ul {
+	display: flex;
+	flex-direction: column;
+	column; gap: 2px;
+}
+
+.pd-h5 {
+	font-size: 20px !important;
+	color: #111111 !important;
+	font-weight: 600 !important;
+	text-transform: uppercase !important;
+	margin-bottom: 0px !important;
+	margin-top: 50px !important;
+}
+
+.pd-subh5 {
+	font-size: 20px !important;
+	color: #111111 !important;
+	font-weight: 600 !important;
+	text-transform: uppercase !important;
+	margin-bottom: 50px !important;
+	margin-top: 15px !important;
+	font-weight: 450 !important;
+	font-size: 15px !important;
+	color: #333 !important;
 }
 
 /*----------------------------------------*/
@@ -1349,7 +1406,8 @@ ol {
 }
 
 .product__item__pic {
-	height: 300px;
+	height: 200px;
+	width: 100%;
 	position: relative;
 	overflow: hidden;
 	border: 1px solid #e0e0e0
@@ -1476,7 +1534,7 @@ ol {
 
 .product__item__text .rating i {
 	font-size: 10px;
-	color: #e3c01c;
+	color: gold;
 	margin-right: -4px;
 }
 
@@ -1969,7 +2027,7 @@ ol {
 
 .product__details__text .rating i {
 	font-size: 12px;
-	color: #e3c01c;
+	color: gold;
 	margin-right: -4px;
 }
 
@@ -2003,6 +2061,7 @@ ol {
 	float: left;
 	margin-right: 10px;
 	margin-bottom: 10px;
+	margin-left: 9.3%;
 }
 
 .quantity>span {
@@ -2046,7 +2105,10 @@ ol {
 
 .product__details__button {
 	overflow: hidden;
-	margin-bottom: 25px;
+	margin-bottom: 20px;
+	margin-top: 25px;
+	border-top: 1px solid #707070;
+	padding-top: 30px;
 }
 
 .product__details__button .cart-btn {
@@ -2092,8 +2154,6 @@ ol {
 	font-size: 18px;
 	color: #666666;
 }
-
-
 
 .product__details__widget {
 	border-top: 1px solid #707070;
@@ -2282,7 +2342,7 @@ ol {
 	left: 0;
 	top: 13px;
 	height: 1px;
-	width: 360px;
+	width: 33%;
 	background: #707070;
 	content: "";
 }
@@ -2292,7 +2352,7 @@ ol {
 	right: 0;
 	top: 13px;
 	height: 1px;
-	width: 360px;
+	width: 33%;
 	background: #707070;
 	content: "";
 }
@@ -2334,7 +2394,8 @@ ol {
 	color: #111111;
 	font-weight: 600;
 	text-transform: uppercase;
-	margin-bottom: 35px;
+	margin-bottom: 20px;
+	margin-top: 60px;
 }
 
 /*---------------------
@@ -2586,9 +2647,8 @@ ol {
 	border-bottom: 1px solid #e0e0e0;
 }
 
-.coupon__link ul  {
+.coupon__link ul {
 	list-style: none;
-	text-align: center;
 	position: relative;
 }
 
