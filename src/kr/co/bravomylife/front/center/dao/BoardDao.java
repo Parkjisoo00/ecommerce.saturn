@@ -61,10 +61,11 @@ public class BoardDao extends BaseDao{
 	public int deleteFlag(BoardDto boardDto) {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.center.Board.deleteFlag", boardDto);
 	}
+	*/
 	public int update(BoardDto boardDto) {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.center.Board.update", boardDto);
 	}
-	*/
+	
 	public BoardDto select(BoardDto boardDto) {
 		
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.center.Board.select", boardDto);

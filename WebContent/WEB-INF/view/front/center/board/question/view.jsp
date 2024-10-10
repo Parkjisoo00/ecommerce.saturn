@@ -14,6 +14,15 @@
 	<script>
 	
 	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
+
+	function modifyForm(value) {
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("cd_bbs_type").value = value;
+		frmMain.action="/front/center/board/modifyForm.web";
+		frmMain.submit();
+	}
+	
 	function goList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -80,16 +89,15 @@
 			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="checkout__form__input">
 					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">내용 <span></span></p>
-					<input type="text" id="content" name="content" value="${boardDto.content}sdfsdfsdf" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
+					<input type="text" id="content" name="content" value="${boardDto.content}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
 				</div>
 			</div>
 			<br/>
 			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="checkout__form__input">
-					<c:if test="${boardDto.file_orig != ''}">
 						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">첨부 파일 <span></span></p>
-							<a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});" style="margin-left: 300px;" >다운로드</a>
-					</c:if>		
+						<img id="img" src="/image/sale/${saleDto.img}" height="250px" alt="판매상품 이미지" style="cursor: pointer; margin-left: 300px;" onclick="window.open(this.src)" />
+							<!-- <a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});" style="margin-left: 300px;" >다운로드</a> -->
 				</div>
 			</div>
 			<br/>

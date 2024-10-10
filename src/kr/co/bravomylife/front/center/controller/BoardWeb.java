@@ -76,6 +76,88 @@ public class BoardWeb extends Common {
 	 * @param boardDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
+	 * @since 2024-10-10
+	 * <p>DESCRIPTION: 고객센터 수정 처리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/center/board/modifyProc.web", method = RequestMethod.POST)
+	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			String contents = boardDto.getContent();
+			
+			contents = contents.replace("<p>", "").replace("</p>", "");
+			
+			boardDto.setContent(contents);
+
+			boardDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			if (boardSrvc.update(boardDto)) {
+				request.setAttribute("script"	, "alert('수정되었습니다.');");
+				request.setAttribute("redirect"	, "/front/center/board/list.web?cd_bbs_type=" + boardDto.getCd_bbs_type());
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-10
+	 * <p>DESCRIPTION: 고객센터 수정 폼</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/center/board/modifyForm.web", method = RequestMethod.POST)
+	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			BoardDto _boardDto = boardSrvc.select(boardDto);
+			
+			mav.addObject("boardDto", _boardDto);
+			
+			if (boardDto.getCd_bbs_type() == 3) {
+				mav.setViewName("front/center/board/question/modifyForm");
+			}
+			else {
+				request.setAttribute("redirect"	, "/");
+				mav.setViewName("forward:/servlet/result.web");
+			}
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
 	 * @since 2024-10-08
 	 * <p>DESCRIPTION: 고객센터 보기</p>
 	 * <p>IMPORTANT:</p>

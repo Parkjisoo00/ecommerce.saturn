@@ -95,7 +95,7 @@
 					<br/>
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="checkout__form__input">
-							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">첨부 파일 <span>*</span></p>
+							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">첨부 파일 <span></span></p>
 								<input type="file" id="files[0]" name="files[0]" />
 						</div>
 					</div>
@@ -104,8 +104,8 @@
 					<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="checkout__form__input">
-							<input type="button" value="등록" style="width:100px; font-weight: bold;" onclick="javascript:writeProc(3);" />
-					 		<input type="button" value="목록" style="width:100px; font-weight: bold;" onclick="javascript:goList(3);"/>
+							<input type="button" value="등록" style="width:100px; font-weight: bold; font-size: 16px;" onclick="javascript:writeProc(3);" />
+					 		<input type="button" value="목록" style="width:100px; font-weight: bold; font-size: 16px;" onclick="javascript:goList(3);"/>
 						</div>
 					</div>
 				</div>

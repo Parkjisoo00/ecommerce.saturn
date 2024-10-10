@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.center.Board">
 	
+	<update id="update" parameterType="boardDto">
+		UPDATE
+			TB_BBS
+		SET
+			TITLE		= #{title}
+			, CD_CTG	= #{cd_ctg}
+			, CONTENT	= #{content}
+			, DT_UPT	= SYSDATE
+			, UPDATER	= #{updater}
+		WHERE
+			SEQ_BBS = #{seq_bbs}
+	</update>
+	
 	<select id="selectReply" parameterType="boardDto" resultType="boardDto">
 		SELECT
 			SEQ_BBS
