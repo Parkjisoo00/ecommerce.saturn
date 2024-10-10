@@ -65,7 +65,7 @@
 			</c:when>
 			<c:otherwise>
 				<c:if test="${paging.filter == 'BestP' && paging.corp_nm == '' && paging.prd_type == ''}">
-					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-fontC">✔판매인기순</a></li>
+					<li class="lowgnb-li-l"><a href="javascript:goTypeG('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-fontC">✔판매인기순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
@@ -94,7 +94,7 @@
 							<li><a href="javascript:goTypeG('', '', '', '7', '${paging.cd_ctg_m}', ${paging.linePerPage});">츄어볼</a></li>
 						</ul>
 					</li>
-				<select name="linePerPage" id="linePerPage" class="sale-select" onchange="javascript:goTypeG('', '', '', '', '${paging.cd_ctg_m}', this);">
+				<select name="linePerPage" id="linePerPage" class="sale-select" onchange="javascript:goTypeG('', 'BestP', '', '', '${paging.cd_ctg_m}', this);">
 					<option value="10" <c:if test="${paging.linePerPage == 10}">selected</c:if>>10개씩보기</option>
 					<option value="20" <c:if test="${paging.linePerPage == 20}">selected</c:if>>20개씩보기</option>
 					<option value="30" <c:if test="${paging.linePerPage == 30}">selected</c:if>>30개씩보기</option>
@@ -102,7 +102,7 @@
 				</select>
 				</c:if>
 				<c:if test="${paging.filter == 'LowP' && paging.corp_nm == '' && paging.prd_type == ''}">
-					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
+					<li class="lowgnb-li-l"><a href="javascript:goTypeG('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-fontC">✔낮은가격순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
@@ -131,7 +131,7 @@
 							<li><a href="javascript:goTypeG('', '', '', '7', '${paging.cd_ctg_m}', ${paging.linePerPage});">츄어볼</a></li>
 						</ul>
 					</li>
-				<select name="linePerPage" id="linePerPage" class="sale-select" onchange="javascript:goTypeG('', '', '', '', '${paging.cd_ctg_m}', this);">
+				<select name="linePerPage" id="linePerPage" class="sale-select" onchange="javascript:goTypeG('', 'LowP', '', '', '${paging.cd_ctg_m}', this);">
 					<option value="10" <c:if test="${paging.linePerPage == 10}">selected</c:if>>10개씩보기</option>
 					<option value="20" <c:if test="${paging.linePerPage == 20}">selected</c:if>>20개씩보기</option>
 					<option value="30" <c:if test="${paging.linePerPage == 30}">selected</c:if>>30개씩보기</option>
@@ -139,7 +139,7 @@
 				</select>
 				</c:if>
 				<c:if test="${paging.filter == 'HighP' && paging.corp_nm == '' && paging.prd_type == ''}">
-					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
+					<li class="lowgnb-li-l"><a href="javascript:goTypeG('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-fontC">✔높은가격순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
@@ -168,7 +168,7 @@
 							<li><a href="javascript:goTypeG('', '', '', '7', '${paging.cd_ctg_m}', ${paging.linePerPage});">츄어볼</a></li>
 						</ul>
 					</li>
-				<select name="linePerPage" id="linePerPage" class="sale-select" onchange="javascript:goTypeG('', '', '', '', '${paging.cd_ctg_m}', this);">
+				<select name="linePerPage" id="linePerPage" class="sale-select" onchange="javascript:goTypeG('', 'HighP', '', '', '${paging.cd_ctg_m}', this);">
 					<option value="10" <c:if test="${paging.linePerPage == 10}">selected</c:if>>10개씩보기</option>
 					<option value="20" <c:if test="${paging.linePerPage == 20}">selected</c:if>>20개씩보기</option>
 					<option value="30" <c:if test="${paging.linePerPage == 30}">selected</c:if>>30개씩보기</option>
@@ -176,7 +176,7 @@
 				</select>
 				</c:if>
 				<c:if test="${paging.filter == 'DtReg' && paging.corp_nm == '' && paging.prd_type == ''}">
-					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
+					<li class="lowgnb-li-l"><a href="javascript:goTypeG('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-fontC">✔등록일순</a></li>
@@ -205,7 +205,7 @@
 							<li><a href="javascript:goTypeG('', '', '', '7', '${paging.cd_ctg_m}', ${paging.linePerPage});">츄어볼</a></li>
 						</ul>
 					</li>
-				<select name="linePerPage" id="linePerPage" class="sale-select" onchange="javascript:goTypeG('', '', '', '', '${paging.cd_ctg_m}', this);">
+				<select name="linePerPage" id="linePerPage" class="sale-select" onchange="javascript:goTypeG('', 'DtReg', '', '', '${paging.cd_ctg_m}', this);">
 					<option value="10" <c:if test="${paging.linePerPage == 10}">selected</c:if>>10개씩보기</option>
 					<option value="20" <c:if test="${paging.linePerPage == 20}">selected</c:if>>20개씩보기</option>
 					<option value="30" <c:if test="${paging.linePerPage == 30}">selected</c:if>>30개씩보기</option>
@@ -213,7 +213,7 @@
 				</select>
 				</c:if>
 				<c:if test="${paging.filter == '' && paging.corp_nm != '' && paging.prd_type == ''}">
-					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
+					<li class="lowgnb-li-l"><a href="javascript:goTypeG('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
@@ -242,7 +242,7 @@
 							<li><a href="javascript:goTypeG('', '', '', '7', '${paging.cd_ctg_m}', ${paging.linePerPage});">츄어볼</a></li>
 						</ul>
 					</li>
-				<select name="linePerPage" id="linePerPage" class="sale-select" onchange="javascript:goTypeG('', '', '', '', '${paging.cd_ctg_m}', this);">
+				<select name="linePerPage" id="linePerPage" class="sale-select" onchange="javascript:goTypeG('', '', '${paging.corp_nm}', '', '${paging.cd_ctg_m}', this);">
 					<option value="10" <c:if test="${paging.linePerPage == 10}">selected</c:if>>10개씩보기</option>
 					<option value="20" <c:if test="${paging.linePerPage == 20}">selected</c:if>>20개씩보기</option>
 					<option value="30" <c:if test="${paging.linePerPage == 30}">selected</c:if>>30개씩보기</option>
@@ -250,7 +250,7 @@
 				</select>
 				</c:if>
 				<c:if test="${paging.filter == '' && paging.corp_nm == '' && paging.prd_type != ''}">
-					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
+					<li class="lowgnb-li-l"><a href="javascript:goTypeG('', 'BestP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">판매인기순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'LowP', '', '', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">낮은가격순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'HighP', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">높은가격순</a></li>
 					<li class="lowgnb-li"><a href="javascript:goTypeG('', 'DtReg', '','', '${paging.cd_ctg_m}', ${paging.linePerPage});" class="lowgnb-font">등록일순</a></li>
@@ -279,7 +279,7 @@
 							<li><a href="javascript:goTypeG('', '', '', '7', '${paging.cd_ctg_m}', ${paging.linePerPage});">츄어볼</a></li>
 						</ul>
 					</li>
-				<select name="linePerPage" id="linePerPage" class="sale-select" onchange="javascript:goTypeG('', '', '', '', '${paging.cd_ctg_m}', this);">
+				<select name="linePerPage" id="linePerPage" class="sale-select" onchange="javascript:goTypeG('', '', '', '${paging.prd_type}', '${paging.cd_ctg_m}', this);">
 					<option value="10" <c:if test="${paging.linePerPage == 10}">selected</c:if>>10개씩보기</option>
 					<option value="20" <c:if test="${paging.linePerPage == 20}">selected</c:if>>20개씩보기</option>
 					<option value="30" <c:if test="${paging.linePerPage == 30}">selected</c:if>>30개씩보기</option>

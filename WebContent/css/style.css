@@ -113,7 +113,7 @@ table.headTop_01 th {
 	list-style: none !important;
 	display: inline-block !important;
 	position: relative !important;
-	margin: 0 30px 0 -4px !important;
+	margin: 0 30px 0 0 !important;
 	padding-left: 1% !important;
 }
 
