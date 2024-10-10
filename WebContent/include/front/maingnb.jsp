@@ -114,7 +114,7 @@
 					<li><a href="#">안심 조회 서비스</a></li>
 					<li><a href="#">건강 정보</a></li>
 					<li><a href="#">새소식</a></li>
-					<li><a href="#">성분 사전</a></li>
+					<li><a href="/front/hpSur/ingredient.web">성분 사전</a></li>
 				</ul>
 			</li>
 			<li style="display: inline-block; margin: 0 57px; position: relative;">
