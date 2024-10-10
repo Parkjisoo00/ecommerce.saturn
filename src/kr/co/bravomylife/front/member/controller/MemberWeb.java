@@ -46,6 +46,7 @@ import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.member.dto.MemberDto;
 import kr.co.bravomylife.front.member.service.MemberSrvc;
 import kr.co.bravomylife.util.security.HSwithSHA;
+import kr.co.bravomylife.util.security.Passwd;
 import kr.co.bravomylife.util.security.SKwithAES;
 
 /**
@@ -79,47 +80,67 @@ public class MemberWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-10-08
-	 * <p>DESCRIPTION: 비밀번호 재설정</p>
+	 * @since 2024-10-10
+	 * <p>DESCRIPTION: 임시 비밀번호 확인 및 처리 </p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/front/member/findPasswdResultProc.web")
-	public ModelAndView findPasswdResultProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto, String tempPasswd) {
+	public ModelAndView findPasswdResultProc(HttpServletRequest request, HttpServletResponse response
+			, MemberDto memberDto
+			, String passwd_temp
+			, String passwd_input
+			, String newPasswd) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
 			
-			// DB에서 저장된 비밀번호 가져오기
-			String dbPasswd = memberSrvc.selectPasswd(memberDto).getPasswd();
+			// - 새 비밀번호(newPasswd)와 새 비밀번호(newPasswd_) 확인이 같은지는 폼에서 처리
+			// - 폼에서 암호화된 이메일(memberDto.getEmail())과 임시 비밀번호(randomPassword)를 제공하여야 함
+			logger.debug("암호화된 이메일=" + URLDecoder.decode(memberDto.getEmail()));
+			logger.debug("암호화된 임시 비밀번호=" + URLDecoder.decode(passwd_temp));
+			logger.debug("회원이 입력한 임시 비밀번호=" + passwd_input);
+			logger.debug("회원이 입력한 신규 비밀번호=" + newPasswd);
 			
-			// DB에서 저장된 비밀번호 가져오기
-			//MemberDto dbMemberDto = memberSrvc.selectPasswd(memberDto); // MemberDto 객체를 반환받음
-
-			// 비밀번호 추출
-			//String dbPasswd = dbMemberDto.getPasswd(); // dbMemberDto에서 비밀번호를 추출하여 String 타입으로 저장
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
 			
-			// 입력한 임시 비밀번호와 DB에 저장된 비밀번호 비교
-			if (tempPasswd.equals(dbPasswd)) {
-
-				// 비밀번호 업데이트 실행
-				boolean updateResult = memberSrvc.updatePasswd(memberDto);
+			String randomPassword = aes.decode(URLDecoder.decode(passwd_temp));
+						
+			// 1. 회원이 입력한 임시 비밀번호(passwd_input)와 복호화한 임시 비밀번호가 같으면
+			
+			//String passwd_input = aes.decode(passwd_input);
+			
+			// 2. 회원의 비밀번호를 새 비밀번호로 업데이트(복호화한 회원의 이메일 기준)
+			
+			//DB에 비밀번호 업데이트
+			if (passwd_input.equals(randomPassword)) {
+					
+				// 신규 비밀번호 암호화	
+				memberDto.setPasswd(HSwithSHA.encode(newPasswd));
 				
-				if (updateResult) {
-					// 업데이트 성공
-					request.setAttribute("script", "alert('비밀번호가 성공적으로 변경되었습니다.');");
-					request.setAttribute("redirect", "/front/login/loginForm.web");
-
-				} else {
-					// 업데이트 실패
-					request.setAttribute("script", "alert('비밀번호 변경에 실패하였습니다. 시스템 관리자에게 문의하세요.');");
-					request.setAttribute("redirect", "/front/member/findPasswdResult.web");
+				memberDto.setEmail(URLDecoder.decode(memberDto.getEmail()));
+				if (memberSrvc.updatePasswd(memberDto)){
+					request.setAttribute("script"	, "alert('신규 비밀번호가 재설정 되었습니다.');");
+					request.setAttribute("redirect"	, "/front/login/loginForm.web");
 				}
-				
+				else {
+					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+					request.setAttribute("redirect"	, "/");
+				}
 			}
-			
-		}catch (Exception e) {
+			else {
+				request.setAttribute("script"	, "alert('현재 비밀번호가 틀립니다!');");
+				request.setAttribute("redirect"	, "/front/member/findPasswdResult.web?email="
+								+ memberDto.getEmail()
+								+ "&passwd_temp=" + passwd_temp);
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		
+		}
+		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".findPasswdResultProc()] " + e.getMessage(), e);
 		}
 		finally {}
@@ -133,7 +154,7 @@ public class MemberWeb extends Common {
 	 * @return ModelAndView
 	 * 
 	 * @since 2024-10-06
-	 * <p>DESCRIPTION:비밀번호 재설정 폼</p>
+	 * <p>DESCRIPTION:임시 비밀번호 확인 및 처리 폼</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
@@ -165,6 +186,7 @@ public class MemberWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/front/member/findPasswProc.web")
 	public ModelAndView findPasswProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
@@ -192,20 +214,26 @@ public class MemberWeb extends Common {
 			if (check == 1) {
 				
 				// 인증 이메일 발송
+				
+				String randomPassword = Passwd.generateRandomPassword(12);
+				
+				System.out.println("Generated Random Password: " + randomPassword);
+				
 				EmailDto emailDto = new EmailDto();
 				
 				emailDto.setSender(dynamicProperties.getMessage("email.sender.mail"));
 				emailDto.setTo(new String[] {aes.decode(memberDto.getEmail())});
-				emailDto.setSubject("이메일 인증");
-				emailDto.setMessage("<b>회원 정보가 확인되었습니다.</b>아래 주소에서 비밀번호를 재설정해 주십시오.<br>"
-							+ "하기 인증하기를 클릭하셔야 가입이 완료됩니다.<br><br>"
-							+ "<a href='http://127.0.0.1:8080/front/member/findPasswdResult.web'>여기를 클릭하여 페이지로 이동하십시오</a><br><br>"
-							+ "해당 페이지로 이동하신 다음"
-							+ "다음의 임시 비밀번호를 입력하시어 비밀번호를 재설정해주십시오."
-							+ " <br><br> "
-							+ "[임시 비밀번호: "
-							+ memberDto.getPasswd()
-							+ "]");
+				emailDto.setSubject("비밀번호 인증");
+				emailDto.setMessage("<b>회원 정보가 확인되었습니다.</b> <br>아래 주소에서 비밀번호를 재설정해 주십시오.<br>"
+							+ "아래 링크를 클릭하셔야 비밀번호 재설정 페이지로 이동합니다.<br><br>"
+							+ "<a href=\"http://127.0.0.1:8080/front/member/findPasswdResult.web?email="
+							+ URLEncoder.encode(memberDto.getEmail())
+							+ "&passwd_temp=" + URLEncoder.encode(aes.encode(randomPassword))
+							+ "\">링크를 클릭하세요</a><br>"
+							+ "다음의 임시 비밀번호를 입력하시어 비밀번호를 재설정해주십시오.<br><br>"
+							+ "<b>[임시 비밀번호: "
+							+ randomPassword
+							+ "]</b>");
 				
 				emailCmpn.send(emailDto);
 				

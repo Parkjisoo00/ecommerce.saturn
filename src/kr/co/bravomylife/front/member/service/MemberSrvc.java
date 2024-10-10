@@ -30,7 +30,6 @@ import kr.co.bravomylife.front.member.dao.MemberDao;
 import kr.co.bravomylife.front.member.dao.TermAgreeDao;
 import kr.co.bravomylife.front.member.dto.MemberDto;
 import kr.co.bravomylife.front.member.dto.TermAgreeDto;
-import kr.co.bravomylife.util.security.Passwd;
 
 /**
  * @version 1.0.0
@@ -77,13 +76,16 @@ public class MemberSrvc {
 		if (result == 1) {
 			
 			//랜덤 비밀번호 생성
-			String randomPassword = Passwd.generateRandomPassword(12); // 원하는 길이 설정
+			//String randomPassword = Passwd.generateRandomPassword(16); // 원하는 길이 설정
+			
+			// 생성된 랜덤 비밀번호는 randomPassword 변수에 저장됨
+			//System.out.println("Generated random password: " + randomPassword);
 			
 			//생성된 랜덤 비밀번호를 DTO에 설정
-			memberDto.setPasswd(randomPassword);
+			//memberDto.setPasswd(randomPassword);
 			
 			//임시 비밀번호를 데이터베이스에 저장
-			memberDao.tempPasswd(memberDto);
+			//memberDao.tempPasswd(memberDto);
 			
 			return 1;
 		}

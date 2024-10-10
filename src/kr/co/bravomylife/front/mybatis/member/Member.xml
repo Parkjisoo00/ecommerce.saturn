@@ -9,7 +9,7 @@
 			PASSWD		= #{newPasswd}
 			, DT_UPT	= SYSDATE
 		WHERE
-			PASSWD		= #{passwd}
+			EMAIL		= #{email}
 	</update>
 	
 	<select id="selectPasswd" parameterType="memberDto" resultType="memberDto">

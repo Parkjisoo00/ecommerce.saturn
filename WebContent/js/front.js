@@ -211,14 +211,14 @@ function checkLogin() {
 	}
 	
 	// 아이디 저장 체크 로직
-		if (document.getElementById("rememberMe").checked) {
-			localStorage.setItem("savedEmail", document.getElementById("email").value);
-		} else {
-			localStorage.removeItem("savedEmail"); // 체크 해제 시 저장된 아이디 삭제
-		}
-		
-		frmMain.action = "/front/login/loginProc.web";
-		frmMain.submit();
+	if (document.getElementById("rememberMe").checked) {
+		localStorage.setItem("savedEmail", document.getElementById("email").value);
+	} else {
+		localStorage.removeItem("savedEmail"); // 체크 해제 시 저장된 아이디 삭제
+	}
+	
+	frmMain.action = "/front/login/loginProc.web";
+	frmMain.submit();
 }
 
 function goToRegister() {
@@ -241,17 +241,43 @@ function moveToFindPasswd() {
 }
 
 function resetPasswd() {
-	if (document.getElementById("newPasswd").value != document.getElementById("newPasswd_").value) {
-			alert("비밀번호를 확인하세요!");
-			isSubmit = false;
-			document.getElementById("newPasswd").focus();
-		}
-		
-		var regExpPasswd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
-		if (!regExpPasswd.test(document.getElementById("newPasswd").value)) {
+	
+	var passwd_input = $("#passwd_input").val();	// 현재 임시 비밀번호
+	
+	var newPasswd	= $("#newPasswd").val();
+	var newPasswd_	= $("#newPasswd_").val();
+	
+	// 임시 비밀번호가 비어 있는지 확인
+	if (!passwd_input) {
+		alert("임시 비밀번호를 입력해주세요!");
+		return;
+	}
+	
+	// 새비밀번호가 비어 있는지 확인
+	if (!newPasswd) {
+		alert("새비밀번호를 입력해주세요!");
+		return;
+	}
+	
+	// 새비밀번호 확인이 비어 있는지 확인
+	if (!newPasswd_) {
+		alert("새비밀번호 확인을 입력해주세요!");
+		return;
+	}
+	
+	// 신규 비밀번호와 비밀번호 확인이 일치하는지 확인
+	if (newPasswd != newPasswd_) {
+		alert("새비밀번호와 새비밀번호 확인이 일치하지 않습니다!");
+		return;
+	}
+	
+	// 비밀번호가 규칙에 맞는지 확인
+	var regExpPasswd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+		if (!regExpPasswd.test(newPasswd)) { // newPasswd를 검사
 			alert("비밀번호는 영문/숫자/특수기호를 조합하여 8자 이상을 입력하세요!");
-			isSubmit = false;
+			return; // isSubmit = false; 대신 return으로 수정
 		}
+
 	frmMain.action = "/front/member/findPasswdResultProc.web";
 	frmMain.submit();
 }

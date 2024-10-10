@@ -13,6 +13,8 @@
 	<script type="text/javascript" src="/js/front.js"></script>
 </head>
 <body>
+<input type="hidden" id="email" name="email" value="${memberDto.email}" />
+<input type="hidden" id="passwd_temp" name="passwd_temp" value="${passwd_input}" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -35,7 +37,7 @@
 						<div class="row3">
 							<div class="col-lg-12 col-md-12 col-sm-12">
 								<div class="checkout__form__input">
-									<input type="text" id="tempPasswd" name="tempPasswd" placeholder="임시 비밀번호 입력" required autocomplete="off" />
+									<input type="text" id="passwd_input" name="passwd_input" placeholder="임시 비밀번호 입력" required autocomplete="off" />
 								</div>
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12">
@@ -51,7 +53,7 @@
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
 								<div class="checkout__form__input">
-									<input type="button" value="비밀번호 변경" id="updatePasswd" onClick="resetPasswd()";/>
+									<input type="button" value="비밀번호 변경" id="updatePasswd" onClick="resetPasswd()"/>
 								</div>
 							</div>
 						</div>
