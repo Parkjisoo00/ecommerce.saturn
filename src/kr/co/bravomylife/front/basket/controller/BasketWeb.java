@@ -20,8 +20,6 @@
  */
 package kr.co.bravomylife.front.basket.controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +33,10 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.bravomylife.front.basket.controller.BasketWeb;
 import kr.co.bravomylife.front.basket.dto.BasketDto;
 import kr.co.bravomylife.front.basket.service.BasketSrvc;
+import kr.co.bravomylife.front.buy.dto.BuyDto;
 import kr.co.bravomylife.front.common.Common;
+import kr.co.bravomylife.front.common.dto.PagingDto;
+import kr.co.bravomylife.front.common.dto.PagingListDto;
 
 /**
  * @version 1.0.0
@@ -113,31 +114,20 @@ public class BasketWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/basket/index.web")
-	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/front/basket/main.web")
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, BuyDto buyDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
 			
-			List<BasketDto> list = basketSrvc.listing(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			pagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
-			String item = "";
+			PagingListDto pagingListDto = basketSrvc.listing(pagingDto);
 			
-			for (int loop = 0; loop < list.size(); loop++) {
-				item += list.get(loop).getSeq_sle()
-						+ "|" + list.get(loop).getSle_nm()
-						+ "|" + list.get(loop).getPrice()
-						+ "|" + list.get(loop).getCount()
-						+ "|" + list.get(loop).getImg()
-						+ "|" + list.get(loop).getPoint_value();
-				
-				if (list.size() > 1 && loop < list.size() - 1) item += ",";
-				
-			}
-			logger.debug(item);
+			mav.addObject("paging"	, pagingListDto.getPaging());
+			mav.addObject("list"	, pagingListDto.getList());
 			
-			mav.addObject("item", item);
 			mav.setViewName("front/basket/index");
 		}
 		catch (Exception e) {

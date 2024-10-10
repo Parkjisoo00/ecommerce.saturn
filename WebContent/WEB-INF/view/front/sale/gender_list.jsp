@@ -147,6 +147,7 @@
 	<section class="shop spad">
 		<div class="container">
 			<%@ include file="/include/front/lowgnbG.jsp" %>
+			<a href="/front/basket/main.web">[장바구니]테스트</a>
 			<div class="row" style="justify-content: center;">
 				<c:choose>
 					<c:when test="${empty list}">

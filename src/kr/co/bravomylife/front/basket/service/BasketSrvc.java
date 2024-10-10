@@ -20,8 +20,6 @@
  */
 package kr.co.bravomylife.front.basket.service;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Repository;
@@ -30,6 +28,8 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import kr.co.bravomylife.front.basket.dao.BasketDao;
 import kr.co.bravomylife.front.basket.dto.BasketDto;
+import kr.co.bravomylife.front.common.dto.PagingDto;
+import kr.co.bravomylife.front.common.dto.PagingListDto;
 
 
 /**
@@ -45,9 +45,21 @@ public class BasketSrvc {
 
 	@Inject
 	BasketDao basketDao;
-	
-	public List<BasketDto> listing(int seq_mbr) {
-		return basketDao.listing(seq_mbr);
+		
+	public PagingListDto listing(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		int totalLine = basketDao.listingCount(pagingDto);
+		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(basketDao.listingList(pagingDto));
+		
+		return pagingListDto;
 	}
 	
 	@Transactional("txFront")

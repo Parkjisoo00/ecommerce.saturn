@@ -8,21 +8,44 @@
 		VALUES
 			(SQ_SEQ_BSK.NEXTVAL, #{seq_mbr}, #{seq_sle}, #{sle_nm}, #{price}, #{count}, #{img}, #{point_value}, 'N', SYSDATE)
 	</insert>
-	
-	<select id="listing" parameterType="java.lang.Integer" resultType="basketDto">
+
+	<select id="listingCount" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
-			SEQ_BSK
-			, SEQ_SLE
-			, SLE_NM
-			, DISCOUNT_PRICE
-			, COUNT
-			, IMG
-			, POINT_VALUE
+			COUNT(ROWNUM)
 		FROM
 			TB_BSK
 		WHERE
-			SEQ_MBR			= #{seq_mbr}
-			AND FLG_DELETE	= 'N'
+		<include refid="listingwhere" />
 	</select>
+
+	<select id="listingList" parameterType="pagingDto" resultType="basketDto">
+		SELECT
+			*
+		FROM
+		(
+		SELECT
+			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
+			, SEQ_SLE
+			, SLE_NM
+			, PRICE
+			, COUNT
+			, IMG
+			, POINT_VALUE
+			,(PRICE * COUNT) TOTAL_PRICE
+		FROM
+			TB_BSK
+		WHERE
+		<include refid="listingwhere" />
+		)
+		<![CDATA[
+		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+		]]>
+		ORDER BY rnum
+	</select>
+
+	<sql id="listingwhere">
+		SEQ_MBR			= #{seq_mbr}
+		AND FLG_DELETE	= 'N'
+	</sql>
 
 </mapper>

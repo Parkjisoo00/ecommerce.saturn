@@ -37,11 +37,18 @@ public class BasketDto {
 	private int price			= 0;
 	private int count			= 0;
 	private int point_value		= 0;
+	private int total_price		= 0;
 	private String img			= "";
 	private String dt_reg		= "";
 	private String dt_upt		= "";
 	
 	
+	public int getTotal_price() {
+		return total_price;
+	}
+	public void setTotal_price(int total_price) {
+		this.total_price = total_price;
+	}
 	public int getPoint_value() {
 		return point_value;
 	}

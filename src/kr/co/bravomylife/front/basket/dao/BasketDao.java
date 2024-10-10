@@ -26,6 +26,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.bravomylife.front.basket.dto.BasketDto;
 import kr.co.bravomylife.front.common.dao.BaseDao;
+import kr.co.bravomylife.front.common.dto.PagingDto;
 
 
 /**
@@ -39,8 +40,12 @@ import kr.co.bravomylife.front.common.dao.BaseDao;
 @Repository("kr.co.bravomylife.front.basket.dao.BasketDao")
 public class BasketDao extends BaseDao {
 
-	public List<BasketDto> listing(int seq_mbr) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.basket.Basket.listing", seq_mbr);
+	public List<BasketDto> listingList(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.basket.Basket.listingList", pagingDto);
+	}
+	
+	public int listingCount(PagingDto pagingDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.basket.Basket.listingCount", pagingDto);
 	}
 	
 	public int insert(BasketDto basketDto) {

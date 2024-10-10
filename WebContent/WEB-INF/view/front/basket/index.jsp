@@ -5,6 +5,21 @@
 
 <head>
 	<%@ include file="/include/common/header.jsp" %>
+	<script>
+		function writeProc() {
+			/* Database + iFrame
+			[2024-10-10][TODO: 데이터베이스 정보(장바구니) 삭제 처리 필요(정상적으로 구매 및 결제된 경우)]
+			*/
+			
+			var frmMain = document.getElementById("frmMain");
+			frmMain.action = "/front/buy/writeProc.web";
+			frmMain.submit();
+		}
+		
+		window.onload = function () {
+		
+		}
+	</script>
 
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -14,6 +29,7 @@
 </head>
 
 <body>
+<form id="frmMain" method="POST">
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -32,144 +48,86 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="shop__cart__table">
-						<table>
-							<thead>
-								<tr>
-									<th>Product</th>
-									<th>Price</th>
-									<th>Quantity</th>
-									<th>Total</th>
-									<th></th>
+						<h6 class="lowgnb-title" style="padding-bottom: 30px; text-align: left; font-size: 24px;">장바구니</h6>
+						<table id="productBasket">
+							<thead style="border-bottom: 1px solid #dbdbdb; border-top: 1px solid #707070; background: #f7f7f7;">
+								<tr style="border-color: #707070 !important;">
+									<th class="cart-th" style="width: 5%">선택</th>
+									<th class="cart-th">상품</th>
+									<th class="cart-th" style="width: 15%">수량</th>
+									<th class="cart-th" style="width: 10%">상품금액</th>
+									<th class="cart-th" style="width: 10%">적립포인트</th>
+									<th class="cart-th" style="width: 10%">합계금액</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td class="cart__product__item">
-										<img src="/img/shop-cart/cp-1.jpg" alt="">
-										<div class="cart__product__item__title">
-											<h6>Chain bucket bag</h6>
-											<div class="rating">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-											</div>
-										</div>
-									</td>
-									<td class="cart__price">$ 150.0</td>
-									<td class="cart__quantity">
-										<div class="pro-qty">
-											<input type="text" value="1">
-										</div>
-									</td>
-									<td class="cart__total">$ 300.0</td>
-									<td class="cart__close"><span class="icon_close"></span></td>
-								</tr>
-								<tr>
-									<td class="cart__product__item">
-										<img src="/img/shop-cart/cp-2.jpg" alt="">
-										<div class="cart__product__item__title">
-											<h6>Zip-pockets pebbled tote briefcase</h6>
-											<div class="rating">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-											</div>
-										</div>
-									</td>
-									<td class="cart__price">$ 170.0</td>
-									<td class="cart__quantity">
-										<div class="pro-qty">
-											<input type="text" value="1">
-										</div>
-									</td>
-									<td class="cart__total">$ 170.0</td>
-									<td class="cart__close"><span class="icon_close"></span></td>
-								</tr>
-								<tr>
-									<td class="cart__product__item">
-										<img src="/img/shop-cart/cp-3.jpg" alt="">
-										<div class="cart__product__item__title">
-											<h6>Black jean</h6>
-											<div class="rating">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-											</div>
-										</div>
-									</td>
-									<td class="cart__price">$ 85.0</td>
-									<td class="cart__quantity">
-										<div class="pro-qty">
-											<input type="text" value="1">
-										</div>
-									</td>
-									<td class="cart__total">$ 170.0</td>
-									<td class="cart__close"><span class="icon_close"></span></td>
-								</tr>
-								<tr>
-									<td class="cart__product__item">
-										<img src="/img/shop-cart/cp-4.jpg" alt="">
-										<div class="cart__product__item__title">
-											<h6>Cotton Shirt</h6>
-											<div class="rating">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-											</div>
-										</div>
-									</td>
-									<td class="cart__price">$ 55.0</td>
-									<td class="cart__quantity">
-										<div class="pro-qty">
-											<input type="text" value="1">
-										</div>
-									</td>
-									<td class="cart__total">$ 110.0</td>
-									<td class="cart__close"><span class="icon_close"></span></td>
-								</tr>
-							</tbody>
-						</table>
+							<c:choose>
+								<c:when test="${empty list}">
+									<tr style="text-align: center; border-bottom: 1px solid #707070;">
+										<td colspan="6" >장바구니에 상품이 없습니다</td>
+									</tr>
+								</c:when>
+									<c:otherwise>
+										<c:forEach var="list" items="${list}">
+											<tbody>
+												<tr>
+													<td>
+														<input type="checkbox" />
+													</td>
+													<td class="cart__product__item">
+														<div>
+															<img src="${list.img}" style="margin-right: 0;">
+														</div>
+														<div class="cart-text">
+															<h6>${list.sle_nm}</h6>
+														</div>
+													</td>
+													<td style="justify-content: center; align-items: center;">
+														<div class="pro-qty">
+															<input type="text" value="${list.count}">
+														</div>
+													</td>
+													<td class="cart-text">${list.price}원</td>
+													<td class="cart-text" style="font-weight: normal !important;">${list.point_value}</td>
+													<td class="cart-text">${list.total_price}원</td>
+												</tr>
+											</tbody>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</table>
+						</div>
+					</div>
+					<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
+						<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
 					</div>
 				</div>
-			</div>
 			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-6">
+				<div class="col-lg-6 col-md-6 col-sm-6" style="border-bottom: none;">
 					<div class="cart__btn">
-						<a href="#">Continue Shopping</a>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-6">
-					<div class="cart__btn update__btn">
-						<a href="#"><span class="icon_loading"></span> Update cart</a>
+						<a href="/">◃ 쇼핑 계속하기</a>
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-6">
-					<div class="discount__content">
-						<h6>Discount codes</h6>
-						<form action="#">
-							<input type="text" placeholder="Enter your coupon code">
-							<button type="submit" class="site-btn">Apply</button>
-						</form>
+				<div class="col-lg-6 col-md-6 col-sm-6" style="max-width: 100% !important; flex: 0 0 100% !important; border-bottom: none;">
+					<div class="cart__total__procced" style="text-align: right;">
+						<p style="margin-top: 15px;">
+							<span style="font-size: 16px;">총 <strong style="font-size: 20px;">1</strong>개의 상품금액 
+							<strong style="font-size: 20px;">10,000</strong>원
+							<img src="/img/cartbtn/total.png" style="padding-left: 10px; padding-right: 10px; vertical-align: -4px;">
+							<strong style="font-size: 20px;">10,000</strong>원
+							</span>
+						</p>
+						<p>
+							<span style="font-size: 14px; color: #ff4c2e;">적립 예정 포인트 : </span><span style="font-size: 14px; color: #ff4c2e;">1000</span>
+						<p>
 					</div>
-				</div>
-				<div class="col-lg-4 offset-lg-2">
-					<div class="cart__total__procced">
-						<h6>Cart total</h6>
-						<ul>
-							<li>Subtotal <span>$ 750.0</span></li>
-							<li>Total <span>$ 750.0</span></li>
-						</ul>
-						<a href="#" class="primary-btn">Proceed to checkout</a>
+					<div style="display: flex; justify-content: space-between;">
+						<a href="#" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c; margin-left: 0;">선택 상품 삭제</a>
+						<div>
+							<a href="javascript:writeProc();" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">선택 상품 주문</a>
+							<a href="javascript:writeProc();" class="cart-btn" style="background: #2c2c2c; color: white !important;">전체 상품 주문</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -188,5 +146,6 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
+</form>
 </body>
 </html>
