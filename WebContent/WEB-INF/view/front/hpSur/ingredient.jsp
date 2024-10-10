@@ -109,14 +109,59 @@
 					</div>
 					<table class="headTop_01" style=" margin-left: auto; margin-right: auto; width: 100%">
 				<tr>
-					<th style="width: 10%">번호</th>
-					<th>제목</th>
-					<th style="width: 10%">작성자</th>
+					<th style="width: 20%">번호</th>
+					<th style="text-align: left;">제목</th>
+					<th style="width: 20%">작성자</th>
 				</tr>
 					</table>
-					<span class="styled-span">아아아아ㅏ아</span>
-					<span>아아아아ㅏ아</span>
-					<span>아아아아ㅏ아</span>
+				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;"onclick="showIngredient()">
+					<span class="styled-span" >1</span>
+					<span class="styled-span" style ="margin-left: 0;">폴리코사놀</span>
+					<span class="styled-span1" >Bravo My Life</span>
+				</div>
+				<div class="hidden-review" id="reviewForm"style="margin-left: auto;margin-right: auto;">
+					 <img src="/img/cat.jpg" alt="Local Image">
+				</div>
+				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
+					<span class="styled-span" >2</span>
+					<span class="styled-span" style ="margin-left: 0;">오메가-3</span>
+					<span class="styled-span1" style="margin-left: 626px;margin-right: 42px;">Bravo My Life</span>
+				</div>
+				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
+					<span class="styled-span" >3</span>
+					<span class="styled-span" style ="margin-left: 0;">비타민/미네랄</span>
+					<span class="styled-span1" style="margin-left: 582px;margin-right: 41px;">Bravo My Life</span>
+				</div>
+				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
+					<span class="styled-span" >4</span>
+					<span class="styled-span" style ="margin-left: 0;">유산균</span>
+					<span class="styled-span1" style="margin-left: 645px;margin-right: 41px;">Bravo My Life</span>
+				</div>
+				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
+					<span class="styled-span" >5</span>
+					<span class="styled-span" style ="margin-left: 0;">글루코사민/MSM</span>
+					<span class="styled-span1" style="margin-left: 560px;margin-right: 37px;">Bravo My Life</span>
+				</div>
+				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
+					<span class="styled-span" >6</span>
+					<span class="styled-span" style ="margin-left: 0;">루테인</span>
+					<span class="styled-span1" style="margin-left: 650px;margin-right: 36px;">Bravo My Life</span>
+				</div>
+				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
+					<span class="styled-span" >7</span>
+					<span class="styled-span" style ="margin-left: 0;">코큐텐</span>
+					<span class="styled-span1" style="margin-left: 650px;margin-right: 36px;">Bravo My Life</span>
+				</div>
+				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
+					<span class="styled-span" >8</span>
+					<span class="styled-span" style ="margin-left: 0;">아르기닌</span>
+					<span class="styled-span1" style="margin-left: 635px;margin-right: 32px;">Bravo My Life</span>
+				</div>
+				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
+					<span class="styled-span" >9</span>
+					<span class="styled-span" style ="margin-left: 0;">밀크씨슬</span>
+					<span class="styled-span1" style="margin-left: 635px;margin-right: 32px;">Bravo My Life</span>
+				</div>
 					<div class="row">
 					<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;" >
 					</div>

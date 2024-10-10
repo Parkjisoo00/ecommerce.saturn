@@ -156,6 +156,18 @@ table.headTop_01 th {
 /* Product Detail Text
 /*----------------------------------------*/
 
+	.styled-span {
+		font-size: 20px;
+		margin-left: 113px;
+		margin-right: 85px;
+	}
+	
+	.styled-span1{
+		font-size: 20px;
+		margin-left: 605px;
+		margin-right: 44px;
+	}
+
 .pd-text {
 	font-weight: 450 !important;
 	font-size: 15px !important;
@@ -260,6 +272,16 @@ table.headTop_pd th, table.headTop_pd td {
 	transition: max-height 1s ease-out;
 }
 
+.hidden-ingredient {
+	display: flex;
+	max-height: 0;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	transition: max-height 1s ease-out;
+}
+
+
 .hidden-review-p {
 	color: #444444;
 	font-weight: 500;
@@ -295,7 +317,7 @@ table.headTop_pd th, table.headTop_pd td {
 }
 
 .visible {
-	max-height: 200px;
+	max-height: 1000px;
 }
 
 /*----------------------------------------*/
