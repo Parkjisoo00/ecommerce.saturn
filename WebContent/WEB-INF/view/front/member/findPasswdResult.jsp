@@ -13,8 +13,6 @@
 	<script type="text/javascript" src="/js/front.js"></script>
 </head>
 <body>
-<input type="hidden" id="email" name="email" value="${memberDto.email}" />
-<input type="hidden" id="passwd_temp" name="passwd_temp" value="${passwd_input}" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -30,7 +28,9 @@
 
 	<section class="checkout spad">
 		<div class="container">
-			<form action="/front/member/findPasswdResult.web" method="POST" id="frmMain" class="checkout__form">
+			<form action="/front/member/findPasswdResultProc.web" method="POST" id="frmMain" class="checkout__form">
+			<input type="hidden" id="email" name="email" value="${email}" />
+			<input type="hidden" id="passwd_temp" name="passwd_temp" value="${passwd_temp}" />
 				<div class="row3">
 					<div class="col-lg-12">
 						<h5 >회원 비밀번호 재설정</h5>

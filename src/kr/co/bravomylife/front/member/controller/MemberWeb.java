@@ -96,18 +96,21 @@ public class MemberWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			
-			// - 새 비밀번호(newPasswd)와 새 비밀번호(newPasswd_) 확인이 같은지는 폼에서 처리
-			// - 폼에서 암호화된 이메일(memberDto.getEmail())과 임시 비밀번호(randomPassword)를 제공하여야 함
-			logger.debug("암호화된 이메일=" + URLDecoder.decode(memberDto.getEmail()));
-			logger.debug("암호화된 임시 비밀번호=" + URLDecoder.decode(passwd_temp));
-			logger.debug("회원이 입력한 임시 비밀번호=" + passwd_input);
-			logger.debug("회원이 입력한 신규 비밀번호=" + newPasswd);
-			
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
 			
-			String randomPassword = aes.decode(URLDecoder.decode(passwd_temp));
+			// - 새 비밀번호(newPasswd)와 새 비밀번호(newPasswd_) 확인이 같은지는 폼에서 처리
+			// - 폼에서 암호화된 이메일(memberDto.getEmail())과 임시 비밀번호(randomPassword)를 제공하여야 함
+			logger.debug("암호화된 이메일(복호화)=" + memberDto.getEmail() + "(" + aes.decode(memberDto.getEmail()) + ")");
+			logger.debug("암호화된 임시 비밀번호(복호화)=" + passwd_temp);
+			// logger.debug("암호화된 임시 비밀번호(복호화)=" + passwd_temp + "(" + aes.decode(URLDecoder.decode(passwd_temp)) + ")");
+			
+			logger.debug("회원이 입력한 임시 비밀번호=" + passwd_input);
+			logger.debug("회원이 입력한 신규 비밀번호=" + newPasswd);
+			
+			
+			
+			String randomPassword = aes.decode(passwd_temp);
 						
 			// 1. 회원이 입력한 임시 비밀번호(passwd_input)와 복호화한 임시 비밀번호가 같으면
 			
@@ -121,7 +124,7 @@ public class MemberWeb extends Common {
 				// 신규 비밀번호 암호화	
 				memberDto.setPasswd(HSwithSHA.encode(newPasswd));
 				
-				memberDto.setEmail(URLDecoder.decode(memberDto.getEmail()));
+				memberDto.setEmail(memberDto.getEmail());
 				if (memberSrvc.updatePasswd(memberDto)){
 					request.setAttribute("script"	, "alert('신규 비밀번호가 재설정 되었습니다.');");
 					request.setAttribute("redirect"	, "/front/login/loginForm.web");
@@ -160,11 +163,16 @@ public class MemberWeb extends Common {
 	 */
 	
 	@RequestMapping(value = "/front/member/findPasswdResult.web")
-	public ModelAndView findPasswdResult(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView findPasswdResult(HttpServletRequest request, HttpServletResponse response
+			, String email
+			, String passwd_temp) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			mav.addObject("email", email);
+			mav.addObject("passwd_temp", passwd_temp);
+			
 			mav.setViewName("front/member/findPasswdResult");
 		}
 		catch (Exception e) {
@@ -217,7 +225,7 @@ public class MemberWeb extends Common {
 				
 				String randomPassword = Passwd.generateRandomPassword(12);
 				
-				System.out.println("Generated Random Password: " + randomPassword);
+				//System.out.println("Generated Random Password: " + randomPassword);
 				
 				EmailDto emailDto = new EmailDto();
 				
