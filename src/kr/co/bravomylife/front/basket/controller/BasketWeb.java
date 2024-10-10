@@ -65,8 +65,8 @@ public class BasketWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/basket/setBasketIframe.web")
-	public ModelAndView setBasketIframe(HttpServletRequest request, HttpServletResponse response
+	@RequestMapping(value = "/front/basket/setBasket.web")
+	public ModelAndView setBasket(HttpServletRequest request, HttpServletResponse response
 			, String item) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -86,6 +86,8 @@ public class BasketWeb extends Common {
 			basketDto.setCount(Integer.parseInt(arrBasket[3]));
 			basketDto.setImg(arrBasket[4]);
 			basketDto.setPoint_value(Integer.parseInt(arrBasket[5]));
+			basketDto.setCd_ctg_m(arrBasket[6]);
+			basketDto.setCd_ctg_b(arrBasket[7]);
 			
 			if (basketSrvc.insert(basketDto)) {
 				request.setAttribute("script", "alert('장바구니에 저장되었습니다');");

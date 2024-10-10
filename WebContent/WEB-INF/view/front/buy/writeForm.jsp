@@ -95,7 +95,7 @@
 		frmMain.submit();
 	}
 	
-	function setBasketIframe() {
+	function setBasket(value, value2) {
 		
 		if (!isLogin) {
 			alert("로그인이 필요합니다");
@@ -108,12 +108,14 @@
 		var count			= document.getElementById("count").value;
 		var img				= document.getElementById("img").value;
 		var point_value		= document.getElementById("point_value").value;
+		var cd_ctg_m		= document.getElementById("cd_ctg_m").value;
+		var cd_ctg_b		= document.getElementById("cd_ctg_b").value;
 		
-		var item = seq_sle + "|" + sle_nm + "|" + discount_sale + "|" + count + "|" + img + "|" + point_value;
+		var item = seq_sle + "|" + sle_nm + "|" + discount_sale + "|" + count + "|" + img + "|" + point_value + "|" + cd_ctg_m + "|" + cd_ctg_b;
 		document.getElementById("item").value = item;
 		
 		var frmMain = document.getElementById("frmMain");
-		frmMain.action = "/front/basket/setBasketIframe.web";
+		frmMain.action = "/front/basket/setBasket.web";
 		frmMain.target = "frmBlank";
 		frmMain.submit();
 	}
@@ -145,8 +147,8 @@
 <input type="hidden" id="discount_sale"	name="discount_sale"	value="${saleDto.discount_sale}" />
 <input type="hidden" id="img"			name="img"				value="${saleDto.img}" />
 <input type="hidden" id="point_value"	name="point_value"		value="${saleDto.point_value}" />
-<input type="hidden" id="cd_ctg_m"		name="cd_ctg_m" />
-<input type="hidden" id="cd_ctg_b"		name="cd_ctg_b" />
+<input type="hidden" id="cd_ctg_m"		name="cd_ctg_m"			value="${saleDto.cd_ctg_m}" />
+<input type="hidden" id="cd_ctg_b"		name="cd_ctg_b"			value="${saleDto.cd_ctg_b}" />
 <input type="hidden" id="corp_nm"		name="corp_nm"			value="${paging.corp_nm}"/>
 <input type="hidden" id="prd_type"		name="prd_type"			value="${paging.prd_type}"/>
 <input type="hidden" id="filter"		name="filter"			value="${paging.filter}"/>
@@ -271,7 +273,7 @@
 								</li>
 								<li>
 									<div>
-									<span class="pd-title">등록일</span>
+									<span class="pd-title">등록일${saleDto.flg_like}</span>
 										<label for="stockin" class="pd-label">
 											${saleDto.dt_reg}
 										</label>
@@ -287,7 +289,7 @@
 									<input type="text" value="1" name="buyList[0].count" id="count" size="3">
 								</div>
 							</div>
-							<a href="javascript:setBasketIframe();" class="cart-btn"><span class="icon_bag_alt"></span> 장바구니에 담기</a>
+							<a href="javascript:setBasket('${saleDto.cd_ctg_m}', '${saleDto.cd_ctg_b}');" class="cart-btn"><span class="icon_bag_alt"></span> 장바구니에 담기</a>
 							<ul>
 								<c:choose>
 									<c:when test="${saleDto.flg_like == 'Y'}">
@@ -310,7 +312,7 @@
 				<c:forEach var="list" items="${list}">
 					<div class="col-lg-3 col-md-6" style="padding: 0px !important;">
 						<div class="product__item">
-							<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_b}', '${list.cd_ctg_m}');" style="display: flex; justify-content: center; align-items: center;">
+							<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');" style="display: flex; justify-content: center; align-items: center;">
 								<div class="product__item__pic set-bg" data-setbg="${list.img}" style="width: 180px; height: 180px;">
 								<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
 									<div class="label new">베스트</div>

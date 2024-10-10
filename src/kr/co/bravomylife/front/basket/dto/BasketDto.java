@@ -38,11 +38,32 @@ public class BasketDto {
 	private int count			= 0;
 	private int point_value		= 0;
 	private int total_price		= 0;
+	private int total_point		= 0;
 	private String img			= "";
 	private String dt_reg		= "";
 	private String dt_upt		= "";
+	private String cd_ctg_m		= "";
+	private String cd_ctg_b		= "";
 	
 	
+	public int getTotal_point() {
+		return total_point;
+	}
+	public void setTotal_point(int total_point) {
+		this.total_point = total_point;
+	}
+	public String getCd_ctg_m() {
+		return cd_ctg_m;
+	}
+	public void setCd_ctg_m(String cd_ctg_m) {
+		this.cd_ctg_m = cd_ctg_m;
+	}
+	public String getCd_ctg_b() {
+		return cd_ctg_b;
+	}
+	public void setCd_ctg_b(String cd_ctg_b) {
+		this.cd_ctg_b = cd_ctg_b;
+	}
 	public int getTotal_price() {
 		return total_price;
 	}

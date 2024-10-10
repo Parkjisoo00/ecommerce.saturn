@@ -61,7 +61,7 @@ table.headTop_01 th {
 	color: black;
 	background-color: #ffffff;
 	border: 1px solid #cccccc;
-	border-radius: 10px;
+	border-radius: 5px;
 	text-decoration: none;
 }
 
@@ -135,7 +135,7 @@ table.headTop_01 th {
 .sale-select {
 	width: 90px;
 	height: 25px;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-size: 13px;
 	padding: 0;
 	margin: 0 0 0 38.5%;
@@ -281,7 +281,6 @@ table.headTop_pd th, table.headTop_pd td {
 	transition: max-height 1s ease-out;
 }
 
-
 .hidden-review-p {
 	color: #444444;
 	font-weight: 500;
@@ -329,11 +328,61 @@ table.headTop_pd th, table.headTop_pd td {
 	display: inline-block;
 	font-size: 14px;
 	font-weight: 600;
-	padding: 15px 30px 15px;
+	padding: 10px 15px 10px;
 	color: #ffffff;
-	border-radius: 10px;
+	border-radius: 4px;
 	text-align: center;
 	margin-left: 15px;
+	font-family: "Montserrat", sans-serif;
+}
+
+.cart-th {
+	font-size: 13px !important;
+	color: #212b36 !important;
+	padding-bottom: 10px !important;
+	padding-top: 10px !important;
+	font-family: "Montserrat", sans-serif !important;
+	text-align: center !important;
+}
+
+.cart-td {
+	font-size: 13px !important;
+	color: #212b36 !important;
+	height: auto !important;
+	padding: 20px 15px !important;
+	border-bottom: none !important;
+	border-top: 1px solid #dbdbdb !important;
+	white-space: nowrap !important;
+	font-family: "Montserrat", sans-serif !important;
+	text-align: center !important;
+	vertical-align: middle !important;
+}
+
+.cart-img {
+	max-width: 100%;
+	max-height: 120px;
+	object-fit: contain;
+	border: 1px solid #dbdbdb;
+	border-radius: 2px
+}
+
+.cart-div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.cart-title {
+	text-align: left;
+	padding-bottom: 10px;
+	border: none;
+	font-size: 12px;
+	font-family: "Montserrat", sans-serif !important;
+}
+
+.cart-table {
+	border: none;
 }
 
 /*----------------------------------------*/
@@ -1543,7 +1592,8 @@ ol {
 	width: 100%;
 	position: relative;
 	overflow: hidden;
-	border: 1px solid #e0e0e0
+	border: 1px solid #e0e0e0;
+	border-radius: 2px;
 }
 
 .product__item__pic .label {
@@ -2208,17 +2258,18 @@ ol {
 
 .pro-qty {
 	height: 51px;
+	color: #212b36 ;
 	width: 150px;
 	border: 1px solid #ebebeb;
-	border-radius: 10px;
+	border-radius: 5px;
 	padding: 0 20px;
 	overflow: hidden;
 	display: inline-block;
 }
 
 .pro-qty .qtybtn {
-	font-size: 14px;
-	color: #666666;
+	font-size: 16px;
+	color: #212b36;
 	cursor: pointer;
 	float: left;
 	width: 12px;
@@ -2227,7 +2278,7 @@ ol {
 
 .pro-qty input {
 	font-size: 14px;
-	color: #666666;
+	color: #212b36 ;
 	font-weight: 500;
 	border: none;
 	float: left;
@@ -2252,7 +2303,7 @@ ol {
 	font-weight: 600;
 	text-transform: uppercase;
 	padding: 15px 30px 15px;
-	border-radius: 10px;
+	border-radius: 5px;
 	float: left;
 	margin-right: 10px;
 	margin-bottom: 10px;
@@ -2564,7 +2615,7 @@ ol {
 }
 
 .shop__cart__table tbody tr {
-	border-bottom: 1px solid #f2f2f2;
+	border-bottom: 1px solid #dbdbdb;
 }
 
 .shop__cart__table tbody tr td {
@@ -2727,7 +2778,8 @@ ol {
 .cart__total__procced {
 	padding: 40px;
 	font-size: 18px;
-	border: 2px solid #d6d6d6;
+	border: 1px solid #dbdbdb;
+	border-radius: 2px;
 }
 
 .cart__total__procced h6 {

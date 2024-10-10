@@ -4,9 +4,9 @@
 
 	<insert id="insert" parameterType="basketDto">
 		INSERT INTO TB_BSK
-			(SEQ_BSK, SEQ_MBR, SEQ_SLE, SLE_NM, PRICE, COUNT, IMG, POINT_VALUE, FLG_DELETE, DT_REG)
+			(SEQ_BSK, SEQ_MBR, SEQ_SLE, SLE_NM, PRICE, COUNT, IMG, POINT_VALUE, CD_CTG_M, CD_CTG_B, FLG_DELETE, DT_REG)
 		VALUES
-			(SQ_SEQ_BSK.NEXTVAL, #{seq_mbr}, #{seq_sle}, #{sle_nm}, #{price}, #{count}, #{img}, #{point_value}, 'N', SYSDATE)
+			(SQ_SEQ_BSK.NEXTVAL, #{seq_mbr}, #{seq_sle}, #{sle_nm}, #{price}, #{count}, #{img}, #{point_value}, #{cd_ctg_m}, #{cd_ctg_b}, 'N', SYSDATE)
 	</insert>
 
 	<select id="listingCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -31,7 +31,10 @@
 			, COUNT
 			, IMG
 			, POINT_VALUE
-			,(PRICE * COUNT) TOTAL_PRICE
+			, CD_CTG_M
+			, CD_CTG_B
+			, (PRICE * COUNT) TOTAL_PRICE
+			, (POINT_VALUE * COUNT) TOTAL_POINT
 		FROM
 			TB_BSK
 		WHERE

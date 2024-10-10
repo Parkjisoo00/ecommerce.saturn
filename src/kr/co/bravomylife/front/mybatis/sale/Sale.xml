@@ -127,6 +127,8 @@
 			, sle.CORP_NM
 			, rate.RATE_STAR
 			, rate.COUNT
+			, sle.cd_ctg_m
+			, sle.cd_ctg_b
 			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
 			, sle.DISCOUNT
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg

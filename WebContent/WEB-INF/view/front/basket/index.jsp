@@ -6,6 +6,18 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
+		function goWriteForm(value, value2, value3) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.seq_sle.setAttribute("value", value);
+			frmMain.cd_ctg_m.setAttribute("value", value2);
+			frmMain.cd_ctg_b.setAttribute("value", value3);
+			frmMain.action="/front/buy/writeForm.web";
+			frmMain.target = "";
+			frmMain.submit();
+		}
+	
 		function writeProc() {
 			/* Database + iFrame
 			[2024-10-10][TODO: 데이터베이스 정보(장바구니) 삭제 처리 필요(정상적으로 구매 및 결제된 경우)]
@@ -14,10 +26,6 @@
 			var frmMain = document.getElementById("frmMain");
 			frmMain.action = "/front/buy/writeProc.web";
 			frmMain.submit();
-		}
-		
-		window.onload = function () {
-		
 		}
 	</script>
 
@@ -30,6 +38,9 @@
 
 <body>
 <form id="frmMain" method="POST">
+<input type="hidden" id="seq_sle"		name="seq_sle"/>
+<input type="hidden" id="cd_ctg_m"		name="cd_ctg_m"/>
+<input type="hidden" id="cd_ctg_b"		name="cd_ctg_b"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -47,48 +58,57 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="shop__cart__table">
-						<h6 class="lowgnb-title" style="padding-bottom: 30px; text-align: left; font-size: 24px;">장바구니</h6>
-						<table id="productBasket">
-							<thead style="border-bottom: 1px solid #dbdbdb; border-top: 1px solid #707070; background: #f7f7f7;">
-								<tr style="border-color: #707070 !important;">
-									<th class="cart-th" style="width: 5%">선택</th>
-									<th class="cart-th">상품</th>
-									<th class="cart-th" style="width: 15%">수량</th>
-									<th class="cart-th" style="width: 10%">상품금액</th>
-									<th class="cart-th" style="width: 10%">적립포인트</th>
-									<th class="cart-th" style="width: 10%">합계금액</th>
-								</tr>
-							</thead>
-							<c:choose>
-								<c:when test="${empty list}">
-									<tr style="text-align: center; border-bottom: 1px solid #707070;">
-										<td colspan="6" >장바구니에 상품이 없습니다</td>
+					<h6 class="lowgnb-title" style="padding-bottom: 20px; text-align: left; font-size: 24px;">장바구니</h6>
+					<h6 class="cart-title">*이미지를 클릭하면 상품으로 이동합니다</h6>
+						<div class="shop__cart__table" style="border: 1px solid #dbdbdb; border-radius: 4px; overflow: hidden;">
+							<table id="productBasket" class="cart-table">
+								<thead>
+									<tr style="border-color: #707070 !important;">
+										<th class="cart-th" style="width: 5%"><input type="checkbox" id="selectAll" checked/></th>
+										<th class="cart-th" colspan="2">상품정보</th>
+										<th class="cart-th" style="width: 15%">수량</th>
+										<th class="cart-th" style="width: 10%">상품금액</th>
+										<th class="cart-th" style="width: 10%">적립포인트</th>
+										<th class="cart-th" style="width: 10%">합계금액</th>
 									</tr>
-								</c:when>
+								</thead>
+								<c:choose>
+									<c:when test="${empty list}">
+										<tr style="text-align: center; border-bottom: 1px solid #707070;">
+											<td colspan="7">장바구니에 상품이 없습니다</td>
+										</tr>
+									</c:when>
 									<c:otherwise>
 										<c:forEach var="list" items="${list}">
 											<tbody>
-												<tr>
-													<td>
-														<input type="checkbox" />
+												<tr style="border: 0;">
+													<td class="cart-td">
+														<input type="checkbox" class="selectItem" checked/>
 													</td>
-													<td class="cart__product__item">
-														<div>
-															<img src="${list.img}" style="margin-right: 0;">
-														</div>
-														<div class="cart-text">
-															<h6>${list.sle_nm}</h6>
-														</div>
-													</td>
-													<td style="justify-content: center; align-items: center;">
-														<div class="pro-qty">
-															<input type="text" value="${list.count}">
+													<td class="cart-td" style="text-align: center; vertical-align: middle;">
+														<div class="cart-div">
+															<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
+																<img src="${list.img}" class="cart-img">
+															</a>
 														</div>
 													</td>
-													<td class="cart-text">${list.price}원</td>
-													<td class="cart-text" style="font-weight: normal !important;">${list.point_value}</td>
-													<td class="cart-text">${list.total_price}원</td>
+													<td class="cart-td" style="text-align: left !important;">
+														${list.sle_nm}
+													</td>
+													<td class="cart-td">
+														<div class="pro-qty" style="border: 0 solid #dbdbdb; border-right-width: 1px; border-left-width: 1px; border-radius: 0; height: 30px; display: flex; justify-content: center; align-items: center;">
+															<span class="dec qtybtn">-</span>
+															<input type="text" value="${list.count}" style="height: 100%;">
+															<span class="inc qtybtn">+</span>
+														</div>
+													</td>
+													<td class="cart-td">
+														<fmt:formatNumber value="${list.price}" type="number" />원
+													</td>
+													<td class="cart-td">${list.total_point}</td>
+													<td class="cart-td" style="font-size: 16px !important; color: #707070 !important; font-weight: bold;'" data-total-price="${list.total_price}" data-total-point="${list.total_point}">
+														<fmt:formatNumber value="${list.total_price}" type="number" />원
+													</td>
 												</tr>
 											</tbody>
 										</c:forEach>
@@ -110,23 +130,23 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-6" style="max-width: 100% !important; flex: 0 0 100% !important; border-bottom: none;">
-					<div class="cart__total__procced" style="text-align: right;">
-						<p style="margin-top: 15px;">
-							<span style="font-size: 16px;">총 <strong style="font-size: 20px;">1</strong>개의 상품금액 
-							<strong style="font-size: 20px;">10,000</strong>원
-							<img src="/img/cartbtn/total.png" style="padding-left: 10px; padding-right: 10px; vertical-align: -4px;">
-							<strong style="font-size: 20px;">10,000</strong>원
-							</span>
-						</p>
-						<p>
-							<span style="font-size: 14px; color: #ff4c2e;">적립 예정 포인트 : </span><span style="font-size: 14px; color: #ff4c2e;">1000</span>
-						<p>
-					</div>
-					<div style="display: flex; justify-content: space-between;">
-						<a href="#" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c; margin-left: 0;">선택 상품 삭제</a>
+<div class="cart__total__procced" style="text-align: right;">
+	<p style="margin-top: 15px;">
+		<span style="font-size: 16px;">총 <strong id="totalItems" style="font-size: 20px;">1</strong>개의 상품금액 
+		<strong id="totalPrice" style="font-size: 20px;">10,000</strong>원
+		<img src="/img/cartbtn/total.png" style="padding-left: 10px; padding-right: 10px; vertical-align: -4px;">
+		<strong id="totalPriceFinal" style="font-size: 20px;">10,000</strong>원
+		</span>
+	</p>
+	<p>
+		<span style="font-size: 14px; color: #ff4c2e;">적립 예정 포인트 : </span><span id="totalPoints" style="font-size: 14px; color: #ff4c2e;">1000</span>
+	</p>
+</div>
+					<div style="display: flex; justify-content: flex-end;">
 						<div>
+							<a href="javascript:writeProc();" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">선택 상품 삭제</a>
 							<a href="javascript:writeProc();" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">선택 상품 주문</a>
-							<a href="javascript:writeProc();" class="cart-btn" style="background: #2c2c2c; color: white !important;">전체 상품 주문</a>
+							<a href="javascript:writeProc();" class="cart-btn" style="background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;">전체 상품 주문</a>
 						</div>
 					</div>
 				</div>
@@ -146,6 +166,48 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		
+		document.getElementById('selectAll').addEventListener('change', function(e) {
+			var checkboxes = document.querySelectorAll('.selectItem');
+			checkboxes.forEach(function(checkbox) {
+				checkbox.checked = e.target.checked;
+			});
+			updateTotal();
+		});
+		document.querySelectorAll('.selectItem').forEach(function(checkbox) {
+			
+			checkbox.addEventListener('change', updateTotal);
+		});
+		updateTotal();
+	});
+	
+	function updateTotal() {
+		
+		var totalPrice = 0;
+		var totalPoints = 0;
+		var totalItems = 0;
+		
+		document.querySelectorAll('.selectItem').forEach(function(checkbox) {
+			
+			if (checkbox.checked) {
+				
+				var priceElement = checkbox.closest('tr').querySelector('td[data-total-price]');
+				var itemPrice = parseInt(priceElement.getAttribute('data-total-price')) || 0;
+				var itemPoints = parseInt(priceElement.getAttribute('data-total-point')) || 0;
+				
+				totalPrice += itemPrice;
+				totalPoints += itemPoints;
+				totalItems++;
+			}
+		});
+		document.getElementById('totalPrice').innerText = totalPrice.toLocaleString();
+		document.getElementById('totalPriceFinal').innerText = totalPrice.toLocaleString();
+		document.getElementById('totalPoints').innerText = totalPoints.toLocaleString();
+		document.getElementById('totalItems').innerText = totalItems;
+	}
+</script>
 </form>
 </body>
 </html>
