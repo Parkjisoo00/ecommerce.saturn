@@ -30,6 +30,7 @@ import kr.co.bravomylife.front.member.dao.MemberDao;
 import kr.co.bravomylife.front.member.dao.TermAgreeDao;
 import kr.co.bravomylife.front.member.dto.MemberDto;
 import kr.co.bravomylife.front.member.dto.TermAgreeDto;
+import kr.co.bravomylife.util.security.Passwd;
 
 /**
  * @version 1.0.0
@@ -64,8 +65,33 @@ public class MemberSrvc {
 			return false;
 	}
 	
-	public MemberDto findPasswd(MemberDto memberDto) {
-		return memberDao.findPasswd(memberDto);
+	public MemberDto selectPasswd(MemberDto memberDto) {
+		return memberDao.selectPasswd(memberDto);
+	}
+	
+	@Transactional("txFront")
+	public int findPasswd(MemberDto memberDto) {
+		
+		int result = memberDao.findPasswd(memberDto);
+		
+		if (result == 1) {
+			
+			//랜덤 비밀번호 생성
+			String randomPassword = Passwd.generateRandomPassword(12); // 원하는 길이 설정
+			
+			//생성된 랜덤 비밀번호를 DTO에 설정
+			memberDto.setPasswd(randomPassword);
+			
+			//임시 비밀번호를 데이터베이스에 저장
+			memberDao.tempPasswd(memberDto);
+			
+			return 1;
+		}
+		else if (result == 0) {
+			return 0;
+		}
+		TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		return 0;
 	}
 			
 	public MemberDto findId(MemberDto memberDto) {

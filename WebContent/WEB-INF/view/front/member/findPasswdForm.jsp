@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="/js/front.js"></script>
 </head>
 <body>
+<input type="hidden" name="phone" id="phone" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -27,7 +28,7 @@
 
 	<section class="checkout spad">
 		<div class="container">
-			<form action="/front/member/findPasswdResult.web" id="frmMain" method="POST" class="checkout__form">
+			<form action="/front/member/findPasswProc.web" id="frmMain" method="POST" class="checkout__form">
 				<div class="row3">
 					<div class="col-lg-12">
 						<h5 >회원 비밀번호 찾기</h5>
@@ -39,7 +40,37 @@
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12">
 								<div class="checkout__form__input">
-									<input type="submit" value="비밀번호 찾기"id = "findPasswd"/>
+									<input type="text" id="mbr_nm" name="mbr_nm" placeholder="이름" required autocomplete="off"/>
+								</div>
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12">
+								<div class="checkout__form__input">
+									<p>핸드폰 번호 <span>*</span></p>
+									<div style="display: flex; gap: 5px;">
+										<input value="휴" type="text" id="phone1" name="phone1"
+											maxlength="3" required
+											oninput="this.value = this.value.replace(/[^0-9.]/g, '')" autocomplete="off"/>
+										-
+										<input value="대" type="text" id="phone2" name="phone2"
+											maxlength="4" required
+											oninput="this.value = this.value.replace(/[^0-9.]/g, '')" autocomplete="off"/>
+										-
+										<input value="폰" type="text" id="phone3" name="phone3"
+											maxlength="4" required
+											oninput="this.value = this.value.replace(/[^0-9.]/g, '')" autocomplete="off"/>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12">
+								<div class="checkout__form__input">
+									<input type="submit" value="휴대폰 인증"id = ""/>
+								</div>
+								<hr style="border: 1px solid #ccc; margin: 0;">
+								<br>
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12">
+								<div class="checkout__form__input">
+									<input type="submit" value="임시 비밀번호 발송"id = "findPasswd"/>
 								</div>
 								<hr style="border: 1px solid #ccc; margin: 0;">
 								<br>

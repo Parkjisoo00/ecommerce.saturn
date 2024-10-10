@@ -239,3 +239,19 @@ function validateForm() {
 function moveToFindPasswd() {
 	window.location.href ="/front/member/findPasswdForm.web"; // findPasswdForm.jsp로 이동
 }
+
+function resetPasswd() {
+	if (document.getElementById("newPasswd").value != document.getElementById("newPasswd_").value) {
+			alert("비밀번호를 확인하세요!");
+			isSubmit = false;
+			document.getElementById("newPasswd").focus();
+		}
+		
+		var regExpPasswd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+		if (!regExpPasswd.test(document.getElementById("newPasswd").value)) {
+			alert("비밀번호는 영문/숫자/특수기호를 조합하여 8자 이상을 입력하세요!");
+			isSubmit = false;
+		}
+	frmMain.action = "/front/member/findPasswdResultProc.web";
+	frmMain.submit();
+}

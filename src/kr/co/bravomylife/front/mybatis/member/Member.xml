@@ -6,19 +6,41 @@
 		UPDATE
 			TB_MBR_MST
 		SET
-			PASSWD		= #{passwd}
+			PASSWD		= #{newPasswd}
 			, DT_UPT	= SYSDATE
 		WHERE
-			email		= #{email}
+			PASSWD		= #{passwd}
 	</update>
-
-	<select id="findPasswd" parameterType="memberDto" resultType="memberDto">
+	
+	<select id="selectPasswd" parameterType="memberDto" resultType="memberDto">
 	SELECT
-		email
+		PASSWD
 	FROM
 		TB_MBR_MST
 	WHERE
 		EMAIL = #{email}
+	</select>
+
+	<update id="tempPasswd" parameterType="memberDto">
+		UPDATE
+			TB_MBR_MST
+		SET
+			PASSWD		= #{passwd}
+			, DT_UPT	= SYSDATE
+		WHERE
+		EMAIL = #{email}
+		AND MBR_NM = #{mbr_nm}
+	</update>
+	
+	<select id="findPasswd" parameterType="memberDto" resultType="java.lang.Integer">
+	SELECT
+		COUNT(SEQ_MBR)
+	FROM
+		TB_MBR_MST
+	WHERE
+		EMAIL = #{email}
+		AND MBR_NM = #{mbr_nm}
+		<!-- PHONE = #{phone} -->
 	</select>
 
 	<select id="findId" parameterType="memberDto" resultType="memberDto">

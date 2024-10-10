@@ -31,16 +31,24 @@ import kr.co.bravomylife.front.member.dto.MemberDto;
  * 
  * @since 2024-10-01
  * <p>DESCRIPTION:</p>
- * <p>IMPORTANT:</p>
+ * <p>IMPORTANT:</p>tempPasswd
  */
 @Repository("kr.co.bravomylife.front.member.dao.MemberDao")
 public class MemberDao extends BaseDao {
+	
+	public MemberDto selectPasswd(MemberDto memberDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.selectPasswd", memberDto);
+	}
+	
+	public int tempPasswd(MemberDto memberDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.member.Member.tempPasswd", memberDto);
+	}
 	
 	public int updatePasswd(MemberDao memberDto) {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.member.Member.updatePasswd", memberDto);
 	}
 	
-	public MemberDto findPasswd(MemberDto memberDto) {
+	public int findPasswd(MemberDto memberDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.findPasswd", memberDto);
 	}
 	
@@ -82,10 +90,6 @@ public class MemberDao extends BaseDao {
 	
 	public MemberDto select(MemberDto memberDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.select", memberDto);
-	}
-	
-	public MemberDto selectPasswd(MemberDto memberDto) {
-		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.selectPasswd", memberDto);
 	}
 	
 	public int updatePasswd(MemberDto memberDto) {

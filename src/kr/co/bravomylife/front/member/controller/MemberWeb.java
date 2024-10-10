@@ -79,41 +79,80 @@ public class MemberWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-10-07
-	 * <p>DESCRIPTION:비밀번호 재설정</p>
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 비밀번호 재설정</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/member/findPasswdResultProc.web")
+	public ModelAndView findPasswdResultProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto, String tempPasswd) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			// DB에서 저장된 비밀번호 가져오기
+			String dbPasswd = memberSrvc.selectPasswd(memberDto).getPasswd();
+			
+			// DB에서 저장된 비밀번호 가져오기
+			//MemberDto dbMemberDto = memberSrvc.selectPasswd(memberDto); // MemberDto 객체를 반환받음
+
+			// 비밀번호 추출
+			//String dbPasswd = dbMemberDto.getPasswd(); // dbMemberDto에서 비밀번호를 추출하여 String 타입으로 저장
+			
+			// 입력한 임시 비밀번호와 DB에 저장된 비밀번호 비교
+			if (tempPasswd.equals(dbPasswd)) {
+
+				// 비밀번호 업데이트 실행
+				boolean updateResult = memberSrvc.updatePasswd(memberDto);
+				
+				if (updateResult) {
+					// 업데이트 성공
+					request.setAttribute("script", "alert('비밀번호가 성공적으로 변경되었습니다.');");
+					request.setAttribute("redirect", "/front/login/loginForm.web");
+
+				} else {
+					// 업데이트 실패
+					request.setAttribute("script", "alert('비밀번호 변경에 실패하였습니다. 시스템 관리자에게 문의하세요.');");
+					request.setAttribute("redirect", "/front/member/findPasswdResult.web");
+				}
+				
+			}
+			
+		}catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".findPasswdResultProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-06
+	 * <p>DESCRIPTION:비밀번호 재설정 폼</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
 	
-	@RequestMapping(value = "/front/member/resetPassword.web", method = RequestMethod.POST)
-	public ModelAndView resetPassword(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto, String newPasswd, String newPasswd_) {
+	@RequestMapping(value = "/front/member/findPasswdResult.web")
+	public ModelAndView findPasswdResult(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
-		 try {
-				/*
-				String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
-				SKwithAES aes		= new SKwithAES(staticKey);
-				
-				memberDto.setEmail(aes.encode(memberDto.getEmail()));
-				*/
-				if (newPasswd.equals(newPasswd_)) {
-					memberDto.setPasswd(HSwithSHA.encode(newPasswd));  // 새 비밀번호를 암호화하여 저장
-					
-					if (memberSrvc.updatePasswd(memberDto)) {
-						request.setAttribute("script", "alert('신규 비밀번호가 성공적으로 설정되었습니다.');");
-						mav.setViewName("redirect:/front/login/loginForm.web"); // 성공 시 로그인 페이지로 리다이렉트
-					}
-				} else {
-					request.setAttribute("script", "alert('비밀번호가 일치하지 않습니다. 다시 입력하세요.');");
-					mav.setViewName("front/member/findPasswdResult");  // 비밀번호가 일치하지 않을 경우 재설정 페이지로 이동
-				}
-			} catch (Exception e) {
-				logger.error("[" + this.getClass().getName() + ".resetPassword()] " + e.getMessage(), e);
-			} finally {}
-
-			return mav;
+		try {
+			mav.setViewName("front/member/findPasswdResult");
 		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".findPasswdResult()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -126,39 +165,65 @@ public class MemberWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	
-	@RequestMapping(value = "/front/member/findPasswdResult.web")
-	public ModelAndView findPasswd(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+	@RequestMapping(value = "/front/member/findPasswProc.web")
+	public ModelAndView findPasswProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			mav.setViewName("front/member/findPasswdForm");
+			
 			logger.debug("받아온 이메일" + " = " + memberDto.getEmail());
+			logger.debug("받아온 이름"+ " = " + memberDto.getMbr_nm());
+			//logger.debug("받아온 핸드폰" + " = " + memberDto.getPhone());
 			
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
 			
 			memberDto.setEmail(aes.encode(memberDto.getEmail()));
+			memberDto.setMbr_nm(aes.encode(memberDto.getMbr_nm()));
+			//memberDto.setPhone(aes.encode(memberDto.getPhone()));
 			
-			MemberDto memberDto_ = memberSrvc.findPasswd(memberDto);
+			int check = memberSrvc.findPasswd(memberDto);
 			
-			if (memberDto_ != null && memberDto_.getPasswd() != null) {
-				// 비밀번호 복호화 후 DTO에 설정
-				memberDto.setPasswd(aes.decode(memberDto_.getPasswd()));
-				//logger.debug("JSP에 보내는 이메일 = " + memberDto.getPasswd());
+			logger.debug("받아온 check 값" + " = " + check);
+			logger.debug("받아온 이메일 = " + memberDto.getEmail());
 			
-				// 비밀번호 찾기에 성공했을 때
-				mav.addObject("findPasswd", memberDto);
-				mav.setViewName("front/member/findPasswdResult");
+			if (check == 1) {
+				
+				// 인증 이메일 발송
+				EmailDto emailDto = new EmailDto();
+				
+				emailDto.setSender(dynamicProperties.getMessage("email.sender.mail"));
+				emailDto.setTo(new String[] {aes.decode(memberDto.getEmail())});
+				emailDto.setSubject("이메일 인증");
+				emailDto.setMessage("<b>회원 정보가 확인되었습니다.</b>아래 주소에서 비밀번호를 재설정해 주십시오.<br>"
+							+ "하기 인증하기를 클릭하셔야 가입이 완료됩니다.<br><br>"
+							+ "<a href='http://127.0.0.1:8080/front/member/findPasswdResult.web'>여기를 클릭하여 페이지로 이동하십시오</a><br><br>"
+							+ "해당 페이지로 이동하신 다음"
+							+ "다음의 임시 비밀번호를 입력하시어 비밀번호를 재설정해주십시오."
+							+ " <br><br> "
+							+ "[임시 비밀번호: "
+							+ memberDto.getPasswd()
+							+ "]");
+				
+				emailCmpn.send(emailDto);
+				
+				request.setAttribute("script"	, "alert('회원 정보가 확인되었습니다!');");
+				request.setAttribute("redirect"	, "/front/member/findPasswdForm.web");
+				
+				mav.setViewName("forward:/servlet/result.web");
+				
 			}
 			else {
-				request.setAttribute("script"	, "alert('일치하는 이메일이 없습니다!');");
+				request.setAttribute("script"	, "alert('일치하는 정보가 없습니다!');");
 				request.setAttribute("redirect"	, "/front/member/findPasswdForm.web");
 				
 				mav.setViewName("forward:/servlet/result.web");
 			}
-		}
-		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".findPasswdForm()] " + e.getMessage(), e);
+			
+		}catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".findPasswProc()] " + e.getMessage(), e);
 		}
 		finally {}
 		
@@ -185,7 +250,7 @@ public class MemberWeb extends Common {
 			mav.setViewName("front/member/findPasswdForm");
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".registerForm()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".findPasswdForm()] " + e.getMessage(), e);
 		}
 		finally {}
 		

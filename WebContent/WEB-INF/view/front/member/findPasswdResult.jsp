@@ -28,14 +28,19 @@
 
 	<section class="checkout spad">
 		<div class="container">
-			<form action="/front/member/resetPassword.web" method="POST" id="frmMain" class="checkout__form">
+			<form action="/front/member/findPasswdResult.web" method="POST" id="frmMain" class="checkout__form">
 				<div class="row3">
 					<div class="col-lg-12">
 						<h5 >회원 비밀번호 재설정</h5>
 						<div class="row3">
 							<div class="col-lg-12 col-md-12 col-sm-12">
 								<div class="checkout__form__input">
-									<p><span>*</span>(영문 대/소문자 구분, 숫자, 특수문자 포함 8~16자 필수 입력) </p>
+									<input type="text" id="tempPasswd" name="tempPasswd" placeholder="임시 비밀번호 입력" required autocomplete="off" />
+								</div>
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12">
+								<div class="checkout__form__input">
+									<p><span>*</span>영문 대/소문자 구분, 숫자, 특수문자 포함 8~16자 필수 입력 </p>
 									<input type="password" id="newPasswd" name="newPasswd" placeholder="새비밀번호 입력" required autocomplete="off" />
 								</div>
 							</div>
@@ -46,7 +51,7 @@
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
 								<div class="checkout__form__input">
-									<input type="submit" value="확인" id="updatePasswd"/>
+									<input type="button" value="비밀번호 변경" id="updatePasswd" onClick="resetPasswd()";/>
 								</div>
 							</div>
 						</div>
