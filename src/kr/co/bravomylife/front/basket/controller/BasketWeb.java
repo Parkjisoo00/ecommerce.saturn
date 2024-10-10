@@ -20,6 +20,8 @@
  */
 package kr.co.bravomylife.front.basket.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -82,6 +84,7 @@ public class BasketWeb extends Common {
 			basketDto.setPrice(Integer.parseInt(arrBasket[2]));
 			basketDto.setCount(Integer.parseInt(arrBasket[3]));
 			basketDto.setImg(arrBasket[4]);
+			basketDto.setPoint_value(Integer.parseInt(arrBasket[5]));
 			
 			if (basketSrvc.insert(basketDto)) {
 				request.setAttribute("script", "alert('장바구니에 저장되었습니다');");
@@ -94,6 +97,51 @@ public class BasketWeb extends Common {
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".setBasketIframe()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-10
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/basket/index.web")
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			List<BasketDto> list = basketSrvc.listing(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			String item = "";
+			
+			for (int loop = 0; loop < list.size(); loop++) {
+				item += list.get(loop).getSeq_sle()
+						+ "|" + list.get(loop).getSle_nm()
+						+ "|" + list.get(loop).getPrice()
+						+ "|" + list.get(loop).getCount()
+						+ "|" + list.get(loop).getImg()
+						+ "|" + list.get(loop).getPoint_value();
+				
+				if (list.size() > 1 && loop < list.size() - 1) item += ",";
+				
+			}
+			logger.debug(item);
+			
+			mav.addObject("item", item);
+			mav.setViewName("front/basket/index");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".main()] " + e.getMessage(), e);
 		}
 		finally {}
 		

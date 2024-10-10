@@ -36,11 +36,18 @@ public class BasketDto {
 	private String sle_nm		= "";
 	private int price			= 0;
 	private int count			= 0;
+	private int point_value		= 0;
 	private String img			= "";
 	private String dt_reg		= "";
 	private String dt_upt		= "";
 	
 	
+	public int getPoint_value() {
+		return point_value;
+	}
+	public void setPoint_value(int point_value) {
+		this.point_value = point_value;
+	}
 	public int getSeq_bsk() {
 		return seq_bsk;
 	}

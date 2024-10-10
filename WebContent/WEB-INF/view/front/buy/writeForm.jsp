@@ -102,13 +102,14 @@
 			return;
 		}
 		
-		var seq_sle	= document.getElementById("seq_sle").value;
-		var sle_nm	= document.getElementById("sle_nm").value;
+		var seq_sle			= document.getElementById("seq_sle").value;
+		var sle_nm			= document.getElementById("sle_nm").value;
 		var discount_sale	= document.getElementById("discount_sale").value;
-		var count	= document.getElementById("count").value;
-		var img		= document.getElementById("img").value;
+		var count			= document.getElementById("count").value;
+		var img				= document.getElementById("img").value;
+		var point_value		= document.getElementById("point_value").value;
 		
-		var item = seq_sle + "|" + sle_nm + "|" + discount_sale + "|" + count + "|" + img;
+		var item = seq_sle + "|" + sle_nm + "|" + discount_sale + "|" + count + "|" + img + "|" + point_value;
 		document.getElementById("item").value = item;
 		
 		var frmMain = document.getElementById("frmMain");
@@ -142,7 +143,8 @@
 <input type="hidden" id="sle_nm"		name="sle_nm"			value="${saleDto.sle_nm}" />
 <input type="hidden" id="price_sale"	name="price_sale"		value="${saleDto.price_sale}" />
 <input type="hidden" id="discount_sale"	name="discount_sale"	value="${saleDto.discount_sale}" />
-<input type="hidden" id="img"			name="img"				value="${saleDto.img}"/>
+<input type="hidden" id="img"			name="img"				value="${saleDto.img}" />
+<input type="hidden" id="point_value"	name="point_value"		value="${saleDto.point_value}" />
 <input type="hidden" id="cd_ctg_m"		name="cd_ctg_m" />
 <input type="hidden" id="cd_ctg_b"		name="cd_ctg_b" />
 <input type="hidden" id="corp_nm"		name="corp_nm"			value="${paging.corp_nm}"/>
