@@ -109,7 +109,7 @@
 	<section class="banner set-bg" data-setbg="img/banner/banner7.jpg">
 		<div class="container">
 			<div class="row">
-				<div class="col-xl-7 col-lg-8 m-auto">
+				<div class="col-xl-7 col-lg-8 ">
 					<div class="banner__slider owl-carousel">
 						<div class="banner__item">
 							<div class="banner__text">
