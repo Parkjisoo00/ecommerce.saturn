@@ -50,6 +50,47 @@ public class BoardSrvc {
 	 * @return boolean
 	 * 
 	 * @since 2024-10-10
+	 * <p>DESCRIPTION: 고객센터 삭제(처리)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@Transactional("txFront")
+	public boolean deleteFlag(BoardDto boardDto) {
+		
+		int result = boardDao.deleteFlag(boardDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	/**
+	 * @param boardDto [게시판 빈]
+	 * @return boolean
+	 * 
+	 * @since 2024-10-10
+	 * <p>DESCRIPTION: 고객센터 삭제</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@Transactional("txFront")
+	public boolean delete(BoardDto boardDto) {
+		
+		int result = boardDao.delete(boardDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	/**
+	 * @param boardDto [게시판 빈]
+	 * @return boolean
+	 * 
+	 * @since 2024-10-10
 	 * <p>DESCRIPTION: 고객센터 수정</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>

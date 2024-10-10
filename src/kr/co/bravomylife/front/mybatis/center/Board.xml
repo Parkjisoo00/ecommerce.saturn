@@ -2,6 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.center.Board">
 	
+	<update id="deleteFlag" parameterType="boardDto">
+		UPDATE
+			TB_BBS
+		SET
+			FLG_DELETE	= 'Y'
+			, DT_UPT	= SYSDATE
+			, UPDATER	= #{updater}
+		WHERE
+			CD_BBS_TYPE = #{cd_bbs_type}
+			AND SEQ_BBS = #{seq_bbs}
+	</update>
+	
+	<delete id="delete" parameterType="boardDto">
+		DELETE FROM
+			TB_BBS
+		WHERE
+			CD_BBS_TYPE = #{cd_bbs_type}
+			AND SEQ_BBS = #{seq_bbs}
+	</delete>
+	
 	<update id="update" parameterType="boardDto">
 		UPDATE
 			TB_BBS
@@ -87,6 +107,9 @@
 					, 'ppt'	, 'ppt'
 					, 'hwp'	, 'hwp'
 					, 'pdf'	, 'pdf'
+					, 'gif'	, 'gif'
+					, 'jpg'	, 'jpg'
+					, 'png'	, 'png'
 					, NULL	, ''
 					, 'etc') extension
 				, FLG_TOP
