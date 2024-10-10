@@ -2725,9 +2725,9 @@ ol {
 }
 
 .cart__total__procced {
-	background: #f5f5f5;
 	padding: 40px;
 	font-size: 18px;
+	border: 2px solid #d6d6d6;
 }
 
 .cart__total__procced h6 {
