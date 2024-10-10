@@ -6,7 +6,7 @@
 		UPDATE
 			TB_MBR_MST
 		SET
-			PASSWD		= #{newPasswd}
+			PASSWD		= #{passwd}
 			, DT_UPT	= SYSDATE
 		WHERE
 			EMAIL		= #{email}

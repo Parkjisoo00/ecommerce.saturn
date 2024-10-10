@@ -93,6 +93,9 @@ public class MemberWeb extends Common {
 			, String passwd_input
 			, String newPasswd) {
 		
+		// passwd_temp에는 암호화된 임시 비밀번호가 URL인코더로 인코더된 상태
+		// 이메일은 ULR 인코더로만 인코더를 한다
+		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
@@ -101,13 +104,17 @@ public class MemberWeb extends Common {
 			
 			// - 새 비밀번호(newPasswd)와 새 비밀번호(newPasswd_) 확인이 같은지는 폼에서 처리
 			// - 폼에서 암호화된 이메일(memberDto.getEmail())과 임시 비밀번호(randomPassword)를 제공하여야 함
-			logger.debug("암호화된 이메일(복호화)=" + memberDto.getEmail() + "(" + aes.decode(memberDto.getEmail()) + ")");
-			logger.debug("암호화된 임시 비밀번호(복호화)=" + passwd_temp);
+			logger.debug("암호화된 이메일(복호화)=" + memberDto.getEmail() + "(" + memberDto.getEmail() + ")");
+			logger.debug("암호화된 임시 비밀번호 URL (복호화)=" + URLDecoder.decode(passwd_temp));
+			logger.debug("암호화된 임시 비밀번호 (복호화) 함" + aes.decode(passwd_temp));
 			// logger.debug("암호화된 임시 비밀번호(복호화)=" + passwd_temp + "(" + aes.decode(URLDecoder.decode(passwd_temp)) + ")");
 			
 			logger.debug("회원이 입력한 임시 비밀번호=" + passwd_input);
 			logger.debug("회원이 입력한 신규 비밀번호=" + newPasswd);
 			
+			
+			
+			// passwd_inputd은 Jsp에서 받아온 암호화만 된 임시 비밀번호
 			
 			
 			String randomPassword = aes.decode(passwd_temp);
@@ -122,7 +129,7 @@ public class MemberWeb extends Common {
 			if (passwd_input.equals(randomPassword)) {
 					
 				// 신규 비밀번호 암호화	
-				memberDto.setPasswd(HSwithSHA.encode(newPasswd));
+				memberDto.setPasswd(aes.encode(newPasswd));
 				
 				memberDto.setEmail(memberDto.getEmail());
 				if (memberSrvc.updatePasswd(memberDto)){
@@ -170,6 +177,8 @@ public class MemberWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			
+			
 			mav.addObject("email", email);
 			mav.addObject("passwd_temp", passwd_temp);
 			
