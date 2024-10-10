@@ -147,72 +147,86 @@
 	<section class="shop spad">
 		<div class="container">
 			<%@ include file="/include/front/lowgnbG.jsp" %>
-			<div class="row">
-				<div class="col-lg-9 col-md-9">
-					<div class="row">
-						<c:choose>
-							<c:when test="${empty list}">
-								<div class="col-12 d-flex justify-content-center align-items-center" style="height: 600px;">
-									<p>상품이 없습니다.</p>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<c:forEach var="list" items="${list}">
-									<div class="col-lg-4 col-md-6">
-										<div class="product__item">
-											<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_b}', '${list.cd_ctg_m}');">
-												<div class="product__item__pic set-bg" data-setbg="${list.img}">
-												<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
-													<div class="label new">베스트</div>
-												</c:if>
-												</div>
-											</a>
-											<div class="product__item__text">
-												<h6 style="line-height: 1.5em; min-height: 3em;"><a href="#" style="font-size: 15px;">${list.sle_nm}</a></h6>
-													<div class="rating">
-														<c:if test="${list.average_rate == 1}">
-															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${list.count}개 상품평</span>
-														</c:if>
-														<c:if test="${list.average_rate == 2}">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${list.count}개 상품평</span>
-														</c:if>
-														<c:if test="${list.average_rate == 3}">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${list.count}개 상품평</span>
-														</c:if>
-														<c:if test="${list.average_rate == 4}">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${list.count}개 상품평</span>
-														</c:if>
-														<c:if test="${list.average_rate == 5}">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i><span style="margin-left: 10px; color: #346aff; font-size: 13px; font-weight: bold;">${list.count}개 상품평</span>
-														</c:if>
-													</div>
-												<c:choose>
-													<c:when test="${list.discount == null || list.discount == 0}">
-														<div class="product__price"><span style="text-decoration: none; font-size: 1.3em; color: black;">${list.price_sale}</span>원</div>
-													</c:when>
-													<c:otherwise>
-														<div class="product__price"><span>${list.price_sale}</span> <span style="text-decoration: none; color : red">-${list.discount}%</span><span style="text-decoration: none; color: black; font-size: 1.3em">${list.discount_sale}</span>원</div>
-													</c:otherwise>
-												</c:choose>
+			<div class="row" style="justify-content: center;">
+				<c:choose>
+					<c:when test="${empty list}">
+						<div class="col-lg-2 col-md-6 d-flex justify-content-center align-items-center" style="height: 600px;">
+							<p>상품이 없습니다.</p>
+						</div>
+					</c:when>
+						<c:otherwise>
+							<c:forEach var="list" items="${list}">
+								<div class="col-lg-2 col-md-6">
+									<div class="product__item">
+										<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');" style="display: flex; justify-content: center; align-items: center;">
+											<div class="product__item__pic set-bg" data-setbg="${list.img}">
+											<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
+												<div class="label new">베스트</div>
+											</c:if>
 											</div>
+										</a>
+										<div class="product__item__text">
+											<h6 style="line-height: 1.5em; min-height: 3em;"><a href="#" style="font-size: 15px;">${list.sle_nm}</a></h6>
+												<div class="rating">
+													<c:if test="${list.average_rate == 0}">
+														<i class="fa fa-star" style="color: #e0e0e0;"></i>
+														<i class="fa fa-star" style="color: #e0e0e0;"></i>
+														<i class="fa fa-star" style="color: #e0e0e0;"></i>
+														<i class="fa fa-star" style="color: #e0e0e0;"></i>
+														<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.count}개 상품평</span>
+													</c:if>
+													<c:if test="${list.average_rate == 1}">
+														<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+													</c:if>
+													<c:if test="${list.average_rate == 2}">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+													</c:if>
+													<c:if test="${list.average_rate == 3}">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+													</c:if>
+													<c:if test="${list.average_rate == 4}">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+													</c:if>
+													<c:if test="${list.average_rate == 5}">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+													</c:if>
+												</div>
+											<c:choose>
+												<c:when test="${list.discount == null || list.discount == 0}">
+													<div class="product__price">
+														<span style="text-decoration: none; font-size: 1.3em; color: black;">
+															<fmt:formatNumber value="${list.price_sale}" type="number" />
+														</span>원
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div class="product__price">
+														<span><fmt:formatNumber value="${list.price_sale}" type="number" /></span>
+														 <span style="text-decoration: none; color : #ff4c2e">-<fmt:formatNumber value="${list.discount}" type="number" />%</span>
+														 <span style="text-decoration: none; color: black; font-size: 1.3em">
+														 	<fmt:formatNumber value="${list.discount_sale}" type="number" />
+														 </span>원
+													</div>
+												</c:otherwise>
+											</c:choose>
 										</div>
 									</div>
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
-						<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
-							<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
-						</div>
+								</div>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+					<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
+						<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
 					</div>
 				</div>
 			</div>

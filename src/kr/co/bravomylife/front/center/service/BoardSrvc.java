@@ -23,10 +23,13 @@ package kr.co.bravomylife.front.center.service;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import kr.co.bravomylife.front.center.dao.BoardDao;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
+import kr.co.bravomylife.front.center.dto.BoardDto;
 
 /**
  * @version 1.0.0
@@ -42,8 +45,59 @@ public class BoardSrvc {
 	@Inject 
 	BoardDao boardDao;
 
+	/**
+	 * @param boardDto [게시판 빈]
+	 * @return BoardDto
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 보기(답변)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public BoardDto selectReply(BoardDto boardDto) {
+		return boardDao.selectReply(boardDto);
+	}
 	
-public PagingListDto list(PagingDto pagingDto) {
+	/**
+	 * @param boardDto [게시판 빈]
+	 * @return BoardDto
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 보기</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public BoardDto select(BoardDto boardDto) {
+		return boardDao.select(boardDto);
+	}
+	
+	/**
+	 * @param boardDto [게시판 빈]
+	 * @return boolean
+	 * 
+	 * @since 2024-07-10
+	 * <p>DESCRIPTION: 고객센터 등록</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@Transactional("txFront")
+	public boolean insert(BoardDto boardDto) {
+		
+		
+		// 신규 글 번호(seq_bbs)
+		boardDto.setSeq_bbs(boardDao.sequence());
+		
+		int result = boardDao.insert(boardDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	
+	public PagingListDto list(PagingDto pagingDto) {
 		
 		PagingListDto pagingListDto = new PagingListDto();
 		

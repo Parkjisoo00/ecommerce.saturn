@@ -102,6 +102,32 @@ table.headTop_01 th {
 	font-weight: bold !important;
 }
 
+.lowgnb-li {
+	list-style: none !important;
+	display: inline-block !important;
+	position: relative !important;
+	margin: 0 30px 0 0 !important;
+}
+
+.lowgnb-li-l {
+	list-style: none !important;
+	display: inline-block !important;
+	position: relative !important;
+	margin: 0 30px 0 0 !important;
+	padding-left: 1% !important;
+}
+
+.lowgnb-h5 {
+	font-weight: bold;
+	font-size: 14px !important;
+	color: #303030 !important;
+	list-style: none !important;
+	display: inline-block !important;
+	position: relative !important;
+	margin-bottom: 5px !important;
+	padding-left: 1% !important;
+}
+
 /*----------------------------------------*/
 /* SaleList Select CSS
 /*----------------------------------------*/
@@ -112,7 +138,164 @@ table.headTop_01 th {
 	border-radius: 5px;
 	font-size: 13px;
 	padding: 0;
-	margin: 0 30px 0 380px;
+	margin: 0 0 0 38.5%;
+}
+
+/*----------------------------------------*/
+/* Rate Star
+/*----------------------------------------*/
+
+.rate {
+	margin-left: 10px !important;
+	color: #346aff !important;
+	font-size: 14px !important;
+	font-weight: bold !important;
+}
+
+/*----------------------------------------*/
+/* Product Detail Text
+/*----------------------------------------*/
+
+.pd-text {
+	font-weight: 450 !important;
+	font-size: 15px !important;
+	color: #555 !important;
+	display: inline-block !important;
+	width: auto !important;
+	height: auto !important;
+}
+
+.pd-title {
+	font-weight: 450 !important;
+	font-size: 15px !important;
+	color: #333 !important;
+	display: flex;
+	align-items: center;
+}
+
+.pd-main {
+	line-height: 1.5em;
+	min-height: 3em;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.pd-label {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: flex-start !important;
+	gap: 10px !important;
+}
+
+.pd-ul {
+	display: flex;
+	flex-direction: column;
+	column; gap: 2px;
+}
+
+.pd-h5 {
+	font-size: 20px !important;
+	color: #111111 !important;
+	font-weight: 600 !important;
+	text-transform: uppercase !important;
+	margin-bottom: 0px !important;
+	margin-top: 50px !important;
+}
+
+.pd-subh5 {
+	font-size: 20px !important;
+	color: #111111 !important;
+	font-weight: 600 !important;
+	text-transform: uppercase !important;
+	margin-bottom: 50px !important;
+	margin-top: 15px !important;
+	font-weight: 450 !important;
+	font-size: 15px !important;
+	color: #333 !important;
+}
+
+.pd-rbutton {
+	width: 100%;
+	text-align: center;
+	margin-top: 50px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.pd-rtext {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: white;
+	color: black;
+	border: 1px solid #cccccc;
+	border-radius: 10px;
+	text-decoration: none;
+}
+
+table.headTop_pd {
+	margin: 20px 10px;
+	border-collapse: collapse;
+	/* width: 95%; */
+	/* margin: 1rem auto; */
+	background-color: white
+	font-family: "Montserrat", sans-serif;
+}
+
+table.headTop_pd th, table.headTop_pd td {
+	padding: 3px;
+	text-align: left;
+	line-height: 3;
+	border-bottom: 1px solid #e0e0e0;
+	border-top: 1px solid #e0e0e0;
+	font-family: "Montserrat", sans-serif;
+	text-align: center
+}
+
+.hidden-review {
+	display: flex;
+	max-height: 0;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	transition: max-height 1s ease-out;
+}
+
+.hidden-review-p {
+	color: #444444;
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
+.hidden-review-t {
+	display: inline-block;
+	padding: 10px 10px;
+	background-color: white;
+	color: black;
+	border: 1px solid #707070;
+	border-radius: 10px;
+	text-decoration: none;
+	font-size: 13px;
+	font-family: "Montserrat", sans-serif;
+}
+
+.hidden-review-span {
+	color: #ca1515;
+}
+
+.hidden-review-area {
+	height: 50px;
+	width: 300px;
+	border: 1px solid #e1e1e1;
+	border-radius: 2px;
+	margin-bottom: 25px;
+	font-size: 14px;
+	padding: 0px;
+	color: #666666;
+	text-align: center;
+}
+
+.visible {
+	max-height: 200px;
 }
 
 /*----------------------------------------*/
@@ -1318,7 +1501,8 @@ ol {
 }
 
 .product__item__pic {
-	height: 360px;
+	height: 200px;
+	width: 100%;
 	position: relative;
 	overflow: hidden;
 	border: 1px solid #e0e0e0
@@ -1445,7 +1629,7 @@ ol {
 
 .product__item__text .rating i {
 	font-size: 10px;
-	color: #e3c01c;
+	color: gold;
 	margin-right: -4px;
 }
 
@@ -1938,7 +2122,7 @@ ol {
 
 .product__details__text .rating i {
 	font-size: 12px;
-	color: #e3c01c;
+	color: gold;
 	margin-right: -4px;
 }
 
@@ -1972,6 +2156,7 @@ ol {
 	float: left;
 	margin-right: 10px;
 	margin-bottom: 10px;
+	margin-left: 9.3%;
 }
 
 .quantity>span {
@@ -2015,7 +2200,10 @@ ol {
 
 .product__details__button {
 	overflow: hidden;
-	margin-bottom: 25px;
+	margin-bottom: 20px;
+	margin-top: 25px;
+	border-top: 1px solid #707070;
+	padding-top: 30px;
 }
 
 .product__details__button .cart-btn {
@@ -2062,10 +2250,8 @@ ol {
 	color: #666666;
 }
 
-
-
 .product__details__widget {
-	border-top: 1px solid #ebebeb;
+	border-top: 1px solid #707070;
 	padding-top: 16px;
 }
 
@@ -2088,7 +2274,7 @@ ol {
 	font-size: 14px;
 	font-weight: 600;
 	color: #111111;
-	width: 150px;
+	width: 200px;
 	float: left;
 }
 
@@ -2251,8 +2437,8 @@ ol {
 	left: 0;
 	top: 13px;
 	height: 1px;
-	width: 335px;
-	background: #e1e1e1;
+	width: 33%;
+	background: #707070;
 	content: "";
 }
 
@@ -2261,8 +2447,8 @@ ol {
 	right: 0;
 	top: 13px;
 	height: 1px;
-	width: 335px;
-	background: #e1e1e1;
+	width: 33%;
+	background: #707070;
 	content: "";
 }
 
@@ -2303,7 +2489,8 @@ ol {
 	color: #111111;
 	font-weight: 600;
 	text-transform: uppercase;
-	margin-bottom: 35px;
+	margin-bottom: 20px;
+	margin-top: 60px;
 }
 
 /*---------------------
@@ -2555,10 +2742,8 @@ ol {
 	border-bottom: 1px solid #e0e0e0;
 }
 
-.coupon__link ul  {
+.coupon__link ul {
 	list-style: none;
-	display: inline-block;
-	text-align: center;
 	position: relative;
 }
 
@@ -3929,6 +4114,14 @@ ol {
 	.categories__item.categories__large__item {
 		padding-left: 30px;
 	}
+	.sale-select {
+	width: 90px;
+	height: 25px;
+	border-radius: 5px;
+	font-size: 13px;
+	padding: 0;
+	margin: 3px 30px 0 250px;
+}
 	.banner__text h1 {
 		font-size: 45px;
 	}

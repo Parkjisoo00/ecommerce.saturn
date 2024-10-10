@@ -57,16 +57,21 @@ public class SaleDto {
 	private int discount_sale		= 0;
 	private String flg_best			= "";
 	private String flg_like			= "";
+	private int point_stack			= 0;
+	private int point_value			= 0;
+	private String rate_review		= "";
+	private String mbr_nm			= "";
+	
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
-	public String getDesces() {
-		return desces;
+	public int getPoint_value() {
+		return point_value;
 	}
-	public void setDesces(String desces) {
-		this.desces = desces;
+	public void setPoint_value(int point_value) {
+		this.point_value = point_value;
 	}
 	public int getRnum() {
 		return rnum;
@@ -103,6 +108,12 @@ public class SaleDto {
 	}
 	public void setPrice_sale(int price_sale) {
 		this.price_sale = price_sale;
+	}
+	public String getDesces() {
+		return desces;
+	}
+	public void setDesces(String desces) {
+		this.desces = desces;
 	}
 	public String getCd_ctg_b() {
 		return cd_ctg_b;
@@ -223,6 +234,24 @@ public class SaleDto {
 	}
 	public void setFlg_like(String flg_like) {
 		this.flg_like = flg_like;
+	}
+	public int getPoint_stack() {
+		return point_stack;
+	}
+	public void setPoint_stack(int point_stack) {
+		this.point_stack = point_stack;
+	}
+	public String getRate_review() {
+		return rate_review;
+	}
+	public void setRate_review(String rate_review) {
+		this.rate_review = rate_review;
+	}
+	public String getMbr_nm() {
+		return mbr_nm;
+	}
+	public void setMbr_nm(String mbr_nm) {
+		this.mbr_nm = mbr_nm;
 	}
 	public String getSearchKey() {
 		return searchKey;
