@@ -1,7 +1,7 @@
 <!-- html 설정 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <!-- JSP 파일이 위치한 경로 입력 -->
-<%@ page info="/WEB-INF/view/backoffice/center/board/question/writeForm.jsp" %>
+<%@ page info="/WEB-INF/view/backoffice/center/board/faq/writeForm.jsp" %>
 <!-- 이 부분은 필요에 따라 추가하는 것이 맞으므로 개별 판단에 따라 추가하거나 삭제해도 되고 사용하지 않더라도 그대로 넣어둬도 무방하다고 판단 -->
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
@@ -103,9 +103,7 @@
 				<tr>
 					<th>첨부 파일</th>
 					<td>
-						
-							<input type="file" id="files[0]" name="files[0]" />
-						
+						<input type="file" id="files[0]" name="files[0]" />
 					</td>
 				</tr>
 			</table>
