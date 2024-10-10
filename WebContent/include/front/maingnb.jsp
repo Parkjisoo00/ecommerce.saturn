@@ -19,8 +19,8 @@
 		</div>
 		<div id="mobile-menu-wrap" style="text-align:left; margin-left: -60px;"></div>
 		<div class="offcanvas__auth" style="text-align: left;">
-			<a href="#">Login</a>
-			<a href="#">Register</a>
+			<a href="/front/login/loginForm.web">로그인</a>
+			<a href="/front/member/registerForm.web">회원가입</a>
 		</div>
 	</div>
 <header class="header" style="background-color: #341d08; height: 160px; position: relative;">
