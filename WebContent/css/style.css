@@ -2185,7 +2185,7 @@ ol {
 }
 
 .pro-qty {
-	height: 50px;
+	height: 51px;
 	width: 150px;
 	border: 1px solid #ebebeb;
 	border-radius: 10px;
@@ -2234,6 +2234,8 @@ ol {
 	float: left;
 	margin-right: 10px;
 	margin-bottom: 10px;
+	margin-top: 0 !important;
+	margin-left: 0 !important;
 }
 
 .product__details__button ul {
