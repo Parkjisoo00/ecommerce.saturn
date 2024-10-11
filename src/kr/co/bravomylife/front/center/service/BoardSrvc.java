@@ -31,6 +31,8 @@ import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.center.dto.BoardDto;
 
+
+
 /**
  * @version 1.0.0
  * @author alstjsrla28#gmail.com

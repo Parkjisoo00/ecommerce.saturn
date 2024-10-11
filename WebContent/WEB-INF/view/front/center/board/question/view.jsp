@@ -112,9 +112,10 @@
 			<br/>
 			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="checkout__form__input">
-						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">첨부 파일 <span></span></p>
-						<img src="/img/question/" height="250px" alt="판매상품 이미지" style="cursor: pointer; margin-left: 300px;" onclick="window.open(this.src)" />
-							<!-- <a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});" style="margin-left: 300px;" >다운로드</a> -->
+				<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">
+					<c:if test="${boardDto.file_orig != ''}">
+						<a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});">첨부파일 다운로드</a>
+					</c:if>
 				</div>
 			</div>
 			<br/>
@@ -175,7 +176,6 @@
 		</article>
 	</div>
 </section>
-	<iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
 	<%@ include file="/include/common/footerpic.jsp" %>
@@ -187,6 +187,7 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
+<iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>
 </form>
 </body>
 </html>

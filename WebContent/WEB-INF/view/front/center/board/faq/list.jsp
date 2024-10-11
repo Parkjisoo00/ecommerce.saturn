@@ -162,7 +162,7 @@
 			<div class="col-lg-12" style="padding: 0 !important;">
 				<div class="checkout__form__input">
 		<div>
-			<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">자주 찾는 질문(FAQ)</h6>
+			<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">공지사항</h6>
 			<h6 class="coupon__link" style="text-align: center; letter-spacing: 1.5px; border: none">
 					<c:if test="${paging.cd_bbs_type == 1}">
 					<a href="javascript:goList(1);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
@@ -201,67 +201,19 @@
 				<div class="checkout__form__input">
 				<div class="brdInfo">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</div>
 				<br/>
-					<!-- 첫 번째 아코디언 -->
-					<button class="accordion" type="button">Q.탈퇴 후 재 가입이 가능한가요? </button>
-					<div class="panel">
-					<textarea class="accordion2" readonly>A. 네 , 회원 탈퇴 후 재가입은 가능합니다..</textarea>
-					</div>
-					
-					<!-- 두 번째 아코디언 -->
-					<button class="accordion" type="button">Q.쿠폰은 어떤 종류가 있나요?</button>
-					<div class="panel">
-					<textarea class="accordion2" readonly>A. 다양한 쿠폰이 있습니다.</textarea>
-					</div>
-					
-					<!-- 세 번째 아코디언 -->
-					<button class="accordion" type="button">Q.개인정보는 어떻게 변경하나요? </button>
-					<div class="panel">
-					<textarea class="accordion2" readonly>A. 마이 페이지 [ 회원정보변경 ] 메뉴에서 변경 하실 수 있습니다.</textarea>
-					</div>
-					
-					<button class="accordion" type="button">Q.회원가입을 해야만 상품 구매가 가능한가요?  </button>
-					<div class="panel">
-					<textarea class="accordion2" readonly>A. 네 회원가입 후 구매가 가능하십니다.</textarea>
-					</div>
-					
-					<button class="accordion" type="button">Q.아이디와 비밀번호를 분실했습니다.  </button>
-					<div class="panel">
-					<textarea class="accordion2" readonly>A. 아이디 찾기와 비밀번호 찾기는 사이트 우측상단 로그인 메뉴에 들어가면 확인하실 수 있습니다.</textarea>
-					</div>
-					
-					<button class="accordion" type="button">Q.포인트에 사용기한이 있나요?  </button>
-					<div class="panel">
-					<textarea class="accordion2" readonly>A. 아니요. 사용기한이 없습니다.</textarea>
-					</div>
-					
-					<button class="accordion" type="button">Q.주문확인/배송조회는 어디서 하나요?  </button>
-					<div class="panel">
-					<textarea class="accordion2" readonly>A. 로그인 후 마이페이지 에서 주문확인이 가능합니다.</textarea>
-					</div>
-					
-					<button class="accordion" type="button">Q.주문자랑 수취인이 이름이 달라도 통관에 문제가 없나요?  </button>
-					<div class="panel">
-					<textarea class="accordion2" readonly>A. 네 , 주문자 성함과는 관계가 없습니다.</textarea>
-					</div>
-					
-					<button class="accordion" type="button">Q.받은 제품이 불량인 것 같아요. 제품 불량은 취소나 환불이 되나요?  </button>
-					<div class="panel">
-					<textarea class="accordion2" readonly>A. 제품 불량이나 제품 파손인 경우 고객센터로 연락주시면 부분 환불이나 재발송 처리가 가능합니다.</textarea>
-					</div>
-					
-					<button class="accordion" type="button">Q.전화로 주문이 가능한가요 ? </button>
-					<div class="panel">
-					<textarea class="accordion2" readonly>A. 네. 전화로 주문이 가능합니다. ARS전화주문 메뉴를 확인하세요.</textarea>
-					</div>
-					
-					<button class="accordion" type="button">Q. 제품의 유통기한은 어떻게 확인 하나요?    </button>
-					<div class="panel">
-					<textarea class="accordion2" readonly>A. 구매하시려는 제품의 상세페이지 내 상단 오른쪽 기본 정보란에 해당 제품의 유통기한이 표기 되어 있으며 입고시 유통기한도 함께 업데이트 되고 있습니다.</textarea>
-					</div>
-					
+					<!-- faq 리스트를 반복문으로 출력 -->
+			            <c:forEach items="${list}" var="list">
+						<button class="accordion" type="button">Q. ${list.title}</button>
+							<div class="panel">
+								<div class="accordion2">
+									${list.content}
+								</div>
+							</div>
+						</c:forEach>
+						
 					<div class="row">
 					<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;" >
-						<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goList" />
+						<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
 					</div>
 					</div>
 				</div>

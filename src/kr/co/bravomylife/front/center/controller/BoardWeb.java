@@ -106,10 +106,15 @@ public class BoardWeb extends Common {
 			
 			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
 			
+			logger.debug("경로 확인" +pathBase);
+			
 			file = new File(pathBase + "" + File.separator + boardDto.getFile_save());
 			
 			fileDownloadDto.setFile_original(boardDto.getFile_orig());
 			fileDownloadDto.setFile_size(file.length());
+			
+			logger.debug("파일 확인" + boardDto.getFile_orig());
+			logger.debug("파일 사이즈 확인" + file.length());
 			
 			if (file == null || file.exists() == false ) {
 				mav.setViewName("redirect:/error.web?code=404");
@@ -353,6 +358,8 @@ public class BoardWeb extends Common {
 			String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
 			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 			
+			logger.debug("업로드 경로 확인" + pathBase);
+			
 			int countFile = 0;
 			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
 			
@@ -390,7 +397,7 @@ public class BoardWeb extends Common {
 				
 				
 				boardDto.setFile_orig(fileNameSrc);
-				boardDto.setFile_save("bbs\\" + fileNameSve);
+				boardDto.setFile_save(fileNameSve);
 				
 				if (boardSrvc.insert(boardDto)) {
 					// GET에서 POST로 변경
@@ -501,7 +508,7 @@ public class BoardWeb extends Common {
 					HttpSession session = request.getSession();
 					session.setAttribute("sessionUser", "SEQ_MBR");
 				}
-				/*
+				
 				if (pagingDto.getCd_bbs_type() == 3) {
 					pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 				
@@ -510,8 +517,8 @@ public class BoardWeb extends Common {
 				mav.addObject("paging"	, pagingListDto.getPaging());
 				mav.addObject("list"	, pagingListDto.getList());
 				}
-				*/
-				/*
+				
+				
 				if (pagingDto.getCd_bbs_type() == 1) {
 					mav.setViewName("front/center/board/notice/list");
 				}
@@ -526,7 +533,7 @@ public class BoardWeb extends Common {
 					request.setAttribute("redirect"	, "/");
 					mav.setViewName("forward:/servlet/result.web");
 				}
-				*/
+				
 			}
 			
 			

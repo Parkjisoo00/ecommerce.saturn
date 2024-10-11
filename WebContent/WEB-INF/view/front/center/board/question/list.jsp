@@ -86,9 +86,10 @@
 	<section class="shop spad">
 		<div class="container">
 			<div class="col-lg-12" style="padding: 0 !important;">
-		<div>
-			<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">1:1 문의</h6>
-			<h6 class="coupon__link" style="text-align: center; letter-spacing: 1.5px; border: none">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="checkout__form__input">
+					<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">1:1 문의</h6>
+					<h6 class="coupon__link" style="text-align: center; letter-spacing: 1.5px; border: none">
 			
 					<c:if test="${paging.cd_bbs_type == 1}">
 					<a href="javascript:goList(1);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
@@ -172,7 +173,7 @@
 					<div class="row">
 					<br/>
 					<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;" >
-						<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goList" />
+						<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
 					</div>
 					<br/>
 					<!-- 문의 등록 버튼 -->
