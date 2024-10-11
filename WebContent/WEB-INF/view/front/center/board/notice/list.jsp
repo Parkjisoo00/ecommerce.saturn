@@ -77,26 +77,17 @@
 		.contact-info h3 {
 		margin-bottom: 10px; /* 하단 여백 */
 		}
-</style>
+	</style>
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
 	
 	window.onload = function() {
 		var acc = document.getElementsByClassName("accordion");
-		for (var i = 0; i < acc.length; i++) {
-		acc[i].addEventListener("click", function() {
-		this.classList.toggle("active");
-		var panel = this.nextElementSibling;
-		if (panel.style.display === "block") {
-		panel.style.display = "none";
-		} else {
-		panel.style.display = "block";
-		}
-		});
-		}
-		}
-	
+		for (var i = 0; i < acc.length; i++) { acc[i].addEventListener("click", function() {
+			this.classList.toggle("active"); var panel=this.nextElementSibling; if
+			(panel.style.display==="block" ) { panel.style.display="none" ; } else {
+			panel.style.display="block" ; } }); } }
 	<!--
 	function toggleAnswer(element) {
         var askDiv = element.querySelector('.ask'); // .ask 요소를 찾음
@@ -220,67 +211,69 @@
 	<section class="shop spad">
 		<div class="container">
 			<article class="txtCenter">
-			<div class="col-lg-12" style="padding: 0 !important;">
-				<div class="checkout__form__input">
-		<div>
-			<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">공지사항</h6>
-			<h6 class="coupon__link" style="text-align: center; letter-spacing: 1.5px; border: none">
-					<c:if test="${paging.cd_bbs_type == 1}">
-					<a href="javascript:goList(1);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
-					<a href="javascript:goList(2);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
-					<a href="javascript:goList(3);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">1:1 문의</a>
-					</c:if>
-
-					<c:if test="${paging.cd_bbs_type == 2}">
-					<a href="javascript:goList(1);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
-					<a href="javascript:goList(2);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
-					<a href="javascript:goList(3);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">1:1 문의</a>
-					</c:if>
-					<c:if test="${paging.cd_bbs_type == 3}">
-					<a href="javascript:goList(1);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
-					<a href="javascript:goList(2);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
-					<a href="javascript:goList(3);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">1:1 문의</a>
-					</c:if>
-		</h6>
-		</div>
+				<div class="col-lg-12" style="padding: 0 !important;">
+					<div class="checkout__form__input">
+						<div>
+							<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">공지사항</h6>
+							<h6 class="coupon__link" style="text-align: center; letter-spacing: 1.5px; border: none">
+								<c:if test="${paging.cd_bbs_type == 1}">
+									<a href="javascript:goList(1);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
+									<a href="javascript:goList(2);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
+									<a href="javascript:goList(3);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">1:1 문의</a>
+								</c:if>
+			
+								<c:if test="${paging.cd_bbs_type == 2}">
+									<a href="javascript:goList(1);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
+									<a href="javascript:goList(2);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
+									<a href="javascript:goList(3);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">1:1 문의</a>
+								</c:if>
+								<c:if test="${paging.cd_bbs_type == 3}">
+									<a href="javascript:goList(1);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
+									<a href="javascript:goList(2);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
+									<a href="javascript:goList(3);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">1:1 문의</a>
+								</c:if>
+							</h6>
+						</div>
+					</div>
 			</div>
-			</div>
+			<br/>
 			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="checkout__form__input">
-				<div style="display: flex; justify-content: flex-end;margin-bottom: 10px;">
-				<select name="searchKey">
-					<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
-					<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
-					<option value="title+contents"<c:if test="${paging.searchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
-				</select>
-				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> 
-				<input type="submit" value="검색"/>
-			</div>
-			</div>
+					<div style="display: flex; justify-content: flex-end;margin-bottom: 10px;">
+						<select name="searchKey">
+							<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
+							<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
+							<option value="title+contents"<c:if test="${paging.searchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
+						</select>
+						<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> 
+						<input type="submit" value="검색"/>
+					</div>
+				</div>
 			<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12">
+			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="checkout__form__input">
-				<div class="brdInfo">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</div>
-				<br/>
+					<div class="brdInfo">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</div>
+					<br/>
 					<!-- 공지사항 리스트를 반복문으로 출력 -->
-			            <c:forEach items="${list}" var="list">
-						<button class="accordion" type="button">[공지]${list.title}</button>
-							<div class="panel">
-								<div class="accordion2">
-									${list.content}
-								</div>
+					<c:forEach items="${list}" var="list">
+					<button class="accordion" type="button">[공지]${list.title}</button>
+						<div class="panel">
+							<div class="accordion2">
+								${list.content}
 							</div>
-						</c:forEach>
-						
+						</div>
+					</c:forEach>
+					<br/>
+					<br/>
 					<div class="row">
-					<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;" >
-						<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+						<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;" >
+							<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+						</div>
 					</div>
-					</div>
-				</div>
 				</div>
 			</div>
-		</div>
+			</div>
+			</div>
 		</article>
 	</div>
 </section>

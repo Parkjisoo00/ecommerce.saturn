@@ -23,6 +23,8 @@
 		frmMain.action = "/front/center/board/download.web";
 		frmMain.target = "frmBlank";
 		frmMain.submit();
+		
+		frmMain.target = "_self";
 	}
 	function remove(value) {
 		var frmMain = document.getElementById("frmMain");
@@ -47,6 +49,7 @@
 		frmMain.cd_bbs_type.setAttribute("value", value);
 		frmMain.action = "/front/center/board/list.web";
 		frmMain.submit();
+		
 	}
 	
 	</script>

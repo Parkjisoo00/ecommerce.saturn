@@ -107,90 +107,92 @@
 					<a href="javascript:goList(2);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
 					<a href="javascript:goList(3);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">1:1 문의</a>
 					</c:if>
-		</h6>
-		</div>
-			</div>
-			
-			<!-- 세션에 로그인 정보가 있는지 확인 -->
-		<c:if test="${not empty sessionUser}">
-			<!-- 로그인 상태일 때만 보이는 영역 -->
-			<div class="brdSearchArea">
-			<div style="display: flex; justify-content: flex-end;margin-bottom: 10px;">
-				<select name="searchKey">
-					<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
-					<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
-					<option value="title+contents"<c:if test="${paging.searchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
-				</select>
-				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> 
-				<input type="submit" value="검색"/>
-			</div>
-			<!-- 게시글 목록 -->
-			<div class="row">
-				<div class="col-lg-12 col-md-12">
-				<div class="brdInfo">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</div>
-				<table class="headTop_01" style=" margin-left: auto; margin-right: auto; width: 100%">
-				<tr>
-					<th style="width: 5%">NO</th>
-					<th style="width: 10%">카테고리</th>
-					<th>제목</th>
-					<th style="width: 10%">작성자</th>
-					<th style="width: 15%">등록일</th>
-					
-				</tr>
-				<c:choose>
-					<c:when test="${empty list}">
-						<tr>
-							<td colspan="6">등록된 글이 없습니다.</td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${list}" var="list">
-							<tr>
-								<td>
-									${list.rnum}
-								</td>
-								<td>
-								${list.ctg_nm}
-							</td>
-								<td style="text-align: left">
-									<a href="javascript:goView(${list.seq_bbs});">
-										<c:if test="${list.seq_reply == 0}">[미답변] </c:if>
-										<c:if test="${list.seq_reply > 0}">[답변 완료] </c:if>
-										${list.title}
-									</a>
-								</td>
-								<td>
-									${list.register}
-								</td>
-								<td>
-									${list.dt_reg}
-								</td>
-							</tr>
-						</c:forEach>
-					</c:otherwise>
-					</c:choose>
-					</table>
-					<div class="row">
-					<br/>
-					<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;" >
-						<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
-					</div>
-					<br/>
-					<!-- 문의 등록 버튼 -->
-					<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center; margin-top: 30px;">
-						<a href="/front/center/board/writeForm.web?cd_bbs_type=3" class="btnBasic" style="display: inline-block; padding: 10px 20px; background-color: #c7b199; color: black; border: 1px solid #cccccc; border-radius: 10px; text-decoration: none;">문의 등록</a>
-					</div>
+					</h6>
 					</div>
 				</div>
+				<br/>
+				<!-- 세션에 로그인 정보가 있는지 확인 -->
+				<c:if test="${not empty sessionUser}">
+					<!-- 로그인 상태일 때만 보이는 영역 -->
+					<div class="brdSearchArea">
+						<div style="display: flex; justify-content: flex-end;margin-bottom: 10px;">
+							<select name="searchKey">
+								<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
+								<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
+								<option value="title+contents"<c:if test="${paging.searchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
+							</select>
+							<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> 
+							<input type="submit" value="검색"/>
+						</div>
+					<!-- 게시글 목록 -->
+					<div class="row">
+						<div class="col-lg-12 col-md-12">
+							<div class="brdInfo">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</div>
+								<table class="headTop_01" style=" margin-left: auto; margin-right: auto; width: 100%">
+									<tr>
+										<th style="width: 5%">NO</th>
+										<th style="width: 10%">카테고리</th>
+										<th>제목</th>
+										<th style="width: 10%">작성자</th>
+										<th style="width: 15%">등록일</th>
+									</tr>
+									<c:choose>
+										<c:when test="${empty list}">
+											<tr>
+												<td colspan="6">등록된 글이 없습니다.</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<c:forEach items="${list}" var="list">
+												<tr>
+													<td>
+														${list.rnum}
+													</td>
+													<td>
+														${list.ctg_nm}
+													</td>
+													<td style="text-align: left">
+														<a href="javascript:goView(${list.seq_bbs});">
+															<c:if test="${list.seq_reply == 0}">[미답변] </c:if>
+															<c:if test="${list.seq_reply > 0}">[답변 완료] </c:if>
+															${list.title}
+														</a>
+													</td>
+													<td>
+														${list.register}
+													</td>
+													<td>
+														${list.dt_reg}
+													</td>
+												</tr>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+								</table>
+								<div class="row">
+									<br/>
+									<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;" >
+										<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+									</div>
+									<br/>
+									<br/>
+									<br/>
+									<!-- 문의 등록 버튼 -->
+									<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center; margin-top: 30px;">
+										<a href="/front/center/board/writeForm.web?cd_bbs_type=3" class="btnBasic" style="display: inline-block; padding: 10px 20px; background-color: #c7b199; color: black; border: 1px solid #cccccc; border-radius: 10px; text-decoration: none;">문의 등록</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:if>
+				<!-- 세션에 로그인 정보가 없을 때 -->
+				<c:if test="${empty sessionUser}">
+					<p style="text-align: center;">로그인이 필요합니다. 1:1 문의를 이용하시려면 로그인해주세요.</p>
+				</c:if>
 			</div>
 		</div>
-	</c:if>
-		<!-- 세션에 로그인 정보가 없을 때 -->
-	<c:if test="${empty sessionUser}">
-		<p style="text-align: center;">로그인이 필요합니다. 1:1 문의를 이용하시려면 로그인해주세요.</p>
-	</c:if>
-	</div>
-</section>
+	</section>
 
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
