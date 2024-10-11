@@ -50,16 +50,187 @@
 		frmMain.submit();
 	}
 	
-	function showIngredient() {
-		var reviewForm = document.getElementById('reviewForm');
-		
-		if (reviewForm.classList.contains('visible')) {
-			reviewForm.classList.remove('visible');
-		} else {
-			reviewForm.classList.add('visible');
-		}
-	}
 	
+	
+	function divClick1() {
+		
+		var reviewForm = document.getElementById('reviewForm1');
+			
+			if (reviewForm.classList.contains('visible')) {
+				reviewForm.classList.remove('visible');
+			} else {
+				reviewForm.classList.add('visible');
+			}
+		var myDiv = document.getElementById('myDiv1');
+			
+			if (myDiv.classList.contains('e7d5bf-background')){
+				myDiv.classList.remove('e7d5bf-background');
+			} else {
+				myDiv.classList.add('e7d5bf-background');
+			}
+		}
+	
+	function divClick2() {
+		
+		var reviewForm = document.getElementById('reviewForm2');
+			
+			if (reviewForm.classList.contains('visible')) {
+				reviewForm.classList.remove('visible');
+			} else {
+				reviewForm.classList.add('visible');
+			}
+		var myDiv = document.getElementById('myDiv2');
+			
+			if (myDiv.classList.contains('e7d5bf-background')){
+				myDiv.classList.remove('e7d5bf-background');
+			} else {
+				myDiv.classList.add('e7d5bf-background');
+			}
+		}
+	
+	function divClick3() {
+		
+		var reviewForm = document.getElementById('reviewForm3');
+			
+			if (reviewForm.classList.contains('visible')) {
+				reviewForm.classList.remove('visible');
+			} else {
+				reviewForm.classList.add('visible');
+			}
+		var myDiv = document.getElementById('myDiv3');
+			
+			if (myDiv.classList.contains('e7d5bf-background')){
+				myDiv.classList.remove('e7d5bf-background');
+			} else {
+				myDiv.classList.add('e7d5bf-background');
+			}
+		}
+		
+	function divClick4() {
+	
+		var reviewForm = document.getElementById('reviewForm4');
+			
+			if (reviewForm.classList.contains('visible')) {
+				reviewForm.classList.remove('visible');
+			} else {
+				reviewForm.classList.add('visible');
+			}
+		var myDiv = document.getElementById('myDiv4');
+			
+			if (myDiv.classList.contains('e7d5bf-background')){
+				myDiv.classList.remove('e7d5bf-background');
+			} else {
+				myDiv.classList.add('e7d5bf-background');
+			}
+		}
+	
+	function divClick5() {
+	
+		var reviewForm = document.getElementById('reviewForm5');
+			
+			if (reviewForm.classList.contains('visible')) {
+				reviewForm.classList.remove('visible');
+			} else {
+				reviewForm.classList.add('visible');
+			}
+		var myDiv = document.getElementById('myDiv5');
+			
+			if (myDiv.classList.contains('e7d5bf-background')){
+				myDiv.classList.remove('e7d5bf-background');
+			} else {
+				myDiv.classList.add('e7d5bf-background');
+			}
+		}
+	
+	function divClick6() {
+	
+		var reviewForm = document.getElementById('reviewForm6');
+			
+			if (reviewForm.classList.contains('visible')) {
+				reviewForm.classList.remove('visible');
+			} else {
+				reviewForm.classList.add('visible');
+			}
+		var myDiv = document.getElementById('myDiv6');
+			
+			if (myDiv.classList.contains('e7d5bf-background')){
+				myDiv.classList.remove('e7d5bf-background');
+			} else {
+				myDiv.classList.add('e7d5bf-background');
+			}
+		}
+	
+	function divClick7() {
+	
+		var reviewForm = document.getElementById('reviewForm7');
+			
+			if (reviewForm.classList.contains('visible')) {
+				reviewForm.classList.remove('visible');
+			} else {
+				reviewForm.classList.add('visible');
+			}
+		var myDiv = document.getElementById('myDiv7');
+			
+			if (myDiv.classList.contains('e7d5bf-background')){
+				myDiv.classList.remove('e7d5bf-background');
+			} else {
+				myDiv.classList.add('e7d5bf-background');
+			}
+		}
+	
+	function divClick8() {
+	
+		var reviewForm = document.getElementById('reviewForm8');
+			
+			if (reviewForm.classList.contains('visible')) {
+				reviewForm.classList.remove('visible');
+			} else {
+				reviewForm.classList.add('visible');
+			}
+		var myDiv = document.getElementById('myDiv8');
+			
+			if (myDiv.classList.contains('e7d5bf-background')){
+				myDiv.classList.remove('e7d5bf-background');
+			} else {
+				myDiv.classList.add('e7d5bf-background');
+			}
+		}
+	
+	function divClick9() {
+	
+		var reviewForm = document.getElementById('reviewForm9');
+			
+			if (reviewForm.classList.contains('visible')) {
+				reviewForm.classList.remove('visible');
+			} else {
+				reviewForm.classList.add('visible');
+			}
+		var myDiv = document.getElementById('myDiv9');
+			
+			if (myDiv.classList.contains('e7d5bf-background')){
+				myDiv.classList.remove('e7d5bf-background');
+			} else {
+				myDiv.classList.add('e7d5bf-background');
+			}
+		}
+	
+	function divClick10() {
+		
+		var reviewForm = document.getElementById('reviewForm10');
+			
+			if (reviewForm.classList.contains('visible')) {
+				reviewForm.classList.remove('visible');
+			} else {
+				reviewForm.classList.add('visible');
+			}
+		var myDiv = document.getElementById('myDiv10');
+			
+			if (myDiv.classList.contains('e7d5bf-background')){
+				myDiv.classList.remove('e7d5bf-background');
+			} else {
+				myDiv.classList.add('e7d5bf-background');
+			}
+		}
 	</script>
 
 	<!-- Google Font -->
@@ -104,63 +275,86 @@
 			</div>
 			<div class="brdSearchArea">
 				<div class="row">
-					<div class="col-lg-12 col-md-12">
-						<div class="brdInfo">전체 9 개 [1/1 페이지]</div>
-					</div>
-					<table class="headTop_01" style=" margin-left: auto; margin-right: auto; width: 100%">
-				<tr>
-					<th style="width: 20%">번호</th>
-					<th style="text-align: left;">제목</th>
-					<th style="width: 20%">작성자</th>
-				</tr>
-					</table>
-				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;"onclick="showIngredient()">
-					<span class="styled-span" >1</span>
-					<span class="styled-span" style ="margin-left: 0;">폴리코사놀</span>
-					<span class="styled-span1" >Bravo My Life</span>
+				<div class="black-line"></div>
+				<div class="mydiv" id="myDiv1" onclick="divClick1()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">1</span>
+					<span class="styled-span" style="width: 30%; display: flex; justify-content: flex-start; align-items: center;">폴리코사놀</span>
+					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
 				</div>
-				<div class="hidden-review" id="reviewForm"style="margin-left: auto;margin-right: auto;">
-					 <img src="/img/cat.jpg" alt="Local Image">
+				<div class="hidden-review" id="reviewForm1"style="margin-left: auto;margin-right: auto;">
+					 <img src="/img/Ingredient/Policosanol.jpg" alt="Local Image">
 				</div>
-				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
-					<span class="styled-span" >2</span>
-					<span class="styled-span" style ="margin-left: 0;">오메가-3</span>
-					<span class="styled-span1" style="margin-left: 626px;margin-right: 42px;">Bravo My Life</span>
+				<div class="mydiv" id="myDiv2" onclick="divClick2()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">2</span>
+					<span class="styled-span" style="width: 30%; display: flex; justify-content: flex-start; align-items: center;">오메가-3</span>
+					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
 				</div>
-				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
-					<span class="styled-span" >3</span>
-					<span class="styled-span" style ="margin-left: 0;">비타민/미네랄</span>
-					<span class="styled-span1" style="margin-left: 582px;margin-right: 41px;">Bravo My Life</span>
+				<div class="hidden-review" id="reviewForm2"style="margin-left: auto;margin-right: auto;">
+					 <img src="/img/Ingredient/Omega3.jpg" alt="Local Image">
 				</div>
-				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
-					<span class="styled-span" >4</span>
-					<span class="styled-span" style ="margin-left: 0;">유산균</span>
-					<span class="styled-span1" style="margin-left: 645px;margin-right: 41px;">Bravo My Life</span>
+				<div class="mydiv" id="myDiv3" onclick="divClick3()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">3</span>
+					<span class="styled-span" style="width: 30%; display: flex; justify-content: flex-start; align-items: center;">비타민/미네랄</span>
+					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
 				</div>
-				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
-					<span class="styled-span" >5</span>
-					<span class="styled-span" style ="margin-left: 0;">글루코사민/MSM</span>
-					<span class="styled-span1" style="margin-left: 560px;margin-right: 37px;">Bravo My Life</span>
+				<div class="hidden-review" id="reviewForm3"style="margin-left: auto;margin-right: auto;">
+					 <img src="/img/Ingredient/Vitamins.jpg" alt="Local Image">
 				</div>
-				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
-					<span class="styled-span" >6</span>
-					<span class="styled-span" style ="margin-left: 0;">루테인</span>
-					<span class="styled-span1" style="margin-left: 650px;margin-right: 36px;">Bravo My Life</span>
+				<div class="mydiv" id="myDiv4" onclick="divClick4()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">4</span>
+					<span class="styled-span" style="width: 30%; display: flex; justify-content: flex-start; align-items: center;">유산균</span>
+					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
 				</div>
-				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
-					<span class="styled-span" >7</span>
-					<span class="styled-span" style ="margin-left: 0;">코큐텐</span>
-					<span class="styled-span1" style="margin-left: 650px;margin-right: 36px;">Bravo My Life</span>
+				<div class="hidden-review" id="reviewForm4"style="margin-left: auto;margin-right: auto;">
+					 <img src="/img/Ingredient/Probiotics.jpg" alt="Local Image">
 				</div>
-				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
-					<span class="styled-span" >8</span>
-					<span class="styled-span" style ="margin-left: 0;">아르기닌</span>
-					<span class="styled-span1" style="margin-left: 635px;margin-right: 32px;">Bravo My Life</span>
+				<div class="mydiv" id="myDiv5" onclick="divClick5()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">5</span>
+					<span class="styled-span" style="width: 30%; display: flex; justify-content: flex-start; align-items: center;">글루코사민</span>
+					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
 				</div>
-				<div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;margin-top: 10px;">
-					<span class="styled-span" >9</span>
-					<span class="styled-span" style ="margin-left: 0;">밀크씨슬</span>
-					<span class="styled-span1" style="margin-left: 635px;margin-right: 32px;">Bravo My Life</span>
+				<div class="hidden-review" id="reviewForm5"style="margin-left: auto;margin-right: auto;">
+					 <img src="/img/Ingredient/Glucosamine.jpg" alt="Local Image">
+				</div>
+				<div class="mydiv" id="myDiv6" onclick="divClick6()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">6</span>
+					<span class="styled-span" style="width: 30%; display: flex; justify-content: flex-start; align-items: center;">루테인</span>
+					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
+				</div>
+				<div class="hidden-review" id="reviewForm6"style="margin-left: auto;margin-right: auto;">
+					 <img src="/img/Ingredient/Lutein.jpg" alt="Local Image">
+				</div>
+				<div class="mydiv" id="myDiv7" onclick="divClick7()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">7</span>
+					<span class="styled-span" style="width: 30%; display: flex; justify-content: flex-start; align-items: center;">코큐텐</span>
+					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
+				</div>
+				<div class="hidden-review" id="reviewForm7"style="margin-left: auto;margin-right: auto;">
+					 <img src="/img/Ingredient/Q10.jpg" alt="Local Image">
+				</div>
+				<div class="mydiv" id="myDiv8" onclick="divClick8()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">8</span>
+					<span class="styled-span" style="width: 30%; display: flex; justify-content: flex-start; align-items: center;">아르기닌</span>
+					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
+				</div>
+				<div class="hidden-review" id="reviewForm8"style="margin-left: auto;margin-right: auto;">
+					 <img src="/img/Ingredient/Arginine.jpg" alt="Local Image">
+				</div>
+				<div class="mydiv" id="myDiv8" onclick="divClick9()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">9</span>
+					<span class="styled-span" style="width: 30%; display: flex; justify-content: flex-start; align-items: center;">밀크씨슬</span>
+					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
+				</div>
+				<div class="hidden-review" id="reviewForm9"style="margin-left: auto;margin-right: auto;">
+					 <img src="/img/Ingredient/MilkThistle.jpg" alt="Local Image">
+				</div>
+				<div class="mydiv" id="myDiv8" onclick="divClick10()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">10</span>
+					<span class="styled-span" style="width: 30%; display: flex; justify-content: flex-start; align-items: center;">MSM</span>
+					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
+				</div>
+				<div class="hidden-review" id="reviewForm10"style="margin-left: auto;margin-right: auto;">
+					  <img src="/img/Ingredient/MSM.jpg" alt="Local Image">
 				</div>
 					<div class="row">
 					<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;" >
@@ -168,7 +362,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 	</section>
 

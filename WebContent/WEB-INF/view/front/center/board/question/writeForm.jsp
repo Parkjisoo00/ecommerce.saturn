@@ -58,54 +58,54 @@
 	</div>
 	<!-- Header Section Begin -->
 	<!-- 페이지의 상단에 보이는 로고 및 로그인 / 회원가입 코드 -->
-		<%@ include file="/include/front/maingnb.jsp" %>
+	<%@ include file="/include/front/maingnb.jsp" %>
 	<!-- Header Section End -->
 	<section class="shop spad">
 		<div class="container">
-				<article class="txtCenter">
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<div class="checkout__form__input">
-							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">제목 <span>*</span></p>
-							<input type="text" id="title" name="title" required style="width: 40%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;"/>
-						</div>
+			<article class="txtCenter">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="checkout__form__input">
+						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">제목 <span>*</span></p>
+						<input type="text" id="title" name="title" required style="width: 40%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;"/>
 					</div>
-					<br/>
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<div class="checkout__form__input">
-							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">카테고리 <span>*</span></p>
-							<select id="cd_ctg" name="cd_ctg" required>
-							<option value="0">선택</option>
-							<option value="1">가입 및 탈퇴</option>
-							<option value="2">상품</option>
-							<option value="3">구매</option>
-							<option value="4">결제</option>
-							<option value="5">배송</option>
-							<option value="6">환불</option>
-							<option value="9">기타</option>
-							</select>
-						</div>
+				</div>
+				<br/>
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="checkout__form__input">
+						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">카테고리 <span>*</span></p>
+						<select id="cd_ctg" name="cd_ctg" required>
+						<option value="0">선택</option>
+						<option value="1">가입 및 탈퇴</option>
+						<option value="2">상품</option>
+						<option value="3">구매</option>
+						<option value="4">결제</option>
+						<option value="5">배송</option>
+						<option value="6">환불</option>
+						<option value="9">기타</option>
+						</select>
 					</div>
-					<br/>
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<div class="checkout__form__input">
-							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">내용 <span>*</span></p>
-								<textarea id="content" name="content" required></textarea>
-						</div>
+				</div>
+				<br/>
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="checkout__form__input">
+						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">내용 <span>*</span></p>
+							<textarea id="content" name="content" required></textarea>
 					</div>
-					<br/>
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<div class="checkout__form__input">
-							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">첨부 파일 <span></span></p>
-								<input type="file" id="files[0]" name="files[0]" />
-						</div>
+				</div>
+				<br/>
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="checkout__form__input">
+						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">첨부 파일 <span></span></p>
+							<input type="file" id="files[0]" name="files[0]" />
 					</div>
-					<br/>
-					<br/>
-					<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
+				</div>
+				<br/>
+				<br/>
+				<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="checkout__form__input">
-							<input type="button" value="등록" style="width:100px; font-weight: bold; font-size: 16px;" onclick="javascript:writeProc(3);" />
-					 		<input type="button" value="목록" style="width:100px; font-weight: bold; font-size: 16px;" onclick="javascript:goList(3);"/>
+							<input type="button" value="등록" style="width:100px; font-weight: 500; font-size: 16px;" onclick="javascript:writeProc(3);" />
+					 		<input type="button" value="목록" style="width:100px; font-weight: 500; font-size: 16px;" onclick="javascript:goList(3);"/>
 						</div>
 					</div>
 				</div>
