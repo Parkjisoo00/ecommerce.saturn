@@ -112,6 +112,8 @@
 <input type="hidden" id="prd_type"		name="prd_type"			value="${paging.prd_type}"/>
 <input type="hidden" id="filter"		name="filter"			value="${paging.filter}"/>
 <input type="hidden" name="currentPage" id="currentPage"		value="${paging.currentPage}" />
+<input type="hidden" name="buyList[0].seq_sle" value="${saleDto.seq_sle}" />
+<input type="hidden" name="buyList[0].seq_prd" value="${saleDto.seq_prd}" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
