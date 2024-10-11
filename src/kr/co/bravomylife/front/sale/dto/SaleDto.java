@@ -61,12 +61,19 @@ public class SaleDto {
 	private int point_value			= 0;
 	private String rate_review		= "";
 	private String mbr_nm			= "";
+	private int seq_review			= 0;
 	
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
+	public int getSeq_review() {
+		return seq_review;
+	}
+	public void setSeq_review(int seq_review) {
+		this.seq_review = seq_review;
+	}
 	public int getPoint_value() {
 		return point_value;
 	}

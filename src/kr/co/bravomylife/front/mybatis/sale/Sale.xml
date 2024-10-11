@@ -135,6 +135,7 @@
 			, sle.COUNT_STOCK
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
 			, best.FLG_BEST
+			, review.SEQ_REVIEW
 		<if test="seq_mbr != null and seq_mbr != ''">
 			, likeTbl.FLG_LIKE
 		</if>
@@ -148,6 +149,10 @@
 			TB_BEST best
 		ON
 			sle.SEQ_SLE = best.SEQ_SLE
+		LEFT OUTER JOIN
+			TB_REVIEW review
+		ON
+			sle.SEQ_SLE = review.SEQ_SLE
 		<if test="seq_mbr != null and seq_mbr != ''">
 			LEFT OUTER JOIN
 				TB_LIKE likeTbl
