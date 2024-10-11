@@ -30,19 +30,21 @@
 /* introduce-background
 /*----------------------------------------*/
 .banner1 {
-	height: 1000px;
+	height: 3800px;
 	width: 100%;
 	opacity: 0.3;
+	text-align:center;
 }
 
 .overlay-content1 {
+	display: flex;
+	flex-direction: column;
 	position: absolute;
+	left:317px;
+	right:317px;
 	top: 350px;
-	left: 0;
 	width: 100%;
-	height: 2210px;
-	left:auto;
-	right:auto;
+	height: 3673px;
 	z-index: 1;
 	background-color: rgba(255, 255, 255, 1);
 }
@@ -57,18 +59,15 @@
 }
 
 .image-container {
-	height: 700px;
+	height: 500px;
 	background-image: url('/img/introduce/introduce2.jpg');
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 50px;
-	margin-bottom: 50px;
-	margin: 50px auto; 
-	opacity: 0;
-	transition: opacity 1s ease;
+	margin-top: 20px;
+
 }
 .image-container.visible {
 	opacity: 1;
@@ -83,9 +82,7 @@
 	margin-right: auto;
 	margin-top: 50px;
 	margin-bottom: 50px;
-	margin: 50px auto; 
-	opacity: 0;
-	transition: opacity 1s ease;
+
 }
 .image-container2.visible {
 	opacity: 1;
@@ -98,9 +95,6 @@
 	background-position: center;
 	margin-left: auto;
 	margin-right: auto;
-	margin: 50px auto; 
-	opacity: 0;
-	transition: opacity 1s ease;
 }
 .image-container3.visible {
 	opacity: 1;
@@ -115,19 +109,16 @@
 	margin-right: auto;
 	margin-top: 50px;
 	margin-bottom: 50px;
-	margin: 50px auto; 
-	opacity: 0;
-	transition: opacity 1s ease;
 }
 
 .image-container4.visible {
 	opacity: 1;
 }
 .tab-content1 .tab-pane h1 {
-	color: #666666;
+	color: rgb(0, 0, 0);
 	font-weight: 600;
-	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-top: 30px;
+
 }
 
 .tab-content1 .tab-pane p:last-child {

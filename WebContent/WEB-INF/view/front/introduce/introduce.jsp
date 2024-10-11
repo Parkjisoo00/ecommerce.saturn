@@ -14,54 +14,6 @@
 	<script>
 	
 	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
-	window.addEventListener('scroll', function() {
-		var imageContainer = document.querySelector('.image-container');
-		var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-		var windowHeight = window.innerHeight;
-		var imageTop = imageContainer.getBoundingClientRect().top;
-
-		if (imageTop < windowHeight && imageTop > 0) {
-			imageContainer.classList.add('visible');
-		} else {
-			imageContainer.classList.remove('visible');
-		}
-	});
-	window.addEventListener('scroll', function() {
-		var imageContainer = document.querySelector('.image-container2');
-		var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-		var windowHeight = window.innerHeight;
-		var imageTop = imageContainer.getBoundingClientRect().top;
-
-		if (imageTop < windowHeight && imageTop > 0) {
-			imageContainer.classList.add('visible');
-		} else {
-			imageContainer.classList.remove('visible');
-		}
-	});
-	window.addEventListener('scroll', function() {
-		var imageContainer = document.querySelector('.image-container3');
-		var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-		var windowHeight = window.innerHeight;
-		var imageTop = imageContainer.getBoundingClientRect().top;
-
-		if (imageTop < windowHeight && imageTop > 0) {
-			imageContainer.classList.add('visible');
-		} else {
-			imageContainer.classList.remove('visible');
-		}
-	});
-	window.addEventListener('scroll', function() {
-		var imageContainer = document.querySelector('.image-container4');
-		var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-		var windowHeight = window.innerHeight;
-		var imageTop = imageContainer.getBoundingClientRect().top;
-
-		if (imageTop < windowHeight && imageTop > 0) {
-			imageContainer.classList.add('visible');
-		} else {
-			imageContainer.classList.remove('visible');
-		}
-	});
 	</script>
 
 	<!-- Google Font -->
@@ -86,13 +38,16 @@
 	<!-- Breadcrumb Begin -->
 	<!-- Breadcrumb End -->
 
-	<section class="banner1 set-bg" data-setbg="/img/20170724511045.jpg"></section>
-		<div class="container">
+	<section class="banner1 set-bg " data-setbg="/img/20170724511045.jpg"></section>
 			<div class="row">
 			<div class="overlay-content1 col-lg-8 ">
 			 <div class="tab-content1">
 					<div class="tab-pane active" >
-						<h1 style = "text-align: center">소개(임시)</h1>
+						<h1 style = "font-size: 80px;text-align: center;line-height: 1.5;margin-top: 50px;">Bravo Your Life!<br>
+						</h1>
+						<h1 style = "font-size: 60px;text-align: center;line-height: 1.5;margin-top: 10px;">
+														신뢰할 수 있는 영양제로<br>
+														당신의 건강을 지켜드립니다</h1>
 							<section class="image-container"></section>
 								<p style = "font-size: 22px; text-align: center ;line-height: 1.5; ">행정안전부가 2023년 1월 발표한<br>
 									‘2022년 우리나라 주민등록 인구 통계’에 따르면,<br>
@@ -130,15 +85,11 @@
 	<%@ include file="/include/common/footer.jsp" %>
 	
 	<!-- Footer Section End -->
+				</div>
 			</div>
-			</div>
-			</div>
-	</div>
-	
-
+		</div>
 	
 	
-
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
 </form>
