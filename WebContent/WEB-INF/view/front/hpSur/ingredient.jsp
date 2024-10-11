@@ -213,6 +213,24 @@
 				myDiv.classList.add('e7d5bf-background');
 			}
 		}
+	
+	function divClick10() {
+		
+		var reviewForm = document.getElementById('reviewForm10');
+			
+			if (reviewForm.classList.contains('visible')) {
+				reviewForm.classList.remove('visible');
+			} else {
+				reviewForm.classList.add('visible');
+			}
+		var myDiv = document.getElementById('myDiv10');
+			
+			if (myDiv.classList.contains('e7d5bf-background')){
+				myDiv.classList.remove('e7d5bf-background');
+			} else {
+				myDiv.classList.add('e7d5bf-background');
+			}
+		}
 	</script>
 
 	<!-- Google Font -->
@@ -264,7 +282,7 @@
 					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
 				</div>
 				<div class="hidden-review" id="reviewForm1"style="margin-left: auto;margin-right: auto;">
-					 <img src="/img/cat.jpg" alt="Local Image">
+					 <img src="/img/Ingredient/Policosanol.jpg" alt="Local Image">
 				</div>
 				<div class="mydiv" id="myDiv2" onclick="divClick2()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
 					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">2</span>
@@ -272,7 +290,7 @@
 					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
 				</div>
 				<div class="hidden-review" id="reviewForm2"style="margin-left: auto;margin-right: auto;">
-					 <img src="/img/cat.jpg" alt="Local Image">
+					 <img src="/img/Ingredient/Omega3.jpg" alt="Local Image">
 				</div>
 				<div class="mydiv" id="myDiv3" onclick="divClick3()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
 					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">3</span>
@@ -280,7 +298,7 @@
 					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
 				</div>
 				<div class="hidden-review" id="reviewForm3"style="margin-left: auto;margin-right: auto;">
-					 <img src="/img/cat.jpg" alt="Local Image">
+					 <img src="/img/Ingredient/Vitamins.jpg" alt="Local Image">
 				</div>
 				<div class="mydiv" id="myDiv4" onclick="divClick4()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
 					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">4</span>
@@ -288,7 +306,7 @@
 					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
 				</div>
 				<div class="hidden-review" id="reviewForm4"style="margin-left: auto;margin-right: auto;">
-					 <img src="/img/cat.jpg" alt="Local Image">
+					 <img src="/img/Ingredient/Probiotics.jpg" alt="Local Image">
 				</div>
 				<div class="mydiv" id="myDiv5" onclick="divClick5()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
 					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">5</span>
@@ -296,7 +314,7 @@
 					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
 				</div>
 				<div class="hidden-review" id="reviewForm5"style="margin-left: auto;margin-right: auto;">
-					 <img src="/img/cat.jpg" alt="Local Image">
+					 <img src="/img/Ingredient/Glucosamine.jpg" alt="Local Image">
 				</div>
 				<div class="mydiv" id="myDiv6" onclick="divClick6()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
 					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">6</span>
@@ -304,7 +322,7 @@
 					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
 				</div>
 				<div class="hidden-review" id="reviewForm6"style="margin-left: auto;margin-right: auto;">
-					 <img src="/img/cat.jpg" alt="Local Image">
+					 <img src="/img/Ingredient/Lutein.jpg" alt="Local Image">
 				</div>
 				<div class="mydiv" id="myDiv7" onclick="divClick7()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
 					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">7</span>
@@ -312,7 +330,7 @@
 					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
 				</div>
 				<div class="hidden-review" id="reviewForm7"style="margin-left: auto;margin-right: auto;">
-					 <img src="/img/cat.jpg" alt="Local Image">
+					 <img src="/img/Ingredient/Q10.jpg" alt="Local Image">
 				</div>
 				<div class="mydiv" id="myDiv8" onclick="divClick8()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
 					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">8</span>
@@ -320,7 +338,7 @@
 					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
 				</div>
 				<div class="hidden-review" id="reviewForm8"style="margin-left: auto;margin-right: auto;">
-					 <img src="/img/cat.jpg" alt="Local Image">
+					 <img src="/img/Ingredient/Arginine.jpg" alt="Local Image">
 				</div>
 				<div class="mydiv" id="myDiv8" onclick="divClick9()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
 					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">9</span>
@@ -328,7 +346,15 @@
 					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
 				</div>
 				<div class="hidden-review" id="reviewForm9"style="margin-left: auto;margin-right: auto;">
-					 <img src="/img/cat.jpg" alt="Local Image">
+					 <img src="/img/Ingredient/MilkThistle.jpg" alt="Local Image">
+				</div>
+				<div class="mydiv" id="myDiv8" onclick="divClick10()" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+					<span class="styled-span" style="width: 20%; display: flex; justify-content: center; align-items: center;">10</span>
+					<span class="styled-span" style="width: 30%; display: flex; justify-content: flex-start; align-items: center;">MSM</span>
+					<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life</span>
+				</div>
+				<div class="hidden-review" id="reviewForm10"style="margin-left: auto;margin-right: auto;">
+					  <img src="/img/Ingredient/MSM.jpg" alt="Local Image">
 				</div>
 					<div class="row">
 					<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;" >
