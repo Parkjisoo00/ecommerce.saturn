@@ -120,7 +120,7 @@ public class MemberWeb extends Common {
 			if (passwd_input.equals(randomPassword)) {
 					
 				// 신규 비밀번호 암호화	
-				memberDto.setPasswd(aes.encode(newPasswd));
+				memberDto.setPasswd(HSwithSHA.encode(newPasswd));
 				
 				memberDto.setEmail(memberDto.getEmail());
 				if (memberSrvc.updatePasswd(memberDto)){
