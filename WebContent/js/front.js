@@ -199,14 +199,14 @@ function checkLogin() {
 		alert("이메일(아이디)를 6 ~ 16자 이내로 입력하세요!");
 		document.getElementById("email").focus();
 		// document.getElementById("email").select();
-		return;
+		return false;
 	}
 	
 	if (document.getElementById("passwd").value.length < 8
 			|| document.getElementById("passwd").value.length > 16) {
 		alert("비밀번호를 8 ~ 16자 이내로 입력하세요!");
 		document.getElementById("passwd").focus();
-		return;
+		return false;
 	}
 	
 	// 아이디 저장 체크 로직
@@ -218,6 +218,8 @@ function checkLogin() {
 	
 	frmMain.action = "/front/login/loginProc.web";
 	frmMain.submit();
+	
+	return true;
 }
 
 function goToRegister() {
