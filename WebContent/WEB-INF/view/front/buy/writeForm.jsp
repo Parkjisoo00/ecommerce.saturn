@@ -383,7 +383,7 @@
 								<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">상품상세정보</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">상품후기 (${saleDto.count})</a>
+								<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">상품후기 (${saleDto.seq_review})</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">상품 Q&A</a>
