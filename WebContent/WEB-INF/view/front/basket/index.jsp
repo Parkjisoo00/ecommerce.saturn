@@ -6,6 +6,75 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
+		function goTypeT(value, value2, value3, value4, value5) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			document.getElementById("currentPage").value = "1";
+			frmMain.type.setAttribute("value", value);
+			frmMain.filter.setAttribute("value", value2);
+			frmMain.corp_nm.setAttribute("value", value3);
+			frmMain.prd_type.setAttribute("value", value4);
+			frmMain.cd_ctg_m.setAttribute("value", value5);
+			
+			frmMain.action = "/front/sale/total_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeF(value, value2, value3, value4, value5) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			document.getElementById("currentPage").value = "1";
+			frmMain.type.setAttribute("value", value);
+			frmMain.filter.setAttribute("value", value2);
+			frmMain.corp_nm.setAttribute("value", value3);
+			frmMain.prd_type.setAttribute("value", value4);
+			frmMain.cd_ctg_m.setAttribute("value", value5);
+			
+			frmMain.action = "/front/sale/function_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeI(value, value2, value3, value4, value5) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			document.getElementById("currentPage").value = "1";
+			frmMain.type.setAttribute("value", value);
+			frmMain.filter.setAttribute("value", value2);
+			frmMain.corp_nm.setAttribute("value", value3);
+			frmMain.prd_type.setAttribute("value", value4);
+			frmMain.cd_ctg_m.setAttribute("value", value5);
+			
+			frmMain.action = "/front/sale/ingredient_list.web";
+			frmMain.submit();
+		}
+		
+		function goTypeG(value, value2, value3, value4, value5) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			document.getElementById("currentPage").value = "1";
+			frmMain.type.setAttribute("value", value);
+			frmMain.filter.setAttribute("value", value2);
+			frmMain.corp_nm.setAttribute("value", value3);
+			frmMain.prd_type.setAttribute("value", value4);
+			frmMain.cd_ctg_m.setAttribute("value", value5);
+			
+			frmMain.action = "/front/sale/gender_list.web";
+			frmMain.submit();
+		}
+		
+		function goPages(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.currentPage.setAttribute("value", value);
+			frmMain.action="/front/sale/gender_list.web";
+			frmMain.submit();
+		}
+		
 		function goWriteForm(value, value2, value3) {
 			
 			var frmMain = document.getElementById("frmMain");
@@ -17,11 +86,8 @@
 			frmMain.target = "";
 			frmMain.submit();
 		}
-	
+		
 		function writeProc() {
-			/* Database + iFrame
-			[2024-10-10][TODO: 데이터베이스 정보(장바구니) 삭제 처리 필요(정상적으로 구매 및 결제된 경우)]
-			*/
 			
 			var frmMain = document.getElementById("frmMain");
 			frmMain.action = "/front/buy/writeProc.web";
@@ -41,6 +107,11 @@
 <input type="hidden" id="seq_sle"		name="seq_sle"/>
 <input type="hidden" id="cd_ctg_m"		name="cd_ctg_m"/>
 <input type="hidden" id="cd_ctg_b"		name="cd_ctg_b"/>
+<input type="hidden" id="type"			name="type" />
+<input type="hidden" id="corp_nm"		name="corp_nm"			value="${paging.corp_nm}"/>
+<input type="hidden" id="prd_type"		name="prd_type"			value="${paging.prd_type}"/>
+<input type="hidden" id="filter"		name="filter"			value="${paging.filter}"/>
+<input type="hidden" name="currentPage" id="currentPage"		value="${paging.currentPage}" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -208,6 +279,9 @@
 	
 	$(document).ready(function () {
 		
+	    $('.dec.qtybtn').off('click');
+	    $('.inc.qtybtn').off('click');
+		
 		$('.dec.qtybtn').on('click', function () {
 			
 			var parentRow = $(this).closest('tr');
@@ -216,8 +290,10 @@
 			
 			if (currentValue > 1) {
 				
+				parentRow.find('.quantityCart').val(currentValue);
+				
 				var newValue = currentValue - 1;
-				parentRow.find('.quantityCart').val(newValue);
+				
 				sendValueToServer(newValue, seq_sle);
 			}
 		});
@@ -228,8 +304,10 @@
 			var seq_sle = parentRow.data('seq-sle');
 			var currentValue = parseInt(parentRow.find('.quantityCart').val());
 
+			parentRow.find('.quantityCart').val(currentValue);
+			
 			var newValue = currentValue + 1;
-			parentRow.find('.quantityCart').val(newValue);
+			
 			sendValueToServer(newValue, seq_sle);
 		});
 		
@@ -262,7 +340,7 @@
 					
 					if (res == true) {
 					}
-					location.reload();
+				location.reload();
 				}
 			});
 		}

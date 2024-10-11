@@ -60,6 +60,14 @@ public class BasketDao extends BaseDao {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.basket.Basket.listingCount", pagingDto);
 	}
 	
+	public int update(BasketDto basketDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.basket.Basket.update", basketDto);
+	}
+	
+	public int insertCheck(BasketDto basketDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.basket.Basket.insertCheck", basketDto);
+	}
+	
 	public int insert(BasketDto basketDto) {
 		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.basket.Basket.insert", basketDto);
 	}

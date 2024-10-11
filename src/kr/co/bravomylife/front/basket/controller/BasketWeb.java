@@ -101,7 +101,7 @@ public class BasketWeb extends Common {
 			mav.setViewName("forward:/servlet/result.web");
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".setBasketIframe()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".setBasket()] " + e.getMessage(), e);
 		}
 		finally {}
 		

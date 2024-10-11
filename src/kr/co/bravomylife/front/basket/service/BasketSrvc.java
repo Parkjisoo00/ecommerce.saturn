@@ -92,11 +92,30 @@ public class BasketSrvc {
 	
 	@Transactional("txFront")
 	public boolean insert(BasketDto basketDto) {
-		
-		int result = basketDao.insert(basketDto);
-		
-		if (result == 1) return true;
-		else {
+		try {
+			
+			int check = basketDao.insertCheck(basketDto);
+			
+			if (check == 1) {
+				
+				basketDao.update(basketDto);
+				return true;
+			}
+			else if (check == 0) {
+				
+				int result = basketDao.insert(basketDto);
+				if (result == 1) {
+					
+					return true;
+				} else {
+					
+					TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+					return false;
+				}
+			}
+			return true;
+		} catch (Exception e) {
+			
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return false;
 		}
