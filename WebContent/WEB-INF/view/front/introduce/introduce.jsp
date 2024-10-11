@@ -14,7 +14,54 @@
 	<script>
 	
 	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
-	
+	window.addEventListener('scroll', function() {
+		var imageContainer = document.querySelector('.image-container');
+		var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+		var windowHeight = window.innerHeight;
+		var imageTop = imageContainer.getBoundingClientRect().top;
+
+		if (imageTop < windowHeight && imageTop > 0) {
+			imageContainer.classList.add('visible');
+		} else {
+			imageContainer.classList.remove('visible');
+		}
+	});
+	window.addEventListener('scroll', function() {
+		var imageContainer = document.querySelector('.image-container2');
+		var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+		var windowHeight = window.innerHeight;
+		var imageTop = imageContainer.getBoundingClientRect().top;
+
+		if (imageTop < windowHeight && imageTop > 0) {
+			imageContainer.classList.add('visible');
+		} else {
+			imageContainer.classList.remove('visible');
+		}
+	});
+	window.addEventListener('scroll', function() {
+		var imageContainer = document.querySelector('.image-container3');
+		var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+		var windowHeight = window.innerHeight;
+		var imageTop = imageContainer.getBoundingClientRect().top;
+
+		if (imageTop < windowHeight && imageTop > 0) {
+			imageContainer.classList.add('visible');
+		} else {
+			imageContainer.classList.remove('visible');
+		}
+	});
+	window.addEventListener('scroll', function() {
+		var imageContainer = document.querySelector('.image-container4');
+		var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+		var windowHeight = window.innerHeight;
+		var imageTop = imageContainer.getBoundingClientRect().top;
+
+		if (imageTop < windowHeight && imageTop > 0) {
+			imageContainer.classList.add('visible');
+		} else {
+			imageContainer.classList.remove('visible');
+		}
+	});
 	</script>
 
 	<!-- Google Font -->
