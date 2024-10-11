@@ -27,6 +27,92 @@
 -------------------------------------------------------------------*/
 
 /*----------------------------------------*/
+/* introduce-background
+/*----------------------------------------*/
+.banner1 {
+	height: 1000px;
+	width: 100%;
+	opacity: 0.3;
+}
+
+.overlay-content1 {
+	position: absolute;
+	top: 350px;
+	left: 0;
+	width: 100%;
+	height: 2210px;
+	left:auto;
+	right:auto;
+	z-index: 10;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.banner2 {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	height: 530px;
+	width: 35%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.image-container {
+	height: 700px;
+	background-image: url('/img/introduce/introduce2.jpg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.image-container2 {
+	height: 430px;
+	background-image: url('/img/introduce/introduce1.jpg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.image-container3 {
+	height: 300px;
+	background-image: url('/img/introduce/introduce3.jpg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.image-container4 {
+	height: 400px;
+	background-image: url('/img/footerpic/old3.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.tab-content1 .tab-pane h1 {
+	color: #666666;
+	font-weight: 600;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.tab-content1 .tab-pane p:last-child {
+	margin-bottom: 0;
+}
+/*----------------------------------------*/
 /* hpSur-ingredient
 /*----------------------------------------*/
 .black-line {
@@ -2722,7 +2808,7 @@ ol {
 	font-size: 18px;
 	color: #111111;
 	line-height: 44px;
-	text-align: center;
+	
 	display: inline-block;
 	font-weight: 600;
 	cursor: pointer;
@@ -4238,6 +4324,30 @@ ol {
 /* Small Device = 320px */
 
 @media only screen and (max-width: 479px) {
+	
+	.image-container {
+	height: 300px;
+	background-image: url('/img/introduce/introduce2.jpg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+}
+
+	.image-container4 {
+		height: 300px;
+		background-image: url('/img/footerpic/old3.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 20px;
+		margin-bottom:20px;
+	}
+	
 	.categories__item.categories__large__item {
 		padding-left: 30px;
 	}
