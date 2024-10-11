@@ -20,6 +20,11 @@
  */
 package kr.co.bravomylife.front.basket.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -154,21 +159,31 @@ public class BasketWeb extends Common {
 	 */
 	 
 	@RequestMapping(value = "/front/basket/basketCount.json", method = RequestMethod.POST, headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
-	public @ResponseBody boolean basketCount(@RequestBody PagingDto pagingDto, HttpServletRequest request) {		
+	public @ResponseBody List<Map<String, Object>> basketCount(@RequestBody PagingDto pagingDto, HttpServletRequest request) {		
 		
-		boolean basketCount = true;
+		List<Map<String, Object>> responseList = new ArrayList<>();
 		
 		try {
 			
 			pagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
-			if (basketSrvc.ajaxUpdate(pagingDto));
+			basketSrvc.ajaxUpdate(pagingDto);
+			
+			List<BasketDto> basketList = basketSrvc.ajaxlist(pagingDto);
+			
+			for (BasketDto basket : basketList) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("seq_sle", basket.getSeq_sle());
+				map.put("sle_nm", basket.getSle_nm());
+				map.put("total_price", basket.getTotal_price());
+				responseList.add(map);
+			}
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".basketCount()] " + e.getMessage(), e);
 		}
 		finally {}
 		
-		return basketCount;
+		return responseList;
 	}
 }

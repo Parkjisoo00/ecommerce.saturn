@@ -339,10 +339,6 @@
 				contentType: "application/json; charset=UTF-8",
 				data: JSON.stringify(myData),
 				success: function (res) {
-					
-					if (res == true) {
-					}
-				location.reload();
 				}
 			});
 		}
