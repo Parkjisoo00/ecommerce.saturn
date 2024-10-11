@@ -18,6 +18,14 @@
 				alert("로그인이 필요합니다.");
 			}
 		}
+		
+		window.onload = function() {
+			var savedEmail = localStorage.getItem("savedEmail");
+			if (savedEmail) {
+				document.getElementById("email").value = savedEmail;
+				document.getElementById("rememberMe").checked = true;
+			}
+		}
 	</script>
 </head>
 
@@ -38,14 +46,14 @@
 	<!-- Checkout Section Begin -->
 	<section class="checkout spad">
 		<div class="container">
-			<form id="frmMain" method="POST" class="checkout__form">
+			<form action ="/front/login/emailSave.web" id="frmMain" method="POST" class="checkout__form">
 				<div class="row3">
 					<div class="col-lg-12">
 						<h5 >회원 로그인</h5>
 						<div class="row3">
 							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
-									<input type="text" id="email" name="email" placeholder="이메일을 입력해주세요." maxlength="32" autocomplete="off" required>
+									<input type="text" id="email" name="email" value="${cookie.email}" placeholder="이메일을 입력해주세요." maxlength="32" autocomplete="off" required>
 								</div>
 							</div>
 							<div class="col-lg-12 col-md-6 col-sm-6">
@@ -55,7 +63,7 @@
 							</div>
 							<div class="col-lg-12">
 								<div class="checkout__form__checkbox">
-									<input type="checkbox" id="rememberMe" name="rememberMe"> 아이디 저장
+									<input type="checkbox" id="rememberMe" > 아이디 저장
 								</div>
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12">

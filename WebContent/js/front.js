@@ -190,7 +190,6 @@ function loadSavedEmail() {
 	}
 }
 
-
 function checkLogin() {
 			
 	var frmMain = document.getElementById("frmMain");
