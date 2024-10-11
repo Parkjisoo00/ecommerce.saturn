@@ -124,7 +124,7 @@
 								</p>
 					<section class="image-container3"></section>
 					<%@ include file="/include/common/footerpic.jsp" %>
-	<!-- Instagram End -->
+	<!-- Instagram End  -->
 
 	<!-- Footer Section Begin -->
 	<%@ include file="/include/common/footer.jsp" %>
