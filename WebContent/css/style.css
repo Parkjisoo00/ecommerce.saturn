@@ -4333,8 +4333,20 @@ ol {
 	background-position: center;
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: 50px;
+	margin-bottom: 10px;
 }
+
+	.image-container4 {
+		height: 300px;
+		background-image: url('/img/footerpic/old3.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 20px;
+		margin-bottom:20px;
+	}
 	
 	.categories__item.categories__large__item {
 		padding-left: 30px;
