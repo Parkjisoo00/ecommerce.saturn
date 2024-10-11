@@ -107,25 +107,16 @@ public class MemberWeb extends Common {
 			logger.debug("암호화된 이메일(복호화)=" + memberDto.getEmail() + "(" + memberDto.getEmail() + ")");
 			logger.debug("암호화된 임시 비밀번호 URL (복호화)=" + URLDecoder.decode(passwd_temp));
 			logger.debug("암호화된 임시 비밀번호 (복호화) 함" + aes.decode(passwd_temp));
-			// logger.debug("암호화된 임시 비밀번호(복호화)=" + passwd_temp + "(" + aes.decode(URLDecoder.decode(passwd_temp)) + ")");
+			logger.debug("암호화된 임시 비밀번호(복호화)=" + passwd_temp + "(" + aes.decode(URLDecoder.decode(passwd_temp)) + ")");
 			
 			logger.debug("회원이 입력한 임시 비밀번호=" + passwd_input);
 			logger.debug("회원이 입력한 신규 비밀번호=" + newPasswd);
 			
-			
-			
-			// passwd_inputd은 Jsp에서 받아온 암호화만 된 임시 비밀번호
-			
-			
 			String randomPassword = aes.decode(passwd_temp);
 						
 			// 1. 회원이 입력한 임시 비밀번호(passwd_input)와 복호화한 임시 비밀번호가 같으면
-			
-			//String passwd_input = aes.decode(passwd_input);
-			
 			// 2. 회원의 비밀번호를 새 비밀번호로 업데이트(복호화한 회원의 이메일 기준)
 			
-			//DB에 비밀번호 업데이트
 			if (passwd_input.equals(randomPassword)) {
 					
 				// 신규 비밀번호 암호화	
@@ -178,7 +169,6 @@ public class MemberWeb extends Common {
 		
 		try {
 			
-			
 			mav.addObject("email", email);
 			mav.addObject("passwd_temp", passwd_temp);
 			
@@ -214,6 +204,7 @@ public class MemberWeb extends Common {
 			
 			logger.debug("받아온 이메일" + " = " + memberDto.getEmail());
 			logger.debug("받아온 이름"+ " = " + memberDto.getMbr_nm());
+			// [2024-10-10][whslsl88#gmail.com][TODO-개선: 핸드폰 인증 처리]
 			//logger.debug("받아온 핸드폰" + " = " + memberDto.getPhone());
 			
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
