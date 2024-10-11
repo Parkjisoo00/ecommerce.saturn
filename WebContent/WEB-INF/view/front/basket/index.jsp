@@ -60,7 +60,7 @@
 				<div class="col-lg-12">
 					<h6 class="lowgnb-title" style="padding-bottom: 20px; text-align: left; font-size: 24px;">장바구니</h6>
 					<h6 class="cart-title">*이미지를 클릭하면 상품으로 이동합니다</h6>
-						<div class="shop__cart__table" style="border: 1px solid #dbdbdb; border-radius: 4px; overflow: hidden;">
+						<div class="shop__cart__table" style="border: 1px solid #dbdbdb; border-radius: 4px;">
 							<table id="productBasket" class="cart-table">
 								<thead>
 									<tr style="border-color: #707070 !important;">
@@ -81,35 +81,33 @@
 									<c:otherwise>
 										<c:forEach var="list" items="${list}">
 											<tbody>
-												<tr style="border: 0;">
-													<td class="cart-td">
-														<input type="checkbox" class="selectItem" checked/>
-													</td>
-													<td class="cart-td" style="text-align: center; vertical-align: middle;">
-														<div class="cart-div">
-															<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
-																<img src="${list.img}" class="cart-img">
-															</a>
-														</div>
-													</td>
-													<td class="cart-td" style="text-align: left !important;">
-														${list.sle_nm}
-													</td>
-													<td class="cart-td">
-														<div class="pro-qty" style="border: 0 solid #dbdbdb; border-right-width: 1px; border-left-width: 1px; border-radius: 0; height: 30px; display: flex; justify-content: center; align-items: center;">
-															<span class="dec qtybtn">-</span>
-															<input type="text" value="${list.count}" style="height: 100%;">
-															<span class="inc qtybtn">+</span>
-														</div>
-													</td>
-													<td class="cart-td">
-														<fmt:formatNumber value="${list.price}" type="number" />원
-													</td>
-													<td class="cart-td">${list.total_point}</td>
-													<td class="cart-td" style="font-size: 16px !important; color: #707070 !important; font-weight: bold;'" data-total-price="${list.total_price}" data-total-point="${list.total_point}">
-														<fmt:formatNumber value="${list.total_price}" type="number" />원
-													</td>
-												</tr>
+											<tr style="border: 0;" data-seq-sle="${list.seq_sle}">
+												<td class="cart-td">
+													<input type="checkbox" class="selectItem" checked/>
+												</td>
+												<td class="cart-td" style="text-align: center; vertical-align: middle;">
+													<div class="cart-div">
+														<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
+															<img src="${list.img}" class="cart-img">
+														</a>
+													</div>
+												</td>
+												<td class="cart-td" style="text-align: left !important;">
+													${list.sle_nm}
+												</td>
+												<td class="cart-td">
+													<div class="pro-qty" style="border: 1.5px solid #c4cdd5;">
+														<input type="text" class="quantityCart" value="${list.count}">
+													</div>
+												</td>
+												<td class="cart-td">
+													<fmt:formatNumber value="${list.price}" type="number" />원
+												</td>
+												<td class="cart-td">${list.total_point}</td>
+												<td class="cart-td" style="font-size: 16px !important; color: #707070 !important; font-weight: bold;" data-total-price="${list.total_price}" data-total-point="${list.total_point}">
+													<fmt:formatNumber value="${list.total_price}" type="number" />원
+												</td>
+											</tr>
 											</tbody>
 										</c:forEach>
 									</c:otherwise>
@@ -130,18 +128,18 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-6" style="max-width: 100% !important; flex: 0 0 100% !important; border-bottom: none;">
-<div class="cart__total__procced" style="text-align: right;">
-	<p style="margin-top: 15px;">
-		<span style="font-size: 16px;">총 <strong id="totalItems" style="font-size: 20px;">1</strong>개의 상품금액 
-		<strong id="totalPrice" style="font-size: 20px;">10,000</strong>원
-		<img src="/img/cartbtn/total.png" style="padding-left: 10px; padding-right: 10px; vertical-align: -4px;">
-		<strong id="totalPriceFinal" style="font-size: 20px;">10,000</strong>원
-		</span>
-	</p>
-	<p>
-		<span style="font-size: 14px; color: #ff4c2e;">적립 예정 포인트 : </span><span id="totalPoints" style="font-size: 14px; color: #ff4c2e;">1000</span>
-	</p>
-</div>
+					<div class="cart__total__procced" style="text-align: right;">
+						<p style="margin-top: 15px;">
+							<span style="font-size: 16px;">총 <strong id="totalItems" style="font-size: 20px;">1</strong>개의 상품금액 
+							<strong id="totalPrice" style="font-size: 20px;">10,000</strong>원
+							<img src="/img/cartbtn/total.png" style="padding-left: 10px; padding-right: 10px; vertical-align: -4px;">
+							<strong id="totalPriceFinal" style="font-size: 20px;">10,000</strong>원
+							</span>
+						</p>
+						<p>
+							<span style="font-size: 14px; color: #ff4c2e;">적립 예정 포인트 : </span><span id="totalPoints" style="font-size: 14px; color: #ff4c2e;">1000</span>
+						</p>
+					</div>
 					<div style="display: flex; justify-content: flex-end;">
 						<div>
 							<a href="javascript:writeProc();" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">선택 상품 삭제</a>
@@ -207,6 +205,68 @@
 		document.getElementById('totalPoints').innerText = totalPoints.toLocaleString();
 		document.getElementById('totalItems').innerText = totalItems;
 	}
+	
+	$(document).ready(function () {
+		
+		$('.dec.qtybtn').on('click', function () {
+			
+			var parentRow = $(this).closest('tr');
+			var seq_sle = parentRow.data('seq-sle');
+			var currentValue = parseInt(parentRow.find('.quantityCart').val());
+			
+			if (currentValue > 1) {
+				
+				var newValue = currentValue - 1;
+				parentRow.find('.quantityCart').val(newValue);
+				sendValueToServer(newValue, seq_sle);
+			}
+		});
+		
+		$('.inc.qtybtn').on('click', function () {
+			
+			var parentRow = $(this).closest('tr');
+			var seq_sle = parentRow.data('seq-sle');
+			var currentValue = parseInt(parentRow.find('.quantityCart').val());
+
+			var newValue = currentValue + 1;
+			parentRow.find('.quantityCart').val(newValue);
+			sendValueToServer(newValue, seq_sle);
+		});
+		
+		$('.quantityCart').off('keypress').on('keypress', function (e) {
+			
+			if (e.which == 13) {
+				
+				var parentRow = $(this).closest('tr');
+				var seq_sle = parentRow.data('seq-sle');
+				var newValue = parseInt($(this).val());
+				
+				if (!isNaN(newValue) && newValue >= 1) {
+					sendValueToServer(newValue, seq_sle);
+				}
+			}
+		});
+		
+		function sendValueToServer(value, seq_sle) {
+			
+			var myData = { count: value, seq_sle: seq_sle };
+			
+			$.ajax({
+				type: "POST",
+				async: false,
+				url: "/front/basket/basketCount.json",
+				dataType: "json",
+				contentType: "application/json; charset=UTF-8",
+				data: JSON.stringify(myData),
+				success: function (res) {
+					
+					if (res == true) {
+					}
+					location.reload();
+				}
+			});
+		}
+	});
 </script>
 </form>
 </body>

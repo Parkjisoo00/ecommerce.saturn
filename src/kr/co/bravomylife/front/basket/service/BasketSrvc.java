@@ -45,6 +45,34 @@ public class BasketSrvc {
 
 	@Inject
 	BasketDao basketDao;
+	
+	@Transactional("txFront")
+	public boolean ajaxUpdate(PagingDto pagingDto) {
+		
+		int result = basketDao.ajaxUpdate(pagingDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	public PagingListDto ajaxlisting(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		int totalLine = basketDao.ajaxlistingCount(pagingDto);
+		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(basketDao.ajaxlistingList(pagingDto));
+		
+		return pagingListDto;
+	}
 		
 	public PagingListDto listing(PagingDto pagingDto) {
 		

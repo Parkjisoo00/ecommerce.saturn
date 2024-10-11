@@ -22,18 +22,25 @@ public class PagingDto {
 	private int cd_ctg			= 0;
 	private int register		= 0;
 	
-	private Integer seq_sle			= 0;
-	private Integer	seq_mbr			= 0;
+	private Integer seq_sle		= 0;
+	private Integer	seq_mbr		= 0;
 	private String cd_ctg_m		= "";
 	private String cd_ctg_b		= "";
 	private String filter		= "";
 	private String corp_nm		= "";
 	private String prd_type		= "";
 	private int point_stack		= 0;
-	private int point_value			= 0;
+	private int point_value		= 0;
 	private String mbr_nm		= "";
+	private int count			= 0;
 	
 	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public int getPoint_value() {
 		return point_value;
 	}

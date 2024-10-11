@@ -46,7 +46,7 @@
 	<!-- Checkout Section Begin -->
 	<section class="checkout spad">
 		<div class="container">
-			<form action ="/front/login/emailSave.web" id="frmMain" method="POST" class="checkout__form">
+			<form id="frmMain" method="POST" class="checkout__form">
 				<div class="row3">
 					<div class="col-lg-12">
 						<h5 >회원 로그인</h5>

@@ -2,6 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.basket.Basket">
 
+	<update id="ajaxUpdate" parameterType="pagingDto">
+		UPDATE
+			TB_BSK
+		SET
+			COUNT = #{count}
+		WHERE
+			SEQ_MBR	= #{seq_mbr}
+			AND SEQ_SLE	= #{seq_sle}
+	</update>
+
 	<insert id="insert" parameterType="basketDto">
 		INSERT INTO TB_BSK
 			(SEQ_BSK, SEQ_MBR, SEQ_SLE, SLE_NM, PRICE, COUNT, IMG, POINT_VALUE, CD_CTG_M, CD_CTG_B, FLG_DELETE, DT_REG)
