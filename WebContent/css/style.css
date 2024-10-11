@@ -27,6 +27,46 @@
 -------------------------------------------------------------------*/
 
 /*----------------------------------------*/
+/* hpSur-ingredient
+/*----------------------------------------*/
+.black-line {
+		border-top: 5px solid #341D08;
+		width: 100%;
+	}
+
+.styled-span {
+		font-size: 20px;
+	}
+	
+.styled-span1{
+		font-size: 20px;
+		margin-left: 605px;
+		margin-right: 44px;
+	}
+.e7d5bf-background {
+		background-color:#e7d5bf !important;;
+}
+.mydiv {
+		max-width: 100%;
+		border-bottom: 1px solid #e0e0e0;
+		padding-bottom: 10px;
+		padding-top: 10px;
+		cursor: pointer;
+		background-color: #f3ebe1;
+		transition: background-color 0.5s ease;
+		
+}
+
+.mydiv:hover{
+		background-color: #c7b199;
+}
+
+.mydiv:active {
+
+background-color: #111111; /* 클릭 시 연한 베이지색 */
+
+}
+/*----------------------------------------*/
 /* Notice, FAQ, Question board CSS
 /*----------------------------------------*/
 
@@ -155,18 +195,6 @@ table.headTop_01 th {
 /*----------------------------------------*/
 /* Product Detail Text
 /*----------------------------------------*/
-
-	.styled-span {
-		font-size: 20px;
-		margin-left: 113px;
-		margin-right: 85px;
-	}
-	
-	.styled-span1{
-		font-size: 20px;
-		margin-left: 605px;
-		margin-right: 44px;
-	}
 
 .pd-text {
 	font-weight: 450 !important;
@@ -2257,7 +2285,7 @@ ol {
 }
 
 .pro-qty {
-	height: 51px;
+	height: 50px;
 	color: #212b36 ;
 	width: 150px;
 	border: 1px solid #ebebeb;
