@@ -90,6 +90,18 @@
 	margin-right: auto;
 }
 
+.image-container4 {
+	height: 400px;
+	background-image: url('/img/footerpic/old3.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
 .tab-content1 .tab-pane h1 {
 	color: #666666;
 	font-weight: 600;
