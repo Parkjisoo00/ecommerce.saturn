@@ -285,7 +285,7 @@
 						<div class="product__details__button">
 							<div class="quantity">
 								<span>구매 수량:</span>
-								<div class="pro-qty">
+								<div class="pro-qty" style="height: 51px;">
 									<input type="text" value="1" name="buyList[0].count" id="count" size="3">
 								</div>
 							</div>

@@ -27,13 +27,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.front.basket.controller.BasketWeb;
 import kr.co.bravomylife.front.basket.dto.BasketDto;
 import kr.co.bravomylife.front.basket.service.BasketSrvc;
-import kr.co.bravomylife.front.buy.dto.BuyDto;
 import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
@@ -117,7 +119,7 @@ public class BasketWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/basket/main.web")
-	public ModelAndView main(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, BuyDto buyDto) {
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
@@ -138,5 +140,35 @@ public class BasketWeb extends Common {
 		finally {}
 		
 		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-11
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	 
+	@RequestMapping(value = "/front/basket/basketCount.json", method = RequestMethod.POST, headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
+	public @ResponseBody boolean basketCount(@RequestBody PagingDto pagingDto, HttpServletRequest request) {		
+		
+		boolean basketCount = true;
+		
+		try {
+			
+			pagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			if (basketSrvc.ajaxUpdate(pagingDto));
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".basketCount()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return basketCount;
 	}
 }
