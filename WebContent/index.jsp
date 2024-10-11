@@ -8,6 +8,31 @@
 
 <head>
 	<%@ include file="/include/common/header.jsp" %>
+	<style>
+	.categories__item {
+	position: relative;
+	background-size: cover;
+	background-position: center;
+	}
+	
+	.categories__item::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(255, 255, 255, 0.3); /* 반투명 흰색 덧씌우기 */
+		z-index: 1;
+	}
+	
+	.categories__text {
+		position: relative;
+		z-index: 2; /* 텍스트를 덮어씌운 반투명 레이어 위에 표시 */
+	}
+		
+	
+	</style>
 	<script>
 		function goTypeT(value) {
 			
@@ -209,6 +234,7 @@
 								</div>
 							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
