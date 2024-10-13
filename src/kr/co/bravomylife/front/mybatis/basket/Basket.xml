@@ -18,7 +18,7 @@
 		SET
 			PRICE = PRICE + #{price}
 			, COUNT = COUNT + #{count}
-			, POINT_VALUE = POINT_VALUE + #{point_value}
+			, POINT_STACK = #{point_stack}
 			, DT_UPT = SYSDATE
 		WHERE
 			SEQ_MBR	= #{seq_mbr}
@@ -27,9 +27,9 @@
 
 	<insert id="insert" parameterType="basketDto">
 		INSERT INTO TB_BSK
-			(SEQ_BSK, SEQ_MBR, SEQ_SLE, SLE_NM, PRICE, COUNT, IMG, POINT_VALUE, CD_CTG_M, CD_CTG_B, FLG_DELETE, DT_REG, DT_UPT)
+			(SEQ_BSK, SEQ_MBR, SEQ_SLE, SLE_NM, PRICE, COUNT, IMG, POINT_STACK, CD_CTG_M, CD_CTG_B, FLG_DELETE, DT_REG, DT_UPT)
 		VALUES
-			(SQ_SEQ_BSK.NEXTVAL, #{seq_mbr}, #{seq_sle}, #{sle_nm}, #{price}, #{count}, #{img}, #{point_value}, #{cd_ctg_m}, #{cd_ctg_b}, 'N', SYSDATE, NULL)
+			(SQ_SEQ_BSK.NEXTVAL, #{seq_mbr}, #{seq_sle}, #{sle_nm}, #{price}, #{count}, #{img}, #{point_stack}, #{cd_ctg_m}, #{cd_ctg_b}, 'N', SYSDATE, NULL)
 	</insert>
 
 	<select id="insertCheck" parameterType="basketDto" resultType="java.lang.Integer">
@@ -44,41 +44,70 @@
 			AND CD_CTG_B	= #{cd_ctg_b}
 	</select>
 
-	<select id="listingCount" parameterType="pagingDto" resultType="java.lang.Integer">
+	<select id="ajaxlisting" parameterType="basketDto" resultType="basketDto">
 		SELECT
-			COUNT(ROWNUM)
+			*
+		FROM
+		(
+		SELECT
+			bsk.SEQ_SLE
+			, bsk.SLE_NM
+			, bsk.PRICE
+			, bsk.COUNT
+			, bsk.IMG
+			, bsk.PRICE * (bsk.POINT_STACK / 100) POINT_VALUE
+			, bsk.CD_CTG_M
+			, bsk.CD_CTG_B
+			, (bsk.PRICE * bsk.COUNT) TOTAL_PRICE
+			, (bsk.PRICE * (bsk.POINT_STACK / 100) * bsk.COUNT) TOTAL_POINT
+			, TO_CHAR(bsk.DT_REG, 'YYYY-MM-DD') dt_reg
+			, sbsk.SEQ_SLE_COUNT
+			, sbsk.TOTAL_PRICE_SUM
+			, sbsk.TOTAL_POINT_SUM
+		FROM
+			TB_BSK bsk
+		CROSS JOIN
+		(
+		SELECT
+			COUNT(SEQ_SLE) SEQ_SLE_COUNT
+			, SUM(PRICE * COUNT) TOTAL_PRICE_SUM
+			, SUM((PRICE * (POINT_STACK / 100)) * COUNT) TOTAL_POINT_SUM
 		FROM
 			TB_BSK
+		) sbsk
 		WHERE
-		<include refid="listingwhere" />
+			SEQ_MBR			= #{seq_mbr}
+			AND SEQ_SLE		= #{seq_sle}
+			AND FLG_DELETE	= 'N'
+		)
+		ORDER BY
+			dt_reg DESC
 	</select>
-
+	
 	<select id="listingList" parameterType="pagingDto" resultType="basketDto">
 		SELECT
 			*
 		FROM
 		(
 		SELECT
-			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
-			, SEQ_SLE
+			SEQ_SLE
 			, SLE_NM
 			, PRICE
 			, COUNT
 			, IMG
-			, POINT_VALUE
+			, PRICE * (POINT_STACK / 100) POINT_VALUE
 			, CD_CTG_M
 			, CD_CTG_B
 			, (PRICE * COUNT) TOTAL_PRICE
-			, (POINT_VALUE * COUNT) TOTAL_POINT
+			, (PRICE * (POINT_STACK / 100) * COUNT) TOTAL_POINT
+			, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
 		FROM
 			TB_BSK
 		WHERE
 		<include refid="listingwhere" />
 		)
-		<![CDATA[
-		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
-		]]>
-		ORDER BY rnum
+		ORDER BY
+			dt_reg DESC
 	</select>
 
 	<sql id="listingwhere">

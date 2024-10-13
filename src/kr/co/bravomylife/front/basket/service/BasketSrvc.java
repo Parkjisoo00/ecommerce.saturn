@@ -20,6 +20,8 @@
  */
 package kr.co.bravomylife.front.basket.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Repository;
@@ -46,10 +48,29 @@ public class BasketSrvc {
 	@Inject
 	BasketDao basketDao;
 	
-	@Transactional("txFront")
-	public boolean ajaxUpdate(PagingDto pagingDto) {
+	public PagingListDto listing(PagingDto pagingDto) {
 		
-		int result = basketDao.ajaxUpdate(pagingDto);
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(basketDao.listingList(pagingDto));
+		
+		return pagingListDto;
+	}
+	
+	public PagingListDto listingList(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		pagingListDto.setList(basketDao.listingList(pagingDto));
+		
+		return pagingListDto;
+	}
+	
+	@Transactional("txFront")
+	public boolean ajaxUpdate(BasketDto basketDto) {
+		
+		int result = basketDao.ajaxUpdate(basketDto);
 		
 		if (result == 1) return true;
 		else {
@@ -58,36 +79,8 @@ public class BasketSrvc {
 		}
 	}
 	
-	public PagingListDto ajaxlisting(PagingDto pagingDto) {
-		
-		PagingListDto pagingListDto = new PagingListDto();
-		
-		int totalLine = basketDao.ajaxlistingCount(pagingDto);
-		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
-		pagingDto.setTotalLine(totalLine);
-		pagingDto.setTotalPage(totalPage);
-		if (totalPage == 0) pagingDto.setCurrentPage(1);
-		
-		pagingListDto.setPaging(pagingDto);
-		pagingListDto.setList(basketDao.ajaxlistingList(pagingDto));
-		
-		return pagingListDto;
-	}
-		
-	public PagingListDto listing(PagingDto pagingDto) {
-		
-		PagingListDto pagingListDto = new PagingListDto();
-		
-		int totalLine = basketDao.listingCount(pagingDto);
-		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
-		pagingDto.setTotalLine(totalLine);
-		pagingDto.setTotalPage(totalPage);
-		if (totalPage == 0) pagingDto.setCurrentPage(1);
-		
-		pagingListDto.setPaging(pagingDto);
-		pagingListDto.setList(basketDao.listingList(pagingDto));
-		
-		return pagingListDto;
+	public List<BasketDto> ajaxlisting(BasketDto basketDto) {
+		return basketDao.ajaxlisting(basketDto);
 	}
 	
 	@Transactional("txFront")
@@ -113,7 +106,7 @@ public class BasketSrvc {
 					return false;
 				}
 			}
-			return true;
+			return false;
 		} catch (Exception e) {
 			
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

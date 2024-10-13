@@ -33,8 +33,29 @@ public class PagingDto {
 	private int point_value		= 0;
 	private String mbr_nm		= "";
 	private int count			= 0;
+	private int seq_sle_count			= 0;
+	private int total_price_sum			= 0;
+	private int total_point_sum			= 0;
 	
 	
+	public int getTotal_point_sum() {
+		return total_point_sum;
+	}
+	public void setTotal_point_sum(int total_point_sum) {
+		this.total_point_sum = total_point_sum;
+	}
+	public int getSeq_sle_count() {
+		return seq_sle_count;
+	}
+	public void setSeq_sle_count(int seq_sle_count) {
+		this.seq_sle_count = seq_sle_count;
+	}
+	public int getTotal_price_sum() {
+		return total_price_sum;
+	}
+	public void setTotal_price_sum(int total_price_sum) {
+		this.total_price_sum = total_price_sum;
+	}
 	public int getCount() {
 		return count;
 	}

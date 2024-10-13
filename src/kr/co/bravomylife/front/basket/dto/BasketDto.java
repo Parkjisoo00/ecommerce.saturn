@@ -30,22 +30,63 @@ package kr.co.bravomylife.front.basket.dto;
  */
 public class BasketDto {
 
-	private int seq_bsk			= 0;
-	private int seq_mbr			= 0;
-	private int seq_sle			= 0;
-	private String sle_nm		= "";
-	private int price			= 0;
-	private int count			= 0;
-	private int point_value		= 0;
-	private int total_price		= 0;
-	private int total_point		= 0;
-	private String img			= "";
-	private String dt_reg		= "";
-	private String dt_upt		= "";
-	private String cd_ctg_m		= "";
-	private String cd_ctg_b		= "";
+	private int seq_bsk					= 0;
+	private int seq_mbr					= 0;
+	private int seq_sle					= 0;
+	private String sle_nm				= "";
+	private int price					= 0;
+	private int count					= 0;
+	private int point_stack				= 0;
+	private int total_price				= 0;
+	private int total_point				= 0;
+	private String img					= "";
+	private String dt_reg				= "";
+	private String dt_upt				= "";
+	private String cd_ctg_m				= "";
+	private String cd_ctg_b				= "";
+	private String format_total_price	= "";
+	private String format_total_point	= "";
+	private int seq_sle_count			= 0;
+	private int total_price_sum			= 0;
+	private int total_point_sum			= 0;
 	
 	
+	public String getFormat_total_point() {
+		return format_total_point;
+	}
+	public void setFormat_total_point(String format_total_point) {
+		this.format_total_point = format_total_point;
+	}
+	public int getTotal_point_sum() {
+		return total_point_sum;
+	}
+	public void setTotal_point_sum(int total_point_sum) {
+		this.total_point_sum = total_point_sum;
+	}
+	public int getSeq_sle_count() {
+		return seq_sle_count;
+	}
+	public void setSeq_sle_count(int seq_sle_count) {
+		this.seq_sle_count = seq_sle_count;
+	}
+	public int getTotal_price_sum() {
+		return total_price_sum;
+	}
+	public void setTotal_price_sum(int total_price_sum) {
+		this.total_price_sum = total_price_sum;
+	}
+	public int getPoint_stack() {
+		return point_stack;
+	}
+	public void setPoint_stack(int point_stack) {
+		this.point_stack = point_stack;
+	}
+	public String getFormat_total_price() {
+		return format_total_price;
+	}
+	public void setFormat_total_price(String format_total_price) {
+		this.format_total_price = format_total_price;
+	}
 	public int getTotal_point() {
 		return total_point;
 	}
@@ -69,12 +110,6 @@ public class BasketDto {
 	}
 	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
-	}
-	public int getPoint_value() {
-		return point_value;
-	}
-	public void setPoint_value(int point_value) {
-		this.point_value = point_value;
 	}
 	public int getSeq_bsk() {
 		return seq_bsk;

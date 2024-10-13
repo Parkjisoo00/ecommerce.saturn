@@ -40,24 +40,12 @@ import kr.co.bravomylife.front.common.dto.PagingDto;
 @Repository("kr.co.bravomylife.front.basket.dao.BasketDao")
 public class BasketDao extends BaseDao {
 	
-	public int ajaxUpdate(PagingDto pagingDto) {
-		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.basket.Basket.ajaxUpdate", pagingDto);
+	public int ajaxUpdate(BasketDto basketDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.basket.Basket.ajaxUpdate", basketDto);
 	}
 	
-	public List<BasketDto> ajaxlistingList(PagingDto pagingDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.basket.Basket.ajaxlistingList", pagingDto);
-	}
-	
-	public int ajaxlistingCount(PagingDto pagingDto) {
-		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.basket.Basket.ajaxlistingCount", pagingDto);
-	}
-			
-	public List<BasketDto> listingList(PagingDto pagingDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.basket.Basket.listingList", pagingDto);
-	}
-	
-	public int listingCount(PagingDto pagingDto) {
-		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.basket.Basket.listingCount", pagingDto);
+	public List<BasketDto> ajaxlisting(BasketDto basketDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.basket.Basket.ajaxlisting", basketDto);
 	}
 	
 	public int update(BasketDto basketDto) {
@@ -72,4 +60,7 @@ public class BasketDao extends BaseDao {
 		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.basket.Basket.insert", basketDto);
 	}
 	
+	public List<BasketDto> listingList(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.basket.Basket.listingList", pagingDto);
+	}
 }
