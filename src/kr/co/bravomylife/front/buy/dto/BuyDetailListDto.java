@@ -20,6 +20,8 @@
  */
 package kr.co.bravomylife.front.buy.dto;
 
+import java.util.List;
+
 /**
  * @version 1.0.0
  * @author cydgate4957@gmail.com
@@ -29,5 +31,14 @@ package kr.co.bravomylife.front.buy.dto;
  * <p>IMPORTANT:</p>
  */
 public class BuyDetailListDto {
-
+	
+	private List<BuyDetailDto> buyList;
+	
+	
+	public List<BuyDetailDto> getBuyList() {
+		return buyList;
+	}
+	public void setBuyList(List<BuyDetailDto> buyList) {
+		this.buyList = buyList;
+	}
 }

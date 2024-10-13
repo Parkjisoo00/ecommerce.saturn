@@ -160,6 +160,7 @@ public class BasketWeb extends Common {
 				formattedItem.setPrice(item.getPrice());
 				formattedItem.setCount(item.getCount());
 				formattedItem.setImg(item.getImg());
+				formattedItem.setPoint_value(item.getPoint_value());
 				formattedItem.setTotal_point(item.getTotal_point());
 				formattedItem.setCd_ctg_m(item.getCd_ctg_m());
 				formattedItem.setCd_ctg_b(item.getCd_ctg_b());

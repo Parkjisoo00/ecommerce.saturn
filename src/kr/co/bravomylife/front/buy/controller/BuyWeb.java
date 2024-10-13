@@ -86,12 +86,13 @@ public class BuyWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			//logger.debug("" + buyDetailListDto.getBuyList().size());
+			logger.debug("" + buyDetailListDto.getBuyList().size());
 			
 			String finalSleName = "";	// 마지막 판매 상품명
 			
 			int totalCount = 0;			// 총 갯수
 			int totalPrice = 0;			// 총 가격
+			int totalPoint = 0;			// 총 포인트
 			
 			ArrayList<BuyDetailDto> listBuyDetailDto = new ArrayList<BuyDetailDto>();
 			
@@ -100,7 +101,7 @@ public class BuyWeb extends Common {
 					
 					if (buyDetailListDto.getBuyList().get(loop).getCount() >= 1) {
 						
-						//logger.debug(loop + " : seq_prd(" + buyDetailListDto.getBuyList().get(loop).getSeq_prd() + ")" + " + count(" + buyDetailListDto.getBuyList().get(loop).getCount() + ")");
+						logger.debug(loop + " : seq_sle(" + buyDetailListDto.getBuyList().get(loop).getSeq_sle() + ")" + " + count(" + buyDetailListDto.getBuyList().get(loop).getCount() + ")");
 						
 						// 갯수가 1개 이상인 상품
 						listBuyDetailDto.add(buyDetailListDto.getBuyList().get(loop));
@@ -108,11 +109,12 @@ public class BuyWeb extends Common {
 						// 전체 상품 갯수 및 금액 그리고 구매명
 						totalCount += buyDetailListDto.getBuyList().get(loop).getCount();
 						totalPrice += buyDetailListDto.getBuyList().get(loop).getCount() * buyDetailListDto.getBuyList().get(loop).getPrice();
+						totalPoint += buyDetailListDto.getBuyList().get(loop).getCount() * buyDetailListDto.getBuyList().get(loop).getPoint();
 						finalSleName = buyDetailListDto.getBuyList().get(loop).getSle_nm();
 					}
 				}
 			}
-			//logger.debug("count=" + listBuyDetailDto.size());
+			logger.debug("count=" + listBuyDetailDto.size());
 			
 			// 선택된 상품이 1개 이상을 경우만 구매 실행
 			if (listBuyDetailDto.size() > 0) {
@@ -123,15 +125,16 @@ public class BuyWeb extends Common {
 				buyMasterDto.setBuy_info(finalSleName + "-포함(총 개수: " + totalCount + ")");
 				buyMasterDto.setBuy_count(totalCount);
 				buyMasterDto.setBuy_price(totalPrice);
+				buyMasterDto.setTotal_point(totalPoint);
 				buyMasterDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 				
 				if (buySrvc.insert(buyMasterDto, listBuyDetailDto)) {
 					request.setAttribute("script"	, "alert('추후 결제 페이지로 이동 예정');");
-					request.setAttribute("redirect"	, "/front/main/main.web");
+					request.setAttribute("redirect"	, "/");
 				}
 				else {
 					request.setAttribute("script"	, "alert('구매에 실패했습니다! 잠시 후에 이용 바랍니다!');");
-					request.setAttribute("redirect"	, "/front/main/main.web");
+					request.setAttribute("redirect"	, "/");
 				}
 			}
 			else {
@@ -139,7 +142,7 @@ public class BuyWeb extends Common {
 				request.setAttribute("redirect"	, "/");
 			}
 			
-			request.setAttribute("redirect"	, "/front/");
+			request.setAttribute("redirect"	, "/");
 			mav.setViewName("forward:/servlet/result.web");
 		}
 		catch (Exception e) {

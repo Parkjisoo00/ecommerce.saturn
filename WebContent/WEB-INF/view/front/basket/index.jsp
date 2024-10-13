@@ -112,8 +112,6 @@
 <input type="hidden" id="prd_type"		name="prd_type"			value="${paging.prd_type}"/>
 <input type="hidden" id="filter"		name="filter"			value="${paging.filter}"/>
 <input type="hidden" name="currentPage" id="currentPage"		value="${paging.currentPage}" />
-<input type="hidden" name="buyList[0].seq_sle" value="${saleDto.seq_sle}" />
-<input type="hidden" name="buyList[0].seq_prd" value="${saleDto.seq_prd}" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -142,6 +140,7 @@
 										<th class="cart-th" style="width: 15%">수량</th>
 										<th class="cart-th" style="width: 10%">상품금액</th>
 										<th class="cart-th" style="width: 10%">적립포인트</th>
+										<th class="cart-th" style="width: 10%">합계포인트</th>
 										<th class="cart-th" style="width: 10%">합계금액</th>
 									</tr>
 								</thead>
@@ -152,13 +151,14 @@
 										</tr>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="list" items="${list}">
+										<c:forEach var="list" items="${list}" varStatus="status">
 											<tbody>
 											<tr style="border: 0;" data-seq-sle="${list.seq_sle}">
 												<td class="cart-td">
 													<input type="checkbox" class="selectItem" checked/>
 												</td>
 												<td class="cart-td" style="text-align: center; vertical-align: middle;">
+													<input type="hidden" name="buyList[${status.index}].seq_sle" value="${list.seq_sle}" />
 													<div class="cart-div">
 														<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
 															<img src="${list.img}" class="cart-img">
@@ -167,14 +167,20 @@
 												</td>
 												<td class="cart-td" style="text-align: left !important;">
 													${list.sle_nm}
+													<input type="hidden" name="buyList[${status.index}].sle_nm" value="${list.sle_nm}">
 												</td>
 												<td class="cart-td">
 													<div class="pro-qty" style="border: 1.5px solid #c4cdd5;">
-														<input type="text" class="quantityCart" value="${list.count}">
+														<input type="text" class="quantityCart" name="buyList[${status.index}].count" value="${list.count}">
 													</div>
 												</td>
 												<td class="cart-td">
 													<fmt:formatNumber value="${list.price}" type="number" />원
+													<input type="hidden" name="buyList[${status.index}].price" value="${list.price}">
+												</td>
+												<td class="cart-td">
+													<fmt:formatNumber value="${list.point_value}" type="number" />
+													<input type="hidden" name="buyList[${status.index}].point" value="${list.point_value}">
 												</td>
 												<td class="cart-td" data-total-point="${list.total_point}">
 													<span class="totalPointDisplay">

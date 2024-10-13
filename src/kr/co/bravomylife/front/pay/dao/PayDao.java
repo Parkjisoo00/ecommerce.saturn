@@ -13,43 +13,34 @@
  * Program		: kr.co.himedia.ecommerce
  * Description	:
  * Environment	: JRE 1.7 or more
- * File			: BuyDao.java
+ * File			: PayDao.java
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20241003231434][cydgate4957@gmail.com][CREATE: Initial Release]
+ *				: [20241013201432][cydgate4957@gmail.com][CREATE: Initial Release]
  */
-package kr.co.bravomylife.front.buy.dao;
+package kr.co.bravomylife.front.pay.dao;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
-import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
-import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
 import kr.co.bravomylife.front.common.dao.BaseDao;
+import kr.co.bravomylife.front.pay.dto.PayDto;
 
 /**
  * @version 1.0.0
  * @author cydgate4957@gmail.com
  * 
- * @since 2024-10-03
+ * @since 2024-10-13
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-@Service("kr.co.bravomylife.front.buy.dao.BuyDao")
-public class BuyDao extends BaseDao {
-	
-	public int sequenceMaster() {
-		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.buy.BuyMaster.sequence");
+@Repository("kr.co.bravomylife.front.pay.dao.PayDao")
+public class PayDao extends BaseDao {
+
+	public int insert(PayDto payDto) {
+		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.pay.Pay.insert", payDto);
 	}
 	
-	public int insertMaster(BuyMasterDto buyMasterDto) {
-		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.buy.BuyMaster.insert", buyMasterDto);
-	}
-	
-	public int sequenceDetail() {
-		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.buy.BuyDetail.sequence");
-	}
-	
-	public int insertDetail(BuyDetailDto buyDetailDto) {
-		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.buy.BuyDetail.insert", buyDetailDto);
+	public int sequence() {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.pay.Pay.sequence");
 	}
 }

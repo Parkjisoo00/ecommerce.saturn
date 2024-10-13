@@ -20,7 +20,19 @@
  */
 package kr.co.bravomylife.front.buy.service;
 
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
+import kr.co.bravomylife.front.buy.dao.BuyDao;
+import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
+import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
+import kr.co.bravomylife.front.pay.dao.PayDao;
+import kr.co.bravomylife.front.pay.dto.PayDto;
 
 /**
  * @version 1.0.0
@@ -32,5 +44,45 @@ import org.springframework.stereotype.Service;
  */
 @Service("kr.co.bravomylife.front.buy.service.BuySrvc")
 public class BuySrvc {
+	
+	@Inject
+	BuyDao buyDao;
+	
+	@Inject
+	PayDao payDao;
+	
+	@Transactional("txFront")
+	public boolean insert(BuyMasterDto buyMasterDto, ArrayList<BuyDetailDto> listBuyDetailDto) {
+			
+			int result = 0;
+			
+			// 구매 마스터 정보
+			buyMasterDto.setSeq_buy_mst(buyDao.sequenceMaster());
+			result += buyDao.insertMaster(buyMasterDto);
+			
+			// 구매 상세 정보들
+			for (int loop = 0; loop < listBuyDetailDto.size(); loop++) {
+				
+				listBuyDetailDto.get(loop).setSeq_buy_dtl(buyDao.sequenceDetail());
+				listBuyDetailDto.get(loop).setSeq_buy_mst(buyMasterDto.getSeq_buy_mst());
+				listBuyDetailDto.get(loop).setRegister(buyMasterDto.getRegister());
+				
+				result += buyDao.insertDetail(listBuyDetailDto.get(loop));
+			}
+			
+			// 결제 정보
+			PayDto payDto = new PayDto();
+			payDto.setSeq_pay(payDao.sequence());
+			payDto.setSeq_mbr(buyMasterDto.getSeq_mbr());
+			payDto.setSeq_buy_mst(buyMasterDto.getSeq_buy_mst());
+			payDto.setRegister(buyMasterDto.getSeq_mbr());
+			result += payDao.insert(payDto);
+			
+			if (result == 1 + listBuyDetailDto.size() + 1) return true;
+			else {
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+				return false;
+			}
+	}
 
 }

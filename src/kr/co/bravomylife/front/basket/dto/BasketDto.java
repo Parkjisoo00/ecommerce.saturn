@@ -49,8 +49,15 @@ public class BasketDto {
 	private int seq_sle_count			= 0;
 	private int total_price_sum			= 0;
 	private int total_point_sum			= 0;
+	private int point_value				= 0;
 	
 	
+	public int getPoint_value() {
+		return point_value;
+	}
+	public void setPoint_value(int point_value) {
+		this.point_value = point_value;
+	}
 	public String getFormat_total_point() {
 		return format_total_point;
 	}

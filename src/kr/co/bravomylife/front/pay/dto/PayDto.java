@@ -13,51 +13,46 @@
  * Program		: kr.co.himedia.ecommerce
  * Description	:
  * Environment	: JRE 1.7 or more
- * File			: BuyDetailDto.java
+ * File			: PayDto.java
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20241003231502][cydgate4957@gmail.com][CREATE: Initial Release]
+ *				: [20241013201439][cydgate4957@gmail.com][CREATE: Initial Release]
  */
-package kr.co.bravomylife.front.buy.dto;
+package kr.co.bravomylife.front.pay.dto;
 
 /**
  * @version 1.0.0
  * @author cydgate4957@gmail.com
  * 
- * @since 2024-10-03
+ * @since 2024-10-13
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-public class BuyDetailDto {
+public class PayDto {
 	
-	private int seq_buy_dtl		= 0;
+	private int seq_pay			= 0;
+	private int seq_mbr			= 0;
 	private int seq_buy_mst		= 0;
-	private int seq_sle			= 0;
-	private int count			= 0;
-	private int price			= 0;
+	private int cd_pg			= 0;
+	private String deal_num		= "";
+	private String cd_response	= "";
+	private int cd_pay_method	= 0;
+	private String flg_success	= "";
 	private String dt_reg		= "";
 	private int register		= 0;
-	private String sle_nm		= "";
-	private int point			= 0;
 	
 	
-	public int getPoint() {
-		return point;
+	public int getSeq_pay() {
+		return seq_pay;
 	}
-	public void setPoint(int point) {
-		this.point = point;
+	public void setSeq_pay(int seq_pay) {
+		this.seq_pay = seq_pay;
 	}
-	public String getSle_nm() {
-		return sle_nm;
+	public int getSeq_mbr() {
+		return seq_mbr;
 	}
-	public void setSle_nm(String sle_nm) {
-		this.sle_nm = sle_nm;
-	}
-	public int getSeq_buy_dtl() {
-		return seq_buy_dtl;
-	}
-	public void setSeq_buy_dtl(int seq_buy_dtl) {
-		this.seq_buy_dtl = seq_buy_dtl;
+	public void setSeq_mbr(int seq_mbr) {
+		this.seq_mbr = seq_mbr;
 	}
 	public int getSeq_buy_mst() {
 		return seq_buy_mst;
@@ -65,23 +60,35 @@ public class BuyDetailDto {
 	public void setSeq_buy_mst(int seq_buy_mst) {
 		this.seq_buy_mst = seq_buy_mst;
 	}
-	public int getSeq_sle() {
-		return seq_sle;
+	public int getCd_pg() {
+		return cd_pg;
 	}
-	public void setSeq_sle(int seq_sle) {
-		this.seq_sle = seq_sle;
+	public void setCd_pg(int cd_pg) {
+		this.cd_pg = cd_pg;
 	}
-	public int getCount() {
-		return count;
+	public String getDeal_num() {
+		return deal_num;
 	}
-	public void setCount(int count) {
-		this.count = count;
+	public void setDeal_num(String deal_num) {
+		this.deal_num = deal_num;
 	}
-	public int getPrice() {
-		return price;
+	public String getCd_response() {
+		return cd_response;
 	}
-	public void setPrice(int price) {
-		this.price = price;
+	public void setCd_response(String cd_response) {
+		this.cd_response = cd_response;
+	}
+	public int getCd_pay_method() {
+		return cd_pay_method;
+	}
+	public void setCd_pay_method(int cd_pay_method) {
+		this.cd_pay_method = cd_pay_method;
+	}
+	public String getFlg_success() {
+		return flg_success;
+	}
+	public void setFlg_success(String flg_success) {
+		this.flg_success = flg_success;
 	}
 	public String getDt_reg() {
 		return dt_reg;
