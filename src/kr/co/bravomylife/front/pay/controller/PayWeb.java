@@ -20,16 +20,24 @@
  */
 package kr.co.bravomylife.front.pay.controller;
 
+import java.util.Properties;
+
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.front.basket.controller.BasketWeb;
+import kr.co.bravomylife.front.common.Common;
+import kr.co.bravomylife.front.member.dto.MemberDto;
+import kr.co.bravomylife.front.member.service.MemberSrvc;
+import kr.co.bravomylife.util.security.SKwithAES;
 
 /**
  * @version 1.0.0
@@ -40,8 +48,13 @@ import kr.co.bravomylife.front.basket.controller.BasketWeb;
  * <p>IMPORTANT:</p>
  */
 @Controller("kr.co.bravomylife.front.pay.controller.PayWeb")
-public class PayWeb {
+public class PayWeb extends Common {
 
+	@Autowired
+	Properties staticProperties;
+	
+	@Inject
+	MemberSrvc memberSrvc;
 	
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(BasketWeb.class);
@@ -66,6 +79,38 @@ public class PayWeb {
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".index()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/front/pay/checkOut.web")
+	public ModelAndView checkOut(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+			
+			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			MemberDto _memberDto = memberSrvc.select(memberDto);
+			
+			_memberDto.setEmail(aes.decode(_memberDto.getEmail()));
+			_memberDto.setMbr_nm(aes.decode(_memberDto.getMbr_nm()));
+			_memberDto.setPhone(aes.decode(_memberDto.getPhone()));
+			_memberDto.setPost(aes.decode(_memberDto.getPost()));
+			_memberDto.setAddr1(aes.decode(_memberDto.getAddr1()));
+			_memberDto.setAddr2(aes.decode(_memberDto.getAddr2()));
+			
+			mav.addObject("memberDto", _memberDto);
+			mav.setViewName("front/pay/checkOut");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".checkOut()] " + e.getMessage(), e);
 		}
 		finally {}
 		

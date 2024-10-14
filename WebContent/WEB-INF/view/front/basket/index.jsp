@@ -87,6 +87,13 @@
 			frmMain.submit();
 		}
 		
+		function checkOut() {
+			
+			var frmMain = document.getElementById("frmMain");
+			frmMain.action = "/front/pay/checkOut.web";
+			frmMain.submit();
+		}
+		
 		function writeProc() {
 			
 			var frmMain = document.getElementById("frmMain");
@@ -224,9 +231,9 @@
 					</div>
 					<div style="display: flex; justify-content: flex-end;">
 						<div>
-							<a href="javascript:writeProc();" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">선택 상품 삭제</a>
-							<a href="javascript:writeProc();" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">선택 상품 주문</a>
-							<a href="javascript:writeProc();" class="cart-btn" style="background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;">전체 상품 주문</a>
+							<a href="#" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">선택 상품 삭제</a>
+							<a href="#" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">선택 상품 주문</a>
+							<a href="javascript:checkOut();" class="cart-btn" style="background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;">전체 상품 주문</a>
 						</div>
 					</div>
 				</div>
