@@ -122,8 +122,9 @@
 			, sle.POINT_STACK
 			, sle.IMG
 			, sle.PRICE_SALE
-			, (sle.PRICE_SALE * (sle.POINT_STACK / 100)) POINT_VALUE
-			, DECODE(sle.PRD_TYPE, 1, '액상', 2, '정', 3, '캡슐', 4, '베지캡슐', 5, '젤리', 6,'분말', 7, '츄어블', '미정') PRD_TYPE
+			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, (sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) * (sle.POINT_STACK / 100)) POINT_VALUE
+			, DECODE(sle.PRD_TYPE, 1, '액상', 2, '정', 3, '캡슐', 4, '베지캡슐', 5, '젤리', 6, '분말', 7, '츄어블', '미정') PRD_TYPE
 			, sle.CORP_NM
 			, rate.RATE_STAR
 			, rate.COUNT
@@ -131,9 +132,8 @@
 			, sle.cd_ctg_b
 			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
 			, sle.DISCOUNT
-			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
+			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') AS dt_reg
 			, sle.COUNT_STOCK
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
 			, best.FLG_BEST
 			, review.SEQ_REVIEW
 		<if test="seq_mbr != null and seq_mbr != ''">

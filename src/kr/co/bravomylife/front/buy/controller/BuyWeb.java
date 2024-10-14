@@ -20,6 +20,7 @@
  */
 package kr.co.bravomylife.front.buy.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -34,6 +35,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
+import kr.co.bravomylife.front.buy.dto.BuyDetailListDto;
+import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
 import kr.co.bravomylife.front.buy.service.BuySrvc;
 import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.common.dto.PagingDto;
@@ -65,6 +69,101 @@ public class BuyWeb extends Common {
 	@Inject
 	SaleSrvc saleSrvc;
 	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-13
+	 * <p>DESCRIPTION: 상품 구매</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/buy/writeProc.web")
+	public ModelAndView writeProc(HttpServletRequest request, HttpServletResponse response, BuyDetailListDto buyDetailListDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			logger.debug("" + buyDetailListDto.getBuyList().size());
+			
+			String finalSleName = "";	// 마지막 판매 상품명
+			
+			int totalCount = 0;			// 총 갯수
+			int totalPrice = 0;			// 총 가격
+			int totalPoint = 0;			// 총 포인트
+			
+			ArrayList<BuyDetailDto> listBuyDetailDto = new ArrayList<BuyDetailDto>();
+			
+			if (buyDetailListDto.getBuyList() != null) {
+				for (int loop = 0; loop < buyDetailListDto.getBuyList().size(); loop++) {
+					
+					if (buyDetailListDto.getBuyList().get(loop).getCount() >= 1) {
+						
+						logger.debug(loop + " : seq_sle(" + buyDetailListDto.getBuyList().get(loop).getSeq_sle() + ")" + " + count(" + buyDetailListDto.getBuyList().get(loop).getCount() + ")");
+						
+						// 갯수가 1개 이상인 상품
+						listBuyDetailDto.add(buyDetailListDto.getBuyList().get(loop));
+						
+						// 전체 상품 갯수 및 금액 그리고 구매명
+						totalCount += buyDetailListDto.getBuyList().get(loop).getCount();
+						totalPrice += buyDetailListDto.getBuyList().get(loop).getCount() * buyDetailListDto.getBuyList().get(loop).getPrice();
+						totalPoint += buyDetailListDto.getBuyList().get(loop).getCount() * buyDetailListDto.getBuyList().get(loop).getPoint();
+						finalSleName = buyDetailListDto.getBuyList().get(loop).getSle_nm();
+					}
+				}
+			}
+			logger.debug("count=" + listBuyDetailDto.size());
+			
+			// 선택된 상품이 1개 이상을 경우만 구매 실행
+			if (listBuyDetailDto.size() > 0) {
+				
+				// 마스터 설정
+				BuyMasterDto buyMasterDto = new BuyMasterDto();
+				buyMasterDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+				buyMasterDto.setBuy_info(finalSleName + "-포함(총 개수: " + totalCount + ")");
+				buyMasterDto.setBuy_count(totalCount);
+				buyMasterDto.setBuy_price(totalPrice);
+				buyMasterDto.setTotal_point(totalPoint);
+				buyMasterDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+				
+				if (buySrvc.insert(buyMasterDto, listBuyDetailDto)) {
+					request.setAttribute("script"	, "alert('추후 결제 페이지로 이동 예정');");
+					request.setAttribute("redirect"	, "/");
+				}
+				else {
+					request.setAttribute("script"	, "alert('구매에 실패했습니다! 잠시 후에 이용 바랍니다!');");
+					request.setAttribute("redirect"	, "/");
+				}
+			}
+			else {
+				request.setAttribute("script"	, "alert('선택된 상품이 없습니다!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			
+			request.setAttribute("redirect"	, "/");
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".writeProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param saleDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-13
+	 * <p>DESCRIPTION: 상품 상세 페이지</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/front/buy/writeForm.web")
 	public ModelAndView writeForm(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, PagingDto reviewpagingDto, SaleDto saleDto) {

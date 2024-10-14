@@ -140,6 +140,7 @@
 										<th class="cart-th" style="width: 15%">수량</th>
 										<th class="cart-th" style="width: 10%">상품금액</th>
 										<th class="cart-th" style="width: 10%">적립포인트</th>
+										<th class="cart-th" style="width: 10%">합계포인트</th>
 										<th class="cart-th" style="width: 10%">합계금액</th>
 									</tr>
 								</thead>
@@ -150,13 +151,14 @@
 										</tr>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="list" items="${list}">
+										<c:forEach var="list" items="${list}" varStatus="status">
 											<tbody>
 											<tr style="border: 0;" data-seq-sle="${list.seq_sle}">
 												<td class="cart-td">
 													<input type="checkbox" class="selectItem" checked/>
 												</td>
 												<td class="cart-td" style="text-align: center; vertical-align: middle;">
+													<input type="hidden" name="buyList[${status.index}].seq_sle" value="${list.seq_sle}" />
 													<div class="cart-div">
 														<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
 															<img src="${list.img}" class="cart-img">
@@ -165,18 +167,30 @@
 												</td>
 												<td class="cart-td" style="text-align: left !important;">
 													${list.sle_nm}
+													<input type="hidden" name="buyList[${status.index}].sle_nm" value="${list.sle_nm}">
 												</td>
 												<td class="cart-td">
 													<div class="pro-qty" style="border: 1.5px solid #c4cdd5;">
-														<input type="text" class="quantityCart" value="${list.count}">
+														<input type="text" class="quantityCart" name="buyList[${status.index}].count" value="${list.count}">
 													</div>
 												</td>
 												<td class="cart-td">
 													<fmt:formatNumber value="${list.price}" type="number" />원
+													<input type="hidden" name="buyList[${status.index}].price" value="${list.price}">
 												</td>
-												<td class="cart-td">${list.total_point}</td>
-												<td class="cart-td" style="font-size: 16px !important; color: #707070 !important; font-weight: bold;" data-total-price="${list.total_price}" data-total-point="${list.total_point}">
-													<fmt:formatNumber value="${list.total_price}" type="number" />원
+												<td class="cart-td">
+													<fmt:formatNumber value="${list.point_value}" type="number" />
+													<input type="hidden" name="buyList[${status.index}].point" value="${list.point_value}">
+												</td>
+												<td class="cart-td" data-total-point="${list.total_point}">
+													<span class="totalPointDisplay">
+														${list.format_total_point}
+													</span>
+												</td>
+												<td class="cart-td" style="font-size: 16px !important; color: #707070 !important; font-weight: bold;" data-total-price="${list.total_price}">
+													<span class="totalPriceDisplay" style="font-size: 16px !important; color: #707070 !important; font-weight: bold;">
+														${list.format_total_price}원
+													</span>
 												</td>
 											</tr>
 											</tbody>
@@ -185,9 +199,6 @@
 								</c:choose>
 							</table>
 						</div>
-					</div>
-					<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
-						<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
 					</div>
 				</div>
 			<div class="row">
@@ -201,14 +212,14 @@
 				<div class="col-lg-6 col-md-6 col-sm-6" style="max-width: 100% !important; flex: 0 0 100% !important; border-bottom: none;">
 					<div class="cart__total__procced" style="text-align: right;">
 						<p style="margin-top: 15px;">
-							<span style="font-size: 16px;">총 <strong id="totalItems" style="font-size: 20px;">1</strong>개의 상품금액 
-							<strong id="totalPrice" style="font-size: 20px;">10,000</strong>원
+							<span style="font-size: 16px;">총 <strong id="totalItems" style="font-size: 20px;"></strong>개의 상품금액 
+							<strong id="totalPrice" style="font-size: 20px;"></strong>원
 							<img src="/img/cartbtn/total.png" style="padding-left: 10px; padding-right: 10px; vertical-align: -4px;">
-							<strong id="totalPriceFinal" style="font-size: 20px;">10,000</strong>원
+							<strong id="totalPriceFinal" style="font-size: 20px;"></strong>원
 							</span>
 						</p>
 						<p>
-							<span style="font-size: 14px; color: #ff4c2e;">적립 예정 포인트 : </span><span id="totalPoints" style="font-size: 14px; color: #ff4c2e;">1000</span>
+							<span style="font-size: 14px; color: #ff4c2e;">적립 예정 포인트 : </span><span id="totalPoints" style="font-size: 14px; color: #ff4c2e;"></span>
 						</p>
 					</div>
 					<div style="display: flex; justify-content: flex-end;">
@@ -236,41 +247,49 @@
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
+	document.addEventListener('DOMContentLoaded', function () {
 		
-		document.getElementById('selectAll').addEventListener('change', function(e) {
-			var checkboxes = document.querySelectorAll('.selectItem');
-			checkboxes.forEach(function(checkbox) {
+		const selectAllCheckbox = document.getElementById('selectAll');
+		const itemCheckboxes = document.querySelectorAll('.selectItem');
+		
+		
+		selectAllCheckbox.addEventListener('change', function (e) {
+			
+			itemCheckboxes.forEach(function (checkbox) {
 				checkbox.checked = e.target.checked;
 			});
 			updateTotal();
 		});
-		document.querySelectorAll('.selectItem').forEach(function(checkbox) {
+		
+		
+		itemCheckboxes.forEach(function (checkbox) {
 			
 			checkbox.addEventListener('change', updateTotal);
 		});
+	
 		updateTotal();
 	});
 	
 	function updateTotal() {
 		
-		var totalPrice = 0;
-		var totalPoints = 0;
-		var totalItems = 0;
+		let totalPrice = 0;
+		let totalPoints = 0;
+		let totalItems = 0;
 		
-		document.querySelectorAll('.selectItem').forEach(function(checkbox) {
+		
+		document.querySelectorAll('.selectItem:checked').forEach(function (checkbox) {
 			
-			if (checkbox.checked) {
-				
-				var priceElement = checkbox.closest('tr').querySelector('td[data-total-price]');
-				var itemPrice = parseInt(priceElement.getAttribute('data-total-price')) || 0;
-				var itemPoints = parseInt(priceElement.getAttribute('data-total-point')) || 0;
-				
-				totalPrice += itemPrice;
-				totalPoints += itemPoints;
-				totalItems++;
-			}
+			const priceElement = checkbox.closest('tr').querySelector('td[data-total-price]');
+			const pointElement = checkbox.closest('tr').querySelector('td[data-total-point]');
+		
+			const itemPrice = parseInt(priceElement.getAttribute('data-total-price')) || 0;
+			const itemPoints = parseInt(pointElement.getAttribute('data-total-point')) || 0;
+		
+			totalPrice += itemPrice;
+			totalPoints += itemPoints;
+			totalItems++;
 		});
+		
 		document.getElementById('totalPrice').innerText = totalPrice.toLocaleString();
 		document.getElementById('totalPriceFinal').innerText = totalPrice.toLocaleString();
 		document.getElementById('totalPoints').innerText = totalPoints.toLocaleString();
@@ -279,8 +298,8 @@
 	
 	$(document).ready(function () {
 		
-	    $('.dec.qtybtn').off('click');
-	    $('.inc.qtybtn').off('click');
+		$('.dec.qtybtn').off('click');
+		$('.inc.qtybtn').off('click');
 		
 		$('.dec.qtybtn').on('click', function () {
 			
@@ -303,7 +322,7 @@
 			var parentRow = $(this).closest('tr');
 			var seq_sle = parentRow.data('seq-sle');
 			var currentValue = parseInt(parentRow.find('.quantityCart').val());
-
+			
 			parentRow.find('.quantityCart').val(currentValue);
 			
 			var newValue = currentValue + 1;
@@ -331,17 +350,58 @@
 			
 			$.ajax({
 				type: "POST",
-				async: false,
 				url: "/front/basket/basketCount.json",
 				dataType: "json",
 				contentType: "application/json; charset=UTF-8",
 				data: JSON.stringify(myData),
 				success: function (res) {
 					
-					if (res == true) {
+					var resArray = Array.isArray(res) ? res : [res];
+					
+					if (resArray.length > 0) {
+						
+						var summary = resArray[0];
+						
+						$('#totalItems').text(summary.seq_sle_count);
+						
+						var formattedTotalPrice = new Intl.NumberFormat().format(summary.total_price_sum) + "원";
+						$('#totalPrice').text(formattedTotalPrice);
+						$('#totalPriceFinal').text(formattedTotalPrice);
+						
+						var formattedTotalPoint = new Intl.NumberFormat().format(summary.total_point_sum);
+						$('#totalPoints').text(formattedTotalPoint);
+						
+						resArray.forEach((item) => {
+							
+							var seqSle = item.seq_sle;
+							var totalPrice = item.total_price;
+							var totalPoint = item.total_point;
+							
+							var row = $('tr').filter(function () {
+								
+								return $(this).attr('data-seq-sle') == seqSle;
+							});
+							
+							if (row.length) {
+								
+								var spantotalprice = row.find('td[data-total-price] span.totalPriceDisplay');
+								var spantotalpoint = row.find('td[data-total-point] span.totalPointDisplay');
+								
+								if (spantotalprice.length && spantotalpoint.length) {
+									
+									var formattedPrice = new Intl.NumberFormat().format(totalPrice) + "원";
+									var formattedPoint = new Intl.NumberFormat().format(totalPoint);
+									
+									spantotalprice.text(formattedPrice);
+									spantotalpoint.text(formattedPoint);
+									
+									spantotalprice.closest('td').attr('data-total-price', totalPrice);
+									spantotalpoint.closest('td').attr('data-total-point', totalPoint);
+								}
+							}
+						});
 					}
-				location.reload();
-				}
+				},
 			});
 		}
 	});

@@ -107,11 +107,11 @@
 		var discount_sale	= document.getElementById("discount_sale").value;
 		var count			= document.getElementById("count").value;
 		var img				= document.getElementById("img").value;
-		var point_value		= document.getElementById("point_value").value;
+		var point_stack		= document.getElementById("point_stack").value;
 		var cd_ctg_m		= document.getElementById("cd_ctg_m").value;
 		var cd_ctg_b		= document.getElementById("cd_ctg_b").value;
 		
-		var item = seq_sle + "|" + sle_nm + "|" + discount_sale + "|" + count + "|" + img + "|" + point_value + "|" + cd_ctg_m + "|" + cd_ctg_b;
+		var item = seq_sle + "|" + sle_nm + "|" + discount_sale + "|" + count + "|" + img + "|" + point_stack + "|" + cd_ctg_m + "|" + cd_ctg_b;
 		document.getElementById("item").value = item;
 		
 		var frmMain = document.getElementById("frmMain");
@@ -147,6 +147,7 @@
 <input type="hidden" id="discount_sale"	name="discount_sale"	value="${saleDto.discount_sale}" />
 <input type="hidden" id="img"			name="img"				value="${saleDto.img}" />
 <input type="hidden" id="point_value"	name="point_value"		value="${saleDto.point_value}" />
+<input type="hidden" id="point_stack"	name="point_stack"		value="${saleDto.point_stack}" />
 <input type="hidden" id="cd_ctg_m"		name="cd_ctg_m"			value="${saleDto.cd_ctg_m}" />
 <input type="hidden" id="cd_ctg_b"		name="cd_ctg_b"			value="${saleDto.cd_ctg_b}" />
 <input type="hidden" id="corp_nm"		name="corp_nm"			value="${paging.corp_nm}"/>
