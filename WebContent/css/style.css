@@ -476,7 +476,6 @@ table.headTop_pd th, table.headTop_pd td {
 	height: auto !important;
 	padding: 20px 15px !important;
 	border-bottom: none !important;
-	border-top: 1px solid #dbdbdb !important;
 	white-space: nowrap !important;
 	font-family: "Montserrat", sans-serif !important;
 	text-align: center !important;
@@ -557,19 +556,6 @@ table.headTop_pd th, table.headTop_pd td {
 	font-weight: 700 !important;
 	border-bottom: 3px solid #777 !important;
 	font-family: "돋움", Dotum, sans-serif !important;
-}
-
-
-.cart-td {
-	font-size: 13px !important;
-	color: #212b36 !important;
-	height: auto !important;
-	padding: 20px 15px !important;
-	border-bottom: none !important;
-	white-space: nowrap !important;
-	font-family: "Montserrat", sans-serif !important;
-	text-align: center !important;
-	vertical-align: middle !important;
 }
 
 /*----------------------------------------*/
