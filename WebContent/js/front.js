@@ -146,6 +146,13 @@ function checkRegister() {
 		return;
 	}
 	
+	var age = document.getElementById("age").value;
+
+	if (age === "") {
+		alert("연령을 입력 하셔야 합니다!");
+		return;
+	}
+	
 	var email = document.getElementById("email").value;
 
 	if (!checkEmail(email)) {
