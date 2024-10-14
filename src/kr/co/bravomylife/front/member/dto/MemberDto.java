@@ -53,11 +53,22 @@ public class MemberDto {
 	private String	cause		= "";
 	private int	register	= 0;
 	private int	updater		= 0;
+	private int point			= 0;
+	private int total_point		= 0;
 	
 	
-	
-	
-	
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
+	public int getTotal_point() {
+		return total_point;
+	}
+	public void setTotal_point(int total_point) {
+		this.total_point = total_point;
+	}
 	public String getCause() {
 		return cause;
 	}

@@ -152,12 +152,24 @@
 			, dtl.ADDR2
 			, dtl.FLG_EMAIL
 			, dtl.FLG_SMS
+			, pt.TOTAL_POINT
 		FROM
 			TB_MBR_MST mst
 		INNER JOIN
 			TB_MBR_DTL dtl
 		ON
 			mst.SEQ_MBR = dtl.SEQ_MBR
+		LEFT OUTER JOIN (
+			SELECT
+				SEQ_MBR
+				, SUM(POINT) TOTAL_POINT
+			FROM
+				TB_MBR_PT
+			GROUP BY
+				SEQ_MBR
+		) pt
+			ON
+				mst.SEQ_MBR = pt.SEQ_MBR
 		WHERE
 			mst.SEQ_MBR = #{seq_mbr}
 	</select>

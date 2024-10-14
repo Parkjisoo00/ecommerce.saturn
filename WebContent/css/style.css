@@ -546,7 +546,7 @@ table.headTop_pd th, table.headTop_pd td {
 	padding: 7px 10px 7px 15px !important;
 	font-weight: 700 !important;
 	text-align: right !important;
-	font-family: "Montserrat", sans-serif !important;
+	font-family: "돋움", Dotum, sans-serif !important;
 	background: #f4f4f4 !important;
 }
 
@@ -554,7 +554,18 @@ table.headTop_pd th, table.headTop_pd td {
 	font-size: 12px !important;
 	border-bottom: 1px solid #e4e4e4 !important;
 	padding: 10px 16px !important;
-	font-family: "Montserrat", sans-serif !important;
+	font-family: "돋움", Dotum, sans-serif !important;
+	vertical-align: middle !important;
+}
+
+.customer-td3 {
+	color: #212529 !important;
+	font-size: 14px !important;
+	font-weight: bold;
+	border-bottom: 1px solid #e4e4e4 !important;
+	padding: 10px 16px !important;
+	font-family: "돋움", Dotum, sans-serif !important;
+	vertical-align: middle !important;
 }
 
 .customer-title {
@@ -578,9 +589,24 @@ table.headTop_pd th, table.headTop_pd td {
 	font-family: "돋움", Dotum, sans-serif !important;
 }
 
+.customer-button {
+	padding: 4px 8px !important;
+	border: 1px solid #999 !important;
+	color: #333 !important;
+	border-radius: 2px !important;
+	box-shadow: 0 -2px 0 rgba(0, 0, 0, .1) inset !important;
+	font-size: 11px !important;
+	background: white !important;
+}
+
+.customer-input {
+	border: 1px solid #ddd;
+	height: 27px !important;
+}
+
 /*----------------------------------------*/
 /* Template default CSS
-/*----------------------------------------*/
+/*----------------------------------------*
 
 @font-face {
 	font-family: 'Pretendard-Regular';
