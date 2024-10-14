@@ -594,4 +594,168 @@ public class BoardWeb extends Common {
 		
 		return mav;
 	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-14
+	 * <p>DESCRIPTION: 마이페이지 문의 이력</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/center/board/myPageNotice/list.web")
+	public ModelAndView myPageNoticeList(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			
+			/* 로그인 세션 체크가 정상적으로 동작하지 않던 코드 수정 */
+			/*이 주석을 풀시 이 코드를 사용하거나 아래의 코드 하나만을 사용해야 됨 */
+			
+			if (pagingDto.getCd_bbs_type() == 3 && !sessionCmpn.isSession(request)) {
+				request.setAttribute("script"	, "alert('로그인이 필요합니다!');");
+				request.setAttribute("redirect"	, "/front/login/loginForm.web?url=/front/center/board/list.web");
+				mav.setViewName("forward:/servlet/result.web");
+			}
+			else {
+				// 로그인 성공 후 세션에 사용자 정보 저장
+				if (pagingDto.getCd_bbs_type() == 3) {
+					HttpSession session = request.getSession(true);
+					session.setAttribute("sessionUser", "SEQ_MBR");
+				}
+				
+				if (pagingDto.getCd_bbs_type() == 3) {
+					pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+				
+				PagingListDto pagingListDto = boardSrvc.list(pagingDto);
+				
+				mav.addObject("paging"	, pagingListDto.getPaging());
+				mav.addObject("list"	, pagingListDto.getList());
+				}
+				
+				
+				if (pagingDto.getCd_bbs_type() == 1) {
+					mav.setViewName("front/center/board/notice/list");
+				}
+				else if (pagingDto.getCd_bbs_type() == 2) {
+					mav.setViewName("front/center/board/faq/list");
+				}
+				else if (pagingDto.getCd_bbs_type() == 3) {
+					mav.setViewName("front/center/board/myPageNotice/list");
+				}
+				else if (pagingDto.getCd_bbs_type() == 4) {
+					mav.setViewName("front/center/board/news/list");
+				}
+				
+				else {
+					
+					mav.setViewName("forward:/servlet/result.web");
+				}
+				
+			}
+			
+			
+			logger.debug("게시판 타입 확인" + " + " + pagingDto.getCd_bbs_type());
+			logger.debug("세션 SEQ_MBR 확인" + " + " + getSession(request, "SEQ_MBR"));
+			
+				String check = "[UNDEFINED]";
+				
+				if (pagingDto.getCd_bbs_type() == 3 && check.equals(getSession(request, "SEQ_MBR"))) {
+					pagingDto.setRegister(0);
+				} else if (pagingDto.getCd_bbs_type() == 3 && !check.equals(getSession(request, "SEQ_MBR"))) {
+					pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+				}
+				
+				PagingListDto pagingListDto = boardSrvc.list(pagingDto);
+				
+				logger.debug("등록자 번호 확인" + " + " + pagingDto.getRegister());
+				
+				mav.addObject("paging"	, pagingListDto.getPaging());
+				mav.addObject("list"	, pagingListDto.getList());
+				
+				if (pagingDto.getCd_bbs_type() == 1) {
+					mav.setViewName("front/center/board/notice/list");
+				}
+				else if (pagingDto.getCd_bbs_type() == 2) {
+					mav.setViewName("front/center/board/faq/list");
+				}
+				else if (pagingDto.getCd_bbs_type() == 3) {
+					mav.setViewName("front/center/board/myPageNotice/list");
+				}
+				else if (pagingDto.getCd_bbs_type() == 4) {
+					mav.setViewName("front/center/board/news/list");
+				}
+				else {
+					request.setAttribute("redirect"	, "/");
+					mav.setViewName("forward:/servlet/result.web");
+				}
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".totalList()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 보기</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/center/board/myPageNotice/view.web", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView myPageNoticeView(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			BoardDto _boardDto = boardSrvc.select(boardDto);
+			
+			mav.addObject("boardDto", _boardDto);
+			
+			if (boardDto.getCd_bbs_type() == 1) {
+				mav.setViewName("front/center/board/notice/view");
+			}
+			else if (boardDto.getCd_bbs_type() == 2) {
+				mav.setViewName("front/center/board/faq/view");
+			}
+			else if (boardDto.getCd_bbs_type() == 3) {
+				
+				// DB 부하 감소를 위해 답변이 있을 때만
+				if (_boardDto.getSeq_reply() > 0) {
+					BoardDto boardReplyDto = boardSrvc.selectReply(boardDto);
+					mav.addObject("boardReplyDto", boardReplyDto);
+				}
+				
+				mav.setViewName("front/center/board/myPageNotice/view");
+			}
+			else if (boardDto.getCd_bbs_type() == 4) {
+				mav.setViewName("front/center/board/news/view");
+			}
+			else {
+				request.setAttribute("redirect"	, "/");
+				mav.setViewName("forward:/servlet/result.web");
+			}
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".view()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	
 }

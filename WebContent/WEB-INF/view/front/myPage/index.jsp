@@ -17,6 +17,16 @@
 	<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript" src="/js/package/tinymce.js"></script>		
 	<script>
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		// document.getElementById("searchWord").value = "";
+		// document.getElementById("currentPage").value = "1";
+		document.getElementById("cd_bbs_type").value = value;
+		
+		frmMain.action="/front/center/board/myPageNotice/list.web";
+		frmMain.submit();}
 	</script>
 </head>
 <body>
@@ -33,7 +43,7 @@
 	<ul class="my-custom-ul" >
 				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px" href="/front/myPage/" class="menuLnb">&nbsp;마이 페이지</a></li>
 				<li><img src="/img/mypage/mypage1.png"><a href="/front/member/modifyForm.web" class="menuLnb">개인정보 수정</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">문의 이력</a></li>
+				<li><img src="/img/mypage/mypage1.png"><a href="javascript:goList(3);" class="menuLnb">문의 이력</a></li>
 				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">포인트</a></li>
 				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">맞춤건강 결과표</a></li>
 				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">찜한 상품</a></li>
@@ -46,6 +56,7 @@
 				<section class="checkout spad">
 					<div class="container">
 						<form id="frmMain" method="POST" class="checkout__form">
+						<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" 	/>
 							<div class="row2">
 									<h5 >개인 정보</h5>
 									<div class="row">
