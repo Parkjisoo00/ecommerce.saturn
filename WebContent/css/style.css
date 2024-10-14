@@ -511,6 +511,68 @@ table.headTop_pd th, table.headTop_pd td {
 }
 
 /*----------------------------------------*/
+/* CheckOut Css
+/*----------------------------------------*/
+
+.customer-table {
+	width: 100% !important;
+	border-top: 2px solid #cecece !important;
+}
+
+.customer-td1 {
+	width: 130px !important;
+	font-size: 12px !important;
+	border: solid #e4e4e4 !important;
+	border-width: 0 1px 1px 0 !important;
+	padding: 7px 10px 7px 15px !important;
+	font-weight: 700 !important;
+	text-align: right !important;
+	font-family: "Montserrat", sans-serif !important;
+	background: #f4f4f4 !important;
+}
+
+.customer-td2 {
+	font-size: 12px !important;
+	border-bottom: 1px solid #e4e4e4 !important;
+	padding: 10px 16px !important;
+	font-family: "Montserrat", sans-serif !important;
+}
+
+.customer-title {
+	padding-left: 2px !important;
+	margin-bottom: 8px !important;
+	font-size: 20px !important;
+	font-weight: 700 !important;
+	color: #333 !important;
+	margin-top: 30px !important;
+	font-family: "돋움", Dotum, sans-serif !important;
+}
+
+.customer-main {
+	margin-top: 5px !important;
+	padding-left: 0 !important;
+	line-height: 70px !important;
+	font-size: 30px !important;
+	color: #111 !important;
+	font-weight: 700 !important;
+	border-bottom: 3px solid #777 !important;
+	font-family: "돋움", Dotum, sans-serif !important;
+}
+
+
+.cart-td {
+	font-size: 13px !important;
+	color: #212b36 !important;
+	height: auto !important;
+	padding: 20px 15px !important;
+	border-bottom: none !important;
+	white-space: nowrap !important;
+	font-family: "Montserrat", sans-serif !important;
+	text-align: center !important;
+	vertical-align: middle !important;
+}
+
+/*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
 
@@ -2951,8 +3013,6 @@ ol {
 .checkout {
 	padding-top: 80px;
 	padding-bottom: 70px;
-	padding-left: 300px;  /* 좌측 패딩 */
-	padding-right: 300px; /* 우측 패딩 */
 }
 
 .coupon__link {
