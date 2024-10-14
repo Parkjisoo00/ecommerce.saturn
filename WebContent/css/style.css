@@ -37,12 +37,11 @@
 }
 
 .overlay-content1 {
+	
 	display: flex;
 	flex-direction: column;
 	position: absolute;
-	left:317px;
-	right:317px;
-	top: 350px;
+	top: 500px;
 	width: 100%;
 	height: 3673px;
 	z-index: 1;
@@ -3877,6 +3876,7 @@ ol {
 	.container {
 		max-width: 1170px;
 	}
+	
 }
 
 /* Medium Device = 1200px */

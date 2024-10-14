@@ -38,9 +38,11 @@
 	<!-- Breadcrumb Begin -->
 	<!-- Breadcrumb End -->
 
+
+
 	<section class="banner1 set-bg " data-setbg="/img/20170724511045.jpg"></section>
-			<div class="row">
-			<div class="overlay-content1 col-lg-8 ">
+		<div class="container" style="display: flex; justify-content: center; align-items: center;">
+			<div class="overlay-content1 col-lg-12" >
 			 <div class="tab-content1">
 					<div class="tab-pane active" >
 						<h1 style = "font-size: 80px;text-align: center;line-height: 1.5;margin-top: 50px;">Bravo Your Life!<br>
@@ -78,6 +80,7 @@
 									합리적이고 안전한 건강기능식품을 판매하는 것을 목표로 한다.<br>
 								</p>
 					<section class="image-container3"></section>
+					
 					<%@ include file="/include/common/footerpic.jsp" %>
 	<!-- Instagram End  -->
 
@@ -87,8 +90,7 @@
 	<!-- Footer Section End -->
 				</div>
 			</div>
-		</div>
-	
+	</div>
 	
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
