@@ -7,12 +7,6 @@
 		<div class="offcanvas__close">+</div>
 		<ul class="offcanvas__widget">
 			<li><span class="icon_search search-switch"></span></li>
-			<li><a href="#"><span class="icon_heart_alt"></span>
-				<div class="tip">2</div>
-			</a></li>
-			<li><a href="#"><span class="icon_bag_alt"></span>
-				<div class="tip">2</div>
-			</a></li>
 		</ul>
 		<div class="offcanvas__logo">
 			<a href="./index.html"><img src="/img/logo/logo3.png" alt=""></a>
@@ -33,29 +27,42 @@
 <div class="header__logo" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
 	<a href="/"><img src="/img/logo/logo3.png" alt=""></a>
 </div>
-<div class="header__right" style="position: absolute; bottom: -10px; right: 395px;">
-	<div class="header__right__auth">
+<div class="header__right" style="position: absolute; bottom: -10px; right: 19%;">
+<div class="header__right__auth" style="display: flex; align-items: center; gap: 5px;">
 	<c:if test="${not empty sessionScope.SEQ_MBR}">
-		<a href="/front/myPage/" title="${sessionScope.NAME}" style="color: white; font-size: 15px;">마이페이지</a>
-		 <a href="/front/login/logout.web" style="color: white; font-size: 15px;">로그아웃</a>
+		<a href="/front/myPage/" title="${sessionScope.NAME}" style="color: white; font-size: 15px;">
+			마이페이지
+		</a>
+		<a href="/front/login/logout.web" style="color: white; font-size: 15px;">
+			로그아웃
+		</a>
+		<a href="/front/basket/main.web" style="color: white; font-size: 15px;">
+			장바구니
+		</a>
+		<ul class="header__right__widget" style="list-style: none; margin: 0; padding: 0; display: flex; align-items: center;">
+			<li style="position: relative; display: inline-block; padding-bottom: 2px;">
+				<span class="icon_bag_alt" 
+					style="font-size: 20px; display: inline-block; position: relative; width: 20px; height: 20px;">
+				</span>
+				<div class="tip" style="position: absolute; top: -12px; right: -12px; font-size: 15px; width: 12px; height: 12px; display: flex; transform: translate(-30%, -30%);">
+					2
+				</div>
+			</li>
+		</ul>
 	</c:if>	 
 	<c:if test="${empty sessionScope.SEQ_MBR}">
 		<a href="/front/login/loginForm.web" style="color: white; font-size: 15px;">로그인</a>
 		<a href="/front/member/registerForm.web" style="color: white; font-size: 15px;">회원가입</a>
-	</c:if>	
+	</c:if>
+</header>
+<!-- "javascript:location.href='front/sale/gender_list.web';" -->
+	<!-- 임시 주석 돋보기 위치 변경
 	</div>
 		<ul class="header__right__widget">
 			<li><span class="icon_search search-switch"></span></li>
-			<li><a href="#"><span class="icon_heart_alt"></span>
-				<div class="tip">2</div>
-			</a></li>
-			<li><a href="#"><span class="icon_bag_alt"></span>
-				<div class="tip">2</div>
-			</a></li>
 		</ul>
 	</div>
-</header>
-<!-- "javascript:location.href='front/sale/gender_list.web';" -->
+	 -->
 <div class="col-xl-12 col-lg-12" style="margin: 0 auto; float: none; width: 90%;">
 	<nav class="header__menu" >
 		<ul style="display: inline-block; width: 90%; list-style: none;">

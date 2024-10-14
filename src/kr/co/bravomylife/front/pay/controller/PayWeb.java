@@ -76,6 +76,7 @@ public class PayWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
+	/*
 	@RequestMapping(value = "/front/pay/index.web")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		
@@ -91,9 +92,10 @@ public class PayWeb extends Common {
 		
 		return mav;
 	}
+	*/
 	
-	@RequestMapping(value = "/front/pay/checkOut.web")
-	public ModelAndView checkOut(BuyDetailListDto buyDetailListDto, HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+	@RequestMapping(value = "/front/pay/index.web")
+	public ModelAndView index(BuyDetailListDto buyDetailListDto, HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
@@ -141,7 +143,6 @@ public class PayWeb extends Common {
 				logger.debug("판매 개수" + detail.getCount());
 				logger.debug("포인트" + detail.getPoint());
 				
-				
 				logger.debug("금액 총합" + totalPriceSum);
 				logger.debug("포인트 총합" + totalPointSum);
 				
@@ -151,17 +152,15 @@ public class PayWeb extends Common {
 				responseList.add(map);
 			}
 			
-			
-			
 			mav.addObject("buyList", responseList);
 			mav.addObject("formatTotalPriceSum", formatTotalPriceSum);
 			mav.addObject("formatTotalPointSum", formatTotalPointSum);
 			mav.addObject("totalPriceSum", totalPriceSum);
 			mav.addObject("totalPointSum", totalPointSum);
 			mav.addObject("memberDto", _memberDto);
-			mav.setViewName("front/pay/checkOut");
+			mav.setViewName("front/pay/index");
 		} catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".checkOut()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".index()] " + e.getMessage(), e);
 		}
 		return mav;
 	}

@@ -87,11 +87,29 @@
 			frmMain.submit();
 		}
 		
+		window.onload = function () {
+			
+			if (sessionStorage.getItem('reloaded')) {
+				
+				sessionStorage.removeItem('reloaded');
+				
+				history.replaceState(null, '', location.href);
+				
+				var frmMain = document.getElementById("frmMain");
+				frmMain.action = "/front/pay/index.web";
+				frmMain.submit();
+			}
+		};
+		
 		function checkOut() {
 			
-			var frmMain = document.getElementById("frmMain");
-			frmMain.action = "/front/pay/checkOut.web";
-			frmMain.submit();
+			if (!sessionStorage.getItem('reloaded')) {
+				sessionStorage.setItem('reloaded', 'true');
+				
+				history.replaceState(null, '', location.href);
+				
+				location.reload();
+			}
 		}
 	</script>
 
@@ -133,7 +151,7 @@
 					<h6 class="cart-title">*이미지를 클릭하면 상품으로 이동합니다</h6>
 						<div class="shop__cart__table" style="border: 1px solid #dbdbdb; border-radius: 4px;">
 							<table id="productBasket" class="cart-table">
-								<thead>
+								<thead style="border-bottom: 1px solid #dbdbdb !important;">
 									<tr style="border-color: #707070 !important;">
 										<th class="cart-th" style="width: 5%"><input type="checkbox" id="selectAll" checked/></th>
 										<th class="cart-th" colspan="2">상품정보</th>
@@ -336,12 +354,20 @@
 			
 			if (e.which == 13) {
 				
+				e.preventDefault();
+
 				var parentRow = $(this).closest('tr');
 				var seq_sle = parentRow.data('seq-sle');
 				var newValue = parseInt($(this).val());
 				
 				if (!isNaN(newValue) && newValue >= 1) {
+					
 					sendValueToServer(newValue, seq_sle);
+					console.log(`수량 변경: ${newValue}, 상품 번호: ${seq_sle}`);
+				} else {
+					
+					alert('유효한 수량을 입력하세요.');
+					$(this).val(1);
 				}
 			}
 		});

@@ -495,7 +495,7 @@ table.headTop_pd th, table.headTop_pd td {
 	color: #212b36 !important;
 	height: auto !important;
 	padding: 20px 15px !important;
-	border-bottom: none !important;
+	border-bottom: 1px solid #f2f2f2 !important;
 	white-space: nowrap !important;
 	font-family: "Montserrat", sans-serif !important;
 	text-align: center !important;
@@ -2556,8 +2556,12 @@ ol {
 }
 
 .product__details__button ul li a span {
-	font-size: 18px;
-	color: #666666;
+	font-size: 18px !important;
+	color: #666666 !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	transform: translateY(10px) !important;
 }
 
 .product__details__widget {

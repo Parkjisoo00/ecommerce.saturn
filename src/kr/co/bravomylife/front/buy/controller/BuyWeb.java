@@ -81,18 +81,19 @@ public class BuyWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/buy/writeProc.web")
-	public ModelAndView writeProc(HttpServletRequest request, HttpServletResponse response, BuyDetailListDto buyDetailListDto) {
+	public ModelAndView writeProc(HttpServletRequest request, HttpServletResponse response, BuyDetailListDto buyDetailListDto, int usePoint) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
 			logger.debug("" + buyDetailListDto.getBuyList().size());
+			logger.debug("사용한 포인트" + usePoint);
 			
 			String finalSleName = "";	// 마지막 판매 상품명
 			
 			int totalCount = 0;			// 총 갯수
-			int totalPrice = 0;
-			// int totalPrice = 0;			// 총 가격
+			// int totalPrice = 0;
+			int totalPrice = 0;			// 총 가격
 			int totalPoint = 0;			// 총 포인트
 			
 			ArrayList<BuyDetailDto> listBuyDetailDto = new ArrayList<BuyDetailDto>();
@@ -109,9 +110,17 @@ public class BuyWeb extends Common {
 						
 						// 전체 상품 갯수 및 금액 그리고 구매명
 						totalCount += buyDetailListDto.getBuyList().get(loop).getCount();
-						// totalPrice += buyDetailListDto.getBuyList().get(loop).getCount() * buyDetailListDto.getBuyList().get(loop).getPrice();
+						totalPrice += buyDetailListDto.getBuyList().get(loop).getCount() * buyDetailListDto.getBuyList().get(loop).getPrice();
 						totalPoint += buyDetailListDto.getBuyList().get(loop).getCount() * buyDetailListDto.getBuyList().get(loop).getPoint();
 						finalSleName = buyDetailListDto.getBuyList().get(loop).getSle_nm();
+						
+						if (loop == buyDetailListDto.getBuyList().size() - 1) {
+							
+							totalPrice -= usePoint;
+							if (totalPrice < 0) {
+								totalPrice = 0;
+							}
+						}
 					}
 				}
 			}

@@ -129,6 +129,18 @@
 			reviewForm.classList.add('visible');
 		}
 	}
+	
+	function writeProc() {
+		
+		if (!isLogin) {
+			alert("로그인이 필요합니다!");
+			return;
+		}
+		
+		var frmMain = document.getElementById("frmMain");
+		frmMain.action = "/front/pay/index.web";
+		frmMain.submit();
+	}
 	</script>
 
 	<!-- Google Font -->
@@ -245,6 +257,7 @@
 											<span class="pd-text">${saleDto.point_value}</span>
 											<span class="pd-text">적립</span>
 											<span class="pd-text" style="color: #346aff !important;">(${saleDto.point_stack}%)</span>
+											<input type="hidden" name="buyList[0].point" value="${saleDto.point_value}" />
 										</label>
 									</div>
 								</li>
@@ -283,21 +296,32 @@
 							</ul>
 						</div>
 						</br>
-						<div class="product__details__button">
-							<div class="quantity">
-								<span>구매 수량:</span>
-								<div class="pro-qty" style="height: 51px;">
-									<input type="text" value="1" name="buyList[0].count" id="count" size="3">
-								</div>
-							</div>
-							<a href="javascript:setBasket('${saleDto.cd_ctg_m}', '${saleDto.cd_ctg_b}');" class="cart-btn"><span class="icon_bag_alt"></span> 장바구니에 담기</a>
-							<ul>
+						<div class="product__details__button" 
+							 style="display: flex !important; justify-content: center !important; gap: 10px !important; width: 100% !important;">
+						<div class="pro-qty" style="padding: 0px; display: flex !important; align-items: center !important; justify-content: center !important; gap: 10px !important; height: 51px !important;">
+							<input type="text" value="1" name="buyList[0].count" id="count" size="3" style="text-align: center !important; font-size: 14px !important; width: 40px; display: inline-block !important;">
+						</div>
+							<a href="javascript:setBasket('${saleDto.cd_ctg_m}', '${saleDto.cd_ctg_b}');" class="cart-btn" style="display: inline-block !important; margin: 0px !important; background: white; color: #346aff !important; border: 1px solid #346aff">
+								<span class="icon_bag_alt"></span> 장바구니 담기
+							</a>
+							<a href="javascript:writeProc();" class="cart-btn" style="display: inline-block !important; margin: 0px !important;">
+								<span class="icon_bag_alt"></span> 바로구매
+							</a>
+							<ul style="list-style: none !important; padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; gap: 10px !important;">
 								<c:choose>
 									<c:when test="${saleDto.flg_like == 'Y'}">
-										<li><a href="javascript:delLike();" style="background-color: #ca1515;"><span class="icon_heart_alt" style="color: white;"></span></a></li>
+										<li>
+											<a href="javascript:delLike();" style="background-color: #ca1515 !important; padding: 5px !important; border-radius: 50% !important;">
+												<span class="icon_heart_alt" style="color: white !important;"></span>
+											</a>
+										</li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="javascript:setLike();"><span class="icon_heart_alt"></span></a></li>
+										<li>
+											<a href="javascript:setLike();"  style="padding: 5px !important; border-radius: 50% !important;">
+												<span class="icon_heart_alt"></span>
+											</a>
+										</li>
 									</c:otherwise>
 								</c:choose>
 							</ul>
