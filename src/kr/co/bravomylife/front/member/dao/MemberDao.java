@@ -95,4 +95,8 @@ public class MemberDao extends BaseDao {
 	public int updatePasswd(MemberDto memberDto) {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.member.Member.updatePasswd", memberDto);
 	}
+	
+	public int withdraw(MemberDto memberDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.member.Member.withdraw", memberDto); 
+	}
 }

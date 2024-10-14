@@ -27,6 +27,7 @@ import java.util.Properties;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,12 +82,78 @@ public class MemberWeb extends Common {
 	 * @return ModelAndView
 	 * 
 	 * @since 2024-10-14
-	 * <p>DESCRIPTION:</p>
+	 * <p>DESCRIPTION:마이 페이지 회원 탈퇴 페이지</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/member/withdraw.web")
+	public ModelAndView withdraw(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			mav.setViewName("front/member/withdraw");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".main()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-14
+	 * <p>DESCRIPTION:마이 페이지 회원 탈퇴 처리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/member/withdrawProc.web")
+	public ModelAndView withdrawProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			HttpSession session = request.getSession(false);
+			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			memberDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			if (memberSrvc.withdraw(memberDto)) {
+				request.setAttribute("script"	, "alert('탈퇴되었습니다.');");
+				session.invalidate();
+				request.setAttribute("redirect"	, "/");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".main()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-14
+	 * <p>DESCRIPTION:마이 페이지 수정</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/member/modifyForm.web")
-	public ModelAndView main(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		

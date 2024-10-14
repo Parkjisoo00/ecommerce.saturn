@@ -25,7 +25,20 @@
 9.  Contact
 10.  Footer Style
 -------------------------------------------------------------------*/
+/*----------------------------------------*/
+/* mypage-withdraw
+/*----------------------------------------*/
 
+/*----------------------------------------*/
+/* mypage-include
+/*----------------------------------------*/
+.my-custom-ul{
+	position: absolute;
+	left: 20px;
+	transform: translateY(30px);
+	list-style-type: none;
+	
+}
 /*----------------------------------------*/
 /* introduce-background
 /*----------------------------------------*/
@@ -36,6 +49,13 @@
 	text-align:center;
 }
 
+
+.image-mypage1 {
+	height: 10px;
+	background-image: url('/img/mypage/mypage1.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
 .overlay-content1 {
 	
 	display: flex;
@@ -4153,7 +4173,18 @@ ol {
 
 /* Wide Mobile = 480px */
 
+
 @media only screen and (max-width: 767px) {
+	
+	.my-custom-ul{
+	position: relative;
+	transform: translateY(30px);
+	list-style-type: none;
+	left: 20px;
+	width: 300px;
+	
+}
+
 	.canvas__open {
 		display: block;
 		font-size: 22px;
@@ -4168,6 +4199,7 @@ ol {
 		position: absolute;
 		right: 15px;
 		top: 24px;
+		z-index:1
 	}
 	.offcanvas-menu-overlay {
 		position: fixed;

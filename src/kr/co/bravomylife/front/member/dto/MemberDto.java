@@ -50,10 +50,20 @@ public class MemberDto {
 	private String	last_dt		= "";
 	private String	dt_reg		= "";
 	private String	dt_upt		= "";
+	private String	cause		= "";
 	private int	register	= 0;
 	private int	updater		= 0;
 	
 	
+	
+	
+	
+	public String getCause() {
+		return cause;
+	}
+	public void setCause(String cause) {
+		this.cause = cause;
+	}
 	public int getSeq_mbr() {
 		return seq_mbr;
 	}

@@ -165,4 +165,17 @@ public class MemberSrvc {
 	public MemberDto select(MemberDto memberDto) {
 		return memberDao.select(memberDto);
 	}
+	
+		public boolean withdraw(MemberDto memberDto) {
+		
+		int result = memberDao.withdraw(memberDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	
 }

@@ -1,6 +1,6 @@
 
 function checkModify() {
-	
+	if (confirm("정보를 변경하시겠습니까?")) {
 	var isSubmit	= true;
 	var frmMain		= document.getElementById("frmMain");
 	
@@ -32,6 +32,7 @@ function checkModify() {
 		frmMain.action = "/front/member/modifyProc.web";
 		frmMain.submit();
 	}
+}
 }
 
 function execDaumPostcode() {
