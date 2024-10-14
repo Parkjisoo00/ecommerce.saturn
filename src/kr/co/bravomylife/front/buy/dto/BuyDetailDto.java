@@ -39,8 +39,36 @@ public class BuyDetailDto {
 	private int register		= 0;
 	private String sle_nm		= "";
 	private int point			= 0;
+	private int total_price_sum			= 0;
+	private int total_point_sum			= 0;
+	private String format_total_price	= "";
+	private String format_total_point	= "";
 	
 	
+	public int getTotal_price_sum() {
+		return total_price_sum;
+	}
+	public void setTotal_price_sum(int total_price_sum) {
+		this.total_price_sum = total_price_sum;
+	}
+	public int getTotal_point_sum() {
+		return total_point_sum;
+	}
+	public void setTotal_point_sum(int total_point_sum) {
+		this.total_point_sum = total_point_sum;
+	}
+	public String getFormat_total_price() {
+		return format_total_price;
+	}
+	public void setFormat_total_price(String format_total_price) {
+		this.format_total_price = format_total_price;
+	}
+	public String getFormat_total_point() {
+		return format_total_point;
+	}
+	public void setFormat_total_point(String format_total_point) {
+		this.format_total_point = format_total_point;
+	}
 	public int getPoint() {
 		return point;
 	}

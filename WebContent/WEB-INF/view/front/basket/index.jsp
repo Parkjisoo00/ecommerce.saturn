@@ -93,13 +93,6 @@
 			frmMain.action = "/front/pay/checkOut.web";
 			frmMain.submit();
 		}
-		
-		function writeProc() {
-			
-			var frmMain = document.getElementById("frmMain");
-			frmMain.action = "/front/buy/writeProc.web";
-			frmMain.submit();
-		}
 	</script>
 
 	<!-- Google Font -->
@@ -186,17 +179,19 @@
 													<input type="hidden" name="buyList[${status.index}].price" value="${list.price}">
 												</td>
 												<td class="cart-td">
-													<fmt:formatNumber value="${list.point_value}" type="number" />
+													<span class="rate" style="margin-left: 0px !important;"><fmt:formatNumber value="${list.point_value}" type="number" /></span>포인트
 													<input type="hidden" name="buyList[${status.index}].point" value="${list.point_value}">
 												</td>
 												<td class="cart-td" data-total-point="${list.total_point}">
 													<span class="totalPointDisplay">
 														${list.format_total_point}
+														<input type="hidden" name="buyList[${status.index}].total_point_sum" value="${list.total_point}">
 													</span>
 												</td>
 												<td class="cart-td" style="font-size: 16px !important; color: #707070 !important; font-weight: bold;" data-total-price="${list.total_price}">
 													<span class="totalPriceDisplay" style="font-size: 16px !important; color: #707070 !important; font-weight: bold;">
 														${list.format_total_price}원
+														<input type="hidden" name="buyList[${status.index}].total_price_sum" value="${list.total_price}">
 													</span>
 												</td>
 											</tr>

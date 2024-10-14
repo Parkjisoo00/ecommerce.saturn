@@ -297,6 +297,9 @@ public class BasketWeb extends Common {
 				map.put("total_price_sum", basket.getTotal_price_sum());
 				map.put("total_point_sum", basket.getTotal_point_sum());
 				
+				logger.debug("개별 총합 가격" + basket.getTotal_price());
+				logger.debug("개별 총합 포인트" + basket.getTotal_point());
+				
 				responseList.add(map);
 			}
 		}

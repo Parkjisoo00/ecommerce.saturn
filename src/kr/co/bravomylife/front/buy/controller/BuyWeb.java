@@ -91,7 +91,8 @@ public class BuyWeb extends Common {
 			String finalSleName = "";	// 마지막 판매 상품명
 			
 			int totalCount = 0;			// 총 갯수
-			int totalPrice = 0;			// 총 가격
+			int totalPrice = 0;
+			// int totalPrice = 0;			// 총 가격
 			int totalPoint = 0;			// 총 포인트
 			
 			ArrayList<BuyDetailDto> listBuyDetailDto = new ArrayList<BuyDetailDto>();
@@ -108,7 +109,7 @@ public class BuyWeb extends Common {
 						
 						// 전체 상품 갯수 및 금액 그리고 구매명
 						totalCount += buyDetailListDto.getBuyList().get(loop).getCount();
-						totalPrice += buyDetailListDto.getBuyList().get(loop).getCount() * buyDetailListDto.getBuyList().get(loop).getPrice();
+						// totalPrice += buyDetailListDto.getBuyList().get(loop).getCount() * buyDetailListDto.getBuyList().get(loop).getPrice();
 						totalPoint += buyDetailListDto.getBuyList().get(loop).getCount() * buyDetailListDto.getBuyList().get(loop).getPoint();
 						finalSleName = buyDetailListDto.getBuyList().get(loop).getSle_nm();
 					}

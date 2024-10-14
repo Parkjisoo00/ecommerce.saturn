@@ -20,6 +20,11 @@
  */
 package kr.co.bravomylife.front.pay.controller;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.inject.Inject;
@@ -34,6 +39,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.front.basket.controller.BasketWeb;
+import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
+import kr.co.bravomylife.front.buy.dto.BuyDetailListDto;
 import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.member.dto.MemberDto;
 import kr.co.bravomylife.front.member.service.MemberSrvc;
@@ -86,19 +93,17 @@ public class PayWeb extends Common {
 	}
 	
 	@RequestMapping(value = "/front/pay/checkOut.web")
-	public ModelAndView checkOut(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+	public ModelAndView checkOut(BuyDetailListDto buyDetailListDto, HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
 			
-			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
-			SKwithAES aes		= new SKwithAES(staticKey);
+			String staticKey = staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes = new SKwithAES(staticKey);
 			
 			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
-			
 			MemberDto _memberDto = memberSrvc.select(memberDto);
-			
 			_memberDto.setEmail(aes.decode(_memberDto.getEmail()));
 			_memberDto.setMbr_nm(aes.decode(_memberDto.getMbr_nm()));
 			_memberDto.setPhone(aes.decode(_memberDto.getPhone()));
@@ -106,14 +111,58 @@ public class PayWeb extends Common {
 			_memberDto.setAddr1(aes.decode(_memberDto.getAddr1()));
 			_memberDto.setAddr2(aes.decode(_memberDto.getAddr2()));
 			
+			DecimalFormat formatter = new DecimalFormat("#,###");
+			
+			List<BuyDetailDto> _buyDetailListDto = buyDetailListDto.getBuyList();
+			List<Map<String, Object>> responseList = new ArrayList<>();
+			
+			int totalPriceSum = 0;
+			int totalPointSum = 0;
+			
+			String formatTotalPriceSum = "";
+			String formatTotalPointSum = "";
+			
+			for (BuyDetailDto detail : _buyDetailListDto) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("seq_sle", detail.getSeq_sle());
+				map.put("sle_nm", detail.getSle_nm());
+				map.put("price", detail.getPrice());
+				map.put("count", detail.getCount());
+				map.put("point", detail.getPoint());
+				map.put("total_price_sum", detail.getTotal_price_sum());
+				map.put("total_point_sum", detail.getTotal_point_sum());
+				
+				totalPriceSum += detail.getTotal_price_sum();
+				totalPointSum += detail.getTotal_point_sum();
+				
+				logger.debug("판매 일려번호" + detail.getSeq_sle());
+				logger.debug("판매명" + detail.getSle_nm());
+				logger.debug("판매 가격" + detail.getPrice());
+				logger.debug("판매 개수" + detail.getCount());
+				logger.debug("포인트" + detail.getPoint());
+				
+				
+				logger.debug("금액 총합" + totalPriceSum);
+				logger.debug("포인트 총합" + totalPointSum);
+				
+				formatTotalPriceSum = formatter.format(totalPriceSum);
+				formatTotalPointSum = formatter.format(totalPointSum);
+				
+				responseList.add(map);
+			}
+			
+			
+			
+			mav.addObject("buyList", responseList);
+			mav.addObject("formatTotalPriceSum", formatTotalPriceSum);
+			mav.addObject("formatTotalPointSum", formatTotalPointSum);
+			mav.addObject("totalPriceSum", totalPriceSum);
+			mav.addObject("totalPointSum", totalPointSum);
 			mav.addObject("memberDto", _memberDto);
 			mav.setViewName("front/pay/checkOut");
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".checkOut()] " + e.getMessage(), e);
 		}
-		finally {}
-		
 		return mav;
 	}
 }
