@@ -13,6 +13,9 @@
 
 <head>
 	<%@ include file="/include/common/header.jsp" %>
+	<style>
+	
+	</style>
 	<script>
 	
 	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
@@ -78,6 +81,14 @@
 				</div>
 			</div>	
 			<br/>
+			<br/>
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="checkout__form__input">
+				<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">
+					<img src="/img/news/${boardDto.file_save}" alt="첨부 이미지" style="width: 300px; height: auto;" />
+				</div>
+			</div>
+			<br/>
 			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="checkout__form__input">
 					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">내용 <span></span></p>
@@ -85,16 +96,6 @@
 				</div>
 			</div>
 			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-				<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">
-					
-						<img src="/img/news/${boardDto.file_save}" alt="첨부 이미지" style="max-width: 100%; height: auto;" />
-					<c:if test="${boardDto.file_orig != ''}">
-						<a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});">첨부파일 다운로드</a>
-					</c:if>
-				</div>
-			</div>
 			<br/>
 			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="checkout__form__input">

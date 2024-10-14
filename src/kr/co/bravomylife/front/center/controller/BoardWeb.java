@@ -504,8 +504,7 @@ public class BoardWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			
-			
+
 			/* 로그인 세션 체크가 정상적으로 동작하지 않던 코드 수정 */
 			/*이 주석을 풀시 이 코드를 사용하거나 아래의 코드 하나만을 사용해야 됨 */
 			
@@ -523,34 +522,10 @@ public class BoardWeb extends Common {
 				
 				if (pagingDto.getCd_bbs_type() == 3) {
 					pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
-				
-				PagingListDto pagingListDto = boardSrvc.list(pagingDto);
-				
-				mav.addObject("paging"	, pagingListDto.getPaging());
-				mav.addObject("list"	, pagingListDto.getList());
-				}
-				
-				
-				if (pagingDto.getCd_bbs_type() == 1) {
-					mav.setViewName("front/center/board/notice/list");
-				}
-				else if (pagingDto.getCd_bbs_type() == 2) {
-					mav.setViewName("front/center/board/faq/list");
-				}
-				else if (pagingDto.getCd_bbs_type() == 3) {
-					mav.setViewName("front/center/board/question/list");
-				}
-				else if (pagingDto.getCd_bbs_type() == 4) {
-					mav.setViewName("front/center/board/news/list");
-				}
-				
-				else {
-					request.setAttribute("redirect"	, "/");
-					mav.setViewName("forward:/servlet/result.web");
+
 				}
 				
 			}
-			
 			
 			logger.debug("게시판 타입 확인" + " + " + pagingDto.getCd_bbs_type());
 			logger.debug("세션 SEQ_MBR 확인" + " + " + getSession(request, "SEQ_MBR"));
@@ -594,7 +569,7 @@ public class BoardWeb extends Common {
 		
 		return mav;
 	}
-	
+
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]

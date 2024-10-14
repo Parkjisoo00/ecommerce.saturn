@@ -363,7 +363,7 @@ public class BoardWeb extends Common{
 				
 				pathBase		= "D:/Business/Eclipse/com.github.ecommerce7th.saturn/WebContent/img/news";
 				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
-				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.image"	, "[UNDEFINED]");
+				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 				
 			}
 			else {
