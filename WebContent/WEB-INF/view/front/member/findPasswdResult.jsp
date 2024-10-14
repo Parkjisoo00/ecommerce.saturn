@@ -31,10 +31,10 @@
 			<form action="/front/member/findPasswdResultProc.web" method="POST" id="frmMain" class="checkout__form">
 			<input type="hidden" id="email" name="email" value="${email}" />
 			<input type="hidden" id="passwd_temp" name="passwd_temp" value="${passwd_temp}" />
-				<div class="row3">
-					<div class="col-lg-12">
+				<div class="row" style="display: flex; justify-content: center; align-items: center;">
+					<div class="col-lg-8">
 						<h5 >회원 비밀번호 재설정</h5>
-						<div class="row3">
+						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12">
 								<div class="checkout__form__input">
 									<input type="text" id="passwd_input" name="passwd_input" placeholder="임시 비밀번호 입력" required autocomplete="off" />
@@ -51,7 +51,7 @@
 									<input type="password" id="newPasswd_" name="newPasswd_" placeholder="새비밀번호 확인" required autocomplete="off" />
 								</div>
 							</div>
-							<div class="col-lg-12 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
+							<div class="col-lg-12 col-md-12 col-sm-12">
 								<div class="checkout__form__input">
 									<input type="button" value="비밀번호 변경" id="updatePasswd" onClick="resetPasswd()"/>
 								</div>

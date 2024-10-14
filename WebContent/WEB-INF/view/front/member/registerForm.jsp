@@ -149,12 +149,12 @@
 	<!-- Breadcrumb Begin -->
 	<!-- Breadcrumb End -->
 
-		 <!-- Checkout Section Begin -->
+	<!-- Register Section Begin -->
 		<section class="checkout spad">
 			<div class="container">
 				<form action="/front/member/registerProc.web" class="checkout__form" id="frmMain" method="POST">
 				<input type="hidden" name="phone" id="phone" />
-					<div class="row"style="display: flex; justify-content: center; align-items: center;">
+					<div class="row" style="display: flex; justify-content: center; align-items: center;">
 						<div class="col-lg-8">
 							<h5>회원가입</h5>
 							<div class="row">
@@ -192,14 +192,14 @@
 									</div>
 								</div>
 								
-								<div class="col-lg-6 col-md-6 col-sm-6">
+								<div class="col-lg-7 col-md-6 col-sm-6">
 									<div class="checkout__form__input">
 										<p>생년월일 <span>*</span></p>
 										<input type="text" id="age" name="age" placeholder="생년월일" maxlength="10" style="width: 100%;" required autocomplete="off"/>
 									</div>
 								</div>
 								
-								<div class="col-lg-6 col-md-6 col-sm-6">
+								<div class="col-lg-5 col-md-6 col-sm-6">
 									<div class="gender-option">
 										<p>성별 <span>*</span></p>
 										<div class="checkbox_container" style="display: flex; gap: 10px;">
@@ -234,11 +234,11 @@
 										<p>주소 <span>*</span></p>
 										<input type="text" id="post" name="post" size="5" autocomplete="off"/>
 
-											<label for="addr1">도로명</label>
+											<p><label for="addr1">도로명 <span>*</span></label></p>
 											<input type="text"	id="addr1"	name="addr1" size="40" autocomplete="off"/>
 											<span id="guide" style="color:#999; display:none"></span>
 											
-											<label for="addr2">상세</label>
+											<p><label for="addr2">상세 <span>*</span></label></p>
 											<input type="text"	id="addr2"	name="addr2" size="20" placeholder="상세 주소" autocomplete="off"/>
 											
 											<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
@@ -304,7 +304,7 @@
 				</form>
 			</div>
 		</section>
-		<!-- Checkout Section End -->
+	<!-- Register Section End -->
 	
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->

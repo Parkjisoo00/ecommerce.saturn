@@ -29,58 +29,58 @@
 	<section class="checkout spad">
 		<div class="container">
 			<form action="/front/member/findPasswProc.web" id="frmMain" method="POST" class="checkout__form">
-				<div class="row3">
-					<div class="col-lg-12">
+				<div class="row" style="display: flex; justify-content: center; align-items: center;">
+					<div class="col-lg-8" style="flex: 0 0 40% !important;">
 						<h5 >회원 비밀번호 찾기</h5>
-						<div class="row3">
-							<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="row">
+							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
 									<input type="text" id="email" name="email" placeholder="이메일" required autocomplete="off"/>
 								</div>
 							</div>
-							<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
 									<input type="text" id="mbr_nm" name="mbr_nm" placeholder="이름" required autocomplete="off"/>
 								</div>
 							</div>
-							<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
-									<p>핸드폰 번호 <span>*</span></p>
+									<p>핸드폰 번호</p>
 									<div style="display: flex; gap: 5px;">
-										<input value="휴" type="text" id="phone1" name="phone1"
+										<input type="text" id="phone1" name="phone1"
 											maxlength="3" required
 											oninput="this.value = this.value.replace(/[^0-9.]/g, '')" autocomplete="off"/>
 										-
-										<input value="대" type="text" id="phone2" name="phone2"
+										<input type="text" id="phone2" name="phone2"
 											maxlength="4" required
 											oninput="this.value = this.value.replace(/[^0-9.]/g, '')" autocomplete="off"/>
 										-
-										<input value="폰" type="text" id="phone3" name="phone3"
+										<input type="text" id="phone3" name="phone3"
 											maxlength="4" required
 											oninput="this.value = this.value.replace(/[^0-9.]/g, '')" autocomplete="off"/>
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
 									<input type="submit" value="휴대폰 인증"id = ""/>
 								</div>
 								<hr style="border: 1px solid #ccc; margin: 0;">
 								<br>
 							</div>
-							<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
 									<input type="submit" value="임시 비밀번호 발송"id = "findPasswd"/>
 								</div>
 								<hr style="border: 1px solid #ccc; margin: 0;">
 								<br>
 							</div>
-							<div class="col-lg-6 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
+							<div class="col-lg-6 col-md-6 col-sm-6" style="padding-left: 8px; padding-right: 8px;">
 								<div class="checkout__form__input">
 									<input type="button" value="아이디 찾기" id="findId" onClick="moveToFindId();"/>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
+							<div class="col-lg-6 col-md-8 col-sm-6" style="padding-left: 8px; padding-right: 8px;">
 								<div class="checkout__form__input">
 									<input type="button" value="회원가입" id="registerId" onClick="goToRegister();"/>
 								</div>

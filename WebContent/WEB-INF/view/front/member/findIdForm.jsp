@@ -28,16 +28,16 @@
 	<section class="checkout spad">
 		<div class="container">
 			<form action="/front/member/findIdResult.web" id="frmMain" method="POST" class="checkout__form">
-				<div class="row3">
-					<div class="col-lg-12">
+				<div class="row" style="display: flex; justify-content: center; align-items: center;">
+					<div class="col-lg-8">
 						<h5 >회원 아이디 찾기</h5>
-						<div class="row3">
-							<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="row">
+							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
 									<input type="text" id="mbr_nm" name="mbr_nm" placeholder="성명" required autocomplete="off"/>
 								</div>
 							</div>
-							<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
 									<input type="submit" value="아이디 찾기" id = "findId"/>
 									<span>${findId.email}</span>
@@ -45,12 +45,12 @@
 								<hr style="border: 1px solid #ccc; margin: 0;">
 								<br>
 							</div>
-							<div class="col-lg-6 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
+							<div class="col-lg-6 col-md-6 col-sm-6" style="padding-left: 8px; padding-right: 8px;">
 								<div class="checkout__form__input">
 									<input type="button" value="비밀번호 찾기" id="findPasswd" onClick="moveToFindPasswd();"/>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-12 col-sm-12" style="padding-left: 8px; padding-right: 8px;">
+							<div class="col-lg-6 col-md-6 col-sm-6" style="padding-left: 8px; padding-right: 8px;">
 								<div class="checkout__form__input">
 									<input type="button" value="회원가입" id="registerId" onClick="goToRegister();"/>
 								</div>
