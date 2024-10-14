@@ -2,6 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.member.Member">
 
+	<update id="updateMaster" parameterType="memberDto">
+		UPDATE
+			TB_MBR_MST
+		SET
+			DT_UPT	= SYSDATE
+			<if test="phone != null and phone != ''">
+			, PHONE	= #{phone}
+			</if>
+			, UPDATER = #{updater}
+		WHERE
+			SEQ_MBR	= #{seq_mbr}
+	</update>
+	
+	<update id="updateDetail" parameterType="memberDto">
+		UPDATE
+			TB_MBR_DTL
+		SET
+			DT_UPT		= SYSDATE
+			, UPDATER	= #{updater}
+			<if test="post != null and post != ''">
+			, POST		= #{post}
+			</if>
+			<if test="addr1 != null and addr1 != ''">
+			, ADDR1		= #{addr1}
+			</if>
+			<if test="addr2 != null and addr2 != ''">
+			, ADDR2		= #{addr2}
+			</if>
+			<if test="flg_sms != null and flg_sms != ''">
+			, FLG_SMS	= #{flg_sms}
+			, DT_SMS	= SYSDATE
+			</if>
+			<if test="flg_email != null and flg_email != ''">
+			, FLG_EMAIL	= #{flg_email}
+			, DT_EMAIL	= SYSDATE
+			</if>
+		WHERE
+			SEQ_MBR		= #{seq_mbr}
+	</update>
+
 	<update id="updatePasswd" parameterType="memberDto">
 		UPDATE
 			TB_MBR_MST

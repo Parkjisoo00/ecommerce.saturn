@@ -154,7 +154,7 @@
 			<div class="container">
 				<form action="/front/member/registerProc.web" class="checkout__form" id="frmMain" method="POST">
 				<input type="hidden" name="phone" id="phone" />
-					<div class="row">
+					<div class="row"style="display: flex; justify-content: center; align-items: center;">
 						<div class="col-lg-8">
 							<h5>회원가입</h5>
 							<div class="row">

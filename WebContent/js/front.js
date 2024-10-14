@@ -1,3 +1,39 @@
+
+function checkModify() {
+	
+	var isSubmit	= true;
+	var frmMain		= document.getElementById("frmMain");
+	
+	// 휴대폰번호 확인(3자리-4자리-4자리)
+	var regExpPhone = /^\d{3}-\d{4}-\d{4}$/;
+	var phone = document.getElementById("phone1").value + "-" + document.getElementById("phone2").value + "-" + document.getElementById("phone3").value;
+	if (!regExpPhone.test(phone)) {
+		alert("연락처를 확인해 주세요!");
+		isSubmit = false;
+	}
+	
+	if (document.getElementById("phone1").value == ""
+			|| document.getElementById("phone2").value == ""
+			|| document.getElementById("phone3").value == ""
+			|| document.getElementById("post").value == ""
+			|| document.getElementById("addr1").value == ""
+			|| document.getElementById("addr2").value == "") {
+		alert("필수 항목을 입력하세요!");
+		isSubmit = false;
+	}
+	
+	if (isSubmit) {
+	
+		document.getElementById("phone").value = 
+			document.getElementById("phone1").value
+			+ "-" + document.getElementById("phone2").value
+			+ "-" + document.getElementById("phone3").value;
+			
+		frmMain.action = "/front/member/modifyProc.web";
+		frmMain.submit();
+	}
+}
+
 function execDaumPostcode() {
 	
 	var width = 500; //팝업의 너비

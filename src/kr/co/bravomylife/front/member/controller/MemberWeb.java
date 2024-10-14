@@ -80,6 +80,109 @@ public class MemberWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
+	 * @since 2024-10-14
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/member/modifyForm.web")
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+					
+			// 대칭키 암호화(AES-256)
+						String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+						SKwithAES aes		= new SKwithAES(staticKey);
+						
+						memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+						
+						MemberDto _memberDto = memberSrvc.select(memberDto);
+						
+						_memberDto.setEmail(aes.decode(_memberDto.getEmail()));
+						_memberDto.setMbr_nm(aes.decode(_memberDto.getMbr_nm()));
+						_memberDto.setPhone(aes.decode(_memberDto.getPhone()));
+						_memberDto.setPost(aes.decode(_memberDto.getPost()));
+						_memberDto.setAddr1(aes.decode(_memberDto.getAddr1()));
+						_memberDto.setAddr2(aes.decode(_memberDto.getAddr2()));
+						
+						mav.addObject("memberDto", _memberDto);
+						
+			mav.setViewName("front/member/modifyForm");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".main()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-14
+	 * <p>DESCRIPTION: 마이페이지 수정 처리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	@RequestMapping(value = "/front/member/modifyProc.web")
+	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto, String _hobbys, String _flg_sms, String _flg_email) {
+
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			int seq_mbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
+			memberDto.setSeq_mbr(seq_mbr);
+			memberDto.setUpdater(seq_mbr);
+			
+			// SMS 또는 Email 수신 동의 정보가 없을 경우 기본값(N)로 설정
+			if (memberDto.getFlg_email() == null || memberDto.getFlg_email().equals("")) memberDto.setFlg_email("N");
+			if (memberDto.getFlg_sms() == null || memberDto.getFlg_sms().equals("")) memberDto.setFlg_sms("N");
+			
+			// 입력한 정보와 기존 정보가 같으면 업데이트를 안 하고 다르면 입력한 정보로 업데이트(시간 포함)
+			if (memberDto.getFlg_email().equals(_flg_email)) memberDto.setFlg_email("");
+			if (memberDto.getFlg_sms().equals(_flg_sms)) memberDto.setFlg_sms("");
+			
+			
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+			
+			memberDto.setPhone(aes.encode(memberDto.getPhone()));
+			memberDto.setPost(aes.encode(memberDto.getPost()));
+			memberDto.setAddr1(aes.encode(memberDto.getAddr1()));
+			memberDto.setAddr2(aes.encode(memberDto.getAddr2()));
+			
+			if (memberSrvc.update(memberDto)) {
+				request.setAttribute("script"	, "alert('수정되었습니다.');");
+				request.setAttribute("redirect"	, "/front/myPage/");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
 	 * @since 2024-10-10
 	 * <p>DESCRIPTION: 임시 비밀번호 확인 및 처리 </p>
 	 * <p>IMPORTANT:</p>
