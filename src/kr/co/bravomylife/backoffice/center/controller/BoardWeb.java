@@ -291,6 +291,9 @@ public class BoardWeb extends Common{
 				mav.addObject("boardDto", _boardDto);
 				mav.setViewName("backoffice/center/board/question/writeForm");
 			}
+			else if (boardDto.getCd_bbs_type() == 4) {
+				mav.setViewName("backoffice/center/board/news/writeForm");
+			}
 			else {
 				request.setAttribute("redirect"	, "/");
 				mav.setViewName("forward:/servlet/result.web");
@@ -328,6 +331,12 @@ public class BoardWeb extends Common{
 		
 		try {
 			
+			String contents = boardDto.getContent();
+			
+			contents = contents.replace("<p>", "").replace("</p>", "");
+			
+			logger.debug("작성 내용 확인" + " = " + contents);
+			
 			logger.debug("++++++++++++++++++++++++++++++++++++++++++++++++++" );
 			
 			// boardDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
@@ -335,9 +344,38 @@ public class BoardWeb extends Common{
 			// **************************
 			// For Board File
 			// **************************
-			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]") + "/bbs/";
-			String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
-			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.image"	, "[UNDEFINED]");
+			String pathBase = null;
+			String maxSize = null;
+			String allowedExt = null;
+
+			
+			if (boardDto.getCd_bbs_type() == 1) {
+				pathBase		= dynamicProperties.getMessage("backoffice.upload.path_notice", "[UNDEFINED]");
+				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
+				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+			}
+			else if (boardDto.getCd_bbs_type() == 3) {
+				pathBase		= dynamicProperties.getMessage("backoffice.upload.path_question", "[UNDEFINED]");
+				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
+				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+			}
+			else if (boardDto.getCd_bbs_type() == 4) {
+				
+				pathBase		= "D:/Business/Eclipse/com.github.ecommerce7th.saturn/WebContent/img/news";
+				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
+				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.image"	, "[UNDEFINED]");
+				
+			}
+			else {
+				pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
+				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
+				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+			}
+			
+			
+			//String pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
+			//String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
+			//String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 			
 			int countFile = 0;
 			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
@@ -380,7 +418,7 @@ public class BoardWeb extends Common{
 				*/
 				
 				boardDto.setFile_orig(fileNameSrc);
-				boardDto.setFile_save("bbs\\" + fileNameSve);
+				boardDto.setFile_save(fileNameSve);
 				
 				if (boardDto.getCd_bbs_type() == 3) {
 					// 답변글(상위 일련번호에 문의글 번호를 저장)
@@ -450,6 +488,9 @@ public class BoardWeb extends Common{
 			else if (pagingDto.getCd_bbs_type() == 3) {
 				mav.setViewName("backoffice/center/board/question/list");
 			}
+			else if (pagingDto.getCd_bbs_type() == 4) {
+				mav.setViewName("backoffice/center/board/news/list");
+			}
 			else {
 				request.setAttribute("redirect"	, "/");
 				mav.setViewName("forward:/servlet/result.web");
@@ -506,6 +547,9 @@ public class BoardWeb extends Common{
 					}
 					
 					mav.setViewName("backoffice/center/board/question/view");
+				}
+				else if (boardDto.getCd_bbs_type() == 4) {
+					mav.setViewName("backoffice/center/board/news/view");
 				}
 				else {
 					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");

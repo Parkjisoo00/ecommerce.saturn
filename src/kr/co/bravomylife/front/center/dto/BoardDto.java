@@ -44,6 +44,7 @@ public class BoardDto {
 	private int readed			= 0;	// 조회수
 	private String file_save	= "";	// 저장 파일명
 	private String file_orig	= "";	// 원본 파일명
+	private String img					= "";
 	private String extension	= "";	// 원본 파일명 확장자
 	private String dt_reg		= "";	// 등록 일시
 	private int register		= 0;	// 등록자
@@ -51,6 +52,12 @@ public class BoardDto {
 	private int updater			= 0;	// 수정자
 	
 	
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	public int getRnum() {
 		return rnum;
 	}

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <!-- JSP 파일이 위치한 경로 입력 -->
-<%@ page info="/WEB-INF/view/front/sale/function_list.jsp" %>
+<%@ page info="/WEB-INF/view/front/center/board/news/list.jsp" %>
 <!-- 이 부분은 필요에 따라 추가하는 것이 맞으므로 개별 판단에 따라 추가하거나 삭제해도 되고 사용하지 않더라도 그대로 넣어둬도 무방하다고 판단 -->
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
@@ -10,9 +10,40 @@
 
 <head>
 	<%@ include file="/include/common/header.jsp" %>
+	<style></style>
+</head>
+	<%@ include file="/include/common/header.jsp" %>
 	<script>
 	
-	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
+	function goView(value) {
+
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("seq_bbs").value = value;
+		
+		frmMain.action="/front/center/board/view.web";
+		frmMain.submit();
+	}
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("searchWord").value = "";
+		document.getElementById("currentPage").value = "1";
+		document.getElementById("cd_bbs_type").value = value;
+		
+		frmMain.action = "/front/center/board/list.web";
+		frmMain.submit();
+	}
+	function goPage(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("currentPage").value = value;
+		
+		frmMain.action="/front/center/board/list.web";
+		frmMain.submit();
+	}
 	
 	</script>
 
@@ -25,6 +56,10 @@
 
 <body>
 <form id="frmMain" method="POST">
+<input type="hidden" name="seq_bbs"		id="seq_bbs" />
+<input type="hidden" name="a"		id="a" value="${paging.register}"/>
+<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
+<input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -38,37 +73,74 @@
 	<!-- Breadcrumb Begin -->
 	<!-- Breadcrumb End -->
 
-	<section class="shop-cart spad">
+	<section class="shop spad">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<h6 class="lowgnb-title" style="padding-bottom: 20px; text-align: left; font-size: 24px;">새소식</h6>
-						<div class="shop__cart__table" style="border: 1px solid #dbdbdb; border-radius: 4px;">
-							<table id="news" class="cart-table">
-								<tbody>
+			<div class="col-lg-12" style="padding: 0 !important;">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="checkout__form__input">
+					<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">새소식</h6>
+						<h6 class="coupon__link" style="text-align: center; letter-spacing: 1.5px; border: none"></h6>
+						<div class="brdSearchArea">
+						<div style="display: flex; justify-content: flex-end;margin-bottom: 10px;">
+							<select name="searchKey">
+								<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
+								<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
+								<option value="title+contents"<c:if test="${paging.searchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
+							</select>
+							<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> 
+							<input type="submit" value="검색"/>
+						</div>
+						
+						<div class="row">
+						<div class="col-lg-12 col-md-12">
+							<div class="brdInfo">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</div>
+								<table class="headTop_01" style=" margin-left: auto; margin-right: auto; width: 100%">
 									<tr>
-										<td style="text-align: center;">1</td>
-										<td>첫 번째 글 제목</td>
-										<td style="text-align: center;"><img src="img/Ingredient/MSM.jpg" alt="첫 번째 이미지" style="max-width: 150px; margin-right: -100px;"></td>
+										<th style="width: 5%">NO</th>
+										<th style="text-align: left; padding-left: 100px;">제목</th>
+										<th style="width: 15%">등록일</th>
 									</tr>
-									<tr>
-										<td style="text-align: center;">2</td>
-										<td>두 번째 글 제목</td>
-										<td style="text-align: center;"><img src="img/Ingredient/MSM.jpg" alt="두 번째 이미지" style="max-width: 150px; margin-right: -100px;"></td>
-									</tr>
-									<tr>
-										<td style="text-align: center;">3</td>
-										<td>세 번째 글 제목</td>
-										<td style="text-align: center;"><img src="img/Ingredient/MSM.jpg" alt="세 번째 이미지" style="max-width: 150px; margin-right: -100px;"></td>
-									</tr>
-								</tbody>
-							</table>
+									<c:choose>
+										<c:when test="${empty list}">
+											<tr>
+												<td colspan="6">등록된 글이 없습니다.</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<c:forEach items="${list}" var="list">
+												<tr>
+													<td>
+														${list.rnum}
+													</td>
+													<td style="text-align: left; padding-left: 100px;">
+														<a href="javascript:goView(${list.seq_bbs});">
+															${list.title}
+														</a>
+													</td>
+													<td>
+														${list.dt_reg}
+													</td>
+												</tr>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+								</table>
+								<div class="row">
+									<br/>
+									<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;" >
+										<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+									</div>
+									<br/>
+									<br/>
+									<br/>
+								</div>
+							</div>
+						</div>
+						</div>
 						</div>
 				</div>
-				<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
-					<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
-				</div>
 			</div>
+		</div>
 		</div>
 	</section>
 	<!-- Shop Cart Section End -->

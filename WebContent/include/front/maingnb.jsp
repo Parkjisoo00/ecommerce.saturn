@@ -113,7 +113,7 @@
 					<li><a href="#">맞춤 건강 추천</a></li>
 					<li><a href="#">안심 조회 서비스</a></li>
 					<li><a href="#">건강 정보</a></li>
-					<li><a href="#">새소식</a></li>
+					<li><a href="javascript:goList(4)">새소식</a></li>
 					<li><a href="/front/hpSur/ingredient.web">성분 사전</a></li>
 				</ul>
 			</li>
@@ -131,6 +131,7 @@
 					<li><a href="javascript:consolegoList(1);" >공지사항</a></li>
 					<li><a href="javascript:consolegoList(2);" >자주 묻는 질문</a></li>
 					<li><a href="javascript:consolegoList(3);" >1대1 문의 사항</a></li>
+					<li><a href="javascript:consolegoList(4);" >새소식</a></li>
 				</ul>
 			</li>
 		</ul>

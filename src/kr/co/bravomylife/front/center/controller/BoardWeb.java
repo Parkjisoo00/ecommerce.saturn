@@ -95,8 +95,15 @@ public class BoardWeb extends Common {
 			File file = null;
 			
 			// [2018-11-05][pluto@plutozone.com][TODO-개선: 타입이 정의되어 있지 않을 경우 처리]
-			if (type.equals("BbsNotice")) boardDto.setCd_bbs_type(1);
-			else if (type.equals("BbsQuestion")) boardDto.setCd_bbs_type(3);
+			//if (type.equals("BbsNotice")) boardDto.setCd_bbs_type(1);
+			//else if (type.equals("BbsQuestion")) boardDto.setCd_bbs_type(3);
+			if ("BbsNotice".equals(type)) {
+				boardDto.setCd_bbs_type(1);
+			} else if ("BbsQuestion".equals(type)) {
+				boardDto.setCd_bbs_type(3);
+			} else if ("BbsNews".equals(type)) {
+				boardDto.setCd_bbs_type(4);
+			}
 			
 			boardDto.setSeq_bbs((int)sequence);
 			
@@ -275,6 +282,7 @@ public class BoardWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			
 			BoardDto _boardDto = boardSrvc.select(boardDto);
 			
 			mav.addObject("boardDto", _boardDto);
@@ -294,6 +302,9 @@ public class BoardWeb extends Common {
 				}
 				
 				mav.setViewName("front/center/board/question/view");
+			}
+			else if (boardDto.getCd_bbs_type() == 4) {
+				mav.setViewName("front/center/board/news/view");
 			}
 			else {
 				request.setAttribute("redirect"	, "/");
@@ -357,6 +368,7 @@ public class BoardWeb extends Common {
 			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
 			String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
 			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+			
 			
 			logger.debug("업로드 경로 확인" + pathBase);
 			
@@ -528,6 +540,9 @@ public class BoardWeb extends Common {
 				else if (pagingDto.getCd_bbs_type() == 3) {
 					mav.setViewName("front/center/board/question/list");
 				}
+				else if (pagingDto.getCd_bbs_type() == 4) {
+					mav.setViewName("front/center/board/news/list");
+				}
 				
 				else {
 					request.setAttribute("redirect"	, "/");
@@ -563,6 +578,9 @@ public class BoardWeb extends Common {
 				}
 				else if (pagingDto.getCd_bbs_type() == 3) {
 					mav.setViewName("front/center/board/question/list");
+				}
+				else if (pagingDto.getCd_bbs_type() == 4) {
+					mav.setViewName("front/center/board/news/list");
 				}
 				else {
 					request.setAttribute("redirect"	, "/");
