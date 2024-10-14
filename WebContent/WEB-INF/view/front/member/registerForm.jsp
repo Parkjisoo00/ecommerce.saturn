@@ -215,15 +215,15 @@
 										<p>연락처 <span>*</span></p>
 										<div style="display: flex; gap: 5px;">
 											<input type="text" id="phone1" name="phone1"
-												maxlength="3" required
+												maxlength="3" required style="height: 33px;"
 												oninput="this.value = this.value.replace(/[^0-9.]/g, '')" autocomplete="off"/>
 											-
 											<input type="text" id="phone2" name="phone2"
-												maxlength="4" required
+												maxlength="4" required style="height: 33px;"
 												oninput="this.value = this.value.replace(/[^0-9.]/g, '')" autocomplete="off"/>
 											-
 											<input type="text" id="phone3" name="phone3"
-												maxlength="4" required
+												maxlength="4" required style="height: 33px;"
 												oninput="this.value = this.value.replace(/[^0-9.]/g, '')" autocomplete="off"/>
 										</div>
 									</div>
