@@ -149,7 +149,7 @@
 							<div class="banner__text">
 								<span>겨울맞이 특별 할인 - 최대 50% OFF! </span>
 								<h1>이벤트</h1>
-								<a href="#">바로가기</a>
+								<a href="/front/popup/event.web">바로가기</a>
 							</div>
 						</div>
 						<div class="banner__item">
