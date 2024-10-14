@@ -10,6 +10,15 @@
 	<%@ include file="/include/common/css.jsp" %>
 	<%@ include file="/include/common/webfont.jsp" %>
 	<script type="text/javascript" src="/js/front.js"></script>
+	<style>
+	
+		@media (min-width: 1200px) {
+			.header__menu::after {width:100%;}
+		}
+		@media (min-width: 992px) {
+			.container, .container-lg, .container-md, .container-sm {max-width:800px;}
+		}
+	</style>
 </head>
 <body>
 <input type="hidden" name="phone" id="phone" />
@@ -30,7 +39,7 @@
 		<div class="container">
 			<form action="/front/member/findPasswProc.web" id="frmMain" method="POST" class="checkout__form">
 				<div class="row" style="display: flex; justify-content: center; align-items: center;">
-					<div class="col-lg-8" style="flex: 0 0 40% !important;">
+					<div class="col-lg-8">
 						<h5 >회원 비밀번호 찾기</h5>
 						<div class="row">
 							<div class="col-lg-12 col-md-6 col-sm-6">

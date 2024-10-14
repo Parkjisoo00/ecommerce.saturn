@@ -10,6 +10,15 @@
 	<%@ include file="/include/common/css.jsp" %>
 	<%@ include file="/include/common/webfont.jsp" %>
 	<script type="text/javascript" src="/js/front.js"></script>
+	<style>
+	
+		@media (min-width: 1200px) {
+			.header__menu::after {width:100%;}
+		}
+		@media (min-width: 992px) {
+			.container, .container-lg, .container-md, .container-sm {max-width:700px;}
+		}
+	</style>
 </head>
 <body>
 	<!-- Page Preloder -->
