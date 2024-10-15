@@ -72,6 +72,59 @@ public class BoardWeb extends Common {
 	BoardSrvc boardSrvc;
 	
 	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-11
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/center/board/introduce/")
+	public ModelAndView introduce(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			mav.setViewName("front/center/board/introduce/index");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".main()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-10
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/center/board/ingred/list.web")
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			mav.setViewName("front/center/board/ingred/list");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".main()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	
+	/**
 	 * @param type
 	 * @param sequence
 	 * @param model
@@ -144,6 +197,9 @@ public class BoardWeb extends Common {
 		
 		return mav;
 	}
+	
+	
+	
 	
 	/**
 	 * @param request [요청 서블릿]

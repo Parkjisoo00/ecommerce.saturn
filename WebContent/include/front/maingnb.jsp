@@ -121,7 +121,7 @@
 					<li><a href="#">안심 조회 서비스</a></li>
 					<li><a href="#">건강 정보</a></li>
 					<li><a href="javascript:goList(4)">새소식</a></li>
-					<li><a href="/front/hpSur/ingredient.web">성분 사전</a></li>
+					<li><a href="/front/center/board/ingred/list.web">성분 사전</a></li>
 				</ul>
 			</li>
 			<li style="display: inline-block; margin: 0 57px; position: relative;">
@@ -133,7 +133,8 @@
 				</ul>
 			</li>
 			<li style="display: inline-block; margin: 0 57px;">
-				<a href="/front/introduce/introduce.web" style="font-size: 18px; font-weight: bold;">소개</a>
+				<a href="/front/center/board/introduce/.web" 
+				style="font-size: 18px; font-weight: bold;">소개</a>
 				<ul class="dropdown" style="top: 100%; left: 0; list-style: none;">
 					<li><a href="javascript:consolegoList(1);" >공지사항</a></li>
 					<li><a href="javascript:consolegoList(2);" >자주 묻는 질문</a></li>

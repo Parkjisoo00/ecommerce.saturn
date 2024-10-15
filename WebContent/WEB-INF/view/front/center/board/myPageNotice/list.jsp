@@ -172,6 +172,10 @@
 									<br/>
 									<br/>
 									<br/>
+									<!-- 문의 등록 버튼 -->
+									<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center; margin-top: 30px;">
+										<a href="/front/center/board/writeForm.web?cd_bbs_type=3" class="btnBasic" style="display: inline-block; padding: 10px 20px; background-color: #c7b199; color: black; border: 1px solid #cccccc; border-radius: 10px; text-decoration: none;">문의 등록</a>
+									</div>
 								</div>
 							</div>
 						</div>
