@@ -470,6 +470,19 @@ table.headTop_pd th, table.headTop_pd td {
 /* Cart Css
 /*----------------------------------------*/
 
+.cart-div {
+	width: 80px;
+	height: 80px;
+	overflow: hidden;
+	display: inline-block;
+}
+
+.cart-img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
 .cart-btn {
 	margin-top: 20px;
 	display: inline-block;

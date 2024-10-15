@@ -20,7 +20,9 @@
  */
 package kr.co.bravomylife.front.basket.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -39,6 +41,15 @@ import kr.co.bravomylife.front.common.dto.PagingDto;
  */
 @Repository("kr.co.bravomylife.front.basket.dao.BasketDao")
 public class BasketDao extends BaseDao {
+	
+	public int removeBasket(int seqMbr, int seqSle) {
+		
+		Map<String, Object> params = new HashMap<>();
+		params.put("seq_mbr", seqMbr);
+		params.put("seq_sle", seqSle);
+		
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.basket.Basket.ajaxRemove", params);
+	}
 	
 	public int ajaxUpdate(BasketDto basketDto) {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.basket.Basket.ajaxUpdate", basketDto);

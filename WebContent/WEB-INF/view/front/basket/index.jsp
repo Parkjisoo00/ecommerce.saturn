@@ -88,11 +88,243 @@
 		}
 		
 		function checkOut() {
-						
-			var frmMain = document.getElementById("frmMain");
+			
+			var checkboxes = document.querySelectorAll('.selectItem');
+			
+			if (checkboxes.length === 0) {
+				
+				alert('장바구니에 담긴 상품이 없습니다.');
+				return;
+			}
+			
+			var selectedCount = 0;
+			
+			checkboxes.forEach((checkbox, index) => {
+				
+				var row = checkbox.closest('tr');
+				
+				if (checkbox.checked) {
+					
+					selectedCount++;
+					
+					row.querySelector('input[name*=".count"]').disabled = false;
+				} else {
+					
+					row.querySelector('input[name*=".count"]').disabled = true;
+				}
+			});
+			
+			if (selectedCount === 0) {
+				
+				alert('주문할 상품을 선택하세요.');
+				
+				checkboxes.forEach((checkbox) => {
+					
+					checkbox.closest('tr').querySelector('input[name*=".count"]').disabled = false;
+				});
+				return;
+			}
+			
+			var frmMain = document.getElementById('frmMain');
 			frmMain.action = "/front/pay/index.web";
 			frmMain.submit();
 		}
+		
+		function toTalcheckOut() {
+			
+			var checkboxes = document.querySelectorAll('.selectItem');
+			
+			if (checkboxes.length === 0) {
+				
+				alert('장바구니에 담긴 상품이 없습니다.');
+				restoreInputs();
+				return;
+			}
+			
+			checkboxes.forEach((checkbox) => {
+				
+				checkbox.checked = true;
+			});
+			
+			document.querySelectorAll('tbody tr input').forEach((input) => {
+				
+				input.disabled = false;
+			});
+			
+			updateTotal();
+			
+			const frmMain = document.getElementById('frmMain');
+			frmMain.action = "/front/pay/index.web";
+			frmMain.submit();
+		}
+		
+		function remove() {
+			
+			var checkboxes = document.querySelectorAll('.selectItem');
+			
+			if (checkboxes.length === 0) {
+				
+				alert('장바구니에 담긴 상품이 없습니다.');
+				restoreInputs();
+				return;
+			}
+			
+			var selectedCount = 0;
+			var selectedItems = [];
+			
+			checkboxes.forEach((checkbox) => {
+				
+				const row = checkbox.closest('tr');
+				const inputs = row.querySelectorAll('input');
+				
+				if (checkbox.checked) {
+					
+					selectedCount++;
+					
+					var seqSle = row.querySelector('input[name*=".seq_sle"]').value;
+					selectedItems.push({ seq_sle: seqSle });
+					
+					inputs.forEach((input) => {
+						input.disabled = false;
+					});
+				} else {
+					
+					inputs.forEach((input) => {
+						input.disabled = true;
+					});
+				}
+			});
+			
+			if (selectedCount === 0) {
+				
+				alert('삭제할 상품을 선택하세요.');
+				restoreInputs();
+				return;
+			}
+			
+			var myData = { items: selectedItems };
+			
+			$.ajax({
+				type: "POST",
+				url: "/front/basket/remove.json",
+				data: JSON.stringify(myData),
+				contentType: "application/json; charset=UTF-8",
+				
+				beforeSend: function () {
+					
+					$("#loadingSpinner").show();
+				},
+				success: function (response) {
+					
+					alert('선택된 상품이 삭제되었습니다.');
+					setTimeout(() => {
+						
+						location.reload();
+					}, 500);
+				},
+				error: function (error) {
+					
+					alert('상품 삭제 중 오류가 발생했습니다.');
+				},
+				complete: function () {
+					
+					$("#loadingSpinner").hide();
+				}
+			});
+		}
+		
+		function restoreInputs() {
+			
+			var inputs = document.querySelectorAll('tbody tr[data-seq-sle] input');
+			
+			inputs.forEach((input) => {
+				input.disabled = false;
+			});
+		}
+		
+		/*
+		$.ajax({
+			type: "POST",
+			url: "/front/basket/remove.json",
+			data: JSON.stringify(myData),
+			contentType: "application/json; charset=UTF-8",
+			success: function (response) {
+				
+				alert('선택된 상품이 삭제되었습니다.');
+				
+				var deletedItems = response.deletedItems;
+				
+				console.log("삭제된 상품 목록:", deletedItems);
+				
+				deletedItems.forEach(seqSle => {
+					
+					console.log("현재 처리 중인 seq_sle:", seqSle);
+					var row = $(`tr[data-seq-sle='${seqSle}']`).filter(function () {
+						
+						return $(this).attr('data-seq-sle') == seqSle;
+					});
+					if (row.length > 0) {
+						
+						row.remove();
+						console.log(`seq_sle=${seqSle}에 해당하는 <tr>이 삭제되었습니다.`);
+					} else {
+						
+						console.log(`seq_sle=${seqSle}에 해당하는 <tr>을 찾을 수 없습니다.`);
+					}
+				});
+				updateTotal();
+			},
+			error: function (error) {
+				alert('상품 삭제 중 오류가 발생했습니다.');
+			}
+		});
+		*/
+		
+		/*
+		function remove() {
+			
+			const checkboxes = document.querySelectorAll('.selectItem');
+			
+			if (checkboxes.length === 0) {
+				alert('장바구니에 담긴 상품이 없습니다.');
+				restoreInputs();
+				return;
+			}
+			
+			var selectedCount = 0;
+			
+			checkboxes.forEach((checkbox) => {
+				
+				var row = checkbox.closest('tr'); 
+				var inputs = row.querySelectorAll('input'); 
+				
+				if (checkbox.checked) {
+					
+					selectedCount++;
+					inputs.forEach((input) => {
+						
+						input.disabled = false;
+					});
+				} else {
+					
+					inputs.forEach((input) => {
+						
+						input.disabled = true;
+					});
+				}
+			});
+			
+			if (selectedCount === 0) {
+				alert('삭제할 상품을 선택하세요.');
+				restoreInputs();
+				return;
+			}
+			
+			var frmMain = document.getElementById('frmMain');
+			frmMain.action = "/front/basket/remove.web";
+			frmMain.submit();
+		}
+		*/
 	</script>
 
 	<!-- Google Font -->
@@ -155,13 +387,13 @@
 											<tbody>
 											<tr style="border: 0;" data-seq-sle="${list.seq_sle}">
 												<td class="cart-td">
-													<input type="checkbox" class="selectItem" checked/>
+													<input style="background: white !important;" type="checkbox" class="selectItem" checked/>
 												</td>
 												<td class="cart-td" style="text-align: center; vertical-align: middle;">
 													<input type="hidden" name="buyList[${status.index}].seq_sle" value="${list.seq_sle}" />
-													<div class="cart-div">
+													<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden; display: inline-block;">
 														<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
-															<img src="${list.img}" class="cart-img">
+															<img class="cart-img" src="${list.img}" class="cart-img">
 														</a>
 													</div>
 												</td>
@@ -170,8 +402,8 @@
 													<input type="hidden" name="buyList[${status.index}].sle_nm" value="${list.sle_nm}">
 												</td>
 												<td class="cart-td">
-													<div class="pro-qty" style="border: 1.5px solid #c4cdd5;">
-														<input type="text" class="quantityCart" name="buyList[${status.index}].count" value="${list.count}">
+													<div class="pro-qty" style="border: 1.5px solid #c4cdd5; background: white !important;">
+														<input style="background: white !important;" type="text" class="quantityCart" name="buyList[${status.index}].count" value="${list.count}">
 													</div>
 												</td>
 												<td class="cart-td">
@@ -179,14 +411,12 @@
 													<input type="hidden" name="buyList[${status.index}].price" value="${list.price}">
 												</td>
 												<td class="cart-td">
-													<span class="rate" style="margin-left: 0px !important;"><fmt:formatNumber value="${list.point_value}" type="number" /></span>포인트
+													<span style="color: #346aff !important;"><fmt:formatNumber value="${list.point_value}" type="number" /></span>포인트
 													<input type="hidden" name="buyList[${status.index}].point" value="${list.point_value}">
 												</td>
 												<td class="cart-td" data-total-point="${list.total_point}">
-													<span class="totalPointDisplay">
-														${list.format_total_point}
-														<input type="hidden" name="buyList[${status.index}].total_point_sum" value="${list.total_point}">
-													</span>
+													<span class="totalPointDisplay" style="color: #346aff !important; font-size: 13px !important; font-weight: bold !important;">${list.format_total_point}</span>포인트
+													<input type="hidden" name="buyList[${status.index}].total_point_sum" value="${list.total_point}">
 												</td>
 												<td class="cart-td" style="font-size: 16px !important; color: #707070 !important; font-weight: bold;" data-total-price="${list.total_price}">
 													<span class="totalPriceDisplay" style="font-size: 16px !important; color: #707070 !important; font-weight: bold;">
@@ -226,15 +456,18 @@
 					</div>
 					<div style="display: flex; justify-content: flex-end;">
 						<div>
-							<a href="#" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">선택 상품 삭제</a>
-							<a href="#" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">선택 상품 주문</a>
-							<a href="javascript:checkOut();" class="cart-btn" style="background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;">전체 상품 주문</a>
+							<a href="javascript:remove()" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">선택 상품 삭제</a>
+							<a href="javascript:checkOut()" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">선택 상품 주문</a>
+							<a href="javascript:toTalcheckOut();" class="cart-btn" style="background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;">전체 상품 주문</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+<div id="loadingSpinner" style=" display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">
+	<img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." style="width: 50px; height: 50px;">
+</div>
 	<!-- Shop Cart Section End -->
 
 	<!-- Instagram Begin -->
@@ -251,8 +484,8 @@
 <script>
 	document.addEventListener('DOMContentLoaded', function () {
 		
-		const selectAllCheckbox = document.getElementById('selectAll');
-		const itemCheckboxes = document.querySelectorAll('.selectItem');
+		var selectAllCheckbox = document.getElementById('selectAll');
+		var itemCheckboxes = document.querySelectorAll('.selectItem');
 		
 		selectAllCheckbox.addEventListener('change', function (e) {
 			
@@ -272,25 +505,27 @@
 	
 	function updateTotal() {
 		
-		let totalPrice = 0;
-		let totalPoints = 0;
-		let totalItems = 0;
+		var totalPrice = 0;
+		var totalPoints = 0;
+		var totalItems = 0;
 		
 		document.querySelectorAll('.selectItem:checked').forEach(function (checkbox) {
 			
-			const priceElement = checkbox.closest('tr').querySelector('td[data-total-price]');
-			const pointElement = checkbox.closest('tr').querySelector('td[data-total-point]');
-		
-			const itemPrice = parseInt(priceElement.getAttribute('data-total-price')) || 0;
-			const itemPoints = parseInt(pointElement.getAttribute('data-total-point')) || 0;
-		
+			var row = checkbox.closest('tr');
+			
+			var priceElement = row.querySelector('td[data-total-price]');
+			var pointElement = row.querySelector('td[data-total-point]');
+			
+			var itemPrice = parseInt(priceElement.getAttribute('data-total-price')) || 0;
+			var itemPoints = parseInt(pointElement.getAttribute('data-total-point')) || 0;
+			
 			totalPrice += itemPrice;
 			totalPoints += itemPoints;
 			totalItems++;
 		});
 		
-		document.getElementById('totalPrice').innerText = totalPrice.toLocaleString();
-		document.getElementById('totalPriceFinal').innerText = totalPrice.toLocaleString();
+		document.getElementById('totalPrice').innerText = totalPrice.toLocaleString() + "원";
+		document.getElementById('totalPriceFinal').innerText = totalPrice.toLocaleString() + "원";
 		document.getElementById('totalPoints').innerText = totalPoints.toLocaleString();
 		document.getElementById('totalItems').innerText = totalItems;
 	}
@@ -340,7 +575,7 @@
 				var newValue = parseInt($(this).val());
 				
 				if (!isNaN(newValue) && newValue >= 1) {
-					
+				
 					sendValueToServer(newValue, seq_sle);
 					console.log(`수량 변경: ${newValue}, 상품 번호: ${seq_sle}`);
 				} else {
@@ -365,52 +600,24 @@
 					
 					var resArray = Array.isArray(res) ? res : [res];
 					
-					if (resArray.length > 0) {
+					resArray.forEach((item) => {
 						
-						var summary = resArray[0];
-						
-						$('#totalItems').text(summary.seq_sle_count);
-						var formattedTotalPrice = new Intl.NumberFormat().format(summary.total_price_sum) + "원";
-						$('#totalPrice').text(formattedTotalPrice);
-						$('#totalPriceFinal').text(formattedTotalPrice);
-						
-						var formattedTotalPoint = new Intl.NumberFormat().format(summary.total_point_sum);
-						$('#totalPoints').text(formattedTotalPoint);
-						
-						resArray.forEach((item, index) => {
+						var row = $('tr[data-seq-sle="' + item.seq_sle + '"]');
+						if (row.length) {
 							
-							var seqSle = item.seq_sle;
-							var sleNm = item.sle_nm;
-							var price = item.price;
-							var count = item.count;
+							row.find('input[name*=".count"]').val(item.count);
 							
-							var row = $('tr[data-seq-sle="' + seqSle + '"]');
+							var formattedPrice = new Intl.NumberFormat().format(item.total_price) + "원";
+							var formattedPoint = new Intl.NumberFormat().format(item.total_point);
 							
-							if (row.length) {
-								
-								row.find('input[name="buyList[' + index + '].seq_sle"]').val(seqSle);
-								row.find('input[name="buyList[' + index + '].sle_nm"]').val(sleNm);
-								row.find('input[name="buyList[' + index + '].price"]').val(price);
-								
-								row.find('input[name="buyList[' + index + '].count"]').val(count);
-								
-								var spantotalprice = row.find('td[data-total-price] span.totalPriceDisplay');
-								var spantotalpoint = row.find('td[data-total-point] span.totalPointDisplay');
-								
-								if (spantotalprice.length && spantotalpoint.length) {
-									
-									var formattedPrice = new Intl.NumberFormat().format(item.total_price) + "원";
-									var formattedPoint = new Intl.NumberFormat().format(item.total_point);
-									
-									spantotalprice.text(formattedPrice);
-									spantotalpoint.text(formattedPoint);
-									
-									spantotalprice.closest('td').attr('data-total-price', item.total_price);
-									spantotalpoint.closest('td').attr('data-total-point', item.total_point);
-								}
-							}
-						});
-					}
+							row.find('td[data-total-price] span.totalPriceDisplay').text(formattedPrice);
+							row.find('td[data-total-point] span.totalPointDisplay').text(formattedPoint);
+							
+							row.find('td[data-total-price]').attr('data-total-price', item.total_price);
+							row.find('td[data-total-point]').attr('data-total-point', item.total_point);
+						}
+					});
+					updateTotal();
 				},
 			});
 		}

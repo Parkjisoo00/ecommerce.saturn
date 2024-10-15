@@ -68,6 +68,18 @@ public class BasketSrvc {
 	}
 	
 	@Transactional("txFront")
+	public boolean removeBasket(int seqMbr, int seqSle) {
+		
+		int result = basketDao.removeBasket(seqMbr, seqSle);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	@Transactional("txFront")
 	public boolean ajaxUpdate(BasketDto basketDto) {
 		
 		int result = basketDao.ajaxUpdate(basketDto);

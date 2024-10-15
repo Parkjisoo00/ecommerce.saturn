@@ -154,7 +154,10 @@
 <form id="frmMain" method="POST">
 <input type="hidden" name="item"				id="item"/>
 <input type="hidden" name="point_stack"			id="point_stack"	value="${saleDto.point_stack}"/>
+<input type="hidden" name="discount_sale"		id="discount_sale"	value="${saleDto.discount_sale}"/>
+<input type="hidden" name="img"					id="img"			value="${saleDto.img}"/>
 <input type="hidden" name="seq_sle"				id="seq_sle"		value="${saleDto.seq_sle}"/>
+<input type="hidden" name="sle_nm"				id="sle_nm"			value="${saleDto.sle_nm}"/>
 <input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"		value="${saleDto.cd_ctg_m}"/>
 <input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"		value="${saleDto.cd_ctg_b}"/>
 <input type="hidden" name="corp_nm"				id="corp_nm"/>
@@ -295,7 +298,7 @@
 						<div class="product__details__button" 
 							 style="display: flex !important; justify-content: center !important; gap: 10px !important; width: 100% !important;">
 						<div class="pro-qty" style="padding: 0px; display: flex !important; align-items: center !important; justify-content: center !important; gap: 10px !important; height: 51px !important;">
-							<input type="text" value="1" name="buyList[0].count" size="3" style="text-align: center !important; font-size: 14px !important; width: 40px; display: inline-block !important;">
+							<input type="text" value="1" name="buyList[0].count" id="count" size="3" style="text-align: center !important; font-size: 14px !important; width: 40px; display: inline-block !important;">
 						</div>
 							<a href="javascript:setBasket();" class="cart-btn" style="display: inline-block !important; margin: 0px !important; background: white; color: #346aff !important; border: 1px solid #346aff">
 								<span class="icon_bag_alt"></span> 장바구니 담기

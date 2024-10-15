@@ -73,6 +73,50 @@ public class BasketWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
+	 * @since 2024-10-16
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/basket/remove.json",  method = RequestMethod.POST, consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
+	public @ResponseBody Map<String, Object> remove(HttpServletRequest request, @RequestBody Map<String, List<Map<String, Object>>> requestBody) {
+		
+		Map<String, Object> response = new HashMap<>();
+		List<Integer> deletedSeqSleList = new ArrayList<>();
+		
+		try {
+			
+			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
+			
+			List<Map<String, Object>> items = requestBody.get("items");
+			
+			logger.debug("삭제할 상품 목록" + items);
+			
+			for (Map<String, Object> item : items) {
+				
+				int seqSle = Integer.parseInt((String) item.get("seq_sle"));
+				
+				logger.debug("삭제 중인 상품 번호" + seqSle);
+				
+				basketSrvc.removeBasket(seqMbr, seqSle);
+				
+				deletedSeqSleList.add(seqSle);
+			}
+			response.put("deletedItems", deletedSeqSleList);
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".basketCount()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return response;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
 	 * @since 2024-09-30
 	 * <p>DESCRIPTION:</p>
 	 * <p>IMPORTANT:</p>

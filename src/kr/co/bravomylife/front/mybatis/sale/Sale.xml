@@ -119,7 +119,7 @@
 			sle.SEQ_SLE
 			, sle.SLE_NM
 			, sle.DESCES
-			, sle.POINT_STACK
+			, NVL(sle.POINT_STACK, 0) POINT_STACK
 			, sle.IMG
 			, sle.PRICE_SALE
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
