@@ -27,11 +27,13 @@
 		frmMain.target = "_self";
 	}
 	function remove(value) {
+		if (confirm("삭제를 하시겠습니까?")) {
 		var frmMain = document.getElementById("frmMain");
 		
 		document.getElementById("cd_bbs_type").value = value;
-		frmMain.action="/front/center/board/remove.web";
+		frmMain.action="/front/center/board/myPageNotice/remove.web";
 		frmMain.submit();
+		}
 	}
 	
 	function modifyForm(value) {

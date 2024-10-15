@@ -41,14 +41,14 @@
 
 	<!-- Breadcrumb Begin -->
 	<ul class="my-custom-ul" >
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px" href="/front/member/modifyForm.web" class="menuLnb">&nbsp;마이 페이지</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">개인정보 수정</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">문의 이력</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">포인트</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">맞춤건강 결과표</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">찜한 상품</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">구매이력</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">회원 탈퇴</a></li>
+				<li><img src="/img/mypage/mypage1.png"><a style="font-size :30px" href="/front/myPage/" class="menuLnb">	마이 페이지</a></li>
+				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/modifyForm.web" class="menuLnb">개인정보 수정</a></li>
+				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goList(3);" class="menuLnb">문의 이력</a></li>
+				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">포인트</a></li>
+				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">맞춤건강 결과표</a></li>
+				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">찜한 상품</a></li>
+				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">구매이력</a></li>
+				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/withdraw.web" class="menuLnb">회원 탈퇴</a></li>
 	</ul>
 	<!-- Breadcrumb End -->
 
@@ -59,7 +59,7 @@
 						<input type="hidden" name="phone" id="phone" />
 							<div class="row"style="display: flex; justify-content: center; align-items: center;">
 								<div class="col-lg-8">
-									<h5 >개인 정보</h5>
+									<h5 style="font-size :30px">개인 정보</h5>
 									<div class="row">
 										<!-- 이메일 -->
 										<div class="col-lg-12 col-md-12 col-sm-12">

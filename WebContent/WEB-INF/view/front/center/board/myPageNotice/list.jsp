@@ -42,7 +42,7 @@
 		document.getElementById("currentPage").value = "1";
 		document.getElementById("cd_bbs_type").value = value;
 		
-		frmMain.action = "/front/center/board/list.web";
+		frmMain.action = "/front/center/board/myPageNotice/list.web";
 		frmMain.submit();
 	}
 	function goPage(value) {

@@ -640,11 +640,11 @@ public class BoardWeb extends Common {
 	@RequestMapping(value = "/front/center/board/myPageNotice/list.web")
 	public ModelAndView myPageNoticeList(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
 		
+
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			
-			
+
 			/* 로그인 세션 체크가 정상적으로 동작하지 않던 코드 수정 */
 			/*이 주석을 풀시 이 코드를 사용하거나 아래의 코드 하나만을 사용해야 됨 */
 			
@@ -656,40 +656,16 @@ public class BoardWeb extends Common {
 			else {
 				// 로그인 성공 후 세션에 사용자 정보 저장
 				if (pagingDto.getCd_bbs_type() == 3) {
-					HttpSession session = request.getSession(true);
+					HttpSession session = request.getSession();
 					session.setAttribute("sessionUser", "SEQ_MBR");
 				}
 				
 				if (pagingDto.getCd_bbs_type() == 3) {
 					pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
-				
-				PagingListDto pagingListDto = boardSrvc.list(pagingDto);
-				
-				mav.addObject("paging"	, pagingListDto.getPaging());
-				mav.addObject("list"	, pagingListDto.getList());
-				}
-				
-				
-				if (pagingDto.getCd_bbs_type() == 1) {
-					mav.setViewName("front/center/board/notice/list");
-				}
-				else if (pagingDto.getCd_bbs_type() == 2) {
-					mav.setViewName("front/center/board/faq/list");
-				}
-				else if (pagingDto.getCd_bbs_type() == 3) {
-					mav.setViewName("front/center/board/myPageNotice/list");
-				}
-				else if (pagingDto.getCd_bbs_type() == 4) {
-					mav.setViewName("front/center/board/news/list");
-				}
-				
-				else {
-					
-					mav.setViewName("forward:/servlet/result.web");
+
 				}
 				
 			}
-			
 			
 			logger.debug("게시판 타입 확인" + " + " + pagingDto.getCd_bbs_type());
 			logger.debug("세션 SEQ_MBR 확인" + " + " + getSession(request, "SEQ_MBR"));
@@ -733,7 +709,6 @@ public class BoardWeb extends Common {
 		
 		return mav;
 	}
-	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
@@ -788,5 +763,30 @@ public class BoardWeb extends Common {
 		return mav;
 	}
 	
-	
+	@RequestMapping(value = "/front/center/board/myPageNotice/remove.web", method = RequestMethod.POST)
+	public ModelAndView myPageNoticeRemove(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			boardDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			if (boardSrvc.deleteFlag(boardDto)) {
+				request.setAttribute("script"	, "alert('삭제되었습니다.');");
+				request.setAttribute("redirect"	, "/front/center/board/myPageNotice/list.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".remove()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 }

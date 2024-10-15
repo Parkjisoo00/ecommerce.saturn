@@ -34,9 +34,11 @@
 /*----------------------------------------*/
 .my-custom-ul{
 	position: absolute;
-	left: 20px;
-	transform: translateY(30px);
+	left: 240px;
+	transform: translateY(47px);
 	list-style-type: none;
+	line-height: 3.5;
+	
 	
 }
 /*----------------------------------------*/
