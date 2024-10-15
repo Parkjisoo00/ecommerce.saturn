@@ -55,6 +55,32 @@ public class popupWeb extends Common{
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
+	@RequestMapping(value = "/front/popup/ars.web")
+	public ModelAndView ars(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			mav.setViewName("front/popup/ars");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".ars()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-14
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
 	@RequestMapping(value = "/front/popup/event.web")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		

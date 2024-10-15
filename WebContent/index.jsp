@@ -163,7 +163,7 @@
 							<div class="banner__text">
 								<span>인터넷 주문이 어려우시다면? <br> ※휴대폰에서만 주문가능※</span>
 								<h1>ARS 전화주문</h1>
-								<a href="#">바로가기</a>
+								<a href="/front/popup/ars.web">바로가기</a>
 							</div>
 						</div>
 					</div>
