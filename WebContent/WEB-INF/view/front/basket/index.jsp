@@ -83,7 +83,6 @@
 			frmMain.cd_ctg_m.setAttribute("value", value2);
 			frmMain.cd_ctg_b.setAttribute("value", value3);
 			frmMain.action="/front/buy/writeForm.web";
-			frmMain.target = "";
 			frmMain.submit();
 		}
 		
@@ -159,11 +158,9 @@
 		}
 		
 		function remove() {
-			
 			var checkboxes = document.querySelectorAll('.selectItem');
 			
 			if (checkboxes.length === 0) {
-				
 				alert('장바구니에 담긴 상품이 없습니다.');
 				restoreInputs();
 				return;
@@ -171,24 +168,23 @@
 			
 			var selectedCount = 0;
 			var selectedItems = [];
+			var rowsToRemove = [];
 			
 			checkboxes.forEach((checkbox) => {
-				
 				const row = checkbox.closest('tr');
 				const inputs = row.querySelectorAll('input');
 				
 				if (checkbox.checked) {
-					
 					selectedCount++;
-					
 					var seqSle = row.querySelector('input[name*=".seq_sle"]').value;
+					
 					selectedItems.push({ seq_sle: seqSle });
+					rowsToRemove.push(row);
 					
 					inputs.forEach((input) => {
 						input.disabled = false;
 					});
 				} else {
-					
 					inputs.forEach((input) => {
 						input.disabled = true;
 					});
@@ -196,7 +192,6 @@
 			});
 			
 			if (selectedCount === 0) {
-				
 				alert('삭제할 상품을 선택하세요.');
 				restoreInputs();
 				return;
@@ -205,31 +200,35 @@
 			var myData = { items: selectedItems };
 			
 			$.ajax({
-				type: "POST",
-				url: "/front/basket/remove.json",
+				type: 'POST',
+				url: '/front/basket/remove.json',
 				data: JSON.stringify(myData),
-				contentType: "application/json; charset=UTF-8",
+				contentType: 'application/json; charset=UTF-8',
 				
 				beforeSend: function () {
-					
-					$("#loadingSpinner").show();
+					$('#loadingSpinner').fadeIn(150);
 				},
 				success: function (response) {
-					
 					alert('선택된 상품이 삭제되었습니다.');
-					setTimeout(() => {
-						
-						location.reload();
-					}, 500);
+					
+					rowsToRemove.forEach((row) => row.remove());
+					restoreInputs();
+					updateTotal();
+					
+					if ($('tbody tr').length === 0) {
+						$('tbody').html(`
+							<tr style="text-align: center; border-bottom: 1px solid #707070;">
+								<td colspan="7">장바구니에 상품이 없습니다</td>
+							</tr>
+						`);
+					}
 				},
 				error: function (error) {
-					
 					alert('상품 삭제 중 오류가 발생했습니다.');
 				},
 				complete: function () {
-					
-					$("#loadingSpinner").hide();
-				}
+					$('#loadingSpinner').fadeOut(200);
+				},
 			});
 		}
 		
@@ -241,90 +240,6 @@
 				input.disabled = false;
 			});
 		}
-		
-		/*
-		$.ajax({
-			type: "POST",
-			url: "/front/basket/remove.json",
-			data: JSON.stringify(myData),
-			contentType: "application/json; charset=UTF-8",
-			success: function (response) {
-				
-				alert('선택된 상품이 삭제되었습니다.');
-				
-				var deletedItems = response.deletedItems;
-				
-				console.log("삭제된 상품 목록:", deletedItems);
-				
-				deletedItems.forEach(seqSle => {
-					
-					console.log("현재 처리 중인 seq_sle:", seqSle);
-					var row = $(`tr[data-seq-sle='${seqSle}']`).filter(function () {
-						
-						return $(this).attr('data-seq-sle') == seqSle;
-					});
-					if (row.length > 0) {
-						
-						row.remove();
-						console.log(`seq_sle=${seqSle}에 해당하는 <tr>이 삭제되었습니다.`);
-					} else {
-						
-						console.log(`seq_sle=${seqSle}에 해당하는 <tr>을 찾을 수 없습니다.`);
-					}
-				});
-				updateTotal();
-			},
-			error: function (error) {
-				alert('상품 삭제 중 오류가 발생했습니다.');
-			}
-		});
-		*/
-		
-		/*
-		function remove() {
-			
-			const checkboxes = document.querySelectorAll('.selectItem');
-			
-			if (checkboxes.length === 0) {
-				alert('장바구니에 담긴 상품이 없습니다.');
-				restoreInputs();
-				return;
-			}
-			
-			var selectedCount = 0;
-			
-			checkboxes.forEach((checkbox) => {
-				
-				var row = checkbox.closest('tr'); 
-				var inputs = row.querySelectorAll('input'); 
-				
-				if (checkbox.checked) {
-					
-					selectedCount++;
-					inputs.forEach((input) => {
-						
-						input.disabled = false;
-					});
-				} else {
-					
-					inputs.forEach((input) => {
-						
-						input.disabled = true;
-					});
-				}
-			});
-			
-			if (selectedCount === 0) {
-				alert('삭제할 상품을 선택하세요.');
-				restoreInputs();
-				return;
-			}
-			
-			var frmMain = document.getElementById('frmMain');
-			frmMain.action = "/front/basket/remove.web";
-			frmMain.submit();
-		}
-		*/
 	</script>
 
 	<!-- Google Font -->
@@ -376,6 +291,7 @@
 										<th class="cart-th" style="width: 10%">합계금액</th>
 									</tr>
 								</thead>
+								<tbody>
 								<c:choose>
 									<c:when test="${empty list}">
 										<tr style="text-align: center; border-bottom: 1px solid #707070;">
@@ -384,7 +300,7 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="list" items="${list}" varStatus="status">
-											<tbody>
+											
 											<tr style="border: 0;" data-seq-sle="${list.seq_sle}">
 												<td class="cart-td">
 													<input style="background: white !important;" type="checkbox" class="selectItem" checked/>
@@ -425,10 +341,11 @@
 													</span>
 												</td>
 											</tr>
-											</tbody>
+											
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
+								</tbody>
 							</table>
 						</div>
 					</div>

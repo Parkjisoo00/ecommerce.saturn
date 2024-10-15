@@ -139,6 +139,7 @@
 		
 		var frmMain = document.getElementById("frmMain");
 		frmMain.action = "/front/pay/index.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	</script>
