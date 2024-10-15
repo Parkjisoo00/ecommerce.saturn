@@ -1,8 +1,5 @@
-	<!-- html 설정 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<!-- JSP 파일이 위치한 경로 입력 -->
-<%@ page info="/WEB-INF/view/front/popup/event.jsp" %>
-<!-- 이 부분은 필요에 따라 추가하는 것이 맞으므로 개별 판단에 따라 추가하거나 삭제해도 되고 사용하지 않더라도 그대로 넣어둬도 무방하다고 판단 -->
+<%@ page info="/WEB-INF/view/front/popup/ars.jsp" %>
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
@@ -12,9 +9,7 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
-	
 	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
-	
 	</script>
 
 	<!-- Google Font -->
@@ -38,16 +33,20 @@
 
 	<!-- Breadcrumb Begin -->
 	<!-- Breadcrumb End -->
-	
-	<!-- Blog Section Begin -->
+
 	<br>
-	<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">11월 이벤트</h6>
+	<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">ARS 전화 주문</h6>
 
 	<div style="position: relative; text-align: center; width: 100%; max-width: 600px; margin: 0 auto;">
-		<img src="/img/popup/event.jpg" alt="Local Image" style="width: 100%; height: auto;">
-		 <div style="position: absolute; top: calc(50% - 2cm); left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5); padding: 10px 20px; border-radius: 10px;">
-			<a href="/front/sale/total_list.web" style="color: white; text-decoration: none; font-size: 24px; font-weight: bold;">상품으로 바로이동!</a>
-		</div>
+		<img src="/img/popup/ARS1.png" style="width: 100%; height: auto;">
+	</div>
+	<br>
+	<div style="position: relative; text-align: center; width: 100%; max-width: 600px; margin: 0 auto;">
+		<img src="/img/popup/ARS2.png" style="width: 100%; height: auto;">
+	</div>
+	<br>
+	<div style="position: relative; text-align: center; width: 100%; max-width: 600px; margin: 0 auto;">
+		<img src="/img/popup/ARS3.png" style="width: 100%; height: auto;">
 	</div>
 	<!-- Blog Section End -->
 
