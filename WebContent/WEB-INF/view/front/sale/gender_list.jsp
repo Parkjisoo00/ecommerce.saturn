@@ -123,14 +123,14 @@
 
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" id="seq_sle"		name="seq_sle" />
-<input type="hidden" id="corp_nm"		name="corp_nm" value="${paging.corp_nm}"/>
-<input type="hidden" id="prd_type"		name="prd_type" value="${paging.prd_type}"/>
-<input type="hidden" id="filter"		name="filter" value="${paging.filter}"/>
-<input type="hidden" id="cd_ctg_m"		name="cd_ctg_m" />
-<input type="hidden" id="cd_ctg_b"		name="cd_ctg_b" />
-<input type="hidden" id="type"			name="type" />
-<input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
+<input type="hidden" name="seq_sle"			id="seq_sle"/>
+<input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>
+<input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
+<input type="hidden" name="corp_nm"			id="corp_nm" value="${paging.corp_nm}"/>
+<input type="hidden" name="prd_type"		id="prd_type" value="${paging.prd_type}"/>
+<input type="hidden" name="filter"			id="filter" value="${paging.filter}"/>
+<input type="hidden" name="type"			id="type"/>
+<input type="hidden" name="currentPage"		id="currentPage" value="${paging.currentPage}"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -147,7 +147,6 @@
 	<section class="shop spad">
 		<div class="container">
 			<%@ include file="/include/front/lowgnbG.jsp" %>
-			<a href="/front/basket/main.web">[장바구니]테스트</a>
 			<div class="row" style="justify-content: center;">
 				<c:choose>
 					<c:when test="${empty list}">

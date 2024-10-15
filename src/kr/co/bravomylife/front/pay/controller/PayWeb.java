@@ -120,6 +120,8 @@ public class PayWeb extends Common {
 			
 			int totalPriceSum = 0;
 			int totalPointSum = 0;
+			int totalPrice = 0;
+			int totalPoint = 0;
 			
 			String formatTotalPriceSum = "";
 			String formatTotalPointSum = "";
@@ -134,14 +136,19 @@ public class PayWeb extends Common {
 				map.put("total_price_sum", detail.getTotal_price_sum());
 				map.put("total_point_sum", detail.getTotal_point_sum());
 				
-				totalPriceSum += detail.getTotal_price_sum();
-				totalPointSum += detail.getTotal_point_sum();
+				totalPrice = detail.getPrice() * detail.getCount();
+				totalPoint = detail.getPoint() * detail.getCount();
 				
-				logger.debug("판매 일려번호" + detail.getSeq_sle());
+				totalPriceSum += totalPrice;
+				totalPointSum += totalPoint;
+				
+				logger.debug("판매 일련번호" + detail.getSeq_sle());
 				logger.debug("판매명" + detail.getSle_nm());
 				logger.debug("판매 가격" + detail.getPrice());
 				logger.debug("판매 개수" + detail.getCount());
 				logger.debug("포인트" + detail.getPoint());
+				logger.debug("개별 총 금액" + totalPrice);
+				logger.debug("개별 총 포인트" + totalPoint);
 				
 				logger.debug("금액 총합" + totalPriceSum);
 				logger.debug("포인트 총합" + totalPointSum);

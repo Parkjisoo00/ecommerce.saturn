@@ -152,22 +152,15 @@
 
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" id="item"			name="item" />
-<input type="hidden" id="seq_sle"		name="seq_sle"			value="${saleDto.seq_sle}"/>
-<input type="hidden" id="sle_nm"		name="sle_nm"			value="${saleDto.sle_nm}" />
-<input type="hidden" id="price_sale"	name="price_sale"		value="${saleDto.price_sale}" />
-<input type="hidden" id="discount_sale"	name="discount_sale"	value="${saleDto.discount_sale}" />
-<input type="hidden" id="img"			name="img"				value="${saleDto.img}" />
-<input type="hidden" id="point_value"	name="point_value"		value="${saleDto.point_value}" />
-<input type="hidden" id="point_stack"	name="point_stack"		value="${saleDto.point_stack}" />
-<input type="hidden" id="cd_ctg_m"		name="cd_ctg_m"			value="${saleDto.cd_ctg_m}" />
-<input type="hidden" id="cd_ctg_b"		name="cd_ctg_b"			value="${saleDto.cd_ctg_b}" />
-<input type="hidden" id="corp_nm"		name="corp_nm"			value="${paging.corp_nm}"/>
-<input type="hidden" id="prd_type"		name="prd_type"			value="${paging.prd_type}"/>
-<input type="hidden" id="filter"		name="filter"			value="${paging.filter}"/>
-<input type="hidden" id="type"			name="type" />
-<input type="hidden" name="currentPage" id="currentPage"		value="${paging.currentPage}" />
-<input type="hidden" name="buyList[0].seq_sle"					value="${saleDto.seq_sle}" />
+<input type="hidden" name="item"			id="item"/>
+<input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>
+<input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
+<input type="hidden" name="corp_nm"			id="corp_nm"/>
+<input type="hidden" name="prd_type"		id="prd_type"/>
+<input type="hidden" name="filter"			id="filter"/>
+<input type="hidden" name="type"			id="type" />
+<input type="hidden" name="currentPage"		id="currentPage"	value="${paging.currentPage}"/>
+<input type="hidden" name="buyList[0].seq_sle"					value="${saleDto.seq_sle}"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
