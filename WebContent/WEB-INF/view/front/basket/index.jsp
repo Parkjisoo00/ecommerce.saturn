@@ -87,29 +87,11 @@
 			frmMain.submit();
 		}
 		
-		window.onload = function () {
-			
-			if (sessionStorage.getItem('reloaded')) {
-				
-				sessionStorage.removeItem('reloaded');
-				
-				history.replaceState(null, '', location.href);
-				
-				var frmMain = document.getElementById("frmMain");
-				frmMain.action = "/front/pay/index.web";
-				frmMain.submit();
-			}
-		};
-		
 		function checkOut() {
-			
-			if (!sessionStorage.getItem('reloaded')) {
-				sessionStorage.setItem('reloaded', 'true');
-				
-				history.replaceState(null, '', location.href);
-				
-				location.reload();
-			}
+						
+			var frmMain = document.getElementById("frmMain");
+			frmMain.action = "/front/pay/index.web";
+			frmMain.submit();
 		}
 	</script>
 
@@ -272,7 +254,6 @@
 		const selectAllCheckbox = document.getElementById('selectAll');
 		const itemCheckboxes = document.querySelectorAll('.selectItem');
 		
-		
 		selectAllCheckbox.addEventListener('change', function (e) {
 			
 			itemCheckboxes.forEach(function (checkbox) {
@@ -280,7 +261,6 @@
 			});
 			updateTotal();
 		});
-		
 		
 		itemCheckboxes.forEach(function (checkbox) {
 			
@@ -295,7 +275,6 @@
 		let totalPrice = 0;
 		let totalPoints = 0;
 		let totalItems = 0;
-		
 		
 		document.querySelectorAll('.selectItem:checked').forEach(function (checkbox) {
 			
@@ -355,7 +334,7 @@
 			if (e.which == 13) {
 				
 				e.preventDefault();
-
+				
 				var parentRow = $(this).closest('tr');
 				var seq_sle = parentRow.data('seq-sle');
 				var newValue = parseInt($(this).val());
@@ -391,7 +370,6 @@
 						var summary = resArray[0];
 						
 						$('#totalItems').text(summary.seq_sle_count);
-						
 						var formattedTotalPrice = new Intl.NumberFormat().format(summary.total_price_sum) + "원";
 						$('#totalPrice').text(formattedTotalPrice);
 						$('#totalPriceFinal').text(formattedTotalPrice);
@@ -399,32 +377,36 @@
 						var formattedTotalPoint = new Intl.NumberFormat().format(summary.total_point_sum);
 						$('#totalPoints').text(formattedTotalPoint);
 						
-						resArray.forEach((item) => {
+						resArray.forEach((item, index) => {
 							
 							var seqSle = item.seq_sle;
-							var totalPrice = item.total_price;
-							var totalPoint = item.total_point;
+							var sleNm = item.sle_nm;
+							var price = item.price;
+							var count = item.count;
 							
-							var row = $('tr').filter(function () {
-								
-								return $(this).attr('data-seq-sle') == seqSle;
-							});
+							var row = $('tr[data-seq-sle="' + seqSle + '"]');
 							
 							if (row.length) {
+								
+								row.find('input[name="buyList[' + index + '].seq_sle"]').val(seqSle);
+								row.find('input[name="buyList[' + index + '].sle_nm"]').val(sleNm);
+								row.find('input[name="buyList[' + index + '].price"]').val(price);
+								
+								row.find('input[name="buyList[' + index + '].count"]').val(count);
 								
 								var spantotalprice = row.find('td[data-total-price] span.totalPriceDisplay');
 								var spantotalpoint = row.find('td[data-total-point] span.totalPointDisplay');
 								
 								if (spantotalprice.length && spantotalpoint.length) {
 									
-									var formattedPrice = new Intl.NumberFormat().format(totalPrice) + "원";
-									var formattedPoint = new Intl.NumberFormat().format(totalPoint);
+									var formattedPrice = new Intl.NumberFormat().format(item.total_price) + "원";
+									var formattedPoint = new Intl.NumberFormat().format(item.total_point);
 									
 									spantotalprice.text(formattedPrice);
 									spantotalpoint.text(formattedPoint);
 									
-									spantotalprice.closest('td').attr('data-total-price', totalPrice);
-									spantotalpoint.closest('td').attr('data-total-point', totalPoint);
+									spantotalprice.closest('td').attr('data-total-price', item.total_price);
+									spantotalpoint.closest('td').attr('data-total-point', item.total_point);
 								}
 							}
 						});

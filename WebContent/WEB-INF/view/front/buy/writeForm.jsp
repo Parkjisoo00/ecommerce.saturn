@@ -95,7 +95,7 @@
 		frmMain.submit();
 	}
 	
-	function setBasket(value, value2) {
+	function setBasket() {
 		
 		if (!isLogin) {
 			alert("로그인이 필요합니다");
@@ -129,8 +129,8 @@
 			reviewForm.classList.add('visible');
 		}
 	}
-	
-	function writeProc() {
+		
+	function checkOut() {
 		
 		if (!isLogin) {
 			alert("로그인이 필요합니다!");
@@ -152,15 +152,18 @@
 
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" name="item"			id="item"/>
-<input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>
-<input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
-<input type="hidden" name="corp_nm"			id="corp_nm"/>
-<input type="hidden" name="prd_type"		id="prd_type"/>
-<input type="hidden" name="filter"			id="filter"/>
-<input type="hidden" name="type"			id="type" />
-<input type="hidden" name="currentPage"		id="currentPage"	value="${paging.currentPage}"/>
-<input type="hidden" name="buyList[0].seq_sle"					value="${saleDto.seq_sle}"/>
+<input type="hidden" name="item"				id="item"/>
+<input type="hidden" name="point_stack"			id="point_stack"	value="${saleDto.point_stack}"/>
+<input type="hidden" name="seq_sle"				id="seq_sle"		value="${saleDto.seq_sle}"/>
+<input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"		value="${saleDto.cd_ctg_m}"/>
+<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"		value="${saleDto.cd_ctg_b}"/>
+<input type="hidden" name="corp_nm"				id="corp_nm"/>
+<input type="hidden" name="prd_type"			id="prd_type"/>
+<input type="hidden" name="filter"				id="filter"/>
+<input type="hidden" name="type"				id="type" />
+<input type="hidden" name="currentPage"			id="currentPage"	value="${paging.currentPage}"/>
+<input type="hidden" name="buyList[0].img"							value="${saleDto.img}"/>
+<input type="hidden" name="buyList[0].seq_sle"						value="${saleDto.seq_sle}"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -238,7 +241,7 @@
 										<label for="stockin" class="pd-label">
 											<span class="pd-text" style="color: #ff4c2e !important;"><fmt:formatNumber value="${saleDto.discount_sale}" type="number" /></span>
 											<span class="pd-text">원</span>
-											<input type="hidden" name="buyList[0].price" value="${saleDto.discount_sale}" />
+											<input type="hidden" name="buyList[0].price"value="${saleDto.discount_sale}" />
 											<span class="pd-text" style="color: #ff4c2e !important;">(${saleDto.discount}%)</span>
 										</label>
 									</div>
@@ -292,12 +295,12 @@
 						<div class="product__details__button" 
 							 style="display: flex !important; justify-content: center !important; gap: 10px !important; width: 100% !important;">
 						<div class="pro-qty" style="padding: 0px; display: flex !important; align-items: center !important; justify-content: center !important; gap: 10px !important; height: 51px !important;">
-							<input type="text" value="1" name="buyList[0].count" id="count" size="3" style="text-align: center !important; font-size: 14px !important; width: 40px; display: inline-block !important;">
+							<input type="text" value="1" name="buyList[0].count" size="3" style="text-align: center !important; font-size: 14px !important; width: 40px; display: inline-block !important;">
 						</div>
-							<a href="javascript:setBasket('${saleDto.cd_ctg_m}', '${saleDto.cd_ctg_b}');" class="cart-btn" style="display: inline-block !important; margin: 0px !important; background: white; color: #346aff !important; border: 1px solid #346aff">
+							<a href="javascript:setBasket();" class="cart-btn" style="display: inline-block !important; margin: 0px !important; background: white; color: #346aff !important; border: 1px solid #346aff">
 								<span class="icon_bag_alt"></span> 장바구니 담기
 							</a>
-							<a href="javascript:writeProc();" class="cart-btn" style="display: inline-block !important; margin: 0px !important;">
+							<a href="javascript:checkOut();" class="cart-btn" style="display: inline-block !important; margin: 0px !important;">
 								<span class="icon_bag_alt"></span> 바로구매
 							</a>
 							<ul style="list-style: none !important; padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; gap: 10px !important;">

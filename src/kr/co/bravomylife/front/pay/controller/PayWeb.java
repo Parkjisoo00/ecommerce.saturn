@@ -127,6 +127,7 @@ public class PayWeb extends Common {
 			String formatTotalPointSum = "";
 			
 			for (BuyDetailDto detail : _buyDetailListDto) {
+				
 				Map<String, Object> map = new HashMap<>();
 				map.put("seq_sle", detail.getSeq_sle());
 				map.put("sle_nm", detail.getSle_nm());
@@ -135,6 +136,9 @@ public class PayWeb extends Common {
 				map.put("point", detail.getPoint());
 				map.put("total_price_sum", detail.getTotal_price_sum());
 				map.put("total_point_sum", detail.getTotal_point_sum());
+				
+				logger.debug("수량" + detail.getCount());
+				logger.debug("포인트" + detail.getPoint());
 				
 				totalPrice = detail.getPrice() * detail.getCount();
 				totalPoint = detail.getPoint() * detail.getCount();

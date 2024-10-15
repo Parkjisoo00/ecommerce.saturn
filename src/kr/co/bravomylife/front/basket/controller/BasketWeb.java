@@ -287,6 +287,7 @@ public class BasketWeb extends Common {
 			List<BasketDto> basketList = basketSrvc.ajaxlisting(basketDto);
 			
 			for (BasketDto basket : basketList) {
+				
 				Map<String, Object> map = new HashMap<>();
 				map.put("seq_sle", basket.getSeq_sle());
 				map.put("sle_nm", basket.getSle_nm());
@@ -301,6 +302,9 @@ public class BasketWeb extends Common {
 				map.put("seq_sle_count", basket.getSeq_sle_count());
 				map.put("total_price_sum", basket.getTotal_price_sum());
 				map.put("total_point_sum", basket.getTotal_point_sum());
+				
+				logger.debug("개별 수량" + basket.getCount());
+				logger.debug("개별 수량" + basket.getCount());
 				
 				logger.debug("개별 총합 가격" + basket.getTotal_price());
 				logger.debug("개별 총합 포인트" + basket.getTotal_point());

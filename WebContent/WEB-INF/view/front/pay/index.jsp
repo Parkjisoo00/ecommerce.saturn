@@ -168,7 +168,7 @@
 								<tr style="border: 0;">
 									<td class="customer-td1">포인트사용</td>
 									<td class="customer-td2">
-										<input name="usePoint" class="customer-input" type="text" style="width:100px; text-align: center; margin-right: 20px;" autocomplete="off" placeholder="포인트 입력" id="pointInput" />
+										<input name="usePoint" class="customer-input" type="text" style="width:100px; text-align: center; margin-right: 20px;" autocomplete="off" value="0" id="pointInput" />
 										보유 : <span class="rate" id="totalPoint" style="margin-left: 0px !important;">
 											${memberDto.total_point}
 										</span> 포인트
@@ -177,6 +177,7 @@
 								<tr style="border: 0;">
 									<td class="customer-td1">총결제금액</td>
 									<td class="customer-td3" id="finalAmountCell">
+									${formatTotalPriceSum}원
 									</td>
 								</tr>
 							</tbody>

@@ -38,7 +38,7 @@ public class BuyDetailDto {
 	private String dt_reg		= "";
 	private int register		= 0;
 	private String sle_nm		= "";
-	private Integer point			= 0;
+	private int point			= 0;
 	private int total_price_sum			= 0;
 	private int total_point_sum			= 0;
 	private String format_total_price	= "";
@@ -93,10 +93,10 @@ public class BuyDetailDto {
 	public void setSle_nm(String sle_nm) {
 		this.sle_nm = sle_nm;
 	}
-	public Integer getPoint() {
+	public int getPoint() {
 		return point;
 	}
-	public void setPoint(Integer point) {
+	public void setPoint(int point) {
 		this.point = point;
 	}
 	public int getTotal_price_sum() {
