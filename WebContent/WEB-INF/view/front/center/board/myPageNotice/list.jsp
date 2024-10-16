@@ -82,14 +82,14 @@
 
 	<!-- Breadcrumb Begin -->
 	<ul class="my-custom-ul" >
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px" href="/front/myPage/" class="menuLnb">&nbsp;마이 페이지</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="/front/member/modifyForm.web" class="menuLnb">개인정보 수정</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="javascript:goList(3);" class="menuLnb">문의 이력</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">포인트</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">맞춤건강 결과표</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">찜한 상품</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">구매이력</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="/front/member/withdraw.web" class="menuLnb">회원 탈퇴</a></li>
+				<li><img src="/img/mypage/mypage1.png"><a style="font-size :30px" href="/front/myPage/" class="menuLnb">	마이 페이지</a></li>
+				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/modifyForm.web" class="menuLnb">개인정보 수정</a></li>
+				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goList(3);" class="menuLnb">문의 이력</a></li>
+				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">포인트</a></li>
+				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">맞춤건강 결과표</a></li>
+				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">찜한 상품</a></li>
+				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">구매이력</a></li>
+				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/withdraw.web" class="menuLnb">회원 탈퇴</a></li>
 	</ul>
 	<!-- Breadcrumb End -->
 
@@ -106,9 +106,7 @@
 					</div>
 				</div>
 				<br/>
-				<!-- 세션에 로그인 정보가 있는지 확인 -->
-				<c:if test="${not empty sessionUser}">
-					<!-- 로그인 상태일 때만 보이는 영역 -->
+		<!-- 로그인 상태일 때만 보이는 영역 -->
 					<div class="brdSearchArea">
 						<div style="display: flex; justify-content: flex-end;margin-bottom: 10px;">
 							<select name="searchKey">
@@ -174,17 +172,12 @@
 									<br/>
 									<!-- 문의 등록 버튼 -->
 									<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center; margin-top: 30px;">
-										<a href="/front/center/board/writeForm.web?cd_bbs_type=3" class="btnBasic" style="display: inline-block; padding: 10px 20px; background-color: #c7b199; color: black; border: 1px solid #cccccc; border-radius: 10px; text-decoration: none;">문의 등록</a>
+										<a href="/front/center/board/myPageNotice/writeForm.web?cd_bbs_type=3" class="btnBasic" style="display: inline-block; padding: 10px 20px; background-color: #c7b199; color: black; border: 1px solid #cccccc; border-radius: 10px; text-decoration: none;">문의 등록</a>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</c:if>
-				<!-- 세션에 로그인 정보가 없을 때 -->
-				<c:if test="${empty sessionUser}">
-					<p style="text-align: center;">로그인이 필요합니다. 1:1 문의를 이용하시려면 로그인해주세요.</p>
-				</c:if>
 			</div>
 		</div>
 	</section>

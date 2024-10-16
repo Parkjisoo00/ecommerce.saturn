@@ -34,7 +34,7 @@
 /*----------------------------------------*/
 .my-custom-ul{
 	position: absolute;
-	left: 240px;
+	left: 150px;
 	transform: translateY(47px);
 	list-style-type: none;
 	line-height: 3.5;
