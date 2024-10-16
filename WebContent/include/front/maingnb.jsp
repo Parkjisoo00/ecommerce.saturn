@@ -74,7 +74,7 @@
 					<li><a href="javascript:goTypeF('', '', '', '', '', '');">기능별</a></li>
 					<li><a href="javascript:goTypeI('', '', '', '', '', '');">성분별</a></li>
 					<li><a href="javascript:goTypeG('', '', '', '', '', '');">대상별</a></li>
-					<li><a href="#">맞춤 건강 관리</a></li>
+					<li><a href="/front/center/board/personalHealth/index.web">맞춤 건강 관리</a></li>
 					<li><a href="#">고객 센터</a></li>
 					<li><a href="#">소개</a></li>
 				</ul>
@@ -115,7 +115,7 @@
 				</ul>
 			</li>
 			<li style="display: inline-block; margin: 0 57px; position: relative;">
-				<a href="#" style="font-size: 18px; font-weight: bold;">맞춤 건강 관리</a>
+				<a href="/front/center/board/personalHealth/index.web" style="font-size: 18px; font-weight: bold;">맞춤 건강 관리</a>
 				<ul class="dropdown" style="top: 100%; left: 0; list-style: none;">
 					<li><a href="#">맞춤 건강 추천</a></li>
 					<li><a href="#">안심 조회 서비스</a></li>

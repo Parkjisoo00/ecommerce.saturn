@@ -156,7 +156,7 @@
 							<div class="banner__text">
 								<span>건강 목표 달성! 나만의 맞춤 영양제로 건강을 지키세요</span>
 								<h1>맞춤 건강 관리</h1>
-								<a href="#">바로가기</a>
+								<a href="/front/center/board/personalHealth/index.web">바로가기</a>
 							</div>
 						</div>
 						<div class="banner__item">
