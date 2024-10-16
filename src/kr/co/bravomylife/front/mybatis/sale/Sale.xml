@@ -14,6 +14,7 @@
 			TB_LIKE
 		SET
 			FLG_LIKE	= #{flg_like}
+			, DT_UPT = SYSDATE
 		WHERE
 			SEQ_MBR		= #{seq_mbr}
 			AND SEQ_SLE	= #{seq_sle}
@@ -35,6 +36,7 @@
 			TB_LIKE
 		SET
 			FLG_LIKE		= #{flg_like}
+			, DT_UPT = SYSDATE
 		WHERE
 			SEQ_MBR			= #{seq_mbr}
 			AND SEQ_SLE		= #{seq_sle}

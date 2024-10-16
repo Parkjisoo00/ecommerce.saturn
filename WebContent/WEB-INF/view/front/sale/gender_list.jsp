@@ -126,11 +126,11 @@
 <input type="hidden" name="seq_sle"			id="seq_sle"/>
 <input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>
 <input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
-<input type="hidden" name="corp_nm"			id="corp_nm" value="${paging.corp_nm}"/>
-<input type="hidden" name="prd_type"		id="prd_type" value="${paging.prd_type}"/>
-<input type="hidden" name="filter"			id="filter" value="${paging.filter}"/>
+<input type="hidden" name="corp_nm"			id="corp_nm"		value="${paging.corp_nm}"/>
+<input type="hidden" name="prd_type"		id="prd_type"		value="${paging.prd_type}"/>
+<input type="hidden" name="filter"			id="filter"			value="${paging.filter}"/>
 <input type="hidden" name="type"			id="type"/>
-<input type="hidden" name="currentPage"		id="currentPage" value="${paging.currentPage}"/>
+<input type="hidden" name="currentPage"		id="currentPage"	value="${paging.currentPage}"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>

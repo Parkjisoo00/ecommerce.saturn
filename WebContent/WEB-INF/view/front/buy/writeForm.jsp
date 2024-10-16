@@ -22,7 +22,7 @@
 	function setLike(value) {
 		
 		if (!isLogin) {
-			alert("로그인이 필요합니다");
+			alert("로그인이 필요합니다.");
 			return;
 		}
 		
@@ -37,16 +37,23 @@
 			data: JSON.stringify(myData),
 			success: function(res) {
 				
-				alert("받아온 값" + res.flg_like);
+				// alert("받아온 값" + res.flg_like);
 				
 				if (res.flg_like === 'Y') {
 					$('.like-button').attr({
-						'style': 'background-color: #ca1515 !important; padding: 5px !important; border-radius: 50% !important;',
+						'style': 'padding: 5px !important; border-radius: 50% !important; background-color: #ca1515 !important; transition: background-color 1s ease !important;',
 						'href': 'javascript:delLike(\'N\');'
 					});
 					$('.icon_heart_alt').attr(
 							'style', 'color: white !important;'
 					);
+					
+					var likeButtonOffset = $('.like-button').offset();
+					$('#setlike-alert').css({
+						
+						'top': (likeButtonOffset.top - $('#setlike-alert').outerHeight() - 20) + 'px',
+						'left': likeButtonOffset.left + 'px'
+					}).fadeIn(400).delay(1500).fadeOut(400);
 				}
 			},
 		});
@@ -55,7 +62,7 @@
 	function delLike(value) {
 		
 		if (!isLogin) {
-			alert("로그인이 필요합니다");
+			alert("로그인이 필요합니다.");
 			return;
 		}
 		
@@ -71,13 +78,22 @@
 			success: function(res) {
 				
 				if (res.flg_like === 'N') {
+					
 					$('.like-button').attr({
-						'style': 'background-color: white !important; color: #ca1515 !important;',
+						
+						'style': 'background-color: white !important; transition: background-color 0.5s ease !important;',
 						'href': 'javascript:setLike(\'Y\');'
 					});
 					$('.icon_heart_alt').attr(
-							'style', 'font-size: 18px !important; color: #666666 !important; display: flex !important; align-items: center !important; justify-content: center !important; transform: translateY(14px) !important;'
+						'style', 'font-size: 18px !important; color: #666666 !important; display: flex !important; align-items: center !important; justify-content: center !important; transform: translateY(14px) !important;'
 					);
+					
+					var likeButtonOffset = $('.like-button').offset();
+					$('#dellike-alert').css({
+						
+						'top': (likeButtonOffset.top - $('#dellike-alert').outerHeight() - 20) + 'px',
+						'left': likeButtonOffset.left + 'px'
+					}).fadeIn(400).delay(1500).fadeOut(400);
 				}
 			},
 		});
@@ -162,7 +178,7 @@
 	function setBasket() {
 		
 		if (!isLogin) {
-			alert("로그인이 필요합니다");
+			alert("로그인이 필요합니다.");
 			return;
 		}
 		
@@ -184,20 +200,10 @@
 		frmMain.submit();
 	}
 	
-	function showReview() {
-		var reviewForm = document.getElementById('reviewForm');
-		
-		if (reviewForm.classList.contains('visible')) {
-			reviewForm.classList.remove('visible');
-		} else {
-			reviewForm.classList.add('visible');
-		}
-	}
-		
 	function checkOut() {
 		
 		if (!isLogin) {
-			alert("로그인이 필요합니다!");
+			alert("로그인이 필요합니다.");
 			return;
 		}
 		
@@ -206,6 +212,7 @@
 		frmMain.target = "";
 		frmMain.submit();
 	}
+		
 	</script>
 
 	<!-- Google Font -->
@@ -382,7 +389,7 @@
 									</c:when>
 									<c:otherwise>
 										<li>
-											<a href="javascript:setLike('Y');"  style="padding: 5px !important; border-radius: 50% !important;">
+											<a class="like-button" href="javascript:setLike('Y');"  style="padding: 5px !important; border-radius: 50% !important;">
 												<span class="icon_heart_alt"></span>
 											</a>
 										</li>
@@ -486,13 +493,43 @@
 							</div>
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
 								<div class="row">
-									<div class="col-lg-12 col-md-12">
-										<div class="pd-rbutton">
-											<input type="button" class="hidden-review-t" onclick="showReview()" value="상품후기 작성" />
+									<div class="col-lg-12 col-md-12" >
+									<div class="review-form" style="height: 700px !important">
+									
+										<!-- 첫 번째 div: 리뷰 제목 -->
+										<div class="review-title" style="border-bottom: 0px !important; border-top: 0px !important; height: 10% !important">
+											리뷰 작성을 안내하는 제목
 										</div>
-										<div class="hidden-review" id="reviewForm">
-											<textarea placeholder="여기에 상품후기를 작성해주세요" class="hidden-review-area"></textarea>
+										
+										<!-- 두 번째 div: 사진과 상품명 -->
+										<div class="review-photo-name" style="border-bottom: 0px !important; height: 20% !important">
+											<div class="photo">
+												사진
+											</div>
+											<div class="product-name">
+												<div class="product-name">
+													상품명
+												</div>
+												<div class="product-name">
+													상품명
+												</div>
+											</div>
 										</div>
+										
+										<!-- 세 번째 div: 리뷰 텍스트와 리뷰 내용 -->
+										<div class="review-photo-name" style="border-bottom: 0px !important; height: 70% !important">
+											<div class="photo">
+												실제 리뷰 작성
+											</div>
+											<div class="product-name">
+												<div style="height: 100% !important;">
+													<textarea class="review-text" placeholder="리뷰 내용을 입력하세요"></textarea>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+									<!-- 
 									<table class="headTop_pd" style=" margin-left: auto; margin-right: auto; width: 100%">
 									<c:choose>
 										<c:when test="${empty reviewList}">
@@ -544,6 +581,7 @@
 										</c:otherwise>
 										</c:choose>
 									</table>
+									 -->
 									<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
 										<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
 									</div>
@@ -558,6 +596,12 @@
 				</div>
 			</div>
 		</div>
+	<div id="dellike-alert" style="display: none; position: absolute; background-color: white; color: #333; padding: 10px 20px; border-radius: 5px; z-index: 9999; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); font-size: 16px; border: 1px solid #ddd;">
+		찜에서 삭제했습니다.
+	</div>
+	<div id="setlike-alert" style="display: none; position: absolute; background-color: white; color: #333; padding: 10px 20px; border-radius: 5px; z-index: 9999; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); font-size: 16px; border: 1px solid #ddd;">
+		찜에 등록되었습니다.
+	</div>
 	</section>
 	<!-- Product Details Section End -->
 

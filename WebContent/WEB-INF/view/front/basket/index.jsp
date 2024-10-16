@@ -206,7 +206,7 @@
 				contentType: 'application/json; charset=UTF-8',
 				
 				beforeSend: function () {
-					$('#loadingSpinner').fadeIn(150);
+					$('#loadingSpinner').fadeIn(200);
 				},
 				success: function (response) {
 					alert('선택된 상품이 삭제되었습니다.');

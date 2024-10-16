@@ -54,35 +54,34 @@ public class BuySrvc {
 	@Transactional("txFront")
 	public boolean insert(BuyMasterDto buyMasterDto, ArrayList<BuyDetailDto> listBuyDetailDto) {
 			
-			int result = 0;
+		int result = 0;
+		
+		// 구매 마스터 정보
+		buyMasterDto.setSeq_buy_mst(buyDao.sequenceMaster());
+		result += buyDao.insertMaster(buyMasterDto);
+		
+		// 구매 상세 정보들
+		for (int loop = 0; loop < listBuyDetailDto.size(); loop++) {
 			
-			// 구매 마스터 정보
-			buyMasterDto.setSeq_buy_mst(buyDao.sequenceMaster());
-			result += buyDao.insertMaster(buyMasterDto);
+			listBuyDetailDto.get(loop).setSeq_buy_dtl(buyDao.sequenceDetail());
+			listBuyDetailDto.get(loop).setSeq_buy_mst(buyMasterDto.getSeq_buy_mst());
+			listBuyDetailDto.get(loop).setRegister(buyMasterDto.getRegister());
 			
-			// 구매 상세 정보들
-			for (int loop = 0; loop < listBuyDetailDto.size(); loop++) {
-				
-				listBuyDetailDto.get(loop).setSeq_buy_dtl(buyDao.sequenceDetail());
-				listBuyDetailDto.get(loop).setSeq_buy_mst(buyMasterDto.getSeq_buy_mst());
-				listBuyDetailDto.get(loop).setRegister(buyMasterDto.getRegister());
-				
-				result += buyDao.insertDetail(listBuyDetailDto.get(loop));
-			}
-			
-			// 결제 정보
-			PayDto payDto = new PayDto();
-			payDto.setSeq_pay(payDao.sequence());
-			payDto.setSeq_mbr(buyMasterDto.getSeq_mbr());
-			payDto.setSeq_buy_mst(buyMasterDto.getSeq_buy_mst());
-			payDto.setRegister(buyMasterDto.getSeq_mbr());
-			result += payDao.insert(payDto);
-			
-			if (result == 1 + listBuyDetailDto.size() + 1) return true;
-			else {
-				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-				return false;
-			}
+			result += buyDao.insertDetail(listBuyDetailDto.get(loop));
+		}
+		
+		// 결제 정보
+		PayDto payDto = new PayDto();
+		payDto.setSeq_pay(payDao.sequence());
+		payDto.setSeq_mbr(buyMasterDto.getSeq_mbr());
+		payDto.setSeq_buy_mst(buyMasterDto.getSeq_buy_mst());
+		payDto.setRegister(buyMasterDto.getSeq_mbr());
+		result += payDao.insert(payDto);
+		
+		if (result == 1 + listBuyDetailDto.size() + 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
 	}
-
 }

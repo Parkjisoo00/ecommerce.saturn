@@ -51,7 +51,6 @@
 	text-align:center;
 }
 
-
 .image-mypage1 {
 	height: 10px;
 	background-image: url('/img/mypage/mypage1.png');
@@ -413,10 +412,11 @@ table.headTop_pd th, table.headTop_pd td {
 .hidden-review {
 	display: flex;
 	max-height: 0;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
-	transition: max-height 1s ease-out;
+	transition: max-height 3s ease-out;
 }
 
 .hidden-ingredient {
@@ -460,6 +460,7 @@ table.headTop_pd th, table.headTop_pd td {
 	padding: 0px;
 	color: #666666;
 	text-align: center;
+	height: 1000px;
 }
 
 .visible {
@@ -542,6 +543,52 @@ table.headTop_pd th, table.headTop_pd td {
 
 .cart-table {
 	border: none;
+}
+
+/*----------------------------------------*/
+/* CheckOut Css
+/*----------------------------------------*/
+
+.review-form {
+	margin: 0 auto !important;
+	border-top: 1px solid #111 !important;
+	border-bottom: 1px solid #ddd !important;
+	width: 80% !important;
+}
+
+.review-title {
+	border-top: 1px solid #ddd !important;
+	border-bottom: 1px solid #ddd !important;
+	padding: 10px !important;
+}
+
+.review-photo-name {
+	padding: 10px !important;
+	display: flex !important;
+	border-top: 1px solid #ddd !important;
+	border-bottom: 1px solid #ddd !important;
+}
+
+.photo {
+	width: 20% !important;
+}
+
+.product-name {
+	width: 100% !important;
+}
+
+.review-text {
+	margin-top: 10px !important;
+	width: 100% !important;
+	height: 146px !important;
+	padding: 10px 0px !important;
+	margin-bottom: 20px !important;
+	border: none !important;
+	color: #111 !important;
+	outline: none !important;
+	resize: none !important;
+	border: 1px solid #ddd !important;
+	height: 100% !important;
 }
 
 /*----------------------------------------*/

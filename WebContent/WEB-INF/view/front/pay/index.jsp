@@ -9,76 +9,76 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
-		function goTypeT(value, value2, value3, value4, value5) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			document.getElementById("currentPage").value = "1";
-			frmMain.type.setAttribute("value", value);
-			frmMain.filter.setAttribute("value", value2);
-			frmMain.corp_nm.setAttribute("value", value3);
-			frmMain.prd_type.setAttribute("value", value4);
-			frmMain.cd_ctg_m.setAttribute("value", value5);
-			
-			frmMain.action = "/front/sale/total_list.web";
-			frmMain.target = "";
-			frmMain.submit();
-		}
+	function goTypeT(value, value2, value3, value4, value5) {
 		
-		function goTypeF(value, value2, value3, value4, value5) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			document.getElementById("currentPage").value = "1";
-			frmMain.type.setAttribute("value", value);
-			frmMain.filter.setAttribute("value", value2);
-			frmMain.corp_nm.setAttribute("value", value3);
-			frmMain.prd_type.setAttribute("value", value4);
-			frmMain.cd_ctg_m.setAttribute("value", value5);
-			
-			frmMain.action = "/front/sale/function_list.web";
-			frmMain.target = "";
-			frmMain.submit();
-		}
+		var frmMain = document.getElementById("frmMain");
 		
-		function goTypeI(value, value2, value3, value4, value5) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			document.getElementById("currentPage").value = "1";
-			frmMain.type.setAttribute("value", value);
-			frmMain.filter.setAttribute("value", value2);
-			frmMain.corp_nm.setAttribute("value", value3);
-			frmMain.prd_type.setAttribute("value", value4);
-			frmMain.cd_ctg_m.setAttribute("value", value5);
-			
-			frmMain.action = "/front/sale/ingredient_list.web";
-			frmMain.target = "";
-			frmMain.submit();
-		}
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
 		
-		function goTypeG(value, value2, value3, value4, value5) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			document.getElementById("currentPage").value = "1";
-			frmMain.type.setAttribute("value", value);
-			frmMain.filter.setAttribute("value", value2);
-			frmMain.corp_nm.setAttribute("value", value3);
-			frmMain.prd_type.setAttribute("value", value4);
-			frmMain.cd_ctg_m.setAttribute("value", value5);
-			
-			frmMain.action = "/front/sale/gender_list.web";
-			frmMain.target = "";
-			frmMain.submit();
-		}
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.target = "";
+		frmMain.submit();
+	}
 	
-		function writeProc() {
-			
-			var frmMain = document.getElementById("frmMain");
-			frmMain.action = "/front/buy/writeProc.web";
-			frmMain.submit();
-		}
+	function goTypeF(value, value2, value3, value4, value5) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		frmMain.action = "/front/sale/function_list.web";
+		frmMain.target = "";
+		frmMain.submit();
+	}
+	
+	function goTypeI(value, value2, value3, value4, value5) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		frmMain.action = "/front/sale/ingredient_list.web";
+		frmMain.target = "";
+		frmMain.submit();
+	}
+	
+	function goTypeG(value, value2, value3, value4, value5) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		frmMain.action = "/front/sale/gender_list.web";
+		frmMain.target = "";
+		frmMain.submit();
+	}
+
+	function writeProc() {
+		
+		var frmMain = document.getElementById("frmMain");
+		frmMain.action = "/front/buy/writeProc.web";
+		frmMain.submit();
+	}
 	</script>
 
 	<!-- Google Font -->
@@ -97,7 +97,7 @@
 <input type="hidden" name="prd_type"		id="prd_type"/>
 <input type="hidden" name="filter"			id="filter"/>
 <input type="hidden" name="type"			id="type"/>
-<input type="hidden" name="currentPage"		id="currentPage" value="${paging.currentPage}"/>
+<input type="hidden" name="currentPage"		id="currentPage"	value="${paging.currentPage}"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>

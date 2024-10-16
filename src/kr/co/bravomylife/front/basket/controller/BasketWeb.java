@@ -90,13 +90,13 @@ public class BasketWeb extends Common {
 			
 			List<Map<String, Object>> items = requestBody.get("items");
 			
-			logger.debug("삭제할 상품 목록" + items);
+			// logger.debug("삭제할 상품 목록" + items);
 			
 			for (Map<String, Object> item : items) {
 				
 				int seqSle = Integer.parseInt((String) item.get("seq_sle"));
 				
-				logger.debug("삭제 중인 상품 번호" + seqSle);
+				// logger.debug("삭제 중인 상품 번호" + seqSle);
 				
 				basketSrvc.removeBasket(seqMbr, seqSle);
 				
@@ -123,16 +123,15 @@ public class BasketWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/basket/setBasket.web")
-	public ModelAndView setBasket(HttpServletRequest request, HttpServletResponse response
-			, String item) {
+	public ModelAndView setBasket(HttpServletRequest request, HttpServletResponse response, String item) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			logger.debug("item=" + item);
+			// logger.debug("item 확인" + item);
 			
 			String[] arrBasket = item.split("\\|");
-			logger.debug("arrBasket.length=" + arrBasket.length);
+			// logger.debug("받은 장바구니 확인" + arrBasket.length);
 			
 			BasketDto basketDto = new BasketDto();
 			
@@ -191,13 +190,13 @@ public class BasketWeb extends Common {
 			DecimalFormat formatter = new DecimalFormat("#,###");
 			
 			/*
-			 * Controller에 온전히 동작하는 추가 기능 코드를 짜둔 상태
-			 * 이하 주석 처리가 된 코드는 Controller에서 처리할지 Jsp에서 자바 스크립트로 처리할지
-			 * 어느 부분이 기능적으로 더 올바른지 고민 후 결정
-			int totalSeqsleSum = 0;
-			int totalPointSum = 0;
-			int totalPriceSum = 0;
-			totalSeqsleSum = basketList.size();
+			 * 주석으로 처리된 코드는 총합 가격과 총합 포인트에 , 를 찍는 기능
+			 * 추후 Controller에서 처리하는 방식과 Jsp에서 처리하는 방식중 하나를 선택
+			 * 이 주석을 작성할 시점에는 장바구니 Jsp에 제이쿼리와 ajax기능을 이용하여 비동기 데이터 전송 및 실시간 UI 변경 코드가 많아 Jsp에서 함께 처리하는 것이 좋다고 판단
+			 * int totalSeqsleSum = 0;
+			 * int totalPointSum = 0;
+			 * int totalPriceSum = 0;
+			 * totalSeqsleSum = basketList.size();
 			*/
 			
 			for (BasketDto item : basketList) {
@@ -221,20 +220,21 @@ public class BasketWeb extends Common {
 				formattedList.add(formattedItem);
 				
 				/*
-				totalPointSum += item.getTotal_point();
-				totalPriceSum += item.getTotal_price();
+				 * totalPointSum += item.getTotal_point();
+				 * totalPriceSum += item.getTotal_price();
 				*/
 			}
 			
 			/*
-			pagingDto.setSeq_sle_count(totalSeqsleSum);
-			pagingDto.setTotal_point_sum(totalPointSum);
-			pagingDto.setTotal_price_sum(totalPriceSum);
+			 * pagingDto.setSeq_sle_count(totalSeqsleSum);
+			 * pagingDto.setTotal_point_sum(totalPointSum);
+			 * pagingDto.setTotal_price_sum(totalPriceSum);
+			*/
 			
-			
-			logger.debug("개수 확인" + pagingDto.getSeq_sle_count());
-			logger.debug("포인트 확인" + pagingDto.getTotal_point_sum());
-			logger.debug("가격 확인" + pagingDto.getTotal_price_sum());
+			/*
+			 * logger.debug("개수 확인" + pagingDto.getSeq_sle_count());
+			 * logger.debug("포인트 확인" + pagingDto.getTotal_point_sum());
+			 * logger.debug("가격 확인" + pagingDto.getTotal_price_sum());
 			*/
 			
 			pagingListDto.setList(formattedList);
@@ -251,60 +251,6 @@ public class BasketWeb extends Common {
 		
 		return mav;
 	}
-	
-	/**
-	 * @param request [요청 서블릿]
-	 * @param response [응답 서블릿]
-	 * @return ModelAndView
-	 * 
-	 * @since 2024-10-11
-	 * <p>DESCRIPTION:</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	 /*
-	  * Count 기준이 아닌 ajax와 json에 mvc구조의 mav 객체를 더해 전체 List를 가지고 오려고 했던 처음 구상 코드
-	  * 추후 다시한번 검토 후 삭제
-	@RequestMapping(value = "/front/basket/main.json", method = RequestMethod.POST, headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
-	public @ResponseBody List<Map<String, Object>> main(HttpServletRequest request, @RequestBody(required = false) BasketDto basketDto) {
-		
-		List<Map<String, Object>> responseList = new ArrayList<>();
-		
-		try {
-			
-			if (basketDto == null) {
-				basketDto = new BasketDto();
-			}
-			
-			basketDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
-			
-			List<BasketDto> basketList = basketSrvc.ajaxlisting(basketDto);
-			
-			for (BasketDto basket : basketList) {
-				Map<String, Object> map = new HashMap<>();
-				map.put("seq_sle", basket.getSeq_sle());
-				map.put("sle_nm", basket.getSle_nm());
-				map.put("price", basket.getPrice());
-				map.put("count", basket.getCount());
-				map.put("img", basket.getImg());
-				map.put("point_stack", basket.getPoint_stack());
-				map.put("cd_ctg_m", basket.getCd_ctg_m());
-				map.put("cd_ctg_b", basket.getCd_ctg_b());
-				map.put("total_price", basket.getTotal_price());
-				map.put("total_point", basket.getTotal_point());
-				map.put("dt_reg", basket.getDt_reg());
-				
-				responseList.add(map);
-			}
-		}
-		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".main()] " + e.getMessage(), e);
-		}
-		finally {}
-		
-		return responseList;
-	}
-	*/
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -333,6 +279,7 @@ public class BasketWeb extends Common {
 			for (BasketDto basket : basketList) {
 				
 				Map<String, Object> map = new HashMap<>();
+				
 				map.put("seq_sle", basket.getSeq_sle());
 				map.put("sle_nm", basket.getSle_nm());
 				map.put("price", basket.getPrice());
@@ -347,11 +294,12 @@ public class BasketWeb extends Common {
 				map.put("total_price_sum", basket.getTotal_price_sum());
 				map.put("total_point_sum", basket.getTotal_point_sum());
 				
-				logger.debug("개별 수량" + basket.getCount());
-				logger.debug("개별 수량" + basket.getCount());
-				
-				logger.debug("개별 총합 가격" + basket.getTotal_price());
-				logger.debug("개별 총합 포인트" + basket.getTotal_point());
+				/*
+				 * logger.debug("개별 수량" + basket.getCount());
+				 * logger.debug("개별 수량" + basket.getCount());
+				 * logger.debug("개별 총합 가격" + basket.getTotal_price());
+				 * logger.debug("개별 총합 포인트" + basket.getTotal_point());
+				*/
 				
 				responseList.add(map);
 			}

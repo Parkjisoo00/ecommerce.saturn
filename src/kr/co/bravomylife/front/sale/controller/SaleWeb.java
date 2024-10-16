@@ -80,7 +80,7 @@ public class SaleWeb extends Common {
 		
 		String flg_like = saleDto.getFlg_like();
 		
-		logger.debug("flg_like 값 확인" + flg_like);
+		// logger.debug("flg_like 값 확인" + flg_like);
 		
 		try {
 			
@@ -115,7 +115,7 @@ public class SaleWeb extends Common {
 		
 		String flg_like = saleDto.getFlg_like();
 		
-		logger.debug("flg_like 값 확인" + flg_like);
+		// logger.debug("flg_like 값 확인" + flg_like);
 		
 		try {
 			
@@ -175,11 +175,13 @@ public class SaleWeb extends Common {
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
 			
-			logger.debug("type 확인" + " = " + type);
-			logger.debug("중분류 확인" + " = " + pagingDto.getCd_ctg_m());
-			logger.debug("필터 확인" + " = " + filter);
-			logger.debug("브랜드명 확인" + " = " + pagingDto.getCorp_nm());
-			logger.debug("제품 타입 확인" + " = " + pagingDto.getPrd_type());
+			/*
+			 * logger.debug("type 확인" + " = " + type);
+			 * logger.debug("중분류 확인" + " = " + pagingDto.getCd_ctg_m());
+			 * logger.debug("필터 확인" + " = " + filter);
+			 * logger.debug("브랜드명 확인" + " = " + pagingDto.getCorp_nm());
+			 * logger.debug("제품 타입 확인" + " = " + pagingDto.getPrd_type());
+			*/
 			
 			mav.setViewName("front/sale/function_list");
 		}
@@ -234,11 +236,13 @@ public class SaleWeb extends Common {
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
 			
-			logger.debug("type 확인" + " = " + type);
-			logger.debug("중분류 확인" + " = " + pagingDto.getCd_ctg_m());
-			logger.debug("필터 확인" + " = " + filter);
-			logger.debug("브랜드명 확인" + " = " + pagingDto.getCorp_nm());
-			logger.debug("제품 타입 확인" + " = " + pagingDto.getPrd_type());
+			/*
+			 * logger.debug("type 확인" + " = " + type);
+			 * logger.debug("중분류 확인" + " = " + pagingDto.getCd_ctg_m());
+			 * logger.debug("필터 확인" + " = " + filter);
+			 * logger.debug("브랜드명 확인" + " = " + pagingDto.getCorp_nm());
+			 * logger.debug("제품 타입 확인" + " = " + pagingDto.getPrd_type());
+			*/
 			
 			mav.setViewName("front/sale/ingredient_list");
 		}
@@ -267,30 +271,30 @@ public class SaleWeb extends Common {
 		
 		try {
 			
-			logger.debug("페이지당 게시글 수" + " = " + pagingDto.getLinePerPage());
+			// logger.debug("페이지당 게시글 수" + " = " + pagingDto.getLinePerPage());
 			
 			pagingDto.setFilter(filter);
 			
-			/* [TODO] front/sale/~.list.Jsp의 자바 스크립트 함수들을 대체하는 코드 추후 작업
-			if (pagingDto.getFilter().equals("LowP")) {
-				pagingDto.setCorp_nm("");
-				pagingDto.setPrd_type("");
-			} else if (pagingDto.getFilter().equals("HighP")) {
-				pagingDto.setCorp_nm("");
-				pagingDto.setPrd_type("");
-			} else if (pagingDto.getFilter().equals("LowP")) {
-				pagingDto.setCorp_nm("");
-				pagingDto.setPrd_type("");
-			} else if (pagingDto.getFilter().equals("BestP")) {
-				pagingDto.setCorp_nm("");
-				pagingDto.setPrd_type("");
-			} else if (pagingDto.getPrd_type() != null && pagingDto.getPrd_type() != "") {
-				pagingDto.setFilter("");
-				pagingDto.setCorp_nm("");
-			} else if (pagingDto.getCorp_nm() != null && pagingDto.getCorp_nm() != "") {
-				pagingDto.setFilter("");
-				pagingDto.setPrd_type("");
-			}
+			/*
+			 * if (pagingDto.getFilter().equals("LowP")) {
+			 * 	pagingDto.setCorp_nm("");
+			 * 	pagingDto.setPrd_type("");
+			 * } else if (pagingDto.getFilter().equals("HighP")) {
+			 * 	pagingDto.setCorp_nm("");
+			 * 	pagingDto.setPrd_type("");
+			 * } else if (pagingDto.getFilter().equals("LowP")) {
+			 * 	pagingDto.setCorp_nm("");
+			 * 	pagingDto.setPrd_type("");
+			 * } else if (pagingDto.getFilter().equals("BestP")) {
+			 * 	pagingDto.setCorp_nm("");
+			 * 	pagingDto.setPrd_type("");
+			 * } else if (pagingDto.getPrd_type() != null && pagingDto.getPrd_type() != "") {
+			 * 	pagingDto.setFilter("");
+			 * 	pagingDto.setCorp_nm("");
+			 * } else if (pagingDto.getCorp_nm() != null && pagingDto.getCorp_nm() != "") {
+			 * 	pagingDto.setFilter("");
+			 * 	pagingDto.setPrd_type("");
+			 * }
 			*/
 			
 			if ("M".equals(type)) {
@@ -303,11 +307,13 @@ public class SaleWeb extends Common {
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
 			
-			logger.debug("type 확인" + " = " + type);
-			logger.debug("중분류 확인" + " = " + pagingDto.getCd_ctg_m());
-			logger.debug("필터 확인" + " = " + filter);
-			logger.debug("브랜드명 확인" + " = " + pagingDto.getCorp_nm());
-			logger.debug("제품 타입 확인" + " = " + pagingDto.getPrd_type());
+			/*
+			 * logger.debug("type 확인" + " = " + type);
+			 * logger.debug("중분류 확인" + " = " + pagingDto.getCd_ctg_m());
+			 * logger.debug("필터 확인" + " = " + filter);
+			 * logger.debug("브랜드명 확인" + " = " + pagingDto.getCorp_nm());
+			 * logger.debug("제품 타입 확인" + " = " + pagingDto.getPrd_type());
+			*/
 			
 			mav.setViewName("front/sale/gender_list");
 		}
@@ -342,11 +348,13 @@ public class SaleWeb extends Common {
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
 			
-			logger.debug("type 확인" + " = " + type);
-			logger.debug("중분류 확인" + " = " + pagingDto.getCd_ctg_m());
-			logger.debug("필터 확인" + " = " + filter);
-			logger.debug("브랜드명 확인" + " = " + pagingDto.getCorp_nm());
-			logger.debug("제품 타입 확인" + " = " + pagingDto.getPrd_type());
+			/*
+			 * logger.debug("type 확인" + " = " + type);
+			 * logger.debug("중분류 확인" + " = " + pagingDto.getCd_ctg_m());
+			 * logger.debug("필터 확인" + " = " + filter);
+			 * logger.debug("브랜드명 확인" + " = " + pagingDto.getCorp_nm());
+			 * logger.debug("제품 타입 확인" + " = " + pagingDto.getPrd_type());
+			*/
 			
 			mav.setViewName("front/sale/total_list");
 		}

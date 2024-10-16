@@ -21,6 +21,7 @@
 package kr.co.bravomylife.front.buy.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -86,8 +87,8 @@ public class BuyWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			logger.debug("" + buyDetailListDto.getBuyList().size());
-			logger.debug("사용한 포인트" + usePoint);
+			// logger.debug("" + buyDetailListDto.getBuyList().size());
+			// logger.debug("사용한 포인트" + usePoint);
 			
 			String finalSleName = "";	// 마지막 판매 상품명
 			
@@ -103,7 +104,7 @@ public class BuyWeb extends Common {
 					
 					if (buyDetailListDto.getBuyList().get(loop).getCount() >= 1) {
 						
-						logger.debug(loop + " : seq_sle(" + buyDetailListDto.getBuyList().get(loop).getSeq_sle() + ")" + " + count(" + buyDetailListDto.getBuyList().get(loop).getCount() + ")");
+						// logger.debug(loop + " : seq_sle(" + buyDetailListDto.getBuyList().get(loop).getSeq_sle() + ")" + " + count(" + buyDetailListDto.getBuyList().get(loop).getCount() + ")");
 						
 						// 갯수가 1개 이상인 상품
 						listBuyDetailDto.add(buyDetailListDto.getBuyList().get(loop));
@@ -124,7 +125,7 @@ public class BuyWeb extends Common {
 					}
 				}
 			}
-			logger.debug("count=" + listBuyDetailDto.size());
+			// logger.debug("count=" + listBuyDetailDto.size());
 			
 			// 선택된 상품이 1개 이상을 경우만 구매 실행
 			if (listBuyDetailDto.size() > 0) {
@@ -206,18 +207,24 @@ public class BuyWeb extends Common {
 			
 			PagingListDto _reviewpagingDto = saleSrvc.reviewList(reviewpagingDto);
 			
-			
 			List<SaleDto> reviewList = (List<SaleDto>) _reviewpagingDto.getList();
 			
-			if (reviewList.get(0).getRate_review().equals("") || reviewList.get(0).getRate_review() == null) {
+			if (reviewList != null && !reviewList.isEmpty()) {
 				
-				_reviewpagingDto.setList("");
-			} else {
-				for (int loop = 0; loop < reviewList.size(); loop++) {
+				if (reviewList.get(0).getRate_review().equals("") || reviewList.get(0).getRate_review() == null) {
 					
-					reviewList.get(loop).setMbr_nm(aes.decode(reviewList.get(loop).getMbr_nm()));
+					_reviewpagingDto.setList("");
+				} else {
+					
+					for (int loop = 0; loop < reviewList.size(); loop++) {
+						reviewList.get(loop).setMbr_nm(aes.decode(reviewList.get(loop).getMbr_nm()));
+					}
 				}
+			} else {
+				
+				mav.addObject("reviewList", Collections.emptyList());
 			}
+			
 			mav.addObject("reviewList"	, _reviewpagingDto.getList());
 			
 			mav.setViewName("front/buy/writeForm");
