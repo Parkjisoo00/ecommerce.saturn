@@ -331,13 +331,13 @@ public class BoardWeb extends Common{
 		
 		try {
 			
-			String contents = boardDto.getContent();
+			//String contents = boardDto.getContent();
 			
-			contents = contents.replace("<p>", "").replace("</p>", "");
+			//contents = contents.replaceAll("<\\s*/?\\s*p\\s*>", "");
+			//contents = contents.replace("<p>", "").replace("</p>", "");
+			//contents = contents.replace("<span>", "").replace("</span>", "");
 			
-			logger.debug("작성 내용 확인" + " = " + contents);
 			
-			logger.debug("++++++++++++++++++++++++++++++++++++++++++++++++++" );
 			
 			// boardDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
 			

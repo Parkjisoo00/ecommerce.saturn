@@ -74,49 +74,50 @@
 <section class="shop spad">
 	<div class="container">
 		<article class="txtCenter">
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">제목 <span></span></p>
-					<input type="text" id="title" name="title" value="${boardDto.title}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
-				</div>
-			</div>	
-			<br/>
-			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-				<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">
-					<img src="/img/news/${boardDto.file_save}" alt="첨부 이미지" style="width: 300px; height: auto;" />
-				</div>
-			</div>
-			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">내용 <span></span></p>
-					<textarea id="content" name="content" style="width: 50%; height: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px; overflow: auto;">${boardDto.content}</textarea>
-				</div>
-			</div>
-			<br/>
-			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">등록 일자 <span></span></p>
-					<input type="text" id="dt_reg" name="dt_reg" value="${boardDto.dt_reg}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
+			<div class="col-lg-8 col-md-8 col-sm-8">
+				<div class="blog__details__content">
+					<div class="blog__details__item">
+						<img src="/img/news/${boardDto.file_save}" alt="" style="margin-left: 200px;" />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						
+						<div class="blog__details__item__title">
+							<span class="tip">게시글 제목</span>
+							<h4>${boardDto.title}</h4>
+							<ul>
+								<li><span>[등록 일자]</span></li>
+								<li>${boardDto.dt_reg}</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
-			<br/>
-			<br/>
+			<div class="blog__details__quote">
+			<div class="icon"><i class="fa fa-quote-left"></i></div>
+				<p>${boardDto.content}</p>
+			</div>
+			<br />
+			<br />
+			<br />
+			<br />
+
 			<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-				<c:if test="${boardDto.seq_reply == 0}">
-				</c:if>
-					<input type="button" value="목록" style="width:100px" onclick="javascript:goList(4);"/>
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="checkout__form__input">
+					<c:if test="${boardDto.seq_reply == 0}">
+					</c:if>
+					<input type="button" value="목록" style="width:150px; font-size: 20px;" onclick="javascript:goList(4);" />
+					</div>
 				</div>
-			</div>
 			</div>
 		</article>
 	</div>
 </section>
+
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
 	<%@ include file="/include/common/footerpic.jsp" %>
