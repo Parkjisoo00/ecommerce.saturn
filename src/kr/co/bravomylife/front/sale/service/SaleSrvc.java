@@ -23,6 +23,8 @@ package kr.co.bravomylife.front.sale.service;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
@@ -42,6 +44,49 @@ public class SaleSrvc {
 	
 	@Inject
 	SaleDao saleDao;
+	
+	@Transactional("txFront")
+	public boolean setLike(SaleDto saleDto) {
+		try {
+			
+			int check = saleDao.setLikeCheck(saleDto);
+			
+			if (check == 1) {
+				
+				saleDao.setLikeUpdate(saleDto);
+				return true;
+			}
+			else if (check == 0) {
+								
+				int result = saleDao.setLikeInsert(saleDto);
+				if (result == 1) {
+					
+					return true;
+				} else {
+					
+					TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+					return false;
+				}
+			}
+			return false;
+		} catch (Exception e) {
+			
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	@Transactional("txFront")
+	public boolean delLike(SaleDto saleDto) {
+		
+		int result = saleDao.delLike(saleDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
 	
 	public PagingListDto reviewList(PagingDto pagingDto) {
 		

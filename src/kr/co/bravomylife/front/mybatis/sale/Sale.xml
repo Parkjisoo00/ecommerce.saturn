@@ -2,6 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.sale.Sale">
 
+	<insert id="setLikeInsert" parameterType="saleDto">
+		INSERT INTO TB_LIKE
+			(SEQ_LIKE, SEQ_MBR, SEQ_SLE, FLG_LIKE, DT_REG, REGISTER, DT_UPT, UPDATER)
+		VALUES
+			(SQ_SEQ_LIKE.NEXTVAL, #{seq_mbr}, #{seq_sle}, #{flg_like}, SYSDATE, #{register}, NULL, NULL)
+	</insert>
+
+	<update id="setLikeUpdate" parameterType="saleDto">
+		UPDATE
+			TB_LIKE
+		SET
+			FLG_LIKE	= #{flg_like}
+		WHERE
+			SEQ_MBR		= #{seq_mbr}
+			AND SEQ_SLE	= #{seq_sle}
+			AND FLG_LIKE	= 'N'
+	</update>
+
+	<select id="setLikeCheck" parameterType="saleDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(SEQ_SLE)
+		FROM
+			TB_LIKE
+		WHERE
+			SEQ_MBR			= #{seq_mbr}
+			AND SEQ_SLE		= #{seq_sle}
+	</select>
+
+	<update id="delLike" parameterType="saleDto">
+		UPDATE
+			TB_LIKE
+		SET
+			FLG_LIKE		= #{flg_like}
+		WHERE
+			SEQ_MBR			= #{seq_mbr}
+			AND SEQ_SLE		= #{seq_sle}
+			AND FLG_LIKE	= 'Y'
+	</update>
+
 	<select id="reviewCount" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
 			COUNT(ROWNUM)

@@ -20,6 +20,9 @@
  */
 package kr.co.bravomylife.front.sale.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +30,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.front.basket.controller.BasketWeb;
@@ -53,6 +59,78 @@ public class SaleWeb extends Common {
 	
 	@Inject
 	private SaleSrvc saleSrvc;
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-16
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/sale/setLike.json",  method = RequestMethod.POST, consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
+	public @ResponseBody Map<String, Object> setLike(HttpServletRequest request, @RequestBody SaleDto saleDto) {
+		
+		Map<String, Object> response = new HashMap<>();
+		
+		saleDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+		saleDto.setRegister(saleDto.getSeq_mbr());
+		
+		String flg_like = saleDto.getFlg_like();
+		
+		logger.debug("flg_like 값 확인" + flg_like);
+		
+		try {
+			
+			if (saleSrvc.setLike(saleDto)) {
+				response.put("flg_like", flg_like);
+			}
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".delLike()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return response;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-16
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/sale/delLike.json",  method = RequestMethod.POST, consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
+	public @ResponseBody Map<String, Object> delLike(HttpServletRequest request, @RequestBody SaleDto saleDto) {
+		
+		Map<String, Object> response = new HashMap<>();
+		
+		saleDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+		
+		String flg_like = saleDto.getFlg_like();
+		
+		logger.debug("flg_like 값 확인" + flg_like);
+		
+		try {
+			
+			if (saleSrvc.delLike(saleDto)) {
+				response.put("flg_like", flg_like);
+			}
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".delLike()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return response;
+	}
+	
 	
 	/**
 	 * @param request [요청 서블릿]

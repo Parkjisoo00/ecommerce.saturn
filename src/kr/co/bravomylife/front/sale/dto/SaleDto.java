@@ -32,6 +32,7 @@ public class SaleDto {
 
 	private int rnum				= 0;
 	private int seq_mbr				= 0;
+	private int seq_like			= 0;
 	private String sle_nm			= "";
 	private Integer seq_sle			= 0;
 	private String img				= "";
@@ -68,6 +69,12 @@ public class SaleDto {
 	private String searchWord		= "";
 	
 	
+	public int getSeq_like() {
+		return seq_like;
+	}
+	public void setSeq_like(int seq_like) {
+		this.seq_like = seq_like;
+	}
 	public int getSeq_review() {
 		return seq_review;
 	}

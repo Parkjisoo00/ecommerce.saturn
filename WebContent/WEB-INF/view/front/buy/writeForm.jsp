@@ -19,6 +19,70 @@
 	var isLogin = true;
 	</c:if>
 	
+	function setLike(value) {
+		
+		if (!isLogin) {
+			alert("로그인이 필요합니다");
+			return;
+		}
+		
+		var seq_sle	= document.getElementById("seq_sle").value;
+		var myData = { flg_like: value, seq_sle: seq_sle };
+		
+		$.ajax({
+			type: "POST",
+			url: "/front/sale/setLike.json",
+			dataType: "json",
+			contentType: "application/json; charset=UTF-8",
+			data: JSON.stringify(myData),
+			success: function(res) {
+				
+				alert("받아온 값" + res.flg_like);
+				
+				if (res.flg_like === 'Y') {
+					$('.like-button').attr({
+						'style': 'background-color: #ca1515 !important; padding: 5px !important; border-radius: 50% !important;',
+						'href': 'javascript:delLike(\'N\');'
+					});
+					$('.icon_heart_alt').attr(
+							'style', 'color: white !important;'
+					);
+				}
+			},
+		});
+	}
+	
+	function delLike(value) {
+		
+		if (!isLogin) {
+			alert("로그인이 필요합니다");
+			return;
+		}
+		
+		var seq_sle	= document.getElementById("seq_sle").value;
+		var myData = { flg_like: value, seq_sle: seq_sle };
+		
+		$.ajax({
+			type: "POST",
+			url: "/front/sale/delLike.json",
+			dataType: "json",
+			contentType: "application/json; charset=UTF-8",
+			data: JSON.stringify(myData),
+			success: function(res) {
+				
+				if (res.flg_like === 'N') {
+					$('.like-button').attr({
+						'style': 'background-color: white !important; color: #ca1515 !important;',
+						'href': 'javascript:setLike(\'Y\');'
+					});
+					$('.icon_heart_alt').attr(
+							'style', 'font-size: 18px !important; color: #666666 !important; display: flex !important; align-items: center !important; justify-content: center !important; transform: translateY(14px) !important;'
+					);
+				}
+			},
+		});
+	}
+		
 	function goTypeT(value, value2, value3, value4, value5) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -311,14 +375,14 @@
 								<c:choose>
 									<c:when test="${saleDto.flg_like == 'Y'}">
 										<li>
-											<a href="javascript:delLike();" style="background-color: #ca1515 !important; padding: 5px !important; border-radius: 50% !important;">
+											<a class="like-button" href="javascript:delLike('N');" style="background-color: #ca1515 !important; padding: 5px !important; border-radius: 50% !important;">
 												<span class="icon_heart_alt" style="color: white !important;"></span>
 											</a>
 										</li>
 									</c:when>
 									<c:otherwise>
 										<li>
-											<a href="javascript:setLike();"  style="padding: 5px !important; border-radius: 50% !important;">
+											<a href="javascript:setLike('Y');"  style="padding: 5px !important; border-radius: 50% !important;">
 												<span class="icon_heart_alt"></span>
 											</a>
 										</li>

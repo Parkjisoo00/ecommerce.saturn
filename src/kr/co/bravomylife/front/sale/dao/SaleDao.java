@@ -38,6 +38,22 @@ import kr.co.bravomylife.front.sale.dto.SaleDto;
  */
 @Repository("kr.co.bravomylife.front.sale.dao.SaleDao")
 public class SaleDao extends BaseDao {
+		
+	public int setLikeUpdate(SaleDto saleDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.sale.Sale.setLikeUpdate", saleDto);
+	}
+	
+	public int setLikeCheck(SaleDto saleDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.setLikeCheck", saleDto);
+	}
+	
+	public int setLikeInsert(SaleDto saleDto) {
+		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.sale.Sale.setLikeInsert", saleDto);
+	}
+	
+	public int delLike(SaleDto saleDto) {		
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.sale.Sale.delLike", saleDto);
+	}
 	
 	public List<SaleDto> reviewList(PagingDto pagingDto) {
 		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.reviewList", pagingDto);
