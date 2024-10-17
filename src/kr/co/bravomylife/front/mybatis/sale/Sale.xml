@@ -2,72 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.sale.Sale">
 
-	<select id="listingLike" parameterType="pagingDto" resultType="pagingDto">
-		SELECT
-			sle.SEQ_SLE
-			, sle.SLE_NM
-			, sle.DESCES
-			, NVL(sle.POINT_STACK, 0) POINT_STACK
-			, sle.IMG
-			, sle.PRICE_SALE
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
-			, (sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) * (sle.POINT_STACK / 100)) POINT_VALUE
-			, DECODE(sle.PRD_TYPE, 1, '액상', 2, '정', 3, '캡슐', 4, '베지캡슐', 5, '젤리', 6, '분말', 7, '츄어블', '미정') PRD_TYPE
-			, sle.CORP_NM
-			, rate.RATE_STAR
-			, rate.COUNT
-			, sle.cd_ctg_m
-			, sle.cd_ctg_b
-			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
-			, sle.DISCOUNT
-			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') AS dt_reg
-			, sle.COUNT_STOCK
-			, best.FLG_BEST
-			, review.SEQ_REVIEW
-			, likeTbl.FLG_LIKE
-		FROM
-			TB_SLE sle
-		LEFT OUTER JOIN
-			TB_RATE rate
-		ON
-			sle.SEQ_SLE = rate.SEQ_SLE
-		LEFT OUTER JOIN
-			TB_BEST best
-		ON
-			sle.SEQ_SLE = best.SEQ_SLE
-		LEFT OUTER JOIN
-			TB_REVIEW review
-		ON
-			sle.SEQ_SLE = review.SEQ_SLE
-		LEFT OUTER JOIN
-			TB_LIKE likeTbl
-		ON
-			sle.SEQ_SLE = likeTbl.SEQ_SLE
-			AND likeTbl.SEQ_MBR = #{seq_mbr}
-		WHERE
-			likeTbl.SEQ_MBR = #{seq_mbr}	
-			AND sle.CD_STATE_SALE = 2
-			AND likeTbl.FLG_LIKE = 'Y'
-	</select>
-
-	<sql id="listingLikewhere">
-		SEQ_MBR			= #{seq_mbr}
-		AND FLG_DELETE	= 'N'
-		AND FLG_LIKE = 'Y'
-	</sql>
-	
-	<select id="myLikeCount" parameterType="pagingDto" resultType="java.lang.Integer">
-		SELECT
-			COUNT(ROWNUM)
-		FROM
-			TB_SLE sle
-		WHERE
-		<include refid="myLikewhere" />
-	</select>
-	
-	<sql id="myLikewhere">
-		sle.SEQ_SLE = #{seq_sle}
-	</sql>
+	<insert id="insertReview" parameterType="saleDto">
+		INSERT INTO TB_REVIEW
+			(SEQ_REVIEW, SEQ_SLE, SEQ_MBR, FLG_DELETE, RATE_REVIEW, IMG, DT_REG, REGISTER, DT_UPT, UPDATER)
+		VALUES
+			(SQ_SEQ_REVIEW.NEXTVAL, #{seq_sle}, #{seq_mbr}, 'N', #{rate_review}, #{img}, SYSDATE, #{register}, NULL, NULL)
+	</insert>
 
 	<insert id="setLikeInsert" parameterType="saleDto">
 		INSERT INTO TB_LIKE

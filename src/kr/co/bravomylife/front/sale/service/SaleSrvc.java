@@ -46,6 +46,18 @@ public class SaleSrvc {
 	SaleDao saleDao;
 	
 	@Transactional("txFront")
+	public boolean delLike(SaleDto saleDto) {
+		
+		int result = saleDao.delLike(saleDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	@Transactional("txFront")
 	public boolean setLike(SaleDto saleDto) {
 		try {
 			
@@ -77,9 +89,9 @@ public class SaleSrvc {
 	}
 	
 	@Transactional("txFront")
-	public boolean delLike(SaleDto saleDto) {
+	public boolean insertReview(SaleDto saleDto) {
 		
-		int result = saleDao.delLike(saleDto);
+		int result = saleDao.insertReview(saleDto);
 		
 		if (result == 1) return true;
 		else {
@@ -87,24 +99,6 @@ public class SaleSrvc {
 			return false;
 		}
 	}
-	
-	public PagingListDto listingLike(PagingDto pagingDto) {
-		
-		PagingListDto pagingListDto = new PagingListDto();
-		
-		int totalLine = saleDao.myLikeCount(pagingDto);
-		int totalPage = (int) Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
-		pagingDto.setTotalLine(totalLine);
-		pagingDto.setTotalPage(totalPage);
-		if (totalPage == 0) pagingDto.setCurrentPage(1);
-		
-		pagingListDto.setPaging(pagingDto);
-		pagingListDto.setList(saleDao.listingLike(pagingDto));
-		
-		return pagingListDto;
-	}
-	
-
 	
 	public PagingListDto reviewList(PagingDto pagingDto) {
 		

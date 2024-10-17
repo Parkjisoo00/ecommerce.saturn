@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import kr.co.bravomylife.front.basket.dto.BasketDto;
 import kr.co.bravomylife.front.common.dao.BaseDao;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
@@ -39,7 +38,11 @@ import kr.co.bravomylife.front.sale.dto.SaleDto;
  */
 @Repository("kr.co.bravomylife.front.sale.dao.SaleDao")
 public class SaleDao extends BaseDao {
-		
+	
+	public int insertReview(SaleDto saleDto) {
+		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.sale.Sale.insertReview", saleDto);
+	}
+	
 	public int setLikeUpdate(SaleDto saleDto) {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.sale.Sale.setLikeUpdate", saleDto);
 	}
@@ -106,12 +109,5 @@ public class SaleDao extends BaseDao {
 	
 	public int totalCount(PagingDto pagingDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.totalCount", pagingDto);
-	}
-	public List<SaleDto> listingLike(PagingDto pagingDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.listingLike", pagingDto);
-	}
-	
-	public int myLikeCount(PagingDto pagingDto) {
-		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.myLikeCount", pagingDto);
 	}
 }
