@@ -599,7 +599,7 @@ public class BoardWeb extends Common {
 				// 로그인 성공 후 세션에 사용자 정보 저장
 				if (pagingDto.getCd_bbs_type() == 3) {
 					HttpSession session = request.getSession();
-					session.setAttribute("", "SEQ_MBR");
+					session.setAttribute("sessionUser", "SEQ_MBR");
 				}
 				
 				if (pagingDto.getCd_bbs_type() == 3) {

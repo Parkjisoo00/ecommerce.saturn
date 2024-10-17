@@ -16,6 +16,7 @@
 	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
 	function download(type, sequence) {
 		
+		
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.type.setAttribute("value", type);
@@ -25,6 +26,7 @@
 		frmMain.submit();
 		
 		frmMain.target = "_self";
+		
 	}
 	function remove(value) {
 		var frmMain = document.getElementById("frmMain");
@@ -84,55 +86,54 @@
 	<div class="container">
 		<article class="txtCenter">
 			<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="blog__details__content">
+					<div class="blog__details__item">
+					
+					<br/>
+					<br/>
+					<br/>
+					<div class="blog__details__item__title">
+						<span class="tip" style="margin-left: 270px;">문의글 제목</span>
+						<h4 style="margin-left: 270px;">${boardDto.title}</h4>
+						<ul>
+							<li><span style="margin-left: 270px; font-size: 16px;">[등록 일자]</span></li>
+							<li style="font-size: 16px;">${boardDto.dt_reg}</li>
+						</ul>
+						<ul>
+							<li><span style="margin-left: 270px; font-size: 16px;">[카테고리]</span></li>
+							<li style="font-size: 16px;">
+								<select id="cd_ctg" name="cd_ctg" disabled >
+									<option value="0"<c:if test="${boardDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
+									<option value="1"<c:if test="${boardDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
+									<option value="2"<c:if test="${boardDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
+									<option value="3"<c:if test="${boardDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
+									<option value="4"<c:if test="${boardDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
+									<option value="5"<c:if test="${boardDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
+									<option value="6"<c:if test="${boardDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
+									<option value="9"<c:if test="${boardDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
+								</select>
+							</li>
+						</ul>
+					</div>
+					<br/>
+					<br/>
+					<div class="col-lg-9 col-md-9 col-sm-9">
+					<div class="blog__details__quote" style="margin-left: 250px;">
+						<p>${boardDto.content}</p>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="checkout__form__input">
-					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">제목 <span></span></p>
-					<input type="text" id="title" name="title" value="${boardDto.title}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
-				</div>
-			</div>
-			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">카테고리 <span></span></p>
-						<select id="cd_ctg" name="cd_ctg" style="margin-left: 300px;" disabled >
-							<option value="0"<c:if test="${boardDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
-							<option value="1"<c:if test="${boardDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
-							<option value="2"<c:if test="${boardDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
-							<option value="3"<c:if test="${boardDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
-							<option value="4"<c:if test="${boardDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
-							<option value="5"<c:if test="${boardDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
-							<option value="6"<c:if test="${boardDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
-							<option value="9"<c:if test="${boardDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
-						</select>
-				</div>
-			</div>
-			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">내용 <span></span></p>
-					<input type="text" id="content" name="content" value="${boardDto.content}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
-				</div>
-			</div>
-			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-				<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">
+				<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 235px;">
 					<c:if test="${boardDto.file_orig != ''}">
-						<a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});">첨부파일 다운로드</a>
+						<a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
 					</c:if>
-				</div>
-			</div>
-			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">등록 일자 <span></span></p>
-					<input type="text" id="dt_reg" name="dt_reg" value="${boardDto.dt_reg}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
 				</div>
 			</div>
 			<br/>
 			<br/>
 			<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
 			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
+				<div class="checkout__form__input" style="margin-left: 100px;">
 				<c:if test="${boardDto.seq_reply == 0}">
 					<input type="button" value="삭제" style="width:100px" onclick="javascript:remove(3);" />
 					 <input type="button" value="수정" style="width:100px" onclick="javascript:modifyForm(3);" /> 
@@ -141,7 +142,9 @@
 				</div>
 			</div>
 			</div>
-			
+			</div>
+			</div>
+			</div>
 	<!-- 답변 부분 추후 작업 
 				<c:if test="${boardDto.seq_reply > 0}">
 				<br/>
@@ -176,6 +179,7 @@
 				</table>
 			</c:if>
 	 -->
+	 		</div>
 		</article>
 	</div>
 </section>

@@ -3633,8 +3633,8 @@ ol {
 
 .blog__details__item__title .tip {
 	font-size: 12px;
-	color: #ffffff;
-	background: #ca1515;
+	color: #212529;
+	background: #c7b199;
 	text-transform: uppercase;
 	font-weight: 500;
 	display: inline-block;
@@ -3693,11 +3693,12 @@ ol {
 }
 
 .blog__details__quote {
-	border-top: 2px solid #ca1515;
+	border-top: 2px solid #c7b199;
 	position: relative;
 	padding-top: 22px;
 	margin-bottom: 20px;
 }
+
 
 .blog__details__quote .icon {
 	height: 30px;
