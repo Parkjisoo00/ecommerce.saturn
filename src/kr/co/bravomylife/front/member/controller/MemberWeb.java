@@ -22,6 +22,7 @@ package kr.co.bravomylife.front.member.controller;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+
 import java.util.Properties;
 
 import javax.inject.Inject;
@@ -43,9 +44,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.common.component.EmailCmpn;
 import kr.co.bravomylife.common.dto.EmailDto;
+import kr.co.bravomylife.front.basket.dto.BasketDto;
+import kr.co.bravomylife.front.basket.service.BasketSrvc;
 import kr.co.bravomylife.front.common.Common;
+import kr.co.bravomylife.front.common.dto.PagingDto;
+import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.member.dto.MemberDto;
 import kr.co.bravomylife.front.member.service.MemberSrvc;
+import kr.co.bravomylife.front.sale.service.SaleSrvc;
 import kr.co.bravomylife.util.security.HSwithSHA;
 import kr.co.bravomylife.util.security.Passwd;
 import kr.co.bravomylife.util.security.SKwithAES;
@@ -75,6 +81,43 @@ public class MemberWeb extends Common {
 	
 	@Inject
 	private MemberSrvc memberSrvc;
+	
+	@Inject
+	SaleSrvc saleSrvc;
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-1
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/member/myLike.web")
+	public ModelAndView myLike(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			pagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			PagingListDto pagingListDto = saleSrvc.listingLike(pagingDto);
+			
+			mav.addObject("paging"	, pagingListDto.getPaging());
+			mav.addObject("list"	, pagingListDto.getList());
+			
+			mav.setViewName("front/member/myLike");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".main()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]

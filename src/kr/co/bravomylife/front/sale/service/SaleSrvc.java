@@ -88,6 +88,24 @@ public class SaleSrvc {
 		}
 	}
 	
+	public PagingListDto listingLike(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		int totalLine = saleDao.myLikeCount(pagingDto);
+		int totalPage = (int) Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(saleDao.listingLike(pagingDto));
+		
+		return pagingListDto;
+	}
+	
+
+	
 	public PagingListDto reviewList(PagingDto pagingDto) {
 		
 		PagingListDto pagingListDto = new PagingListDto();

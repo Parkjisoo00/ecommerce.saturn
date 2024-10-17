@@ -74,4 +74,7 @@ public class BasketDao extends BaseDao {
 	public List<BasketDto> listingList(PagingDto pagingDto) {
 		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.basket.Basket.listingList", pagingDto);
 	}
+	public List<BasketDto> listingLike(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.basket.Basket.listingLike", pagingDto);
+	}
 }

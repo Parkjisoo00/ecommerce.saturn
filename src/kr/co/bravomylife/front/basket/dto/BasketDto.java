@@ -51,7 +51,6 @@ public class BasketDto {
 	private int total_point_sum			= 0;
 	private int point_value				= 0;
 	
-	
 	public int getPoint_value() {
 		return point_value;
 	}
