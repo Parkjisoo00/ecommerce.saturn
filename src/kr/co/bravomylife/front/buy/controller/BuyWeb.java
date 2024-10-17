@@ -76,6 +76,34 @@ public class BuyWeb extends Common {
 	 * @param boardDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
+	 * @since 2024-010-17
+	 * <p>DESCRIPTION: 리뷰 관리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/buy/review.web")
+	public ModelAndView review(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			mav.setViewName("front/buy/review");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".review()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
 	 * @since 2024-10-13
 	 * <p>DESCRIPTION: 상품 구매</p>
 	 * <p>IMPORTANT:</p>

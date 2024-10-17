@@ -494,94 +494,61 @@
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
 								<div class="row">
 									<div class="col-lg-12 col-md-12" >
-									<div class="review-form" style="height: 700px !important">
-									
-										<!-- 첫 번째 div: 리뷰 제목 -->
-										<div class="review-title" style="border-bottom: 0px !important; border-top: 0px !important; height: 10% !important">
-											리뷰 작성을 안내하는 제목
-										</div>
-										
-										<!-- 두 번째 div: 사진과 상품명 -->
-										<div class="review-photo-name" style="border-bottom: 0px !important; height: 20% !important">
-											<div class="photo">
-												사진
+										<div class="review-form" style="height: 100% !important; display: flex; flex-direction: column;">
+											<div class="review-title" style="border-bottom: 0px !important; border-top: 0px !important;">
+												<div>
+													<img src="/img/review/review.png" style="height: 26px !important;"><span class="reviewtitle">상품 후기</span>
+												</div>
+												<div>
+													<span class="reviewsub">이 상품에 대해서 얼마나 만족하시나요?</span>
+												</div>
 											</div>
-											<div class="product-name">
-												<div class="product-name">
-													상품명
+											<div class="review-name" style="border-bottom: 0px !important;">
+												<div class="photoreview" style="padding: 25px 20px !important;">
+													<img src="/img/review/review.png" style="height: 100px !important; ">
+												</div>
+												<div class="product-name" style="flex-grow: 1;">
+													<div class="product-name" style="padding: 0px !important;">
+														품명
+													</div>
+													<div class="product-name" style="padding: 0px !important;">
+														평점
+													</div>
+												</div>
+											</div>
+											
+											<div class="review-name" style="border-bottom: 0px !important;">
+												<div class="photoreview" style="display: flex !important; justify-content: flex-start !important; align-items: center !important;">
+													사진첨부
 												</div>
 												<div class="product-name">
-													상품명
+												<div>
+													<a href="#" class="cart-btn" style="background: #fff; color: #346aff !important; border: 1px solid #346aff !important; margin: 0;">
+														사진 첨부하기
+													</a>
+												</div>
+												</div>
+											</div>
+											
+											<div class="review-name" style="border-bottom: 0px !important; height: auto !important; flex-grow: 2 !important; min-height: 250px !important;">
+												<div class="photoreview">
+													상세후기
+												</div>
+												<div class="product-name" style="display: flex; justify-content: center; align-items: center; height: 100% !important; padding: 20px 0px 20px 20px !important;">
+													<div style="height: 100% !important; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; width: 100%;">
+														<textarea class="review-text" placeholder="리뷰 내용을 입력하세요"></textarea>
+														<div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; width: 100%;">
+															<a href="#" class="cart-btn" style="background: #fff; color: #111 !important; border: 1px solid #ccc !important; margin: 0; padding: 10px 10px 10px !important;">
+																취소하기
+															</a>
+															<a href="#" class="cart-btn" style="background: #346aff; color: white !important; border: 1px solid #346aff !important; margin: 0; padding: 10px 10px 10px !important;">
+																등록하기
+															</a>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
-										
-										<!-- 세 번째 div: 리뷰 텍스트와 리뷰 내용 -->
-										<div class="review-photo-name" style="border-bottom: 0px !important; height: 70% !important">
-											<div class="photo">
-												실제 리뷰 작성
-											</div>
-											<div class="product-name">
-												<div style="height: 100% !important;">
-													<textarea class="review-text" placeholder="리뷰 내용을 입력하세요"></textarea>
-												</div>
-											</div>
-										</div>
-										
-									</div>
-									<!-- 
-									<table class="headTop_pd" style=" margin-left: auto; margin-right: auto; width: 100%">
-									<c:choose>
-										<c:when test="${empty reviewList}">
-											<tr>
-												<td colspan="4">등록된 상품후기가 없습니다.</td>
-											</tr>
-										</c:when>
-										<c:otherwise>
-											<c:forEach items="${reviewList}" var="reviewList">
-												<tr style="font-size: 14px;">
-													<td>
-														<c:if test="${reviewList.average_rate == 1}">
-															<i class="fa fa-star"></i>
-														</c:if>
-														<c:if test="${reviewList.average_rate == 2}">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-														</c:if>
-														<c:if test="${reviewList.average_rate == 3}">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-														</c:if>
-														<c:if test="${reviewList.average_rate == 4}">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-														</c:if>
-														<c:if test="${reviewList.average_rate == 5}">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-														</c:if>
-													</td>
-													<td style="text-align: left;">
-														${reviewList.rate_review}
-													</td>
-													<td>
-														${reviewList.mbr_nm}
-													</td>
-													<td>
-														${reviewList.dt_reg}
-													</td>
-												</tr>
-											</c:forEach>
-										</c:otherwise>
-										</c:choose>
-									</table>
-									 -->
 									<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
 										<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
 									</div>
