@@ -169,8 +169,7 @@
 	<sql id="detailwhere">
 		sle.CD_STATE_SALE = 2
 		AND sle.FLG_DELETE = 'N'
-		AND sle.CD_CTG_B =
-		#{cd_ctg_b}
+		AND sle.CD_CTG_B = #{cd_ctg_b}
 		AND sle.CD_CTG_M = #{cd_ctg_m}
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
