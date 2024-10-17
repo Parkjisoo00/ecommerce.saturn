@@ -213,6 +213,23 @@
 		frmMain.submit();
 	}
 		
+	function writeReview() {
+		
+		if (!isLogin) {
+			alert("로그인이 필요합니다.");
+			return;
+		}
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		var seq_sle			= document.getElementById("seq_sle").value;
+		var sle_nm			= document.getElementById("sle_nm").value;
+		var img				= document.getElementById("img").value;
+		
+		frmMain.action = "/front/buy/review.web";
+		frmMain.target = "";
+		frmMain.submit();
+	}
 	</script>
 
 	<!-- Google Font -->
@@ -471,6 +488,11 @@
 						</div>
 					</div>
 				</c:forEach>
+							<div>
+							<a href="javascript:writeReview();" class="cart-btn" style="background: #346aff; color: white !important; border: 1px solid #346aff !important; margin: 0; padding: 10px 10px 10px !important;">
+								상품후기 쓰기
+							</a>
+							</div>
 				</div>
 				<div class="col-lg-12" style="padding: 0;">
 					<div class="product__details__tab">
@@ -494,6 +516,7 @@
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
 								<div class="row">
 									<div class="col-lg-12 col-md-12" >
+										<!-- 
 										<div class="review-form" style="height: 100% !important; display: flex; flex-direction: column;">
 											<div class="review-title" style="border-bottom: 0px !important; border-top: 0px !important;">
 												<div>
@@ -549,6 +572,7 @@
 												</div>
 											</div>
 										</div>
+										 -->
 									<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
 										<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
 									</div>

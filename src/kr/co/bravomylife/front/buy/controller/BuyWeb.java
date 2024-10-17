@@ -22,6 +22,8 @@ package kr.co.bravomylife.front.buy.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
@@ -32,10 +34,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.bravomylife.common.dto.FileDto;
+import kr.co.bravomylife.common.dto.FileUploadDto;
+import kr.co.bravomylife.common.file.FileUpload;
 import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
 import kr.co.bravomylife.front.buy.dto.BuyDetailListDto;
 import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
@@ -62,6 +69,9 @@ public class BuyWeb extends Common {
 	private static Logger logger = LoggerFactory.getLogger(BuyWeb.class);
 	
 	@Autowired
+	private MessageSourceAccessor dynamicProperties;
+	
+	@Autowired
 	Properties staticProperties;
 	
 	@Inject
@@ -69,6 +79,111 @@ public class BuyWeb extends Common {
 	
 	@Inject
 	SaleSrvc saleSrvc;
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-17
+	 * <p>DESCRIPTION: 고객센터 쓰기 처리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@SuppressWarnings({ "rawtypes", "unused", "unchecked" })
+	@RequestMapping(value = "/front/buy/reviewWriteProc.web", method = RequestMethod.POST)
+	public ModelAndView reviewWriteProc(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, FileUploadDto fileUploadDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		String message	= "";
+		
+		try {
+			
+			saleDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			saleDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
+			String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
+			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+			
+			int countFile = 0;
+			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
+			
+			FileDto[] fileDto = new FileDto[countFile];
+			LinkedList<Object> uploadResult = FileUpload.upload(fileUploadDto, pathBase, maxSize, allowedExt, countFile);
+			
+			message	= (String)((Hashtable)uploadResult.getLast()).get("resultID");
+			
+			if (message.equals("success")) {
+				
+				Hashtable<String, String> hashtable	= (Hashtable<String, String>)uploadResult.getLast();
+				
+				String fileNameSrc	= "";
+				String fileNameSve	= "";
+				String fileSize		= "";
+				long totalSize		= 0;
+				
+				logger.debug("countFile=" + countFile);
+				for (int loop = 0; loop < countFile; loop++) {
+					fileNameSrc		= (String)hashtable.get("files[" + loop + "]_fileSrcName");
+					fileNameSve		= (String)hashtable.get("files[" + loop + "]_fileSveNameRelative");
+					fileSize		= (String)hashtable.get("files[" + loop + "]_fileSveSize");
+					if (fileSize == null || fileSize == "") fileSize = "0";
+					
+					fileDto[loop] = new FileDto();
+					fileDto[loop].setFileNameOriginal(fileNameSrc);
+					fileDto[loop].setFileNameSave(fileNameSve);
+					fileDto[loop].setFileSize((Long.parseLong(fileSize)));
+					logger.debug("fileNameSrc=" + fileNameSrc);
+					logger.debug("fileNameSve=" + fileNameSve);
+					logger.debug("fileSize=" + fileSize);
+					
+					totalSize += Long.parseLong(fileSize);
+				}
+				
+				/*
+				if (countFile >=2 ) {
+					boardSrvc.insert(boardDto, boardFileDto);
+				}
+				else {
+					boardSrvc.insert(boardDto);
+				}
+				*/
+				
+				saleDto.setFile_orig(fileNameSrc);
+				saleDto.setFile_save(fileNameSve);
+				
+				if (saleSrvc.insertReview(saleDto)) {
+					
+					// GET에서 POST로 변경
+					String[] arrName = new String[1];
+					String[] arrValue = new String[1];
+					
+					request.setAttribute("script"	, "alert('상품 후기가 등록되었습니다.');");
+					request.setAttribute("redirect"		, "/");
+					
+					// request.setAttribute("script"	, "alert('등록되었습니다.');");
+					// request.setAttribute("redirect"	, "/front/center/board/list.web?cd_bbs_type=" + boardDto.getCd_bbs_type());
+				}
+				else {
+					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+					request.setAttribute("redirect"	, "/");
+				}
+			}
+			else {
+				request.setAttribute("script"	, "alert('" + message + "');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".reviewWriteProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -88,6 +203,7 @@ public class BuyWeb extends Common {
 		
 		try {
 			
+			mav.addObject("saleDto", saleDto);
 			mav.setViewName("front/buy/review");
 		}
 		catch (Exception e) {

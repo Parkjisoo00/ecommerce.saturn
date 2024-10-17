@@ -497,6 +497,20 @@ table.headTop_pd th, table.headTop_pd td {
 	font-family: "Montserrat", sans-serif;
 }
 
+.cart-btn-review {
+	margin-top: 20px;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 600;
+	padding: 10px 15px;
+	color: #ffffff;
+	border-radius: 4px;
+	text-align: center;
+	margin-left: 15px;
+	font-family: "Montserrat", sans-serif;
+	cursor: pointer;
+}
+
 .cart-th {
 	font-size: 13px !important;
 	color: #212b36 !important;

@@ -212,7 +212,7 @@
 		<input type="hidden" name="buyList[${status.index}].count" value="${list.count}" />
 		<input type="hidden" name="buyList[${status.index}].point" value="${list.point}" />
 	</c:forEach>
-	<script>
+<script>
 	$(document).ready(function () {
 		
 		var totalPriceSum = Number($('#totalPriceSum').val());

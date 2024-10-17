@@ -63,12 +63,33 @@ public class SaleDto {
 	private String rate_review		= "";	// 상품 리뷰 내용
 	private String mbr_nm			= "";	// 회원 이름
 	private int seq_review			= 0;	// 리뷰 일련번호
+	private String file_save		= "";
+	private String file_orig		= "";
+	private String extension		= "";
 	
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
+	public String getFile_save() {
+		return file_save;
+	}
+	public void setFile_save(String file_save) {
+		this.file_save = file_save;
+	}
+	public String getFile_orig() {
+		return file_orig;
+	}
+	public void setFile_orig(String file_orig) {
+		this.file_orig = file_orig;
+	}
+	public String getExtension() {
+		return extension;
+	}
+	public void setExtension(String extension) {
+		this.extension = extension;
+	}
 	public int getSeq_like() {
 		return seq_like;
 	}
