@@ -546,8 +546,24 @@ table.headTop_pd th, table.headTop_pd td {
 }
 
 /*----------------------------------------*/
-/* CheckOut Css
+/* review Css
 /*----------------------------------------*/
+
+.reviewtitle {
+	font-size: 24px !important;
+	color: #111 !important;
+	padding-left: 10px !important;
+	vertical-align: middle !important;
+	font-weight: bold !important;
+	font-family: Dotum, "돋움", Helvetica, AppleSDGothicNeo, Arial, sans-serif !important;
+}
+
+.reviewsub {
+	font-size: 14px !important;
+	color: #111 !important;
+	vertical-align: middle !important;
+	font-family: Dotum, "돋움", Helvetica, AppleSDGothicNeo, Arial, sans-serif !important;
+}
 
 .review-form {
 	margin: 0 auto !important;
@@ -557,38 +573,50 @@ table.headTop_pd th, table.headTop_pd td {
 }
 
 .review-title {
+	font-family: "Montserrat", sans-serif !important;
 	border-top: 1px solid #ddd !important;
 	border-bottom: 1px solid #ddd !important;
-	padding: 10px !important;
+	padding: 20px 20px !important;
 }
 
-.review-photo-name {
-	padding: 10px !important;
+.review-name {
 	display: flex !important;
 	border-top: 1px solid #ddd !important;
 	border-bottom: 1px solid #ddd !important;
 }
 
 .photo {
+	font-size: 14px !important;
+	font-weight: bold !important;
 	width: 20% !important;
+	padding: 20px 20px !important;
+	font-family: Dotum, "돋움", Helvetica, AppleSDGothicNeo, Arial, sans-serif !important;
+}
+
+.photoreview {
+	font-size: 14px !important;
+	font-weight: bold !important;
+	width: 20% !important;
+	padding: 20px 20px !important;
+	font-family: Dotum, "돋움", Helvetica, AppleSDGothicNeo, Arial, sans-serif !important;
 }
 
 .product-name {
+	font-family: Dotum, "돋움", Helvetica, AppleSDGothicNeo, Arial, sans-serif !important;
 	width: 100% !important;
+	padding: 20px 20px !important;
 }
 
 .review-text {
-	margin-top: 10px !important;
+	font-family: "Montserrat", sans-serif !important;
 	width: 100% !important;
-	height: 146px !important;
-	padding: 10px 0px !important;
-	margin-bottom: 20px !important;
+	height: 100% !important;
+	padding: 10px 10px !important;
 	border: none !important;
 	color: #111 !important;
 	outline: none !important;
 	resize: none !important;
 	border: 1px solid #ddd !important;
-	height: 100% !important;
 }
 
 /*----------------------------------------*/
@@ -3633,8 +3661,8 @@ ol {
 
 .blog__details__item__title .tip {
 	font-size: 12px;
-	color: #212529;
-	background: #c7b199;
+	color: #ffffff;
+	background: #ca1515;
 	text-transform: uppercase;
 	font-weight: 500;
 	display: inline-block;
@@ -3693,12 +3721,11 @@ ol {
 }
 
 .blog__details__quote {
-	border-top: 2px solid #c7b199;
+	border-top: 2px solid #ca1515;
 	position: relative;
 	padding-top: 22px;
 	margin-bottom: 20px;
 }
-
 
 .blog__details__quote .icon {
 	height: 30px;
@@ -4015,6 +4042,18 @@ ol {
 }
 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
+
+@media (max-width: 600px) {
+	.photo {
+		width: 40% !important;
+	}
+}
+
+@media (max-width: 600px) {
+	.photoreview {
+	width: 45% !important;
+	}
+}
 
 @media only screen and (min-width: 1600px) and (max-width: 1900px) {
 	.header {
