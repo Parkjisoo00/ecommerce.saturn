@@ -101,7 +101,7 @@ public class MemberWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			
+			/*
 			pagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
 			PagingListDto pagingListDto = saleSrvc.listingLike(pagingDto);
@@ -110,6 +110,7 @@ public class MemberWeb extends Common {
 			mav.addObject("list"	, pagingListDto.getList());
 			
 			mav.setViewName("front/member/myLike");
+			*/
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".main()] " + e.getMessage(), e);

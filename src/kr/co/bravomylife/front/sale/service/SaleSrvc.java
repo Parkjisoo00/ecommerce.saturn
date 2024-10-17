@@ -30,6 +30,7 @@ import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.sale.dao.SaleDao;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
+import kr.co.bravomylife.front.sale.dto.SaleFileDto;
 
 /**
  * @version 1.0.0
@@ -44,6 +45,103 @@ public class SaleSrvc {
 	
 	@Inject
 	SaleDao saleDao;
+	
+	
+	@Transactional("txFront")
+	public boolean insertText(SaleDto saleDto) {
+		
+		boolean totalResult = false;
+		
+		saleDto.setSeq_review(saleDao.sequence());
+		
+		try {
+			
+			int result = saleDao.insertText(saleDto);
+			
+			if (result == 1) { 
+				
+				totalResult = true;
+			}
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+		return totalResult;
+	}
+	
+	@Transactional("txFront")
+	public boolean insertReview(SaleDto saleDto, SaleFileDto[] saleFileDto) {
+		
+		boolean totalResult = false;
+		
+		saleDto.setSeq_review(saleDao.sequence());
+		
+		try {
+			
+			int result = saleDao.insertReview(saleDto);
+			
+			if (result == 1) {
+				
+				if (saleFileDto[0].getFile_orig() != null && !saleFileDto[0].getFile_orig().equals("")) {
+				
+					for (SaleFileDto fileDto : saleFileDto) {
+						
+						fileDto.setSeq_sle(saleDto.getSeq_sle());
+						fileDto.setSeq_review(saleDto.getSeq_review());
+						
+						int reImgResult = saleDao.insertReviewFile(fileDto);
+						
+						if (reImgResult <= 0) {
+							
+							return false;
+						}
+					}
+				}
+				totalResult = true;
+			}
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+		return totalResult;
+	}
+	
+	
+	/*
+	@Transactional("txFront")
+	public boolean insertReview(SaleDto saleDto, SaleFileDto[] saleFileDto) {
+		
+		boolean totalResult = false;
+		
+		saleDto.setSeq_review(saleDao.sequence());
+		
+		try {
+			
+			int result = saleDao.insertReview(saleDto);
+			
+			if (result == 1) {
+				
+				for (SaleFileDto fileDto : saleFileDto) {
+					
+					fileDto.setSeq_sle(saleDto.getSeq_sle());
+					fileDto.setSeq_review(saleDto.getSeq_review());
+					
+					int reImgResult = saleDao.insertReviewFile(fileDto);
+					
+					if (reImgResult <= 0) {
+						
+						return false;
+					}
+				}
+				totalResult = true;
+			}
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+		return totalResult;
+	}
+	*/
 	
 	@Transactional("txFront")
 	public boolean delLike(SaleDto saleDto) {

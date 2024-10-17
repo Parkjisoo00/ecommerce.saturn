@@ -40,7 +40,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.co.bravomylife.common.dto.FileDto;
 import kr.co.bravomylife.common.dto.FileUploadDto;
 import kr.co.bravomylife.common.file.FileUpload;
 import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
@@ -51,6 +50,7 @@ import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
+import kr.co.bravomylife.front.sale.dto.SaleFileDto;
 import kr.co.bravomylife.front.sale.service.SaleSrvc;
 import kr.co.bravomylife.util.security.SKwithAES;
 
@@ -90,100 +90,112 @@ public class BuyWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@SuppressWarnings({ "rawtypes", "unused", "unchecked" })
+	@SuppressWarnings({"unchecked" })
 	@RequestMapping(value = "/front/buy/reviewWriteProc.web", method = RequestMethod.POST)
 	public ModelAndView reviewWriteProc(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, FileUploadDto fileUploadDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
-		String message	= "";
+		String message = "";
 		
 		try {
 			
-			saleDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
-			saleDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
+			saleDto.setSeq_mbr(seqMbr);
+			saleDto.setRegister(seqMbr);
 			
-			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
-			String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
-			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+			String pathBase = dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
+			String maxSize = dynamicProperties.getMessage("backoffice.upload.file.max10MB", "[UNDEFINED]");
+			String allowedExt = dynamicProperties.getMessage("backoffice.upload.file.extension.doc", "[UNDEFINED]");
 			
-			int countFile = 0;
-			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
+			int countFile = fileUploadDto.getFiles() != null ? fileUploadDto.getFiles().size() : 0;
 			
-			FileDto[] fileDto = new FileDto[countFile];
-			LinkedList<Object> uploadResult = FileUpload.upload(fileUploadDto, pathBase, maxSize, allowedExt, countFile);
-			
-			message	= (String)((Hashtable)uploadResult.getLast()).get("resultID");
-			
-			if (message.equals("success")) {
+			if (countFile > 0) {
 				
-				Hashtable<String, String> hashtable	= (Hashtable<String, String>)uploadResult.getLast();
+				LinkedList<Object> uploadResult = FileUpload.upload(fileUploadDto, pathBase, maxSize, allowedExt, countFile);
 				
-				String fileNameSrc	= "";
-				String fileNameSve	= "";
-				String fileSize		= "";
-				long totalSize		= 0;
+				Hashtable<String, String> hashtable = (Hashtable<String, String>) uploadResult.getLast();
 				
-				logger.debug("countFile=" + countFile);
-				for (int loop = 0; loop < countFile; loop++) {
-					fileNameSrc		= (String)hashtable.get("files[" + loop + "]_fileSrcName");
-					fileNameSve		= (String)hashtable.get("files[" + loop + "]_fileSveNameRelative");
-					fileSize		= (String)hashtable.get("files[" + loop + "]_fileSveSize");
-					if (fileSize == null || fileSize == "") fileSize = "0";
+				message = hashtable.get("resultID");
+				
+				if (message.equals("success")) {
 					
-					fileDto[loop] = new FileDto();
-					fileDto[loop].setFileNameOriginal(fileNameSrc);
-					fileDto[loop].setFileNameSave(fileNameSve);
-					fileDto[loop].setFileSize((Long.parseLong(fileSize)));
-					logger.debug("fileNameSrc=" + fileNameSrc);
-					logger.debug("fileNameSve=" + fileNameSve);
-					logger.debug("fileSize=" + fileSize);
+					SaleFileDto[] saleFileDto = new SaleFileDto[countFile];
+					for (int loop = 0; loop < countFile; loop++) {
+						
+						String fileNameSrc = hashtable.get("files[" + loop + "]_fileSrcName");
+						String fileNameSve = hashtable.get("files[" + loop + "]_fileSveNameRelative");
+						String fileSize = hashtable.get("files[" + loop + "]_fileSveSize");
+						if (fileSize == null || fileSize.isEmpty()) fileSize = "0";
+						
+						saleFileDto[loop] = new SaleFileDto();
+						saleFileDto[loop].setSeq_sle(saleDto.getSeq_sle());
+						saleFileDto[loop].setSeq_mbr(saleDto.getSeq_mbr());
+						saleFileDto[loop].setFile_orig(fileNameSrc);
+						saleFileDto[loop].setFile_save(fileNameSve);
+					}
 					
-					totalSize += Long.parseLong(fileSize);
-				}
-				
-				/*
-				if (countFile >=2 ) {
-					boardSrvc.insert(boardDto, boardFileDto);
-				}
-				else {
-					boardSrvc.insert(boardDto);
-				}
-				*/
-				
-				saleDto.setFile_orig(fileNameSrc);
-				saleDto.setFile_save(fileNameSve);
-				
-				if (saleSrvc.insertReview(saleDto)) {
+					boolean result = false;
 					
-					// GET에서 POST로 변경
-					String[] arrName = new String[1];
-					String[] arrValue = new String[1];
-					
-					request.setAttribute("script"	, "alert('상품 후기가 등록되었습니다.');");
-					request.setAttribute("redirect"		, "/");
-					
-					// request.setAttribute("script"	, "alert('등록되었습니다.');");
-					// request.setAttribute("redirect"	, "/front/center/board/list.web?cd_bbs_type=" + boardDto.getCd_bbs_type());
-				}
-				else {
-					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
-					request.setAttribute("redirect"	, "/");
-				}
-			}
-			else {
-				request.setAttribute("script"	, "alert('" + message + "');");
-				request.setAttribute("redirect"	, "/");
-			}
-			mav.setViewName("forward:/servlet/result.web");
-		}
-		catch (Exception e) {
+					if (countFile > 0) {
+						
+						result = saleSrvc.insertReview(saleDto, saleFileDto);
+					} else {
+						
+						result = saleSrvc.insertText(saleDto);
+					}
+					if (result) {
+						
+						request.setAttribute("script", "alert('상품 후기가 등록되었습니다.');");
+						request.setAttribute("redirect", "/");
+					} else {
+						
+						request.setAttribute("script", "alert('시스템 관리자에게 문의하세요!');");
+						request.setAttribute("redirect", "/");
+					}
+				} 
+			} 
+		mav.setViewName("forward:/servlet/result.web");
+		
+		}	catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".reviewWriteProc()] " + e.getMessage(), e);
 		}
 		finally {}
 		
 		return mav;
 	}
+	
+				/*
+				boolean result = false;
+				
+				if (countFile > 0) {
+					
+					result = saleSrvc.insertReview(saleDto, saleFileDto);
+				} else {
+					
+					result = saleSrvc.insertReview(saleDto);
+				}
+				if (result) {
+					
+					request.setAttribute("script", "alert('상품 후기가 등록되었습니다.');");
+					request.setAttribute("redirect", "/");
+				} else {
+					
+					request.setAttribute("script", "alert('시스템 관리자에게 문의하세요!');");
+					request.setAttribute("redirect", "/");
+				}
+			} 
+		} 
+		mav.setViewName("forward:/servlet/result.web");
+	
+		} 	catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".reviewWriteProc()] " + e.getMessage(), e);
+		}
+		finally {}
+	
+		return mav;
+	}
+	*/
 	
 	/**
 	 * @param request [요청 서블릿]

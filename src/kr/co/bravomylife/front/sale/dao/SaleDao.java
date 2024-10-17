@@ -27,6 +27,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.bravomylife.front.common.dao.BaseDao;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
+import kr.co.bravomylife.front.sale.dto.SaleFileDto;
 
 /**
  * @version 1.0.0
@@ -39,8 +40,26 @@ import kr.co.bravomylife.front.sale.dto.SaleDto;
 @Repository("kr.co.bravomylife.front.sale.dao.SaleDao")
 public class SaleDao extends BaseDao {
 	
+	public int insertText(SaleDto saleDto) {
+		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.sale.Sale.insertText", saleDto);
+	}
+	
 	public int insertReview(SaleDto saleDto) {
 		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.sale.Sale.insertReview", saleDto);
+	}
+	
+	public int insertReviewFile(SaleFileDto saleFileDto) {
+		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.sale.Sale.insertReviewFile", saleFileDto);
+	}
+	
+	/*
+	public int insertReview(SaleDto saleDto) {
+		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.sale.Sale.insertReview", saleDto);
+	}
+	*/
+	
+	public int sequence() {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.sequence");
 	}
 	
 	public int setLikeUpdate(SaleDto saleDto) {

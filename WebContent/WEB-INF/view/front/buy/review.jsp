@@ -21,14 +21,6 @@
 			return;
 		}
 		
-		var fileInput = document.getElementById("files[0]");
-		
-		if (!fileInput || fileInput.files.length === 0) {
-			
-			alert("파일을 선택하세요.");
-			return;
-		}
-		
 		if (document.getElementById("rate_review").value == "") {
 			
 			alert("후기 내용을 입력하세요.");
@@ -37,6 +29,7 @@
 		frmMain.action="/front/buy/reviewWriteProc.web";
 		frmMain.submit();
 	}
+	
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -111,14 +104,30 @@ alert("평점 확인" + value);
 								<div class="photoreview" style="display: flex !important; justify-content: flex-start !important; align-items: center !important;">
 									사진첨부
 								</div>
-								<div class="product-name">
-									<div>
-										<input type="file" style="display: none;" id="files[0]" name="files[0]"/>
-										<label for="files[0]" class="cart-btn-review" style="background: #fff; color: #346aff !important; border: 1px solid #346aff !important; margin: 0;">
-											파일 선택
-										</label>
+							<div class="product-name">
+								<div style="display: flex; align-items: center; height: 100px;">
+									<label id="show-input" class="cart-btn-review" style="margin: 0px !important; background: #fff; color: #346aff !important; border: 1px solid #346aff !important; padding: 10px; cursor: pointer;">
+										파일 선택
+									</label>
+									<div id="file-inputs" style="display: flex; margin-left: 10px; align-items: center;">
+										<div style="display: flex; align-items: center;">
+											<img id="img-preview-0" style="display: none; width: 70px; height: 70px; object-fit: cover; margin-right: 10px; cursor: pointer;" />
+											<input type="file" id="file-input-0" name="files[0]" style="display: none;" />
+											<span id="file-name-0" style="margin-left: 10px; cursor: pointer;"></span>
+										</div>
+										<div style="display: flex; align-items: center; margin-left: 20px;">
+											<img id="img-preview-1" style="display: none; width: 70px; height: 70px; object-fit: cover; margin-right: 10px; cursor: pointer;" />
+											<input type="file" id="file-input-1" name="files[1]" style="display: none;" />
+											<span id="file-name-1" style="margin-left: 10px; cursor: pointer;"></span>
+										</div>
+										<div style="display: flex; align-items: center; margin-left: 20px;">
+											<img id="img-preview-2" style="display: none; width: 70px; height: 70px; object-fit: cover; margin-right: 10px; cursor: pointer;" />
+											<input type="file" id="file-input-2" name="files[2]" style="display: none;" />
+											<span id="file-name-2" style="margin-left: 10px; cursor: pointer;"></span>
+										</div>
 									</div>
 								</div>
+							</div>
 							</div>
 							<div class="review-name" style="border-bottom: 0px !important; height: auto !important; flex-grow: 2 !important; min-height: 250px !important;">
 								<div class="photoreview">
@@ -176,6 +185,78 @@ alert("평점 확인" + value);
 			
 			this.setAttribute('name', 'rate_star');
 			this.setAttribute('id', 'rate_star');
+		});
+	});
+	
+	var currentFileIndex = 0;
+	
+	var fileInputs = [
+		document.getElementById('file-input-0'),
+		document.getElementById('file-input-1'),
+		document.getElementById('file-input-2')
+	];
+	
+	var fileNames = [
+		document.getElementById('file-name-0'),
+		document.getElementById('file-name-1'),
+		document.getElementById('file-name-2')
+	];
+	
+	var imgPreviews = [
+		document.getElementById('img-preview-0'),
+		document.getElementById('img-preview-1'),
+		document.getElementById('img-preview-2')
+	];
+	
+	var label = document.getElementById('show-input');
+	
+	label.addEventListener('click', function () {
+		
+		if (currentFileIndex < fileInputs.length) {
+			
+			var currentInput = fileInputs[currentFileIndex];
+			
+			var handleFileChange = (index) => {
+				
+				return function () {
+					
+					if (currentInput.files.length > 0) {
+						
+						var file = currentInput.files[0];
+						fileNames[index].textContent = file.name;
+						
+						if (file.type.startsWith('image/')) {
+							
+							var reader = new FileReader();
+							reader.onload = function (e) {
+								
+								imgPreviews[index].src = e.target.result;
+								imgPreviews[index].style.display = 'inline';
+							};
+							reader.readAsDataURL(file);
+						}
+						currentFileIndex++;
+					}
+				}
+			}
+			currentInput.click();
+			
+			currentInput.removeEventListener('change', handleFileChange(currentFileIndex));
+			currentInput.addEventListener('change', handleFileChange(currentFileIndex));
+		}
+	});
+	imgPreviews.forEach((imgPreview, index) => {
+		
+		imgPreview.addEventListener('click', function () {
+			
+			fileInputs[index].click();
+		});
+	});
+	fileNames.forEach((fileName, index) => {
+		
+		fileName.addEventListener('click', function () {
+			
+			fileInputs[index].click();
 		});
 	});
 </script>

@@ -17,6 +17,7 @@
 		<typeAlias type="kr.co.bravomylife.front.buy.dto.BuyDetailListDto"				alias="buyDetailListDto" />
 		<typeAlias type="kr.co.bravomylife.front.buy.dto.BuyMasterDto"					alias="buyMasterDto" />
 		<typeAlias type="kr.co.bravomylife.front.pay.dto.PayDto"						alias="payDto" />
+		<typeAlias type="kr.co.bravomylife.front.sale.dto.SaleFileDto"					alias="saleFileDto" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="kr/co/bravomylife/front/mybatis/member/Member.xml" />
