@@ -269,9 +269,9 @@
 				</div>
 				<div style="display: flex; justify-content: flex-end; padding-right: 15px; align-items: flex-start;">
 					<div>
-						 <input type="button" value="결제 하기" style="width:100px" id="btnPay" />
-							
-					
+						<a id="btnPay" class="cart-btn" style="cursor: pointer; background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c; margin: 0;">
+							결제 하기
+						</a>
 					</div>
 				</div>
 			</div>
