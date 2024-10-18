@@ -249,10 +249,10 @@
 <input type="hidden" name="sle_nm"				id="sle_nm"			value="${saleDto.sle_nm}"/>
 <input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"		value="${saleDto.cd_ctg_m}"/>
 <input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"		value="${saleDto.cd_ctg_b}"/>
-<input type="hidden" name="corp_nm"				id="corp_nm"/>
-<input type="hidden" name="prd_type"			id="prd_type"/>
-<input type="hidden" name="filter"				id="filter"/>
-<input type="hidden" name="type"				id="type" />
+<input type="hidden" name="corp_nm"				id="corp_nm"		value="${saleDto.corp_nm}"/>
+<input type="hidden" name="prd_type"			id="prd_type"		value="${saleDto.prd_type}"/>
+<input type="hidden" name="filter"				id="filter">
+<input type="hidden" name="type"				id="type"/>
 <input type="hidden" name="currentPage"			id="currentPage"	value="${paging.currentPage}"/>
 <input type="hidden" name="buyList[0].img"							value="${saleDto.img}"/>
 <input type="hidden" name="buyList[0].seq_sle"						value="${saleDto.seq_sle}"/>
@@ -384,6 +384,11 @@
 							</ul>
 						</div>
 						</br>
+							<div>
+							<a href="javascript:writeReview();" class="cart-btn" style="background: #346aff; color: white !important; border: 1px solid #346aff !important; margin: 0; padding: 10px 10px 10px !important;">
+								상품후기 쓰기(임시)
+							</a>
+							</div>
 						<div class="product__details__button" 
 							 style="display: flex !important; justify-content: center !important; gap: 10px !important; width: 100% !important;">
 						<div class="pro-qty" style="padding: 0px; display: flex !important; align-items: center !important; justify-content: center !important; gap: 10px !important; height: 51px !important;">
@@ -488,11 +493,6 @@
 						</div>
 					</div>
 				</c:forEach>
-							<div>
-							<a href="javascript:writeReview();" class="cart-btn" style="background: #346aff; color: white !important; border: 1px solid #346aff !important; margin: 0; padding: 10px 10px 10px !important;">
-								상품후기 쓰기
-							</a>
-							</div>
 				</div>
 				<div class="col-lg-12" style="padding: 0;">
 					<div class="product__details__tab">

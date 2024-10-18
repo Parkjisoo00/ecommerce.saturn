@@ -44,11 +44,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.common.component.EmailCmpn;
 import kr.co.bravomylife.common.dto.EmailDto;
-import kr.co.bravomylife.front.basket.dto.BasketDto;
-import kr.co.bravomylife.front.basket.service.BasketSrvc;
 import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.common.dto.PagingDto;
-import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.member.dto.MemberDto;
 import kr.co.bravomylife.front.member.service.MemberSrvc;
 import kr.co.bravomylife.front.sale.service.SaleSrvc;

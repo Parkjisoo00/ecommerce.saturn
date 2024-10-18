@@ -278,7 +278,7 @@
 				<div class="col-lg-12">
 					<h6 class="lowgnb-title" style="padding-bottom: 20px; text-align: left; font-size: 24px;">장바구니</h6>
 					<h6 class="cart-title">*이미지를 클릭하면 상품으로 이동합니다</h6>
-						<div class="shop__cart__table" style="border: 	1px solid #dbdbdb; border-radius: 4px;">
+						<div class="shop__cart__table" style="border: 1px solid #dbdbdb; border-radius: 4px;">
 							<table id="productBasket" class="cart-table">
 								<thead style="border-bottom: 1px solid #dbdbdb !important;">
 									<tr style="border-color: #707070 !important;">

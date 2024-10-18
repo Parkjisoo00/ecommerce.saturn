@@ -221,8 +221,10 @@ public class SaleSrvc {
 		pagingDto.setLinePerPage(5);
 		pagingDto.setTotalPage(1);
 		
+		int totalPage = pagingDto.getTotalPage();
+		
 		int totalLine = saleDao.detailCount(pagingDto);
-		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		
 		pagingDto.setTotalLine(totalLine);
 		pagingDto.setTotalPage(totalPage);
 		if (totalPage == 0) pagingDto.setCurrentPage(1);

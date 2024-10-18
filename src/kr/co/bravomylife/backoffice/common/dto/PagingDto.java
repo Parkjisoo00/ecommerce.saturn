@@ -22,8 +22,8 @@ public class PagingDto {
 	private int cd_ctg			= 0;
 	private int register		= 0;
 	
-	private Integer seq_sle			= 0;
-	private Integer	seq_mbr			= 0;
+	private Integer seq_sle		= 0;
+	private Integer	seq_mbr		= 0;
 	private String cd_ctg_m		= "";
 	private String cd_ctg_b		= "";
 	private String filter		= "";

@@ -161,7 +161,7 @@
 		<include refid="detailwhere" />
 		)
 		<![CDATA[
-		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+		WHERE rnum <= ${linePerPage}
 		]]>
 		ORDER BY FLG_BEST, rnum
 	</select>
