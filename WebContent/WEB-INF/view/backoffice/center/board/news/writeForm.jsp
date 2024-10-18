@@ -88,9 +88,7 @@
 				<tr>
 					<th>첨부 파일</th>
 					<td>
-						
 							<input type="file" id="files[0]" name="files[0]" />
-						
 					</td>
 				</tr>
 			</table>

@@ -77,6 +77,7 @@
 		.contact-info h3 {
 		margin-bottom: 10px; /* 하단 여백 */
 		}
+
 	</style>
 <head>
 	<%@ include file="/include/common/header.jsp" %>
@@ -258,7 +259,8 @@
 					<c:forEach items="${list}" var="list">
 					<button class="accordion" type="button">[공지]${list.title}</button>
 						<div class="panel">
-							<div class="accordion2">
+							<div class="accordion2" >
+							<a href="javascript:download('BbsNotice', ${list.seq_bbs});">[첨부파일 다운로드]</a>
 								${list.content}
 							</div>
 						</div>

@@ -89,8 +89,8 @@
 							<span class="tip">게시글 제목</span>
 							<h4>${boardDto.title}</h4>
 							<ul>
-								<li><span>[등록 일자]</span></li>
-								<li>${boardDto.dt_reg}</li>
+								<li><span style="font-size: 16px;">[등록 일자]</span></li>
+								<li style="font-size: 16px;">${boardDto.dt_reg}</li>
 							</ul>
 						</div>
 					</div>
@@ -110,7 +110,7 @@
 					<div class="checkout__form__input">
 					<c:if test="${boardDto.seq_reply == 0}">
 					</c:if>
-					<input type="button" value="목록" style="width:150px; font-size: 20px;" onclick="javascript:goList(4);" />
+					<input type="button" value="목록" style="width:130px; font-size: 17px;" onclick="javascript:goList(4);" />
 					</div>
 				</div>
 			</div>
