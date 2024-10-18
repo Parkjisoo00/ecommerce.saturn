@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.co.bravomylife.front.basket.controller.BasketWeb;
+
 import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
 import kr.co.bravomylife.front.buy.dto.BuyDetailListDto;
 import kr.co.bravomylife.front.common.Common;
@@ -164,6 +164,9 @@ public class PayWeb extends Common {
 	public @ResponseBody Map<String,Object> order(@RequestParam Map<String, String> param, HttpServletRequest request, BuyDetailListDto buyDetailListDto) throws NoSuchAlgorithmException {
 		
 		Map<String,Object> returnMap = new HashMap<>();
+		Map<String,String> map = new HashMap<>();
+		
+		int usePoint = Integer.parseInt(param.get("usePoint"));
 		
 		try {
 			// logger.info("[" + this.getClass().getName() + ".order().REQ] " + param.toString());
@@ -195,6 +198,11 @@ public class PayWeb extends Common {
 			apiMap.put("signature"		,signature);
 			apiMap.put("timestamp"		,timestamp);
 			
+			String finalSleName = "";
+			int totalCount = 0;			// 총 갯수
+			int totalPrice = 0;			// 총 가격
+			int totalPoint = 0;
+			
 			if (Request.isDevice(request, "mobile")) {
 				apiMap.put("auth_return","http://119.71.96.251:"
 						+ staticProperties.getProperty("common.server.port", "[UNDEFINED]") + "/front/pay/payup/receive.api");
@@ -211,6 +219,41 @@ public class PayWeb extends Common {
 			
 			// logger.info("통신 결과[" + this.getClass().getName() + ".order().RES] " + returnMap.toString());
 			
+			
+			
+			ArrayList<BuyDetailDto> listBuyDetailDto = new ArrayList<BuyDetailDto>();
+			
+			if (buyDetailListDto.getBuyList() != null) {
+				for (int loop = 0; loop < buyDetailListDto.getBuyList().size(); loop++) {
+					
+					if (buyDetailListDto.getBuyList().get(loop).getCount() >= 1) {
+						
+						// logger.debug(loop + " : seq_sle(" + buyDetailListDto.getBuyList().get(loop).getSeq_sle() + ")" + " + count(" + buyDetailListDto.getBuyList().get(loop).getCount() + ")");
+						
+						// 갯수가 1개 이상인 상품
+						listBuyDetailDto.add(buyDetailListDto.getBuyList().get(loop));
+						
+						// 전체 상품 갯수 및 금액 그리고 구매명
+						totalCount += buyDetailListDto.getBuyList().get(loop).getCount();
+						totalPrice += buyDetailListDto.getBuyList().get(loop).getCount() * buyDetailListDto.getBuyList().get(loop).getPrice();
+						finalSleName = buyDetailListDto.getBuyList().get(loop).getSle_nm();
+						
+						if (loop == buyDetailListDto.getBuyList().size() - 1) {
+							
+							totalPrice -= usePoint;
+							if (totalPrice < 0) {
+								totalPrice = 0;
+							}
+						}
+						
+						
+					}
+				}
+			}
+			
+			
+			
+			
 			if ("0000".equals(returnMap.get("responseCode"))) {
 				// logger.info("[" + this.getClass().getName() + ".order().RES.SUCCESS] " + returnMap.toString());
 				
@@ -222,10 +265,10 @@ public class PayWeb extends Common {
 					// 마스터 설정
 					BuyMasterDto buyMasterDto = new BuyMasterDto();
 					buyMasterDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
-
-					buyMasterDto.setBuy_info(buyDetailListDto.getBuyList().get(0).getSle_nm() + "(수량: " + buyDetailListDto.getBuyList().get(0).getCount() + ")");
-					buyMasterDto.setBuy_count(buyDetailListDto.getBuyList().get(0).getCount());
-					buyMasterDto.setBuy_price(buyDetailListDto.getBuyList().get(0).getPrice() * buyDetailListDto.getBuyList().get(0).getCount());
+					buyMasterDto.setBuy_info(finalSleName + "-포함(총 개수: " + totalCount + ")");
+					buyMasterDto.setBuy_count(totalCount);
+					buyMasterDto.setBuy_price(totalPrice);
+					buyMasterDto.setTotal_point(totalPoint);
 					buyMasterDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 					
 					if (!buySrvc.insert(buyMasterDto, (ArrayList<BuyDetailDto>) buyDetailListDto.getBuyList(), deal_num)) {
