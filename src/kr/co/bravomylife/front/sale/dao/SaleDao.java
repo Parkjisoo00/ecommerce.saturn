@@ -40,6 +40,22 @@ import kr.co.bravomylife.front.sale.dto.SaleFileDto;
 @Repository("kr.co.bravomylife.front.sale.dao.SaleDao")
 public class SaleDao extends BaseDao {
 	
+	public int reviewCheck(SaleDto saleDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.reviewCheck", saleDto);
+	}
+	
+	public int rateUpdate(SaleDto saleDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.sale.Sale.rateUpdate", saleDto);
+	}
+	
+	public int rateCheck(SaleDto saleDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.rateCheck", saleDto);
+	}
+	
+	public int rateInsert(SaleDto saleDto) {
+		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.sale.Sale.rateInsert", saleDto);
+	}
+	
 	public int insertText(SaleDto saleDto) {
 		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.sale.Sale.insertText", saleDto);
 	}
@@ -128,13 +144,5 @@ public class SaleDao extends BaseDao {
 	
 	public int totalCount(PagingDto pagingDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.totalCount", pagingDto);
-	}
-	
-	public List<SaleDto> listingLike(PagingDto pagingDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.listingLike", pagingDto);
-	}
-	
-	public int myLikeCount(PagingDto pagingDto) {
-		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.myLikeCount", pagingDto);
 	}
 }

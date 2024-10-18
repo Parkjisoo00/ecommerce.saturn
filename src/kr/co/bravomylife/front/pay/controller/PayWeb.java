@@ -164,7 +164,7 @@ public class PayWeb extends Common {
 	public @ResponseBody Map<String,Object> order(@RequestParam Map<String, String> param, HttpServletRequest request, BuyDetailListDto buyDetailListDto) throws NoSuchAlgorithmException {
 		
 		Map<String,Object> returnMap = new HashMap<>();
-		Map<String,String> map = new HashMap<>();
+		// Map<String,String> map = new HashMap<>();
 		
 		int usePoint = Integer.parseInt(param.get("usePoint"));
 		

@@ -2,52 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.sale.Sale">
 
-	<select id="listingLike" parameterType="pagingDto" resultType="pagingDto">
-		SELECT
-			sle.SEQ_SLE
-			, sle.SLE_NM
-			, NVL(sle.POINT_STACK, 0) POINT_STACK
-			, sle.IMG
-			, sle.PRICE_SALE
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
-			, sle.CORP_NM
-			, rate.COUNT
-			, sle.cd_ctg_m
-			, sle.cd_ctg_b
-			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') AS dt_reg
-			, sle.COUNT_STOCK
-			, likeTbl.FLG_LIKE
-		FROM
-			TB_SLE sle
-		LEFT OUTER JOIN
-			TB_RATE rate
-		ON
-			sle.SEQ_SLE = rate.SEQ_SLE
-		LEFT OUTER JOIN
-			TB_LIKE likeTbl
-		ON
-			sle.SEQ_SLE = likeTbl.SEQ_SLE
-			AND likeTbl.SEQ_MBR = #{seq_mbr}
+	<insert id="rateInsert" parameterType="saleDto">
+		INSERT INTO TB_RATE
+			(SEQ_SLE, SEQ_MBR, COUNT, RATE_STAR, DT_REG, REGISTER, DT_UPT, UPDATER)
+		VALUES
+			(#{seq_sle}, #{seq_mbr}, 1, #{rate_star}, SYSDATE, #{register}, NULL, NULL)
+	</insert>
+
+	<update id="rateUpdate" parameterType="saleDto">
+		UPDATE
+			TB_RATE
+		SET
+			RATE_STAR	= #{rate_star}
+			, DT_UPT = SYSDATE
+			, UPDATE = #{seq_mbr}
 		WHERE
-			likeTbl.SEQ_MBR = #{seq_mbr}	
-			AND sle.CD_STATE_SALE = 2
-			AND sle.FLG_DELETE	= 'N'
-			AND likeTbl.FLG_LIKE = 'Y'
-	</select>
-	
-	<select id="myLikeCount" parameterType="pagingDto" resultType="java.lang.Integer">
+			SEQ_MBR		= #{seq_mbr}
+			AND SEQ_SLE	= #{seq_sle}
+	</update>
+
+	<select id="reviewCheck" parameterType="saleDto" resultType="java.lang.Integer">
 		SELECT
-			COUNT(ROWNUM)
+			COUNT(SEQ_SLE)
 		FROM
-			TB_SLE sle
+			TB_REVIEW
 		WHERE
-		<include refid="myLikewhere" />
+			SEQ_MBR			= #{seq_mbr}
+			AND SEQ_SLE		= #{seq_sle}
+			AND FLG_DELETE	= 'N'
 	</select>
-	
-	<sql id="myLikewhere">
-		sle.SEQ_SLE = #{seq_sle}
-	</sql>
-	
+
+	<select id="rateCheck" parameterType="saleDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(SEQ_SLE)
+		FROM
+			TB_RATE
+		WHERE
+			SEQ_MBR			= #{seq_mbr}
+			AND SEQ_SLE		= #{seq_sle}
+	</select>
+
 	<select id="sequence" resultType="java.lang.Integer">
 		SELECT SQ_SEQ_REVIEW.NEXTVAL FROM DUAL
 	</select>

@@ -46,6 +46,49 @@ public class SaleSrvc {
 	@Inject
 	SaleDao saleDao;
 	
+	/*
+	for (int loop = 0; loop < saleFileDto.length; loop++) {
+		
+		saleSrvc.insert(saleFileDto[loop]);
+	}
+	*/
+	
+	@Transactional("txFront")
+	public boolean insertRate(SaleDto saleDto) {
+		try {
+			
+			int result = saleDao.rateInsert(saleDto);
+			
+			if(result == 1) {
+				
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	@Transactional("txFront")
+	public boolean reviewCheck(SaleDto saleDto) {
+		
+		boolean totalResult = false;
+		
+		try {
+			
+			int result = saleDao.reviewCheck(saleDto);
+			
+			if (result == 1) { 
+				
+				totalResult = true;
+			}
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+		return totalResult;
+	}
 	
 	@Transactional("txFront")
 	public boolean insertText(SaleDto saleDto) {
@@ -299,21 +342,6 @@ public class SaleSrvc {
 		
 		pagingListDto.setPaging(pagingDto);
 		pagingListDto.setList(saleDao.totalList(pagingDto));
-		
-		return pagingListDto;
-	}
-	public PagingListDto listingLike(PagingDto pagingDto) {
-		
-		PagingListDto pagingListDto = new PagingListDto();
-		
-		int totalLine = saleDao.myLikeCount(pagingDto);
-		int totalPage = (int) Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
-		pagingDto.setTotalLine(totalLine);
-		pagingDto.setTotalPage(totalPage);
-		if (totalPage == 0) pagingDto.setCurrentPage(1);
-		
-		pagingListDto.setPaging(pagingDto);
-		pagingListDto.setList(saleDao.listingLike(pagingDto));
 		
 		return pagingListDto;
 	}
