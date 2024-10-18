@@ -125,7 +125,7 @@
 				</ul>
 			</li>
 			<li style="display: inline-block; margin: 0 57px; position: relative;">
-				<a href="#" style="font-size: 18px; font-weight: bold;">고객 센터</a>
+				<a href="javascript:goList(1);" style="font-size: 18px; font-weight: bold;">고객 센터</a>
 				<ul class="dropdown" style="top: 100%; left: 0; list-style: none;">
 					<li><a href="javascript:goList(1);" >공지사항</a></li>
 					<li><a href="javascript:goList(2);" >자주 묻는 질문</a></li>
