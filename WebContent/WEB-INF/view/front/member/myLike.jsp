@@ -102,15 +102,16 @@
 								<thead style="border-bottom: 1px solid #dbdbdb !important;">
 									<tr style="border-color: #707070 !important;">
 										<th class="cart-th" style="width: 5%">
-										<th class="cart-th" colspan="2">상품정보</th>
+										<th class="cart-th" >상품정보</th>
 										<th class="cart-th" style="width: 20%">상품금액</th>
+										<th class="cart-th" style="width: 20%">상품처리(미정)</th>
 									</tr>
 								</thead>
 								<tbody>
 								<c:choose>
 									<c:when test="${empty list}">
 										<tr style="text-align: center; border-bottom: 1px solid #707070;">
-											<td colspan="7">장바구니에 상품이 없습니다</td>
+											<td colspan="7">찜한 상품이 없습니다</td>
 										</tr>
 									</c:when>
 									<c:otherwise>
@@ -133,9 +134,9 @@
 												</td>
 												<td class="cart-td">
 													<div style="display: flex; flex-direction: column; align-items: center;">
-													<a href="javascript:setBasket('${list.seq_sle}', '${list.sle_nm}', '${list.discount_sale}', '${list.count}'
-													, '${list.img}', '${list.point_stack}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');" 
-													class="cart-btn" style="background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;margin-top:0px">장바구니 담기</a>
+														<a href="javascript:setBasket('${list.seq_sle}', '${list.sle_nm}', '${list.discount_sale}', '${list.count}'
+														, '${list.img}', '${list.point_stack}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');" 
+														class="cart-btn" style="background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;margin-top:0px">장바구니 담기</a>
 														<a href="javascript:remove()" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;padding: 10px 45px 10px;">삭제</a>
 													</div>
 												</td>

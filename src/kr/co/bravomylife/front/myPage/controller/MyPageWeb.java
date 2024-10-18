@@ -20,6 +20,7 @@
  */
 package kr.co.bravomylife.front.myPage.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,6 +31,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.backoffice.common.Common;
+import kr.co.bravomylife.front.common.dto.PagingDto;
+import kr.co.bravomylife.front.common.dto.PagingListDto;
+import kr.co.bravomylife.front.sale.service.SaleSrvc;
 
 /**
  * @version 1.0.0
@@ -45,6 +49,8 @@ public class MyPageWeb extends Common{
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(MyPageWeb.class);
 
+	@Inject
+	SaleSrvc saleSrvc;
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
@@ -56,11 +62,17 @@ public class MyPageWeb extends Common{
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/myPage/index.web")
-	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			pagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			PagingListDto pagingListDto = saleSrvc.listingLike(pagingDto);
+			
+			mav.addObject("paging"	, pagingListDto.getPaging());
+			mav.addObject("list"	, pagingListDto.getList());
 			mav.setViewName("front/myPage/index");
 		}
 		catch (Exception e) {

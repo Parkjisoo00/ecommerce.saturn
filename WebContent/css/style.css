@@ -30,7 +30,7 @@
 /*----------------------------------------*/
 
 /*----------------------------------------*/
-/* mypage-include
+/* mypage
 /*----------------------------------------*/
 .my-custom-ul{
 	position: absolute;
@@ -38,9 +38,25 @@
 	transform: translateY(47px);
 	list-style-type: none;
 	line-height: 3.5;
-	
-	
 }
+
+.mydiv1{
+		max-width: 100%;
+		border-bottom: 1px solid #e0e0e0;
+		padding-bottom: 30px;
+		padding-top: 30px;
+		background-color: #f3ebe1;
+}
+.mypage-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.mypage-header-right-group {
+	display: flex;
+	align-items: center;
+}
+
 /*----------------------------------------*/
 /* introduce-background
 /*----------------------------------------*/

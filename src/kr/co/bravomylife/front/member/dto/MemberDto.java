@@ -56,32 +56,7 @@ public class MemberDto {
 	private int point			= 0;
 	private int total_point		= 0;
 	
-	private int seq_sle 	= 0;
-	private String cd_ctg_b			= "";	// 중분류
-	private String cd_ctg_m			= "";	// 대분류
 	
-	
-	
-	
-	
-	public String getCd_ctg_b() {
-		return cd_ctg_b;
-	}
-	public void setCd_ctg_b(String cd_ctg_b) {
-		this.cd_ctg_b = cd_ctg_b;
-	}
-	public String getCd_ctg_m() {
-		return cd_ctg_m;
-	}
-	public void setCd_ctg_m(String cd_ctg_m) {
-		this.cd_ctg_m = cd_ctg_m;
-	}
-	public int getSeq_sle() {
-		return seq_sle;
-	}
-	public void setSeq_sle(int seq_sle) {
-		this.seq_sle = seq_sle;
-	}
 	public int getPoint() {
 		return point;
 	}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ page info="/WEB-INF/view/front/myPage/" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="kor">
 
@@ -18,13 +19,13 @@
 	<script type="text/javascript" src="/js/package/tinymce.js"></script>		
 	<script>
 	function goList(value) {
-		
+				
 		var frmMain = document.getElementById("frmMain");
-		
+				
 		// document.getElementById("searchWord").value = "";
 		// document.getElementById("currentPage").value = "1";
 		document.getElementById("cd_bbs_type").value = value;
-		
+				
 		frmMain.action="/front/center/board/myPageNotice/list.web";
 		frmMain.submit();}
 	</script>
@@ -54,164 +55,73 @@
 	<!-- Breadcrumb End -->
 
 				<!-- Checkout Section Begin -->
-				<section class="checkout spad">
+				<section class="checkout spad" >
 					<div class="container">
 						<form id="frmMain" method="POST" class="checkout__form">
-						<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" 	/>
-							<div class="row2">
-									<h5 >개인 정보</h5>
-									<div class="row">
-										<!-- 이메일 -->
-										<div class="col-lg-12 col-md-12 col-sm-12">
-											<div class="checkout__form__input">
-												<p>이메일 <span>*</span></p>
-												<div style="display: flex; align-items: center; gap: 10px;">
-													<input type="text" id="email" name="email" required
-														style="flex: 1; min-width: 250px;" autocomplete="off"/>
-												</div>
-											</div>
-										</div>
-
-										<div class="col-lg-12 col-md-12 col-sm-12">
-											<div class="checkout__form__input">
-												<p>비밀번호 (영문 대/소문자 구분, 숫자, 특수문자 포함 8~16자 필수 입력) <span>*</span></p>
-												<input type="password" id="passwd" name="passwd" required autocomplete="off" />
-											</div>
-										</div>
-										
-										<div class="col-lg-12 col-md-12 col-sm-12">
-											<div class="checkout__form__input">
-												<p>비밀번호 (확인을 위해 새 비밀번호를 다시 입력해주세요.) <span>*</span></p>
-												<input type="password" id="passwd_" name="passwd_" required autocomplete="off" />
-											</div>
-										</div>
-
-										<!-- 성명 -->
-										<div class="col-lg-12 col-md-12 col-sm-12">
-											<div class="checkout__form__input">
-												<p>성명 <span>*</span></p>
-												<input type="text" id="mbr_nm" name="mbr_nm" required
-													style="width: 100%;" autocomplete="off"/>
-											</div>
-										</div>
-
-										<!-- 생년월일 -->
-										<div class="col-lg-6 col-md-6 col-sm-6">
-											<div class="checkout__form__input">
-												<p>생년월일 <span>*</span></p>
-												<input type="text" id="age" name="age" placeholder="생년월일" maxlength="10" style="width: 100%;" required autocomplete="off"/>
-											</div>
-										</div>
-
-										<!-- 성별 -->
-										<div class="col-lg-6 col-md-6 col-sm-6">
-											<div class="gender-option">
-												<p>성별 <span>*</span></p>
-												<div class="checkbox_container" style="display: flex; gap: 10px;">
-													<label><input type="radio" name="gender" value="M" checked />
-														남</label>
-													<label><input type="radio" name="gender" value="F" /> 여</label>
-												</div>
-											</div>
-										</div>
-
-										<!-- 연락처 -->
-										<div class="col-lg-12 col-md-12 col-sm-12">
-											<div class="checkout__form__input">
-												<p>연락처 <span>*</span></p>
-												<div style="display: flex; gap: 5px;">
-													<input value="010" type="text" id="phone1" name="phone1"
-														maxlength="3" required
-														oninput="this.value = this.value.replace(/[^0-9.]/g, '')" autocomplete="off"/>
-													-
-													<input value="1111" type="text" id="phone2" name="phone2"
-														maxlength="4" required
-														oninput="this.value = this.value.replace(/[^0-9.]/g, '')" autocomplete="off"/>
-													-
-													<input value="2222" type="text" id="phone3" name="phone3"
-														maxlength="4" required
-														oninput="this.value = this.value.replace(/[^0-9.]/g, '')" autocomplete="off"/>
-												</div>
-											</div>
-										</div>
-
-										<!-- 주소 -->
-										<div class="col-lg-12 col-md-12 col-sm-12">
-											<div class="checkout__form__input">
-												<p>주소 <span>*</span></p>
-												<input type="text" id="postcode" name="postcode" size="5" autocomplete="off"/>
-
-													<label for="addr1">도로명</label>
-													<input type="text"		id="addr1"			name="addr1" size="40" autocomplete="off"/>
-													<input type="hidden"	id="roadAddr"		name="roadAddr" />
-													
-													<span id="guide" style="color:#999; display:none"></span>
-													
-													<label for="addr2">상세</label>
-													<input type="text"		id="addr2"			name="addr2" size="20" placeholder="상세 주소" autocomplete="off"/>
-													<input type="hidden"	id="extraAddress"	name="extraAddress" />
-													
-													<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
-											</div>
-										</div>
-
-										<!-- 마케팅 수신 동의 -->
-										<div class="col-lg-12 col-md-12 col-sm-12">
-											<div class="checkout__form__checkbox" >
-												<p>마케팅 수신 동의</p>
-													<br>
-														<input type = "checkbox" id="flg_sms" name="flg_sms" value="Y">
-														SMS
-														<input type = "checkbox" id="flg_email" name="flg_email" value="Y">
-														EMAIL
-											</div>
-										</div>
-
-										<!-- 약관 동의 -->
-										<div class="col-lg-12 col-md-12 col-sm-12">
-											<div class="checkout__form__checkbox">
-												<input type="checkbox" id="term_1" name="term_1" value="Y">
-												[필수] '브라보 마이 라이프' 이용 약관 동의
-												<div class="terms-container"
-													style="border: 1px solid #ccc; padding: 10px; margin-top: 5px; max-height: 100px; overflow-y: auto;">
-													제1장 총칙<br>제 1 조 (목적)<br>이 약관은 쿠팡 주식회사(이하 “회사”)가 운영하는 사이버몰에서 제공하는
-													서비스와 이를 이용하는 회원의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
-												</div>
-											</div>
-										</div>
-
-										<div class="col-lg-12 col-md-12 col-sm-12">
-											<div class="checkout__form__checkbox">
-												<input type="checkbox" id="term_2" name="term_2" value="Y">
-												[필수] 개인정보 수집 및 이용동의
-												<div class="terms-container"
-													style="border: 1px solid #ccc; padding: 10px; margin-top: 5px; max-height: 100px; overflow-y: auto;">
-													제1장 총칙<br>제 1 조 (목적)<br>이 약관은 쿠팡 주식회사(이하 “회사”)가 운영하는 사이버몰에서 제공하는
-													서비스와 이를 이용하는 회원의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
-												</div>
-											</div>
-										</div>
-
-										<div class="col-lg-12 col-md-12 col-sm-12">
-											<div class="checkout__form__checkbox">
-												<input type="checkbox" id="term_3" name="term_3" value="Y">
-												[선택] 개인정보 제3자 제공 동의
-												<div class="terms-container"
-													style="border: 1px solid #ccc; padding: 10px; margin-top: 5px; max-height: 100px; overflow-y: auto;">
-													제1장 총칙<br>제 1 조 (목적)<br>이 약관은 쿠팡 주식회사(이하 “회사”)가 운영하는 사이버몰에서 제공하는
-													서비스와 이를 이용하는 회원의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
-												</div>
-											</div>
-										</div>
-
-										<!-- 회원가입 버튼 -->
-										<div class="col-lg-12 col-md-12 col-sm-12">
-											<div class="checkout__form__input">
-												<input type="button" value="회원가입"
-													style="width: 100%; text-align: center;" id="registerId" onClick="checkRegister();"/>
-											</div>
-										</div>
+						<input type="hidden" name="phone" id="phone" />
+							<div class="row"style="display: flex; justify-content: center; align-items: center;">
+								<div class="col-lg-12">
+									<div class="mydiv1" id="myDiv1" style="width: 100%; display: flex; justify-content: space-between; align-items: center;margin-bottom:50px">
+										<span class="styled-span" style="width: 40%; display: flex; justify-content: center; align-items: center;font-weight:700;color:#341d08">님 반갑습니다.</span>
+										<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;font-weight:700;color:#341d08">포인트:</span>
 									</div>
+									
+					
+					<h6 class="lowgnb-title" style="padding-bottom: 20px; text-align: left; font-size: 30px;">찜 리스트</h6>
+					<div class="mypage-header">
+						<h6 class="cart-title" style="font-size:15px">*이미지를 클릭하면 상품으로 이동합니다.</h6>
+						<div class="mypage-header-right-group">
+							<a href="/front/member/myLike.web" ><h6 class="cart-title" style="font-size:30px">더보기 </h6></a>
+							<a href="/front/member/myLike.web" style="padding-bottom: 13px;"><img src="/img/mypage/mypage3.png"></a>
+						</div>
+					</div>
+						<div class="shop__cart__table" style="border: 1px solid #dbdbdb; border-radius: 4px;">
+							<table id="productBasket" class="cart-table">
+								<thead style="border-bottom: 1px solid #dbdbdb !important;">
+									<tr style="border-color: #707070 !important;">
+										<th class="cart-th" style="width: 5%">
+										<th class="cart-th" colspan="2">상품정보</th>
+										<th class="cart-th" style="width: 20%">상품금액</th>
+									</tr>
+								</thead>
+								<tbody>
+								<c:choose>
+									<c:when test="${empty list}">
+										<tr style="text-align: center; border-bottom: 1px solid #707070;">
+											<td colspan="7">찜한 상품이 없습니다</td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach var="list" items="${list}">
+											<tr style="border: 0;" data-seq-sle="${list.seq_sle}">
+												
+												<td class="cart-td" style="text-align: center; vertical-align: middle;">
+												
+													<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden; display: inline-block;">
+														<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
+															<img class="cart-img" src="${list.img}" class="cart-img">
+														</a>
+													</div>
+												</td>
+												<td class="cart-td" style="text-align: left !important;">
+													${list.sle_nm}
+												</td>
+												<td class="cart-td">
+												</td>
+												<td class="cart-td">
+													<div style="display: flex; flex-direction: column; align-items: center;">
+													<fmt:formatNumber value="${list.price_sale}" type="number" />원
+													</div>
+												</td>
+											</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+								</tbody>
+							</table>
+						</div>
+					
+								</div>
 								</div>
 							</form>
 						</div>
