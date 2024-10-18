@@ -20,6 +20,7 @@
  */
 package kr.co.bravomylife.backoffice.product.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,6 +29,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import kr.co.bravomylife.backoffice.product.dto.ProductDto;
+import kr.co.bravomylife.backoffice.product.service.ProductSrvc;
 
 /**
  * @version 1.0.0
@@ -40,6 +44,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller("kr.co.bravomylife.backoffice.product.controller.ProductWeb")
 public class ProductWeb {
 	
+	@Inject
+	ProductSrvc productSrvc;
+	
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(ProductWeb.class);
 	
@@ -48,22 +55,54 @@ public class ProductWeb {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-09-30
-	 * <p>DESCRIPTION:상품 상세</p>
+	 * @since 2024-10-17
+	 * <p>DESCRIPTION:상품 등록</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
 	
-	@RequestMapping(value = "/console/product/view.web")
+	@RequestMapping(value = "/backoffice/product/productRegProc.web")
+	public ModelAndView productRegProc(HttpServletRequest request, HttpServletResponse response, ProductDto productDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			logger.debug("새턴" + productDto.getDesces());
+			
+			productSrvc.insert(productDto);
+			
+			mav.setViewName("front/sale/total_list");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".productRegProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-17
+	 * <p>DESCRIPTION:상품 등록 페이지</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	@RequestMapping(value = "/backoffice/product/productReg.web")
 	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			mav.setViewName("backoffice/product/view");
+			mav.setViewName("backoffice/product/productReg");
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".loginForm()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".productReg()] " + e.getMessage(), e);
 		}
 		finally {}
 		

@@ -36,27 +36,46 @@
 	<!-- Header Section End -->
 
 	<!-- Breadcrumb Begin -->
-	
-	<div style="width: 100%;">
-    <ul class="my-custom-ul" style="list-style-type: none; padding-left: 0; margin-left: 155px;">
-        <li><a style="font-size: 30px;" href="#" class="menuLnb">맞춤 건강 관리</a></li>
-        <li><a style="font-size: 20px; border-bottom: 2px solid; padding-bottom: 2px;" href="#" class="menuLnb">- 맞춤 건강 추천</a></li>
-        <li><a style="font-size: 20px; border-bottom: 2px solid; padding-bottom: 2px;" href="#" class="menuLnb">- 안심 조회 서비스</a></li>
-        <li><a style="font-size: 20px; border-bottom: 2px solid; padding-bottom: 2px;" href="#" class="menuLnb">- 건강 정보</a></li>
-        <li><a style="font-size: 20px; border-bottom: 2px solid; padding-bottom: 2px;" href="#" class="menuLnb">- 새소식</a></li>
-        <li><a style="font-size: 20px; border-bottom: 2px solid; padding-bottom: 2px;" href="#" class="menuLnb">- 성분 사전</a></li>
-    </ul>
-</div>
 	<!-- Breadcrumb End -->
-	<br>
-	<div style="position: relative; text-align: center; width: 100%; max-width: 600px; margin: 0 auto;">
-		<img src="/img/popup/personalized health.png" alt="Local Image" style="width: 100%; height: auto;">
-		 <div style="position: absolute; top: calc(50% - 2cm); left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5); padding: 10px 20px; border-radius: 10px;">
+	<section class="shop spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-3">
+					<div class="shop__sidebar">
+						<div class="sidebar__categories">
+							<div class="section-title">
+								<h4><a href="#" style= "font-size: 25px;">맞춤 건강 관리</a></h4>
+							</div>
+							<div class="categories__accordion">
+								<div class="accordion" id="accordionExample">
+									<div class="card">
+										<div>
+											<a href="#" style="display: block; margin-bottom: 20px; font-size: 20px;">- 맞춤 건강 추천</a>
+										</div>
+										<div>
+											<a href="#" style="display: block; margin-bottom: 20px; font-size: 20px;">- 안심 조회 서비스</a>
+										</div>
+										<div>
+											<a href="#" style="display: block; margin-bottom: 20px; font-size: 20px;">- 건강 정보</a>
+										</div>
+										<div>
+											<a href="#" style="display: block; margin-bottom: 20px; font-size: 20px;">- 새소식</a>
+										</div>
+										<div>
+											<a href="#" style="display: block; margin-bottom: 20px; font-size: 20px;">- 성분 사전</a>
+										</div>
+									</div>
+								</div>
+							</div>	
+						</div>
+					</div>
+				</div>
+					<div style="position: relative; text-align: center; width: 100%; max-width: 600px; margin: 0 auto;">
+						<img src="/img/popup/personalized health.png" alt="Local Image" style="width: 100%; height: auto;">
+					</div>
+			</div>
 		</div>
-	</div>
-
-	
-	
+	</section>	
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
 </form>
