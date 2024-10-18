@@ -98,6 +98,10 @@ public class SaleDao extends BaseDao {
 		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.reviewList", pagingDto);
 	}
 	
+	public SaleDto reviewCounts(SaleDto saleDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.reviewCounts", saleDto);
+	}
+	
 	public int reviewCount(PagingDto pagingDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.reviewCount", pagingDto);
 	}

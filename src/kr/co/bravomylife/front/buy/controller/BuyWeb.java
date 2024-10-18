@@ -374,6 +374,9 @@ public class BuyWeb extends Common {
 			SaleDto _saleDto	= saleSrvc.select(saleDto);
 			mav.addObject("saleDto"		, _saleDto);
 			
+			SaleDto reviewCount = saleSrvc.reviewCounts(saleDto);
+			mav.addObject("reviewCount"		, reviewCount);
+			
 			PagingListDto _pagingListDto = saleSrvc.detailList(pagingDto);
 			mav.addObject("paging"	, _pagingListDto.getPaging());
 			mav.addObject("list"	, _pagingListDto.getList());

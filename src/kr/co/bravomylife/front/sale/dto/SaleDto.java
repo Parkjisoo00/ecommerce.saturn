@@ -66,12 +66,33 @@ public class SaleDto {
 	private String file_save		= "";
 	private String file_orig		= "";
 	private String extension		= "";
+	private int review_count		= 0;
+	private int average_star_rate 	= 0;
+	private int total_count			= 0;
 	
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
+	public int getAverage_star_rate() {
+		return average_star_rate;
+	}
+	public void setAverage_star_rate(int average_star_rate) {
+		this.average_star_rate = average_star_rate;
+	}
+	public int getTotal_count() {
+		return total_count;
+	}
+	public void setTotal_count(int total_count) {
+		this.total_count = total_count;
+	}
+	public int getReview_count() {
+		return review_count;
+	}
+	public void setReview_count(int review_count) {
+		this.review_count = review_count;
+	}
 	public String getFile_save() {
 		return file_save;
 	}

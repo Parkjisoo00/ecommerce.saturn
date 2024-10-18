@@ -284,37 +284,37 @@
 						<input type="hidden" name="buyList[0].sle_nm" value="${saleDto.sle_nm}" />
 						<div class="product__details__widget">
 							<div class="rating">
-								<c:if test="${saleDto.average_rate == 0}">
+								<c:if test="${saleDto.average_star_rate == 0}">
 									<i class="fa fa-star" style="color: #e0e0e0;"></i>
 									<i class="fa fa-star" style="color: #e0e0e0;"></i>
 									<i class="fa fa-star" style="color: #e0e0e0;"></i>
 									<i class="fa fa-star" style="color: #e0e0e0;"></i>
-									<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${saleDto.count}개 상품평</span>
+									<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${saleDto.total_count}개 상품평</span>
 								</c:if>
-								<c:if test="${salDto.average_rate == 1}">
-									<i class="fa fa-star"></i><span class="rate">${saleDto.count}개 상품평</span>
+								<c:if test="${salDto.average_star_rate == 1}">
+									<i class="fa fa-star"></i><span class="rate">${saleDto.total_count}개 상품평</span>
 								</c:if>
-								<c:if test="${saleDto.average_rate == 2}">
+								<c:if test="${saleDto.average_star_rate == 2}">
 									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i><span class="rate">${saleDto.count}개 상품평</span>
+									<i class="fa fa-star"></i><span class="rate">${saleDto.total_count}개 상품평</span>
 								</c:if>
-								<c:if test="${saleDto.average_rate == 3}">
+								<c:if test="${saleDto.average_star_rate == 3}">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i><span class="rate">${saleDto.count}개 상품평</span>
+									<i class="fa fa-star"></i><span class="rate">${saleDto.total_count}개 상품평</span>
 								</c:if>
-								<c:if test="${saleDto.average_rate == 4}">
+								<c:if test="${saleDto.average_star_rate == 4}">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i><span class="rate">${saleDto.count}개 상품평</span>
+									<i class="fa fa-star"></i><span class="rate">${saleDto.total_count}개 상품평</span>
 								</c:if>
-								<c:if test="${saleDto.average_rate == 5}">
+								<c:if test="${saleDto.average_star_rate == 5}">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i><span class="rate">${saleDto.count}개 상품평</span>
+									<i class="fa fa-star"></i><span class="rate">${saleDto.total_count}개 상품평</span>
 								</c:if>
 							</div>
 							<ul class="pd-ul">
@@ -501,7 +501,7 @@
 								<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">상품상세정보</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">상품후기 (${saleDto.seq_review})</a>
+								<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">상품후기 (${reviewCount.review_count})</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">상품 Q&A</a>

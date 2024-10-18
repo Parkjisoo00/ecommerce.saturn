@@ -33,9 +33,10 @@ public class PagingDto {
 	private int point_value		= 0;
 	private String mbr_nm		= "";
 	private int count			= 0;
-	private int seq_sle_count			= 0;
-	private int total_price_sum			= 0;
-	private int total_point_sum			= 0;
+	private int seq_sle_count	= 0;
+	private int total_price_sum	= 0;
+	private int total_point_sum	= 0;
+	private int review_count	= 0;
 	
 	
 	private String sle_nm			= "";	// 판매 상품명
@@ -50,6 +51,12 @@ public class PagingDto {
 	private String flg_like			= "";	// 찜 여부
 	
 	
+	public int getReview_count() {
+		return review_count;
+	}
+	public void setReview_count(int review_count) {
+		this.review_count = review_count;
+	}
 	public String getSle_nm() {
 		return sle_nm;
 	}

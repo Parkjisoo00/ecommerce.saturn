@@ -108,11 +108,24 @@
 			AND FLG_LIKE	= 'Y'
 	</update>
 
+	<select id="reviewCounts" parameterType="saleDto" resultType="saleDto">
+		SELECT
+			COUNT(SEQ_REVIEW) review_count
+		FROM
+			TB_REVIEW
+		WHERE
+			SEQ_SLE = #{seq_sle}
+	</select>
+
 	<select id="reviewCount" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
 			COUNT(ROWNUM)
 		FROM
 			TB_SLE sle
+		LEFT JOIN
+			TB_REVIEW review
+		ON
+			sle.SEQ_SLE = review.SEQ_SLE
 		WHERE
 		<include refid="reviewwhere" />
 	</select>
@@ -124,9 +137,10 @@
 		(
 		SELECT
 			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY sle.DT_REG DESC) rnum
-			, rate.COUNT
-			, rate.RATE_STAR
-			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
+			, CASE 
+				WHEN rate.COUNT > 0 THEN ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0)
+				ELSE 0 
+			  END AS average_rate
 			, review.SEQ_MBR
 			, review.FLG_DELETE
 			, review.RATE_REVIEW
@@ -154,9 +168,10 @@
 		]]>
 		ORDER BY rnum
 	</select>
-
+	
 	<sql id="reviewwhere">
 		sle.SEQ_SLE = #{seq_sle}
+		AND review.FLG_DELETE = 'N'
 	</sql>
 
 	<select id="detailCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -231,33 +246,37 @@
 			, (sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) * (sle.POINT_STACK / 100)) POINT_VALUE
 			, DECODE(sle.PRD_TYPE, 1, '액상', 2, '정', 3, '캡슐', 4, '베지캡슐', 5, '젤리', 6, '분말', 7, '츄어블', '미정') PRD_TYPE
 			, sle.CORP_NM
-			, rate.RATE_STAR
-			, rate.COUNT
 			, sle.cd_ctg_m
 			, sle.cd_ctg_b
-			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
 			, sle.DISCOUNT
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') AS dt_reg
 			, sle.COUNT_STOCK
+			, rate_summary.total_count
+			, CASE 
+				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
+				ELSE 0
+			  END AS average_star_rate
 			, best.FLG_BEST
-			, review.SEQ_REVIEW
 		<if test="seq_mbr != null and seq_mbr != ''">
 			, likeTbl.FLG_LIKE
 		</if>
 		FROM
 			TB_SLE sle
-		LEFT OUTER JOIN
-			TB_RATE rate
+		LEFT OUTER JOIN (
+			SELECT
+				SEQ_SLE,
+				SUM(RATE_STAR) AS total_star_rate,
+				SUM(COUNT) AS total_count
+			FROM
+				TB_RATE
+			GROUP BY SEQ_SLE
+		) rate_summary
 		ON
-			sle.SEQ_SLE = rate.SEQ_SLE
+			sle.SEQ_SLE = rate_summary.SEQ_SLE
 		LEFT OUTER JOIN
 			TB_BEST best
 		ON
 			sle.SEQ_SLE = best.SEQ_SLE
-		LEFT OUTER JOIN
-			TB_REVIEW review
-		ON
-			sle.SEQ_SLE = review.SEQ_SLE
 		<if test="seq_mbr != null and seq_mbr != ''">
 			LEFT OUTER JOIN
 				TB_LIKE likeTbl

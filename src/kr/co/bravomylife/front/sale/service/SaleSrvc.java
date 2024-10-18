@@ -186,6 +186,11 @@ public class SaleSrvc {
 	}
 	*/
 	
+	public SaleDto reviewCounts(SaleDto saleDto) {
+		
+		return saleDao.reviewCounts(saleDto);
+	}
+	
 	@Transactional("txFront")
 	public boolean delLike(SaleDto saleDto) {
 		
