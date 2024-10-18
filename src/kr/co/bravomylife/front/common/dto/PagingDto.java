@@ -37,7 +37,81 @@ public class PagingDto {
 	private int total_price_sum			= 0;
 	private int total_point_sum			= 0;
 	
+
+	private String sle_nm			= "";	// 판매 상품명
+	private String img				= "";	// 판매 상품 이미지
+	private int price_sale			= 0;	// 판매 상품 원가
+	private int discount_sale		= 0;	// 판매가(원가에서 할인율%을 뺀 가격)
+	private int rnum				= 0;
+	private int seq_like			= 0;	// 찜 일련번호(판매 상세 페이지에서 사용)
+	private String flg_delete		= "";	// 삭제 처리 여부
+	private String dt_upt			= "";	// 수정일
+	private int updater				= 0;	// 수정자
+	private String flg_like			= "";	// 찜 여부
+
 	
+	
+	
+	public String getSle_nm() {
+		return sle_nm;
+	}
+	public void setSle_nm(String sle_nm) {
+		this.sle_nm = sle_nm;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public int getPrice_sale() {
+		return price_sale;
+	}
+	public void setPrice_sale(int price_sale) {
+		this.price_sale = price_sale;
+	}
+	public int getDiscount_sale() {
+		return discount_sale;
+	}
+	public void setDiscount_sale(int discount_sale) {
+		this.discount_sale = discount_sale;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	public int getSeq_like() {
+		return seq_like;
+	}
+	public void setSeq_like(int seq_like) {
+		this.seq_like = seq_like;
+	}
+	public String getFlg_delete() {
+		return flg_delete;
+	}
+	public void setFlg_delete(String flg_delete) {
+		this.flg_delete = flg_delete;
+	}
+	public String getDt_upt() {
+		return dt_upt;
+	}
+	public void setDt_upt(String dt_upt) {
+		this.dt_upt = dt_upt;
+	}
+	public int getUpdater() {
+		return updater;
+	}
+	public void setUpdater(int updater) {
+		this.updater = updater;
+	}
+	public String getFlg_like() {
+		return flg_like;
+	}
+	public void setFlg_like(String flg_like) {
+		this.flg_like = flg_like;
+	}
 	public int getTotal_point_sum() {
 		return total_point_sum;
 	}

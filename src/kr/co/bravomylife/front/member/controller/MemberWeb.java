@@ -46,6 +46,7 @@ import kr.co.bravomylife.common.component.EmailCmpn;
 import kr.co.bravomylife.common.dto.EmailDto;
 import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.common.dto.PagingDto;
+import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.member.dto.MemberDto;
 import kr.co.bravomylife.front.member.service.MemberSrvc;
 import kr.co.bravomylife.front.sale.service.SaleSrvc;
@@ -98,7 +99,7 @@ public class MemberWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			/*
+			
 			pagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
 			PagingListDto pagingListDto = saleSrvc.listingLike(pagingDto);
@@ -107,7 +108,7 @@ public class MemberWeb extends Common {
 			mav.addObject("list"	, pagingListDto.getList());
 			
 			mav.setViewName("front/member/myLike");
-			*/
+			
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".main()] " + e.getMessage(), e);

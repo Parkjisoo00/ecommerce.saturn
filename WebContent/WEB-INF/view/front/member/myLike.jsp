@@ -24,7 +24,7 @@
 		
 		frmMain.action="/front/member/myLike.web";
 		frmMain.target = "";
-		frmMain.submit();ㄹ
+		frmMain.submit();
 	}
 	function setBasket(value, value2, value3,value4, value5, value6,value7, value8) {
 		

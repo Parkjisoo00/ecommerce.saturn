@@ -82,7 +82,7 @@
 			<li style="display: inline-block; margin: 0 57px; position: relative;">
 				<a href="javascript:goTypeF('', '', '', '', '', '');" style="font-size: 18px; font-weight: bold;">기능별</a>
 				<ul class="dropdown" style="top: 100%; left: 0; list-style: none;">
-					<li><a href="javascript:goTypeF('bld', '', '', '', ''${paging.cd_ctg_m}'', '');">혈당/혈행/혈압</a></li>
+					<li><a href="javascript:goTypeF('bld', '', '', '', '${paging.cd_ctg_m}', '');">혈당/혈행/혈압</a></li>
 					<li><a href="javascript:goTypeF('imu', '', '', '', '${paging.cd_ctg_m}', '');">항산화/면역력</a></li>
 					<li><a href="javascript:goTypeF('inf', '', '', '', '${paging.cd_ctg_m}', '');">염증/항염</a></li>
 					<li><a href="javascript:goTypeF('jnt', '', '', '', '${paging.cd_ctg_m}', '');">관절/뼈/치아</a></li>
