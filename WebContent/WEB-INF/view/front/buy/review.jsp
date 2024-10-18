@@ -9,24 +9,25 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
-	function reviewWriteProc(value) {
+	function reviewWriteProc() {
 		
 		var frmMain = document.getElementById("frmMain");
+		var rateStarHiddenInput = document.querySelector("input[name='rate_star']");
+		var rateStarValue = rateStarHiddenInput.value;
 		
-		var rateStar = document.getElementById("rate_star");
+		alert("평점 확인: " + rateStarValue);
 		
-		if (!rateStar || rateStar.getAttribute('data-value') == null || rateStar.getAttribute('data-value') == "") {
-			
+		if (!rateStarValue || rateStarValue === "") {
 			alert("평점을 입력하세요.");
 			return;
 		}
 		
 		if (document.getElementById("rate_review").value == "") {
-			
 			alert("후기 내용을 입력하세요.");
 			return;
 		}
-		frmMain.action="/front/buy/reviewWriteProc.web";
+		
+		frmMain.action = "/front/buy/reviewWriteProc.web";
 		frmMain.submit();
 	}
 	
@@ -44,6 +45,7 @@ alert("평점 확인" + value);
  -->
 <body>
 <form id="frmMain" method="POST" enctype="multipart/form-data">
+<input type="hidden" name="rate_star" id="rate_star" value="">
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -112,17 +114,17 @@ alert("평점 확인" + value);
 									<div id="file-inputs" style="display: flex; margin-left: 10px; align-items: center;">
 										<div style="display: flex; align-items: center;">
 											<img id="img-preview-0" style="display: none; width: 70px; height: 70px; object-fit: cover; margin-right: 10px; cursor: pointer;" />
-											<input type="file" id="file-input-0" name="files[0]" style="display: none;" />
+											<input type="file" id="file-input-0" style="display: none;" />
 											<span id="file-name-0" style="margin-left: 10px; cursor: pointer;"></span>
 										</div>
 										<div style="display: flex; align-items: center; margin-left: 20px;">
 											<img id="img-preview-1" style="display: none; width: 70px; height: 70px; object-fit: cover; margin-right: 10px; cursor: pointer;" />
-											<input type="file" id="file-input-1" name="files[1]" style="display: none;" />
+											<input type="file" id="file-input-1" style="display: none;" />
 											<span id="file-name-1" style="margin-left: 10px; cursor: pointer;"></span>
 										</div>
 										<div style="display: flex; align-items: center; margin-left: 20px;">
 											<img id="img-preview-2" style="display: none; width: 70px; height: 70px; object-fit: cover; margin-right: 10px; cursor: pointer;" />
-											<input type="file" id="file-input-2" name="files[2]" style="display: none;" />
+											<input type="file" id="file-input-2" style="display: none;" />
 											<span id="file-name-2" style="margin-left: 10px; cursor: pointer;"></span>
 										</div>
 									</div>
@@ -166,25 +168,32 @@ alert("평점 확인" + value);
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>	
 <script>
-	var stars = document.querySelectorAll('.fa-star-large');
-	
-	stars.forEach(star => {
-		star.addEventListener('click', function() {
-			var value = this.getAttribute('data-value');
+	$(document).ready(function() {
+		
+		var stars = document.querySelectorAll('.fa-star-large');
+		var rateStarHiddenInput = document.querySelector("input[name='rate_star']");
+		
+		stars.forEach(star => {
 			
-			stars.forEach(s => {
-				s.removeAttribute('name');
-				s.removeAttribute('id');
+			star.addEventListener('click', function() {
 				
-				if (s.getAttribute('data-value') <= value) {
-					s.style.setProperty('color', 'gold', 'important');
-				} else {
-					s.style.setProperty('color', '#e0e0e0', 'important');
-				}
+				var value = this.getAttribute('data-value');
+				
+				
+				stars.forEach(s => {
+					
+					if (s.getAttribute('data-value') <= value) {
+						
+						s.style.setProperty('color', 'gold', 'important');
+					} else {
+						
+						s.style.setProperty('color', '#e0e0e0', 'important');
+					}
+				});
+				
+				
+				rateStarHiddenInput.value = value;
 			});
-			
-			this.setAttribute('name', 'rate_star');
-			this.setAttribute('id', 'rate_star');
 		});
 	});
 	
@@ -216,11 +225,13 @@ alert("평점 확인" + value);
 			
 			var currentInput = fileInputs[currentFileIndex];
 			
-			var handleFileChange = (index) => {
+			var handleFileChange = (function(index) {
 				
 				return function () {
 					
 					if (currentInput.files.length > 0) {
+						
+						currentInput.setAttribute('name', 'files[' + index + ']');
 						
 						var file = currentInput.files[0];
 						fileNames[index].textContent = file.name;
@@ -238,11 +249,10 @@ alert("평점 확인" + value);
 						currentFileIndex++;
 					}
 				}
-			}
+			})(currentFileIndex);
 			currentInput.click();
-			
-			currentInput.removeEventListener('change', handleFileChange(currentFileIndex));
-			currentInput.addEventListener('change', handleFileChange(currentFileIndex));
+			currentInput.removeEventListener('change', handleFileChange);
+			currentInput.addEventListener('change', handleFileChange);
 		}
 	});
 	imgPreviews.forEach((imgPreview, index) => {

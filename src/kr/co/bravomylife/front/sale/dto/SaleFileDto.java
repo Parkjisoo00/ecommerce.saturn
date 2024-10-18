@@ -35,15 +35,40 @@ public class SaleFileDto {
 	private int seq_mbr					= 0;
 	private String file_save			= "";
 	private String file_orig			= "";
-	private String fileNameOriginal;
-	private String fileNameSave;
+	private String fileNameOriginal		= "";
+	private String fileNameSave			= "";
+	private Long fileSize				= 0L;
 	
 	
+	public int getSeq_sle() {
+		return seq_sle;
+	}
+	public void setSeq_sle(int seq_sle) {
+		this.seq_sle = seq_sle;
+	}
 	public int getSeq_review() {
 		return seq_review;
 	}
 	public void setSeq_review(int seq_review) {
 		this.seq_review = seq_review;
+	}
+	public int getSeq_mbr() {
+		return seq_mbr;
+	}
+	public void setSeq_mbr(int seq_mbr) {
+		this.seq_mbr = seq_mbr;
+	}
+	public String getFile_save() {
+		return file_save;
+	}
+	public void setFile_save(String file_save) {
+		this.file_save = file_save;
+	}
+	public String getFile_orig() {
+		return file_orig;
+	}
+	public void setFile_orig(String file_orig) {
+		this.file_orig = file_orig;
 	}
 	public String getFileNameOriginal() {
 		return fileNameOriginal;
@@ -57,29 +82,10 @@ public class SaleFileDto {
 	public void setFileNameSave(String fileNameSave) {
 		this.fileNameSave = fileNameSave;
 	}
-	public int getSeq_sle() {
-		return seq_sle;
+	public Long getFileSize() {
+		return fileSize;
 	}
-	public void setSeq_sle(int seq_sle) {
-		this.seq_sle = seq_sle;
-	}
-	public int getSeq_mbr() {
-		return seq_mbr;
-	}
-	public void setSeq_mbr(int seq_mbr) {
-		this.seq_mbr = seq_mbr;
-	}
-
-	public String getFile_save() {
-		return file_save;
-	}
-	public void setFile_save(String file_save) {
-		this.file_save = file_save;
-	}
-	public String getFile_orig() {
-		return file_orig;
-	}
-	public void setFile_orig(String file_orig) {
-		this.file_orig = file_orig;
+	public void setFileSize(Long fileSize) {
+		this.fileSize = fileSize;
 	}
 }

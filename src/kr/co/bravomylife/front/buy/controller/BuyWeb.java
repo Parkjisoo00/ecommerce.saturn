@@ -90,7 +90,7 @@ public class BuyWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@SuppressWarnings({"unchecked" })
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/front/buy/reviewWriteProc.web", method = RequestMethod.POST)
 	public ModelAndView reviewWriteProc(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, FileUploadDto fileUploadDto) {
 		
@@ -100,7 +100,10 @@ public class BuyWeb extends Common {
 		
 		try {
 			
+			logger.debug("평점 확인" + saleDto.getRate_star());
+			
 			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
+			
 			saleDto.setSeq_mbr(seqMbr);
 			saleDto.setRegister(seqMbr);
 			
@@ -108,56 +111,70 @@ public class BuyWeb extends Common {
 			String maxSize = dynamicProperties.getMessage("backoffice.upload.file.max10MB", "[UNDEFINED]");
 			String allowedExt = dynamicProperties.getMessage("backoffice.upload.file.extension.doc", "[UNDEFINED]");
 			
-			int countFile = fileUploadDto.getFiles() != null ? fileUploadDto.getFiles().size() : 0;
+			int countFile = 0;
+			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
 			
-			if (countFile > 0) {
-				
-				LinkedList<Object> uploadResult = FileUpload.upload(fileUploadDto, pathBase, maxSize, allowedExt, countFile);
+			SaleFileDto[] saleFileDto = new SaleFileDto[countFile];
+			LinkedList<Object> uploadResult = FileUpload.upload(fileUploadDto, pathBase, maxSize, allowedExt, countFile);
+			
+			message	= (String)((Hashtable)uploadResult.getLast()).get("resultID");
+			
+			if (message.equals("success")) {
 				
 				Hashtable<String, String> hashtable = (Hashtable<String, String>) uploadResult.getLast();
 				
-				message = hashtable.get("resultID");
+				String fileNameSrc	= "";
+				String fileNameSve	= "";
+				// String fileSize		= "";
+				// long totalSize		= 0;
 				
-				if (message.equals("success")) {
+				for (int loop = 0; loop < countFile; loop++) {
 					
-					SaleFileDto[] saleFileDto = new SaleFileDto[countFile];
-					for (int loop = 0; loop < countFile; loop++) {
-						
-						String fileNameSrc = hashtable.get("files[" + loop + "]_fileSrcName");
-						String fileNameSve = hashtable.get("files[" + loop + "]_fileSveNameRelative");
-						String fileSize = hashtable.get("files[" + loop + "]_fileSveSize");
-						if (fileSize == null || fileSize.isEmpty()) fileSize = "0";
-						
-						saleFileDto[loop] = new SaleFileDto();
-						saleFileDto[loop].setSeq_sle(saleDto.getSeq_sle());
-						saleFileDto[loop].setSeq_mbr(saleDto.getSeq_mbr());
-						saleFileDto[loop].setFile_orig(fileNameSrc);
-						saleFileDto[loop].setFile_save(fileNameSve);
-					}
+					fileNameSrc		= (String)hashtable.get("files[" + loop + "]_fileSrcName");
+					fileNameSve		= (String)hashtable.get("files[" + loop + "]_fileSveNameRelative");
+					// fileSize		= (String)hashtable.get("files[" + loop + "]_fileSveSize");
+					// if (fileSize == null || fileSize == "") fileSize = "0";
 					
-					boolean result = false;
+					saleFileDto[loop] = new SaleFileDto();
+					saleFileDto[loop].setFileNameOriginal(fileNameSrc);
+					saleFileDto[loop].setFileNameSave(fileNameSve);
+					saleFileDto[loop].setSeq_sle(saleDto.getSeq_sle());
+					saleFileDto[loop].setSeq_mbr(saleDto.getSeq_mbr());
+					saleFileDto[loop].setFile_orig(fileNameSrc);
+					saleFileDto[loop].setFile_save(fileNameSve);
 					
-					if (countFile > 0) {
-						
-						result = saleSrvc.insertReview(saleDto, saleFileDto);
-					} else {
-						
-						result = saleSrvc.insertText(saleDto);
-					}
-					if (result) {
-						
-						request.setAttribute("script", "alert('상품 후기가 등록되었습니다.');");
-						request.setAttribute("redirect", "/");
-					} else {
-						
-						request.setAttribute("script", "alert('시스템 관리자에게 문의하세요!');");
-						request.setAttribute("redirect", "/");
-					}
-				} 
+					saleFileDto[loop].setFileNameSave(fileNameSve);
+					
+					// totalSize += Long.parseLong(fileSize);
+				}
+					
+				boolean result = false;
+				boolean resultRate = false;
+				
+				if (countFile > 0) {
+					
+					result = saleSrvc.insertReview(saleDto, saleFileDto);
+				} else {
+					
+					result = saleSrvc.insertText(saleDto);
+				}
+				if (result) {
+					
+					resultRate = saleSrvc.insertRate(saleDto);
+				}
+				if (resultRate) {
+					
+					request.setAttribute("script", "alert('상품 후기가 등록되었습니다.');");
+					request.setAttribute("redirect", "/");
+				} else {
+					
+					request.setAttribute("script", "alert('시스템 관리자에게 문의하세요.');");
+					request.setAttribute("redirect", "/");
+				}
 			} 
-		mav.setViewName("forward:/servlet/result.web");
-		
-		}	catch (Exception e) {
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".reviewWriteProc()] " + e.getMessage(), e);
 		}
 		finally {}
