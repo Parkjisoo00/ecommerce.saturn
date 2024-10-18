@@ -45,5 +45,11 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/xmlbeans-2.6.0.jar"/>
 	<classpathentry kind="lib" path="C:/apache-tomcat-9.0.89/lib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="C:/apache-tomcat-9.0.89/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="/kr.co.himedia.sn.ecommerce7th.moon/WebContent/WEB-INF/lib/kotlin-stdlib-1.9.22.jar"/>
+	<classpathentry kind="lib" path="/kr.co.himedia.sn.ecommerce7th.moon/WebContent/WEB-INF/lib/kotlin-stdlib-common-1.9.22.jar"/>
+	<classpathentry kind="lib" path="/kr.co.himedia.sn.ecommerce7th.moon/WebContent/WEB-INF/lib/kotlin-stdlib-jdk8-1.9.22.jar"/>
+	<classpathentry kind="lib" path="/kr.co.himedia.sn.ecommerce7th.moon/WebContent/WEB-INF/lib/okhttp-4.12.0.jar"/>
+	<classpathentry kind="lib" path="/kr.co.himedia.sn.ecommerce7th.moon/WebContent/WEB-INF/lib/okio-3.6.0.jar"/>
+	<classpathentry kind="lib" path="/kr.co.himedia.sn.ecommerce7th.moon/WebContent/WEB-INF/lib/okio-jvm-3.6.0.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>

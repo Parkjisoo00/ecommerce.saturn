@@ -33,6 +33,7 @@ public class BuyDetailDto {
 	private int seq_buy_dtl		= 0;
 	private int seq_buy_mst		= 0;
 	private int seq_sle			= 0;
+	private String deal_num		= "";
 	private int count			= 0;
 	private int price			= 0;
 	private String dt_reg		= "";
@@ -45,6 +46,13 @@ public class BuyDetailDto {
 	private String format_total_point	= "";
 	
 	
+
+	public String getDeal_num() {
+		return deal_num;
+	}
+	public void setDeal_num(String deal_num) {
+		this.deal_num = deal_num;
+	}
 	public int getSeq_buy_dtl() {
 		return seq_buy_dtl;
 	}

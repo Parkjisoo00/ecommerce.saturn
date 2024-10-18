@@ -5,10 +5,91 @@
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
 <!DOCTYPE html>
 <html lang="kor">
-
 <head>
 	<%@ include file="/include/common/header.jsp" %>
-	<script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript">
+		<c:if test="${empty sessionScope.SEQ_MBR}">
+		var isLogin = false;
+		</c:if>
+		
+		<c:if test="${not empty sessionScope.SEQ_MBR}">
+		var isLogin = true;
+		</c:if>
+	
+		<c:if test="${flgMobile == 'Y'}">
+			$(document).ready(function() {
+				$("#btnPay").on("click", function() {
+					
+					if (!isLogin) {
+						alert("로그인이 필요합니다!");
+						return;
+					}
+					
+					$.ajax({
+						url: "/front/pay/payup/order.json",
+						type: "POST",
+						dataType: "json",
+						data: $("#frmMain").serialize(),
+						success: function(data) {
+							$("input[name=ordr_idxx]").val(data.ordr_idxx);
+							$("input[name=good_name]").val(data.good_name);
+							$("input[name=good_mny]").val(data.good_mny);
+							$("input[name=buyr_name]").val(data.buyr_name);
+							$("input[name=site_cd]").val(data.site_cd);
+							
+							//alert(data.pay_url);
+							// $("form[name=form]").action.val(data.pay_url);
+							//alert(data.Ret_URL);
+							$("input[name=Ret_URL]").val(data.Ret_URL);
+							//alert(data.approval_key);
+							$("input[name=approval_key]").val(data.approval_key);
+							//alert(data.AppUrl);
+							$("input[name=AppUrl]").val(data.AppUrl);
+							
+							document.form.submit();
+							//alert("submit");
+						},
+						error: function(data) {
+							alert("[ERROR]결제 연동!");
+						}
+					});
+				});
+			});
+		</c:if>
+		
+		<c:if test="${flgMobile != 'Y'}">
+			$(document).ready(function() {
+				$("#btnPay").on("click", function() {
+					
+					if (!isLogin) {
+						alert("로그인이 필요합니다!");
+						return;
+					}
+					
+					$.ajax({
+						url: "/front/pay/payup/order.json",
+						type: "POST",
+						dataType: "json",
+						data: $("#frmMain").serialize(),
+						success: function(data) {
+							//console.log(data);
+							$("input[name=ordr_idxx]").val(data.ordr_idxx);
+							$("input[name=good_name]").val(data.good_name);
+							$("input[name=good_mny]").val(data.good_mny);
+							$("input[name=buyr_name]").val(data.buyr_name);
+							$("input[name=site_cd]").val(data.site_cd);
+							
+							jsf__pay();
+						},
+						error: function(data) {
+							alert("[ERROR]결제 연동!");
+						}
+					});
+				});
+			});
+		</c:if>
+	
 	function goTypeT(value, value2, value3, value4, value5) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -80,16 +161,17 @@
 		frmMain.submit();
 	}
 	</script>
-
+</head>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
 
 	<!-- Css Styles -->
 	<%@ include file="/include/common/css.jsp" %>
-</head>
+
 
 <body>
 <form id="frmMain" method="POST">
+<input type="hidden" id="item" name="item" />
 <input type="hidden" name="seq_sle"			id="seq_sle"/>
 <input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>
 <input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
@@ -98,6 +180,7 @@
 <input type="hidden" name="filter"			id="filter"/>
 <input type="hidden" name="type"			id="type"/>
 <input type="hidden" name="currentPage"		id="currentPage"	value="${paging.currentPage}"/>
+	
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -186,9 +269,9 @@
 				</div>
 				<div style="display: flex; justify-content: flex-end; padding-right: 15px; align-items: flex-start;">
 					<div>
-						<a href="javascript:writeProc();" class="cart-btn" style="background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c; margin: 0;">
-							결제 하기
-						</a>
+						 <input type="button" value="결제 하기" style="width:100px" id="btnPay" />
+							
+					
 					</div>
 				</div>
 			</div>
@@ -212,7 +295,7 @@
 		<input type="hidden" name="buyList[${status.index}].count" value="${list.count}" />
 		<input type="hidden" name="buyList[${status.index}].point" value="${list.point}" />
 	</c:forEach>
-<script>
+	<script>
 	$(document).ready(function () {
 		
 		var totalPriceSum = Number($('#totalPriceSum').val());
@@ -256,5 +339,80 @@
 	});
 </script>
 </form>
+<iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>
+<c:if test="${flgMobile == 'Y'}">
+	<script type="text/javascript" src="https://testpay.kcp.co.kr/plugin/payplus_web.jsp"></script>
+	<%
+	// <script type="text/javascript" src="https://pay.kcp.co.kr/plugin/payplus_web.jsp"></script>
+	%>
+	<form name="form" action="https://testsmpay.kcp.co.kr/pay/mobileGW.kcp" method="post" accept-charset="utf-8">
+		<input type="hidden" name="ordr_idxx" value="">
+		<input type="hidden" name="good_name" value="">
+		<input type="hidden" name="good_mny" value="">
+		<input type="hidden" name="buyr_name" value="">
+		<input type="hidden" name="site_cd" value="">
+		
+		<input type="hidden" name="Ret_URL" value="">
+		<input type="hidden" name="approval_key" value="">
+		
+		<input type="hidden" name="req_tx" value="pay">
+		<input type="hidden" name="pay_method" value="CARD">
+		<input type="hidden" name="currency" value="410">
+		<input type="hidden" name="escw_used" value="N">
+		<input type="hidden" name="AppUrl" value="testApp://testURL">
+	</form>
+</c:if>
+<c:if test="${flgMobile != 'Y'}">
+	<script type="text/javascript">
+		function m_Completepayment(FormOrJson, closeEvent) {
+			var frm = document.kcp_order_info;
+			GetField(frm, FormOrJson);
+			//console.log(frm);
+			if (frm.res_cd.value == "0000") {
+				frm.action = "/front/pay/payup/pay.web";
+				frm.submit();
+				closeEvent();
+			}
+			else {
+				alert("[" + frm.res_cd.value + "] " + frm.res_msg.value);
+				closeEvent();
+			}
+		}
+		
+		function jsf__pay() {
+			try {
+				var form = document.kcp_order_info;
+				KCP_Pay_Execute(form);
+			}
+			catch (e) {	}
+		}
+	</script>
+	<script type="text/javascript" src="https://testpay.kcp.co.kr/plugin/payplus_web.jsp"></script>
+	<form name="kcp_order_info" method="post" accept-charset="utf-8">
+		<input type="hidden" name="ordr_idxx" value="">
+		<input type="hidden" name="good_name" value="">
+		<input type="hidden" name="good_mny" value="">
+		<input type="hidden" name="buyr_name" value="">
+		<input type="hidden" name="site_cd" value="">
+		
+		<input type="hidden" name="req_tx" value="pay">
+		<input type="hidden" name="pay_method" value="100000000000">
+		<input type="hidden" name="site_name" value="payup" />
+		<!-- <input type="hidden" name="kakaopay_direct" value="Y"> -->
+		
+		<input type="hidden" name="res_cd" value="" />
+		<input type="hidden" name="res_msg" value="" />
+		<input type="hidden" name="enc_info" value="" />
+		<input type="hidden" name="enc_data" value="" />
+		<input type="hidden" name="ret_pay_method" value="" />
+		<input type="hidden" name="tran_cd" value="" />
+		<input type="hidden" name="use_pay_method" value="" />
+		<input type="hidden" name="buyr_mail" value="">
+		<input type="hidden" name="ordr_chk" value="" />
+		<input type="hidden" name="good_expr" value="0">
+		<input type="hidden" name="module_type" value="01" />
+		<input type="hidden" name="currency" value="WON" />
+	</form>
+</c:if>
 </body>
 </html>

@@ -52,7 +52,43 @@ public class BuySrvc {
 	PayDao payDao;
 	
 	@Transactional("txFront")
-	public boolean insert(BuyMasterDto buyMasterDto, ArrayList<BuyDetailDto> listBuyDetailDto) {
+	public boolean update(String deal_num, int updater, String flg_success) {
+		
+		int result = 0;
+		
+		// Null 체크 필요
+		if (deal_num == null || flg_success == null) {
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+				return false;
+			}
+		
+		PayDto payDto = new PayDto();
+		payDto.setDeal_num(deal_num);
+		payDto.setFlg_success(flg_success);			// 성공(Y), 실패(N)
+		result += payDao.update(payDto);
+		
+		// payDto가 null일 경우를 대비한 처리
+		payDto = payDao.select(payDto);
+			if (payDto == null) {
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+				return false;
+			}
+			
+		BuyMasterDto buyMasterDto = new BuyMasterDto();
+		buyMasterDto.setSeq_buy_mst(payDto.getSeq_buy_mst());
+		buyMasterDto.setCd_state_pay(flg_success);	// 결제 완료(Y), 결제 전(N), 결제 취소(C)
+		buyMasterDto.setUpdater(updater);
+		result += buyDao.update(buyMasterDto);
+		
+		if (result == 2) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	@Transactional("txFront")
+	public boolean insert(BuyMasterDto buyMasterDto, ArrayList<BuyDetailDto> listBuyDetailDto, String deal_num) {
 			
 		int result = 0;
 		
@@ -75,6 +111,7 @@ public class BuySrvc {
 		payDto.setSeq_pay(payDao.sequence());
 		payDto.setSeq_mbr(buyMasterDto.getSeq_mbr());
 		payDto.setSeq_buy_mst(buyMasterDto.getSeq_buy_mst());
+		payDto.setDeal_num(deal_num);
 		payDto.setRegister(buyMasterDto.getSeq_mbr());
 		result += payDao.insert(payDto);
 		

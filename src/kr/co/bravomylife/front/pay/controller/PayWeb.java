@@ -20,6 +20,7 @@
  */
 package kr.co.bravomylife.front.pay.controller;
 
+import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,6 +37,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.front.basket.controller.BasketWeb;
@@ -44,11 +48,16 @@ import kr.co.bravomylife.front.buy.dto.BuyDetailListDto;
 import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.member.dto.MemberDto;
 import kr.co.bravomylife.front.member.service.MemberSrvc;
+import kr.co.bravomylife.front.pay.component.PayCmpn;
 import kr.co.bravomylife.util.security.SKwithAES;
+import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
+import kr.co.bravomylife.front.buy.service.BuySrvc;
+import kr.co.bravomylife.util.Datetime;
+import kr.co.bravomylife.util.servlet.Request;
 
 /**
  * @version 1.0.0
- * @author cydgate4957@gmail.com
+ * @author 
  * 
  * @since 2024-09-30
  * <p>DESCRIPTION:</p>
@@ -56,15 +65,192 @@ import kr.co.bravomylife.util.security.SKwithAES;
  */
 @Controller("kr.co.bravomylife.front.pay.controller.PayWeb")
 public class PayWeb extends Common {
-
+	
+	/** Logger */
+	private static Logger logger = LoggerFactory.getLogger(PayWeb.class);
+	
 	@Autowired
 	Properties staticProperties;
 	
 	@Inject
-	MemberSrvc memberSrvc;
+	private PayCmpn payCmpn;
 	
-	/** Logger */
-	private static Logger logger = LoggerFactory.getLogger(BasketWeb.class);
+	@Inject
+	private BuySrvc buySrvc;
+	
+	@Inject
+	private MemberSrvc memberSrvc;
+
+	@RequestMapping(value = "/front/pay/payup/pay.web")
+	public ModelAndView pay(@RequestParam Map<String,String> param, HttpServletRequest request) throws NoSuchAlgorithmException {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		try {
+			logger.info("화면에서 넘어온값[" + this.getClass().getName() + ".pay().REQ] " + param.toString());
+			
+			String res_cd		= param.get("res_cd");
+			String ordr_idxx	= param.get("ordr_idxx");
+			String res_msg		= param.get("res_msg");
+			String enc_data		= param.get("enc_data");
+			String enc_info		= param.get("enc_info");
+			String tran_cd		= param.get("tran_cd");
+			String buyr_mail	= param.get("buyr_mail");
+			
+			String url = "https://api.testpayup.co.kr/ap/api/payment/" + ordr_idxx + "/pay";
+			Map<String,String> apiMap = new HashMap<>();		
+			apiMap.put("res_cd",res_cd);
+			apiMap.put("ordr_idxx",ordr_idxx);
+			apiMap.put("res_msg",res_msg);
+			apiMap.put("enc_data",enc_data);
+			apiMap.put("enc_info",enc_info);
+			apiMap.put("tran_cd",tran_cd);
+			apiMap.put("buyr_mail",buyr_mail);
+			
+			Map<String,Object> apiResult = new HashMap<>();
+			apiResult = payCmpn.JsonApi(request, url, apiMap);
+			
+			logger.info("통신 결과[" + this.getClass().getName() + ".pay().RES] " + apiResult.toString());
+			
+			/** 페이업 거래번호 */
+			String deal_num = (String) apiResult.get("transactionId");
+			boolean isResult = true;
+			
+			if ("0000".equals(apiResult.get("responseCode"))) {
+				
+				// logger.info("[" + this.getClass().getName() + ".pay().RES.SUCCESS] " + apiResult.toString());
+				isResult = buySrvc.update(deal_num, Integer.parseInt(getSession(request, "SEQ_MBR")), "Y");
+				
+				request.setAttribute("script"	, "alert('정상적으로 결제되었습니다. 구매해 주셔서 감사합니다.');");
+				request.setAttribute("redirect"	, "/");
+				/*
+				mav.setViewName("pay/pay_s");
+				mav.addObject("responseMsg"		,apiResult.get("responseMsg"));
+				mav.addObject("cardName"		,apiResult.get("cardName"));
+				mav.addObject("transactionId"	,apiResult.get("transactionId"));
+				*/
+			}
+			else {
+				logger.error("[" + this.getClass().getName() + ".payProcess().RES.FAILURE] " + apiResult.toString());
+				isResult = buySrvc.update(deal_num, Integer.parseInt(getSession(request, "SEQ_MBR")), "N");
+				
+				request.setAttribute("script"	, "alert('결제가 실패되었습니다. 고객센터로 문의바랍니다!');");
+				request.setAttribute("redirect"	, "/");
+				
+				/*
+				mav.setViewName("pay/pay_f");
+				mav.addObject("responseMsg"		,apiResult.get("responseMsg"));
+				*/
+			}
+			
+			// 결제 결과에 대한 업데이트 실패 시
+			if (!isResult) {
+				request.setAttribute("script"	, "alert('[ERROR]결제 정보 업데이트');");
+				request.setAttribute("redirect"	, "/");
+			}
+			
+			mav.setViewName("forward:/servlet/result.web");
+			
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".pay()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;	
+	}
+	
+	@RequestMapping(value = "/front/pay/payup/order.json", method = RequestMethod.POST)
+	public @ResponseBody Map<String,Object> order(@RequestParam Map<String, String> param, HttpServletRequest request, BuyDetailListDto buyDetailListDto) throws NoSuchAlgorithmException {
+		
+		Map<String,Object> returnMap = new HashMap<>();
+		
+		try {
+			// logger.info("[" + this.getClass().getName() + ".order().REQ] " + param.toString());
+			
+			String yyyyMMddHHmmss = Datetime.getNow("yyyyMMddHHmmss");
+			
+			String merchantId			= "himedia";
+			String key					= "ac805b30517f4fd08e3e80490e559f8e";
+			String orderNumber			= "HM-" + yyyyMMddHHmmss;
+			String amount				= "100";
+			// String amount			= Integer.toString(Integer.parseInt(param.get("buyList[0].price")) * Integer.parseInt(param.get("buyList[0].count")));
+																			// 금액: param.get("amount");
+			String quota				= "0";								// 할부: param.get("quota")
+			String itemName				= param.get("buyList[0].sle_nm");	// 판매 상품명: param.get("itemName");
+			String userName				= getSession(request, "NAME");		// 구매자명 param.get("userName");
+			String userAgent			= "WP";
+			String returnUrl			= "returnUrl";
+			String signature			= "";	//아래에서 생성
+			String timestamp			= yyyyMMddHHmmss;	
+			
+			signature = payCmpn.getSHA256Hash(merchantId + "|" + orderNumber + "|" + amount + "|" + key + "|" + timestamp);
+			
+			String url = "https://api.testpayup.co.kr/ap/api/payment/" + merchantId + "/order";
+			Map<String,String> apiMap = new HashMap<>();
+			apiMap.put("orderNumber"	,orderNumber);
+			apiMap.put("amount"			,amount);
+			apiMap.put("itemName"		,itemName);
+			apiMap.put("userName"		,userName);
+			apiMap.put("signature"		,signature);
+			apiMap.put("timestamp"		,timestamp);
+			
+			if (Request.isDevice(request, "mobile")) {
+				apiMap.put("auth_return","http://119.71.96.251:"
+						+ staticProperties.getProperty("common.server.port", "[UNDEFINED]") + "/front/pay/payup/receive.api");
+			}
+			else {
+				apiMap.put("userAgent", userAgent);
+				apiMap.put("returnUrl", returnUrl);
+			}
+			
+			apiMap.put("quota",quota);
+			apiMap.put("bypassValue","himediaValue");
+			
+			returnMap = payCmpn.JsonApi(request, url, apiMap);
+			
+			// logger.info("통신 결과[" + this.getClass().getName() + ".order().RES] " + returnMap.toString());
+			
+			if ("0000".equals(returnMap.get("responseCode"))) {
+				// logger.info("[" + this.getClass().getName() + ".order().RES.SUCCESS] " + returnMap.toString());
+				
+				if (buyDetailListDto.getBuyList() != null) {
+					
+					/** 페이업 거래번호 */
+					String deal_num = (String) returnMap.get("ordr_idxx");
+					
+					// 마스터 설정
+					BuyMasterDto buyMasterDto = new BuyMasterDto();
+					buyMasterDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+
+					buyMasterDto.setBuy_info(buyDetailListDto.getBuyList().get(0).getSle_nm() + "(수량: " + buyDetailListDto.getBuyList().get(0).getCount() + ")");
+					buyMasterDto.setBuy_count(buyDetailListDto.getBuyList().get(0).getCount());
+					buyMasterDto.setBuy_price(buyDetailListDto.getBuyList().get(0).getPrice() * buyDetailListDto.getBuyList().get(0).getCount());
+					buyMasterDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
+					
+					if (!buySrvc.insert(buyMasterDto, (ArrayList<BuyDetailDto>) buyDetailListDto.getBuyList(), deal_num)) {
+						// 구매 정보 저장 에러
+						returnMap.put("responseCode", "B001");
+						returnMap.put("responseMsg", "[ERROR]구매 정보 저장");
+					}
+				}
+				else {
+					// 상품 정보 부재 에러
+					returnMap.put("responseCode", "B000");
+					returnMap.put("responseMsg", "[ERROR]구매 정보 부재");
+				}
+			}
+			else {
+				logger.error("[" + this.getClass().getName() + ".order().RES.FAILURE] " + returnMap.toString());
+			}
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".order()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return returnMap;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]

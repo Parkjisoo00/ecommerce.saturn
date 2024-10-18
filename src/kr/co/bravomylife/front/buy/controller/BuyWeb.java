@@ -295,7 +295,7 @@ public class BuyWeb extends Common {
 				buyMasterDto.setTotal_point(totalPoint);
 				buyMasterDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 				
-				if (buySrvc.insert(buyMasterDto, listBuyDetailDto)) {
+				if (buySrvc.insert(buyMasterDto, listBuyDetailDto, "N/A")) {
 					request.setAttribute("script"	, "alert('추후 결제 페이지로 이동 예정');");
 					request.setAttribute("redirect"	, "/");
 				}

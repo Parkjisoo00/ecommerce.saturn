@@ -37,6 +37,10 @@ import kr.co.bravomylife.front.common.dao.BaseDao;
 @Service("kr.co.bravomylife.front.buy.dao.BuyDao")
 public class BuyDao extends BaseDao {
 	
+	public int update(BuyMasterDto buyMasterDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.buy.BuyMaster.update", buyMasterDto);
+	}
+	
 	public int sequenceMaster() {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.buy.BuyMaster.sequence");
 	}
