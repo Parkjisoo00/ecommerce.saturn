@@ -644,5 +644,51 @@
 			AND best.FLG_BEST IS NOT NULL AND best.FLG_BEST = 'Y'
 		</if>
 	</sql>
+	
+	<select id="listingLike" parameterType="pagingDto" resultType="pagingDto">
+		SELECT
+			sle.SEQ_SLE
+			, sle.SLE_NM
+			, NVL(sle.POINT_STACK, 0) POINT_STACK
+			, sle.IMG
+			, sle.PRICE_SALE
+			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, sle.CORP_NM
+			, rate.COUNT
+			, sle.cd_ctg_m
+			, sle.cd_ctg_b
+			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') AS dt_reg
+			, sle.COUNT_STOCK
+			, likeTbl.FLG_LIKE
+		FROM
+			TB_SLE sle
+		LEFT OUTER JOIN
+			TB_RATE rate
+		ON
+			sle.SEQ_SLE = rate.SEQ_SLE
+		LEFT OUTER JOIN
+			TB_LIKE likeTbl
+		ON
+			sle.SEQ_SLE = likeTbl.SEQ_SLE
+			AND likeTbl.SEQ_MBR = #{seq_mbr}
+		WHERE
+			likeTbl.SEQ_MBR = #{seq_mbr}	
+			AND sle.CD_STATE_SALE = 2
+			AND sle.FLG_DELETE	= 'N'
+			AND likeTbl.FLG_LIKE = 'Y'
+	</select>
+	
+	<select id="myLikeCount" parameterType="pagingDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(ROWNUM)
+		FROM
+			TB_SLE sle
+		WHERE
+		<include refid="myLikewhere" />
+	</select>
+	
+	<sql id="myLikewhere">
+		sle.SEQ_SLE = #{seq_sle}
+	</sql>
 
 </mapper>

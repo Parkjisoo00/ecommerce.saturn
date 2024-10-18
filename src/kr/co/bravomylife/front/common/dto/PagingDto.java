@@ -37,7 +37,7 @@ public class PagingDto {
 	private int total_price_sum			= 0;
 	private int total_point_sum			= 0;
 	
-
+	
 	private String sle_nm			= "";	// 판매 상품명
 	private String img				= "";	// 판매 상품 이미지
 	private int price_sale			= 0;	// 판매 상품 원가
@@ -48,8 +48,6 @@ public class PagingDto {
 	private String dt_upt			= "";	// 수정일
 	private int updater				= 0;	// 수정자
 	private String flg_like			= "";	// 찜 여부
-
-	
 	
 	
 	public String getSle_nm() {
