@@ -20,6 +20,8 @@
  */
 package kr.co.bravomylife.backoffice.product.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import kr.co.bravomylife.backoffice.common.dao.BaseDao;
@@ -35,6 +37,10 @@ import kr.co.bravomylife.backoffice.product.dto.ProductDto;
  */
 @Repository("kr.co.bravomylife.backoffice.product.dao.ProductDao")
 public class ProductDao extends BaseDao {
+	
+	public List<ProductDto> listPrd(ProductDto productDto) {
+		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.product.Product.listPrd", productDto);
+	}
 	
 	public int insert(ProductDto productDto) {
 		return sqlSessionBackoffice.insert("kr.co.bravomylife.backoffice.mybatis.product.Product.insert", productDto);

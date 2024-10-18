@@ -1,119 +1,129 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ page info="/WEB-INF/view/backoffice/product/productReg.jsp" %>
+<%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>AdminLTE 2 | 상품 등록</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="/include/backoffice/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="/include/backoffice/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="/include/backoffice/_all-skins.min.css">
+<title>상품 등록</title>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<link rel="stylesheet" href="/include/backoffice/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	<link rel="stylesheet" href="/include/backoffice/AdminLTE.min.css">
+	<link rel="stylesheet" href="/include/backoffice/_all-skins.min.css">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
-	
-<script>
-$(function(){
-	$('#dt_sale_start').datepicker({dateFormat:'yy-mm-dd'});
-})
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
+	<script type="text/javascript" src="/js/package/tinymce.js"></script>	
+	<script>
 
-$(function(){
-	$('#dt_sale_end').datepicker({dateFormat:'yy-mm-dd'});
-})
-
-	function productRegProc() {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.action = "/backoffice/product/productRegProc.web";
-		frmMain.submit();
-		
-	}
-
-
-	function updateCategoryMinor() {
-		const cd_ctg_b = document.getElementById("cd_ctg_b").value;
-		const cd_ctg_m = document.getElementById("cd_ctg_m");
-		
-		// 기존 옵션 삭제
-		cd_ctg_m.innerHTML = "";
-
-		let options = [];
-
-		if (cd_ctg_b === "1") { // 기능별
-			options = [
-				{ value: "11", text: "혈당/혈행/혈압" },
-				{ value: "12", text: "항산화/면역력" },
-				{ value: "13", text: "염증/항염" },
-				{ value: "14", text: "관절/뼈/치아" },
-				{ value: "15", text: "피로회복" },
-				{ value: "16", text: "눈 건강" },
-				{ value: "17", text: "장 건강" },
-				{ value: "18", text: "두뇌/기억력" },
-				{ value: "19", text: "위/간/갑상선" }
-			];
-		} else if (cd_ctg_b === "2") { // 성분별
-			options = [
-				{ value: "21", text: "폴리코사놀(3)" },
-				{ value: "22", text: "오메가-3" },
-				{ value: "23", text: "비타민/미네랄" },
-				{ value: "24", text: "유산균" },
-				{ value: "25", text: "글루코사민/MSM" },
-				{ value: "26", text: "루테인" },
-				{ value: "27", text: "코큐텐" },
-				{ value: "28", text: "아르기닌" },
-				{ value: "29", text: "밀크씨슬" }
-			];
-		} else if (cd_ctg_b === "3") { // 대상별
-			options = [
-				{ value: "31", text: "남성" },
-				{ value: "32", text: "여성" }
-			];
+		window.onload = function () {
+			// HTML Editor
+			tinymce.init({selector:'textarea'});
 		}
-
-		// 새 옵션 추가
-		options.forEach(option => {
-			const newOption = document.createElement("option");
-			newOption.value = option.value;
-			newOption.textContent = option.text;
-			cd_ctg_m.appendChild(newOption);
-		});
-	}
-</script>
-
-<script>
-	function formatPrice(input) {
-		// 숫자가 아닌 문자를 제거
-		let value = input.value.replace(/[^0-9]/g, '');
-
-		// 천 단위로 콤마 추가
-		value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-		input.value = value;
-	}
 	
-
-</script>
-
-
+		function commaValue(input) {
+			// 입력된 값에서 콤마를 제거
+			let value = input.value.replace(/,/g, '');
+			
+			// 숫자 형식으로 변환
+			let formattedValue = Number(value).toLocaleString();
+			
+			// 포맷된 값을 다시 입력 필드에 설정
+			input.value = formattedValue;
+		}
+		
+		$(function() {
+			$('#dt_sale_start').datepicker({ dateFormat: 'yy-mm-dd' });
+			$('#dt_sale_end').datepicker({ dateFormat: 'yy-mm-dd' });
+		});
+	
+		function productRegProc() {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			if (document.getElementById("sle_nm").value == ""
+					|| document.getElementById("img").value == ""
+					|| document.getElementById("price_sale").value == ""
+					|| document.getElementById("desces").value == ""
+					|| document.getElementById("cd_ctg_b").value == "0"
+					|| document.getElementById("cd_ctg_m").value == "0"
+					|| document.getElementById("cd_state_sale").value == ""
+					|| document.getElementById("prd_type").value == ""
+					|| document.getElementById("count_stock").value == 0
+					|| document.getElementById("corp_nm").value == ""
+					|| document.getElementById("dt_sale_start").value == ""
+					|| document.getElementById("dt_sale_end").value == ""
+					|| document.getElementById("discount").value == 0
+					|| document.getElementById("point_stack").value == 0) {
+				alert("필수 항목을 입력하세요!");
+				return;
+			}
+			document.getElementById("price_sale").value = document.getElementById("price_sale").value.replaceAll(",", "");
+			
+			frmMain.action = "/backoffice/product/productRegProc.web";
+			frmMain.submit();
+			
+		}
+	
+		function updateCategoryMinor() {
+			var cd_ctg_b = document.getElementById("cd_ctg_b").value;
+			var cd_ctg_m = document.getElementById("cd_ctg_m");
+			
+			// 기존 옵션 삭제
+			cd_ctg_m.innerHTML = "";
+	
+			let options = [];
+	
+			if (cd_ctg_b === "1") { // 기능별
+				options = [
+					{ value: "1", text: "혈당/혈행/혈압" },
+					{ value: "2", text: "항산화/면역력" },
+					{ value: "3", text: "염증/항염" },
+					{ value: "4", text: "관절/뼈/치아" },
+					{ value: "5", text: "피로회복" },
+					{ value: "6", text: "눈 건강" },
+					{ value: "7", text: "장 건강" },
+					{ value: "8", text: "두뇌/기억력" },
+					{ value: "9", text: "위/간/갑상선" }
+				];
+			} else if (cd_ctg_b === "2") { // 성분별
+				options = [
+					{ value: "1", text: "폴리코사놀" },
+					{ value: "2", text: "오메가-3" },
+					{ value: "3", text: "비타민/미네랄" },
+					{ value: "4", text: "유산균" },
+					{ value: "5", text: "글루코사민/MSM" },
+					{ value: "6", text: "루테인" },
+					{ value: "7", text: "코큐텐" },
+					{ value: "8", text: "아르기닌" },
+					{ value: "9", text: "밀크씨슬" }
+				];
+			} else if (cd_ctg_b === "3") { // 대상별
+				options = [
+					{ value: "1", text: "남성" },
+					{ value: "2", text: "여성" }
+				];
+			}
+	
+			// 새 옵션 추가
+			options.forEach(option => {
+				const newOption = document.createElement("option");
+				newOption.value = option.value;
+				newOption.textContent = option.text;
+				cd_ctg_m.appendChild(newOption);
+			});
+		}
+	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<form action= "/backoffice/product/productRegProc.web"id="frmMain" method="POST">
+<form action= "/backoffice/product/productRegProc.web"id="frmMain" method="POST" enctype="multipart/form-data">
 <div class="wrapper">
 
 <header class="main-header">
@@ -149,9 +159,6 @@ $(function(){
 				<ul class="menu">
 				<li><!-- start message -->
 					<a href="#">
-					<div class="pull-left">
-						<img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-					</div>
 					<h4>
 						Support Team
 						<small><i class="fa fa-clock-o"></i> 5 mins</small>
@@ -162,9 +169,6 @@ $(function(){
 				<!-- end message -->
 				<li>
 					<a href="#">
-					<div class="pull-left">
-						<img src="../../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-					</div>
 					<h4>
 						AdminLTE Design Team
 						<small><i class="fa fa-clock-o"></i> 2 hours</small>
@@ -174,9 +178,6 @@ $(function(){
 				</li>
 				<li>
 					<a href="#">
-					<div class="pull-left">
-						<img src="../../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-					</div>
 					<h4>
 						Developers
 						<small><i class="fa fa-clock-o"></i> Today</small>
@@ -186,9 +187,6 @@ $(function(){
 				</li>
 				<li>
 					<a href="#">
-					<div class="pull-left">
-						<img src="../../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-					</div>
 					<h4>
 						Sales Department
 						<small><i class="fa fa-clock-o"></i> Yesterday</small>
@@ -198,9 +196,6 @@ $(function(){
 				</li>
 				<li>
 					<a href="#">
-					<div class="pull-left">
-						<img src="../../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-					</div>
 					<h4>
 						Reviewers
 						<small><i class="fa fa-clock-o"></i> 2 days</small>
@@ -333,14 +328,11 @@ $(function(){
 		<!-- User Account: style can be found in dropdown.less -->
 		<li class="dropdown user user-menu">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-			<img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
 			<span class="hidden-xs">Alexander Pierce</span>
 			</a>
 			<ul class="dropdown-menu">
 			<!-- User image -->
 			<li class="user-header">
-				<img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
 				<p>
 				Alexander Pierce - Web Developer
 				<small>Member since Nov. 2012</small>
@@ -386,9 +378,6 @@ $(function(){
 	<section class="sidebar">
 	<!-- Sidebar user panel -->
 	<div class="user-panel">
-		<div class="pull-left image">
-		<img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-		</div>
 		<div class="pull-left info">
 		<p>Alexander Pierce</p>
 		<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
@@ -603,28 +592,28 @@ $(function(){
 				<div class="box-body">
 					<div class="form-group">
 						<label>판매 상품명</label>
-						<input type="text" id="sle_nm" name="sle_nm" class="form-control">
+						<input type="text" id="sle_nm" name="sle_nm" class="form-control" required autocomplete="off">
 					</div>
 
 					<div class="form-group">
 						<label>판매 상품 원가</label>
-						<input type="text" class="form-control" id="price_sale" name="price_sale" oninput="formatPrice(this)">
+						<input type="text" class="form-control" id="price_sale" name="price_sale" onkeyup="commaValue(this);" required autocomplete="off">
 					</div>
 
 					<div class="form-group">
 						<label>판매 상품 이미지</label>
-						<input type="file" id="img" name="img">
+						<input type="file" id="img" name="files[0]" required>
 					</div>
 
 					<div class="form-group">
 						<label>판매 상품 상세 이미지</label>
-						<input type="file" id="desces" name="desces">
+						<input type="file" id="desces" name="files[1]" required>
 					</div>
 
 					<div class="form-group">
 						<label>카테고리 대분류</label>
-						<select class="form-control" id="cd_ctg_b" name="cd_ctg_b" onchange="updateCategoryMinor()">
-							<option value="">선택하세요</option>
+						<select class="form-control" id="cd_ctg_b" name="cd_ctg_b" onchange="updateCategoryMinor()" required>
+							<option value="0">선택하세요</option>
 							<option value="1">기능별</option>
 							<option value="2">성분별</option>
 							<option value="3">대상별</option>
@@ -633,14 +622,14 @@ $(function(){
 					
 					<div class="form-group">
 						<label>카테고리 중분류</label>
-						<select class="form-control" id="cd_ctg_m" name="cd_ctg_m">
-							<option value="">먼저 대분류를 선택하세요</option>
+						<select class="form-control" id="cd_ctg_m" name="cd_ctg_m" required>
+							<option value="0">먼저 대분류를 선택하세요</option>
 						</select>
 					</div>
 
 					<div class="form-group">
 						<label>판매 상품 상태</label>
-						<select class="form-control" id="cd_state_sale" name="cd_state_sale">
+						<select class="form-control" id="cd_state_sale" name="cd_state_sale" required>
 							<option value="1">대기(1)</option>
 							<option value="2">판매(2)</option>
 							<option value="3">중지(3)</option>
@@ -650,7 +639,7 @@ $(function(){
 
 					<div class="form-group">
 						<label>판매 상품 섭취 타입</label>
-						<select class="form-control" id="prd_type" name="prd_type">
+						<select class="form-control" id="prd_type" name="prd_type" required>
 							<option value="1">액상(1)</option>
 							<option value="2">정(2)</option>
 							<option value="3">캡슐(3)</option>
@@ -663,12 +652,12 @@ $(function(){
 
 					<div class="form-group">
 						<label>판매 상품 재고</label>
-						<input type="text" id="count_stock" name="count_stock" class="form-control">
+						<input type="text" id="count_stock" name="count_stock" class="form-control" onkeyup="commaValue(this);" required autocomplete="off">
 					</div>
 
 					<div class="form-group">
 						<label>판매 상품 브랜드</label>
-						<input type="text" id="corp_nm" name="corp_nm" class="form-control">
+						<input type="text" id="corp_nm" name="corp_nm" class="form-control" required autocomplete="off">
 					</div>
 
 					<div class="form-group">
@@ -677,7 +666,7 @@ $(function(){
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"></i>
 							</div>
-							<input type="text" id="dt_sale_start" name="dt_sale_start">
+							<input type="text" id="dt_sale_start" name="dt_sale_start" required autocomplete="off">
 						</div>
 					</div>
 					
@@ -687,18 +676,18 @@ $(function(){
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"></i>
 							</div>
-							<input type="text" id="dt_sale_end" name="dt_sale_end">
+							<input type="text" id="dt_sale_end" name="dt_sale_end" required autocomplete="off">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label>할인율</label>
-						<input type="text" id="discount" name="discount" class="form-control">
+						<input type="text" id="discount" name="discount" class="form-control" required autocomplete="off">
 					</div>
 
 					<div class="form-group">
 						<label>포인트 적립률</label>
-						<input type="text" id="point_stack" name="point_stack" class="form-control">
+						<input type="text" id="point_stack" name="point_stack" class="form-control" required autocomplete="off">
 					</div>
 
 					<div class="form-group">
@@ -917,7 +906,6 @@ $(function(){
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->
-<script src="/include/backoffice/js/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="/include/backoffice/js/bootstrap.min.js"></script>
 <!-- FastClick -->
@@ -926,10 +914,6 @@ $(function(){
 <script src="/include/backoffice/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/include/backoffice/js/demo.js"></script>
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </form>
 </body>
 </html>
-

@@ -21,10 +21,13 @@
 package kr.co.bravomylife.backoffice.product.service;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import kr.co.bravomylife.backoffice.product.dao.ProductDao;
 import kr.co.bravomylife.backoffice.product.dto.ProductDto;
@@ -44,6 +47,18 @@ public class ProductSrvc {
 	ProductDao productDao;
 	
 	/**
+	 * @return List<SaleDto>
+	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public List<ProductDto> listPrd(ProductDto productDto) {
+		return productDao.listPrd(productDto);
+	}
+	
+	/**
 	 * @return boolean
 	 * 
 	 * @since 2024-10-17
@@ -51,11 +66,19 @@ public class ProductSrvc {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
+	
 	@Transactional("txBackoffice")
-	public ProductDto insert(ProductDto productDto) {
+	public boolean insert(ProductDto productDto) {
 		
-		productDao.insert(productDto);
-		return productDto;
-	}
+		productDto.setSeq_sle(productDto.getSeq_sle());
+		
+		int result = productDao.insert(productDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
 
+	}
 }
