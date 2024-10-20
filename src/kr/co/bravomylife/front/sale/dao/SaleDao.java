@@ -68,11 +68,9 @@ public class SaleDao extends BaseDao {
 		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.sale.Sale.insertReviewFile", saleFileDto);
 	}
 	
-	/*
-	public int insertReview(SaleDto saleDto) {
-		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.sale.Sale.insertReview", saleDto);
+	public int rateSequence() {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.rateSequence");
 	}
-	*/
 	
 	public int sequence() {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.sequence");
@@ -93,6 +91,11 @@ public class SaleDao extends BaseDao {
 	public int delLike(SaleDto saleDto) {		
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.sale.Sale.delLike", saleDto);
 	}
+	
+	public List<SaleDto> reviewListImgs(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.reviewListImgs", pagingDto);
+	}
+	
 	
 	public List<SaleDto> reviewList(PagingDto pagingDto) {
 		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.reviewList", pagingDto);

@@ -4,21 +4,21 @@
 
 	<insert id="rateInsert" parameterType="saleDto">
 		INSERT INTO TB_RATE
-			(SEQ_SLE, SEQ_MBR, COUNT, RATE_STAR, DT_REG, REGISTER, DT_UPT, UPDATER)
+			(SEQ_RATE, SEQ_SLE, SEQ_MBR, COUNT, RATE_STAR, DT_REG, REGISTER, DT_UPT, UPDATER)
 		VALUES
-			(#{seq_sle}, #{seq_mbr}, 1, #{rate_star}, SYSDATE, #{register}, NULL, NULL)
+			(#{seq_rate}, #{seq_sle}, #{seq_mbr}, 1, #{rate_star}, SYSDATE, #{register}, NULL, NULL)
 	</insert>
 
 	<update id="rateUpdate" parameterType="saleDto">
 		UPDATE
 			TB_RATE
 		SET
-			RATE_STAR	= #{rate_star}
-			, DT_UPT = SYSDATE
-			, UPDATE = #{seq_mbr}
+			RATE_STAR		= #{rate_star}
+			, DT_UPT		= SYSDATE
+			, UPDATE		= #{seq_mbr}
 		WHERE
-			SEQ_MBR		= #{seq_mbr}
-			AND SEQ_SLE	= #{seq_sle}
+			SEQ_MBR			= #{seq_mbr}
+			AND SEQ_SLE		= #{seq_sle}
 	</update>
 
 	<select id="reviewCheck" parameterType="saleDto" resultType="java.lang.Integer">
@@ -42,6 +42,10 @@
 			AND SEQ_SLE		= #{seq_sle}
 	</select>
 
+	<select id="rateSequence" resultType="java.lang.Integer">
+		SELECT SQ_SEQ_RATE.NEXTVAL FROM DUAL
+	</select>
+
 	<select id="sequence" resultType="java.lang.Integer">
 		SELECT SQ_SEQ_REVIEW.NEXTVAL FROM DUAL
 	</select>
@@ -62,9 +66,9 @@
 	
 	<insert id="insertReviewFile" parameterType="saleFileDto">
 		INSERT INTO TB_REVIEW_IMG
-			(SEQ_REVIEW, SEQ_SLE, SEQ_MBR, FILE_SAVE, FILE_ORIG)
+			(SEQ_REVIEW_IMG, SEQ_REVIEW, SEQ_SLE, SEQ_MBR, FILE_SAVE, FILE_ORIG)
 		VALUES
-			(#{seq_review}, #{seq_sle}, #{seq_mbr}, #{file_save}, #{file_orig})
+			(SQ_SEQ_REVIEW_IMG.NEXTVAL, #{seq_review}, #{seq_sle}, #{seq_mbr}, #{file_save}, #{file_orig})
 	</insert>
 
 	<insert id="setLikeInsert" parameterType="saleDto">
@@ -78,11 +82,11 @@
 		UPDATE
 			TB_LIKE
 		SET
-			FLG_LIKE	= #{flg_like}
-			, DT_UPT = SYSDATE
+			FLG_LIKE		= #{flg_like}
+			, DT_UPT		= SYSDATE
 		WHERE
-			SEQ_MBR		= #{seq_mbr}
-			AND SEQ_SLE	= #{seq_sle}
+			SEQ_MBR			= #{seq_mbr}
+			AND SEQ_SLE		= #{seq_sle}
 			AND FLG_LIKE	= 'N'
 	</update>
 
@@ -114,7 +118,21 @@
 		FROM
 			TB_REVIEW
 		WHERE
-			SEQ_SLE = #{seq_sle}
+			SEQ_SLE			= #{seq_sle}
+	</select>
+
+	<select id="reviewListImgs" parameterType="pagingDto" resultType="saleDto">
+		SELECT
+			SEQ_REVIEW
+			, FILE_SAVE
+		FROM
+			TB_REVIEW_IMG
+		WHERE
+			SEQ_REVIEW IN (
+				SELECT SEQ_REVIEW 
+				FROM TB_REVIEW 
+				WHERE SEQ_SLE	= #{seq_sle}
+			)
 	</select>
 
 	<select id="reviewCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -136,30 +154,47 @@
 		FROM
 		(
 		SELECT
-			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY sle.DT_REG DESC) rnum
-			, CASE 
-				WHEN rate.COUNT > 0 THEN ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0)
-				ELSE 0 
-			  END AS average_rate
+			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY review.DT_REG DESC) rnum
+			, review.SEQ_REVIEW
+			, sle.SEQ_SLE
+			, rate_summary.total_count
+			, ROUND(CASE 
+				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
+				ELSE 0
+			END, 0) star
 			, review.SEQ_MBR
 			, review.FLG_DELETE
 			, review.RATE_REVIEW
 			, TO_CHAR(review.DT_REG, 'YYYY-MM-DD') dt_reg
 			, mbr.MBR_NM
+			, rate.RATE_STAR AS mbr_rate_star
 		FROM
 			TB_SLE sle
-		LEFT JOIN
-			TB_RATE rate
+		LEFT OUTER JOIN (
+			SELECT
+				SEQ_SLE
+				, SUM(RATE_STAR) total_star_rate
+				, SUM(COUNT) total_count
+			FROM
+				TB_RATE
+			GROUP BY
+				SEQ_SLE
+		) rate_summary
 		ON
-			sle.SEQ_SLE = rate.SEQ_SLE
+			sle.SEQ_SLE			= rate_summary.SEQ_SLE
 		LEFT JOIN
 			TB_REVIEW review
 		ON
-			sle.SEQ_SLE = review.SEQ_SLE
+			sle.SEQ_SLE			= review.SEQ_SLE
 		LEFT JOIN
 			TB_MBR_MST mbr
 		ON
-			review.SEQ_MBR = mbr.SEQ_MBR
+			review.SEQ_MBR		= mbr.SEQ_MBR
+		LEFT JOIN
+			TB_RATE rate
+		ON
+			rate.SEQ_MBR		= review.SEQ_MBR
+			AND rate.SEQ_SLE	= review.SEQ_SLE
 		WHERE
 		<include refid="reviewwhere" />
 		)
@@ -170,8 +205,8 @@
 	</select>
 	
 	<sql id="reviewwhere">
-		sle.SEQ_SLE = #{seq_sle}
-		AND review.FLG_DELETE = 'N'
+		sle.SEQ_SLE				= #{seq_sle}
+		AND review.FLG_DELETE	= 'N'
 	</sql>
 
 	<select id="detailCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -194,24 +229,33 @@
 			, sle.SLE_NM
 			, sle.IMG
 			, sle.PRICE_SALE
-			, rate.RATE_STAR
 			, sle.cd_ctg_b
 			, sle.cd_ctg_m
-			, rate.COUNT
-			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
 			, sle.DISCOUNT
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, rate_summary.total_count
+			, ROUND(CASE 
+				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
+				ELSE 0
+			END, 0) star
 			, best.FLG_BEST
 		FROM
 			TB_SLE sle
-		LEFT JOIN
-			TB_RATE rate
+		LEFT OUTER JOIN (
+			SELECT
+				SEQ_SLE,
+				SUM(RATE_STAR) total_star_rate,
+				SUM(COUNT) total_count
+			FROM
+				TB_RATE
+			GROUP BY SEQ_SLE
+		) rate_summary
 		ON
-			sle.SEQ_SLE = rate.SEQ_SLE
+			sle.SEQ_SLE			= rate_summary.SEQ_SLE
 		LEFT JOIN
 			TB_BEST best
 		ON
-			sle.SEQ_SLE = best.SEQ_SLE
+			sle.SEQ_SLE			= best.SEQ_SLE
 		WHERE
 		<include refid="detailwhere" />
 		)
@@ -222,10 +266,10 @@
 	</select>
 
 	<sql id="detailwhere">
-		sle.CD_STATE_SALE = 2
-		AND sle.FLG_DELETE = 'N'
-		AND sle.CD_CTG_B = #{cd_ctg_b}
-		AND sle.CD_CTG_M = #{cd_ctg_m}
+		sle.CD_STATE_SALE		= 2
+		AND sle.FLG_DELETE		= 'N'
+		AND sle.CD_CTG_B		= #{cd_ctg_b}
+		AND sle.CD_CTG_M		= #{cd_ctg_m}
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
 		]]>
@@ -249,13 +293,13 @@
 			, sle.cd_ctg_m
 			, sle.cd_ctg_b
 			, sle.DISCOUNT
-			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') AS dt_reg
+			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
 			, sle.COUNT_STOCK
 			, rate_summary.total_count
-			, CASE 
+			, ROUND(CASE 
 				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
 				ELSE 0
-			  END AS average_star_rate
+			END, 0) star
 			, best.FLG_BEST
 		<if test="seq_mbr != null and seq_mbr != ''">
 			, likeTbl.FLG_LIKE
@@ -264,29 +308,30 @@
 			TB_SLE sle
 		LEFT OUTER JOIN (
 			SELECT
-				SEQ_SLE,
-				SUM(RATE_STAR) AS total_star_rate,
-				SUM(COUNT) AS total_count
+				SEQ_SLE
+				, SUM(RATE_STAR) total_star_rate
+				, SUM(COUNT) total_count
 			FROM
 				TB_RATE
-			GROUP BY SEQ_SLE
+			GROUP BY
+				SEQ_SLE
 		) rate_summary
 		ON
-			sle.SEQ_SLE = rate_summary.SEQ_SLE
+			sle.SEQ_SLE				= rate_summary.SEQ_SLE
 		LEFT OUTER JOIN
 			TB_BEST best
 		ON
-			sle.SEQ_SLE = best.SEQ_SLE
+			sle.SEQ_SLE				= best.SEQ_SLE
 		<if test="seq_mbr != null and seq_mbr != ''">
 			LEFT OUTER JOIN
 				TB_LIKE likeTbl
 			ON
-				sle.SEQ_SLE = likeTbl.SEQ_SLE
+				sle.SEQ_SLE			= likeTbl.SEQ_SLE
 				AND likeTbl.SEQ_MBR = #{seq_mbr}
 		</if>
 		WHERE
-			sle.SEQ_SLE = #{seq_sle}
-			AND sle.CD_STATE_SALE = 2
+			sle.SEQ_SLE				= #{seq_sle}
+			AND sle.CD_STATE_SALE	= 2
 	</select>
 
 	<select id="totalCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -317,22 +362,31 @@
 			, sle.PRICE_SALE
 			, sle.CD_CTG_B
 			, sle.CD_CTG_M
-			, rate.RATE_STAR
-			, rate.COUNT
-			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
 			, sle.PRD_TYPE
 			, sle.CORP_NM
 			, sle.DISCOUNT
 			, sle.COUNT_STOCK
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') DT_REG
+			, rate_summary.total_count
+			, ROUND(CASE 
+				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
+				ELSE 0
+			END, 0) star
 			, best.FLG_BEST
 		FROM
 			TB_SLE sle
-		LEFT JOIN
-			TB_RATE rate
+		LEFT OUTER JOIN (
+			SELECT
+				SEQ_SLE
+				, SUM(RATE_STAR) total_star_rate
+				, SUM(COUNT) total_count
+			FROM
+				TB_RATE
+			GROUP BY SEQ_SLE
+		) rate_summary
 		ON
-			sle.SEQ_SLE = rate.SEQ_SLE
+			sle.SEQ_SLE = rate_summary.SEQ_SLE
 		LEFT JOIN
 			TB_BEST best
 		ON
@@ -404,22 +458,31 @@
 			, sle.PRICE_SALE
 			, sle.CD_CTG_B
 			, sle.CD_CTG_M
-			, rate.RATE_STAR
-			, rate.COUNT
-			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
 			, sle.PRD_TYPE
 			, sle.CORP_NM
 			, sle.DISCOUNT
 			, sle.COUNT_STOCK
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') DT_REG
+			, rate_summary.total_count
+			, ROUND(CASE 
+				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
+				ELSE 0
+			END, 0) star
 			, best.FLG_BEST
 		FROM
 			TB_SLE sle
-		LEFT JOIN
-			TB_RATE rate
+		LEFT OUTER JOIN (
+			SELECT
+				SEQ_SLE
+				, SUM(RATE_STAR) total_star_rate
+				, SUM(COUNT) total_count
+			FROM
+				TB_RATE
+			GROUP BY SEQ_SLE
+		) rate_summary
 		ON
-			sle.SEQ_SLE = rate.SEQ_SLE
+			sle.SEQ_SLE = rate_summary.SEQ_SLE
 		LEFT JOIN
 			TB_BEST best
 		on
@@ -500,22 +563,31 @@
 			, sle.PRICE_SALE
 			, sle.CD_CTG_B
 			, sle.CD_CTG_M
-			, rate.RATE_STAR
-			, rate.COUNT
-			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
 			, sle.PRD_TYPE
 			, sle.CORP_NM
 			, sle.DISCOUNT
 			, sle.COUNT_STOCK
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') DT_REG
+			, rate_summary.total_count
+			, ROUND(CASE 
+				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
+				ELSE 0
+			END, 0) star
 			, best.FLG_BEST
 		FROM
 			TB_SLE sle
-		LEFT JOIN
-			TB_RATE rate
+		LEFT OUTER JOIN (
+			SELECT
+				SEQ_SLE
+				, SUM(RATE_STAR) total_star_rate
+				, SUM(COUNT) total_count
+			FROM
+				TB_RATE
+			GROUP BY SEQ_SLE
+		) rate_summary
 		ON
-			sle.SEQ_SLE = rate.SEQ_SLE
+			sle.SEQ_SLE = rate_summary.SEQ_SLE
 		LEFT JOIN
 			TB_BEST best
 		on
@@ -596,22 +668,31 @@
 			, sle.PRICE_SALE
 			, sle.CD_CTG_B
 			, sle.CD_CTG_M
-			, rate.RATE_STAR
-			, rate.COUNT
-			, ROUND(rate.RATE_STAR * 1.0 / rate.COUNT, 0) average_rate
 			, sle.PRD_TYPE
 			, sle.CORP_NM
 			, sle.DISCOUNT
 			, sle.COUNT_STOCK
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') DT_REG
+			, rate_summary.total_count
+			, ROUND(CASE 
+				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
+				ELSE 0
+			END, 0) star
 			, best.FLG_BEST
 		FROM
 			TB_SLE sle
-		LEFT JOIN
-			TB_RATE rate
+		LEFT OUTER JOIN (
+			SELECT
+				SEQ_SLE
+				, SUM(RATE_STAR) total_star_rate
+				, SUM(COUNT) total_count
+			FROM
+				TB_RATE
+			GROUP BY SEQ_SLE
+		) rate_summary
 		ON
-			sle.SEQ_SLE = rate.SEQ_SLE
+			sle.SEQ_SLE = rate_summary.SEQ_SLE
 		LEFT JOIN
 			TB_BEST best
 		on

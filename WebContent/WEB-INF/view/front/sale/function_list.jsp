@@ -168,37 +168,47 @@
 										<div class="product__item__text">
 											<h6 style="line-height: 1.5em; min-height: 3em;"><a href="#" style="font-size: 15px;">${list.sle_nm}</a></h6>
 												<div class="rating">
-													<c:if test="${list.average_rate == 0}">
+													<c:if test="${list.star == 0}">
 														<i class="fa fa-star" style="color: #e0e0e0;"></i>
 														<i class="fa fa-star" style="color: #e0e0e0;"></i>
 														<i class="fa fa-star" style="color: #e0e0e0;"></i>
 														<i class="fa fa-star" style="color: #e0e0e0;"></i>
-														<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.count}개 상품평</span>
+														<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.total_count}개 상품평</span>
 													</c:if>
-													<c:if test="${list.average_rate == 1}">
-														<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+													<c:if test="${list.star == 1}">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star" style="color: #e0e0e0;"></i>
+														<i class="fa fa-star" style="color: #e0e0e0;"></i>
+														<i class="fa fa-star" style="color: #e0e0e0;"></i>
+														<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.total_count}개 상품평</span>
 													</c:if>
-													<c:if test="${list.average_rate == 2}">
+													<c:if test="${list.star == 2}">
 														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star" style="color: #e0e0e0;"></i>
+														<i class="fa fa-star" style="color: #e0e0e0;"></i>
+														<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.total_count}개 상품평</span>
 													</c:if>
-													<c:if test="${list.average_rate == 3}">
+													<c:if test="${list.star == 3}">
 														<i class="fa fa-star"></i>
 														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star" style="color: #e0e0e0;"></i>
+														<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.total_count}개 상품평</span>
 													</c:if>
-													<c:if test="${list.average_rate == 4}">
+													<c:if test="${list.star == 4}">
 														<i class="fa fa-star"></i>
 														<i class="fa fa-star"></i>
 														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.total_count}개 상품평</span>
 													</c:if>
-													<c:if test="${list.average_rate == 5}">
+													<c:if test="${list.star == 5}">
 														<i class="fa fa-star"></i>
 														<i class="fa fa-star"></i>
 														<i class="fa fa-star"></i>
 														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+														<i class="fa fa-star"></i><span class="rate">${list.total_count}개 상품평</span>
 													</c:if>
 												</div>
 											<c:choose>

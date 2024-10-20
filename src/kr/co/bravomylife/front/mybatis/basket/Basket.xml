@@ -2,42 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.basket.Basket">
 
+	<update id="updateBasket" parameterType="buyDetailDto">
+		UPDATE
+			TB_BSK
+		SET
+			FLG_DELETE		= 'Y'
+			, DT_UPT		= SYSDATE
+		WHERE
+			SEQ_MBR			= #{seq_mbr}
+			AND SEQ_SLE		= #{seq_sle}
+			AND FLG_DELETE	= 'N'
+	</update>
+
 	<update id="ajaxRemove" parameterType="map">
 		UPDATE
 			TB_BSK
 		SET
-			FLG_DELETE = 'Y'
-			, DT_UPT = SYSDATE
+			FLG_DELETE		= 'Y'
+			, DT_UPT		= SYSDATE
 		WHERE
-			SEQ_MBR	= #{seq_mbr}
-			AND SEQ_SLE	= #{seq_sle}
-			AND FLG_DELETE = 'N'
+			SEQ_MBR			= #{seq_mbr}
+			AND SEQ_SLE		= #{seq_sle}
+			AND FLG_DELETE	= 'N'
 	</update>
 
 	<update id="ajaxUpdate" parameterType="pagingDto">
 		UPDATE
 			TB_BSK
 		SET
-			COUNT = #{count}
-			, DT_UPT = SYSDATE
+			COUNT			= #{count}
+			, DT_UPT		= SYSDATE
 		WHERE
-			SEQ_MBR	= #{seq_mbr}
-			AND SEQ_SLE	= #{seq_sle}
-			AND FLG_DELETE = 'N'
+			SEQ_MBR			= #{seq_mbr}
+			AND SEQ_SLE		= #{seq_sle}
+			AND FLG_DELETE	= 'N'
 	</update>
 
 	<update id="update" parameterType="basketDto">
 		UPDATE
 			TB_BSK
 		SET
-			PRICE = PRICE + #{price}
-			, COUNT = COUNT + #{count}
-			, POINT_STACK = #{point_stack}
-			, DT_UPT = SYSDATE
+			PRICE			= PRICE + #{price}
+			, COUNT			= COUNT + #{count}
+			, POINT_STACK	= #{point_stack}
+			, DT_UPT		= SYSDATE
 		WHERE
-			SEQ_MBR	= #{seq_mbr}
-			AND SEQ_SLE	= #{seq_sle}
-			AND FLG_DELETE = 'N'
+			SEQ_MBR			= #{seq_mbr}
+			AND SEQ_SLE		= #{seq_sle}
+			AND FLG_DELETE	= 'N'
 	</update>
 
 	<insert id="insert" parameterType="basketDto">

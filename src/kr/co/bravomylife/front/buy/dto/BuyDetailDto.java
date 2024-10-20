@@ -44,9 +44,15 @@ public class BuyDetailDto {
 	private int total_point_sum			= 0;
 	private String format_total_price	= "";
 	private String format_total_point	= "";
+	private int seq_mbr					= 0;
 	
 	
-
+	public int getSeq_mbr() {
+		return seq_mbr;
+	}
+	public void setSeq_mbr(int seq_mbr) {
+		this.seq_mbr = seq_mbr;
+	}
 	public String getDeal_num() {
 		return deal_num;
 	}

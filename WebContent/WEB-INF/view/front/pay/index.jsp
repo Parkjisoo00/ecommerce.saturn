@@ -289,6 +289,7 @@
 	<%@ include file="/include/common/js.jsp" %>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<c:forEach var="list" items="${buyList}" varStatus="status">
+		<input type="hidden" name="buyList[${status.index}].seq_mbr" value="${list.seq_mbr}" />
 		<input type="hidden" name="buyList[${status.index}].seq_sle" value="${list.seq_sle}" />
 		<input type="hidden" name="buyList[${status.index}].sle_nm" value="${list.sle_nm}" />
 		<input type="hidden" name="buyList[${status.index}].price" value="${list.price}" />

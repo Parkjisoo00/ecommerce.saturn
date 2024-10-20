@@ -167,6 +167,7 @@ public class PayWeb extends Common {
 		// Map<String,String> map = new HashMap<>();
 		
 		int usePoint = Integer.parseInt(param.get("usePoint"));
+		// int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
 		
 		try {
 			// logger.info("[" + this.getClass().getName() + ".order().REQ] " + param.toString());
@@ -219,8 +220,6 @@ public class PayWeb extends Common {
 			
 			// logger.info("통신 결과[" + this.getClass().getName() + ".order().RES] " + returnMap.toString());
 			
-			
-			
 			ArrayList<BuyDetailDto> listBuyDetailDto = new ArrayList<BuyDetailDto>();
 			
 			if (buyDetailListDto.getBuyList() != null) {
@@ -236,6 +235,7 @@ public class PayWeb extends Common {
 						// 전체 상품 갯수 및 금액 그리고 구매명
 						totalCount += buyDetailListDto.getBuyList().get(loop).getCount();
 						totalPrice += buyDetailListDto.getBuyList().get(loop).getCount() * buyDetailListDto.getBuyList().get(loop).getPrice();
+						totalPoint += buyDetailListDto.getBuyList().get(loop).getCount() * buyDetailListDto.getBuyList().get(loop).getPoint();
 						finalSleName = buyDetailListDto.getBuyList().get(loop).getSle_nm();
 						
 						if (loop == buyDetailListDto.getBuyList().size() - 1) {
@@ -250,10 +250,6 @@ public class PayWeb extends Common {
 					}
 				}
 			}
-			
-			
-			
-			
 			if ("0000".equals(returnMap.get("responseCode"))) {
 				// logger.info("[" + this.getClass().getName() + ".order().RES.SUCCESS] " + returnMap.toString());
 				
@@ -269,12 +265,20 @@ public class PayWeb extends Common {
 					buyMasterDto.setBuy_count(totalCount);
 					buyMasterDto.setBuy_price(totalPrice);
 					buyMasterDto.setTotal_point(totalPoint);
+					buyMasterDto.setUse_point(usePoint);
 					buyMasterDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 					
 					if (!buySrvc.insert(buyMasterDto, (ArrayList<BuyDetailDto>) buyDetailListDto.getBuyList(), deal_num)) {
 						// 구매 정보 저장 에러
 						returnMap.put("responseCode", "B001");
 						returnMap.put("responseMsg", "[ERROR]구매 정보 저장");
+						
+						return returnMap;
+					}
+					if (!memberSrvc.pointInsert(buyMasterDto)) {
+						
+						returnMap.put("responseMsg", "[ERROR]회원 정보 저장");
+						return returnMap;
 					}
 				}
 				else {
@@ -355,9 +359,14 @@ public class PayWeb extends Common {
 			String formatTotalPriceSum = "";
 			String formatTotalPointSum = "";
 			
+			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
+			
 			for (BuyDetailDto detail : _buyDetailListDto) {
 				
+				detail.setSeq_mbr(seqMbr);
+				
 				Map<String, Object> map = new HashMap<>();
+				map.put("seq_mbr", detail.getSeq_mbr());
 				map.put("seq_sle", detail.getSeq_sle());
 				map.put("sle_nm", detail.getSle_nm());
 				map.put("price", detail.getPrice());

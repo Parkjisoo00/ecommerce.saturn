@@ -44,8 +44,15 @@ public class BuyMasterDto {
 	private String dt_upt				= "";
 	private int updater					= 0;
 	private int total_point				= 0;
+	private int use_point				= 0;
 	
 	
+	public int getUse_point() {
+		return use_point;
+	}
+	public void setUse_point(int use_point) {
+		this.use_point = use_point;
+	}
 	public int getTotal_point() {
 		return total_point;
 	}

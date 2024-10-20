@@ -22,6 +22,7 @@ package kr.co.bravomylife.front.member.dao;
 
 import org.springframework.stereotype.Repository;
 
+import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
 import kr.co.bravomylife.front.common.dao.BaseDao;
 import kr.co.bravomylife.front.member.dto.MemberDto;
 
@@ -35,6 +36,14 @@ import kr.co.bravomylife.front.member.dto.MemberDto;
  */
 @Repository("kr.co.bravomylife.front.member.dao.MemberDao")
 public class MemberDao extends BaseDao {
+	
+	public int pointUpdate(BuyMasterDto buyMasterDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.member.Member.pointUpdate", buyMasterDto);
+	}
+	
+	public int useUpdate(BuyMasterDto buyMasterDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.member.Member.useUpdate", buyMasterDto);
+	}
 	
 	public MemberDto selectPasswd(MemberDto memberDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.selectPasswd", memberDto);

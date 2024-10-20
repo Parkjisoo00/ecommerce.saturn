@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
 import kr.co.bravomylife.front.member.dao.MemberDao;
 import kr.co.bravomylife.front.member.dao.TermAgreeDao;
 import kr.co.bravomylife.front.member.dto.MemberDto;
@@ -47,6 +48,25 @@ public class MemberSrvc {
 	
 	@Inject
 	TermAgreeDao termAgreeDao;
+	
+	@Transactional("txFront")
+	public boolean pointInsert(BuyMasterDto buyMasterDto) {
+		
+		int result = 0;
+		
+		result += memberDao.useUpdate(buyMasterDto);
+		
+		result += memberDao.pointUpdate(buyMasterDto);
+		
+		if(result == 2) {
+			
+			return true;
+		}
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
 	
 	@Transactional("txFront")
 	public boolean updateState(MemberDto memberDto) {

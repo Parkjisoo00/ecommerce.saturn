@@ -20,6 +20,8 @@
  */
 package kr.co.bravomylife.front.sale.dto;
 
+import java.util.List;
+
 /**
  * @version 1.0.0
  * @author cydgate4957@gmail.com
@@ -31,6 +33,7 @@ package kr.co.bravomylife.front.sale.dto;
 public class SaleDto {
 
 	private int rnum				= 0;
+	private int star				= 0;
 	private int seq_mbr				= 0;	// 회원 일련번호
 	private int seq_like			= 0;	// 찜 일련번호(판매 상세 페이지에서 사용)
 	private String sle_nm			= "";	// 판매 상품명
@@ -67,19 +70,38 @@ public class SaleDto {
 	private String file_orig		= "";
 	private String extension		= "";
 	private int review_count		= 0;
-	private int average_star_rate 	= 0;
 	private int total_count			= 0;
-	
+	private int seq_rate			= 0;
+	private int mbr_rate_star		= 0;
+	private List<String> imgs		= null;	
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
-	public int getAverage_star_rate() {
-		return average_star_rate;
+	public List<String> getImgs() {
+		return imgs;
 	}
-	public void setAverage_star_rate(int average_star_rate) {
-		this.average_star_rate = average_star_rate;
+	public void setImgs(List<String> imgs) {
+		this.imgs = imgs;
+	}
+	public int getMbr_rate_star() {
+		return mbr_rate_star;
+	}
+	public void setMbr_rate_star(int mbr_rate_star) {
+		this.mbr_rate_star = mbr_rate_star;
+	}
+	public int getStar() {
+		return star;
+	}
+	public void setStar(int star) {
+		this.star = star;
+	}
+	public int getSeq_rate() {
+		return seq_rate;
+	}
+	public void setSeq_rate(int seq_rate) {
+		this.seq_rate = seq_rate;
 	}
 	public int getTotal_count() {
 		return total_count;

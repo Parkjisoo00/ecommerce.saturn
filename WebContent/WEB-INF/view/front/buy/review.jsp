@@ -75,7 +75,7 @@ alert("평점 확인" + value);
 					<div class="col-lg-12 col-md-12" >
 						<div class="review-form" style="height: 100% !important; display: flex; flex-direction: column;">
 							<input type="hidden" name="seq_sle"				id="seq_sle"		value="${saleDto.seq_sle}"/>
-							<div class="review-title" style="border-bottom: 0px !important; border-top: 0px !important;">
+							<div class="review-title" style="border-bottom: 0px !important; border-top: 0px !important; padding-bottom: 25px !important">
 								<div>
 									<img src="/img/review/review.png" style="height: 26px !important;"><span class="reviewtitle">상품 후기</span>
 								</div>
@@ -84,10 +84,10 @@ alert("평점 확인" + value);
 								</div>
 							</div>
 							<div class="review-name" style="border-bottom: 0px !important;">
-								<div class="photoreview" style="padding: 25px 20px !important;">
+								<div class="photoreview" style="padding: 20px 10px !important;">
 									<img src="${saleDto.img}" style="height: 100px !important; ">
 								</div>
-								<div class="product-name" style="flex-grow: 1;">
+								<div class="product-name" style="flex-grow: 1; padding-right: 0px !important">
 									<div class="product-name" style="padding: 0px !important; padding-top: 20px !important; font-weight: bold !important;">
 										${saleDto.sle_nm}
 									</div>
@@ -106,26 +106,26 @@ alert("평점 확인" + value);
 								<div class="photoreview" style="display: flex !important; justify-content: flex-start !important; align-items: center !important;">
 									사진첨부
 								</div>
-							<div class="product-name">
+							<div class="product-name" style="padding-right: 0px !important">
 								<div style="display: flex; align-items: center; height: 100px;">
 									<label id="show-input" class="cart-btn-review" style="margin: 0px !important; background: #fff; color: #346aff !important; border: 1px solid #346aff !important; padding: 10px; cursor: pointer;">
 										파일 선택
 									</label>
-									<div id="file-inputs" style="display: flex; margin-left: 10px; align-items: center;">
+									<div id="file-inputs" style="display: flex; margin-left: 20px; align-items: center;">
 										<div style="display: flex; align-items: center;">
-											<img id="img-preview-0" style="display: none; width: 70px; height: 70px; object-fit: cover; margin-right: 10px; cursor: pointer;" />
+											<img id="img-preview-0" style="display: none; width: 70px; height: 80px; object-fit: cover; cursor: pointer;" />
 											<input type="file" id="file-input-0" style="display: none;" />
-											<span id="file-name-0" style="margin-left: 10px; cursor: pointer;"></span>
+											<span id="file-name-0" style="margin-left: 10px; cursor: pointer; display: none !important;"></span>
 										</div>
 										<div style="display: flex; align-items: center; margin-left: 20px;">
-											<img id="img-preview-1" style="display: none; width: 70px; height: 70px; object-fit: cover; margin-right: 10px; cursor: pointer;" />
+											<img id="img-preview-1" style="display: none; width: 70px; height: 80px; object-fit: cover; cursor: pointer;" />
 											<input type="file" id="file-input-1" style="display: none;" />
-											<span id="file-name-1" style="margin-left: 10px; cursor: pointer;"></span>
+											<span id="file-name-1" style="margin-left: 10px; cursor: pointer; display: none !important;"></span>
 										</div>
 										<div style="display: flex; align-items: center; margin-left: 20px;">
-											<img id="img-preview-2" style="display: none; width: 70px; height: 70px; object-fit: cover; margin-right: 10px; cursor: pointer;" />
+											<img id="img-preview-2" style="display: none; width: 70px; height: 80px; object-fit: cover; cursor: pointer;" />
 											<input type="file" id="file-input-2" style="display: none;" />
-											<span id="file-name-2" style="margin-left: 10px; cursor: pointer;"></span>
+											<span id="file-name-2" style="margin-left: 10px; cursor: pointer; display: none !important;"></span>
 										</div>
 									</div>
 								</div>

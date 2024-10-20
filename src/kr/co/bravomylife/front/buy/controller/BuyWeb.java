@@ -21,7 +21,6 @@
 package kr.co.bravomylife.front.buy.controller;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
@@ -107,7 +106,7 @@ public class BuyWeb extends Common {
 			saleDto.setSeq_mbr(seqMbr);
 			saleDto.setRegister(seqMbr);
 			
-			String pathBase = dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
+			String pathBase = dynamicProperties.getMessage("backoffice.upload.path.review", "[UNDEFINED]");
 			String maxSize = dynamicProperties.getMessage("backoffice.upload.file.max10MB", "[UNDEFINED]");
 			String allowedExt = dynamicProperties.getMessage("backoffice.upload.file.extension.doc", "[UNDEFINED]");
 			
@@ -125,25 +124,24 @@ public class BuyWeb extends Common {
 				
 				String fileNameSrc	= "";
 				String fileNameSve	= "";
-				// String fileSize		= "";
+				String fileSize		= "";
 				// long totalSize		= 0;
 				
 				for (int loop = 0; loop < countFile; loop++) {
 					
 					fileNameSrc		= (String)hashtable.get("files[" + loop + "]_fileSrcName");
 					fileNameSve		= (String)hashtable.get("files[" + loop + "]_fileSveNameRelative");
-					// fileSize		= (String)hashtable.get("files[" + loop + "]_fileSveSize");
-					// if (fileSize == null || fileSize == "") fileSize = "0";
+					fileSize		= (String)hashtable.get("files[" + loop + "]_fileSveSize");
+					if (fileSize == null || fileSize == "") fileSize = "0";
 					
 					saleFileDto[loop] = new SaleFileDto();
 					saleFileDto[loop].setFileNameOriginal(fileNameSrc);
 					saleFileDto[loop].setFileNameSave(fileNameSve);
+					saleFileDto[loop].setFileSize((Long.parseLong(fileSize)));
 					saleFileDto[loop].setSeq_sle(saleDto.getSeq_sle());
 					saleFileDto[loop].setSeq_mbr(saleDto.getSeq_mbr());
 					saleFileDto[loop].setFile_orig(fileNameSrc);
 					saleFileDto[loop].setFile_save(fileNameSve);
-					
-					saleFileDto[loop].setFileNameSave(fileNameSve);
 					
 					// totalSize += Long.parseLong(fileSize);
 				}
@@ -166,6 +164,7 @@ public class BuyWeb extends Common {
 					
 					request.setAttribute("script", "alert('상품 후기가 등록되었습니다.');");
 					request.setAttribute("redirect", "/");
+					// 추후 코드 완성시 마이 페이지 리뷰 관리 페이지로 이동
 				} else {
 					
 					request.setAttribute("script", "alert('시스템 관리자에게 문의하세요.');");
@@ -181,38 +180,6 @@ public class BuyWeb extends Common {
 		
 		return mav;
 	}
-	
-				/*
-				boolean result = false;
-				
-				if (countFile > 0) {
-					
-					result = saleSrvc.insertReview(saleDto, saleFileDto);
-				} else {
-					
-					result = saleSrvc.insertReview(saleDto);
-				}
-				if (result) {
-					
-					request.setAttribute("script", "alert('상품 후기가 등록되었습니다.');");
-					request.setAttribute("redirect", "/");
-				} else {
-					
-					request.setAttribute("script", "alert('시스템 관리자에게 문의하세요!');");
-					request.setAttribute("redirect", "/");
-				}
-			} 
-		} 
-		mav.setViewName("forward:/servlet/result.web");
-	
-		} 	catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".reviewWriteProc()] " + e.getMessage(), e);
-		}
-		finally {}
-	
-		return mav;
-	}
-	*/
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -372,6 +339,7 @@ public class BuyWeb extends Common {
 			SKwithAES aes		= new SKwithAES(staticKey);
 						
 			SaleDto _saleDto	= saleSrvc.select(saleDto);
+			
 			mav.addObject("saleDto"		, _saleDto);
 			
 			SaleDto reviewCount = saleSrvc.reviewCounts(saleDto);
@@ -381,27 +349,18 @@ public class BuyWeb extends Common {
 			mav.addObject("paging"	, _pagingListDto.getPaging());
 			mav.addObject("list"	, _pagingListDto.getList());
 			
+			PagingListDto _reviewListImgs = saleSrvc.reviewListImgs(reviewpagingDto);
 			PagingListDto _reviewpagingDto = saleSrvc.reviewList(reviewpagingDto);
 			
-			List<SaleDto> reviewList = (List<SaleDto>) _reviewpagingDto.getList();
+			PagingListDto mergedPagingList = saleSrvc.mergeReviewAndImages(_reviewpagingDto, _reviewListImgs);
 			
-			if (reviewList != null && !reviewList.isEmpty()) {
-				
-				if (reviewList.get(0).getRate_review().equals("") || reviewList.get(0).getRate_review() == null) {
-					
-					_reviewpagingDto.setList("");
-				} else {
-					
-					for (int loop = 0; loop < reviewList.size(); loop++) {
-						reviewList.get(loop).setMbr_nm(aes.decode(reviewList.get(loop).getMbr_nm()));
-					}
-				}
-			} else {
-				
-				mav.addObject("reviewList", Collections.emptyList());
+			List<SaleDto> reviewList = (List<SaleDto>) mergedPagingList.getList();
+			
+			for (int loop = 0; loop < reviewList.size(); loop++) {
+				reviewList.get(loop).setMbr_nm(aes.decode(reviewList.get(loop).getMbr_nm()));
 			}
 			
-			mav.addObject("reviewList"	, _reviewpagingDto.getList());
+			mav.addObject("reviewList", mergedPagingList.getList());
 			
 			mav.setViewName("front/buy/writeForm");
 		}

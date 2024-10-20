@@ -4,9 +4,9 @@
 	
 	<insert id="insert" parameterType="buyDetailDto">
 		INSERT INTO TB_BUY_DTL
-			(SEQ_BUY_DTL, SEQ_BUY_MST, SEQ_SLE, COUNT, PRICE, POINT, FLG_REVIEW, DT_REG, REGISTER)
+			(SEQ_BUY_DTL, SEQ_BUY_MST, SEQ_SLE, SEQ_MBR, COUNT, PRICE, POINT, FLG_REVIEW, DT_REG, REGISTER)
 		VALUES
-			(#{seq_buy_dtl}, #{seq_buy_mst}, #{seq_sle}, #{count}, #{price}, #{point}, 'N', SYSDATE, #{register})
+			(#{seq_buy_dtl}, #{seq_buy_mst}, #{seq_sle}, #{seq_mbr}, #{count}, #{price}, #{point}, 'N', SYSDATE, #{register})
 	</insert>
 	
 	<select id="sequence" resultType="java.lang.Integer">

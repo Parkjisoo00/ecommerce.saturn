@@ -286,7 +286,7 @@
 										<th class="cart-th" colspan="2">상품정보</th>
 										<th class="cart-th" style="width: 15%">수량</th>
 										<th class="cart-th" style="width: 10%">상품금액</th>
-										<th class="cart-th" style="width: 10%">적립포인트</th>
+										<th class="cart-th" style="width: 10%">개별포인트</th>
 										<th class="cart-th" style="width: 10%">합계포인트</th>
 										<th class="cart-th" style="width: 10%">합계금액</th>
 									</tr>
@@ -441,8 +441,8 @@
 			totalItems++;
 		});
 		
-		document.getElementById('totalPrice').innerText = totalPrice.toLocaleString() + "원";
-		document.getElementById('totalPriceFinal').innerText = totalPrice.toLocaleString() + "원";
+		document.getElementById('totalPrice').innerText = totalPrice.toLocaleString();
+		document.getElementById('totalPriceFinal').innerText = totalPrice.toLocaleString();
 		document.getElementById('totalPoints').innerText = totalPoints.toLocaleString();
 		document.getElementById('totalItems').innerText = totalItems;
 	}

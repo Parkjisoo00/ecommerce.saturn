@@ -230,6 +230,15 @@
 		frmMain.target = "";
 		frmMain.submit();
 	}
+	
+	function goPages(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.currentPage.setAttribute("value", value);
+		frmMain.action="/front/buy/writeForm.web";
+		frmMain.submit();
+	}
 	</script>
 
 	<!-- Google Font -->
@@ -284,32 +293,42 @@
 						<input type="hidden" name="buyList[0].sle_nm" value="${saleDto.sle_nm}" />
 						<div class="product__details__widget">
 							<div class="rating">
-								<c:if test="${saleDto.average_star_rate == 0}">
+								<c:if test="${saleDto.star == 0}">
 									<i class="fa fa-star" style="color: #e0e0e0;"></i>
 									<i class="fa fa-star" style="color: #e0e0e0;"></i>
 									<i class="fa fa-star" style="color: #e0e0e0;"></i>
 									<i class="fa fa-star" style="color: #e0e0e0;"></i>
 									<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${saleDto.total_count}개 상품평</span>
 								</c:if>
-								<c:if test="${salDto.average_star_rate == 1}">
-									<i class="fa fa-star"></i><span class="rate">${saleDto.total_count}개 상품평</span>
+								<c:if test="${saleDto.star == 1}">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star" style="color: #e0e0e0;"></i>
+									<i class="fa fa-star" style="color: #e0e0e0;"></i>
+									<i class="fa fa-star" style="color: #e0e0e0;"></i>
+									<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${saleDto.total_count}개 상품평</span>
 								</c:if>
-								<c:if test="${saleDto.average_star_rate == 2}">
+								<c:if test="${saleDto.star == 2}">
 									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i><span class="rate">${saleDto.total_count}개 상품평</span>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star" style="color: #e0e0e0;"></i>
+									<i class="fa fa-star" style="color: #e0e0e0;"></i>
+									<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${saleDto.total_count}개 상품평</span>
 								</c:if>
-								<c:if test="${saleDto.average_star_rate == 3}">
+								<c:if test="${saleDto.star == 3}">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i><span class="rate">${saleDto.total_count}개 상품평</span>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star" style="color: #e0e0e0;"></i>
+									<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${saleDto.total_count}개 상품평</span>
 								</c:if>
-								<c:if test="${saleDto.average_star_rate == 4}">
+								<c:if test="${saleDto.star == 4}">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i><span class="rate">${saleDto.total_count}개 상품평</span>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${saleDto.total_count}개 상품평</span>
 								</c:if>
-								<c:if test="${saleDto.average_star_rate == 5}">
+								<c:if test="${saleDto.star == 5}">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
@@ -384,11 +403,6 @@
 							</ul>
 						</div>
 						</br>
-							<div>
-							<a href="javascript:writeReview();" class="cart-btn" style="background: #346aff; color: white !important; border: 1px solid #346aff !important; margin: 0; padding: 10px 10px 10px !important;">
-								상품후기 쓰기(임시)
-							</a>
-							</div>
 						<div class="product__details__button" 
 							 style="display: flex !important; justify-content: center !important; gap: 10px !important; width: 100% !important;">
 						<div class="pro-qty" style="padding: 0px; display: flex !important; align-items: center !important; justify-content: center !important; gap: 10px !important; height: 51px !important;">
@@ -398,7 +412,7 @@
 								<span class="icon_bag_alt"></span> 장바구니 담기
 							</a>
 							<a href="javascript:checkOut();" class="cart-btn" style="display: inline-block !important; margin: 0px !important;">
-								<span class="icon_bag_alt"></span> 바로구매
+								바로구매
 							</a>
 							<ul style="list-style: none !important; padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; gap: 10px !important;">
 								<c:choose>
@@ -440,37 +454,47 @@
 							<div class="product__item__text">
 								<h6 style="line-height: 1.5em; min-height: 3em;"><a style="font-size: 15px;">${list.sle_nm}</a></h6>
 									<div class="rating">
-										<c:if test="${list.average_rate == 0}">
+										<c:if test="${list.star == 0}">
 											<i class="fa fa-star" style="color: #e0e0e0;"></i>
 											<i class="fa fa-star" style="color: #e0e0e0;"></i>
 											<i class="fa fa-star" style="color: #e0e0e0;"></i>
 											<i class="fa fa-star" style="color: #e0e0e0;"></i>
-											<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.count}개 상품평</span>
+											<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.total_count}개 상품평</span>
 										</c:if>
-										<c:if test="${list.average_rate == 1}">
-											<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+										<c:if test="${list.star == 1}">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star" style="color: #e0e0e0;"></i>
+											<i class="fa fa-star" style="color: #e0e0e0;"></i>
+											<i class="fa fa-star" style="color: #e0e0e0;"></i>
+											<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.total_count}개 상품평</span>
 										</c:if>
-										<c:if test="${list.average_rate == 2}">
+										<c:if test="${list.star == 2}">
 											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star" style="color: #e0e0e0;"></i>
+											<i class="fa fa-star" style="color: #e0e0e0;"></i>
+											<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.total_count}개 상품평</span>
 										</c:if>
-										<c:if test="${list.average_rate == 3}">
+										<c:if test="${list.star == 3}">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star" style="color: #e0e0e0;"></i>
+											<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.total_count}개 상품평</span>
 										</c:if>
-										<c:if test="${list.average_rate == 4}">
+										<c:if test="${list.star == 4}">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.total_count}개 상품평</span>
 										</c:if>
-										<c:if test="${list.average_rate == 5}">
+										<c:if test="${list.star == 5}">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i><span class="rate">${list.count}개 상품평</span>
+											<i class="fa fa-star"></i><span class="rate">${list.total_count}개 상품평</span>
 										</c:if>
 									</div>
 								<c:choose>
@@ -514,68 +538,105 @@
 								</div>
 							</div>
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
+								<div style="text-align: right; padding-bottom: 20px; border-bottom: 1px solid #707070">
+									<a href="javascript:writeReview();" class="cart-btn" style="font-size: 12px !important; font-weight: normal !important; cursor: pointer; background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c; margin: 0; padding: 5px 10px 5px !important;">
+										상품후기 쓰기
+									</a>
+								</div>
 								<div class="row">
 									<div class="col-lg-12 col-md-12" >
-										<!-- 
-										<div class="review-form" style="height: 100% !important; display: flex; flex-direction: column;">
-											<div class="review-title" style="border-bottom: 0px !important; border-top: 0px !important;">
-												<div>
-													<img src="/img/review/review.png" style="height: 26px !important;"><span class="reviewtitle">상품 후기</span>
-												</div>
-												<div>
-													<span class="reviewsub">이 상품에 대해서 얼마나 만족하시나요?</span>
-												</div>
+									<c:choose>
+										<c:when test="${empty reviewList}">
+											<div class="col-lg-12 col-md-12 d-flex justify-content-center align-items-center" style="height: 400px;">
+												<p>등록된 상품후기가 없습니다.</p>
 											</div>
-											<div class="review-name" style="border-bottom: 0px !important;">
-												<div class="photoreview" style="padding: 25px 20px !important;">
-													<img src="/img/review/review.png" style="height: 100px !important; ">
-												</div>
-												<div class="product-name" style="flex-grow: 1;">
-													<div class="product-name" style="padding: 0px !important;">
-														품명
-													</div>
-													<div class="product-name" style="padding: 0px !important;">
-														평점
-													</div>
-												</div>
-											</div>
-											
-											<div class="review-name" style="border-bottom: 0px !important;">
-												<div class="photoreview" style="display: flex !important; justify-content: flex-start !important; align-items: center !important;">
-													사진첨부
-												</div>
-												<div class="product-name">
-												<div>
-													<a href="#" class="cart-btn" style="background: #fff; color: #346aff !important; border: 1px solid #346aff !important; margin: 0;">
-														사진 첨부하기
-													</a>
-												</div>
-												</div>
-											</div>
-											
-											<div class="review-name" style="border-bottom: 0px !important; height: auto !important; flex-grow: 2 !important; min-height: 250px !important;">
-												<div class="photoreview">
-													상세후기
-												</div>
-												<div class="product-name" style="display: flex; justify-content: center; align-items: center; height: 100% !important; padding: 20px 0px 20px 20px !important;">
-													<div style="height: 100% !important; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; width: 100%;">
-														<textarea class="review-text" placeholder="리뷰 내용을 입력하세요"></textarea>
-														<div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; width: 100%;">
-															<a href="#" class="cart-btn" style="background: #fff; color: #111 !important; border: 1px solid #ccc !important; margin: 0; padding: 10px 10px 10px !important;">
-																취소하기
-															</a>
-															<a href="#" class="cart-btn" style="background: #346aff; color: white !important; border: 1px solid #346aff !important; margin: 0; padding: 10px 10px 10px !important;">
-																등록하기
-															</a>
+										</c:when>
+											<c:otherwise>
+												<c:forEach var="review" items="${reviewList}">
+												<div class="review-form" style="display: flex; flex-direction: column; border-top: 0px !important; margin: 0px !important; width: 100% !important; padding-bottom: 25px !important">
+												<input type="hidden" name="seq_sle" id="seq_sle" value="${review.seq_sle}"/>
+													<div class="review-title" style="border-bottom: 0px !important; border-top: 0px !important; padding-left: 0px !important; padding-top: 25px !important">
+														<div>
+															<span class="reviewsub" style="font-weight: bold !important; font-size: 14px !important;">${review.mbr_nm}</span>
 														</div>
-													</div>
-												</div>
-											</div>
+														<div>
+															<div class="product-name" style="padding: 0px !important; display: flex; align-items: center;">
+																<div class="rating" style="display: flex; align-items: center;">
+																	<c:if test="${review.mbr_rate_star == 1}">
+																		<i class="fa fa-star-middle"></i>
+																		<i class="fa fa-star-middle" style="color: #e0e0e0;"></i>
+																		<i class="fa fa-star-middle" style="color: #e0e0e0;"></i>
+																		<i class="fa fa-star-middle" style="color: #e0e0e0;"></i>
+																		<i class="fa fa-star-middle" style="color: #e0e0e0;"></i>
+																	</c:if>
+																	<c:if test="${review.mbr_rate_star == 2}">
+																		<i class="fa fa-star-middle"></i>
+																		<i class="fa fa-star-middle"></i>
+																		<i class="fa fa-star-middle" style="color: #e0e0e0;"></i>
+																		<i class="fa fa-star-middle" style="color: #e0e0e0;"></i>
+																		<i class="fa fa-star-middle" style="color: #e0e0e0;"></i>
+																	</c:if>
+																	<c:if test="${review.mbr_rate_star == 3}">
+																		<i class="fa fa-star-middle"></i>
+																		<i class="fa fa-star-middle"></i>
+																		<i class="fa fa-star-middle"></i>
+																		<i class="fa fa-star-middle" style="color: #e0e0e0;"></i>
+																		<i class="fa fa-star-middle" style="color: #e0e0e0;"></i>
+																	</c:if>
+																	<c:if test="${review.mbr_rate_star == 4}">
+																		<i class="fa fa-star-middle"></i>
+																		<i class="fa fa-star-middle"></i>
+																		<i class="fa fa-star-middle"></i>
+																		<i class="fa fa-star-middle"></i>
+																		<i class="fa fa-star-middle" style="color: #e0e0e0;"></i>
+																	</c:if>
+																	<c:if test="${review.mbr_rate_star == 5}">
+																		<i class="fa fa-star-middle"></i>
+																		<i class="fa fa-star-middle"></i>
+																		<i class="fa fa-star-middle"></i>
+																		<i class="fa fa-star-middle"></i>
+																		<i class="fa fa-star-middle"></i>
+																	</c:if>
+																</div>
+															<div style="margin-left: 5px; display: flex;">
+																<span class="reviewsub" style="padding-top: 5px; font-size: 12px !important;">
+																	${review.dt_reg}
+																</span>
+															</div>
+																	</div>
+																</div>
+																<div style="margin-top: 10px !important;">
+																	<span class="reviewsub" style="font-size: 12px !important;">${review.sle_nm}</span>
+																</div>
+															</div>
+															<div class="review-name" style="border-bottom: 0px !important; padding-left: 0px !important; border-top: 0px !important; margin-top: 5px !important">
+															<c:choose>
+																<c:when test="${empty review.imgs}">
+																	<div class="photoreview" style="display: inline-block; padding: 15px 6px !important; padding-left: 0px !important; width: auto !important;">
+																		<h6 class="cart-title" style="padding-bottom: 0px !important; margin-bottom: 0px !important; font-weight: normal !important;">*등록된 상품후기 이미지가 없습니다.</h6>
+																	</div>
+																</c:when>
+																<c:otherwise>
+																	<c:forEach var="imgs" items="${review.imgs}">
+																		<div class="photoreview" style="display: inline-block; padding-right: 5px !important; padding-left: 0px !important; padding-top: 0px !important; width: auto !important;">
+																			<img src="/img/review/${imgs}" style="width: 70px; height: 80px; object-fit: cover;">
+																		</div>
+																	</c:forEach>	
+																</c:otherwise>
+															</c:choose>
+															</div>
+															<div class="review-name" style="display: block !important; padding-left: 0px !important; border-top: 0px !important; border-bottom: 0px !important;">
+																<div class="reviewsub">
+																	${review.rate_review}
+																</div>
+															</div>
+														</div>
+													</c:forEach>
+												</c:otherwise>
+											</c:choose>
+										<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
+											<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
 										</div>
-										 -->
-									<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
-										<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
-									</div>
 									</div>
 								</div>
 							</div>
@@ -593,6 +654,7 @@
 	<div id="setlike-alert" style="display: none; position: absolute; background-color: white; color: #333; padding: 10px 20px; border-radius: 5px; z-index: 9999; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); font-size: 16px; border: 1px solid #ddd;">
 		찜에 등록되었습니다.
 	</div>
+
 	</section>
 	<!-- Product Details Section End -->
 
@@ -607,6 +669,10 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
+	
+<script>
+
+</script>
 </form>
 <iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>
 </body>

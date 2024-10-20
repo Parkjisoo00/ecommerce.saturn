@@ -20,10 +20,8 @@
  */
 package kr.co.bravomylife.backoffice.product.controller;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedList;
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;

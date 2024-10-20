@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.co.bravomylife.util.Datetime;
+// import kr.co.bravomylife.util.Datetime;
 import kr.co.bravomylife.common.dto.FileUploadDto;
 
 /**
@@ -192,12 +192,21 @@ public class FileUpload {
 	 */
 	public static String getFolderName(String pathBase) {
 		
+		/*
+		 * 원본 코드
 		String folderName	= Datetime.getNow("yyyy")
 								+ File.separator + Datetime.getNow("MM")
 								+ File.separator + Datetime.getNow("dd")
 								+ File.separator + Datetime.getNow("HH");
+		
 								
-		// String folderName	= Datetime.getNow("yyyyMMddHH");
+		String folderName	= Datetime.getNow("yyyyMMddHH");
+		
+		String pathSave		= pathBase + File.separator + folderName;
+		*/
+		
+		String folderName	= "";
+		
 		String pathSave		= pathBase + File.separator + folderName;
 		
 		File dirExists 	= new File(pathSave);

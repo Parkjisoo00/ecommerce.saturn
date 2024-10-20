@@ -20,6 +20,11 @@
  */
 package kr.co.bravomylife.front.sale.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -56,6 +61,8 @@ public class SaleSrvc {
 	@Transactional("txFront")
 	public boolean insertRate(SaleDto saleDto) {
 		try {
+			
+			saleDto.setSeq_rate(saleDao.rateSequence());
 			
 			int result = saleDao.rateInsert(saleDto);
 			
@@ -148,44 +155,7 @@ public class SaleSrvc {
 		}
 		return totalResult;
 	}
-	
-	
-	/*
-	@Transactional("txFront")
-	public boolean insertReview(SaleDto saleDto, SaleFileDto[] saleFileDto) {
 		
-		boolean totalResult = false;
-		
-		saleDto.setSeq_review(saleDao.sequence());
-		
-		try {
-			
-			int result = saleDao.insertReview(saleDto);
-			
-			if (result == 1) {
-				
-				for (SaleFileDto fileDto : saleFileDto) {
-					
-					fileDto.setSeq_sle(saleDto.getSeq_sle());
-					fileDto.setSeq_review(saleDto.getSeq_review());
-					
-					int reImgResult = saleDao.insertReviewFile(fileDto);
-					
-					if (reImgResult <= 0) {
-						
-						return false;
-					}
-				}
-				totalResult = true;
-			}
-		} catch (Exception e) {
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			return false;
-		}
-		return totalResult;
-	}
-	*/
-	
 	public SaleDto reviewCounts(SaleDto saleDto) {
 		
 		return saleDao.reviewCounts(saleDto);
@@ -246,9 +216,49 @@ public class SaleSrvc {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public PagingListDto mergeReviewAndImages(PagingListDto reviewListDto, PagingListDto reviewImgsDto) {
+		
+		List<SaleDto> reviewList = (List<SaleDto>) reviewListDto.getList();
+		List<SaleDto> reviewImgsList = (List<SaleDto>) reviewImgsDto.getList();
+		
+		Map<Integer, List<String>> imagesMap = new HashMap<>();
+		
+		for (SaleDto reviewImg : reviewImgsList) {
+			
+			int seqReview = reviewImg.getSeq_review();
+			String fileSave = reviewImg.getFile_save();
+			
+			if (!imagesMap.containsKey(seqReview)) {
+				
+				imagesMap.put(seqReview, new ArrayList<>());
+			}
+			
+			imagesMap.get(seqReview).add(fileSave);
+		}
+		
+		for (SaleDto review : reviewList) {
+			int seqReview = review.getSeq_review();
+			
+			List<String> images = imagesMap.get(seqReview);
+			
+			if (images != null) {
+				review.setImgs(images);
+			}
+		}
+		
+		PagingListDto mergedPagingListDto = new PagingListDto();
+		mergedPagingListDto.setPaging(reviewListDto.getPaging());
+		mergedPagingListDto.setList(reviewList);
+		
+		return mergedPagingListDto;
+	}
+	
 	public PagingListDto reviewList(PagingDto pagingDto) {
 		
 		PagingListDto pagingListDto = new PagingListDto();
+		
+		pagingDto.setLinePerPage(5);
 		
 		int totalLine = saleDao.reviewCount(pagingDto);
 		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
@@ -258,6 +268,24 @@ public class SaleSrvc {
 		
 		pagingListDto.setPaging(pagingDto);
 		pagingListDto.setList(saleDao.reviewList(pagingDto));
+		
+		return pagingListDto;
+	}
+	
+	public PagingListDto reviewListImgs(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		pagingDto.setLinePerPage(5);
+		
+		int totalLine = saleDao.reviewCount(pagingDto);
+		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(saleDao.reviewListImgs(pagingDto));
 		
 		return pagingListDto;
 	}

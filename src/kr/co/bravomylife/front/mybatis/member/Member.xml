@@ -2,6 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.member.Member">
 
+	<update id="pointUpdate" parameterType="buyMasterDto">
+		UPDATE
+			TB_MBR_MST
+		SET
+			TOTAL_POINT	= TOTAL_POINT + #{total_point}
+			, DT_UPT	= SYSDATE
+			, UPDATER	= #{seq_mbr}
+		WHERE
+			SEQ_MBR		= #{seq_mbr}
+	</update>
+	
+	<update id="useUpdate" parameterType="buyMasterDto">
+		UPDATE
+			TB_MBR_MST
+		SET
+			TOTAL_POINT	= TOTAL_POINT - #{use_point}
+			, DT_UPT	= SYSDATE
+			, UPDATER	= #{seq_mbr}
+		WHERE
+			SEQ_MBR		= #{seq_mbr}
+	</update>
+
 	<update id="withdraw" parameterType ="memberDto">
 		UPDATE
 			TB_MBR_MST
@@ -152,24 +174,13 @@
 			, dtl.ADDR2
 			, dtl.FLG_EMAIL
 			, dtl.FLG_SMS
-			, pt.TOTAL_POINT
+			, mst.TOTAL_POINT
 		FROM
 			TB_MBR_MST mst
 		INNER JOIN
 			TB_MBR_DTL dtl
 		ON
 			mst.SEQ_MBR = dtl.SEQ_MBR
-		LEFT OUTER JOIN (
-			SELECT
-				SEQ_MBR
-				, SUM(POINT) TOTAL_POINT
-			FROM
-				TB_MBR_PT
-			GROUP BY
-				SEQ_MBR
-		) pt
-			ON
-				mst.SEQ_MBR = pt.SEQ_MBR
 		WHERE
 			mst.SEQ_MBR = #{seq_mbr}
 	</select>
