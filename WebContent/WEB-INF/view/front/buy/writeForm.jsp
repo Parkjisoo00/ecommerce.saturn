@@ -213,20 +213,14 @@
 		frmMain.submit();
 	}
 		
-	function writeReview() {
+	function reviewListPage() {
 		
 		if (!isLogin) {
 			alert("로그인이 필요합니다.");
 			return;
 		}
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		var seq_sle			= document.getElementById("seq_sle").value;
-		var sle_nm			= document.getElementById("sle_nm").value;
-		var img				= document.getElementById("img").value;
-		
-		frmMain.action = "/front/buy/review.web";
+
+		frmMain.action = "/front/buy/reviewListPage.web";
 		frmMain.target = "";
 		frmMain.submit();
 	}
@@ -538,11 +532,20 @@
 								</div>
 							</div>
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
-								<div style="text-align: right; padding-bottom: 20px; border-bottom: 1px solid #707070">
-									<a href="javascript:writeReview();" class="cart-btn" style="font-size: 12px !important; font-weight: normal !important; cursor: pointer; background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c; margin: 0; padding: 5px 10px 5px !important;">
-										상품후기 쓰기
-									</a>
-								</div>
+								
+									<div style="text-align: right;">
+										<c:if test="${saleDto.flg_review == 'N'}">
+											<a href="javascript:reviewListPage();" class="cart-btn" style="font-size: 12px !important; font-weight: normal !important; cursor: pointer; background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c; margin: 0; padding: 5px 10px 5px !important;">
+												상품후기 쓰기
+											</a>
+										</c:if>
+										<c:if test="${saleDto.flg_review == 'Y'}">
+											<a href="javascript:reviewListPage();" class="cart-btn" style="font-size: 12px !important; font-weight: normal !important; cursor: pointer; background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c; margin: 0; padding: 5px 10px 5px !important;">
+												리뷰관리
+											</a>
+											<h6 class="cart-title" style="padding-bottom: 0px !important; margin-bottom: 0px !important; font-weight: normal !important;">*이미 등록된 상품후기가 있습니다. 리뷰관리로 이동합니다.</h6>
+										</c:if>
+									</div>
 								<div class="row">
 									<div class="col-lg-12 col-md-12" >
 									<c:choose>
@@ -553,9 +556,8 @@
 										</c:when>
 											<c:otherwise>
 												<c:forEach var="review" items="${reviewList}">
-												<div class="review-form" style="display: flex; flex-direction: column; border-top: 0px !important; margin: 0px !important; width: 100% !important; padding-bottom: 25px !important">
-												<input type="hidden" name="seq_sle" id="seq_sle" value="${review.seq_sle}"/>
-													<div class="review-title" style="border-bottom: 0px !important; border-top: 0px !important; padding-left: 0px !important; padding-top: 25px !important">
+												<div class="review-form" style="display: flex; flex-direction: column; border-top: 0px !important; margin: 0px !important; width: 100% !important; padding-bottom: 25px !important; margin-bottom: 20px !important">
+													<div class="review-title" style="border-bottom: 0px !important; border-top: 0px !important; padding-left: 0px !important; padding-top: 0px !important">
 														<div>
 															<span class="reviewsub" style="font-weight: bold !important; font-size: 14px !important;">${review.mbr_nm}</span>
 														</div>
@@ -612,7 +614,7 @@
 															<div class="review-name" style="border-bottom: 0px !important; padding-left: 0px !important; border-top: 0px !important; margin-top: 5px !important">
 															<c:choose>
 																<c:when test="${empty review.imgs}">
-																	<div class="photoreview" style="display: inline-block; padding: 15px 6px !important; padding-left: 0px !important; width: auto !important;">
+																	<div class="photoreview" style="display: inline-block; padding-bottom: 20px !important; padding-left: 0px !important; padding-top: 0px !important; width: auto !important;">
 																		<h6 class="cart-title" style="padding-bottom: 0px !important; margin-bottom: 0px !important; font-weight: normal !important;">*등록된 상품후기 이미지가 없습니다.</h6>
 																	</div>
 																</c:when>

@@ -2,6 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.sale.Sale">
 
+	<select id="reviewListPage" parameterType="saleDto" resultType="saleDto">
+		SELECT
+			sle.SLE_NM
+			, sle.IMG
+			, sle.CD_CTG_B
+			, sle.CD_CTG_M
+			, buy_dtl.SEQ_BUY_DTL
+			, buy_dtl.SEQ_SLE
+			, buy_dtl.COUNT
+			, TO_CHAR(buy_dtl.DT_REG, 'YYYY-MM-DD') dt_reg
+		FROM 
+			TB_SLE sle
+		JOIN 
+			TB_BUY_DTL buy_dtl
+		ON 
+			sle.SEQ_SLE = buy_dtl.SEQ_SLE
+			AND buy_dtl.SEQ_MBR = #{seq_mbr}
+		WHERE 
+			buy_dtl.SEQ_MBR = #{seq_mbr}
+			AND FLG_REVIEW = 'N'
+	</select>
+
 	<insert id="rateInsert" parameterType="saleDto">
 		INSERT INTO TB_RATE
 			(SEQ_RATE, SEQ_SLE, SEQ_MBR, COUNT, RATE_STAR, DT_REG, REGISTER, DT_UPT, UPDATER)
@@ -279,34 +301,30 @@
 	</sql>
 
 	<select id="select" parameterType="saleDto" resultType="saleDto">
-		SELECT
-			sle.SEQ_SLE
-			, sle.SLE_NM
-			, sle.DESCES
-			, NVL(sle.POINT_STACK, 0) POINT_STACK
-			, sle.IMG
-			, sle.PRICE_SALE
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
-			, (sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) * (sle.POINT_STACK / 100)) POINT_VALUE
-			, DECODE(sle.PRD_TYPE, 1, '액상', 2, '정', 3, '캡슐', 4, '베지캡슐', 5, '젤리', 6, '분말', 7, '츄어블', '미정') PRD_TYPE
-			, sle.CORP_NM
-			, sle.cd_ctg_m
-			, sle.cd_ctg_b
-			, sle.DISCOUNT
-			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
-			, sle.COUNT_STOCK
-			, rate_summary.total_count
-			, ROUND(CASE 
-				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
-				ELSE 0
-			END, 0) star
-			, best.FLG_BEST
-		<if test="seq_mbr != null and seq_mbr != ''">
-			, likeTbl.FLG_LIKE
-		</if>
-		FROM
-			TB_SLE sle
-		LEFT OUTER JOIN (
+		WITH sle_base AS (
+			SELECT
+				sle.SEQ_SLE
+				, sle.SLE_NM
+				, sle.DESCES
+				, NVL(sle.POINT_STACK, 0) POINT_STACK
+				, sle.IMG
+				, sle.PRICE_SALE
+				, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+				, (sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) * (sle.POINT_STACK / 100)) POINT_VALUE
+				, DECODE(sle.PRD_TYPE, 1, '액상', 2, '정', 3, '캡슐', 4, '베지캡슐', 5, '젤리', 6, '분말', 7, '츄어블', '미정') PRD_TYPE
+				, sle.CORP_NM
+				, sle.cd_ctg_m
+				, sle.cd_ctg_b
+				, sle.DISCOUNT
+				, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
+				, sle.COUNT_STOCK
+			FROM
+				TB_SLE sle
+			WHERE
+				sle.SEQ_SLE = #{seq_sle}
+				AND sle.CD_STATE_SALE = 2
+		),
+		rate_summary AS (
 			SELECT
 				SEQ_SLE
 				, SUM(RATE_STAR) total_star_rate
@@ -315,23 +333,69 @@
 				TB_RATE
 			GROUP BY
 				SEQ_SLE
-		) rate_summary
+		),
+		buy_dtl AS (
+			SELECT
+				SEQ_SLE
+				, SEQ_MBR
+				, MAX(FLG_REVIEW) AS FLG_REVIEW
+			FROM
+				TB_BUY_DTL
+			WHERE
+				SEQ_SLE = #{seq_sle}
+				AND SEQ_MBR = #{seq_mbr}
+			GROUP BY
+				SEQ_SLE
+				, SEQ_MBR
+		)
+		SELECT
+			base.SEQ_SLE
+			, base.SLE_NM
+			, base.DESCES
+			, base.POINT_STACK
+			, base.IMG
+			, base.PRICE_SALE
+			, base.discount_sale
+			, base.POINT_VALUE
+			, base.PRD_TYPE
+			, base.CORP_NM
+			, base.cd_ctg_m
+			, base.cd_ctg_b
+			, base.DISCOUNT
+			, base.dt_reg
+			, base.COUNT_STOCK
+			, rate_summary.total_count
+			, ROUND(CASE 
+				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
+				ELSE 0
+			END, 0) star
+			, best.FLG_BEST
+			<if test="seq_mbr != null and seq_mbr != ''">
+			, likeTbl.FLG_LIKE
+			, buy_dtl.FLG_REVIEW
+			</if>
+		FROM
+			sle_base base
+		LEFT OUTER JOIN
+			rate_summary
 		ON
-			sle.SEQ_SLE				= rate_summary.SEQ_SLE
+			base.SEQ_SLE = rate_summary.SEQ_SLE
 		LEFT OUTER JOIN
 			TB_BEST best
 		ON
-			sle.SEQ_SLE				= best.SEQ_SLE
+			base.SEQ_SLE = best.SEQ_SLE
 		<if test="seq_mbr != null and seq_mbr != ''">
-			LEFT OUTER JOIN
-				TB_LIKE likeTbl
-			ON
-				sle.SEQ_SLE			= likeTbl.SEQ_SLE
-				AND likeTbl.SEQ_MBR = #{seq_mbr}
+		LEFT OUTER JOIN
+			TB_LIKE likeTbl
+		ON
+			base.SEQ_SLE = likeTbl.SEQ_SLE
+			AND likeTbl.SEQ_MBR = #{seq_mbr}
+		LEFT OUTER JOIN
+			buy_dtl
+		ON
+			base.SEQ_SLE = buy_dtl.SEQ_SLE
+			AND buy_dtl.SEQ_MBR = #{seq_mbr}
 		</if>
-		WHERE
-			sle.SEQ_SLE				= #{seq_sle}
-			AND sle.CD_STATE_SALE	= 2
 	</select>
 
 	<select id="totalCount" parameterType="pagingDto" resultType="java.lang.Integer">

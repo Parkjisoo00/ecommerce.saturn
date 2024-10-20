@@ -116,6 +116,8 @@ public class PayWeb extends Common {
 			String deal_num = (String) apiResult.get("transactionId");
 			boolean isResult = true;
 			
+			logger.debug("deal_num 확인" + deal_num);
+			
 			if ("0000".equals(apiResult.get("responseCode"))) {
 				
 				// logger.info("[" + this.getClass().getName() + ".pay().RES.SUCCESS] " + apiResult.toString());

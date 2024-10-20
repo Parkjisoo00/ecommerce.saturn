@@ -36,6 +36,7 @@ import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.sale.dao.SaleDao;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
 import kr.co.bravomylife.front.sale.dto.SaleFileDto;
+import kr.co.bravomylife.front.sale.dto.SaleListDto;
 
 /**
  * @version 1.0.0
@@ -51,12 +52,15 @@ public class SaleSrvc {
 	@Inject
 	SaleDao saleDao;
 	
-	/*
-	for (int loop = 0; loop < saleFileDto.length; loop++) {
+	public SaleListDto reviewListPage(SaleDto saleDto) {
 		
-		saleSrvc.insert(saleFileDto[loop]);
+		SaleListDto saleListDto = new SaleListDto();
+		
+		saleListDto.setSale(saleDto);
+		saleListDto.setList(saleDao.reviewListPage(saleDto));
+		
+		return saleListDto;
 	}
-	*/
 	
 	@Transactional("txFront")
 	public boolean insertRate(SaleDto saleDto) {

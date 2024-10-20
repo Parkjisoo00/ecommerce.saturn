@@ -50,6 +50,7 @@ import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
 import kr.co.bravomylife.front.sale.dto.SaleFileDto;
+import kr.co.bravomylife.front.sale.dto.SaleListDto;
 import kr.co.bravomylife.front.sale.service.SaleSrvc;
 import kr.co.bravomylife.util.security.SKwithAES;
 
@@ -192,13 +193,64 @@ public class BuyWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/front/buy/reviewListPage.web")
+	public ModelAndView reviewListPage(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			saleDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			SaleListDto saleListDto = saleSrvc.reviewListPage(saleDto);
+			
+			List<SaleDto> saleList = (List<SaleDto>) saleListDto.getList();
+			
+			for (SaleDto dto : saleList) {
+				logger.debug("SLE_NM : " + dto.getSle_nm());
+				logger.debug("IMG : " + dto.getImg());
+				logger.debug("CD_CTG_B : " + dto.getCd_ctg_b());
+				logger.debug("CD_CTG_M : " + dto.getCd_ctg_m());
+				logger.debug("SEQ_BUY_DTL : " + dto.getSeq_buy_dtl());
+				logger.debug("SEQ_SLE : " + dto.getSeq_sle());
+				logger.debug("COUNT : " + dto.getCount());
+				logger.debug("DT_REG : " + dto.getDt_reg());
+			}
+			
+			// 원하는 데이터를 가지고 오는 것 까지 확인
+			
+			mav.addObject("sale"	, saleListDto.getSale());
+			mav.addObject("list", saleListDto.getList());
+			
+			mav.setViewName("front/buy/reviewList");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".reviewListPage()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-010-17
+	 * <p>DESCRIPTION: 리뷰 관리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
 	@RequestMapping(value = "/front/buy/review.web")
 	public ModelAndView review(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			
+						
 			mav.addObject("saleDto", saleDto);
 			mav.setViewName("front/buy/review");
 		}

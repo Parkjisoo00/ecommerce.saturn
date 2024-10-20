@@ -74,11 +74,26 @@ public class SaleDto {
 	private int seq_rate			= 0;
 	private int mbr_rate_star		= 0;
 	private List<String> imgs		= null;	
+	private String flg_review		= "";
+	private int seq_buy_dtl			= 0;
+	
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
+	public int getSeq_buy_dtl() {
+		return seq_buy_dtl;
+	}
+	public void setSeq_buy_dtl(int seq_buy_dtl) {
+		this.seq_buy_dtl = seq_buy_dtl;
+	}
+	public String getFlg_review() {
+		return flg_review;
+	}
+	public void setFlg_review(String flg_review) {
+		this.flg_review = flg_review;
+	}
 	public List<String> getImgs() {
 		return imgs;
 	}
