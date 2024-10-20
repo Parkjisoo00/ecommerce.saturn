@@ -74,30 +74,13 @@ public class ProductWeb {
 	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/backoffice/product/productRegProc.web")
-	public ModelAndView productProc(HttpServletRequest request, HttpServletResponse response, ProductDto productDto, FileUploadDto fileUploadDto) {
+	public ModelAndView writeProc(HttpServletRequest request, HttpServletResponse response, ProductDto productDto, FileUploadDto fileUploadDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		String message	= "";
 		
 		try {
-			//productDto.setRegister(Integer.parseInt(getSession(request, "SEQ_SLE")));
-			
-			/*
-			String categoryB = request.getParameter("cd_ctg_b");
-			
-			if (categoryB != null && !categoryB.isEmpty()) {
-				productDto.setCd_ctg_b(categoryB); // DTO에 설정
-			}
-
-			// cd_ctg_m 값을 String으로 받아오기
-			String categoryM = request.getParameter("cd_ctg_m");
-			
-			if (categoryM != null && !categoryM.isEmpty()) {
-				productDto.setCd_ctg_m(categoryM); // DTO에 설정
-			}
-			*/
-			
 			//파일이 저장될 기본 경로를 가져온다
 			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_product", "[UNDEFINED]");
 			//업로드 가능한 파일의 최대 크기
@@ -125,36 +108,27 @@ public class ProductWeb {
 				@SuppressWarnings("unchecked")
 				Hashtable<String, String> hashtable	= (Hashtable<String, String>)uploadResult.getLast();
 				
-				//String fileNameSrc	= "";
-				//String fileNameSve	= "";
-				//String fileSize		= "";
-				//@SuppressWarnings("unused")
-				//long totalSize		= 0;
-				
 				//파일 정보 처리 및 DTO 설정
 				
-				if (countFile > 1) { // 두 개 이상의 파일이 있을 경우
-				// 첫 번째 파일의 원본 파일명
-				String firstFileNameSrc = (String)hashtable.get("files[0]_fileSrcName"); // 첫 번째 원본 파일명
-				String firstFileNameSve = firstFileNameSrc; // 첫 번째 파일명으로 저장
-				// 첫 번째 파일 사이즈
-				//String firstFileSize = (String)hashtable.get("files[0]_fileSveSize");
+				if (countFile == 2) { // 파일 개수가 2개일 경우
+					// 첫 번째 파일의 원본 파일명
+					
+					String firstFileNameSrc = (String) hashtable.get("files[0]_fileSrcName"); // 첫 번째 원본 파일명
+					String firstFileNameSve = firstFileNameSrc; // 첫 번째 파일명으로 저장
 
-				// 첫 번째 파일 정보 설정
-				fileDto[0] = new FileDto();
-				fileDto[0].setFileNameOriginal(firstFileNameSrc); // 첫 번째 원본명 설정
-				fileDto[0].setFileNameSave(firstFileNameSve); // 첫 번째 저장명 설정 (원본명으로)
+					// 첫 번째 파일 정보 설정
+					fileDto[0] = new FileDto();
+					fileDto[0].setFileNameOriginal(firstFileNameSrc); // 첫 번째 원본명 설정
+					fileDto[0].setFileNameSave(firstFileNameSve); // 첫 번째 저장명 설정 (원본명으로)
 
-				// 두 번째 파일의 원본 파일명
-				String secondFileNameSrc = (String)hashtable.get("files[1]_fileSrcName"); // 두 번째 원본 파일명
-				String secondFileNameSve = secondFileNameSrc; // 두 번째 파일명으로 저장
-				// 두 번째 파일 사이즈
-				//String secondFileSize = (String)hashtable.get("files[1]_fileSveSize");
+					// 두 번째 파일의 원본 파일명
+					String secondFileNameSrc = (String) hashtable.get("files[1]_fileSrcName"); // 두 번째 원본 파일명
+					String secondFileNameSve = secondFileNameSrc; // 두 번째 파일명으로 저장
 
-				// 두 번째 파일 정보 설정
-				fileDto[1] = new FileDto();
-				fileDto[1].setFileNameOriginal(secondFileNameSrc); // 두 번째 원본명 설정
-				fileDto[1].setFileNameSave(secondFileNameSve); // 두 번째 저장명 설정 (원본명으로)
+					// 두 번째 파일 정보 설정
+					fileDto[1] = new FileDto();
+					fileDto[1].setFileNameOriginal(secondFileNameSrc); // 두 번째 원본명 설정
+					fileDto[1].setFileNameSave(secondFileNameSve); // 두 번째 저장명 설정 (원본명으로)
 
 				// 상품 DTO에 파일 정보 설정
 				productDto.setImg(fileDto[0].getFileNameOriginal()); // 첫 번째 이미지
