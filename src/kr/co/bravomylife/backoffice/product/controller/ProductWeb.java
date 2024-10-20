@@ -74,7 +74,7 @@ public class ProductWeb {
 	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/backoffice/product/productRegProc.web")
-	public ModelAndView productRegProc(HttpServletRequest request, HttpServletResponse response, ProductDto productDto, FileUploadDto fileUploadDto) {
+	public ModelAndView productProc(HttpServletRequest request, HttpServletResponse response, ProductDto productDto, FileUploadDto fileUploadDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		

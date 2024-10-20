@@ -262,7 +262,7 @@
 										[필수] '브라보 마이 라이프' 이용 약관 동의
 										<div class="terms-container"
 											style="border: 1px solid #ccc; padding: 10px; margin-top: 5px; max-height: 100px; overflow-y: auto;">
-											제1장 총칙<br>제 1 조 (목적)<br>이 약관은 쿠팡 주식회사(이하 “회사”)가 운영하는 사이버몰에서 제공하는
+											제1장 총칙<br>제 1 조 (목적)<br>이 약관은 브라보 마이 라이프(이하 “회사”)가 운영하는 사이버몰에서 제공하는
 											서비스와 이를 이용하는 회원의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
 										</div>
 									</div>
@@ -274,7 +274,7 @@
 										[필수] 개인정보 수집 및 이용동의
 										<div class="terms-container"
 											style="border: 1px solid #ccc; padding: 10px; margin-top: 5px; max-height: 100px; overflow-y: auto;">
-											제1장 총칙<br>제 1 조 (목적)<br>이 약관은 쿠팡 주식회사(이하 “회사”)가 운영하는 사이버몰에서 제공하는
+											제1장 총칙<br>제 1 조 (목적)<br>이 약관은 브라보 마이 라이프(이하 “회사”)가 운영하는 사이버몰에서 제공하는
 											서비스와 이를 이용하는 회원의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
 										</div>
 									</div>
@@ -286,7 +286,7 @@
 										[선택] 개인정보 제3자 제공 동의
 										<div class="terms-container"
 											style="border: 1px solid #ccc; padding: 10px; margin-top: 5px; max-height: 100px; overflow-y: auto;">
-											제1장 총칙<br>제 1 조 (목적)<br>이 약관은 쿠팡 주식회사(이하 “회사”)가 운영하는 사이버몰에서 제공하는
+											제1장 총칙<br>제 1 조 (목적)<br>이 약관은 브라보 마이 라이프(이하 “회사”)가 운영하는 사이버몰에서 제공하는
 											서비스와 이를 이용하는 회원의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
 										</div>
 									</div>

@@ -42,7 +42,9 @@
 						<h5 >회원 아이디 찾기</h5>
 						<div class="row">
 							<div class="col-lg-12 col-md-6 col-sm-6">
-								<p style="font-size: 20px;">회원님의 이메일은: ${findId.email} 입니다</p>
+								<p style="font-size: 20px;">회원님의 이메일은: 
+									<bravomylifeTag:masking text="${findId.email}" letter="*" count="3" mode="left" />입니다
+								</p>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6" style="padding-left: 8px; padding-right: 8px;">
 								<div class="checkout__form__input">
