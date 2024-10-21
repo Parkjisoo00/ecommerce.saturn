@@ -74,8 +74,8 @@ alert("평점 확인" + value);
 				<div class="row">
 					<div class="col-lg-12 col-md-12" >
 						<div class="review-form" style="height: 100% !important; display: flex; flex-direction: column;">
-							<input type="hidden" name="seq_sle"				id="seq_sle"		value="${.seq_sle}"/>
-							<input type="hidden" name="seq_buy_dtl"			id="seq_buy_dtl"	value="${.seq_buy_dtl}"/>
+							<input type="hidden" name="seq_sle"				id="seq_sle"		value="${saleDto.seq_sle}"/>
+							<input type="hidden" name="seq_buy_dtl"			id="seq_buy_dtl"	value="${saleDto.seq_buy_dtl}"/>
 							<div class="review-title" style="border-bottom: 0px !important; border-top: 0px !important; padding-bottom: 25px !important">
 								<div>
 									<img src="/img/review/review.png" style="height: 26px !important;"><span class="reviewtitle">상품 후기</span>
@@ -86,11 +86,11 @@ alert("평점 확인" + value);
 							</div>
 							<div class="review-name" style="border-bottom: 0px !important;">
 								<div class="photoreview" style="padding: 20px 10px !important;">
-					이미지				<img src="${.img}" style="height: 100px !important; ">
+									<img src="${saleDto.img}" style="height: 100px !important; ">
 								</div>
 								<div class="product-name" style="flex-grow: 1; padding-right: 0px !important">
 									<div class="product-name" style="padding: 0px !important; padding-top: 20px !important; font-weight: bold !important;">
-					상품 이름			${.sle_nm}
+										${saleDto.sle_nm}, ${saleDto.count}개
 									</div>
 									<div class="product-name" style="padding: 0px !important;">
 										<div class="rating">

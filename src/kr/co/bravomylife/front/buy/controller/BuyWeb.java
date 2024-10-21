@@ -146,9 +146,8 @@ public class BuyWeb extends Common {
 					
 					// totalSize += Long.parseLong(fileSize);
 				}
-					
+				
 				boolean result = false;
-				boolean resultRate = false;
 				
 				if (countFile > 0) {
 					
@@ -158,10 +157,6 @@ public class BuyWeb extends Common {
 					result = saleSrvc.insertText(saleDto);
 				}
 				if (result) {
-					
-					resultRate = saleSrvc.insertRate(saleDto);
-				}
-				if (resultRate) {
 					
 					request.setAttribute("script", "alert('상품 후기가 등록되었습니다.');");
 					request.setAttribute("redirect", "/");
@@ -250,8 +245,12 @@ public class BuyWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-						
-			mav.addObject("saleDto", saleDto);
+			
+			saleDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			SaleDto _saleDto = saleSrvc.review(saleDto);
+			
+			mav.addObject("saleDto", _saleDto);
 			mav.setViewName("front/buy/review");
 		}
 		catch (Exception e) {

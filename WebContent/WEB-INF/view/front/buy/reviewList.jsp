@@ -20,6 +20,18 @@
 		frmMain.action="/front/buy/writeForm.web";
 		frmMain.submit();
 	}
+	
+	function review(value, value2, value3, value4) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.seq_sle.setAttribute("value", value);
+		frmMain.cd_ctg_m.setAttribute("value", value2);
+		frmMain.cd_ctg_b.setAttribute("value", value3);
+		frmMain.seq_buy_dtl.setAttribute("value", value4);
+		frmMain.action="/front/buy/review.web";
+		frmMain.submit();
+	}
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -37,6 +49,7 @@ alert("평점 확인" + value);
 <input type="hidden" name="seq_sle"			id="seq_sle"/>
 <input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>
 <input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
+<input type="hidden" name="seq_buy_dtl"		id="seq_buy_dtl" value="0"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -76,7 +89,6 @@ alert("평점 확인" + value);
 							<c:otherwise>
 								<c:forEach var="list" items="${list}">
 										<div class="review-name" style="border-bottom: 0px !important; padding: 20px 20px 20px 30px !important;">
-											<input type="hidden" name="seq_buy_dtl"		id="seq_buy_dtl"	value="${list.seq_buy_dtl}"/>
 											<div class="photoreview" style="padding: 0px !important;">
 												<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
 													<img src="${list.img}" style="height: 100px !important;">
@@ -95,7 +107,7 @@ alert("평점 확인" + value);
 													</div>
 												</div>
 												<div style="display: flex; justify-content: flex-end; align-items: center; gap: 10px;">
-													<a href="javascript:#();" class="cart-btn" style="border-radius: 0px !important; background: white; color: #346aff !important; border: 1px solid #346aff !important; margin: 0; padding: 7px 7px 7px !important;">
+													<a href="javascript:review('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}', '${list.seq_buy_dtl}');" class="cart-btn" style="border-radius: 0px !important; background: white; color: #346aff !important; border: 1px solid #346aff !important; margin: 0; padding: 7px 7px 7px !important;">
 														후기 작성하기
 													</a>
 												</div>
