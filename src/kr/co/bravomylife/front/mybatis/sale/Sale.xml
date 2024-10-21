@@ -241,6 +241,8 @@
 			, TO_CHAR(review.DT_REG, 'YYYY-MM-DD') dt_reg
 			, mbr.MBR_NM
 			, rate.RATE_STAR AS mbr_rate_star
+			, dtl.SLE_NM
+			, dtl.COUNT
 		FROM
 			TB_SLE sle
 		LEFT JOIN
@@ -255,6 +257,12 @@
 			TB_RATE rate
 		ON
 			rate.SEQ_REVIEW = review.SEQ_REVIEW
+		LEFT JOIN
+			TB_BUY_DTL dtl
+		ON
+			dtl.SEQ_REVIEW = review.SEQ_REVIEW
+			AND dtl.SEQ_SLE = review.SEQ_SLE
+			AND dtl.SEQ_MBR = review.SEQ_MBR
 		WHERE
 		<include refid="reviewwhere" />
 		)

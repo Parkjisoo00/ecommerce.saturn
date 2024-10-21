@@ -107,7 +107,8 @@ public class BuySrvc {
 			
 			result += buyDao.insertDetail(listBuyDetailDto.get(loop));
 			result += buyDao.updateCountStock(listBuyDetailDto.get(loop));
-			result += buyDao.updateBasket(listBuyDetailDto.get(loop));
+			
+			buyDao.updateBasket(listBuyDetailDto.get(loop));
 			/*
 			check += buyDao.checkBasket(listBuyDetailDto.get(loop));
 			
@@ -128,7 +129,7 @@ public class BuySrvc {
 		payDto.setRegister(buyMasterDto.getSeq_mbr());
 		result += payDao.insert(payDto);
 		
-		if (result == 1 + listBuyDetailDto.size() + listBuyDetailDto.size() + listBuyDetailDto.size() + 1) return true;
+		if (result == 1 + listBuyDetailDto.size() + listBuyDetailDto.size() + 1) return true;
 		else {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return false;

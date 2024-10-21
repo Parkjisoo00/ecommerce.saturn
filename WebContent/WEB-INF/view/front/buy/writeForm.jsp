@@ -384,7 +384,7 @@
 								</li>
 								<li>
 									<div>
-									<span class="pd-title">재고</span>
+									<span class="pd-title">수량</span>
 										<label for="stockin" class="pd-label">
 											${saleDto.count_stock}
 										</label>
@@ -612,7 +612,7 @@
 																	</div>
 																</div>
 																<div style="margin-top: 10px !important;">
-																	<span class="reviewsub" style="font-size: 12px !important;">${review.sle_nm}</span>
+																	<span class="reviewsub" style="font-size: 12px !important;">${review.sle_nm}, ${review.count}개</span>
 																</div>
 															</div>
 															<div class="review-name" style="border-bottom: 0px !important; padding-left: 0px !important; border-top: 0px !important; margin-top: 5px !important">

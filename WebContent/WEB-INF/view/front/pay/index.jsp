@@ -298,13 +298,12 @@
 	</c:forEach>
 	<script>
 	$(document).ready(function () {
-		
 		var totalPriceSum = Number($('#totalPriceSum').val());
 		var totalPoint = Number($('#totalPoint').text());
 		var pointInput = $('#pointInput');
 		var finalAmountCell = $('#finalAmountCell');
 		
-		pointInput.on('input keydown', function (event) {
+		pointInput.on('input', function () {
 			
 			let inputValue = Number($(this).val());
 			
@@ -314,28 +313,20 @@
 				alert('유효한 포인트를 입력해주세요.');
 				return;
 			}
-			
-			if (event.key === 'Enter') {
+			if (inputValue > totalPoint) {
 				
-				event.preventDefault();
-				
-				if (inputValue > totalPoint) {
-					
-					alert('보유한 포인트보다 큰 값을 입력할 수 없습니다.');
-					inputValue = totalPoint;
-					$(this).val(totalPoint);
-				}
-				
-				if (inputValue > totalPriceSum) {
-					
-					alert('사용할 포인트는 총 상품 금액을 초과할 수 없습니다.');
-					inputValue = totalPriceSum;
-					$(this).val(totalPriceSum);
-				}
-				
-				let finalPrice = totalPriceSum - inputValue;
-				finalAmountCell.text(finalPrice.toLocaleString() + '원');
+				alert('보유한 포인트보다 큰 값을 입력할 수 없습니다.');
+				inputValue = totalPoint;
+				$(this).val(totalPoint); // 최대 보유 포인트로 설정
 			}
+			if (inputValue > totalPriceSum) {
+				
+				alert('사용할 포인트는 총 상품 금액을 초과할 수 없습니다.');
+				inputValue = totalPriceSum;
+				$(this).val(totalPriceSum);
+			}
+			let finalPrice = totalPriceSum - inputValue;
+			finalAmountCell.text(finalPrice.toLocaleString() + '원');
 		});
 	});
 </script>
