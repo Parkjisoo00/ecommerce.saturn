@@ -190,8 +190,10 @@
 		var point_stack		= document.getElementById("point_stack").value;
 		var cd_ctg_m		= document.getElementById("cd_ctg_m").value;
 		var cd_ctg_b		= document.getElementById("cd_ctg_b").value;
+		var price_sale		= document.getElementById("price_sale").value;
+		var discount		= document.getElementById("discount").value;
 		
-		var item = seq_sle + "|" + sle_nm + "|" + discount_sale + "|" + count + "|" + img + "|" + point_stack + "|" + cd_ctg_m + "|" + cd_ctg_b;
+		var item = seq_sle + "|" + sle_nm + "|" + discount_sale + "|" + count + "|" + img + "|" + point_stack + "|" + cd_ctg_m + "|" + cd_ctg_b + "|" + price_sale + "|" + discount;
 		document.getElementById("item").value = item;
 		
 		var frmMain = document.getElementById("frmMain");
@@ -251,7 +253,9 @@
 <input type="hidden" name="seq_sle"				id="seq_sle"		value="${saleDto.seq_sle}"/>
 <input type="hidden" name="sle_nm"				id="sle_nm"			value="${saleDto.sle_nm}"/>
 <input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"		value="${saleDto.cd_ctg_m}"/>
-<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"		value="${saleDto.cd_ctg_b}"/>
+<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"		value="${saleDto.cd_ctg_b}"/>\
+<input type="hidden" name="price_sale"			id="price_sale"		value="${saleDto.price_sale}"/>
+<input type="hidden" name="discount"			id="discount"		value="${saleDto.discount}"/>
 <input type="hidden" name="corp_nm"				id="corp_nm"		value="${saleDto.corp_nm}"/>
 <input type="hidden" name="prd_type"			id="prd_type"		value="${saleDto.prd_type}"/>
 <input type="hidden" name="filter"				id="filter">

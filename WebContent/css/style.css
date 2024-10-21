@@ -494,6 +494,17 @@ table.headTop_pd th, table.headTop_pd td {
 	display: inline-block;
 }
 
+.discount-rate {
+	padding: 2px 4px 1px !important;
+	background: #e12705 !important;
+	border-radius: 4px !important;
+	color: #fff !important;
+	font-size: 11px !important;
+	font-weight: 700 !important;
+	line-height: 13px !important;
+	font-family: Dotum, \\B3CB\C6C0, sans-serif !important;
+}
+
 .cart-img {
 	width: 100%;
 	height: 100%;

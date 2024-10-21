@@ -92,7 +92,7 @@ public class BuySrvc {
 			
 		int result = 0;
 		
-		int check = 0;
+		// int check = 0;
 		
 		// 구매 마스터 정보
 		buyMasterDto.setSeq_buy_mst(buyDao.sequenceMaster());
@@ -106,13 +106,17 @@ public class BuySrvc {
 			listBuyDetailDto.get(loop).setRegister(buyMasterDto.getRegister());
 			
 			result += buyDao.insertDetail(listBuyDetailDto.get(loop));
-			
+			result += buyDao.updateCountStock(listBuyDetailDto.get(loop));
+			result += buyDao.updateBasket(listBuyDetailDto.get(loop));
+			/*
 			check += buyDao.checkBasket(listBuyDetailDto.get(loop));
+			
 			
 			if (check == listBuyDetailDto.size()) {
 				
 				buyDao.updateBasket(listBuyDetailDto.get(loop));
 			}
+			*/
 		}
 		
 		// 결제 정보
@@ -124,7 +128,7 @@ public class BuySrvc {
 		payDto.setRegister(buyMasterDto.getSeq_mbr());
 		result += payDao.insert(payDto);
 		
-		if (result == 1 + listBuyDetailDto.size() + 1) return true;
+		if (result == 1 + listBuyDetailDto.size() + listBuyDetailDto.size() + listBuyDetailDto.size() + 1) return true;
 		else {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return false;

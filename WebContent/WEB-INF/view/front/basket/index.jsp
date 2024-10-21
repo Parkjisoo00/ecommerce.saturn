@@ -322,8 +322,15 @@
 													</div>
 												</td>
 												<td class="cart-td">
-													<fmt:formatNumber value="${list.price}" type="number" />원
-													<input type="hidden" name="buyList[${status.index}].price" value="${list.price}">
+													<div>
+														<span style="font-size: 16px !important;"><fmt:formatNumber value="${list.price}" type="number" />원</span>
+														<input type="hidden" name="buyList[${status.index}].price" value="${list.price}">
+													</div>
+													<c:if test="${list.discount != null && list.discount != 0}">
+													<div>
+														<span class="discount-rate">${list.discount}% 할인</span> <span style="font-family: Dotum, \\B3CB\C6C0, sans-serif !important; font-size: 13px !important; text-decoration: line-through !important; color: #b1b0b0 !important;"><fmt:formatNumber value="${list.price_sale}" type="number" /></span>
+													</div>
+													</c:if>
 												</td>
 												<td class="cart-td">
 													<span style="color: #346aff !important;"><fmt:formatNumber value="${list.point_value}" type="number" /></span>포인트
@@ -366,7 +373,7 @@
 							</span>
 						</p>
 						<p>
-							<span style="font-size: 14px; color: #ff4c2e;">적립 예정 포인트 : </span><span id="totalPoints" style="font-size: 14px; color: #ff4c2e;"></span>
+							<span style="font-size: 14px; color: #ff4c2e;">적립 포인트 : </span><span id="totalPoints" style="font-size: 14px; color: #ff4c2e;"></span>
 						</p>
 					</div>
 					<div style="display: flex; justify-content: flex-end;">

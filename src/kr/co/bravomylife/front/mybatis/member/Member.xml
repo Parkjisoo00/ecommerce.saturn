@@ -6,7 +6,7 @@
 		UPDATE
 			TB_MBR_MST
 		SET
-			TOTAL_POINT	= TOTAL_POINT + #{total_point}
+			TOTAL_POINT = NVL(TOTAL_POINT, 0) + #{total_point}
 			, DT_UPT	= SYSDATE
 			, UPDATER	= #{seq_mbr}
 		WHERE

@@ -39,6 +39,7 @@ public class BasketDto {
 	private int point_stack				= 0;
 	private int total_price				= 0;
 	private int total_point				= 0;
+	private int price_sale				= 0;
 	private String img					= "";
 	private String dt_reg				= "";
 	private String dt_upt				= "";
@@ -50,7 +51,21 @@ public class BasketDto {
 	private int total_price_sum			= 0;
 	private int total_point_sum			= 0;
 	private int point_value				= 0;
+	private int discount				= 0;
 	
+	
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+	public int getPrice_sale() {
+		return price_sale;
+	}
+	public void setPrice_sale(int price_sale) {
+		this.price_sale = price_sale;
+	}
 	public int getPoint_value() {
 		return point_value;
 	}

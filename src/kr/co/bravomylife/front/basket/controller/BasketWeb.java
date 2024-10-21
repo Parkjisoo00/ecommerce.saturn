@@ -144,6 +144,8 @@ public class BasketWeb extends Common {
 			basketDto.setPoint_stack(Integer.parseInt(arrBasket[5]));
 			basketDto.setCd_ctg_m(arrBasket[6]);
 			basketDto.setCd_ctg_b(arrBasket[7]);
+			basketDto.setPrice_sale(Integer.parseInt(arrBasket[8]));
+			basketDto.setDiscount(Integer.parseInt(arrBasket[9]));
 			
 			if (basketSrvc.insert(basketDto)) {
 				request.setAttribute("script", "alert('장바구니에 저장되었습니다');");
@@ -214,6 +216,8 @@ public class BasketWeb extends Common {
 				formattedItem.setCd_ctg_b(item.getCd_ctg_b());
 				formattedItem.setTotal_price(item.getTotal_price());
 				formattedItem.setDt_reg(item.getDt_reg());
+				formattedItem.setDiscount(item.getDiscount());
+				formattedItem.setPrice_sale(item.getPrice_sale());
 				
 				formattedItem.setFormat_total_price(formatter.format(item.getTotal_price()));
 				formattedItem.setFormat_total_point(formatter.format(item.getTotal_point()));

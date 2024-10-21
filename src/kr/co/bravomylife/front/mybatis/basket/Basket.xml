@@ -53,9 +53,11 @@
 		UPDATE
 			TB_BSK
 		SET
-			PRICE			= PRICE + #{price}
+			PRICE			= #{price}
 			, COUNT			= COUNT + #{count}
 			, POINT_STACK	= #{point_stack}
+			, PRICE_SALE	= #{price_sale}
+			, DISCOUNT		= #{discount}
 			, DT_UPT		= SYSDATE
 		WHERE
 			SEQ_MBR			= #{seq_mbr}
@@ -65,9 +67,9 @@
 
 	<insert id="insert" parameterType="basketDto">
 		INSERT INTO TB_BSK
-			(SEQ_BSK, SEQ_MBR, SEQ_SLE, SLE_NM, PRICE, COUNT, IMG, POINT_STACK, CD_CTG_M, CD_CTG_B, FLG_DELETE, DT_REG, DT_UPT)
+			(SEQ_BSK, SEQ_MBR, SEQ_SLE, SLE_NM, PRICE, COUNT, IMG, POINT_STACK, CD_CTG_M, CD_CTG_B, PRICE_SALE, DISCOUNT, FLG_DELETE, DT_REG, DT_UPT)
 		VALUES
-			(SQ_SEQ_BSK.NEXTVAL, #{seq_mbr}, #{seq_sle}, #{sle_nm}, #{price}, #{count}, #{img}, #{point_stack}, #{cd_ctg_m}, #{cd_ctg_b}, 'N', SYSDATE, NULL)
+			(SQ_SEQ_BSK.NEXTVAL, #{seq_mbr}, #{seq_sle}, #{sle_nm}, #{price}, #{count}, #{img}, #{point_stack}, #{cd_ctg_m}, #{cd_ctg_b}, #{price_sale}, #{discount}, 'N', SYSDATE, NULL)
 	</insert>
 
 	<select id="insertCheck" parameterType="basketDto" resultType="java.lang.Integer">
@@ -137,6 +139,8 @@
 			, PRICE * (POINT_STACK / 100) POINT_VALUE
 			, CD_CTG_M
 			, CD_CTG_B
+			, PRICE_SALE
+			, DISCOUNT
 			, (PRICE * COUNT) TOTAL_PRICE
 			, (PRICE * (POINT_STACK / 100) * COUNT) TOTAL_POINT
 			, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg

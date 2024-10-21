@@ -45,6 +45,10 @@ public class BuyDao extends BaseDao {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.basket.Basket.updateBasket", buyDetailDto);
 	}
 	
+	public int updateCountStock(BuyDetailDto buyDetailDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.sale.Sale.updateCountStock", buyDetailDto);
+	}
+	
 	public int update(BuyMasterDto buyMasterDto) {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.buy.BuyMaster.update", buyMasterDto);
 	}
