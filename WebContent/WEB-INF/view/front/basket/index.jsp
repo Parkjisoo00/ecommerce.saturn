@@ -341,7 +341,6 @@
 													</span>
 												</td>
 											</tr>
-											
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>

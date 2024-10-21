@@ -107,7 +107,7 @@ public class BuyWeb extends Common {
 			saleDto.setSeq_mbr(seqMbr);
 			saleDto.setRegister(seqMbr);
 			
-			String pathBase = dynamicProperties.getMessage("backoffice.upload.path.review", "[UNDEFINED]");
+			String pathBase = dynamicProperties.getMessage("backoffice.upload.path_review", "[UNDEFINED]");
 			String maxSize = dynamicProperties.getMessage("backoffice.upload.file.max10MB", "[UNDEFINED]");
 			String allowedExt = dynamicProperties.getMessage("backoffice.upload.file.extension.doc", "[UNDEFINED]");
 			
