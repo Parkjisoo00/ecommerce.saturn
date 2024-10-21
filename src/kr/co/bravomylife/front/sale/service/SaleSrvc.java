@@ -134,8 +134,9 @@ public class SaleSrvc {
 			
 			result += saleDao.insertText(saleDto);
 			result += saleDao.rateInsert(saleDto);
+			result += saleDao.dtlUpdate(saleDto);
 			
-			if (result == 2) { 
+			if (result == 3) { 
 				
 				totalResult = true;
 			}
@@ -159,8 +160,9 @@ public class SaleSrvc {
 			
 			result += saleDao.insertReview(saleDto);
 			result += saleDao.rateInsert(saleDto);
+			result += saleDao.dtlUpdate(saleDto);
 			
-			if (result == 2) {
+			if (result == 3) {
 				
 				if (saleFileDto[0].getFile_orig() != null && !saleFileDto[0].getFile_orig().equals("")) {
 				

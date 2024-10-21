@@ -543,7 +543,7 @@
 											<a href="javascript:reviewListPage();" class="cart-btn" style="font-size: 12px !important; font-weight: normal !important; cursor: pointer; background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c; margin: 0; padding: 5px 10px 5px !important;">
 												리뷰관리
 											</a>
-											<h6 class="cart-title" style="padding-bottom: 0px !important; margin-bottom: 0px !important; font-weight: normal !important;">*이미 등록된 상품후기가 있습니다. 리뷰관리로 이동합니다.</h6>
+											<h6 class="cart-title" style="padding-top: 5px !important; padding-bottom: 0px !important; margin-bottom: 0px !important; font-weight: normal !important; text-align: right !important;">*이미 등록된 상품후기가 있습니다. 리뷰관리로 이동합니다.</h6>
 										</c:if>
 									</div>
 								<div class="row">
