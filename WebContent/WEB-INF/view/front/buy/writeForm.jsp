@@ -278,7 +278,7 @@
 			<div class="row">
 				<div class="col-lg-6" style="display: flex; justify-content: center; align-items: center;">
 					<div class="product__details__pic">
-						<img data-hash="product-1" class="product__big__img" src="${saleDto.img}" alt="판매상품 이미지" style="width: 450px; height: 450px; cursor: pointer" onclick="window.open(this.src)">
+						<img data-hash="product-1" class="product__big__img" src="/img/product/${saleDto.img}" alt="판매상품 이미지" style="width: 450px; height: 450px; cursor: pointer" onclick="window.open(this.src)">
 					</div>
 				</div>
 				<div class="col-lg-6" style="padding-right: 0;">
@@ -528,7 +528,7 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="tabs-1" role="tabpanel">
 								<div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-									<img src="${saleDto.desces}" alt="">
+									<img src="/img/product/${saleDto.desces}" alt="">
 								</div>
 							</div>
 							<div class="tab-pane" id="tabs-3" role="tabpanel">

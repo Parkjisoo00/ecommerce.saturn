@@ -81,11 +81,8 @@ public class ProductWeb {
 		String message	= "";
 		
 		try {
-			//파일이 저장될 기본 경로를 가져온다
 			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_product", "[UNDEFINED]");
-			//업로드 가능한 파일의 최대 크기
 			String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max5MB"			, "[UNDEFINED]");
-			//허용되는 파일 확장자
 			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.image"	, "[UNDEFINED]");
 			
 			logger.debug("업로드 경로 확인" + pathBase);
@@ -113,46 +110,56 @@ public class ProductWeb {
 				if (countFile == 2) { // 파일 개수가 2개일 경우
 					// 첫 번째 파일의 원본 파일명
 					
-					String firstFileNameSrc = (String) hashtable.get("files[0]_fileSrcName"); // 첫 번째 원본 파일명
-					String firstFileNameSve = firstFileNameSrc; // 첫 번째 파일명으로 저장
-
-					// 첫 번째 파일 정보 설정
+					String fileNameSrc	= "";
+					String fileNameSve	= "";
+					
+					fileNameSrc		= (String)hashtable.get("files[0]_fileSrcName");
+					fileNameSve		= (String)hashtable.get("files[0]_fileSveNameRelative");
+					
+					// 백슬래시 제거
+					fileNameSve = fileNameSve.replace("\\", "");
+					
 					fileDto[0] = new FileDto();
-					fileDto[0].setFileNameOriginal(firstFileNameSrc); // 첫 번째 원본명 설정
-					fileDto[0].setFileNameSave(firstFileNameSve); // 첫 번째 저장명 설정 (원본명으로)
-
-					// 두 번째 파일의 원본 파일명
-					String secondFileNameSrc = (String) hashtable.get("files[1]_fileSrcName"); // 두 번째 원본 파일명
-					String secondFileNameSve = secondFileNameSrc; // 두 번째 파일명으로 저장
-
-					// 두 번째 파일 정보 설정
+					fileDto[0].setFileNameOriginal(fileNameSrc);			// 파일 원본명
+					fileDto[0].setFileNameSave(fileNameSve);				// 파일 저장명(경로 포함)
+					
+					fileNameSrc		= (String)hashtable.get("files[1]_fileSrcName");
+					fileNameSve		= (String)hashtable.get("files[1]_fileSveNameRelative");
+					
+					// 백슬래시 제거
+					fileNameSve = fileNameSve.replace("\\", "");
+					
 					fileDto[1] = new FileDto();
-					fileDto[1].setFileNameOriginal(secondFileNameSrc); // 두 번째 원본명 설정
-					fileDto[1].setFileNameSave(secondFileNameSve); // 두 번째 저장명 설정 (원본명으로)
+					fileDto[1].setFileNameOriginal(fileNameSrc);			// 파일 원본명
+					fileDto[1].setFileNameSave(fileNameSve);				// 파일 저장명(경로 포함)
+					
+					System.out.println("File Save Name: " + fileNameSve);
 
 				// 상품 DTO에 파일 정보 설정
-				productDto.setImg(fileDto[0].getFileNameOriginal()); // 첫 번째 이미지
-				productDto.setDesces(fileDto[1].getFileNameOriginal()); // 두 번째 이미지
+				productDto.setImg(fileDto[0].getFileNameSave()); // 첫 번째 이미지
+				productDto.setDesces(fileDto[1].getFileNameSave()); // 두 번째 이미지
 				}
+				
 				
 				//상품 DTO에 파일 정보 설정
 				 
 				//상품 등록 처리
 				if (productSrvc.insert(productDto)) {
 					request.setAttribute("script"	, "alert('등록되었습니다.');");
-					request.setAttribute("redirect"	, "/console/");
+					request.setAttribute("redirect"	, "/backoffice/product/productReg.web");
+					
 				}
 				else {
 					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
-					request.setAttribute("redirect"	, "/console/");
+					request.setAttribute("redirect"	, "backoffice/product/productReg.web");
 				}
 			}
 			else {
-				request.setAttribute("script"	, "alert('" + message + "');");
-				request.setAttribute("redirect"	, "/console/");
+				request.setAttribute("script"	, "alert('상품이미지를 입력해주세요!');");
+				request.setAttribute("redirect"	, "backoffice/product/productReg.web");
 			}
 			
-			mav.setViewName("/console/");
+			mav.setViewName("forward:/servlet/result.web");
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".productRegProc()] " + e.getMessage(), e);
