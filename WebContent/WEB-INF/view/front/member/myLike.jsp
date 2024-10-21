@@ -6,9 +6,30 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
+	
+	function remove(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.seq_sle.setAttribute("value", value);
+		
+		document.getElementById("count").remove();
+		document.getElementById("currentPage").remove();
+		document.getElementById("discount_sale").remove();
+		document.getElementById("point_stack").remove();
+		
+		frmMain.action="/front/member/likeRemove.web";
+		frmMain.submit();
+	}
+	
 	function goWriteForm(value, value2, value3) {
 		
 		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("count").remove();
+		document.getElementById("currentPage").remove();
+		document.getElementById("discount_sale").remove();
+		document.getElementById("point_stack").remove();
 		
 		frmMain.seq_sle.setAttribute("value", value);
 		frmMain.cd_ctg_m.setAttribute("value", value2);
@@ -16,6 +37,7 @@
 		frmMain.action="/front/buy/writeForm.web";
 		frmMain.submit();
 	}
+	
 	function goPage(value) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -67,6 +89,8 @@
 <input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"			/>
 <input type="hidden" name="currentPage"			id="currentPage"		/>
 <input type="hidden" name="count"				id="count"				/>
+<input type="hidden" name="cd_bbs_type"	id="cd_bbs_type" value="${paging.cd_bbs_type}" />
+<input type="hidden" name="currentPage"	id="currentPage" value="${paging.currentPage}" />
 
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -116,7 +140,7 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="list" items="${list}">
-											<tr style="border: 0;" data-seq-sle="${list.seq_sle}">
+											<tr style="border: 0;">
 												
 												<td class="cart-td" style="text-align: center; vertical-align: middle;">
 												
@@ -137,7 +161,7 @@
 														<a href="javascript:setBasket('${list.seq_sle}', '${list.sle_nm}', '${list.discount_sale}', '${list.count}'
 														, '${list.img}', '${list.point_stack}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');" 
 														class="cart-btn" style="background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;margin-top:0px">장바구니 담기</a>
-														<a href="javascript:remove()" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;padding: 10px 45px 10px;">삭제</a>
+														<a href="javascript:remove('${list.seq_sle}')" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;padding: 10px 45px 10px;">삭제</a>
 													</div>
 												</td>
 											</tr>

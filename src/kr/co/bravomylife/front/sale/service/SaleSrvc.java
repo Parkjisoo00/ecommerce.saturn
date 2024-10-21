@@ -52,6 +52,28 @@ public class SaleSrvc {
 	@Inject
 	SaleDao saleDao;
 	
+	/**
+	 * @param 
+	 * @return 
+	 * 
+	 * @since 2024-10-21
+	 * <p>DESCRIPTION: 고객센터 삭제(처리)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@Transactional("txFront")
+	
+	public boolean deleteLike(SaleDto saleDto) {
+		
+		int result = saleDao.deleteLike(saleDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
 	public SaleListDto reviewListPage(SaleDto saleDto) {
 		
 		SaleListDto saleListDto = new SaleListDto();
@@ -379,6 +401,16 @@ public class SaleSrvc {
 		
 		pagingListDto.setPaging(pagingDto);
 		pagingListDto.setList(saleDao.totalList(pagingDto));
+		
+		return pagingListDto;
+	}
+	
+	public PagingListDto listingMyLike(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(saleDao.listingMyLike(pagingDto));
 		
 		return pagingListDto;
 	}

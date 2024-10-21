@@ -49,6 +49,7 @@ import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.member.dto.MemberDto;
 import kr.co.bravomylife.front.member.service.MemberSrvc;
+import kr.co.bravomylife.front.sale.dto.SaleDto;
 import kr.co.bravomylife.front.sale.service.SaleSrvc;
 import kr.co.bravomylife.util.security.HSwithSHA;
 import kr.co.bravomylife.util.security.Passwd;
@@ -88,8 +89,8 @@ public class MemberWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-10-1
-	 * <p>DESCRIPTION:</p>
+	 * @since 2024-10-18
+	 * <p>DESCRIPTION:찜 페이지</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
@@ -112,6 +113,42 @@ public class MemberWeb extends Common {
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".main()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-21
+	 * <p>DESCRIPTION:찜 삭제</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/member/likeRemove.web")
+	public ModelAndView likeRemove(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			saleDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			if (saleSrvc.deleteLike(saleDto)) {
+				request.setAttribute("script"	, "alert('삭제되었습니다.');");
+				request.setAttribute("redirect"	, "/front/member/myLike.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".remove()] " + e.getMessage(), e);
 		}
 		finally {}
 		

@@ -69,7 +69,7 @@ public class MyPageWeb extends Common{
 		try {
 			pagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
-			PagingListDto pagingListDto = saleSrvc.listingLike(pagingDto);
+			PagingListDto pagingListDto = saleSrvc.listingMyLike(pagingDto);
 			
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());

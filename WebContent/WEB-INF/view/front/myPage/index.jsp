@@ -92,11 +92,9 @@
 										</tr>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="list" items="${list}">
-											<tr style="border: 0;" data-seq-sle="${list.seq_sle}">
-												
+										<c:forEach var="list" items="${list}" >
+											<tr style="border: 0;">
 												<td class="cart-td" style="text-align: center; vertical-align: middle;">
-												
 													<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden; display: inline-block;">
 														<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
 															<img class="cart-img" src="${list.img}" class="cart-img">
@@ -120,12 +118,11 @@
 								</tbody>
 							</table>
 						</div>
-					
-								</div>
-								</div>
-							</form>
-						</div>
-			</section>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
 
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
