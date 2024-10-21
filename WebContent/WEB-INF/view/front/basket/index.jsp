@@ -300,7 +300,6 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="list" items="${list}" varStatus="status">
-											
 											<tr style="border: 0;" data-seq-sle="${list.seq_sle}">
 												<td class="cart-td">
 													<input style="background: white !important;" type="checkbox" class="selectItem" checked/>
