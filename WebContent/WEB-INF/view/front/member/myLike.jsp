@@ -38,16 +38,21 @@
 		frmMain.submit();
 	}
 	
-	function goPage(value) {
+	function goPages(value) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
-		document.getElementById("currentPage").value = value;
+		frmMain.currentPage.setAttribute("value", value);
+		
+		document.getElementById("count").remove();
+		document.getElementById("discount_sale").remove();
+		document.getElementById("point_stack").remove();
+		
 		
 		frmMain.action="/front/member/myLike.web";
-		frmMain.target = "";
 		frmMain.submit();
 	}
+	
 	function setBasket(value, value2, value3,value4, value5, value6,value7, value8) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -87,7 +92,6 @@
 <input type="hidden" name="sle_nm"				id="sle_nm"				/>
 <input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"			/>
 <input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"			/>
-<input type="hidden" name="currentPage"			id="currentPage"		/>
 <input type="hidden" name="count"				id="count"				/>
 <input type="hidden" name="cd_bbs_type"	id="cd_bbs_type" value="${paging.cd_bbs_type}" />
 <input type="hidden" name="currentPage"	id="currentPage" value="${paging.currentPage}" />

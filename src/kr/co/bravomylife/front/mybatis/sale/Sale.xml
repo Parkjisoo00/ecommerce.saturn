@@ -824,19 +824,51 @@
 	
 	<select id="listingLike" parameterType="pagingDto" resultType="pagingDto">
 		SELECT
-			sle.SEQ_SLE
-			, sle.SLE_NM
-			, NVL(sle.POINT_STACK, 0) POINT_STACK
-			, sle.IMG
-			, sle.PRICE_SALE
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
-			, sle.CORP_NM
-			, rate.COUNT
-			, sle.cd_ctg_m
-			, sle.cd_ctg_b
-			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') AS dt_reg
-			, sle.COUNT_STOCK
-			, likeTbl.FLG_LIKE
+			*
+		FROM
+			(
+			SELECT
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY likeTbl.DT_REG DESC) rnum
+				, sle.SEQ_SLE										seq_sle
+				, sle.SLE_NM									sle_nm
+				, NVL(sle.POINT_STACK, 0)						point_stack
+				, sle.IMG										img
+				, sle.PRICE_SALE								price_sale
+				, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100))	discount_sale
+				, sle.CORP_NM									corp_nm
+				, rate.COUNT									count
+				, sle.cd_ctg_m									cd_ctg_m
+				, sle.cd_ctg_b									cd_ctg_b
+				, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD')				dt_reg
+				, sle.COUNT_STOCK								count_stock
+				, likeTbl.FLG_LIKE								flg_like
+			FROM
+				TB_SLE sle
+			LEFT OUTER JOIN
+				TB_RATE rate
+			ON
+				sle.SEQ_SLE = rate.SEQ_SLE
+			LEFT OUTER JOIN
+				TB_LIKE likeTbl
+			ON
+				sle.SEQ_SLE = likeTbl.SEQ_SLE
+				AND likeTbl.SEQ_MBR = #{seq_mbr}
+			WHERE	
+				sle.CD_STATE_SALE = 2
+				AND sle.FLG_DELETE	= 'N'
+				AND likeTbl.FLG_LIKE = 'Y'
+			)
+			<![CDATA[
+			WHERE
+				rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+			]]> 
+			ORDER BY
+				DT_REG DESC
+	</select>
+	
+	<select id="myLikeCount" parameterType="pagingDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(*)
 		FROM
 			TB_SLE sle
 		LEFT OUTER JOIN
@@ -849,14 +881,14 @@
 			sle.SEQ_SLE = likeTbl.SEQ_SLE
 			AND likeTbl.SEQ_MBR = #{seq_mbr}
 		WHERE
-			likeTbl.SEQ_MBR = #{seq_mbr}	
-			AND sle.CD_STATE_SALE = 2
-			AND sle.FLG_DELETE	= 'N'
-			AND likeTbl.FLG_LIKE = 'Y'
-		ORDER BY
-			likeTbl.DT_REG DESC
+		<include refid="myLikewhere" />
 	</select>
 	
+	<sql id="myLikewhere">
+		sle.CD_STATE_SALE = 2
+		AND sle.FLG_DELETE	= 'N'
+		AND likeTbl.FLG_LIKE = 'Y'
+	</sql>
 	
 	<select id="listingMyLike" parameterType="pagingDto" resultType="pagingDto">
 		SELECT
@@ -895,18 +927,5 @@
 			likeTbl.DT_REG DESC
 			
 	</select>
-	
-	<select id="myLikeCount" parameterType="pagingDto" resultType="java.lang.Integer">
-		SELECT
-			COUNT(ROWNUM)
-		FROM
-			TB_SLE sle
-		WHERE
-		<include refid="myLikewhere" />
-	</select>
-	
-	<sql id="myLikewhere">
-		sle.SEQ_SLE = #{seq_sle}
-	</sql>
 
 </mapper>

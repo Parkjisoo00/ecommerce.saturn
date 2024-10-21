@@ -161,13 +161,17 @@ public class SaleDao extends BaseDao {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.totalCount", pagingDto);
 	}
 	
-	public List<SaleDto> listingLike(PagingDto pagingDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.listingLike", pagingDto);
-	}
-	public List<SaleDto> listingMyLike(PagingDto pagingDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.listingMyLike", pagingDto);
-	}
+	
 	public int myLikeCount(PagingDto pagingDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.myLikeCount", pagingDto);
 	}
+	public List<SaleDto> listingLike(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.listingLike", pagingDto);
+	}
+	
+	
+	public List<SaleDto> listingMyLike(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.listingMyLike", pagingDto);
+	}
+	
 }

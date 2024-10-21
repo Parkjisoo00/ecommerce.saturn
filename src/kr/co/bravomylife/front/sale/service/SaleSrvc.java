@@ -420,6 +420,7 @@ public class SaleSrvc {
 		PagingListDto pagingListDto = new PagingListDto();
 		
 		int totalLine = saleDao.myLikeCount(pagingDto);
+		
 		int totalPage = (int) Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
 		pagingDto.setTotalLine(totalLine);
 		pagingDto.setTotalPage(totalPage);
