@@ -14,6 +14,28 @@
 			AND SEQ_SLE = 	#{seq_sle}
 	</update>
 	
+	<select id="review" parameterType="saleDto" resultType="saleDto">
+		SELECT
+			sle.SLE_NM
+			, sle.IMG
+			, sle.CD_CTG_B
+			, sle.CD_CTG_M
+			, buy_dtl.SEQ_BUY_DTL
+			, buy_dtl.SEQ_SLE
+			, buy_dtl.COUNT
+			, TO_CHAR(buy_dtl.DT_REG, 'YYYY-MM-DD') dt_reg
+		FROM 
+			TB_SLE sle
+		JOIN 
+			TB_BUY_DTL buy_dtl
+		ON 
+			sle.SEQ_SLE = buy_dtl.SEQ_SLE
+			AND buy_dtl.SEQ_MBR = #{seq_mbr}
+		WHERE 
+			buy_dtl.SEQ_MBR = #{seq_mbr}
+			AND buy_dtl.SEQ_BUY_DTL = #{seq_buy_dtl}
+			AND FLG_REVIEW = 'N'
+	</select>
 
 	<select id="reviewListPage" parameterType="saleDto" resultType="saleDto">
 		SELECT
@@ -39,9 +61,9 @@
 
 	<insert id="rateInsert" parameterType="saleDto">
 		INSERT INTO TB_RATE
-			(SEQ_RATE, SEQ_SLE, SEQ_MBR, COUNT, RATE_STAR, DT_REG, REGISTER, DT_UPT, UPDATER)
+			(SEQ_RATE, SEQ_SLE, SEQ_REVIEW, SEQ_MBR, COUNT, RATE_STAR, DT_REG, REGISTER, DT_UPT, UPDATER)
 		VALUES
-			(#{seq_rate}, #{seq_sle}, #{seq_mbr}, 1, #{rate_star}, SYSDATE, #{register}, NULL, NULL)
+			(#{seq_rate}, #{seq_sle}, #{seq_review}, #{seq_mbr}, 1, #{rate_star}, SYSDATE, #{register}, NULL, NULL)
 	</insert>
 
 	<update id="rateUpdate" parameterType="saleDto">
@@ -192,11 +214,6 @@
 			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY review.DT_REG DESC) rnum
 			, review.SEQ_REVIEW
 			, sle.SEQ_SLE
-			, rate_summary.total_count
-			, ROUND(CASE 
-				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
-				ELSE 0
-			END, 0) star
 			, review.SEQ_MBR
 			, review.FLG_DELETE
 			, review.RATE_REVIEW
@@ -205,31 +222,18 @@
 			, rate.RATE_STAR AS mbr_rate_star
 		FROM
 			TB_SLE sle
-		LEFT OUTER JOIN (
-			SELECT
-				SEQ_SLE
-				, SUM(RATE_STAR) total_star_rate
-				, SUM(COUNT) total_count
-			FROM
-				TB_RATE
-			GROUP BY
-				SEQ_SLE
-		) rate_summary
-		ON
-			sle.SEQ_SLE			= rate_summary.SEQ_SLE
 		LEFT JOIN
 			TB_REVIEW review
 		ON
-			sle.SEQ_SLE			= review.SEQ_SLE
+			sle.SEQ_SLE = review.SEQ_SLE
 		LEFT JOIN
 			TB_MBR_MST mbr
 		ON
-			review.SEQ_MBR		= mbr.SEQ_MBR
+			review.SEQ_MBR = mbr.SEQ_MBR
 		LEFT JOIN
 			TB_RATE rate
 		ON
-			rate.SEQ_MBR		= review.SEQ_MBR
-			AND rate.SEQ_SLE	= review.SEQ_SLE
+			rate.SEQ_REVIEW = review.SEQ_REVIEW
 		WHERE
 		<include refid="reviewwhere" />
 		)

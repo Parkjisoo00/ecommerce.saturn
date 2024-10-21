@@ -52,17 +52,12 @@ public class SaleSrvc {
 	@Inject
 	SaleDao saleDao;
 	
-	/**
-	 * @param 
-	 * @return 
-	 * 
-	 * @since 2024-10-21
-	 * <p>DESCRIPTION: 고객센터 삭제(처리)</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	@Transactional("txFront")
+	public SaleDto review(SaleDto saleDto) {
+		
+		return saleDao.review(saleDto);
+	}
 	
+	@Transactional("txFront")
 	public boolean deleteLike(SaleDto saleDto) {
 		
 		int result = saleDao.deleteLike(saleDto);
@@ -84,6 +79,7 @@ public class SaleSrvc {
 		return saleListDto;
 	}
 	
+	/*
 	@Transactional("txFront")
 	public boolean insertRate(SaleDto saleDto) {
 		try {
@@ -102,6 +98,7 @@ public class SaleSrvc {
 			return false;
 		}
 	}
+	*/
 	
 	@Transactional("txFront")
 	public boolean reviewCheck(SaleDto saleDto) {
@@ -128,13 +125,17 @@ public class SaleSrvc {
 		
 		boolean totalResult = false;
 		
+		int result = 0;
+		
 		saleDto.setSeq_review(saleDao.sequence());
+		saleDto.setSeq_rate(saleDao.rateSequence());
 		
 		try {
 			
-			int result = saleDao.insertText(saleDto);
+			result += saleDao.insertText(saleDto);
+			result += saleDao.rateInsert(saleDto);
 			
-			if (result == 1) { 
+			if (result == 2) { 
 				
 				totalResult = true;
 			}
@@ -149,14 +150,17 @@ public class SaleSrvc {
 	public boolean insertReview(SaleDto saleDto, SaleFileDto[] saleFileDto) {
 		
 		boolean totalResult = false;
+		int result = 0;
 		
 		saleDto.setSeq_review(saleDao.sequence());
+		saleDto.setSeq_rate(saleDao.rateSequence());
 		
 		try {
 			
-			int result = saleDao.insertReview(saleDto);
+			result += saleDao.insertReview(saleDto);
+			result += saleDao.rateInsert(saleDto);
 			
-			if (result == 1) {
+			if (result == 2) {
 				
 				if (saleFileDto[0].getFile_orig() != null && !saleFileDto[0].getFile_orig().equals("")) {
 				
