@@ -30,6 +30,7 @@ package kr.co.bravomylife.backoffice.manager.dto;
  */
 public class ManagerDto {
 	
+	private int rnum			= 0;
 	private int	seq_mng		= 0;
 	private String 	email		= "";
 	private String	passwd		= "";
@@ -45,6 +46,13 @@ public class ManagerDto {
 	private int	updater		= 0;
 	
 	
+	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 	public int getSeq_mng() {
 		return seq_mng;
 	}

@@ -20,14 +20,29 @@
  */
 package kr.co.bravomylife.backoffice.login.controller;
 
+
+import java.util.Properties;
+
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import kr.co.bravomylife.backoffice.common.Common;
+import kr.co.bravomylife.backoffice.login.dto.LoginDto;
+import kr.co.bravomylife.backoffice.login.service.LoginSrvc;
+import kr.co.bravomylife.backoffice.manager.dto.ManagerDto;
+import kr.co.bravomylife.util.Datetime;
+import kr.co.bravomylife.util.security.HSwithSHA;
+import kr.co.bravomylife.util.security.SKwithAES;
 
 /**
  * @version 1.0.0
@@ -39,7 +54,13 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller("kr.co.bravomylife.backoffice.login.controller.LoginWeb")
 
-	public class LoginWeb {
+	public class LoginWeb extends Common{
+	
+	@Autowired
+	Properties staticProperties;
+	
+	@Inject
+	LoginSrvc loginSrvc;
 	
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(LoginWeb.class);
@@ -49,25 +70,86 @@ import org.springframework.web.servlet.ModelAndView;
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-09-30
-	 * <p>DESCRIPTION:로그인 페이지 jsp로만 가게</p>
+	 * @since 2024-10-22
+	 * <p>DESCRIPTION:</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	
-	@RequestMapping(value = "/console/login/loginForm.web")
-	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/console/login/logout.web")
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			mav.setViewName("backoffice/login/loginForm");
+			HttpSession session = request.getSession(false);
+			
+			String name		= (String) session.getAttribute("NAME");
+			String dt_login	= (String) session.getAttribute("DT_LOGIN");
+			session.invalidate();
+			
+			request.setAttribute("script"	, "alert('" + dt_login + "에 로그인한 " + name + "님 안녕히 가세요.')");
+			request.setAttribute("redirect"	, "backoffice/index");
+			
+			mav.setViewName("forward:/servlet/result.web");
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".loginForm()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".logout()] " + e.getMessage(), e);
 		}
 		finally {}
 		
 		return mav;
 	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param loginDto [로그인 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-22
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/login/loginProc.web", method = RequestMethod.POST)
+	public ModelAndView loginProc(HttpServletRequest request, HttpServletResponse response, LoginDto loginDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			ManagerDto managerDto = loginSrvc.exist(loginDto);
+			
+			if (managerDto != null
+					&& loginDto.getPasswd().equals(managerDto.getPasswd())) {
+				
+				/** 정상적인 회원일 경우 세션에 이름과 아이디를 저장 */
+				HttpSession session = request.getSession(true);
+				session.setAttribute("SEQ_MNG", Integer.toString(managerDto.getSeq_mng()));
+				session.setAttribute("NAME", managerDto.getMng_nm());
+				session.setAttribute("EMAIL", managerDto.getEmail());
+				session.setAttribute("DT_LOGIN", Datetime.getNow("yyyy-MM-dd HH:mm:ss"));
+				
+				request.setAttribute("script", "alert('" + session.getAttribute("NAME")
+												+ "님 "
+												+ session.getAttribute("DT_LOGIN")
+												+ "반갑습니다."
+												+ "')");
+			}
+			else {
+				request.setAttribute("script", "alert('이메일(아이디)과 비밀번호를 확인하세요!')");
+			}			
+			
+			request.setAttribute("redirect"	, "/console/index.web");
+			
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".loginProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+
 }
