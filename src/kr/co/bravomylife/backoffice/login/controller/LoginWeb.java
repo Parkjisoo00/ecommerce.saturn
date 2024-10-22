@@ -41,8 +41,6 @@ import kr.co.bravomylife.backoffice.login.dto.LoginDto;
 import kr.co.bravomylife.backoffice.login.service.LoginSrvc;
 import kr.co.bravomylife.backoffice.manager.dto.ManagerDto;
 import kr.co.bravomylife.util.Datetime;
-import kr.co.bravomylife.util.security.HSwithSHA;
-import kr.co.bravomylife.util.security.SKwithAES;
 
 /**
  * @version 1.0.0
