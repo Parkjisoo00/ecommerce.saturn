@@ -5,6 +5,56 @@
  * <p>DESCRIPTION: 다음 우편번호 찾기(https://postcode.map.daum.net/guide)</p>
  * <p>IMPORTANT:</p>
  */
+
+function loadSavedEmail() {
+	var savedEmail = localStorage.getItem("savedEmail");
+	if (savedEmail) {
+		var emailInput = document.getElementById("email");
+		var rememberMeCheckbox = document.getElementById("rememberMe");
+
+		if (emailInput) {
+			emailInput.value = savedEmail;
+		}
+
+		if (rememberMeCheckbox) {
+			rememberMeCheckbox.checked = true;
+		}
+	}
+}
+
+function checkLogin() {
+			
+	var frmMain = document.getElementById("frmMain");
+	
+	if (document.getElementById("email").value.length < 6
+			|| document.getElementById("email").value.length > 32) {
+		alert("이메일(아이디)를 6 ~ 16자 이내로 입력하세요!");
+		document.getElementById("email").focus();
+		// document.getElementById("email").select();
+		return false;
+	}
+	
+	if (document.getElementById("passwd").value.length < 8
+			|| document.getElementById("passwd").value.length > 16) {
+		alert("비밀번호를 8 ~ 16자 이내로 입력하세요!");
+		document.getElementById("passwd").focus();
+		return false;
+	}
+	
+	// 아이디 저장 체크 로직
+	if (document.getElementById("rememberMe").checked) {
+		localStorage.setItem("savedEmail", document.getElementById("email").value);
+	} else {
+		localStorage.removeItem("savedEmail"); // 체크 해제 시 저장된 아이디 삭제
+	}
+	
+	frmMain.action = "/console/login/loginProc.web";
+	frmMain.submit();
+	
+	return true;
+}
+
+
 function execDaumPostcode() {
 	
 	var width	= 500; //팝업의 너비
