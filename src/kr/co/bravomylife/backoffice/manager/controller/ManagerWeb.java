@@ -220,6 +220,7 @@ public class ManagerWeb extends Common {
 		return mav;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/console/manager/registerProc.web")
 	public ModelAndView registerProc(HttpServletRequest request, HttpServletResponse response, ManagerDto managerDto) {
 		

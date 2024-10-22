@@ -196,23 +196,32 @@ public class BuyWeb extends Common {
 		
 		try {
 			
+			int count = 0;
+			int reviwCount = 0;
+			
 			saleDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			reviewpagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
 			SaleListDto saleListDto = saleSrvc.reviewListPage(saleDto);
 			
 			List<SaleDto> saleList = (List<SaleDto>)saleListDto.getList();
-			SaleDto reviewCount = saleList.get(0);
 			
-			int count = reviewCount.getList_count();
+			if (saleList != null && !saleList.isEmpty()) {
+				
+			SaleDto reviewCount = saleList.get(0);
+			count = reviewCount.getList_count();
+			}
 			
 			PagingListDto _reviewListImgs = saleSrvc.reviewPageListImgs(reviewpagingDto);
 			PagingListDto _reviewpagingDto = saleSrvc.reviewPageList(reviewpagingDto);
 			
 			List<SaleDto> reviewList = (List<SaleDto>)_reviewpagingDto.getList();
-			SaleDto reviewWriteCount = reviewList.get(0);
 			
-			int reviwCount = reviewWriteCount.getWriteReview_count();
+			if (reviewList != null && !reviewList.isEmpty()) {
+				
+			SaleDto reviewWriteCount = reviewList.get(0);
+			reviwCount = reviewWriteCount.getWriteReview_count();
+			}
 			
 			PagingListDto mergedPagingList = saleSrvc.mergePageReviewAndImages(_reviewpagingDto, _reviewListImgs);
 			

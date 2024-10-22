@@ -40,6 +40,7 @@
 			, dtl.SLE_NM
 			, dtl.COUNT
 			, COUNT(*) OVER () writeReview_count
+			, dtl.SEQ_BUY_DTL
 		FROM
 			TB_SLE sle
 		LEFT JOIN
