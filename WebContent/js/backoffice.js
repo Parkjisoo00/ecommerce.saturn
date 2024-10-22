@@ -130,7 +130,7 @@ function execDaumPostcode() {
  * <p>IMPORTANT:</p>
  */
 function checkEmail(email) {
-	alert("backoffice");
+	
 	
 	var isEmail = true;
 	
@@ -191,67 +191,76 @@ function checkEmail(email) {
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
+
 function checkRegister() {
     var isSubmit = true;  // 폼 제출 여부 결정 변수
     var frmMain = document.getElementById("frmMain");
 
-    // 이메일, 비밀번호, 성명, 연락처 등의 유효성 검사
+    // 이메일 유효성 검사
     if (!checkEmail(document.getElementById("email").value)) {
         alert("이메일을 확인하세요!");
         isSubmit = false;
         document.getElementById("email").focus();
     }
 
+    // 비밀번호 일치 확인
     if (document.getElementById("passwd").value != document.getElementById("passwd_").value) {
         alert("비밀번호를 확인하세요!");
         isSubmit = false;
         document.getElementById("passwd").focus();
     }
 
-    // 성명 확인
+    // 성명 한글 확인
     var regExpName = /^[가-힣]*$/;
     if (!regExpName.test(document.getElementById("mng_nm").value)) {
         alert("성명은 한글만 입력하세요!");
         isSubmit = false;
     }
 
-	// 휴대폰 번호 결합 및 유효성 검사
-	       var phone1 = document.getElementById("phone1").value;
-	       var phone2 = document.getElementById("phone2").value;
-	       var phone3 = document.getElementById("phone3").value;
+    // 휴대폰 번호 유효성 검사 및 결합
+    var phone1 = document.getElementById("phone1").value;
+    var phone2 = document.getElementById("phone2").value;
+    var phone3 = document.getElementById("phone3").value;
 
-	       if (phone1 === "" || phone2 === "" || phone3 === "") {
-	           alert("전화번호를 모두 입력하세요!");
-	           isSubmit = false;
-	       } else {
-	           var phone = phone1 + "-" + phone2 + "-" + phone3;
-	           document.getElementById("phone").value = phone;  // 결합된 전화번호를 hidden 필드에 저장
-	       }
+    if (phone1 === "" || phone2 === "" || phone3 === "") {
+        alert("전화번호를 모두 입력하세요!");
+        isSubmit = false;
+    } else {
+        var phone = phone1 + "-" + phone2 + "-" + phone3;
+        document.getElementById("phone").value = phone;  // 결합된 전화번호를 hidden 필드에 저장
+    }
 
-		   // 주소 필드 확인
-		          if (document.getElementById("post").value === "" || 
-		              document.getElementById("addr1").value === "" || 
-		              document.getElementById("addr2").value === "") {
-		              alert("주소를 모두 입력하세요!");
-		              isSubmit = false;
-		          }
+    // 주소 필드 확인
+    if (document.getElementById("post").value === "" || 
+        document.getElementById("addr1").value === "" || 
+        document.getElementById("addr2").value === "") {
+        alert("주소를 모두 입력하세요!");
+        isSubmit = false;
+    }
+
+    // 모든 유효성 검사를 통과하면 이메일 인증 Ajax 요청
+
+	if (isSubmit) {
+	        var myData = { email: $("#email").val() };
+
+			$.ajax({
+				type: "POST",
+				async: false,
+				url: "/console/manager/checkEmail.json",
+				dataType: "json",
+				contentType: "application/json; charset=UTF-8",
+				data: JSON.stringify(myData),
+				success: function (res) {
+					if (res == true) {
+						alert("정상적으로 " + $("#email").val()
+							+ "로 인증 URL이 전송되었습니다.\n반드시 가입 후 10분 이내에 인증 URL을 클릭하셔야 정상적으로 서비스를 이용할 수 있습니다.");
+						// + "로 인증 URL이 전송되었습니다.\n반드시 가입 후 인증 URL을 클릭하셔야 정상적으로 서비스를 이용할 수 있습니다.");
+					}
+					else {
+						alert("인증 이메일이 발송이 실패되었습니다!\n시스템 관리자에게 문의하세요!");
+					}
+				}
+			});
+		};
 	
-				  $.ajax({
-				  					type: "POST",
-				  					async: false,
-				  					url: "/backoffice/manager/checkEmail.json",
-				  					dataType: "json",
-				  					contentType: "application/json; charset=UTF-8",
-				  					data: JSON.stringify(myData),
-				  					success: function (res) {
-				  						if (res == true) {
-				  							alert("정상적으로 " + $("#email").val()
-				  								+ "로 인증 URL이 전송되었습니다.\n반드시 가입 후 10분 이내에 인증 URL을 클릭하셔야 정상적으로 서비스를 이용할 수 있습니다.");
-				  							// + "로 인증 URL이 전송되었습니다.\n반드시 가입 후 인증 URL을 클릭하셔야 정상적으로 서비스를 이용할 수 있습니다.");
-				  						}
-				  						else {
-				  							alert("인증 이메일이 발송이 실패되었습니다!\n시스템 관리자에게 문의하세요!");
-				  						}
-				  					}
-				  				});
 }

@@ -8,9 +8,11 @@
 		<typeAlias type="kr.co.bravomylife.backoffice.center.dto.BoardDto"					alias="boardDto" />
 		<typeAlias type="kr.co.bravomylife.backoffice.common.dto.PagingDto"					alias="pagingDto" />
 		<typeAlias type="kr.co.bravomylife.backoffice.product.dto.ProductDto"				alias="productDto" />
+		<typeAlias type="kr.co.bravomylife.backoffice.manager.dto.ManagerDto"		alias="managerDto" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="kr/co/bravomylife/backoffice/mybatis/center/Board.xml" />
 		<mapper resource="kr/co/bravomylife/backoffice/mybatis/product/Product.xml" />
+		<mapper resource="kr/co/bravomylife/backoffice/mybatis/manager/Manager.xml" />
 	</mappers>
 </configuration>
