@@ -6,7 +6,6 @@
 	</script>
 	<script src="/backoffice/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-	<script src="/backoffice/js/morris.min.js"></script>
 	<script src="/backoffice/js/jquery.sparkline.min.js"></script>
 	<script src="/backoffice/js/jquery-jvectormap-1.2.2.min.js"></script>
 	<script src="/backoffice/js/jquery-jvectormap-world-mill-en.js"></script>
@@ -18,5 +17,4 @@
 	<script src="/backoffice/js/jquery.slimscroll.min.js"></script>
 	<script src="/backoffice/js/fastclick.js"></script>
 	<script src="/backoffice/js/app.min.js"></script>
-	<script src="/backoffice/js/dashboard.js"></script>
 	<script src="/backoffice/js/demo.js"></script>
