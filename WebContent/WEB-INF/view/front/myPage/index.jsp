@@ -18,6 +18,18 @@
 	<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript" src="/js/package/tinymce.js"></script>		
 	<script>
+
+	function goWriteForm(value, value2, value3) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.seq_sle.setAttribute("value", value);
+		frmMain.cd_ctg_m.setAttribute("value", value2);
+		frmMain.cd_ctg_b.setAttribute("value", value3);
+		frmMain.action="/front/buy/writeForm.web";
+		frmMain.submit();
+	}
+	
 	function goList(value) {
 				
 		var frmMain = document.getElementById("frmMain");
@@ -42,14 +54,14 @@
 
 	<!-- Breadcrumb Begin -->
 	<ul class="my-custom-ul" >
-				<li><img src="/img/mypage/mypage1.png"><a style="font-size :30px" href="/front/myPage/" class="menuLnb">	마이 페이지</a></li>
+				<li><a style="font-size :30px" href="/front/myPage/" class="menuLnb">	마이 페이지</a></li>
 				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/modifyForm.web" class="menuLnb">개인정보 수정</a></li>
 				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goList(3);" class="menuLnb">문의 이력</a></li>
 				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">포인트</a></li>
 				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">맞춤건강 결과표</a></li>
 				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/myLike.web" class="menuLnb">찜한 상품</a></li>
 				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/reviewListPage.web" class="menuLnb">리뷰관리</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">구매이력</a></li>
+				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/history.web" class="menuLnb">구매이력</a></li>
 				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/withdraw.web" class="menuLnb">회원 탈퇴</a></li>
 	</ul>
 	<!-- Breadcrumb End -->
@@ -58,6 +70,9 @@
 				<section class="checkout spad" >
 					<div class="container">
 						<form id="frmMain" method="POST" class="checkout__form">
+						<input type="hidden" name="seq_sle"				id="seq_sle"			/>
+						<input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"			/>
+						<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"			/>
 						<input type="hidden" name="phone" id="phone" />
 							<div class="row"style="display: flex; justify-content: center; align-items: center;">
 								<div class="col-lg-12">
