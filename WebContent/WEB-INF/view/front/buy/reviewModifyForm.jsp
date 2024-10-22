@@ -85,7 +85,7 @@ alert("평점 확인" + value);
 									<img src="${reviewList.img}" style="height: 100px !important; ">
 								</div>
 								<div class="product-name" style="flex-grow: 1; padding-right: 0px !important">
-									<div class="product-name" style="padding: 0px !important; padding-top: 20px !important; font-weight: bold !important;">
+									<div class="product-name" style="padding: 0px !important; font-weight: bold !important;">
 										${reviewList.sle_nm}, ${reviewList.count}개
 									</div>
 									<div class="product-name" style="padding: 0px !important;">
@@ -127,7 +127,7 @@ alert("평점 확인" + value);
 											</c:if>
 										</div>
 									</div>
-									<div class="product-name" style="padding: 0px !important;">
+									<div class="product-name" style="margin-top: 25px !important; color: #888 !important; padding: 0px !important;">
 										${reviewList.dt_reg}
 									</div>
 								</div>
@@ -141,14 +141,15 @@ alert("평점 확인" + value);
 									<label id="show-input" class="cart-btn-review" style="margin: 0px !important; background: #fff; color: #346aff !important; border: 1px solid #346aff !important; padding: 10px; cursor: pointer;">
 										파일 선택
 									</label>
-									<c:forEach var="imgs" items="${reviewList.imgs}">${imgs}
-									<div id="file-inputs" style="display: flex; margin-left: 20px; align-items: center;">
-										<div style="display: flex; align-items: center;">
-											<img id="img-preview-0" style="display: none; width: 70px; height: 80px; object-fit: cover; cursor: pointer;" src="${imgs}"/>
-											<input type="file" id="file-input-0" style="display: none;" />
-											<span id="file-name-0" style="margin-left: 10px; cursor: pointer; display: none !important;"></span>
+									<c:forEach var="imgs" items="${reviewList.imgs}" varStatus="status">
+										<div id="file-inputs-${status.index}" style="position: relative; display: flex; flex-direction: column; margin-left: 20px; align-items: center;">
+											<div style="display: flex; flex-direction: column; align-items: center; position: relative;">
+												<img id="img-preview-${status.index}" style="width: 70px; height: 80px; object-fit: cover; cursor: pointer;" src="/img/review/${imgs}" />
+												<input type="file" id="file-input-${status.index}" style="display: none;" />
+												<span id="file-name-${status.index}" style="margin-left: 10px; cursor: pointer; display: none !important;"></span>
+												<button type="button" id="delete-btn-${status.index}" style="background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
+											</div>
 										</div>
-									</div>
 									</c:forEach>
 								</div>
 							</div>
@@ -221,24 +222,18 @@ alert("평점 확인" + value);
 	});
 	
 	var currentFileIndex = 0;
+	var maxFiles = 3;
+
+	var fileInputs = [];
+	var fileNames = [];
+	var imgPreviews = [];
 	
-	var fileInputs = [
-		document.getElementById('file-input-0'),
-		document.getElementById('file-input-1'),
-		document.getElementById('file-input-2')
-	];
-	
-	var fileNames = [
-		document.getElementById('file-name-0'),
-		document.getElementById('file-name-1'),
-		document.getElementById('file-name-2')
-	];
-	
-	var imgPreviews = [
-		document.getElementById('img-preview-0'),
-		document.getElementById('img-preview-1'),
-		document.getElementById('img-preview-2')
-	];
+	for (var i = 0; i < maxFiles; i++) {
+		
+		fileInputs.push(document.getElementById('file-input-' + i));
+		fileNames.push(document.getElementById('file-name-' + i));
+		imgPreviews.push(document.getElementById('img-preview-' + i));
+	}
 	
 	var label = document.getElementById('show-input');
 	
@@ -273,23 +268,31 @@ alert("평점 확인" + value);
 					}
 				}
 			})(currentFileIndex);
+			
 			currentInput.click();
 			currentInput.removeEventListener('change', handleFileChange);
 			currentInput.addEventListener('change', handleFileChange);
 		}
 	});
-	imgPreviews.forEach((imgPreview, index) => {
+	
+	fileInputs.forEach((fileInput, index) => {
 		
-		imgPreview.addEventListener('click', function () {
+		var deleteBtn = document.getElementById('delete-btn-' + index);
+		deleteBtn.addEventListener('click', function () {
 			
-			fileInputs[index].click();
-		});
-	});
-	fileNames.forEach((fileName, index) => {
-		
-		fileName.addEventListener('click', function () {
+			imgPreviews[index].src = '';
+			imgPreviews[index].style.display = 'none';
 			
-			fileInputs[index].click();
+			fileInput.value = '';
+			
+			fileNames[index].textContent = '';
+			
+			deleteBtn.style.display = 'none';
+			
+			if (currentFileIndex > 0) {
+				
+				currentFileIndex--;
+			}
 		});
 	});
 </script>

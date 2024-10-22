@@ -224,7 +224,7 @@ alert("평점 확인" + value);
 																</c:if>
 															</div>
 															<div style="margin-left: 5px; display: flex;">
-																<span class="reviewsub" style="padding-top: 5px; font-size: 12px !important; color: #888 !important;">
+																<span class="reviewsub" style="font-family: Dotum, 돋움, Helvetica, AppleSDGothicNeo, Arial, sans-serif !important; padding-top: 5px; font-size: 12px !important; color: #888 !important;">
 																	${review.dt_reg}
 																</span>
 															</div>

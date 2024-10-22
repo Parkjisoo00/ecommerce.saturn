@@ -88,7 +88,7 @@ alert("평점 확인" + value);
 									<img src="${saleDto.img}" style="height: 100px !important; ">
 								</div>
 								<div class="product-name" style="flex-grow: 1; padding-right: 0px !important">
-									<div class="product-name" style="padding: 0px !important; padding-top: 20px !important; font-weight: bold !important;">
+									<div class="product-name" style="padding: 0px !important; font-weight: bold !important;">
 										${saleDto.sle_nm}, ${saleDto.count}개
 									</div>
 									<div class="product-name" style="padding: 0px !important;">
@@ -112,20 +112,23 @@ alert("평점 확인" + value);
 										파일 선택
 									</label>
 									<div id="file-inputs" style="display: flex; margin-left: 20px; align-items: center;">
-										<div style="display: flex; align-items: center;">
+										<div style="display: flex; flex-direction: column; align-items: center;">
 											<img id="img-preview-0" style="display: none; width: 70px; height: 80px; object-fit: cover; cursor: pointer;" />
 											<input type="file" id="file-input-0" style="display: none;" />
 											<span id="file-name-0" style="margin-left: 10px; cursor: pointer; display: none !important;"></span>
+											<button type="button" id="delete-btn-0" style="display: none; background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
 										</div>
-										<div style="display: flex; align-items: center; margin-left: 20px;">
+										<div style="display: flex; flex-direction: column; align-items: center; margin-left: 20px;">
 											<img id="img-preview-1" style="display: none; width: 70px; height: 80px; object-fit: cover; cursor: pointer;" />
 											<input type="file" id="file-input-1" style="display: none;" />
 											<span id="file-name-1" style="margin-left: 10px; cursor: pointer; display: none !important;"></span>
+											<button type="button" id="delete-btn-1" style="display: none; background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
 										</div>
-										<div style="display: flex; align-items: center; margin-left: 20px;">
+										<div style="display: flex; flex-direction: column; align-items: center; margin-left: 20px;">
 											<img id="img-preview-2" style="display: none; width: 70px; height: 80px; object-fit: cover; cursor: pointer;" />
 											<input type="file" id="file-input-2" style="display: none;" />
 											<span id="file-name-2" style="margin-left: 10px; cursor: pointer; display: none !important;"></span>
+											<button type="button" id="delete-btn-2" style="display: none; background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
 										</div>
 									</div>
 								</div>
@@ -217,43 +220,85 @@ alert("평점 확인" + value);
 		document.getElementById('img-preview-2')
 	];
 	
+	var deleteButtons = [
+		document.getElementById('delete-btn-0'),
+		document.getElementById('delete-btn-1'),
+		document.getElementById('delete-btn-2')
+	];
+	
 	var label = document.getElementById('show-input');
 	
+	function setFileNames() {
+		
+		fileInputs.forEach((input, index) => {
+			
+			if (input.files.length > 0) {
+				
+				input.setAttribute('name', 'files[' + index + ']');
+			} else {
+				
+				input.removeAttribute('name');
+			}
+		});
+	}
 	label.addEventListener('click', function () {
 		
 		if (currentFileIndex < fileInputs.length) {
 			
 			var currentInput = fileInputs[currentFileIndex];
-			
 			var handleFileChange = (function(index) {
 				
 				return function () {
 					
 					if (currentInput.files.length > 0) {
 						
-						currentInput.setAttribute('name', 'files[' + index + ']');
-						
 						var file = currentInput.files[0];
-						fileNames[index].textContent = file.name;
 						
+						fileNames[index].textContent = file.name;
 						if (file.type.startsWith('image/')) {
 							
 							var reader = new FileReader();
+							
 							reader.onload = function (e) {
 								
 								imgPreviews[index].src = e.target.result;
 								imgPreviews[index].style.display = 'inline';
+								deleteButtons[index].style.display = 'inline';
 							};
 							reader.readAsDataURL(file);
 						}
+						setFileNames();
 						currentFileIndex++;
 					}
-				}
+				};
 			})(currentFileIndex);
 			currentInput.click();
 			currentInput.removeEventListener('change', handleFileChange);
 			currentInput.addEventListener('change', handleFileChange);
 		}
+	});
+	deleteButtons.forEach((deleteBtn, index) => {
+		
+		deleteBtn.addEventListener('click', function () {
+			
+			imgPreviews[index].src = '';
+			imgPreviews[index].style.display = 'none';
+			
+			fileInputs[index].value = '';
+			
+			fileNames[index].textContent = '';
+			
+			deleteBtn.style.display = 'none';
+			
+			fileInputs[index].removeAttribute('name');
+			
+			setFileNames();
+			
+			if (currentFileIndex > 0) {
+				
+				currentFileIndex--;
+			}
+		});
 	});
 	imgPreviews.forEach((imgPreview, index) => {
 		
