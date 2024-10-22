@@ -2,6 +2,57 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.sale.Sale">
 
+	<select id="reviewModifyImgs" parameterType="saleDto" resultType="saleDto">
+		SELECT
+			SEQ_REVIEW
+			, FILE_SAVE
+		FROM
+			TB_REVIEW_IMG
+		WHERE
+			SEQ_REVIEW IN (
+				SELECT
+					SEQ_REVIEW 
+				FROM
+					TB_REVIEW 
+				WHERE
+					SEQ_MBR = #{seq_mbr}
+					AND SEQ_REVIEW = #{seq_review}
+					AND SEQ_SLE = #{seq_sle}
+			)
+	</select>
+
+	<select id="reviewModify" parameterType="saleDto" resultType="saleDto">
+		SELECT
+			dtl.SLE_NM
+			, review.SEQ_REVIEW
+			, dtl.SEQ_BUY_DTL
+			, review.SEQ_SLE
+			, dtl.COUNT
+			, TO_CHAR(dtl.DT_REG, 'YYYY-MM-DD') dt_reg
+			, review.RATE_REVIEW
+			, rate.RATE_STAR
+			, sle.IMG
+		FROM 
+			TB_REVIEW review
+		LEFT JOIN 
+			TB_BUY_DTL dtl
+		ON 
+			review.SEQ_REVIEW = dtl.SEQ_REVIEW
+			AND dtl.SEQ_BUY_DTL = #{seq_buy_dtl}
+		LEFT JOIN
+			TB_RATE rate
+		ON
+			review.SEQ_REVIEW = rate.SEQ_REVIEW
+		LEFT JOIN
+			TB_SLE sle
+		ON
+			review.SEQ_SLE = sle.SEQ_SLE
+		WHERE 
+			review.SEQ_MBR = #{seq_mbr}
+			AND review.SEQ_REVIEW = #{seq_review}
+			AND review.SEQ_SLE = #{seq_sle}
+	</select>
+
 	<select id="reviewPageListImgs" parameterType="pagingDto" resultType="saleDto">
 		SELECT
 			SEQ_REVIEW
