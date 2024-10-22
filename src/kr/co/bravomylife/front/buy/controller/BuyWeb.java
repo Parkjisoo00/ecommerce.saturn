@@ -442,4 +442,46 @@ public class BuyWeb extends Common {
 		
 		return mav;
 	}
+	
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-21
+	 * <p>DESCRIPTION: 구매 이력</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/buy/history.web")
+	public ModelAndView history(HttpServletRequest request, HttpServletResponse response, BuyDetailDto buyDetailDto, PagingDto pagingDto) {
+
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			buyDetailDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+
+			//구매 이력
+			List<BuyDetailDto> list = buySrvc.list(buyDetailDto);
+			
+			String total_price = buySrvc.selectTotal(buyDetailDto);
+			
+			mav.addObject("list", list);
+			mav.addObject("total_price", total_price);
+			
+			mav.setViewName("front/buy/history");
+			
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".history()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+
 }

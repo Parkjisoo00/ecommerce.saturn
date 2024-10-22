@@ -20,20 +20,29 @@
  */
 package kr.co.bravomylife.front.myPage.controller;
 
+import java.util.List;
+import java.util.Properties;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.backoffice.common.Common;
+import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
+import kr.co.bravomylife.front.buy.service.BuySrvc;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
+import kr.co.bravomylife.front.member.dto.MemberDto;
+import kr.co.bravomylife.front.member.service.MemberSrvc;
 import kr.co.bravomylife.front.sale.service.SaleSrvc;
+import kr.co.bravomylife.util.security.SKwithAES;
 
 /**
  * @version 1.0.0
@@ -51,6 +60,16 @@ public class MyPageWeb extends Common{
 
 	@Inject
 	SaleSrvc saleSrvc;
+	
+	@Inject
+	BuySrvc buySrvc;
+	
+	@Autowired
+	Properties staticProperties;
+	
+	@Inject
+	private MemberSrvc memberSrvc;
+	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
@@ -62,17 +81,38 @@ public class MyPageWeb extends Common{
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/myPage/index.web")
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, BuyDetailDto buyDetailDto
+			, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
+		
+		
 		try {
-			pagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+			
+			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			MemberDto _memberDto = memberSrvc.select(memberDto);
+			
+			_memberDto.setMbr_nm(aes.decode(_memberDto.getMbr_nm()));
+			mav.addObject("memberDto", _memberDto);
+			
+			pagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			PagingListDto pagingListDto = saleSrvc.listingMyLike(pagingDto);
 			
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
+			
+			buyDetailDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			List<BuyDetailDto> historyList = buySrvc.historyList(buyDetailDto);
+			String total_price = buySrvc.selectTotal(buyDetailDto);
+			
+			mav.addObject("historyList", historyList);
+			mav.addObject("total_price", total_price);
+			
 			mav.setViewName("front/myPage/index");
 		}
 		catch (Exception e) {

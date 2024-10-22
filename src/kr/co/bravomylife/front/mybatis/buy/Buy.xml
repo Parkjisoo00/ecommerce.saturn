@@ -2,4 +2,88 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.buy.Buy">
 	
+	
+	<select id="selectTotal" parameterType="buyDetailDto" resultType="java.lang.String">
+		SELECT
+			SUM(PRICE) total_price
+		FROM
+			TB_BUY_DTL
+		WHERE
+			SEQ_MBR = #{seq_mbr}
+	</select>
+	
+	<select id="list" parameterType="buyDetailDto" resultType="buyDetailDto">
+			SELECT *
+				FROM
+			(
+				SELECT
+					dtl.SEQ_BUY_MST
+					, dtl.SEQ_BUY_DTL
+					, dtl.SEQ_MBR
+					, dtl.COUNT
+					, dtl.PRICE
+					, TO_CHAR(dtl.DT_REG, 'YYYY-MM-DD') AS dt_reg
+					, (SELECT DECODE(mst.CD_STATE, 1, '결제', 2, '취소', 3, '교환', 4, '환불','미완성') from TB_BUY_MST mst where mst.seq_buy_mst = dtl.seq_buy_mst) cd_state
+					, (SELECT DECODE(mst.CD_STATE_PAY, 'null', '결제전', 'N', '실패', 'Y', '성공', 'C', '취소', 'error') from TB_BUY_MST mst where mst.seq_buy_mst = dtl.seq_buy_mst)  cd_state_pay
+					, (SELECT DECODE(mst.CD_STATE_DELIVERY, 'null', '등록', 'C', '판매 확인중', 'P', '배송 준비중', 'D', '배송중', 'Y', '배송 완료','미완성') from TB_BUY_MST mst where mst.seq_buy_mst = dtl.seq_buy_mst)  cd_state_delivery
+					, sle.SEQ_SLE									
+					, sle.SLE_NM
+					, sle.IMG
+					, sle.DISCOUNT
+					, sle.PRICE_SALE								
+					, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100))		discount_sale
+					, sle.cd_ctg_m									
+					, sle.cd_ctg_b	
+					, sle.FLG_DELETE					
+				FROM 
+					TB_BUY_DTL dtl 
+				INNER JOIN 
+					TB_SLE sle	
+				ON 
+					dtl.SEQ_SLE = sle.SEQ_SLE
+				WHERE
+					dtl.SEQ_MBR = #{seq_mbr}
+				)
+					ORDER BY dt_reg DESC
+	</select>
+	
+	
+	<select id="historyList" parameterType="buyDetailDto" resultType="buyDetailDto">
+			SELECT *
+				FROM
+			(
+				SELECT
+					dtl.SEQ_BUY_MST
+					, dtl.SEQ_BUY_DTL
+					, dtl.SEQ_MBR
+					, dtl.COUNT
+					, dtl.PRICE
+					, TO_CHAR(dtl.DT_REG, 'YYYY-MM-DD') AS dt_reg
+					, (SELECT DECODE(mst.CD_STATE, 1, '결제', 2, '취소', 3, '교환', 4, '환불','미완성') from TB_BUY_MST mst where mst.seq_buy_mst = dtl.seq_buy_mst) cd_state
+					, (SELECT DECODE(mst.CD_STATE_PAY, 'null', '결제전', 'N', '실패', 'Y', '성공', 'C', '취소', 'error') from TB_BUY_MST mst where mst.seq_buy_mst = dtl.seq_buy_mst)  cd_state_pay
+					, (SELECT DECODE(mst.CD_STATE_DELIVERY, 'null', '등록', 'C', '판매 확인중', 'P', '배송 준비중', 'D', '배송중', 'Y', '배송 완료','미완성') from TB_BUY_MST mst where mst.seq_buy_mst = dtl.seq_buy_mst)  cd_state_delivery
+					, sle.SEQ_SLE									
+					, sle.SLE_NM
+					, sle.IMG
+					, sle.DISCOUNT
+					, sle.PRICE_SALE								
+					, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100))		discount_sale
+					, sle.cd_ctg_m									
+					, sle.cd_ctg_b	
+					, sle.FLG_DELETE					
+				FROM 
+					TB_BUY_DTL dtl 
+				INNER JOIN 
+					TB_SLE sle	
+				ON 
+					dtl.SEQ_SLE = sle.SEQ_SLE
+				WHERE
+					dtl.SEQ_MBR = #{seq_mbr}
+				<![CDATA[
+					AND rownum <=3
+				]]>
+				)
+					ORDER BY dt_reg DESC
+	</select>
+	
 </mapper>

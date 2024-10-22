@@ -46,7 +46,95 @@ public class BuyDetailDto {
 	private String format_total_point	= "";
 	private int seq_mbr					= 0;
 	
+	private int rnum						= 0;
+	private String cd_state					= "";
+	private String cd_state_pay				= "";
+	private String cd_state_delivery		= "";
+	private String img						= "";
+	private int discount					= 0;
+	private int discount_sale				= 0;
+	private String cd_ctg_b					= "";	
+	private String cd_ctg_m					= "";
+	private String flg_delete				= "";
+	private int point_stack					= 0;
+	private int price_sale			= 0;
 	
+	
+	
+	
+	
+	public int getPrice_sale() {
+		return price_sale;
+	}
+	public void setPrice_sale(int price_sale) {
+		this.price_sale = price_sale;
+	}
+	public int getPoint_stack() {
+		return point_stack;
+	}
+	public void setPoint_stack(int point_stack) {
+		this.point_stack = point_stack;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	public String getCd_state() {
+		return cd_state;
+	}
+	public void setCd_state(String cd_state) {
+		this.cd_state = cd_state;
+	}
+	public String getCd_state_pay() {
+		return cd_state_pay;
+	}
+	public void setCd_state_pay(String cd_state_pay) {
+		this.cd_state_pay = cd_state_pay;
+	}
+	public String getCd_state_delivery() {
+		return cd_state_delivery;
+	}
+	public void setCd_state_delivery(String cd_state_delivery) {
+		this.cd_state_delivery = cd_state_delivery;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+	public int getDiscount_sale() {
+		return discount_sale;
+	}
+	public void setDiscount_sale(int discount_sale) {
+		this.discount_sale = discount_sale;
+	}
+	public String getCd_ctg_b() {
+		return cd_ctg_b;
+	}
+	public void setCd_ctg_b(String cd_ctg_b) {
+		this.cd_ctg_b = cd_ctg_b;
+	}
+	public String getCd_ctg_m() {
+		return cd_ctg_m;
+	}
+	public void setCd_ctg_m(String cd_ctg_m) {
+		this.cd_ctg_m = cd_ctg_m;
+	}
+	public String getFlg_delete() {
+		return flg_delete;
+	}
+	public void setFlg_delete(String flg_delete) {
+		this.flg_delete = flg_delete;
+	}
 	public int getSeq_mbr() {
 		return seq_mbr;
 	}

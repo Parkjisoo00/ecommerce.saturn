@@ -956,6 +956,7 @@
 				, sle.cd_ctg_b									cd_ctg_b
 				, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD')				dt_reg
 				, sle.COUNT_STOCK								count_stock
+				, sle.DISCOUNT									discount
 				, likeTbl.FLG_LIKE								flg_like
 			FROM
 				TB_SLE sle

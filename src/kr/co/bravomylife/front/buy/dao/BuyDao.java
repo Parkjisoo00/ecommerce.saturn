@@ -20,6 +20,8 @@
  */
 package kr.co.bravomylife.front.buy.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
@@ -68,4 +70,19 @@ public class BuyDao extends BaseDao {
 	public int insertDetail(BuyDetailDto buyDetailDto) {
 		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.buy.BuyDetail.insert", buyDetailDto);
 	}
+	
+	public String selectTotal(BuyDetailDto buyDetailDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.buy.Buy.selectTotal", buyDetailDto);
+	}
+	
+	public List<BuyDetailDto> list(BuyDetailDto buyDetailDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.buy.Buy.list", buyDetailDto);
+	}
+	
+	public List<BuyDetailDto> historyList(BuyDetailDto buyDetailDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.buy.Buy.historyList", buyDetailDto);
+	}
+	
+
+	
 }

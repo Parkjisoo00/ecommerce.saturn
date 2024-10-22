@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ page info="/WEB-INF/view/front/basket/index.jsp" %>
 <!DOCTYPE html>
 <html lang="kor">
@@ -6,30 +6,9 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
-	
-	function remove(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.seq_sle.setAttribute("value", value);
-		
-		document.getElementById("count").remove();
-		document.getElementById("currentPage").remove();
-		document.getElementById("discount_sale").remove();
-		document.getElementById("point_stack").remove();
-		
-		frmMain.action="/front/member/likeRemove.web";
-		frmMain.submit();
-	}
-	
 	function goWriteForm(value, value2, value3) {
 		
 		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("count").remove();
-		document.getElementById("currentPage").remove();
-		document.getElementById("discount_sale").remove();
-		document.getElementById("point_stack").remove();
 		
 		frmMain.seq_sle.setAttribute("value", value);
 		frmMain.cd_ctg_m.setAttribute("value", value2);
@@ -43,11 +22,6 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.currentPage.setAttribute("value", value);
-		
-		document.getElementById("count").remove();
-		document.getElementById("discount_sale").remove();
-		document.getElementById("point_stack").remove();
-		
 		
 		frmMain.action="/front/member/myLike.web";
 		frmMain.submit();
@@ -76,6 +50,24 @@
 		frmMain.target = "frmBlank";
 		frmMain.submit();
 	}
+	
+	function review(value, value2, value3, value4) {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	document.getElementById("count").remove();
+	document.getElementById("discount").remove();
+	document.getElementById("discount_sale").remove();
+	document.getElementById("price_sale").remove();
+	document.getElementById("point_stack").remove();
+	
+	frmMain.seq_sle.setAttribute("value", value);
+	frmMain.cd_ctg_m.setAttribute("value", value2);
+	frmMain.cd_ctg_b.setAttribute("value", value3);
+	frmMain.seq_buy_dtl.setAttribute("value", value4);
+	frmMain.action="/front/buy/review.web";
+	frmMain.submit();
+}
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -97,8 +89,7 @@
 <input type="hidden" name="count"				id="count"				/>
 <input type="hidden" name="price_sale"			id="price_sale"			/>
 <input type="hidden" name="discount"			id="discount"			/>
-<input type="hidden" name="cd_bbs_type"	id="cd_bbs_type" value="${paging.cd_bbs_type}" />
-<input type="hidden" name="currentPage"	id="currentPage" value="${paging.currentPage}" />
+<input type="hidden" name="seq_buy_dtl"			id="seq_buy_dtl"		/>
 
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -111,7 +102,7 @@
 
 	<!-- Breadcrumb Begin -->
 	<ul class="my-custom-ul" style= "transform: translateY(35px);">
-				<li><img src="/img/mypage/mypage1.png"><a style="font-size :30px" href="/front/myPage/" class="menuLnb">	마이 페이지</a></li>
+				<li><a style="font-size :30px" href="/front/myPage/" class="menuLnb">마이 페이지</a></li>
 				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/modifyForm.web" class="menuLnb">개인정보 수정</a></li>
 				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goList(3);" class="menuLnb">문의 이력</a></li>
 				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">포인트</a></li>
@@ -127,7 +118,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h6 class="lowgnb-title" style="padding-bottom: 20px; text-align: left; font-size: 35px;">찜 리스트</h6>
+					<h6 class="lowgnb-title" style="padding-bottom: 20px; text-align: left; font-size: 35px;">구매 이력</h6>
 					<h6 class="cart-title">*이미지를 클릭하면 상품으로 이동합니다</h6>
 						<div class="shop__cart__table" style="border: 1px solid #dbdbdb; border-radius: 4px;">
 							<table id="productBasket" class="cart-table">
@@ -135,15 +126,20 @@
 									<tr style="border-color: #707070 !important;">
 										<th class="cart-th" style="width: 5%">
 										<th class="cart-th" >상품정보</th>
-										<th class="cart-th" style="width: 20%">상품금액</th>
-										<th class="cart-th" style="width: 20%">상품처리(미정)</th>
+										<th class="cart-th" style="width: 10%">수량</th>
+										<th class="cart-th" style="width: 10%">상품 금액</th>
+										<th class="cart-th" style="width: 20%">구매 날자</th>
+										<th class="cart-th" style="width: 10%">구매 상태</th>
+										<th class="cart-th" style="width: 10%">결재 상태</th>
+										<th class="cart-th" style="width: 10%">배송 상태</th>
+										<th class="cart-th" style="width: 10%">상품처리(미정)</th>
 									</tr>
 								</thead>
 								<tbody>
 								<c:choose>
 									<c:when test="${empty list}">
 										<tr style="text-align: center; border-bottom: 1px solid #707070;">
-											<td colspan="7">찜한 상품이 없습니다</td>
+											<td colspan="7">구매한 상품이 없습니다</td>
 										</tr>
 									</c:when>
 									<c:otherwise>
@@ -158,18 +154,34 @@
 														</a>
 													</div>
 												</td>
-												<td class="cart-td" style="text-align: left !important;">
+												<td class="cart-td" style="text-align: center !important;">
 													${list.sle_nm}
 												</td>
-												<td class="cart-td">
-													<fmt:formatNumber value="${list.price_sale}" type="number" />원
+												<td class="cart-td" style="text-align: center !important;">
+													${list.count} 개
 												</td>
+												<td class="cart-td">
+													<fmt:formatNumber value="${list.price}" type="number" />원
+												</td>
+												<td class="cart-td" style="text-align: center !important;">
+													${list.dt_reg}
+												</td>
+												<td class="cart-td" style="text-align: center !important;">
+													${list.cd_state}
+												</td>
+												<td class="cart-td" style="text-align: center !important;">
+													${list.cd_state_pay}
+												</td>
+												<td class="cart-td" style="text-align: center !important;">
+													${list.cd_state_delivery}
+												</td>
+												
 												<td class="cart-td">
 													<div style="display: flex; flex-direction: column; align-items: center;">
 														<a href="javascript:setBasket('${list.seq_sle}', '${list.sle_nm}', '${list.discount_sale}', '${list.count}'
 														, '${list.img}', '${list.point_stack}', '${list.cd_ctg_m}', '${list.cd_ctg_b}', '${list.price_sale}', '${list.discount}');" 
 														class="cart-btn" style="background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;margin-top:0px">장바구니 담기</a>
-														<a href="javascript:remove('${list.seq_sle}')" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;padding: 10px 45px 10px;">삭제</a>
+														<a href="javascript:review('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}', '${list.seq_buy_dtl}');" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">후기 작성하기</a>
 													</div>
 												</td>
 											</tr>

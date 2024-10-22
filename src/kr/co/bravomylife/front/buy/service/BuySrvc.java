@@ -21,6 +21,7 @@
 package kr.co.bravomylife.front.buy.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -135,4 +136,44 @@ public class BuySrvc {
 			return false;
 		}
 	}
+	
+	
+	/**
+	 * @return String
+	 * 
+	 * @since 2024-10-21
+	 * <p>DESCRIPTION: 마이페이지 구매이력 총 구매 금액</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public String selectTotal(BuyDetailDto buyDetailDto) {
+		return buyDao.selectTotal(buyDetailDto);
+	}
+	
+	/**
+	 * @return List<BuyDto>
+	 * 
+	 * @since 2024-10-21
+	 * <p>DESCRIPTION: 마이페이지 구매이력 목록</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public List<BuyDetailDto> list(BuyDetailDto buyDetailDto) {
+		return buyDao.list(buyDetailDto);
+	}
+	
+	/**
+	 * @return List<BuyDto>
+	 * 
+	 * @since 2024-10-21
+	 * <p>DESCRIPTION: 마이페이지 구매이력 목록</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public List<BuyDetailDto> historyList(BuyDetailDto buyDetailDto) {
+		return buyDao.historyList(buyDetailDto);
+	}
+
+
+	
 }
