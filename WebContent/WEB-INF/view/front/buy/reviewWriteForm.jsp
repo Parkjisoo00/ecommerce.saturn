@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<%@ page info="/WEB-INF/view/front/buy/review.jsp" %>
+<%@ page info="/WEB-INF/view/front/buy/reviewWriteForm.jsp" %>
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
@@ -30,7 +30,6 @@
 		frmMain.action = "/front/buy/reviewWriteProc.web";
 		frmMain.submit();
 	}
-	
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>

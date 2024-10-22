@@ -21,7 +21,7 @@
 		frmMain.submit();
 	}
 	
-	function review(value, value2, value3, value4) {
+	function reviewWriteForm(value, value2, value3, value4) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
@@ -29,7 +29,20 @@
 		frmMain.cd_ctg_m.setAttribute("value", value2);
 		frmMain.cd_ctg_b.setAttribute("value", value3);
 		frmMain.seq_buy_dtl.setAttribute("value", value4);
-		frmMain.action="/front/buy/review.web";
+		frmMain.action="/front/buy/reviewWriteForm.web";
+		frmMain.submit();
+	}
+	
+	function reviewModifyForm(value, value2, value3, value4, value5) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.seq_sle.setAttribute("value", value);
+		frmMain.cd_ctg_m.setAttribute("value", value2);
+		frmMain.cd_ctg_b.setAttribute("value", value3);
+		frmMain.seq_buy_dtl.setAttribute("value", value4);
+		frmMain.seq_review.setAttribute("value", value5);
+		frmMain.action="/front/buy/reviewModifyForm.web";
 		frmMain.submit();
 	}
 	</script>
@@ -49,8 +62,9 @@ alert("평점 확인" + value);
 <input type="hidden" name="seq_sle"			id="seq_sle"/>
 <input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>
 <input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
-<input type="hidden" name="currentPage"		id="currentPage"	value="${paging.currentPage}"/>
 <input type="hidden" name="seq_buy_dtl"		id="seq_buy_dtl" value="0"/>
+<input type="hidden" name="seq_review"		id="seq_review" value="0"/>
+<input type="hidden" name="currentPage"		id="currentPage"	value="${paging.currentPage}"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -121,7 +135,7 @@ alert("평점 확인" + value);
 															</div>
 														</div>
 														<div style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; width: 25% !important; height: auto !important; flex-shrink: 0 !important; overflow: hidden !important;">
-															<a href="javascript:review('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}', '${list.seq_buy_dtl}');" class="cart-btn" style="border-radius: 0px !important; background: white; color: #346aff !important; border: 1px solid #346aff !important; margin: 0; padding: 7px 7px 7px !important; text-align: center !important;">
+															<a href="javascript:reviewWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}', '${list.seq_buy_dtl}');" class="cart-btn" style="border-radius: 0px !important; background: white; color: #346aff !important; border: 1px solid #346aff !important; margin: 0; padding: 7px 7px 7px !important; text-align: center !important;">
 																후기 작성하기
 															</a>
 														</div>
@@ -160,10 +174,10 @@ alert("평점 확인" + value);
 															</div>
 															<div style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; width: 25% !important; height: auto !important; flex-shrink: 0 !important; overflow: hidden !important;">
 																<span>
-																<a href="javascript:#('${review.seq_sle}', '${review.cd_ctg_m}', '${review.cd_ctg_b}', '${review.seq_buy_dtl}');" style="padding-right: 2px !important; margin-right: 5px !important; border-right: 1px solid #d5d5d5 !important;color: #346aff !important; margin: 0; text-align: center !important; font-size: 14px !important">
+																<a href="javascript:reviewModifyForm('${review.seq_sle}', '${review.cd_ctg_m}', '${review.cd_ctg_b}', '${review.seq_buy_dtl}', '${review.seq_review}');" style="padding-right: 2px !important; margin-right: 5px !important; border-right: 1px solid #d5d5d5 !important;color: #346aff !important; margin: 0; text-align: center !important; font-size: 14px !important">
 																 수정
 																</a>
-																<a href="javascript:#('${review.seq_sle}', '${review.cd_ctg_m}', '${review.cd_ctg_b}', '${review.seq_buy_dtl}');" style="color: #346aff !important; margin: 0; text-align: center !important; font-size: 14px !important">
+																<a href="javascript:#('${review.seq_sle}', '${review.cd_ctg_m}', '${review.cd_ctg_b}', '${review.seq_buy_dtl}', '${review.seq_review}');" style="color: #346aff !important; margin: 0; text-align: center !important; font-size: 14px !important">
 																 삭제
 																</a>
 																</span>
@@ -218,26 +232,26 @@ alert("평점 확인" + value);
 													</div>
 												</div>
 												<div class="review-name" style="padding: 10px 15px !important; border-bottom: 0px !important; border-top: 0px !important;">
-												<c:choose>
-													<c:when test="${empty review.imgs}">
-														<div class="photoreview" style="display: inline-block; padding-bottom: 20px !important; padding-left: 0px !important; padding-top: 0px !important; width: auto !important;">
-															<h6 class="cart-title" style="padding-bottom: 0px !important; margin-bottom: 0px !important; font-weight: normal !important;">*등록된 상품후기 이미지가 없습니다.</h6>
-														</div>
-													</c:when>
-													<c:otherwise>
-														<c:forEach var="imgs" items="${review.imgs}">
-															<div class="photoreview" style="display: inline-block; padding: 0px !important; width: auto !important;">
-																<img src="/img/review/${imgs}" style="width: 70px; height: 80px; object-fit: cover;">
+													<c:choose>
+														<c:when test="${empty review.imgs}">
+															<div class="photoreview" style="display: inline-block; padding-bottom: 20px !important; padding-left: 0px !important; padding-top: 0px !important; width: auto !important;">
+																<h6 class="cart-title" style="padding-bottom: 0px !important; margin-bottom: 0px !important; font-weight: normal !important;">*등록된 상품후기 이미지가 없습니다.</h6>
 															</div>
-														</c:forEach>	
-													</c:otherwise>
-												</c:choose>
+														</c:when>
+														<c:otherwise>
+															<c:forEach var="imgs" items="${review.imgs}">
+																<div class="photoreview" style="display: inline-block; padding: 0px !important; width: auto !important;">
+																	<img src="/img/review/${imgs}" style="width: 70px; height: 80px; object-fit: cover;">
+																</div>
+															</c:forEach>	
+														</c:otherwise>
+													</c:choose>
 												</div>
-												<div class="review-name" style="padding: 10px 15px 40px 15px !important; display: block !important; border-top: 0px !important; border-bottom: 0px !important;">
-													<div class="reviewsub">
-														${review.rate_review}
+													<div class="review-name" style="padding: 10px 15px 40px 15px !important; display: block !important; border-top: 0px !important; border-bottom: 0px !important;">
+														<div class="reviewsub">
+															${review.rate_review}
+														</div>
 													</div>
-												</div>
 												</c:forEach>
 											</c:otherwise>
 										</c:choose>

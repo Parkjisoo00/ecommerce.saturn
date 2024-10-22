@@ -51,6 +51,62 @@ public class SaleSrvc {
 	
 	@Inject
 	SaleDao saleDao;
+		
+	@SuppressWarnings("unchecked")
+	public SaleListDto mergeReviewModify(SaleListDto _saleDto, SaleListDto _saleDtoImgs) {
+		
+		List<SaleDto> modifyList = (List<SaleDto>) _saleDto.getList();
+		List<SaleDto> modifyImgsList = (List<SaleDto>) _saleDtoImgs.getList();
+		
+		Map<Integer, List<String>> imagesMap = new HashMap<>();
+		
+		for (SaleDto modifyImg : modifyImgsList) {
+			
+			int seqReview = modifyImg.getSeq_review();
+			String fileSave = modifyImg.getFile_save();
+			
+			if (!imagesMap.containsKey(seqReview)) {
+				
+				imagesMap.put(seqReview, new ArrayList<>());
+			}
+			
+			imagesMap.get(seqReview).add(fileSave);
+		}
+		
+		for (SaleDto modify : modifyList) {
+			int seqReview = modify.getSeq_review();
+			
+			List<String> images = imagesMap.get(seqReview);
+			
+			if (images != null) {
+				modify.setImgs(images);
+			}
+		}
+		
+		SaleListDto mergedReviewListDto = new SaleListDto();
+		mergedReviewListDto.setSale(_saleDto.getSale());
+		mergedReviewListDto.setList(modifyList);
+		
+		return mergedReviewListDto;
+	}
+	
+	public SaleListDto reviewModifyImgs(SaleDto saleDto) {
+				
+		SaleListDto saleListDto = new SaleListDto();
+		
+		saleListDto.setList(saleDao.reviewModifyImgs(saleDto));
+		
+		return saleListDto;
+	}
+	
+	public SaleListDto reviewModify(SaleDto saleDto) {
+		
+		SaleListDto saleListDto = new SaleListDto();
+		
+		saleListDto.setList(saleDao.reviewModify(saleDto));
+		
+		return saleListDto;
+	}
 	
 	@SuppressWarnings("unchecked")
 	public PagingListDto mergePageReviewAndImages(PagingListDto reviewListDto, PagingListDto reviewImgsDto) {

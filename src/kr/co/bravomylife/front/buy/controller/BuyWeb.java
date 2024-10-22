@@ -159,12 +159,12 @@ public class BuyWeb extends Common {
 				if (result) {
 					
 					request.setAttribute("script", "alert('상품 후기가 등록되었습니다.');");
-					request.setAttribute("redirect", "/");
+					request.setAttribute("redirect", "/front/buy/reviewListPage.web");
 					// 추후 코드 완성시 마이 페이지 리뷰 관리 페이지로 이동
 				} else {
 					
 					request.setAttribute("script", "alert('시스템 관리자에게 문의하세요.');");
-					request.setAttribute("redirect", "/");
+					request.setAttribute("redirect", "/front/buy/reviewListPage.web");
 				}
 			} 
 			mav.setViewName("forward:/servlet/result.web");
@@ -268,8 +268,47 @@ public class BuyWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/buy/review.web")
-	public ModelAndView review(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+	@RequestMapping(value = "/front/buy/reviewModifyForm.web")
+	public ModelAndView reviewModifyForm(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
+			
+			saleDto.setSeq_mbr(seqMbr);
+			saleDto.setUpdater(seqMbr);
+			
+			SaleListDto _saleDto = saleSrvc.reviewModify(saleDto);
+			SaleListDto _saleDtoImgs = saleSrvc.reviewModifyImgs(saleDto);
+			
+			SaleListDto mergedReviewModify = saleSrvc.mergeReviewModify(_saleDto, _saleDtoImgs);
+			
+			mav.addObject("reviewList", mergedReviewModify.getList());
+			mav.setViewName("front/buy/reviewModifyForm");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".reviewModifyForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-010-17
+	 * <p>DESCRIPTION: 리뷰 관리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/buy/reviewWriteForm.web")
+	public ModelAndView reviewWriteForm(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
@@ -280,10 +319,10 @@ public class BuyWeb extends Common {
 			SaleDto _saleDto = saleSrvc.review(saleDto);
 			
 			mav.addObject("saleDto", _saleDto);
-			mav.setViewName("front/buy/review");
+			mav.setViewName("front/buy/reviewWriteForm");
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".review()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".reviewWriteForm()] " + e.getMessage(), e);
 		}
 		finally {}
 		

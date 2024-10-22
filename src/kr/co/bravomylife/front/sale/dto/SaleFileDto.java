@@ -33,6 +33,7 @@ public class SaleFileDto {
 	private int seq_sle					= 0;
 	private int seq_review				= 0;
 	private int seq_mbr					= 0;
+	private int seq_buy_dtl				= 0;
 	private String file_save			= "";
 	private String file_orig			= "";
 	private String fileNameOriginal		= "";
@@ -40,6 +41,12 @@ public class SaleFileDto {
 	private Long fileSize				= 0L;
 	
 	
+	public int getSeq_buy_dtl() {
+		return seq_buy_dtl;
+	}
+	public void setSeq_buy_dtl(int seq_buy_dtl) {
+		this.seq_buy_dtl = seq_buy_dtl;
+	}
 	public int getSeq_sle() {
 		return seq_sle;
 	}
