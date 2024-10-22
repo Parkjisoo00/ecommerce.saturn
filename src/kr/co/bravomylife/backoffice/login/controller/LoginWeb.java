@@ -86,12 +86,39 @@ import kr.co.bravomylife.util.Datetime;
 			session.invalidate();
 			
 			request.setAttribute("script"	, "alert('" + dt_login + "에 로그인한 " + name + "님 안녕히 가세요.')");
-			request.setAttribute("redirect"	, "backoffice/index");
+			request.setAttribute("redirect"	, "/console/index.web");
 			
 			mav.setViewName("forward:/servlet/result.web");
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".logout()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-22
+	 * <p>DESCRIPTION:로그인한 메인 페이지로 가게/p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	@RequestMapping(value = "/console/login/loginForm.web")
+	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			mav.setViewName("backoffice/login/loginForm");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".loginForm()] " + e.getMessage(), e);
 		}
 		finally {}
 		
@@ -133,12 +160,12 @@ import kr.co.bravomylife.util.Datetime;
 												+ session.getAttribute("DT_LOGIN")
 												+ "반갑습니다."
 												+ "')");
+				request.setAttribute("redirect"	, "/console/login/loginForm.web");
 			}
 			else {
 				request.setAttribute("script", "alert('이메일(아이디)과 비밀번호를 확인하세요!')");
+				request.setAttribute("redirect"	, "/console/index.web");
 			}			
-			
-			request.setAttribute("redirect"	, "/console/index.web");
 			
 			mav.setViewName("forward:/servlet/result.web");
 		}

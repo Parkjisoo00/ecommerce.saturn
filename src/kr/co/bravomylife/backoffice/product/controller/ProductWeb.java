@@ -146,7 +146,7 @@ public class ProductWeb {
 				//상품 등록 처리
 				if (productSrvc.insert(productDto)) {
 					request.setAttribute("script"	, "alert('등록되었습니다.');");
-					request.setAttribute("redirect"	, "/backoffice/product/productReg.web");
+					request.setAttribute("redirect"	, "/console/product/productReg.web");
 					
 				}
 				else {
@@ -180,7 +180,7 @@ public class ProductWeb {
 	 * <p>EXAMPLE:</p>
 	 */
 	
-	@RequestMapping(value = "/backoffice/product/productReg.web")
+	@RequestMapping(value = "/console/product/productReg.web")
 	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");

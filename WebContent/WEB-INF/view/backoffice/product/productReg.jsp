@@ -9,8 +9,7 @@
 	<%@ include file="/include/backoffice/header.jsp" %>
 	
 	<%@ include file="/include/backoffice/css.jsp" %>
-
-	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript" src="/js/package/tinymce.js"></script>	
 	<script>

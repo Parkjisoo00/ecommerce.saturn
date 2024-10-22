@@ -87,7 +87,6 @@
 
 <%@ include file="/include/backoffice/footer.jsp" %>
 
-<%@ include file="/include/backoffice/sideBar.jsp" %>
 
 <div class="control-sidebar-bg"></div>
 

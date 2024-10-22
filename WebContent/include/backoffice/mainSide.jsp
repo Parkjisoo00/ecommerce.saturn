@@ -4,6 +4,8 @@
 <span style="float:right;line-height:43px;vertical-align:middle;">
 	<!-- 세션이 있으면 -->
 	<c:if test="${not empty sessionScope.SEQ_MNG}">
+		<a href="/console/myPage/" class="menuTop" title="<%=session.getAttribute("NAME")%>">[마이페이지]</a>
+				 <a href="/console/login/logout.web" class="menuTop">[로그아웃]</a>
 		 <!-- Left side column. contains the logo and sidebar -->
 			<aside class="main-sidebar">
 				<!-- sidebar: style can be found in sidebar.less -->
@@ -85,7 +87,7 @@
 						</span>
 					</a>
 					<ul class="treeview-menu">
-						<li><a href="backoffice/product/productReg.web"><i class="fa fa-circle-o"></i> 상품 등록</a></li>
+						<li><a href="/console/product/productReg.web"><i class="fa fa-circle-o"></i> 상품 등록</a></li>
 						<li><a href="#"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
 						<li><a href="#"><i class="fa fa-circle-o"></i> Editors</a></li>
 					</ul>
