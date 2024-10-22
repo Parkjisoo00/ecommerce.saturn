@@ -952,7 +952,6 @@
 				, sle.PRICE_SALE								price_sale
 				, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100))	discount_sale
 				, sle.CORP_NM									corp_nm
-				, rate.COUNT									count
 				, sle.cd_ctg_m									cd_ctg_m
 				, sle.cd_ctg_b									cd_ctg_b
 				, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD')				dt_reg
@@ -961,10 +960,6 @@
 				, likeTbl.FLG_LIKE								flg_like
 			FROM
 				TB_SLE sle
-			LEFT OUTER JOIN
-				TB_RATE rate
-			ON
-				sle.SEQ_SLE = rate.SEQ_SLE
 			LEFT OUTER JOIN
 				TB_LIKE likeTbl
 			ON
@@ -989,10 +984,6 @@
 		FROM
 			TB_SLE sle
 		LEFT OUTER JOIN
-			TB_RATE rate
-		ON
-			sle.SEQ_SLE = rate.SEQ_SLE
-		LEFT OUTER JOIN
 			TB_LIKE likeTbl
 		ON
 			sle.SEQ_SLE = likeTbl.SEQ_SLE
@@ -1016,7 +1007,6 @@
 			, sle.PRICE_SALE								price_sale
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100))	discount_sale
 			, sle.CORP_NM									corp_nm
-			, rate.COUNT									count
 			, sle.cd_ctg_m									cd_ctg_m
 			, sle.cd_ctg_b									cd_ctg_b
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD')				dt_reg
@@ -1024,10 +1014,6 @@
 			, likeTbl.FLG_LIKE								flg_like
 		FROM
 			TB_SLE sle
-		LEFT OUTER JOIN
-			TB_RATE rate
-		ON
-			sle.SEQ_SLE = rate.SEQ_SLE
 		LEFT OUTER JOIN
 			TB_LIKE likeTbl
 		ON

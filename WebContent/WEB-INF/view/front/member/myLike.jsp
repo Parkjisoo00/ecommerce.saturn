@@ -17,6 +17,8 @@
 		document.getElementById("currentPage").remove();
 		document.getElementById("discount_sale").remove();
 		document.getElementById("point_stack").remove();
+		document.getElementById("price_sale").remove();
+		document.getElementById("discount").remove();
 		
 		frmMain.action="/front/member/likeRemove.web";
 		frmMain.submit();
@@ -30,6 +32,8 @@
 		document.getElementById("currentPage").remove();
 		document.getElementById("discount_sale").remove();
 		document.getElementById("point_stack").remove();
+		document.getElementById("price_sale").remove();
+		document.getElementById("discount").remove();
 		
 		frmMain.seq_sle.setAttribute("value", value);
 		frmMain.cd_ctg_m.setAttribute("value", value2);
@@ -47,6 +51,8 @@
 		document.getElementById("count").remove();
 		document.getElementById("discount_sale").remove();
 		document.getElementById("point_stack").remove();
+		document.getElementById("price_sale").remove();
+		document.getElementById("discount").remove();
 		
 		
 		frmMain.action="/front/member/myLike.web";
@@ -166,7 +172,7 @@
 												</td>
 												<td class="cart-td">
 													<div style="display: flex; flex-direction: column; align-items: center;">
-														<a href="javascript:setBasket('${list.seq_sle}', '${list.sle_nm}', '${list.discount_sale}', '${list.count}'
+														<a href="javascript:setBasket('${list.seq_sle}', '${list.sle_nm}', '${list.discount_sale}', '1'
 														, '${list.img}', '${list.point_stack}', '${list.cd_ctg_m}', '${list.cd_ctg_b}', '${list.price_sale}', '${list.discount}');" 
 														class="cart-btn" style="background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;margin-top:0px">장바구니 담기</a>
 														<a href="javascript:remove('${list.seq_sle}')" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;padding: 10px 45px 10px;">삭제</a>
@@ -203,7 +209,7 @@
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
 	<%@ include file="/include/common/footerpic.jsp" %>
 	<!-- Instagram End -->
-
+	
 	<!-- Footer Section Begin -->
 	<%@ include file="/include/common/footer.jsp" %>
 	<!-- Footer Section End -->

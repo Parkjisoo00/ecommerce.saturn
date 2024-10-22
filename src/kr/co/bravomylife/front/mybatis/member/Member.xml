@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.member.Member">
-
+	
+	<update id="updateMyPasswd" parameterType="memberDto">
+		UPDATE
+			TB_MBR_MST
+		SET
+			PASSWD		= #{passwd}
+			, UPDATER	= #{updater}
+			, DT_UPT	= SYSDATE
+		WHERE
+			SEQ_MBR		= #{seq_mbr}
+	</update>
+	
+	<select id="selectMyPasswd" parameterType="memberDto" resultType="memberDto">
+	SELECT
+		PASSWD
+	FROM
+		TB_MBR_MST
+	WHERE
+		SEQ_MBR		= #{seq_mbr}
+	</select>
+	
 	<update id="pointUpdate" parameterType="buyMasterDto">
 		UPDATE
 			TB_MBR_MST

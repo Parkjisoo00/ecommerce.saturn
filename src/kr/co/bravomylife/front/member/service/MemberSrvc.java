@@ -197,5 +197,19 @@ public class MemberSrvc {
 		}
 	}
 	
-	
+		@Transactional("txFront")
+		public boolean updateMyPasswd(MemberDto memberDto) {
+			
+			int result = memberDao.updateMyPasswd(memberDto);
+			
+			if (result == 1) return true;
+			else {
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+				return false;
+			}
+		}
+		
+	public MemberDto selectMyPasswd(MemberDto memberDto) {
+		return memberDao.selectMyPasswd(memberDto);
+	}
 }

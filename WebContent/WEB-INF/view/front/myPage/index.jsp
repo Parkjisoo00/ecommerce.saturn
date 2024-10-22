@@ -93,7 +93,7 @@
 								<c:choose>
 									<c:when test="${empty list}">
 										<tr style="text-align: center; border-bottom: 1px solid #707070;">
-											<td colspan="7">찜한 상품이 없습니다</td>
+											<td colspan="4">찜한 상품이 없습니다</td>
 										</tr>
 									</c:when>
 									<c:otherwise>
@@ -151,7 +151,7 @@
 								<c:choose>
 									<c:when test="${empty historyList}">
 										<tr style="text-align: center; border-bottom: 1px solid #707070;">
-											<td colspan="7">구매한 상품이 없습니다</td>
+											<td colspan="8">구매한 상품이 없습니다</td>
 										</tr>
 									</c:when>
 									<c:otherwise>
