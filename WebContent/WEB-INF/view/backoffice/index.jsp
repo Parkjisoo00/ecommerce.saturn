@@ -45,7 +45,7 @@
 
 <!-- Main content -->
 <div class="content-wrapper" >
-	<section class="content" style="display: flex; justify-content: center; align-items: center; padding-top: 280px;">
+	<section class="content" style="display: flex; justify-content: center; align-items: center; padding-top: 230px;">
 		<div class="col-md-6">
 			<div class="box box-info">
 				<div class="box-header with-border">
@@ -56,13 +56,13 @@
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">이메일</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="email" name="email" placeholder="Email">
+										<input type="text" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off" >
 									</div>
 							</div>
 							<div class="form-group">
 								<label for="inputPassword3" class="col-sm-2 control-label">비밀번호</label>
 									<div class="col-sm-10">
-										<input type="password" class="form-control" id="passwd" name="passwd" placeholder="Password">
+										<input type="password" class="form-control" id="passwd" name="passwd" placeholder="Password" autocomplete="off" >
 									</div>
 							</div>
 							<div class="form-group">
