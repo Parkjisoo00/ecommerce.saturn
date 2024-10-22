@@ -611,7 +611,7 @@
 															</div>
 																	</div>
 																</div>
-																<div style="margin-top: 10px !important;">
+																<div>
 																	<span class="reviewsub" style="font-size: 12px !important;">${review.sle_nm}, ${review.count}개</span>
 																</div>
 															</div>

@@ -40,6 +40,18 @@ import kr.co.bravomylife.front.sale.dto.SaleFileDto;
 @Repository("kr.co.bravomylife.front.sale.dao.SaleDao")
 public class SaleDao extends BaseDao {
 	
+	public List<SaleDto> reviewPageListImgs(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.reviewPageListImgs", pagingDto);
+	}
+	
+	public List<SaleDto> reviewPageList(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.reviewPageList", pagingDto);
+	}
+	
+	public int reviewPageCount(PagingDto pagingDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.reviewPageCount", pagingDto);
+	}
+	
 	public int dtlUpdate(SaleDto saleDto) {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.sale.Sale.dtlUpdate", saleDto);
 	}
@@ -111,7 +123,6 @@ public class SaleDao extends BaseDao {
 	public List<SaleDto> reviewListImgs(PagingDto pagingDto) {
 		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.reviewListImgs", pagingDto);
 	}
-	
 	
 	public List<SaleDto> reviewList(PagingDto pagingDto) {
 		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.reviewList", pagingDto);

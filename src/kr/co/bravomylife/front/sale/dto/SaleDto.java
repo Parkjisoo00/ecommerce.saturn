@@ -76,12 +76,26 @@ public class SaleDto {
 	private List<String> imgs		= null;	
 	private String flg_review		= "";
 	private int seq_buy_dtl			= 0;
+	private int list_count			= 0;
+	private int writeReview_count	= 0;
 	
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
+	public int getWriteReview_count() {
+		return writeReview_count;
+	}
+	public void setWriteReview_count(int writeReview_count) {
+		this.writeReview_count = writeReview_count;
+	}
+	public int getList_count() {
+		return list_count;
+	}
+	public void setList_count(int list_count) {
+		this.list_count = list_count;
+	}
 	public int getSeq_buy_dtl() {
 		return seq_buy_dtl;
 	}

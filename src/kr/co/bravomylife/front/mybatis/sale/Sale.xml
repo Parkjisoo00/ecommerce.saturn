@@ -2,6 +2,87 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.sale.Sale">
 
+	<select id="reviewPageListImgs" parameterType="pagingDto" resultType="saleDto">
+		SELECT
+			SEQ_REVIEW
+			, FILE_SAVE
+		FROM
+			TB_REVIEW_IMG
+		WHERE
+			SEQ_REVIEW IN (
+				SELECT
+					SEQ_REVIEW 
+				FROM
+					TB_REVIEW 
+				WHERE
+					SEQ_MBR = #{seq_mbr}
+			)
+	</select>
+
+	<select id="reviewPageList" parameterType="pagingDto" resultType="saleDto">
+		SELECT
+			*
+		FROM
+		(
+		SELECT
+			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY review.DT_REG DESC) rnum
+			, review.SEQ_REVIEW
+			, sle.SEQ_SLE
+			, sle.IMG
+			, review.SEQ_MBR
+			, review.FLG_DELETE
+			, review.RATE_REVIEW
+			, TO_CHAR(review.DT_REG, 'YYYY-MM-DD') dt_reg
+			, mbr.MBR_NM
+			, sle.CD_CTG_M
+			, sle.CD_CTG_B
+			, rate.RATE_STAR AS mbr_rate_star
+			, dtl.SLE_NM
+			, dtl.COUNT
+			, COUNT(*) OVER () writeReview_count
+		FROM
+			TB_SLE sle
+		LEFT JOIN
+			TB_REVIEW review
+		ON
+			sle.SEQ_SLE = review.SEQ_SLE
+		LEFT JOIN
+			TB_MBR_MST mbr
+		ON
+			review.SEQ_MBR = mbr.SEQ_MBR
+		LEFT JOIN
+			TB_RATE rate
+		ON
+			rate.SEQ_REVIEW = review.SEQ_REVIEW
+		LEFT JOIN
+			TB_BUY_DTL dtl
+		ON
+			dtl.SEQ_REVIEW = review.SEQ_REVIEW
+			AND dtl.SEQ_SLE = review.SEQ_SLE
+			AND dtl.SEQ_MBR = review.SEQ_MBR
+		WHERE
+		<include refid="reviewPagewhere" />
+		)
+		<![CDATA[
+		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+		]]>
+		ORDER BY rnum
+	</select>
+	
+	<sql id="reviewPagewhere">
+		review.SEQ_MBR		= #{seq_mbr}
+		AND review.FLG_DELETE	= 'N'
+	</sql>
+
+	<select id="reviewPageCount" parameterType="pagingDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(ROWNUM)
+		FROM
+			TB_REVIEW review
+		WHERE
+		<include refid="reviewPagewhere" />
+	</select>
+
 	<update id="updateCountStock" parameterType="buyDetailDto">
 		UPDATE
 			TB_SLE
@@ -62,6 +143,7 @@
 		SELECT
 			sle.SLE_NM
 			, sle.IMG
+			, COUNT(*) OVER () list_count
 			, sle.CD_CTG_B
 			, sle.CD_CTG_M
 			, buy_dtl.SEQ_BUY_DTL

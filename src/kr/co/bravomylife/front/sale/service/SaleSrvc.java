@@ -52,6 +52,76 @@ public class SaleSrvc {
 	@Inject
 	SaleDao saleDao;
 	
+	@SuppressWarnings("unchecked")
+	public PagingListDto mergePageReviewAndImages(PagingListDto reviewListDto, PagingListDto reviewImgsDto) {
+		
+		List<SaleDto> reviewList = (List<SaleDto>) reviewListDto.getList();
+		List<SaleDto> reviewImgsList = (List<SaleDto>) reviewImgsDto.getList();
+		
+		Map<Integer, List<String>> imagesMap = new HashMap<>();
+		
+		for (SaleDto reviewImg : reviewImgsList) {
+			
+			int seqReview = reviewImg.getSeq_review();
+			String fileSave = reviewImg.getFile_save();
+			
+			if (!imagesMap.containsKey(seqReview)) {
+				
+				imagesMap.put(seqReview, new ArrayList<>());
+			}
+			
+			imagesMap.get(seqReview).add(fileSave);
+		}
+		
+		for (SaleDto review : reviewList) {
+			int seqReview = review.getSeq_review();
+			
+			List<String> images = imagesMap.get(seqReview);
+			
+			if (images != null) {
+				review.setImgs(images);
+			}
+		}
+		
+		PagingListDto mergedPagingListDto = new PagingListDto();
+		mergedPagingListDto.setPaging(reviewListDto.getPaging());
+		mergedPagingListDto.setList(reviewList);
+		
+		return mergedPagingListDto;
+	}
+	
+	public PagingListDto reviewPageList(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		int totalLine = saleDao.reviewPageCount(pagingDto);
+		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(saleDao.reviewPageList(pagingDto));
+		
+		return pagingListDto;
+	}
+	
+	public PagingListDto reviewPageListImgs(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		int totalLine = saleDao.reviewPageCount(pagingDto);
+		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(saleDao.reviewPageListImgs(pagingDto));
+		
+		return pagingListDto;
+	}
+	
 	public SaleDto review(SaleDto saleDto) {
 		
 		return saleDao.review(saleDto);

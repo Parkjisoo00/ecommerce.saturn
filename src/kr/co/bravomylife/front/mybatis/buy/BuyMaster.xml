@@ -7,6 +7,7 @@
 			TB_BUY_MST
 		SET
 			CD_STATE_PAY	= #{cd_state_pay}
+			, CD_STATE		= 1
 			, DT_UPT		= SYSDATE
 			, UPDATER		= #{updater}
 		WHERE

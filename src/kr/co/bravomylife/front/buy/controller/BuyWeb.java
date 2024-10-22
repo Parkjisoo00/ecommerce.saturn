@@ -190,16 +190,35 @@ public class BuyWeb extends Common {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/front/buy/reviewListPage.web")
-	public ModelAndView reviewListPage(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+	public ModelAndView reviewListPage(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto reviewpagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
 			
 			saleDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			reviewpagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
 			SaleListDto saleListDto = saleSrvc.reviewListPage(saleDto);
 			
+			List<SaleDto> saleList = (List<SaleDto>)saleListDto.getList();
+			SaleDto reviewCount = saleList.get(0);
+			
+			int count = reviewCount.getList_count();
+			
+			PagingListDto _reviewListImgs = saleSrvc.reviewPageListImgs(reviewpagingDto);
+			PagingListDto _reviewpagingDto = saleSrvc.reviewPageList(reviewpagingDto);
+			
+			List<SaleDto> reviewList = (List<SaleDto>)_reviewpagingDto.getList();
+			SaleDto reviewWriteCount = reviewList.get(0);
+			
+			int reviwCount = reviewWriteCount.getWriteReview_count();
+			
+			PagingListDto mergedPagingList = saleSrvc.mergePageReviewAndImages(_reviewpagingDto, _reviewListImgs);
+			
+			mav.addObject("reviewList", mergedPagingList.getList());
+			
+			/*
 			List<SaleDto> saleList = (List<SaleDto>) saleListDto.getList();
 			
 			for (SaleDto dto : saleList) {
@@ -212,10 +231,11 @@ public class BuyWeb extends Common {
 				logger.debug("COUNT : " + dto.getCount());
 				logger.debug("DT_REG : " + dto.getDt_reg());
 			}
+			원하는 데이터를 가지고 오는 것 까지 확인
+			*/
 			
-			// 원하는 데이터를 가지고 오는 것 까지 확인
-			
-			mav.addObject("sale"	, saleListDto.getSale());
+			mav.addObject("reviwCount"	, reviwCount);
+			mav.addObject("count"	, count);
 			mav.addObject("list", saleListDto.getList());
 			
 			mav.setViewName("front/buy/reviewList");

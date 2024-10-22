@@ -575,10 +575,10 @@ table.headTop_pd th, table.headTop_pd td {
 }
 
 .cart-title {
-	text-align: left;
-	padding-bottom: 10px;
-	border: none;
-	font-size: 12px;
+	text-align: left !important;
+	padding-bottom: 10px !important;
+	border: none !important;
+	font-size: 12px !important;
 	font-family: "Montserrat", sans-serif !important;
 }
 
