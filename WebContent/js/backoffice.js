@@ -193,74 +193,67 @@ function checkEmail(email) {
  */
 
 function checkRegister() {
-    var isSubmit = true;  // 폼 제출 여부 결정 변수
-    var frmMain = document.getElementById("frmMain");
-
-    // 이메일 유효성 검사
-    if (!checkEmail(document.getElementById("email").value)) {
-        alert("이메일을 확인하세요!");
-        isSubmit = false;
-        document.getElementById("email").focus();
-    }
-
-    // 비밀번호 일치 확인
-    if (document.getElementById("passwd").value != document.getElementById("passwd_").value) {
-        alert("비밀번호를 확인하세요!");
-        isSubmit = false;
-        document.getElementById("passwd").focus();
-    }
-
-    // 성명 한글 확인
-    var regExpName = /^[가-힣]*$/;
-    if (!regExpName.test(document.getElementById("mng_nm").value)) {
-        alert("성명은 한글만 입력하세요!");
-        isSubmit = false;
-    }
-
-    // 휴대폰 번호 유효성 검사 및 결합
-    var phone1 = document.getElementById("phone1").value;
-    var phone2 = document.getElementById("phone2").value;
-    var phone3 = document.getElementById("phone3").value;
-
-    if (phone1 === "" || phone2 === "" || phone3 === "") {
-        alert("전화번호를 모두 입력하세요!");
-        isSubmit = false;
-    } else {
-        var phone = phone1 + "-" + phone2 + "-" + phone3;
-        document.getElementById("phone").value = phone;  // 결합된 전화번호를 hidden 필드에 저장
-    }
-
-    // 주소 필드 확인
-    if (document.getElementById("post").value === "" || 
-        document.getElementById("addr1").value === "" || 
-        document.getElementById("addr2").value === "") {
-        alert("주소를 모두 입력하세요!");
-        isSubmit = false;
-    }
-
-    // 모든 유효성 검사를 통과하면 이메일 인증 Ajax 요청
-
-	if (isSubmit) {
-	        var myData = { email: $("#email").val() };
-
-			$.ajax({
-				type: "POST",
-				async: false,
-				url: "/console/manager/checkEmail.json",
-				dataType: "json",
-				contentType: "application/json; charset=UTF-8",
-				data: JSON.stringify(myData),
-				success: function (res) {
-					if (res == true) {
-						alert("정상적으로 " + $("#email").val()
-							+ "로 인증 URL이 전송되었습니다.\n반드시 가입 후 10분 이내에 인증 URL을 클릭하셔야 정상적으로 서비스를 이용할 수 있습니다.");
-						// + "로 인증 URL이 전송되었습니다.\n반드시 가입 후 인증 URL을 클릭하셔야 정상적으로 서비스를 이용할 수 있습니다.");
-					}
-					else {
-						alert("인증 이메일이 발송이 실패되었습니다!\n시스템 관리자에게 문의하세요!");
-					}
-				}
-			});
-		};
 	
+	var isSubmit	= true;
+	var frmMain		= document.getElementById("frmMain");
+	
+	var email = document.getElementById("email").value;
+	//alert("이메일=" + email);
+	
+	// 정상적인 이메일이 아니면(checkEmail = false)
+	if (!checkEmail(email)) {
+		alert("이메일을 확인하세요!");
+		isSubmit = false;
+		document.getElementById("email").focus();
+	}
+	// 비밀번호 확인
+	//alert(document.getElementById("passwd").value);
+	//alert(document.getElementById("passwd_").value);
+	if (document.getElementById("passwd").value != document.getElementById("passwd_").value) {
+		alert("비밀번호를 확인하세요!");
+		isSubmit = false;
+		document.getElementById("passwd").focus();
+	}
+	var regExpPasswd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+	if (!regExpPasswd.test(document.getElementById("passwd").value)) {
+		alert("비밀번호는 영문/숫자/특수기호를 조합하여 8자 이상을 입력하세요!");
+		isSubmit = false;
+	}
+	
+	// 성명 확인(한글만 입력 가능)
+	var regExpName = /^[가-힣]*$/;
+	if (!regExpName.test(document.getElementById("mng_nm").value)) {
+		alert("성명은 한글만 입력하세요!");
+		isSubmit = false;
+	}
+	
+	// 휴대폰번호 확인(3자리-4자리-4자리)
+	var regExpPhone = /^\d{3}-\d{4}-\d{4}$/;
+	var phone = document.getElementById("phone1").value + "-" + document.getElementById("phone2").value + "-" + document.getElementById("phone3").value;
+	if (!regExpPhone.test(phone)) {
+		alert("연락처를 확인해 주세요!");
+		isSubmit = false;
+	}
+	
+	if (document.getElementById("mng_nm").value == ""
+			|| document.getElementById("phone1").value == ""
+			|| document.getElementById("phone2").value == ""
+			|| document.getElementById("phone3").value == ""
+			|| document.getElementById("post").value == ""
+			|| document.getElementById("addr1").value == ""
+			|| document.getElementById("addr2").value == "") {
+		alert("필수 항목을 입력하세요!");
+		isSubmit = false;
+	}
+	
+	if (isSubmit) {
+		document.getElementById("phone").value = 
+			document.getElementById("phone1").value
+			+ "-" + document.getElementById("phone2").value
+			+ "-" + document.getElementById("phone3").value;
+			
+		frmMain.action = "/console/manager/registerProc.web";
+		// frmMain.action = "/registerProc.jsp";
+		frmMain.submit();
+	}
 }

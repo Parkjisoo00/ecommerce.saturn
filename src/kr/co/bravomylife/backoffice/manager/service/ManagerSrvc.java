@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import kr.co.bravomylife.backoffice.manager.dto.ManagerDto;
+
 import kr.co.bravomylife.backoffice.manager.dao.ManagerDao;
 
 /**
@@ -63,9 +64,9 @@ public class ManagerSrvc {
 	public int selectDuplicate(ManagerDto managerDto) {
 		return managerDao.selectDuplicate(managerDto);
 	}
-	
+
 	@Transactional("txBackoffice")
-	public boolean insert(ManagerDto managerDto, String post) {
+	public boolean insert(ManagerDto managerDto) {
 		
 		managerDto.setSeq_mng(managerDao.sequence());
 		managerDto.setRegister(managerDto.getSeq_mng());
@@ -82,5 +83,6 @@ public class ManagerSrvc {
 	public ManagerDto select(ManagerDto managerDto) {
 		return managerDao.select(managerDto);
 	}
+
 
 }
