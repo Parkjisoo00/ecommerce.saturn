@@ -7,6 +7,5 @@
 	<link rel="stylesheet" href="/backoffice/css/blue.css">
 	<link rel="stylesheet" href="/backoffice/css/morris.css">
 	<link rel="stylesheet" href="/backoffice/css/jquery-jvectormap-1.2.2.css">
-	<link rel="stylesheet" href="/backoffice/css/datepicker3.css">
-	<link rel="stylesheet" href="/backoffice/css/daterangepicker.css">
 	<link rel="stylesheet" href="/backoffice/css/bootstrap3-wysihtml5.min.css">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

@@ -1,18 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<header class="main-header">
+	<a href="/console/index.web" class="logo">
+	<span class="logo-lg"><b>관리자</b></span>
+	</a>
+</header>
 <span style="float:right;line-height:43px;vertical-align:middle;">
 	<!-- 세션이 있으면 -->
 	<c:if test="${not empty sessionScope.SEQ_MNG}">
-		<a href="/console/myPage/" class="menuTop" title="<%=session.getAttribute("NAME")%>">[마이페이지]</a>
-				 <a href="/console/login/logout.web" class="menuTop">[로그아웃]</a>
+		<a href="/console/myPage/" class="menuTop" title="<%=session.getAttribute("NAME")%>" style="font-weight: bold; font-size: 1.2em;">[마이페이지]</a>
+		 <a href="/console/login/logout.web" class="menuTop" style="font-weight: bold; font-size: 1.2em;">[로그아웃]</a>
 		 <!-- Left side column. contains the logo and sidebar -->
 			<aside class="main-sidebar">
 				<!-- sidebar: style can be found in sidebar.less -->
 				<section class="sidebar">
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
-					<li class="active treeview">
+					<li class="treeview">
 					<a href="#">
 						<i class="fa fa-dashboard"></i> <span>Dashboard</span>
 						<span class="pull-right-container">
