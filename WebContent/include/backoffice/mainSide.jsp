@@ -98,14 +98,15 @@
 					</li>
 					<li class="treeview">
 					<a href="#">
-						<i class="fa fa-table"></i> <span>Tables</span>
+						<i class="fa fa-fw fa-volume-up"></i> <span>고객 센터</span>
 						<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 						</span>
 					</a>
 					<ul class="treeview-menu">
-						<li><a href="#"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Data tables</a></li>
+						<li><a href="#"><i class="fa fa-bullhorn"></i> 공지사항</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-user"></i> 1:1문의</a></li>
 					</ul>
 					</li>
 					<li>
