@@ -61,6 +61,8 @@
 						</div>
 							<div class="box-footer">
 								<input type="submit" value="로그인" class="btn btn-info pull-right" id="loginId" onClick="checkLogin();"/>
+								<a href="/console/manager/registerForm.web" class="btn btn-info pull-right" style="margin-right: 10px;">회원 가입</a>
+								
 							</div>
 					</form>
 			</div>

@@ -18,14 +18,14 @@
 				<ul class="sidebar-menu">
 					<li class="treeview">
 					<a href="#">
-						<i class="fa fa-dashboard"></i> <span>Dashboard</span>
+						<i class="fa fa-dashboard"></i> <span>사용자 관리</span>
 						<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 						</span>
 					</a>
 					<ul class="treeview-menu">
-						<li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+						<li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> 회원 관리</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> 관리자 관리</a></li>
 					</ul>
 					</li>
 					<li class="treeview">
