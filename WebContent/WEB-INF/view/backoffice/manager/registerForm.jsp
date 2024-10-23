@@ -68,7 +68,7 @@
 		<span class="sr-only">Toggle navigation</span>
 	</a>
 
-	<%@ include file="/include/backoffice/top.jsp" %>
+	
 	
 	</nav>
 	</header>
@@ -81,7 +81,7 @@
     <section class="content-header">
       <h1>
         관리자가입
-        <small>Preview</small>
+        <small></small>
       </h1>
     </section>
 
@@ -103,7 +103,7 @@
 						<label>이메일 *</label>
 						<input type="text" id="email" name="email" required
 							style="flex: 1; min-width: 250px;" autocomplete="off"/>
-							<button type="submit" class="btn btn-primary" id="btnId">중복 찾기</button>
+							<input type="button" value="중복 찾기" id="btnId" />
 					</div>
 				</div>	
 					<div class="form-group">
@@ -161,7 +161,7 @@
 						<input type="button" value="우편번호 찾기" onclick="execDaumPostcode()" />
 					</div>
 				<div class="box-footer">
-				 <button type="submit" class="btn btn-primary" id="registerId" onClick="checkRegister();">회원가입</button>
+				<input type="button" value="회원가입" onclick="checkRegister()" />
              	 </div>
              	
        		</div>

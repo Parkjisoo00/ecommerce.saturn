@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.backoffice.mybatis.manager.Manager">
-
+<!-- 
 <update id="updateStateM" parameterType="managerDto">
 		UPDATE
 			TB_MNG
@@ -51,7 +51,7 @@
 		WHERE
 			SEQ_MNG	= #{seq_mng}
 	</update>
-
+ -->
 	<select id="selectDuplicate" parameterType="managerDto" resultType="java.lang.Integer">
 		SELECT
 			COUNT(EMAIL)

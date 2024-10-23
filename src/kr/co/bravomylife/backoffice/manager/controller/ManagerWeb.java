@@ -129,7 +129,7 @@ public class ManagerWeb extends Common {
 			if (result) logger.debug("가입 성공");
 			else logger.debug("가입 실패");
 			
-			request.setAttribute("redirect"	, "/");
+			request.setAttribute("redirect"	, "/console/");
 			
 			mav.setViewName("forward:/servlet/result.web");
 		}

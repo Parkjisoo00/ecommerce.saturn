@@ -39,7 +39,7 @@ import kr.co.bravomylife.backoffice.manager.dto.ManagerDto;
  */
 @Repository("kr.co.bravomylife.backoffice.manager.dao.ManagerDao")
 public class ManagerDao extends BaseDao {
-	
+	/*
 	public int updateStateM(ManagerDto managerDto) {
 		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.manager.Manager.updateStateM", managerDto);
 	}
@@ -51,7 +51,7 @@ public class ManagerDao extends BaseDao {
 	public int update(ManagerDto managerDto) {
 		return sqlSessionBackoffice.insert("kr.co.bravomylife.backoffice.mybatis.manager.Manager.update", managerDto);
 	}
-	
+	*/
 	public ManagerDto select(ManagerDto managerDto) {
 		return sqlSessionBackoffice.selectOne("kr.co.bravomylife.backoffice.mybatis.manager.Manager.select", managerDto);
 	}

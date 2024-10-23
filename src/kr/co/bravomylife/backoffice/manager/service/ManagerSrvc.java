@@ -44,7 +44,7 @@ public class ManagerSrvc {
 	@Inject
 	ManagerDao managerDao;
 	
-	
+	/*
 	@Transactional("txFront")
 	public boolean updateState(ManagerDto managerDto) {
 		
@@ -60,7 +60,7 @@ public class ManagerSrvc {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return false;
 	}
-	
+	*/
 	public int selectDuplicate(ManagerDto managerDto) {
 		return managerDao.selectDuplicate(managerDto);
 	}
