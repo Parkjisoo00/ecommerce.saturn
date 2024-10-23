@@ -126,8 +126,13 @@ public class ManagerWeb extends Common {
 			
 			boolean result = managerSrvc.insert(managerDto);
 			
-			if (result) logger.debug("가입 성공");
-			else logger.debug("가입 실패");
+			if (result) {
+				logger.debug("가입 성공");
+				mav.addObject("message", "가입 성공");
+			} else {
+				logger.debug("가입 실패");
+			
+			}
 			
 			request.setAttribute("redirect"	, "/console/");
 			
