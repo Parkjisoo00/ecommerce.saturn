@@ -10,11 +10,15 @@
 		<typeAlias type="kr.co.bravomylife.backoffice.product.dto.ProductDto"				alias="productDto" />
 		<typeAlias type="kr.co.bravomylife.backoffice.manager.dto.ManagerDto"				alias="managerDto" />
 		<typeAlias type="kr.co.bravomylife.backoffice.login.dto.LoginDto"					alias="loginDto" />
+		
+		<typeAlias type="kr.co.bravomylife.backoffice.users.dto.MemberDto"				alias="memberDto" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="kr/co/bravomylife/backoffice/mybatis/center/Board.xml" />
 		<mapper resource="kr/co/bravomylife/backoffice/mybatis/product/Product.xml" />
 		<mapper resource="kr/co/bravomylife/backoffice/mybatis/manager/Manager.xml" />
 		<mapper resource="kr/co/bravomylife/backoffice/mybatis/login/Login.xml" />
+		
+		<mapper resource="kr/co/bravomylife/backoffice/mybatis/users/Member.xml" />
 	</mappers>
 </configuration>
