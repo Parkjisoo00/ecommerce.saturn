@@ -34,6 +34,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.sale.dao.SaleDao;
+import kr.co.bravomylife.front.sale.dto.ImageData;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
 import kr.co.bravomylife.front.sale.dto.SaleFileDto;
 import kr.co.bravomylife.front.sale.dto.SaleListDto;
@@ -51,35 +52,118 @@ public class SaleSrvc {
 	
 	@Inject
 	SaleDao saleDao;
+	
+	@Transactional("txFront")
+	public boolean modifyText(SaleDto saleDto) {
 		
+		boolean totalResult = false;
+		
+		int result = 0;
+		
+		try {
+			
+			result += saleDao.modifyText(saleDto);
+			result += saleDao.rateModify(saleDto);
+			
+			if (result == 2) { 
+				
+				totalResult = true;
+			}
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+		return totalResult;
+	}
+	
+	@Transactional("txFront")
+	public boolean modifyReview(SaleDto saleDto, SaleFileDto[] saleFileDto) {
+		
+		boolean totalResult = false;
+		int result = 0;
+		
+		try {
+			
+			result += saleDao.modifyReview(saleDto);
+			result += saleDao.rateModify(saleDto);
+			
+			if (result == 2) {
+				
+				if (saleFileDto[0].getFile_orig() != null && !saleFileDto[0].getFile_orig().equals("")) {
+					
+					for (SaleFileDto fileDto : saleFileDto) {
+						
+						fileDto.setSeq_sle(saleDto.getSeq_sle());
+						fileDto.setSeq_review(saleDto.getSeq_review());
+						
+						if (fileDto.getReview_imgs() == 0) {
+							
+							int insertImgResult = saleDao.insertReviewModify(fileDto);
+							if (insertImgResult <= 0) {
+								
+								return false;
+							}
+						} else {
+							
+							int reImgResult = saleDao.modifyReviewFile(fileDto);
+							if (reImgResult <= 0) {
+								
+								return false;
+							}
+						}
+						if (fileDto.getFlg_del().equals("Y")) {
+							
+							int deleteImgResult = saleDao.deleteReviewImg(fileDto);
+							if (deleteImgResult <= 0) {
+								
+								return false;
+							}
+						}
+					}
+				}
+				totalResult = true;
+			}
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+		return totalResult;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public SaleListDto mergeReviewModify(SaleListDto _saleDto, SaleListDto _saleDtoImgs) {
 		
 		List<SaleDto> modifyList = (List<SaleDto>) _saleDto.getList();
 		List<SaleDto> modifyImgsList = (List<SaleDto>) _saleDtoImgs.getList();
 		
-		Map<Integer, List<String>> imagesMap = new HashMap<>();
+		Map<Integer, List<ImageData>> imagesMap = new HashMap<>();
 		
 		for (SaleDto modifyImg : modifyImgsList) {
 			
 			int seqReview = modifyImg.getSeq_review();
 			String fileSave = modifyImg.getFile_save();
+			int seqReviewImg = modifyImg.getSeq_review_img();
 			
 			if (!imagesMap.containsKey(seqReview)) {
 				
 				imagesMap.put(seqReview, new ArrayList<>());
 			}
 			
-			imagesMap.get(seqReview).add(fileSave);
+			ImageData imageData = new ImageData();
+			imageData.setFile_save(fileSave);
+			imageData.setSeq_review_img(seqReviewImg);
+			
+			imagesMap.get(seqReview).add(imageData);
 		}
-		
 		for (SaleDto modify : modifyList) {
+			
 			int seqReview = modify.getSeq_review();
 			
-			List<String> images = imagesMap.get(seqReview);
+			List<ImageData> imageDataList = imagesMap.get(seqReview);
 			
-			if (images != null) {
-				modify.setImgs(images);
+			if (imageDataList != null) {
+				
+				modify.setImgs(imageDataList);
 			}
 		}
 		
@@ -114,28 +198,33 @@ public class SaleSrvc {
 		List<SaleDto> reviewList = (List<SaleDto>) reviewListDto.getList();
 		List<SaleDto> reviewImgsList = (List<SaleDto>) reviewImgsDto.getList();
 		
-		Map<Integer, List<String>> imagesMap = new HashMap<>();
+		Map<Integer, List<ImageData>> imagesMap = new HashMap<>();
 		
 		for (SaleDto reviewImg : reviewImgsList) {
 			
 			int seqReview = reviewImg.getSeq_review();
 			String fileSave = reviewImg.getFile_save();
+			int seqReviewImg = reviewImg.getSeq_review_img();
 			
 			if (!imagesMap.containsKey(seqReview)) {
 				
 				imagesMap.put(seqReview, new ArrayList<>());
 			}
+			ImageData imageData = new ImageData();
+			imageData.setFile_save(fileSave);
+			imageData.setSeq_review_img(seqReviewImg);
 			
-			imagesMap.get(seqReview).add(fileSave);
+			imagesMap.get(seqReview).add(imageData);
 		}
-		
 		for (SaleDto review : reviewList) {
+			
 			int seqReview = review.getSeq_review();
 			
-			List<String> images = imagesMap.get(seqReview);
+			List<ImageData> imageDataList = imagesMap.get(seqReview);
 			
-			if (images != null) {
-				review.setImgs(images);
+			if (imageDataList != null) {
+				
+				review.setImgs(imageDataList);
 			}
 		}
 		
@@ -380,31 +469,35 @@ public class SaleSrvc {
 		List<SaleDto> reviewList = (List<SaleDto>) reviewListDto.getList();
 		List<SaleDto> reviewImgsList = (List<SaleDto>) reviewImgsDto.getList();
 		
-		Map<Integer, List<String>> imagesMap = new HashMap<>();
+		Map<Integer, List<ImageData>> imagesMap = new HashMap<>();
 		
 		for (SaleDto reviewImg : reviewImgsList) {
 			
 			int seqReview = reviewImg.getSeq_review();
 			String fileSave = reviewImg.getFile_save();
+			int seqReviewImg = reviewImg.getSeq_review_img();
 			
 			if (!imagesMap.containsKey(seqReview)) {
 				
 				imagesMap.put(seqReview, new ArrayList<>());
 			}
+			ImageData imageData = new ImageData();
+			imageData.setFile_save(fileSave);
+			imageData.setSeq_review_img(seqReviewImg);
 			
-			imagesMap.get(seqReview).add(fileSave);
+			imagesMap.get(seqReview).add(imageData);
 		}
-		
 		for (SaleDto review : reviewList) {
+			
 			int seqReview = review.getSeq_review();
 			
-			List<String> images = imagesMap.get(seqReview);
+			List<ImageData> imageDataList = imagesMap.get(seqReview);
 			
-			if (images != null) {
-				review.setImgs(images);
+			if (imageDataList != null) {
+				
+				review.setImgs(imageDataList);
 			}
 		}
-		
 		PagingListDto mergedPagingListDto = new PagingListDto();
 		mergedPagingListDto.setPaging(reviewListDto.getPaging());
 		mergedPagingListDto.setList(reviewList);

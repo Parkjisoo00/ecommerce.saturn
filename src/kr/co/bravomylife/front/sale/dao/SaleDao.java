@@ -40,6 +40,39 @@ import kr.co.bravomylife.front.sale.dto.SaleFileDto;
 @Repository("kr.co.bravomylife.front.sale.dao.SaleDao")
 public class SaleDao extends BaseDao {
 	
+	public int modifyReview(SaleDto saleDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.sale.Sale.modifyReview", saleDto);
+	}
+	
+	public int rateModify(SaleDto saleDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.sale.Sale.rateModify", saleDto);
+	}
+	
+	public int modifyReviewFile(SaleFileDto saleFileDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.sale.Sale.modifyReviewFile", saleFileDto);
+	}
+	
+	public int modifyText(SaleDto saleDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.sale.Sale.modifyText", saleDto);
+	}
+	
+	public int insertReviewModify(SaleFileDto saleFileDto) {
+		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.sale.Sale.insertReviewModify", saleFileDto);
+	}
+	
+	public int deleteReviewImg(SaleFileDto saleFileDto) {
+		return sqlSessionFront.delete("kr.co.bravomylife.front.mybatis.sale.Sale.deleteReviewImg", saleFileDto);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public List<SaleDto> reviewModifyImgs(SaleDto saleDto) {
 		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.reviewModifyImgs", saleDto);
 	}

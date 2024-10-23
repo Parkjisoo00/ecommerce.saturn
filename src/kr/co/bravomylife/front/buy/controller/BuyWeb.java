@@ -48,6 +48,7 @@ import kr.co.bravomylife.front.buy.service.BuySrvc;
 import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
+import kr.co.bravomylife.front.sale.dto.ImageData;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
 import kr.co.bravomylife.front.sale.dto.SaleFileDto;
 import kr.co.bravomylife.front.sale.dto.SaleListDto;
@@ -79,6 +80,113 @@ public class BuyWeb extends Common {
 	
 	@Inject
 	SaleSrvc saleSrvc;
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-23
+	 * <p>DESCRIPTION: 고객센터 쓰기 처리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value = "/front/buy/reviewModifyProc.web", method = RequestMethod.POST)
+	public ModelAndView reviewModifyProc(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, FileUploadDto fileUploadDto, ImageData imagedata) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		String message = "";
+		
+		try {
+			
+			logger.debug("평점 확인" + saleDto.getRate_star());
+			
+			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
+			
+			saleDto.setSeq_mbr(seqMbr);
+			saleDto.setRegister(seqMbr);
+			
+			String pathBase = dynamicProperties.getMessage("backoffice.upload.path_review", "[UNDEFINED]");
+			String maxSize = dynamicProperties.getMessage("backoffice.upload.file.max10MB", "[UNDEFINED]");
+			String allowedExt = dynamicProperties.getMessage("backoffice.upload.file.extension.doc", "[UNDEFINED]");
+			
+			int countFile = 0;
+			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
+			
+			SaleFileDto[] saleFileDto = new SaleFileDto[countFile];
+			LinkedList<Object> uploadResult = FileUpload.upload(fileUploadDto, pathBase, maxSize, allowedExt, countFile);
+			
+			message	= (String)((Hashtable)uploadResult.getLast()).get("resultID");
+			
+			if (message.equals("success")) {
+				
+				Hashtable<String, String> hashtable = (Hashtable<String, String>) uploadResult.getLast();
+				
+				String fileNameSrc	= "";
+				String fileNameSve	= "";
+				String fileSize		= "";
+				List<Integer> review_imgs = imagedata.getReview_imgs();
+				List<String> flg_del = imagedata.getFlg_del();
+				// long totalSize		= 0;
+				
+				for (int loop = 0; loop < countFile; loop++) {
+					
+					fileNameSrc		= (String)hashtable.get("files[" + loop + "]_fileSrcName");
+					fileNameSve		= (String)hashtable.get("files[" + loop + "]_fileSveNameRelative");
+					fileSize		= (String)hashtable.get("files[" + loop + "]_fileSveSize");
+					
+					int reviewImgValue = review_imgs.get(loop);
+					String imgFlgDel = flg_del.get(loop);
+					
+					if (fileSize == null || fileSize == "") fileSize = "0";
+					
+					saleFileDto[loop] = new SaleFileDto();
+					saleFileDto[loop].setFileNameOriginal(fileNameSrc);
+					saleFileDto[loop].setFileNameSave(fileNameSve);
+					saleFileDto[loop].setFileSize((Long.parseLong(fileSize)));
+					saleFileDto[loop].setSeq_sle(saleDto.getSeq_sle());
+					saleFileDto[loop].setSeq_buy_dtl(saleDto.getSeq_buy_dtl());
+					saleFileDto[loop].setSeq_review(saleDto.getSeq_review());
+					saleFileDto[loop].setSeq_mbr(saleDto.getSeq_mbr());
+					saleFileDto[loop].setReview_imgs(reviewImgValue);
+					saleFileDto[loop].setFlg_del(imgFlgDel);
+					saleFileDto[loop].setFile_orig(fileNameSrc);
+					saleFileDto[loop].setFile_save(fileNameSve);
+					
+					// totalSize += Long.parseLong(fileSize);
+				}
+				
+				boolean result = false;
+				
+				if (countFile > 0) {
+					
+					result = saleSrvc.modifyReview(saleDto, saleFileDto);
+				} else {
+					
+					result = saleSrvc.modifyText(saleDto);
+				}
+				if (result) {
+					
+					request.setAttribute("script", "alert('상품 후기가 수정되었습니다.');");
+					request.setAttribute("redirect", "/front/buy/reviewListPage.web");
+					// 추후 코드 완성시 마이 페이지 리뷰 관리 페이지로 이동
+				} else {
+					
+					request.setAttribute("script", "alert('시스템 관리자에게 문의하세요.');");
+					request.setAttribute("redirect", "/front/buy/reviewListPage.web");
+				}
+			} 
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".reviewModifyProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -140,6 +248,7 @@ public class BuyWeb extends Common {
 					saleFileDto[loop].setFileNameSave(fileNameSve);
 					saleFileDto[loop].setFileSize((Long.parseLong(fileSize)));
 					saleFileDto[loop].setSeq_sle(saleDto.getSeq_sle());
+					saleFileDto[loop].setSeq_buy_dtl(saleDto.getSeq_buy_dtl());
 					saleFileDto[loop].setSeq_mbr(saleDto.getSeq_mbr());
 					saleFileDto[loop].setFile_orig(fileNameSrc);
 					saleFileDto[loop].setFile_save(fileNameSve);

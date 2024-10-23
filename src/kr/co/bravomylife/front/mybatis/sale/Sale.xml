@@ -2,10 +2,81 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.sale.Sale">
 
+	<update id="rateModify" parameterType="saleDto">
+		UPDATE
+			TB_RATE
+		SET
+			RATE_STAR		=	#{rate_star}
+			, UPDATER		=	#{seq_mbr}
+			, DT_UPT		=	SYSDATE
+		WHERE
+			SEQ_MBR			=	#{seq_mbr}
+			AND SEQ_SLE		=	#{seq_sle}
+			AND SEQ_REVIEW	=	#{seq_review}
+	</update>
+
+	<update id="modifyText" parameterType="saleDto">
+		UPDATE
+			TB_REVIEW
+		SET
+			RATE_REVIEW		=	#{rate_review}
+			, UPDATER		=	#{seq_mbr}
+			, DT_UPT		=	SYSDATE
+		WHERE
+			SEQ_MBR			=	#{seq_mbr}
+			AND SEQ_SLE		=	#{seq_sle}
+			AND SEQ_REVIEW	=	#{seq_review}
+	</update>
+
+	<update id="modifyReview" parameterType="saleDto">
+		UPDATE
+			TB_REVIEW
+		SET
+			RATE_REVIEW		=	#{rate_review}
+			, UPDATER		=	#{seq_mbr}
+			, DT_UPT		=	SYSDATE
+		WHERE
+			SEQ_MBR			=	#{seq_mbr}
+			AND SEQ_SLE		= 	#{seq_sle}
+			AND SEQ_REVIEW	=	#{seq_review}
+	</update>
+
+	<update id="modifyReviewFile" parameterType="saleDto">
+		UPDATE
+			TB_REVIEW_IMG
+		SET
+			FILE_SAVE			=	#{file_save}
+			, FILE_ORIG			=	#{file_orig}
+		WHERE
+			SEQ_MBR				=	#{seq_mbr}
+			AND SEQ_SLE			=	#{seq_sle}
+			AND SEQ_REVIEW		=	#{seq_review}
+			AND SEQ_REVIEW_IMG	=	#{review_imgs}
+	</update>
+
+	<insert id="insertReviewModify" parameterType="saleFileDto">
+		INSERT INTO TB_REVIEW_IMG
+			(SEQ_REVIEW_IMG, SEQ_REVIEW, SEQ_SLE, SEQ_MBR, FILE_SAVE, FILE_ORIG)
+		VALUES
+			(SQ_SEQ_REVIEW_IMG.NEXTVAL, #{seq_review}, #{seq_sle}, #{seq_mbr}, #{file_save}, #{file_orig})
+	</insert>
+
+	<update id="deleteReviewImg" parameterType="saleFileDto">
+		DELETE
+		FROM
+			TB_REVIEW_IMG
+		WHERE
+			SEQ_MBR				=	#{seq_mbr}
+			AND SEQ_SLE			=	#{seq_sle}
+			AND SEQ_REVIEW		=	#{seq_review}
+			AND SEQ_REVIEW_IMG	=	#{review_imgs}
+	</update>
+
 	<select id="reviewModifyImgs" parameterType="saleDto" resultType="saleDto">
 		SELECT
 			SEQ_REVIEW
 			, FILE_SAVE
+			, SEQ_REVIEW_IMG
 		FROM
 			TB_REVIEW_IMG
 		WHERE

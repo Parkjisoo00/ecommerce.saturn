@@ -625,7 +625,7 @@
 																<c:otherwise>
 																	<c:forEach var="imgs" items="${review.imgs}">
 																		<div class="photoreview" style="display: inline-block; padding-right: 5px !important; padding-left: 0px !important; padding-top: 0px !important; width: auto !important;">
-																			<img src="/img/review/${imgs}" style="width: 70px; height: 80px; object-fit: cover;">
+																			<img src="/img/review/${imgs.file_save}" style="width: 70px; height: 80px; object-fit: cover;">
 																		</div>
 																	</c:forEach>	
 																</c:otherwise>

@@ -9,7 +9,7 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
-	function reviewModifyProc() {
+	function reviewWriteProc() {
 		
 		var frmMain = document.getElementById("frmMain");
 		var rateStarHiddenInput = document.querySelector("input[name='rate_star']");
@@ -44,7 +44,6 @@ alert("평점 확인" + value);
  -->
 <body>
 <form id="frmMain" method="POST" enctype="multipart/form-data">
-<input type="hidden" name="rate_star" id="rate_star" value="">
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -74,11 +73,11 @@ alert("평점 확인" + value);
 					<div class="col-lg-12 col-md-12" >
 						<div class="review-form" style="height: 100% !important; display: flex; flex-direction: column;">
 						<c:forEach var="reviewList" items="${reviewList}">
+							<input type="hidden" name="rate_star" id="rate_star" value="${reviewList.rate_star}">
 							<input type="hidden" name="seq_sle"				id="seq_sle"		value="${reviewList.seq_sle}"/>
 							<input type="hidden" name="seq_buy_dtl"			id="seq_buy_dtl"	value="${reviewList.seq_buy_dtl}"/>
 							<input type="hidden" name="seq_review"			id="seq_review"		value="${reviewList.seq_review}"/>
 							<div class="review-title" style="border-bottom: 0px !important; border-top: 0px !important; padding-bottom: 25px !important">
-
 							</div>
 							<div class="review-name" style="border-bottom: 0px !important;">
 								<div class="photoreview" style="padding: 20px 10px !important;">
@@ -91,39 +90,39 @@ alert("평점 확인" + value);
 									<div class="product-name" style="padding: 0px !important;">
 										<div class="rating" style="display: flex; align-items: center;">
 											<c:if test="${reviewList.rate_star == 1}">
-												<i class="fa fa-star-large"></i>
-												<i class="fa fa-star-large" style="color: #e0e0e0;"></i>
-												<i class="fa fa-star-large" style="color: #e0e0e0;"></i>
-												<i class="fa fa-star-large" style="color: #e0e0e0;"></i>
-												<i class="fa fa-star-large" style="color: #e0e0e0;"></i>
+												<i class="fa fa-star-large" data-value="1"></i>
+												<i class="fa fa-star-large" style="color: #e0e0e0;" data-value="2"></i>
+												<i class="fa fa-star-large" style="color: #e0e0e0;" data-value="3"></i>
+												<i class="fa fa-star-large" style="color: #e0e0e0;" data-value="4"></i>
+												<i class="fa fa-star-large" style="color: #e0e0e0;" data-value="5"></i>
 											</c:if>
 											<c:if test="${reviewList.rate_star == 2}">
-												<i class="fa fa-star-large"></i>
-												<i class="fa fa-star-large"></i>
-												<i class="fa fa-star-large" style="color: #e0e0e0;"></i>
-												<i class="fa fa-star-large" style="color: #e0e0e0;"></i>
-												<i class="fa fa-star-large" style="color: #e0e0e0;"></i>
+												<i class="fa fa-star-large" data-value="1"></i>
+												<i class="fa fa-star-large" data-value="2"></i>
+												<i class="fa fa-star-large" style="color: #e0e0e0;" data-value="3"></i>
+												<i class="fa fa-star-large" style="color: #e0e0e0;" data-value="4"></i>
+												<i class="fa fa-star-large" style="color: #e0e0e0;" data-value="5"></i>
 											</c:if>
 											<c:if test="${reviewList.rate_star == 3}">
-												<i class="fa fa-star-large"></i>
-												<i class="fa fa-star-large"></i>
-												<i class="fa fa-star-large"></i>
-												<i class="fa fa-star-large" style="color: #e0e0e0;"></i>
-												<i class="fa fa-star-large" style="color: #e0e0e0;"></i>
+												<i class="fa fa-star-large" data-value="1"></i>
+												<i class="fa fa-star-large" data-value="2"></i>
+												<i class="fa fa-star-large" data-value="3"></i>
+												<i class="fa fa-star-large" style="color: #e0e0e0;" data-value="4"></i>
+												<i class="fa fa-star-large" style="color: #e0e0e0;" data-value="5"></i>
 											</c:if>
 											<c:if test="${reviewList.rate_star == 4}">
-												<i class="fa fa-star-large"></i>
-												<i class="fa fa-star-large"></i>
-												<i class="fa fa-star-large"></i>
-												<i class="fa fa-star-large"></i>
-												<i class="fa fa-star-large" style="color: #e0e0e0;"></i>
+												<i class="fa fa-star-large" data-value="1"></i>
+												<i class="fa fa-star-large" data-value="2"></i>
+												<i class="fa fa-star-large" data-value="3"></i>
+												<i class="fa fa-star-large" data-value="4"></i>
+												<i class="fa fa-star-large" style="color: #e0e0e0;" data-value="5"></i>
 											</c:if>
 											<c:if test="${reviewList.rate_star == 5}">
-												<i class="fa fa-star-large"></i>
-												<i class="fa fa-star-large"></i>
-												<i class="fa fa-star-large"></i>
-												<i class="fa fa-star-large"></i>
-												<i class="fa fa-star-large"></i>
+												<i class="fa fa-star-large" data-value="1"></i>
+												<i class="fa fa-star-large" data-value="2"></i>
+												<i class="fa fa-star-large" data-value="3"></i>
+												<i class="fa fa-star-large" data-value="4"></i>
+												<i class="fa fa-star-large" data-value="5"></i>
 											</c:if>
 										</div>
 									</div>
@@ -136,23 +135,38 @@ alert("평점 확인" + value);
 								<div class="photoreview" style="display: flex !important; justify-content: flex-start !important; align-items: center !important;">
 									사진첨부
 								</div>
-							<div class="product-name" style="padding-right: 0px !important">
-								<div style="display: flex; align-items: center; height: 100px;">
-									<label id="show-input" class="cart-btn-review" style="margin: 0px !important; background: #fff; color: #346aff !important; border: 1px solid #346aff !important; padding: 10px; cursor: pointer;">
-										파일 선택
-									</label>
-									<c:forEach var="imgs" items="${reviewList.imgs}" varStatus="status">
-										<div id="file-inputs-${status.index}" style="position: relative; display: flex; flex-direction: column; margin-left: 20px; align-items: center;">
-											<div style="display: flex; flex-direction: column; align-items: center; position: relative;">
-												<img id="img-preview-${status.index}" style="width: 70px; height: 80px; object-fit: cover; cursor: pointer;" src="/img/review/${imgs}" />
-												<input type="file" id="file-input-${status.index}" style="display: none;" />
-												<span id="file-name-${status.index}" style="margin-left: 10px; cursor: pointer; display: none !important;"></span>
-												<button type="button" id="delete-btn-${status.index}" style="background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
+								<div class="product-name" style="padding-right: 0px !important">
+									<div style="display: flex; align-items: center; height: 100px;">
+										<label id="show-input" class="cart-btn-review" style="margin: 0px !important; background: #fff; color: #346aff !important; border: 1px solid #346aff !important; padding: 10px; cursor: pointer;">
+											파일 선택
+										</label>
+										<div id="file-inputs" style="display: flex; margin-left: 20px; align-items: center;">
+											<div id="file-inputs" style="display: flex; margin-left: 20px; align-items: center;">
+												<c:forEach var="imgs" items="${reviewList.imgs}" varStatus="status">
+													<div id="file-inputs-${status.index}" style="position: relative; display: flex; flex-direction: column; margin-left: 20px; align-items: center;">
+														<div style="display: flex; flex-direction: column; align-items: center; position: relative;">
+															<img id="img-preview-${status.index}" style="width: 70px; height: 80px; object-fit: cover; cursor: pointer;" src="/img/review/${imgs.file_save}" />
+															<input type="file" id="file-input-${status.index}" style="display: none;" name="files[${status.index}]" value="${imgs.seq_review_img}" />
+															<input type="hidden" style="display: none;" name="flg_del[${status.index}]" />
+															<input type="hidden" style="display: none;" name="review_imgs[${status.index}]" value="${imgs.seq_review_img}"/>
+															<button type="button" id="delete-btn-${status.index}" style="background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
+														</div>
+													</div>
+												</c:forEach>
+												<c:forEach begin="${reviewList.imgs.size()}" end="2" varStatus="status">
+													<div id="file-inputs-${status.index}" style="position: relative; display: flex; flex-direction: column; margin-left: 20px; align-items: center;">
+														<div style="display: flex; flex-direction: column; align-items: center; position: relative;">
+															<img id="img-preview-${status.index}" style="display: none; width: 70px; height: 80px; object-fit: cover; cursor: pointer;" />
+															<input type="file" id="file-input-${status.index}" style="display: none;" />
+															<input type="hidden" style="display: none;" name="review_imgs[${status.index}]" value="0"/>
+															<button type="button" id="delete-btn-${status.index}" style="display: none; background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
+														</div>
+													</div>
+												</c:forEach>
 											</div>
 										</div>
-									</c:forEach>
+									</div>
 								</div>
-							</div>
 							</div>
 							<div class="review-name" style="border-bottom: 0px !important; height: auto !important; flex-grow: 2 !important; min-height: 250px !important;">
 								<div class="photoreview">
@@ -165,7 +179,7 @@ alert("평점 확인" + value);
 											<a href="#" class="cart-btn" style="background: #fff; color: #111 !important; border: 1px solid #ccc !important; margin: 0; padding: 10px 10px 10px !important;">
 												취소하기
 											</a>
-											<a href="javascript:reviewModifyProc();" class="cart-btn" style="background: #346aff; color: white !important; border: 1px solid #346aff !important; margin: 0 ; padding: 10px 10px 10px !important;">
+											<a href="javascript:reviewWriteProc();" class="cart-btn" style="background: #346aff; color: white !important; border: 1px solid #346aff !important; margin: 0 ; padding: 10px 10px 10px !important;">
 												수정하기
 											</a>
 										</div>
@@ -221,79 +235,67 @@ alert("평점 확인" + value);
 		});
 	});
 	
-	var currentFileIndex = 0;
-	var maxFiles = 3;
 
-	var fileInputs = [];
-	var fileNames = [];
-	var imgPreviews = [];
-	
-	for (var i = 0; i < maxFiles; i++) {
+	$(document).ready(function() {
 		
-		fileInputs.push(document.getElementById('file-input-' + i));
-		fileNames.push(document.getElementById('file-name-' + i));
-		imgPreviews.push(document.getElementById('img-preview-' + i));
-	}
-	
-	var label = document.getElementById('show-input');
-	
-	label.addEventListener('click', function () {
+		let maxFiles = 3;
 		
-		if (currentFileIndex < fileInputs.length) {
+		$('#show-input').click(function() {
 			
-			var currentInput = fileInputs[currentFileIndex];
-			
-			var handleFileChange = (function(index) {
+			for (let i = 0; i < maxFiles; i++) {
 				
-				return function () {
+				let fileInput = $('#file-input-' + i);
+				
+				if (fileInput.length > 0 && fileInput[0].files.length === 0) {
 					
-					if (currentInput.files.length > 0) {
-						
-						currentInput.setAttribute('name', 'files[' + index + ']');
-						
-						var file = currentInput.files[0];
-						fileNames[index].textContent = file.name;
-						
-						if (file.type.startsWith('image/')) {
-							
-							var reader = new FileReader();
-							reader.onload = function (e) {
-								
-								imgPreviews[index].src = e.target.result;
-								imgPreviews[index].style.display = 'inline';
-							};
-							reader.readAsDataURL(file);
-						}
-						currentFileIndex++;
-					}
+					fileInput.trigger('click');
+					break;
 				}
-			})(currentFileIndex);
-			
-			currentInput.click();
-			currentInput.removeEventListener('change', handleFileChange);
-			currentInput.addEventListener('change', handleFileChange);
-		}
-	});
-	
-	fileInputs.forEach((fileInput, index) => {
-		
-		var deleteBtn = document.getElementById('delete-btn-' + index);
-		deleteBtn.addEventListener('click', function () {
-			
-			imgPreviews[index].src = '';
-			imgPreviews[index].style.display = 'none';
-			
-			fileInput.value = '';
-			
-			fileNames[index].textContent = '';
-			
-			deleteBtn.style.display = 'none';
-			
-			if (currentFileIndex > 0) {
-				
-				currentFileIndex--;
 			}
 		});
+		$('input[type="file"]').change(function(e) {
+			
+			let inputId = $(this).attr('id').split('-')[2];
+			let file = this.files[0];
+			
+			if (file) {
+				
+				let reader = new FileReader();
+				reader.onload = function(event) {
+					
+					$('#img-preview-' + inputId).attr('src', event.target.result).show();
+					$('#delete-btn-' + inputId).show();
+					$('#file-input-' + inputId).attr('name', 'files[' + inputId + ']');
+				}
+				reader.readAsDataURL(file);
+				$(this).hide();
+				
+				updateInputNames();
+			}
+		});
+		$('button[id^="delete-btn"]').click(function() {
+			
+			let btnId = $(this).attr('id').split('-')[2];
+			$('#img-preview-' + btnId).attr('src', '').hide();
+			$('#file-input-' + btnId).val('').hide();
+			$('input[name="flg_del[' + btnId + ']"]').val('Y');
+			$('#file-input-' + btnId).removeAttr('name');
+			$(this).hide();
+			
+			updateInputNames();
+		});
+		function updateInputNames() {
+			
+			let currentIndex = 0;
+			$('input[type="file"]').each(function() {
+				
+				if (this.files.length > 0) {
+					
+					$(this).attr('name', 'files[' + currentIndex + ']');
+					currentIndex++;
+				}
+			});
+		}
 	});
 </script>
 </form>

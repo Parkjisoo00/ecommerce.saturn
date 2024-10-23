@@ -115,19 +115,16 @@ alert("평점 확인" + value);
 										<div style="display: flex; flex-direction: column; align-items: center;">
 											<img id="img-preview-0" style="display: none; width: 70px; height: 80px; object-fit: cover; cursor: pointer;" />
 											<input type="file" id="file-input-0" style="display: none;" />
-											<span id="file-name-0" style="margin-left: 10px; cursor: pointer; display: none !important;"></span>
 											<button type="button" id="delete-btn-0" style="display: none; background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
 										</div>
 										<div style="display: flex; flex-direction: column; align-items: center; margin-left: 20px;">
 											<img id="img-preview-1" style="display: none; width: 70px; height: 80px; object-fit: cover; cursor: pointer;" />
 											<input type="file" id="file-input-1" style="display: none;" />
-											<span id="file-name-1" style="margin-left: 10px; cursor: pointer; display: none !important;"></span>
 											<button type="button" id="delete-btn-1" style="display: none; background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
 										</div>
 										<div style="display: flex; flex-direction: column; align-items: center; margin-left: 20px;">
 											<img id="img-preview-2" style="display: none; width: 70px; height: 80px; object-fit: cover; cursor: pointer;" />
 											<input type="file" id="file-input-2" style="display: none;" />
-											<span id="file-name-2" style="margin-left: 10px; cursor: pointer; display: none !important;"></span>
 											<button type="button" id="delete-btn-2" style="display: none; background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
 										</div>
 									</div>
@@ -200,119 +197,64 @@ alert("평점 확인" + value);
 		});
 	});
 	
-	var currentFileIndex = 0;
-	
-	var fileInputs = [
-		document.getElementById('file-input-0'),
-		document.getElementById('file-input-1'),
-		document.getElementById('file-input-2')
-	];
-	
-	var fileNames = [
-		document.getElementById('file-name-0'),
-		document.getElementById('file-name-1'),
-		document.getElementById('file-name-2')
-	];
-	
-	var imgPreviews = [
-		document.getElementById('img-preview-0'),
-		document.getElementById('img-preview-1'),
-		document.getElementById('img-preview-2')
-	];
-	
-	var deleteButtons = [
-		document.getElementById('delete-btn-0'),
-		document.getElementById('delete-btn-1'),
-		document.getElementById('delete-btn-2')
-	];
-	
-	var label = document.getElementById('show-input');
-	
-	function setFileNames() {
+	$(document).ready(function() {
 		
-		fileInputs.forEach((input, index) => {
-			
-			if (input.files.length > 0) {
-				
-				input.setAttribute('name', 'files[' + index + ']');
-			} else {
-				
-				input.removeAttribute('name');
-			}
-		});
-	}
-	label.addEventListener('click', function () {
+		var maxFiles = 3;
 		
-		if (currentFileIndex < fileInputs.length) {
+		$('#show-input').click(function() {
 			
-			var currentInput = fileInputs[currentFileIndex];
-			var handleFileChange = (function(index) {
+			for (var i = 0; i < maxFiles; i++) {
 				
-				return function () {
+				let fileInput = $('#file-input-' + i);
+				if (!fileInput[0].files.length) {
 					
-					if (currentInput.files.length > 0) {
-						
-						var file = currentInput.files[0];
-						
-						fileNames[index].textContent = file.name;
-						if (file.type.startsWith('image/')) {
-							
-							var reader = new FileReader();
-							
-							reader.onload = function (e) {
-								
-								imgPreviews[index].src = e.target.result;
-								imgPreviews[index].style.display = 'inline';
-								deleteButtons[index].style.display = 'inline';
-							};
-							reader.readAsDataURL(file);
-						}
-						setFileNames();
-						currentFileIndex++;
-					}
-				};
-			})(currentFileIndex);
-			currentInput.click();
-			currentInput.removeEventListener('change', handleFileChange);
-			currentInput.addEventListener('change', handleFileChange);
-		}
-	});
-	deleteButtons.forEach((deleteBtn, index) => {
-		
-		deleteBtn.addEventListener('click', function () {
-			
-			imgPreviews[index].src = '';
-			imgPreviews[index].style.display = 'none';
-			
-			fileInputs[index].value = '';
-			
-			fileNames[index].textContent = '';
-			
-			deleteBtn.style.display = 'none';
-			
-			fileInputs[index].removeAttribute('name');
-			
-			setFileNames();
-			
-			if (currentFileIndex > 0) {
-				
-				currentFileIndex--;
+					fileInput.trigger('click');
+					break;
+				}
 			}
 		});
-	});
-	imgPreviews.forEach((imgPreview, index) => {
-		
-		imgPreview.addEventListener('click', function () {
+		$('input[type="file"]').change(function(e) {
 			
-			fileInputs[index].click();
-		});
-	});
-	fileNames.forEach((fileName, index) => {
-		
-		fileName.addEventListener('click', function () {
+			var inputId = $(this).attr('id').split('-')[2];
+			var file = this.files[0];
 			
-			fileInputs[index].click();
+			if (file) {
+				
+				var reader = new FileReader();
+				reader.onload = function(event) {
+					
+					$('#img-preview-' + inputId).attr('src', event.target.result).show();
+					$('#delete-btn-' + inputId).show();
+					$('#file-input-' + inputId).attr('name', 'files[' + inputId + ']');
+				}
+				reader.readAsDataURL(file);
+				$(this).hide();
+				
+				updateInputNames();
+			}
 		});
+		$('button[id^="delete-btn"]').click(function() {
+			
+			var btnId = $(this).attr('id').split('-')[2];
+			$('#img-preview-' + btnId).hide();
+			$('#file-input-' + btnId).val('').hide();
+			$(this).hide();
+			$('#file-input-' + btnId).removeAttr('name');
+			
+			updateInputNames();
+		});
+		function updateInputNames() {
+			
+			var currentIndex = 0;
+			$('input[type="file"]').each(function() {
+				
+				if (this.files.length > 0) {
+					
+					$(this).attr('name', 'files[' + currentIndex + ']');
+					currentIndex++;
+				}
+			});
+		}
 	});
 </script>
 </form>

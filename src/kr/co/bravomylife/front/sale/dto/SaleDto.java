@@ -73,17 +73,24 @@ public class SaleDto {
 	private int total_count			= 0;
 	private int seq_rate			= 0;
 	private int mbr_rate_star		= 0;
-	private List<String> imgs		= null;	
+	private List<ImageData> imgs		= null;	
 	private String flg_review		= "";
 	private int seq_buy_dtl			= 0;
 	private int list_count			= 0;
 	private int writeReview_count	= 0;
+	private int seq_review_img		= 0;
 	
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
+	public int getSeq_review_img() {
+		return seq_review_img;
+	}
+	public void setSeq_review_img(int seq_review_img) {
+		this.seq_review_img = seq_review_img;
+	}
 	public int getWriteReview_count() {
 		return writeReview_count;
 	}
@@ -108,10 +115,10 @@ public class SaleDto {
 	public void setFlg_review(String flg_review) {
 		this.flg_review = flg_review;
 	}
-	public List<String> getImgs() {
+	public List<ImageData> getImgs() {
 		return imgs;
 	}
-	public void setImgs(List<String> imgs) {
+	public void setImgs(List<ImageData> imgs) {
 		this.imgs = imgs;
 	}
 	public int getMbr_rate_star() {
