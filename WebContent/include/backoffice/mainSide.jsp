@@ -131,8 +131,8 @@
 						</span>
 					</a>
 					<ul class="treeview-menu">
+						<li><a href="/console/product/list.web"><i class="fa fa-circle-o"></i> 상품 목록</a></li>
 						<li><a href="/console/product/productReg.web"><i class="fa fa-circle-o"></i> 상품 등록</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
 						<li><a href="#"><i class="fa fa-circle-o"></i> Editors</a></li>
 					</ul>
 					</li>
