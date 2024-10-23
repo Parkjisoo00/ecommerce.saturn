@@ -76,6 +76,12 @@
 					</td>
 				</tr>
 				<tr>
+					<th style="width: 150px;">포인트 총합</th>
+					<td>
+						${memberDto.total_point}
+					</td>
+				</tr>
+				<tr>
 					<th style="width: 150px;">마지막 접속 일시</th>
 					<td>
 						${memberDto.last_dt}

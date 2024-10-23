@@ -65,7 +65,7 @@
 					</a>
 					<ul class="treeview-menu">
 						<li class="active"><a href="/console/users/member/list.web"><i class="fa fa-circle-o"></i> 회원 관리</a></li>
-						<li><a href="/console/users/manager/list.web"><i class="fa fa-circle-o"></i> 관리자 관리</a></li>
+						<li><a href="/console/users/managers/list.web"><i class="fa fa-circle-o"></i> 관리자 관리</a></li>
 					</ul>
 					</li>
 					<li class="treeview">
