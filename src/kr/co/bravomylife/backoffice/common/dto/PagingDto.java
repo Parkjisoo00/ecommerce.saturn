@@ -12,8 +12,8 @@ public class PagingDto {
 	
 	private int totalLine		= 0;
 	private int totalPage		= 0;
-	private int linePerPage		= 10;
-	private int currentPage		= 1;
+	private int linePerPage	= 10;
+	private int currentPage	= 1;
 	
 	private String searchKey	= "";
 	private String searchWord	= "";
@@ -29,20 +29,9 @@ public class PagingDto {
 	private String filter		= "";
 	private String corp_nm		= "";
 	private String prd_type		= "";
+	private String cd_state_sale= "";
 	
 	
-	public Integer getSeq_mbr() {
-		return seq_mbr;
-	}
-	public void setSeq_mbr(Integer seq_mbr) {
-		this.seq_mbr = seq_mbr;
-	}
-	public String getCd_ctg_b() {
-		return cd_ctg_b;
-	}
-	public void setCd_ctg_b(String cd_ctg_b) {
-		this.cd_ctg_b = cd_ctg_b;
-	}
 	public int getTotalLine() {
 		return totalLine;
 	}
@@ -103,11 +92,23 @@ public class PagingDto {
 	public void setSeq_sle(Integer seq_sle) {
 		this.seq_sle = seq_sle;
 	}
+	public Integer getSeq_mbr() {
+		return seq_mbr;
+	}
+	public void setSeq_mbr(Integer seq_mbr) {
+		this.seq_mbr = seq_mbr;
+	}
 	public String getCd_ctg_m() {
 		return cd_ctg_m;
 	}
 	public void setCd_ctg_m(String cd_ctg_m) {
 		this.cd_ctg_m = cd_ctg_m;
+	}
+	public String getCd_ctg_b() {
+		return cd_ctg_b;
+	}
+	public void setCd_ctg_b(String cd_ctg_b) {
+		this.cd_ctg_b = cd_ctg_b;
 	}
 	public String getFilter() {
 		return filter;
@@ -127,4 +128,11 @@ public class PagingDto {
 	public void setPrd_type(String prd_type) {
 		this.prd_type = prd_type;
 	}
+	public String getCd_state_sale() {
+		return cd_state_sale;
+	}
+	public void setCd_state_sale(String cd_state_sale) {
+		this.cd_state_sale = cd_state_sale;
+	}
+	
 }

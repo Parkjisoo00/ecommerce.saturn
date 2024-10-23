@@ -2,15 +2,92 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.backoffice.mybatis.product.Product">
 
+	<select id="list" parameterType="pagingDto" resultType="productDto">
+		SELECT
+			*
+		FROM
+			(
+			SELECT
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY DT_REG DESC) rnum
+				, SEQ_SLE
+				, SLE_NM
+				, CORP_NM
+				, CD_STATE_SALE
+				, PRICE_SALE
+				, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
+			FROM
+				TB_SLE
+			WHERE
+				<include refid="where" />
+			)
+		<![CDATA[
+		WHERE
+			rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+		]]> 
+		ORDER BY
+			rnum
+	</select>
+
+	<select id="count" parameterType="pagingDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(ROWNUM)
+		FROM
+			TB_SLE
+		WHERE
+			<include refid="where" />
+	</select>
+	
+	<sql id="where">
+			REGISTER = #{register}
+		<if test="searchWord != null and searchWord != ''">
+			<if test="searchKey == 'sle_nm'">
+				AND UPPER(SLE_NM) LIKE UPPER('%' || #{searchWord} || '%')
+			</if>
+			<if test="searchKey == 'corp_nm'">
+				AND UPPER(CORP_NM) LIKE UPPER('%' || #{searchWord} || '%')
+			</if>
+			<if test="searchKey == 'sle_nm_and_corp_nm'">
+				AND (
+					UPPER(CORP_NM) LIKE UPPER('%' || #{searchWord} || '%')
+					OR
+					UPPER(SLE_NM) LIKE UPPER('%' || #{searchWord} || '%')
+				)
+			</if>
+		</if>
+		<choose>
+			<when test="cd_state_sale != null and cd_state_sale != '' and cd_state_sale != 0">
+				AND CD_STATE_SALE = #{cd_state_sale}
+			</when>
+			<otherwise>
+				AND CD_STATE_SALE IN (1, 2, 3, 9)
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="cd_ctg_b != null and cd_ctg_b != '' and cd_ctg_b != 0">
+				AND CD_CTG_B = #{cd_ctg_b}
+			</when>
+			<otherwise>
+				AND cd_ctg_b IN (1, 2, 3)
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="cd_ctg_m != null and cd_ctg_m != '' and cd_ctg_m != 0 ">
+				AND CD_CTG_M = #{cd_ctg_m}
+			</when>
+			<otherwise>
+				AND cd_ctg_m IN (1, 2, 3, 4, 5, 6, 7, 8, 9)
+			</otherwise>
+		</choose>
+	</sql>
+
 	<select id="select" parameterType="productDto" resultType="productDto">
 		SELECT
 			SEQ_SLE
 			, SLE_NM
-			, DESCES
 			, CD_WHERE_CTG
 			, PRICE_SALE
 			, CD_STATE_SALE
-			, IMG
+			, CORP_NM
 			, TO_CHAR(DT_SALE_START, 'YYYY-MM-DD')	dt_sale_start
 			, TO_CHAR(DT_SALE_END, 'YYYY-MM-DD')	dt_sale_end
 		FROM

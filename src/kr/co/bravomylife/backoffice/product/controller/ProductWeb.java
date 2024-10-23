@@ -35,6 +35,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.bravomylife.backoffice.common.dto.PagingDto;
+import kr.co.bravomylife.backoffice.common.dto.PagingListDto;
 import kr.co.bravomylife.backoffice.product.dto.ProductDto;
 import kr.co.bravomylife.backoffice.product.service.ProductSrvc;
 import kr.co.bravomylife.common.dto.FileDto;
@@ -60,6 +62,39 @@ public class ProductWeb {
 	
 	@Inject
 	ProductSrvc productSrvc;
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-23
+	 * <p>DESCRIPTION:상품 리스트 페이지</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/product/list.web")
+	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			pagingDto.setRegister(1);
+			
+			PagingListDto pagingListDto = productSrvc.list(pagingDto);
+			
+			mav.addObject("paging"	, pagingListDto.getPaging());
+			mav.addObject("list"	, pagingListDto.getList());
+			
+			mav.setViewName("backoffice/product/list");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".list()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]

@@ -25,6 +25,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import kr.co.bravomylife.backoffice.common.dao.BaseDao;
+import kr.co.bravomylife.backoffice.common.dto.PagingDto;
 import kr.co.bravomylife.backoffice.product.dto.ProductDto;
 
 /**
@@ -37,6 +38,14 @@ import kr.co.bravomylife.backoffice.product.dto.ProductDto;
  */
 @Repository("kr.co.bravomylife.backoffice.product.dao.ProductDao")
 public class ProductDao extends BaseDao {
+	
+	public int count(PagingDto pagingDto) {
+		return sqlSessionBackoffice.selectOne("kr.co.bravomylife.backoffice.mybatis.product.Product.count", pagingDto);
+	}
+	
+	public List<ProductDto> list(PagingDto pagingDto) {
+		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.product.Product.list", pagingDto);
+	}
 	
 	public List<ProductDto> listPrd(ProductDto productDto) {
 		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.product.Product.listPrd", productDto);

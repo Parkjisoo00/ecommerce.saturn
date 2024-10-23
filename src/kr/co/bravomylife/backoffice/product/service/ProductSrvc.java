@@ -29,6 +29,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import kr.co.bravomylife.backoffice.common.dto.PagingDto;
+import kr.co.bravomylife.backoffice.common.dto.PagingListDto;
 import kr.co.bravomylife.backoffice.product.dao.ProductDao;
 import kr.co.bravomylife.backoffice.product.dto.ProductDto;
 
@@ -45,6 +47,32 @@ public class ProductSrvc {
 	
 	@Inject
 	ProductDao productDao;
+	
+	/**
+	 * @return List<SaleDto>
+	 * 
+	 * @since 2024-10-23
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public PagingListDto list(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		// 전체 라인(행) 수
+		int totalLine = productDao.count(pagingDto);
+		// 전체 페이지 수 = 전체 라인(행) 수 / 페이징할 라인수
+		int totalPage = (int) Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(productDao.list(pagingDto));
+		
+		return pagingListDto;
+	}
 	
 	/**
 	 * @return List<SaleDto>
