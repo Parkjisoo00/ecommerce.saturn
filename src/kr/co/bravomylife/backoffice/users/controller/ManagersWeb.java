@@ -32,7 +32,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.backoffice.common.Common;
@@ -40,8 +39,6 @@ import kr.co.bravomylife.backoffice.common.dto.PagingDto;
 import kr.co.bravomylife.backoffice.common.dto.PagingListDto;
 import kr.co.bravomylife.backoffice.users.dto.ManagersDto;
 import kr.co.bravomylife.backoffice.users.service.ManagersSrvc;
-import kr.co.bravomylife.front.center.dto.BoardDto;
-import kr.co.bravomylife.util.security.SKwithAES;
 
 /**
  * @version 1.0.0

@@ -36,19 +36,26 @@ public class ImageData {
 	private int seq_review_img				= 0;
 	private List<Integer> review_imgs		= null;
 	private List<String> flg_del			= null;
+	private List<Integer> review_imgIn		= null;
 	
 	
-	public List<String> getFlg_del() {
-		return flg_del;
+	public List<Integer> getReview_imgIn() {
+		return review_imgIn;
 	}
-	public void setFlg_del(List<String> flg_del) {
-		this.flg_del = flg_del;
+	public void setReview_imgIn(List<Integer> review_imgIn) {
+		this.review_imgIn = review_imgIn;
 	}
 	public List<Integer> getReview_imgs() {
 		return review_imgs;
 	}
 	public void setReview_imgs(List<Integer> review_imgs) {
 		this.review_imgs = review_imgs;
+	}
+	public List<String> getFlg_del() {
+		return flg_del;
+	}
+	public void setFlg_del(List<String> flg_del) {
+		this.flg_del = flg_del;
 	}
 	public String getFile_save() {
 		return file_save;

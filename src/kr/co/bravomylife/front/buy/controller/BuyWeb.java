@@ -120,6 +120,12 @@ public class BuyWeb extends Common {
 			
 			message	= (String)((Hashtable)uploadResult.getLast()).get("resultID");
 			
+			List<Integer> review_imgs = imagedata.getReview_imgs();
+			List<String> flg_del = imagedata.getFlg_del();
+			List<Integer> review_imgIn = imagedata.getReview_imgIn();
+			
+			int _review_imgs = 0;
+			
 			if (message.equals("success")) {
 				
 				Hashtable<String, String> hashtable = (Hashtable<String, String>) uploadResult.getLast();
@@ -127,57 +133,84 @@ public class BuyWeb extends Common {
 				String fileNameSrc	= "";
 				String fileNameSve	= "";
 				String fileSize		= "";
-				List<Integer> review_imgs = imagedata.getReview_imgs();
-				List<String> flg_del = imagedata.getFlg_del();
 				// long totalSize		= 0;
 				
-				for (int loop = 0; loop < countFile; loop++) {
-					
-					fileNameSrc		= (String)hashtable.get("files[" + loop + "]_fileSrcName");
-					fileNameSve		= (String)hashtable.get("files[" + loop + "]_fileSveNameRelative");
-					fileSize		= (String)hashtable.get("files[" + loop + "]_fileSveSize");
-					
-					int reviewImgValue = review_imgs.get(loop);
-					String imgFlgDel = flg_del.get(loop);
-					
-					if (fileSize == null || fileSize == "") fileSize = "0";
-					
-					saleFileDto[loop] = new SaleFileDto();
-					saleFileDto[loop].setFileNameOriginal(fileNameSrc);
-					saleFileDto[loop].setFileNameSave(fileNameSve);
-					saleFileDto[loop].setFileSize((Long.parseLong(fileSize)));
-					saleFileDto[loop].setSeq_sle(saleDto.getSeq_sle());
-					saleFileDto[loop].setSeq_buy_dtl(saleDto.getSeq_buy_dtl());
-					saleFileDto[loop].setSeq_review(saleDto.getSeq_review());
-					saleFileDto[loop].setSeq_mbr(saleDto.getSeq_mbr());
-					saleFileDto[loop].setReview_imgs(reviewImgValue);
-					saleFileDto[loop].setFlg_del(imgFlgDel);
-					saleFileDto[loop].setFile_orig(fileNameSrc);
-					saleFileDto[loop].setFile_save(fileNameSve);
-					
-					// totalSize += Long.parseLong(fileSize);
+				logger.debug("review_imgIn 번호 크기" + review_imgIn.size());
+				logger.debug("review_imgIn 번호" + review_imgIn);
+				
+					for (int loop = 0; loop < countFile; loop++) {
+						
+						fileNameSrc		= (String)hashtable.get("files[" + loop + "]_fileSrcName");
+						fileNameSve		= (String)hashtable.get("files[" + loop + "]_fileSveNameRelative");
+						fileSize		= (String)hashtable.get("files[" + loop + "]_fileSveSize");
+						
+						int _review_imgIn = review_imgIn.get(loop);
+						
+						if (fileSize == null || fileSize == "") fileSize = "0";
+						
+						saleFileDto[loop] = new SaleFileDto();
+						
+						saleFileDto[loop].setFileNameOriginal(fileNameSrc);
+						saleFileDto[loop].setFileNameSave(fileNameSve);
+						saleFileDto[loop].setFileSize((Long.parseLong(fileSize)));
+						saleFileDto[loop].setSeq_sle(saleDto.getSeq_sle());
+						saleFileDto[loop].setSeq_buy_dtl(saleDto.getSeq_buy_dtl());
+						saleFileDto[loop].setSeq_review(saleDto.getSeq_review());
+						saleFileDto[loop].setSeq_mbr(saleDto.getSeq_mbr());
+						saleFileDto[loop].setReview_imgIn(_review_imgIn);
+						saleFileDto[loop].setFile_orig(fileNameSrc);
+						saleFileDto[loop].setFile_save(fileNameSve);
+						
+						// totalSize += Long.parseLong(fileSize);
+					}
+				}
+				if (review_imgs != null && !review_imgs.isEmpty()) {
+					_review_imgs = review_imgs.size();
 				}
 				
+				SaleFileDto[] _saleFileDto = new SaleFileDto[_review_imgs];
+				
+				if (flg_del != null) {
+					
+					logger.debug("review_imgs 번호 크기" + review_imgs.size());
+					logger.debug("review_imgs 번호" + review_imgs);
+					logger.debug("삭제 번호 크기" + flg_del.size());
+					logger.debug("삭제 번호" + flg_del);
+					
+					for (int loop = 0; loop < review_imgs.size(); loop++) {
+						
+						String imgFlgDel = flg_del.get(loop);
+						int reviewImgValue = review_imgs.get(loop);
+						
+						_saleFileDto[loop] = new SaleFileDto();
+						
+						_saleFileDto[loop].setSeq_sle(saleDto.getSeq_sle());
+						_saleFileDto[loop].setSeq_buy_dtl(saleDto.getSeq_buy_dtl());
+						_saleFileDto[loop].setSeq_review(saleDto.getSeq_review());
+						_saleFileDto[loop].setSeq_mbr(saleDto.getSeq_mbr());
+						_saleFileDto[loop].setFlg_del(imgFlgDel);
+						_saleFileDto[loop].setReview_imgs(reviewImgValue);
+					}
+				}
 				boolean result = false;
 				
 				if (countFile > 0) {
 					
-					result = saleSrvc.modifyReview(saleDto, saleFileDto);
+					result = saleSrvc.modifyReview(saleDto, saleFileDto, _saleFileDto);
 				} else {
 					
-					result = saleSrvc.modifyText(saleDto);
+					result = saleSrvc.modifyText(saleDto, _saleFileDto);
 				}
 				if (result) {
 					
 					request.setAttribute("script", "alert('상품 후기가 수정되었습니다.');");
 					request.setAttribute("redirect", "/front/buy/reviewListPage.web");
-					// 추후 코드 완성시 마이 페이지 리뷰 관리 페이지로 이동
 				} else {
 					
 					request.setAttribute("script", "alert('시스템 관리자에게 문의하세요.');");
 					request.setAttribute("redirect", "/front/buy/reviewListPage.web");
 				}
-			} 
+			
 			mav.setViewName("forward:/servlet/result.web");
 		}
 		catch (Exception e) {

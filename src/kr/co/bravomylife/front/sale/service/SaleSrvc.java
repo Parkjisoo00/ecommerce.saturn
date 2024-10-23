@@ -27,10 +27,13 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import kr.co.bravomylife.front.buy.controller.BuyWeb;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.sale.dao.SaleDao;
@@ -50,15 +53,19 @@ import kr.co.bravomylife.front.sale.dto.SaleListDto;
 @Service("kr.co.bravomylife.front.sale.service.SaleSrvc")
 public class SaleSrvc {
 	
+	/** Logger */
+	private static Logger logger = LoggerFactory.getLogger(BuyWeb.class);
+	
 	@Inject
 	SaleDao saleDao;
 	
 	@Transactional("txFront")
-	public boolean modifyText(SaleDto saleDto) {
+	public boolean modifyText(SaleDto saleDto, SaleFileDto[] _saleFileDto) {
 		
 		boolean totalResult = false;
-		
 		int result = 0;
+		
+		logger.debug("어느 Srvc로 오는지 확인 modifyText" + saleDto.getSeq_mbr());
 		
 		try {
 			
@@ -67,6 +74,20 @@ public class SaleSrvc {
 			
 			if (result == 2) { 
 				
+				for (SaleFileDto fileDto : _saleFileDto) {
+					
+					fileDto.setSeq_sle(saleDto.getSeq_sle());
+					fileDto.setSeq_review(saleDto.getSeq_review());
+					
+					if (fileDto.getFlg_del().equals("Y") && fileDto.getReview_imgs() != 0) {
+						
+						int deleteImgResult = saleDao.deleteReviewImg(fileDto);
+						if (deleteImgResult <= 0) {
+							
+							return false;
+						}
+					}
+				}
 				totalResult = true;
 			}
 		} catch (Exception e) {
@@ -77,10 +98,12 @@ public class SaleSrvc {
 	}
 	
 	@Transactional("txFront")
-	public boolean modifyReview(SaleDto saleDto, SaleFileDto[] saleFileDto) {
+	public boolean modifyReview(SaleDto saleDto, SaleFileDto[] saleFileDto, SaleFileDto[] _saleFileDto) {
 		
 		boolean totalResult = false;
 		int result = 0;
+		
+		logger.debug("어느 Srvc로 오는지 확인 modifyReview" + saleDto.getSeq_mbr());
 		
 		try {
 			
@@ -89,14 +112,17 @@ public class SaleSrvc {
 			
 			if (result == 2) {
 				
-				if (saleFileDto[0].getFile_orig() != null && !saleFileDto[0].getFile_orig().equals("")) {
-					
 					for (SaleFileDto fileDto : saleFileDto) {
 						
 						fileDto.setSeq_sle(saleDto.getSeq_sle());
 						fileDto.setSeq_review(saleDto.getSeq_review());
 						
-						if (fileDto.getReview_imgs() == 0) {
+						logger.debug("fileDto 확인 " + fileDto);
+						logger.debug("Review_imgIn == 0인지 확인" + fileDto.getReview_imgIn());
+						
+						if (fileDto.getReview_imgIn() == 0) {
+							
+							logger.debug("fileDto.getReview_imgIn() == 0의 값 " + fileDto.getReview_imgIn());
 							
 							int insertImgResult = saleDao.insertReviewModify(fileDto);
 							if (insertImgResult <= 0) {
@@ -105,22 +131,31 @@ public class SaleSrvc {
 							}
 						} else {
 							
-							int reImgResult = saleDao.modifyReviewFile(fileDto);
+							int reImgResult = saleDao.modifyReviewFileIn(fileDto);
+							
+							logger.debug("reImgResult 확인" + reImgResult);
+							
 							if (reImgResult <= 0) {
 								
 								return false;
 							}
 						}
-						if (fileDto.getFlg_del().equals("Y")) {
+						
+						for (SaleFileDto _fileDto : _saleFileDto) {
+						
+							logger.debug("_fileDto.getFlg_del 확인" + _fileDto.getFlg_del());
+							logger.debug("_fileDto.getReview_imgs 확인" + _fileDto.getReview_imgs());
 							
-							int deleteImgResult = saleDao.deleteReviewImg(fileDto);
-							if (deleteImgResult <= 0) {
+							if (_fileDto.getFlg_del().equals("Y") && _fileDto.getReview_imgs() != 0) {
 								
-								return false;
+								int deleteImgResult = saleDao.deleteReviewImgIn(_fileDto);
+								if (deleteImgResult <= 0) {
+									
+									return false;
+								}
 							}
 						}
 					}
-				}
 				totalResult = true;
 			}
 		} catch (Exception e) {

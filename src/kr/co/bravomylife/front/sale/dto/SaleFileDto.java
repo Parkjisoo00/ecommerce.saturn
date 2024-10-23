@@ -40,21 +40,28 @@ public class SaleFileDto {
 	private String fileNameSave			= "";
 	private Long fileSize				= 0L;
 	private int seq_review_img			= 0;
-	private int review_imgs				= 0;
-	private String flg_del			= "";
+	private Integer review_imgs			= null;
+	private String flg_del				= "";
+	private Integer review_imgIn		= null;
 	
 	
+	public Integer getReview_imgIn() {
+		return review_imgIn;
+	}
+	public void setReview_imgIn(Integer review_imgIn) {
+		this.review_imgIn = review_imgIn;
+	}
+	public Integer getReview_imgs() {
+		return review_imgs;
+	}
+	public void setReview_imgs(Integer review_imgs) {
+		this.review_imgs = review_imgs;
+	}
 	public String getFlg_del() {
 		return flg_del;
 	}
 	public void setFlg_del(String flg_del) {
 		this.flg_del = flg_del;
-	}
-	public int getReview_imgs() {
-		return review_imgs;
-	}
-	public void setReview_imgs(int review_imgs) {
-		this.review_imgs = review_imgs;
 	}
 	public int getSeq_review_img() {
 		return seq_review_img;
