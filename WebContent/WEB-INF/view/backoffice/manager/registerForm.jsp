@@ -56,23 +56,9 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST" >
-
-	
-	<header class="main-header">
-	<a href="index2.html" class="logo">
-	<span class="logo-mini"><b>관</b>리자</span>
-	<span class="logo-lg"><b>관리자</b></span>
-	</a>
-	<nav class="navbar navbar-static-top">
-	<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-		<span class="sr-only">Toggle navigation</span>
-	</a>
-
-	
-	
-	</nav>
-	</header>
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
+	
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
