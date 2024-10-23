@@ -3,6 +3,11 @@
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
+<%
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +17,9 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 	<script type="text/javascript" src="/js/backoffice.js"></script>
+	<style>
 	
+	</style>
 	<script>
 	
 	function goModifyForm(value) {
@@ -47,15 +54,18 @@
 <!-- Main content -->
 <section>
 	<div class="content-wrapper" >
-		<article class="txtCenter">
-			<div class="brdSearchArea">
+		<article class="txtCenter" style="padding-top: 150px;">
+		<div style="position: relative; width: 900px; margin-left: auto; margin-right: auto;">
+			<div class="brdSearchArea" style="float: right; position: relative; top: -20px;">
 				<select name="searchKey">
 					<option value="email"<c:if test="${paging.searchKey == 'email'}"> selected</c:if>>이메일</option>
 					<option value="mbr_nm"<c:if test="${paging.searchKey == 'mbr_nm'}"> selected</c:if>>성명</option>
 				</select>
 				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> <input type="submit" value="검색"/>
 			</div>
-			<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
+			<div class="brdInfo" style="position: relative; top: 10px;">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
+			<br/>
+			<br/>
 			<table class="headTop_01" style="width: 900px; margin-left: auto; margin-right: auto">
 				<tr>
 					<th style="width: 5%">NO</th>
@@ -109,7 +119,10 @@
 				</c:choose>
 			</table>
 			<br/>
+			<div style="text-align: center; position: relative; top: 30px; left: -30px;">
 			<bravomylifeTag:page styleID="admin_text" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+			</div>
+		</div>
 		</article>
 	</div>
 </section>	
