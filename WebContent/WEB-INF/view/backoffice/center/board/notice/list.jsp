@@ -115,27 +115,23 @@
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">공지 사항</h3>&nbsp;&nbsp;&nbsp;
-			
-
-				<div class="box-tools pull-right">
-					<div class="has-feedback">
-						<div style="display: flex; align-items: center;">
-							<select class="form-control" name="searchKey" style="height: 30px;">
-								<option value="title" <c:if test="${paging.searchKey == 'title'}">  selected</c:if>>제목</option>
-								<option value="contents" <c:if test="${paging.searchKey == 'contents'}">  selected</c:if>>내용</option>
-								<option value="title+contents" <c:if test="${paging.searchKey == 'title+contents'}">  selected</c:if>>제목 또는 내용</option>
-							</select>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="text" name="searchWord" id="searchWord" class="form-control input-sm" value="${paging.searchWord}" required onKeyPress="if (event.keyCode == 13) search();" />
-							&nbsp;&nbsp;
-							<input type="submit" value="검색"/>
-							
-							
+					<div class="box-tools pull-right">
+						<div class="has-feedback">
+							<div style="display: flex; align-items: center;">&nbsp;&nbsp;
+								<select class="form-control" name="searchKey" style="height: 30px;">
+									<option value="title" <c:if test="${paging.searchKey == 'title'}">  selected</c:if>>제목</option>
+									<option value="contents" <c:if test="${paging.searchKey == 'contents'}">  selected</c:if>>내용</option>
+									<option value="title+contents" <c:if test="${paging.searchKey == 'title+contents'}">  selected</c:if>>제목 또는 내용</option>
+								</select>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="text" name="searchWord" id="searchWord" class="form-control input-sm" value="${paging.searchWord}" required onKeyPress="if (event.keyCode == 13) search();" />
+								&nbsp;&nbsp;
+								<input type="submit" value="검색"/>
+							</div>
 						</div>
-				</div>
-			</div>
+					</div>
 			<!-- /.box-tools -->
-			</div>
+				</div>
 			<!-- /.box-header -->
 			<div class="box-body no-padding">
 				<div class="table-responsive mailbox-messages">
