@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ page info="/WEB-INF/view/backoffice/product/list.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn"					uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
 <!DOCTYPE html>
 <html>
@@ -155,9 +156,9 @@
 											${list.rnum}
 										</td>
 										<td>
-											<!-- <a href="/seller/sale/view.web?seq_sle=${list.sle_nm}">
-											</a> -->
-											${list.sle_nm}
+											<a href="/console/product/view.web?seq_sle=${list.sle_nm}" style="color: black;">
+												<bravomylifeTag:substring text="${fn:escapeXml(list.sle_nm)}" length="60" />
+											</a>
 										</td>
 										<td>
 											${list.corp_nm}
