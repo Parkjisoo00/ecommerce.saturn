@@ -1,59 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <header class="main-header">
-    <!-- Logo -->
-    <a href="../../index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>관</b></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>관리자</b></span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
-          
-          <!-- Notifications: style can be found in dropdown.less -->
-         
-          <!-- Tasks: style can be found in dropdown.less -->
-          
-          <!-- User Account: style can be found in dropdown.less -->
-
-          <!-- Control Sidebar Toggle Button -->
-
-        <!-- 세션이 있으면 -->
-        <c:if test="${not empty sessionScope.SEQ_MNG}">
-          <li class="dropdown user user-menu">
-            <a href="/console/myPage/"  title="<%=session.getAttribute("NAME")%>" style="font-weight: bold; font-size: 1.2em;">[마이페이지]</a>
-              <span class="hidden-xs">          
-              </span>
-            </a>
-          </li>
-          <li class="dropdown user user-menu">
-            <a href="/console/login/logout.web" class="menuTop" style="font-weight: bold; font-size: 1.2em;">[로그아웃]</a>
-              <span class="hidden-xs">          
-              </span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+	<a href="/console/index.web" class="logo">
+	<span class="logo-lg"><b>관리자</b></span>
+	</a>
+</header>
 <span style="float:right;line-height:43px;vertical-align:middle;">
+	<!-- 세션이 있으면 -->
+	<c:if test="${not empty sessionScope.SEQ_MNG}">
+		<a href="/console/myPage/" class="menuTop" title="<%=session.getAttribute("NAME")%>" style="font-weight: bold; font-size: 1.2em;">[마이페이지]</a>
+		 <a href="/console/login/logout.web" class="menuTop" style="font-weight: bold; font-size: 1.2em;">[로그아웃]</a>
 		 <!-- Left side column. contains the logo and sidebar -->
 			<aside class="main-sidebar">
 				<!-- sidebar: style can be found in sidebar.less -->
-				<section class="sidebar" style="padding-bottom: 0px;">
+				<section class="sidebar">
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
 					<li class="treeview">
@@ -64,8 +24,8 @@
 						</span>
 					</a>
 					<ul class="treeview-menu">
-						<li class="active"><a href="/console/users/member/list.web"><i class="fa fa-circle-o"></i> 회원 관리</a></li>
-						<li><a href="/console/users/manager/list.web"><i class="fa fa-circle-o"></i> 관리자 관리</a></li>
+						<li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> 회원 관리</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> 관리자 관리</a></li>
 					</ul>
 					</li>
 					<li class="treeview">
@@ -145,7 +105,7 @@
 					</a>
 					<ul class="treeview-menu">
 						<li><a href="#"><i class="fa fa-bullhorn"></i> 공지사항</a></li>
-						<li><a href="#"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-users"></i> 자주찾는 질문()</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-user"></i> 1:1문의</a></li>
 					</ul>
 					</li>

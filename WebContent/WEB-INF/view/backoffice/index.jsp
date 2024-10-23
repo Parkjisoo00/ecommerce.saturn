@@ -25,7 +25,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 
-	<%@ include file="/include/backoffice/mainSide.jsp" %>
+	<%@ include file="/include/backoffice/loginMainSide.jsp" %>
 
 <!-- Main content -->
 <div class="content-wrapper" >
