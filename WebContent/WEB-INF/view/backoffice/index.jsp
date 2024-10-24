@@ -29,7 +29,7 @@
 
 <!-- Main content -->
 <div class="content-wrapper" >
-	<section class="content" style="display: flex; justify-content: center; align-items: center; padding-top: 230px;">
+	<section class="content" style="display: flex; justify-content: center; align-items: center; padding-top: 310px;">
 		<div class="col-md-6">
 			<div class="box box-info">
 				<div class="box-header with-border">
