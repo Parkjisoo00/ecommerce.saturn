@@ -458,7 +458,7 @@ public class BuyWeb extends Common {
 			PagingListDto mergedPagingList = saleSrvc.mergePageReviewAndImages(_reviewpagingDto, _reviewListImgs);
 			
 			mav.addObject("reviewList", mergedPagingList.getList());
-			
+			mav.addObject("paging"	, mergedPagingList.getPaging());
 			/*
 			List<SaleDto> saleList = (List<SaleDto>) saleListDto.getList();
 			

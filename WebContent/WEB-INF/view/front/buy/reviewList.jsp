@@ -128,9 +128,9 @@ alert("평점 확인" + value);
 <input type="hidden" name="seq_sle"			id="seq_sle"/>
 <input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>
 <input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
-<input type="hidden" name="seq_buy_dtl"		id="seq_buy_dtl" value="0"/>
-<input type="hidden" name="seq_review"		id="seq_review" value="0"/>
-<input type="hidden" name="currentPage"		id="currentPage"	value="1"/>
+<input type="hidden" name="seq_buy_dtl"		id="seq_buy_dtl"	value="0"/>
+<input type="hidden" name="seq_review"		id="seq_review"		value="0"/>
+<input type="hidden" name="currentPage"		id="currentPage"	value="${paging.currentPage}"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>

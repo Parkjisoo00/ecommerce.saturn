@@ -290,14 +290,6 @@ public class SaleSrvc {
 	public PagingListDto reviewPageListImgs(PagingDto pagingDto) {
 		
 		PagingListDto pagingListDto = new PagingListDto();
-		
-		int totalLine = saleDao.reviewPageCount(pagingDto);
-		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
-		pagingDto.setTotalLine(totalLine);
-		pagingDto.setTotalPage(totalPage);
-		if (totalPage == 0) pagingDto.setCurrentPage(1);
-		
-		pagingListDto.setPaging(pagingDto);
 		pagingListDto.setList(saleDao.reviewPageListImgs(pagingDto));
 		
 		return pagingListDto;
