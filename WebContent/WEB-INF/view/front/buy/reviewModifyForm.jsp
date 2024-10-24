@@ -137,38 +137,35 @@ alert("평점 확인" + value);
 								</div>
 								<div class="product-name" style="padding-right: 0px !important">
 									<div style="display: flex; align-items: center; height: 100px;">
-										<label id="show-input" class="cart-btn-review" style="margin: 0px !important; background: #fff; color: #346aff !important; border: 1px solid #346aff !important; padding: 10px; cursor: pointer;">
-											파일 선택
-										</label>
-										<div id="file-inputs" style="display: flex; margin-left: 20px; align-items: center;">
-<div id="file-inputs" style="display: flex; margin-left: 20px; align-items: center;">
-    <c:forEach var="imgs" items="${reviewList.imgs}" varStatus="status">
-        <div id="file-inputs-${status.index}" style="position: relative; display: flex; flex-direction: column; margin-left: 20px; align-items: center;">
-            <div class="img-container" id="img-container-${status.index}" style="width: 70px; height: 80px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                <span class="upload-text" id="upload-text-${status.index}" style="color: #666;">사진 첨부</span>
-                <img id="img-preview-${status.index}" style="display: none; width: 100%; height: 100%; object-fit: cover;" src="/img/review/${imgs.file_save}" />
-            </div>
-            <input type="file" id="file-input-${status.index}" style="display: none;" name="files[${status.index}]"/>
-            <input type="hidden" id="review_imgIn-${status.index}" style="display: none;" name="review_imgIn[${status.index}]" value="${imgs.seq_review_img}"/>
-            <input type="hidden" id="flg_del-${status.index}" style="display: none;" name="flg_del[${status.index}]" value="N"/>
-            <input type="hidden" id="review_imgs-${status.index}" style="display: none;" name="review_imgs[${status.index}]" value="${imgs.seq_review_img}"/>
-            <button type="button" id="delete-btn-${status.index}" style="background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
-        </div>
-    </c:forEach>
-    <c:forEach begin="${reviewList.imgs.size()}" end="2" varStatus="status">
-        <div id="file-inputs-${status.index}" style="position: relative; display: flex; flex-direction: column; margin-left: 20px; align-items: center;">
-            <div class="img-container" id="img-container-${status.index}" style="width: 70px; height: 80px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                <span class="upload-text" id="upload-text-${status.index}" style="color: #666;">사진 첨부</span>
-                <img id="img-preview-${status.index}" style="display: none; width: 100%; height: 100%; object-fit: cover;" />
-            </div>
-            <input type="file" id="file-input-${status.index}" style="display: none;" name="files[${status.index}]"/>
-            <input type="hidden" id="review_imgIn-${status.index}" style="display: none;" name="review_imgIn[${status.index}]" value="0"/>
-            <input type="hidden" id="flg_del-${status.index}" style="display: none;" name="flg_del[${status.index}]" value="N"/>
-            <input type="hidden" id="review_imgs-${status.index}" style="display: none;" name="review_imgs[${status.index}]" value="0"/>
-            <button type="button" id="delete-btn-${status.index}" style="background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
-        </div>
-    </c:forEach>
-</div>
+										<div id="file-inputs" style="display: flex; align-items: center;">
+											<div id="file-inputs" style="display: flex; align-items: center;">
+												<c:forEach var="imgs" items="${reviewList.imgs}" varStatus="status">
+													<div id="file-inputs-${status.index}" style="position: relative; display: flex; flex-direction: column; margin-right: 20px; align-items: center;">
+														<div class="img-container" id="img-container-${status.index}" style="width: 70px; height: 80px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+															<span class="upload-text" id="upload-text-${status.index}" style="color: #666;">사진 첨부</span>
+															<img id="img-preview-${status.index}" style="display: none; width: 100%; height: 100%; object-fit: cover;" src="/img/review/${imgs.file_save}" />
+														</div>
+														<input type="file" id="file-input-${status.index}" style="display: none;" name="files[${status.index}]"/>
+														<input type="hidden" id="review_imgIn-${status.index}" style="display: none;" name="review_imgIn[${status.index}]" value="${imgs.seq_review_img}"/>
+														<input type="hidden" id="flg_del-${status.index}" style="display: none;" name="flg_del[${status.index}]" value="N"/>
+														<input type="hidden" id="review_imgs-${status.index}" style="display: none;" name="review_imgs[${status.index}]" value="${imgs.seq_review_img}"/>
+														<button type="button" id="delete-btn-${status.index}" style="background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
+													</div>
+												</c:forEach>
+												<c:forEach begin="${reviewList.imgs.size()}" end="2" varStatus="status">
+													<div id="file-inputs-${status.index}" style="position: relative; display: flex; flex-direction: column; margin-right: 20px; align-items: center;">
+														<div class="img-container" id="img-container-${status.index}" style="width: 70px; height: 80px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+															<span class="upload-text" id="upload-text-${status.index}" style="color: #666;">사진 첨부</span>
+															<img id="img-preview-${status.index}" style="display: none; width: 100%; height: 100%; object-fit: cover;" />
+														</div>
+														<input type="file" id="file-input-${status.index}" style="display: none;" name="files[${status.index}]"/>
+														<input type="hidden" id="review_imgIn-${status.index}" style="display: none;" name="review_imgIn[${status.index}]" value="0"/>
+														<input type="hidden" id="flg_del-${status.index}" style="display: none;" name="flg_del[${status.index}]" value="N"/>
+														<input type="hidden" id="review_imgs-${status.index}" style="display: none;" name="review_imgs[${status.index}]" value="0"/>
+														<button type="button" id="delete-btn-${status.index}" style="background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
+													</div>
+												</c:forEach>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -241,64 +238,71 @@ alert("평점 확인" + value);
 	});
 	
 	$(document).ready(function() {
-	    var uploadIndex = 0;  // 파일 업로드 시 인덱스 값 (0부터 시작)
-	    var deleteIndex = 0;  // 삭제 시 인덱스 값 (0부터 시작)
-
-	    // 페이지 로드 시 모든 input 태그에 disabled 속성을 추가
-	    $('input[type="file"], input[name^="flg_del"], input[name^="review_imgs"], input[name^="review_imgIn"]').prop('disabled', true);
-
-	    // 이미지 클릭 시 파일 업로드 창 띄우기
-	    $('div[id^="img-container"]').click(function() {
-	        var imgId = $(this).attr('id').split('-')[2];
-
-	        // 파일 업로드 창 띄우기
-	        var fileInput = $('#file-input-' + imgId);
-	        fileInput.prop('disabled', false); // input 태그의 disabled 속성 해제
-
-	        // 파일 선택 창을 강제로 열기 전에 reset() 호출로 input 초기화
-	        fileInput.val(''); // input 태그 초기화
-	        fileInput.trigger('click'); // 파일 업로드 창 열기
-	    });
-
-	    // 파일 선택 시 (change 이벤트)
-	    $('input[type="file"]').change(function() {
-	        var inputId = $(this).attr('id').split('-')[2];
-	        var file = this.files[0];
-
-	        if (file) {
-	            // 이미지 미리보기 갱신
-	            var reader = new FileReader();
-	            reader.onload = function(e) {
-	                $('#img-preview-' + inputId).attr('src', e.target.result).show();
-	            }
-	            reader.readAsDataURL(file);
-
-	            // files 및 review_imgIn의 인덱스 값을 0부터 설정
-	            $(this).attr('name', 'files[' + uploadIndex + ']');
-	            $('#review_imgIn-' + inputId).attr('name', 'review_imgIn[' + uploadIndex + ']');
-	            $('#review_imgIn-' + inputId).prop('disabled', false);  // disabled 해제
-	            uploadIndex++;  // 업로드 인덱스 증가
-	        }
-	    });
-
-	    // 삭제 버튼 클릭 시
-	    $('button[id^="delete-btn"]').click(function() {
-	        var btnId = $(this).attr('id').split('-')[2];
-
-	        // 해당 이미지 미리보기 숨기기 및 input 값 초기화
-	        $('#img-preview-' + btnId).hide();
-	        $('#file-input-' + btnId).val('').hide(); // 파일 입력 필드를 숨기고 초기화
-	        $('#flg_del-' + btnId).val('Y');
-	        $('#file-input-' + btnId).prop('disabled', true); // 삭제 후 disabled 처리
-	        $('#review_imgIn-' + btnId).prop('disabled', true); // 삭제 후 disabled 처리
-
-	        // flg_del 및 review_imgs의 인덱스 값을 0부터 설정
-	        $('#flg_del-' + btnId).attr('name', 'flg_del[' + deleteIndex + ']');
-	        $('#review_imgs-' + btnId).attr('name', 'review_imgs[' + deleteIndex + ']');
-	        $('#flg_del-' + btnId).prop('disabled', false);  // disabled 해제
-	        $('#review_imgs-' + btnId).prop('disabled', false);  // disabled 해제
-	        deleteIndex++;  // 삭제 인덱스를 증가시킴
-	    });
+		
+		$('img[id^="img-preview"]').each(function() {
+			
+			var src = $(this).attr('src');
+			var inputId = $(this).attr('id').split('-')[2];
+			if (src && src.trim() !== '') {
+				
+				$(this).show();
+				$('#upload-text-' + inputId).hide();
+			}
+		});
+		var uploadIndex = 0;
+		var deleteIndex = 0;
+		
+		$('input[type="file"], input[name^="flg_del"], input[name^="review_imgs"], input[name^="review_imgIn"]').prop('disabled', true);
+		
+		$('div[id^="img-container"]').click(function() {
+			
+			var imgId = $(this).attr('id').split('-')[2];
+			var fileInput = $('#file-input-' + imgId);
+			
+			fileInput.prop('disabled', false);
+			fileInput.val('');
+			fileInput.trigger('click');
+		});
+		$('input[type="file"]').change(function() {
+			
+			var inputId = $(this).attr('id').split('-')[2];
+			var file = this.files[0];
+			
+			if (file) {
+				var reader = new FileReader();
+				
+				reader.onload = function(e) {
+					
+					$('#img-preview-' + inputId).attr('src', e.target.result).show();
+					$('#upload-text-' + inputId).hide();
+				}
+				reader.readAsDataURL(file);
+				
+				$(this).attr('name', 'files[' + uploadIndex + ']');
+				$('#review_imgIn-' + inputId).attr('name', 'review_imgIn[' + uploadIndex + ']');
+				$('#review_imgIn-' + inputId).prop('disabled', false);
+				
+				uploadIndex++;
+			}
+		});
+		$('button[id^="delete-btn"]').click(function() {
+			
+			var btnId = $(this).attr('id').split('-')[2];
+			
+			$('#img-preview-' + btnId).hide();
+			$('#file-input-' + btnId).val('').hide();
+			$('#flg_del-' + btnId).val('Y');
+			$('#file-input-' + btnId).prop('disabled', true);
+			$('#review_imgIn-' + btnId).prop('disabled', true);
+			$('#flg_del-' + btnId).attr('name', 'flg_del[' + deleteIndex + ']');
+			$('#review_imgs-' + btnId).attr('name', 'review_imgs[' + deleteIndex + ']');
+			$('#flg_del-' + btnId).prop('disabled', false);
+			$('#review_imgs-' + btnId).prop('disabled', false);
+			
+			$('#upload-text-' + btnId).show();
+			
+			deleteIndex++;
+		});
 	});
 </script>
 </form>

@@ -84,6 +84,52 @@ public class BuyWeb extends Common {
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-010-17
+	 * <p>DESCRIPTION: 리뷰 관리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/buy/reviewDelete.web")
+	public ModelAndView reviewDelete(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		boolean result = false;
+		
+		try {
+			
+			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
+			
+			saleDto.setSeq_mbr(seqMbr);
+			saleDto.setUpdater(seqMbr);
+			
+			result = saleSrvc.reviewDelete(saleDto);
+			
+			if (result) {
+				
+				request.setAttribute("script", "alert('상품 후기가 삭제되었습니다.');");
+				request.setAttribute("redirect", "/front/buy/reviewListPage.web");
+			} else {
+				
+				request.setAttribute("script", "alert('시스템 관리자에게 문의하세요.');");
+				request.setAttribute("redirect", "/front/buy/reviewListPage.web");
+			}
+		mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".reviewDelete()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
 	 * @since 2024-10-23
@@ -100,8 +146,6 @@ public class BuyWeb extends Common {
 		String message = "";
 		
 		try {
-			
-			logger.debug("평점 확인" + saleDto.getRate_star());
 			
 			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
 			
@@ -135,9 +179,6 @@ public class BuyWeb extends Common {
 				String fileSize		= "";
 				// long totalSize		= 0;
 				
-				logger.debug("review_imgIn 번호 크기" + review_imgIn.size());
-				logger.debug("review_imgIn 번호" + review_imgIn);
-				
 					for (int loop = 0; loop < countFile; loop++) {
 						
 						fileNameSrc		= (String)hashtable.get("files[" + loop + "]_fileSrcName");
@@ -148,8 +189,9 @@ public class BuyWeb extends Common {
 						
 						if (fileSize == null || fileSize == "") fileSize = "0";
 						
-						saleFileDto[loop] = new SaleFileDto();
+						fileNameSve = fileNameSve.replace("\\", "");
 						
+						saleFileDto[loop] = new SaleFileDto();
 						saleFileDto[loop].setFileNameOriginal(fileNameSrc);
 						saleFileDto[loop].setFileNameSave(fileNameSve);
 						saleFileDto[loop].setFileSize((Long.parseLong(fileSize)));
@@ -275,6 +317,8 @@ public class BuyWeb extends Common {
 					fileNameSve		= (String)hashtable.get("files[" + loop + "]_fileSveNameRelative");
 					fileSize		= (String)hashtable.get("files[" + loop + "]_fileSveSize");
 					if (fileSize == null || fileSize == "") fileSize = "0";
+					
+					fileNameSve = fileNameSve.replace("\\", "");
 					
 					saleFileDto[loop] = new SaleFileDto();
 					saleFileDto[loop].setFileNameOriginal(fileNameSrc);

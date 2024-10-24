@@ -108,24 +108,36 @@ alert("평점 확인" + value);
 								</div>
 							<div class="product-name" style="padding-right: 0px !important">
 								<div style="display: flex; align-items: center; height: 100px;">
-									<label id="show-input" class="cart-btn-review" style="margin: 0px !important; background: #fff; color: #346aff !important; border: 1px solid #346aff !important; padding: 10px; cursor: pointer;">
-										파일 선택
-									</label>
-									<div id="file-inputs" style="display: flex; margin-left: 20px; align-items: center;">
-										<div style="display: flex; flex-direction: column; align-items: center;">
-											<img id="img-preview-0" style="display: none; width: 70px; height: 80px; object-fit: cover; cursor: pointer;" />
-											<input type="file" id="file-input-0" style="display: none;" />
-											<button type="button" id="delete-btn-0" style="display: none; background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
+									<div id="file-inputs" style="display: flex; align-items: center;">
+										<div id="file-inputs" style="display: flex; align-items: center;">
+											<div id="file-inputs-0" style="position: relative; display: flex; flex-direction: column; margin-right: 20px; align-items: center;">
+												<div class="img-container" id="img-container-0" style="width: 70px; height: 80px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+													<span class="upload-text" id="upload-text-0" style="color: #666;">사진 첨부</span>
+													<img id="img-preview-0" style="display: none; width: 100%; height: 100%; object-fit: cover;"/>
+												</div>
+												<input type="file" id="file-input-0" style="display: none;" name="files[0]"/>
+												<button type="button" id="delete-btn-0" style="background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
+											</div>
 										</div>
-										<div style="display: flex; flex-direction: column; align-items: center; margin-left: 20px;">
-											<img id="img-preview-1" style="display: none; width: 70px; height: 80px; object-fit: cover; cursor: pointer;" />
-											<input type="file" id="file-input-1" style="display: none;" />
-											<button type="button" id="delete-btn-1" style="display: none; background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
+										<div id="file-inputs" style="display: flex; align-items: center;">
+											<div id="file-inputs-1" style="position: relative; display: flex; flex-direction: column; margin-right: 20px; align-items: center;">
+												<div class="img-container" id="img-container-1" style="width: 70px; height: 80px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+													<span class="upload-text" id="upload-text-1" style="color: #666;">사진 첨부</span>
+													<img id="img-preview-1" style="display: none; width: 100%; height: 100%; object-fit: cover;"/>
+												</div>
+												<input type="file" id="file-input-1" style="display: none;" name="files[1]"/>
+												<button type="button" id="delete-btn-1" style="background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
+											</div>
 										</div>
-										<div style="display: flex; flex-direction: column; align-items: center; margin-left: 20px;">
-											<img id="img-preview-2" style="display: none; width: 70px; height: 80px; object-fit: cover; cursor: pointer;" />
-											<input type="file" id="file-input-2" style="display: none;" />
-											<button type="button" id="delete-btn-2" style="display: none; background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
+										<div id="file-inputs" style="display: flex; align-items: center;">
+											<div id="file-inputs-2" style="position: relative; display: flex; flex-direction: column; margin-right: 20px; align-items: center;">
+												<div class="img-container" id="img-container-2" style="width: 70px; height: 80px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+													<span class="upload-text" id="upload-text-2" style="color: #666;">사진 첨부</span>
+													<img id="img-preview-2" style="display: none; width: 100%; height: 100%; object-fit: cover;"/>
+												</div>
+												<input type="file" id="file-input-2" style="display: none;" name="files[2]"/>
+												<button type="button" id="delete-btn-2" style="background-color: transparent; border: none; font-size: 16px; color: #666666; cursor: pointer;">&times;</button>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -199,21 +211,30 @@ alert("평점 확인" + value);
 	
 	$(document).ready(function() {
 		
-		var maxFiles = 3;
-		
-		$('#show-input').click(function() {
+		$('img[id^="img-preview"]').each(function() {
 			
-			for (var i = 0; i < maxFiles; i++) {
+			var src = $(this).attr('src');
+			var inputId = $(this).attr('id').split('-')[2];
+			if (src && src.trim() !== '') {
 				
-				let fileInput = $('#file-input-' + i);
-				if (!fileInput[0].files.length) {
-					
-					fileInput.trigger('click');
-					break;
-				}
+				$(this).show();
+				$('#upload-text-' + inputId).hide();
 			}
 		});
-		$('input[type="file"]').change(function(e) {
+		var uploadIndex = 0;
+		var deleteIndex = 0;
+		
+		$('input[type="file"], input[name^="flg_del"], input[name^="review_imgs"], input[name^="review_imgIn"]').prop('disabled', true);
+		$('div[id^="img-container"]').click(function() {
+			
+			var imgId = $(this).attr('id').split('-')[2];
+			var fileInput = $('#file-input-' + imgId);
+			
+			fileInput.prop('disabled', false);
+			fileInput.val('');
+			fileInput.trigger('click');
+		});
+		$('input[type="file"]').change(function() {
 			
 			var inputId = $(this).attr('id').split('-')[2];
 			var file = this.files[0];
@@ -221,37 +242,40 @@ alert("평점 확인" + value);
 			if (file) {
 				
 				var reader = new FileReader();
-				reader.onload = function(event) {
+				
+				reader.onload = function(e) {
 					
-					$('#img-preview-' + inputId).attr('src', event.target.result).show();
-					$('#delete-btn-' + inputId).show();
-					$('#file-input-' + inputId).attr('name', 'files[' + inputId + ']');
+					$('#img-preview-' + inputId).attr('src', e.target.result).show();
+					$('#upload-text-' + inputId).hide();
 				}
 				reader.readAsDataURL(file);
-				$(this).hide();
-				
-				updateInputNames();
+				reindexFileInputs();
 			}
 		});
 		$('button[id^="delete-btn"]').click(function() {
 			
 			var btnId = $(this).attr('id').split('-')[2];
+			
 			$('#img-preview-' + btnId).hide();
 			$('#file-input-' + btnId).val('').hide();
-			$(this).hide();
-			$('#file-input-' + btnId).removeAttr('name');
+			$('#upload-text-' + btnId).show();
+			$('#file-input-' + btnId).prop('disabled', true);
+			$('#review_imgIn-' + btnId).prop('disabled', true);
+			$('#flg_del-' + btnId).prop('disabled', true);
 			
-			updateInputNames();
+			reindexFileInputs();
 		});
-		function updateInputNames() {
+		function reindexFileInputs() {
 			
-			var currentIndex = 0;
-			$('input[type="file"]').each(function() {
+			var fileInputs = $('input[type="file"]');
+			var newIndex = 0;
+			
+			fileInputs.each(function() {
 				
-				if (this.files.length > 0) {
+				if ($(this).val() !== '') {
 					
-					$(this).attr('name', 'files[' + currentIndex + ']');
-					currentIndex++;
+					$(this).attr('name', 'files[' + newIndex + ']');
+					newIndex++;
 				}
 			});
 		}

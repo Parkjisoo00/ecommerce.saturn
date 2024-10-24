@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.sale.Sale">
 
+	<update id="reviewDelete" parameterType="saleDto">
+		UPDATE
+			TB_REVIEW
+		SET
+			FLG_DELETE		=	'Y'
+			, UPDATER		=	#{seq_mbr}
+			, DT_UPT		=	SYSDATE
+		WHERE
+			SEQ_MBR			=	#{seq_mbr}
+			AND SEQ_SLE		=	#{seq_sle}
+			AND SEQ_REVIEW	=	#{seq_review}
+	</update>
+
 	<delete id="deleteReviewImgIn" parameterType="saleFileDto">
 		DELETE
 		FROM

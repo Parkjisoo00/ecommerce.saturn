@@ -7,6 +7,48 @@
 <html lang="kor">
 
 <head>
+<style>
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal-content {
+	margin: auto;
+	display: block;
+	width: 80%;
+	max-width: 700px;
+	position: relative;
+}
+
+.close {
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	color: white;
+	font-size: 35px;
+	font-weight: bold;
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 5px 10px;
+	border-radius: 50%;
+}
+
+@media only screen and (max-width: 700px) {
+	.modal-content {
+		width: 100%;
+	}
+}
+</style>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
 	
@@ -45,6 +87,19 @@
 		frmMain.action="/front/buy/reviewModifyForm.web";
 		frmMain.submit();
 	}
+	
+	function reviewDelete(value, value2, value3, value4, value5) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.seq_sle.setAttribute("value", value);
+		frmMain.cd_ctg_m.setAttribute("value", value2);
+		frmMain.cd_ctg_b.setAttribute("value", value3);
+		frmMain.seq_buy_dtl.setAttribute("value", value4);
+		frmMain.seq_review.setAttribute("value", value5);
+		frmMain.action="/front/buy/reviewDelete.web";
+		frmMain.submit();
+	}
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -64,7 +119,7 @@ alert("평점 확인" + value);
 <input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
 <input type="hidden" name="seq_buy_dtl"		id="seq_buy_dtl" value="0"/>
 <input type="hidden" name="seq_review"		id="seq_review" value="0"/>
-<input type="hidden" name="currentPage"		id="currentPage"	value="${paging.currentPage}"/>
+<input type="hidden" name="currentPage"		id="currentPage"	value="1"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -94,18 +149,18 @@ alert("평점 확인" + value);
 			<div class="row">
 				<div class="col-lg-12" style="padding: 0;">
 					<div class="product__details__tab" style="padding-left: 17px !important; padding-right: 17px !important; padding-top: 0px !important;">
-						<ul class="nav nav-tabs" role="tablist" style="margin-bottom: 40px !important; border: 1px solid #d9d9d9 !important; display: flex !important; justify-content: space-between !important;">
-							<li class="nav-item" style="padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; display: flex !important; align-items: center !important; justify-content: center !important; margin-right: 0px !important; border-right: 1px solid #d9d9d9 !important;">
-								<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" style="display: inline-block !important;">상품후기 작성 (${count})</a>
+						<ul class="nav nav-tabs" role="tablist" style="margin-bottom: 0px !important; border: 1px solid #d9d9d9 !important; display: flex !important; justify-content: space-between !important;">
+							<li class="nav-item" style="background-color: #f9f9f9 !important; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important; margin-right: 0px !important; border-right: 1px solid #d9d9d9 !important;">
+								<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" style="display: inline-block !important;">작성 가능한 후기 (${count})</a>
 							</li>
-							<li class="nav-item" style="padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; display: flex !important; align-items: center !important; justify-content: center !important;">
+							<li class="nav-item" style="background-color: #f9f9f9 !important; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important;">
 								<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" style="display: inline-block !important;">작성한 후기(${reviwCount})</a>
 							</li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tabs-1" role="tabpanel">
-							<h6 class="cart-title" style="font-weight: normal !important; margin-bottom: 0px !important; ">*이미지를 클릭하면 상품으로 이동합니다</h6>
-								<div class="review-form" style="border-top: 0px !important; border-bottom: 1px solid #ddd !important">
+							<h6 class="cart-title" style="border-top: 1px solid #d9d9d9 !important; padding-top: 40px !important;  font-weight: normal !important; margin-bottom: 0px !important; ">*이미지를 클릭하면 상품으로 이동합니다</h6>
+								<div class="review-form" style="border-left: 1px solid #ddd !important; border-right: 1px solid #ddd !important; border-top: 0px !important; border-bottom: 1px solid #ddd !important">
 									<c:choose>
 										<c:when test="${empty list}">
 											<div class="review-name" style="border-bottom: 0px !important; padding: 20px 20px 20px 30px !important; display: block !important; text-align: center; ">
@@ -116,7 +171,7 @@ alert("평점 확인" + value);
 										</c:when>
 									<c:otherwise>
 										<c:forEach var="list" items="${list}">
-												<div class="review-name" style="border-bottom: 0px !important; padding: 20px 20px 20px 30px !important;">
+												<div class="review-name" style="border-top: 1px solid #aaa !important; border-bottom: 0px !important; padding: 20px 20px 20px 30px !important;">
 													<div class="photoreview" style="padding: 0px !important;">
 														<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
 															<img src="${list.img}" style="height: 100px !important;">
@@ -147,8 +202,8 @@ alert("평점 확인" + value);
 								</div>
 							</div>
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
-							<h6 class="cart-title" style="font-weight: normal !important; margin-bottom: 0px !important; ">*상품명을 클릭하면 상품으로 이동합니다.</h6>
-							<div class="review-form" style="display: flex; flex-direction: column; border-top: 0px !important; margin: 0px !important; width: 100% !important; padding-bottom: 20px !important;">
+							<h6 class="cart-title" style="border-top: 1px solid #d9d9d9 !important; padding-top: 40px !important;  font-weight: normal !important; margin-bottom: 0px !important; ">*상품명을 클릭하면 상품으로 이동합니다.</h6>
+							<div class="review-form" style="border-left: 1px solid #ddd !important; border-right: 1px solid #ddd !important; display: flex; flex-direction: column; border-top: 0px !important; margin: 0px !important; width: 100% !important; padding-bottom: 20px !important;">
 								<c:choose>
 									<c:when test="${empty reviewList}">
 										<div class="review-name" style="border-bottom: 0px !important; padding: 20px 20px 20px 30px !important; display: block !important; text-align: center; ">
@@ -160,7 +215,7 @@ alert("평점 확인" + value);
 										<c:otherwise>
 											<c:forEach var="review" items="${reviewList}">
 												<div class="review-title" style="border-bottom: 0px !important; border-top: 1px solid #aaa !important; padding-left: 0px !important; padding-top: 0px !important">
-													<div class="review-name" style="padding: 10px 15px !important; border-top: 0px !important;">
+													<div class="review-name" style="padding: 10px 15px !important; border-top: 0px !important">
 														<div class="photoreview" style="width: unset !important; display: inline-block; padding: 0 !important;">
 															<a href="javascript:goWriteForm('${review.seq_sle}', '${review.cd_ctg_m}', '${review.cd_ctg_b}');">
 																<img src="${review.img}" style="width: 50px !important; height: 50px !important; vertical-align: middle !important;">
@@ -174,10 +229,10 @@ alert("평점 확인" + value);
 															</div>
 															<div style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; width: 25% !important; height: auto !important; flex-shrink: 0 !important; overflow: hidden !important;">
 																<span>
-																<a href="javascript:reviewModifyForm('${review.seq_sle}', '${review.cd_ctg_m}', '${review.cd_ctg_b}', '${review.seq_buy_dtl}', '${review.seq_review}');" style="padding-right: 2px !important; margin-right: 5px !important; border-right: 1px solid #d5d5d5 !important;color: #346aff !important; margin: 0; text-align: center !important; font-size: 14px !important">
+																<a class="reviewBtn" href="javascript:reviewModifyForm('${review.seq_sle}', '${review.cd_ctg_m}', '${review.cd_ctg_b}', '${review.seq_buy_dtl}', '${review.seq_review}');">
 																 수정
 																</a>
-																<a href="javascript:#('${review.seq_sle}', '${review.cd_ctg_m}', '${review.cd_ctg_b}', '${review.seq_buy_dtl}', '${review.seq_review}');" style="color: #346aff !important; margin: 0; text-align: center !important; font-size: 14px !important">
+																<a class="reviewBtn" href="javascript:reviewDelete('${review.seq_sle}', '${review.cd_ctg_m}', '${review.cd_ctg_b}', '${review.seq_buy_dtl}', '${review.seq_review}');">
 																 삭제
 																</a>
 																</span>
@@ -234,14 +289,14 @@ alert("평점 확인" + value);
 												<div class="review-name" style="padding: 10px 15px !important; border-bottom: 0px !important; border-top: 0px !important;">
 													<c:choose>
 														<c:when test="${empty review.imgs}">
-															<div class="photoreview" style="display: inline-block; padding-bottom: 20px !important; padding-left: 0px !important; padding-top: 0px !important; width: auto !important;">
+															<div class="photoreview" style="margin-right: 20px !important; display: inline-block; padding-bottom: 20px !important; padding-left: 0px !important; padding-top: 0px !important; width: auto !important;">
 																<h6 class="cart-title" style="padding-bottom: 0px !important; margin-bottom: 0px !important; font-weight: normal !important;">*등록된 상품후기 이미지가 없습니다.</h6>
 															</div>
 														</c:when>
 														<c:otherwise>
 															<c:forEach var="imgs" items="${review.imgs}">
-																<div class="photoreview" style="display: inline-block; padding: 0px !important; width: auto !important;">
-																	<img src="/img/review/${imgs.file_save}" style="width: 70px; height: 80px; object-fit: cover;">
+																<div class="photoreview" style="margin-right: 20px !important; display: inline-block; padding: 0px !important; width: auto !important;">
+																	<img src="/img/review/${imgs.file_save}" class="img-thumbnail" style="padding: 0px !important; width: 70px; height: 80px; object-fit: cover;" />
 																</div>
 															</c:forEach>	
 														</c:otherwise>
@@ -264,7 +319,11 @@ alert("평점 확인" + value);
 						</div>
 					</div>
 				</div>
-			</div>		
+			</div>
+		<div id="imageModal" class="modal">
+			<span class="close">&times;</span>
+			<img class="modal-content" id="modalImage">
+		</div>
 		</section>
 <!-- Checkout Section end -->
 
@@ -280,11 +339,69 @@ alert("평점 확인" + value);
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>	
 <script>
-$(document).ready(function() {
+	$(document).ready(function() {
+		
+		var modal = $('#imageModal');
+		var modalImg = $('#modalImage');
+		
+		$('.img-thumbnail').on('click', function() {
+			
+			var imgSrc = $(this).attr('src');
+			modal.css('display', 'flex');
+			modalImg.attr('src', imgSrc);
+		});
+		$('.close').on('click', function() {
+			
+			modal.css('display', 'none');
+		});
+		$(window).on('click', function(event) {
+			
+			if ($(event.target).is(modal)) {
+				
+				modal.css('display', 'none');
+			}
+		});
+	});
+
+	$(document).ready(function() {
+		
+		$('<style>.nav::before { display: none; }</style>').appendTo('head');
+		$('<style>.nav::after { display: none; }</style>').appendTo('head');
+	});
 	
-	$('<style>.nav::before { display: none; }</style>').appendTo('head');
-	$('<style>.nav::after { display: none; }</style>').appendTo('head');
-});
+	document.addEventListener("DOMContentLoaded", function() {
+		var activeNavLink = document.querySelector(".nav-link.active");
+		if (activeNavLink) {
+			
+			activeNavLink.style.backgroundColor = "#f9f9f9";
+		}
+	});
+	
+	document.addEventListener("DOMContentLoaded", function() {
+		
+		var navLinks = document.querySelectorAll(".nav-link");
+		var observer = new MutationObserver(function(mutations) {
+			
+			mutations.forEach(function(mutation) {
+				if (mutation.type === "attributes" && mutation.attributeName === "class") {
+					
+					var target = mutation.target;
+					
+					if (target.classList.contains("active")) {
+						
+						target.style.backgroundColor = "#f9f9f9";
+					} else {
+						
+						target.style.backgroundColor = "";
+					}
+				}
+			});
+		});
+		navLinks.forEach(function(navLink) {
+			
+			observer.observe(navLink, { attributes: true });
+		});
+	});
 </script>
 </form>
 </body>

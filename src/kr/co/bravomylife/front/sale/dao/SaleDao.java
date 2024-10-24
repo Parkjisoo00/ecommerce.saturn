@@ -40,6 +40,10 @@ import kr.co.bravomylife.front.sale.dto.SaleFileDto;
 @Repository("kr.co.bravomylife.front.sale.dao.SaleDao")
 public class SaleDao extends BaseDao {
 	
+	public int reviewDelete(SaleDto saleDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.sale.Sale.reviewDelete", saleDto);
+	}
+	
 	public int modifyReview(SaleDto saleDto) {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.sale.Sale.modifyReview", saleDto);
 	}

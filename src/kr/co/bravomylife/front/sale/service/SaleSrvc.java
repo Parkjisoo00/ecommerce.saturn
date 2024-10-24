@@ -60,6 +60,18 @@ public class SaleSrvc {
 	SaleDao saleDao;
 	
 	@Transactional("txFront")
+	public boolean reviewDelete(SaleDto saleDto) {
+		
+		int result = saleDao.reviewDelete(saleDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	@Transactional("txFront")
 	public boolean modifyText(SaleDto saleDto, SaleFileDto[] _saleFileDto) {
 		
 		boolean totalResult = false;
@@ -117,12 +129,7 @@ public class SaleSrvc {
 						fileDto.setSeq_sle(saleDto.getSeq_sle());
 						fileDto.setSeq_review(saleDto.getSeq_review());
 						
-						logger.debug("fileDto 확인 " + fileDto);
-						logger.debug("Review_imgIn == 0인지 확인" + fileDto.getReview_imgIn());
-						
 						if (fileDto.getReview_imgIn() == 0) {
-							
-							logger.debug("fileDto.getReview_imgIn() == 0의 값 " + fileDto.getReview_imgIn());
 							
 							int insertImgResult = saleDao.insertReviewModify(fileDto);
 							if (insertImgResult <= 0) {
@@ -133,26 +140,20 @@ public class SaleSrvc {
 							
 							int reImgResult = saleDao.modifyReviewFileIn(fileDto);
 							
-							logger.debug("reImgResult 확인" + reImgResult);
-							
 							if (reImgResult <= 0) {
 								
 								return false;
 							}
 						}
+					}
+					for (SaleFileDto _fileDto : _saleFileDto) {
 						
-						for (SaleFileDto _fileDto : _saleFileDto) {
-						
-							logger.debug("_fileDto.getFlg_del 확인" + _fileDto.getFlg_del());
-							logger.debug("_fileDto.getReview_imgs 확인" + _fileDto.getReview_imgs());
+						if (_fileDto.getFlg_del().equals("Y") && _fileDto.getReview_imgs() != 0) {
 							
-							if (_fileDto.getFlg_del().equals("Y") && _fileDto.getReview_imgs() != 0) {
+							int deleteImgResult = saleDao.deleteReviewImgIn(_fileDto);
+							if (deleteImgResult <= 0) {
 								
-								int deleteImgResult = saleDao.deleteReviewImgIn(_fileDto);
-								if (deleteImgResult <= 0) {
-									
-									return false;
-								}
+								return false;
 							}
 						}
 					}

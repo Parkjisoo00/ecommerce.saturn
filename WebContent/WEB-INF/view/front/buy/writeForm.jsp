@@ -7,6 +7,48 @@
 <html lang="kor">
 
 <head>
+<style>
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal-content {
+	margin: auto;
+	display: block;
+	width: 80%;
+	max-width: 700px;
+	position: relative;
+}
+
+.close {
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	color: white;
+	font-size: 35px;
+	font-weight: bold;
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 5px 10px;
+	border-radius: 50%;
+}
+
+@media only screen and (max-width: 700px) {
+	.modal-content {
+		width: 100%;
+	}
+}
+</style>
 	<%@ include file="/include/common/header.jsp" %>
 	<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript" src="/js/package/tinymce.js"></script>
@@ -536,7 +578,6 @@
 								</div>
 							</div>
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
-								
 									<div style="text-align: right;">
 										<c:if test="${saleDto.flg_review == 'N'}">
 											<a href="javascript:reviewListPage();" class="cart-btn" style="font-size: 12px !important; font-weight: normal !important; cursor: pointer; background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c; margin: 0; padding: 5px 10px 5px !important;">
@@ -547,7 +588,7 @@
 											<a href="javascript:reviewListPage();" class="cart-btn" style="font-size: 12px !important; font-weight: normal !important; cursor: pointer; background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c; margin: 0; padding: 5px 10px 5px !important;">
 												리뷰관리
 											</a>
-											<h6 class="cart-title" style="padding-top: 5px !important; padding-bottom: 0px !important; margin-bottom: 0px !important; font-weight: normal !important; text-align: right !important;">*이미 등록된 상품후기가 있습니다. 리뷰관리로 이동합니다.</h6>
+											<h6 class="cart-title" style="padding-top: 5px !important; padding-bottom: 0px !important; margin-bottom: 0px !important; font-weight: normal !important; text-align: right !important;">*작성 및 수정할 수 있는 상품후기가 있습니다. 리뷰관리로 이동합니다.</h6>
 										</c:if>
 									</div>
 								<div class="row">
@@ -625,7 +666,7 @@
 																<c:otherwise>
 																	<c:forEach var="imgs" items="${review.imgs}">
 																		<div class="photoreview" style="display: inline-block; padding-right: 5px !important; padding-left: 0px !important; padding-top: 0px !important; width: auto !important;">
-																			<img src="/img/review/${imgs.file_save}" style="width: 70px; height: 80px; object-fit: cover;">
+																			<img src="/img/review/${imgs.file_save}" class="img-thumbnail" style="padding: 0px !important; width: 70px; height: 80px; object-fit: cover;">
 																		</div>
 																	</c:forEach>	
 																</c:otherwise>
@@ -660,7 +701,10 @@
 	<div id="setlike-alert" style="display: none; position: absolute; background-color: white; color: #333; padding: 10px 20px; border-radius: 5px; z-index: 9999; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); font-size: 16px; border: 1px solid #ddd;">
 		찜에 등록되었습니다.
 	</div>
-
+	<div id="imageModal" class="modal">
+		<span class="close">&times;</span>
+		<img class="modal-content" id="modalImage">
+	</div>
 	</section>
 	<!-- Product Details Section End -->
 
@@ -677,7 +721,29 @@
 	<%@ include file="/include/common/js.jsp" %>
 	
 <script>
-
+	$(document).ready(function() {
+		
+		var modal = $('#imageModal');
+		var modalImg = $('#modalImage');
+		
+		$('.img-thumbnail').on('click', function() {
+			
+			var imgSrc = $(this).attr('src');
+			modal.css('display', 'flex');
+			modalImg.attr('src', imgSrc);
+		});
+		$('.close').on('click', function() {
+			
+			modal.css('display', 'none');
+		});
+		$(window).on('click', function(event) {
+			
+			if ($(event.target).is(modal)) {
+				
+				modal.css('display', 'none');
+			}
+		});
+	});
 </script>
 </form>
 <iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>
