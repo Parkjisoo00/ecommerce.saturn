@@ -69,19 +69,21 @@
 					</ul>
 					</li>
 					<li class="treeview">
-					<a href="#">
+					<a href="/console/buy/list.web">
 						<i class="fa fa-files-o"></i>
-						<span>Layout Options</span>
+						<span>주문관리</span>
 						<span class="pull-right-container">
-						<span class="label label-primary pull-right">4</span>
+						<span class="label label-primary pull-right"></span>
 						</span>
 					</a>
+					<!-- 
 					<ul class="treeview-menu">
 						<li><a href="#"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
 						<li><a href="#"><i class="fa fa-circle-o"></i> Boxed</a></li>
 						<li><a href="#"><i class="fa fa-circle-o"></i> Fixed</a></li>
 						<li><a href="#"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
 					</ul>
+					 -->
 					</li>
 					<li>
 					<a href="#">

@@ -182,8 +182,7 @@
 			</c:if>
 	 -->
 	 		</div>
-		
-	
+
 	
 </section>
 	<!-- Instagram Begin -->

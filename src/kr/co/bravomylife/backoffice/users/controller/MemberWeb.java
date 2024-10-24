@@ -138,7 +138,7 @@ public class MemberWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			memberDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			memberDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
 			if (memberSrvc.update(memberDto)) {
 				request.setAttribute("script"	, "alert('적용되었습니다.');");
