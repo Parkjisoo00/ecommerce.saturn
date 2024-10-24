@@ -33,13 +33,12 @@
 	function goList(value) {
 				
 		var frmMain = document.getElementById("frmMain");
-				
-		// document.getElementById("searchWord").value = "";
-		// document.getElementById("currentPage").value = "1";
+
 		document.getElementById("cd_bbs_type").value = value;
 				
 		frmMain.action="/front/center/board/myPageNotice/list.web";
-		frmMain.submit();}
+		frmMain.submit();
+	}
 	</script>
 </head>
 <body>
@@ -63,6 +62,7 @@
 						<input type="hidden" name="seq_sle"				id="seq_sle"			/>
 						<input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"			/>
 						<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"			/>
+						<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		/>
 						<input type="hidden" name="phone" id="phone" />
 							<div class="row"style="display: flex; justify-content: center; align-items: center;">
 								<div class="col-lg-12">

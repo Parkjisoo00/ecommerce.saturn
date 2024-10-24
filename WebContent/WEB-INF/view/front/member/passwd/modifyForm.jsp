@@ -61,6 +61,17 @@
 		// 폼을 제출
 		$("#frmMain").submit();
 	}
+	
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+
+		document.getElementById("cd_bbs_type").value = value;
+		
+		frmMain.action = "/front/center/board/myPageNotice/list.web";
+		frmMain.submit();
+	}
+	
 	</script>
 	<style>
 	
@@ -82,13 +93,14 @@
 	<!-- 페이지의 상단에 보이는 로고 및 로그인 / 회원가입 코드 -->
 		<%@ include file="/include/front/maingnb.jsp" %>
 	<!-- Header Section End -->
-
+		<%@ include file="/include/front/mygnb.jsp" %>
 	<!-- Breadcrumb Begin -->
 	<!-- Breadcrumb End -->
 
-	<section class="checkout spad">
+	<section class="checkout spad" style="min-height: calc(100vh - 200px); ">
 		<div class="container">
 			<form action="/front/member/passwd/modifyProc.web" id="frmMain" method="POST" class="checkout__form">
+			<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		/>
 				<div class="row" style="display: flex; justify-content: center; align-items: center;">
 					<div class="col-lg-8">
 						<h5 >비밀번호 변경</h5>
@@ -96,19 +108,19 @@
 							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
 									<p>현재 비밀번호 <span>*</span> </p>
-									<input type="password" id="passwd" name="passwd" value="12345678!a" />
+									<input type="password" id="passwd" name="passwd"  />
 								</div>
 							</div>
 							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
 									<p>신규 비밀번호 <span>*</span> (영문 대/소문자 구분, 숫자, 특수문자 포함 8~16자 필수 입력)</p>
-									<input type="password" id="confirmPasswd" name="confirmPasswd" value="123456789!a" />
+									<input type="password" id="confirmPasswd" name="confirmPasswd"  />
 								</div>
 							</div>
 							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
 									<p>신규 비밀번호 확인 <span>*</span> </p>
-									<input type="password" id="confirmPasswd_" name="confirmPasswd_" value="123456789!a" />
+									<input type="password" id="confirmPasswd_" name="confirmPasswd_"  />
 								</div>
 							</div>
 							<div class="col-lg-12 col-md-6 col-sm-6">

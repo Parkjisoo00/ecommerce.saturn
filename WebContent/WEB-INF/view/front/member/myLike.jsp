@@ -82,6 +82,24 @@
 		frmMain.target = "frmBlank";
 		frmMain.submit();
 	}
+	
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("count").remove();
+		document.getElementById("currentPage").remove();
+		document.getElementById("discount_sale").remove();
+		document.getElementById("point_stack").remove();
+		document.getElementById("price_sale").remove();
+		document.getElementById("discount").remove();
+
+		document.getElementById("cd_bbs_type").value = value;
+		
+		frmMain.action = "/front/center/board/myPageNotice/list.web";
+		frmMain.submit();
+	}
+	
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -116,20 +134,11 @@
 	<!-- Header Section End -->
 
 	<!-- Breadcrumb Begin -->
-	<ul class="my-custom-ul" style= "transform: translateY(35px);">
-				<li><img src="/img/mypage/mypage1.png"><a style="font-size :30px" href="/front/myPage/" class="menuLnb">	마이 페이지</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/modifyForm.web" class="menuLnb">개인정보 수정</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goList(3);" class="menuLnb">문의 이력</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">포인트</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">맞춤건강 결과표</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">찜한 상품</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">구매이력</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/withdraw.web" class="menuLnb">회원 탈퇴</a></li>
-	</ul>
+		<%@ include file="/include/front/mygnb.jsp" %>
 	<!-- Breadcrumb End -->
 
 	<!-- Shop Cart Section Begin -->
-	<section class="shop-cart spad">
+	<section class="shop-cart spad" style="min-height: calc(100vh - 200px);" >
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">

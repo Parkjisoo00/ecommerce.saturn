@@ -28,6 +28,16 @@
 			frmMain.submit();
 		}
 	}
+	
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+
+		document.getElementById("cd_bbs_type").value = value;
+				
+		frmMain.action="/front/center/board/myPageNotice/list.web";
+		frmMain.submit();
+	}
 	</script>
 </head>
 <body>
@@ -41,22 +51,14 @@
 	<!-- Header Section End -->
 
 	<!-- Breadcrumb Begin -->
-	<ul class="my-custom-ul" >
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px" href="/front/member/modifyForm.web" class="menuLnb">&nbsp;마이 페이지</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">개인정보 수정</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">문의 이력</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">포인트</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">맞춤건강 결과표</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">찜한 상품</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">구매이력</a></li>
-				<li><img src="/img/mypage/mypage1.png"><a href="#" class="menuLnb">회원 탈퇴</a></li>
-	</ul>
+		<%@ include file="/include/front/mygnb.jsp" %>
 	<!-- Breadcrumb End -->
 
 				<!-- Checkout Section Begin -->
-				<section class="checkout spad" >
+				<section class="checkout spad" style="min-height: calc(100vh - 200px);">
 					<div class="container">
 						<form id="frmMain" method="POST" class="checkout__form">
+						<input type="hidden" name="cd_bbs_type"	id="cd_bbs_type"				/>
 						<input type="hidden" name="phone" id="phone" />
 							<div class="row"style="display: flex; justify-content: center; align-items: center;">
 								<div class="col-lg-8">

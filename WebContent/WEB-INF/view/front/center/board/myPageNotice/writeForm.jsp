@@ -58,17 +58,12 @@
 	</div>
 	<!-- Header Section Begin -->
 	<!-- 페이지의 상단에 보이는 로고 및 로그인 / 회원가입 코드 -->
-	<%@ include file="/include/front/maingnb.jsp" %>
-	<ul class="my-custom-ul" >
-				<li><img src="/img/mypage/mypage1.png"><a style="font-size :30px" href="/front/myPage/" class="menuLnb">	마이 페이지</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/modifyForm.web" class="menuLnb">개인정보 수정</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goList(3);" class="menuLnb">문의 이력</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">포인트</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">맞춤건강 결과표</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">찜한 상품</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">구매이력</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/withdraw.web" class="menuLnb">회원 탈퇴</a></li>
-	</ul>
+		<%@ include file="/include/front/maingnb.jsp" %>
+	<!-- Header Section End -->
+
+	<!-- Breadcrumb Begin -->
+		<%@ include file="/include/front/mygnb.jsp" %>
+	<!-- Breadcrumb End -->
 	<!-- Header Section End -->
 	<section class="shop spad">
 		<div class="container">

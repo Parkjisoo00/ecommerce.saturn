@@ -100,6 +100,17 @@
 		frmMain.action="/front/buy/reviewDelete.web";
 		frmMain.submit();
 	}
+	
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+
+		document.getElementById("cd_bbs_type").value = value;
+				
+		frmMain.action="/front/center/board/myPageNotice/list.web";
+		frmMain.submit();
+	}
+	
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -114,6 +125,7 @@ alert("평점 확인" + value);
  -->
 <body>
 <form id="frmMain" method="POST">
+<input type="hidden" name="cd_bbs_type"	id="cd_bbs_type" />
 <input type="hidden" name="seq_sle"			id="seq_sle"/>
 <input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>
 <input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
@@ -130,21 +142,11 @@ alert("평점 확인" + value);
 	<!-- Header Section End -->
 
 	<!-- Breadcrumb Begin -->
-	<ul class="my-custom-ul" >
-				<li><a style="font-size :30px" href="/front/myPage/" class="menuLnb">	마이 페이지</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/modifyForm.web" class="menuLnb">개인정보 수정</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goList(3);" class="menuLnb">문의 이력</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">포인트</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">맞춤건강 결과표</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/myLike.web" class="menuLnb">찜한 상품</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/reviewListPage.web" class="menuLnb">리뷰관리</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/history.web" class="menuLnb">구매이력</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/withdraw.web" class="menuLnb">회원 탈퇴</a></li>
-	</ul>
+		<%@ include file="/include/front/mygnb.jsp" %>
 	<!-- Breadcrumb End -->
 
 	<!-- Checkout Section Begin -->
-	<section class="checkout spad">
+	<section class="checkout spad" style="min-height: calc(100vh - 200px);">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12" style="padding: 0;">
