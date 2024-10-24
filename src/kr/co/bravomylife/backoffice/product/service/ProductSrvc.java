@@ -20,9 +20,6 @@
  */
 package kr.co.bravomylife.backoffice.product.service;
 
-
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -49,6 +46,18 @@ public class ProductSrvc {
 	ProductDao productDao;
 	
 	/**
+	 * @return SaleDto
+	 * 
+	 * @since 2024-10-24
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public ProductDto select(ProductDto productDto) {
+		return productDao.select(productDto);
+	}
+	
+	/**
 	 * @return List<SaleDto>
 	 * 
 	 * @since 2024-10-23
@@ -73,27 +82,6 @@ public class ProductSrvc {
 		
 		return pagingListDto;
 	}
-	
-	/**
-	 * @return List<SaleDto>
-	 * 
-	 * @since 2024-08-08
-	 * <p>DESCRIPTION:</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	public List<ProductDto> listPrd(ProductDto productDto) {
-		return productDao.listPrd(productDto);
-	}
-	
-	/**
-	 * @return boolean
-	 * 
-	 * @since 2024-10-17
-	 * <p>DESCRIPTION:</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
 	
 	@Transactional("txBackoffice")
 	public boolean insert(ProductDto productDto) {

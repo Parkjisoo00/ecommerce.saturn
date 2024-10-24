@@ -68,13 +68,46 @@ public class ProductWeb {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
+	 * @since 2024-10-24
+	 * <p>DESCRIPTION:상품 등록 페이지</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	@RequestMapping(value = "/console/product/view.web")
+	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, ProductDto productDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			productDto.setRegister(1);
+			
+			ProductDto _productDto = productSrvc.select(productDto);
+			
+			mav.addObject("productDto", _productDto);
+			mav.setViewName("backoffice/product/view");
+			}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".view()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
 	 * @since 2024-10-23
 	 * <p>DESCRIPTION:상품 리스트 페이지</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/console/product/list.web")
-	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
+	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, ProductDto productDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
@@ -101,7 +134,7 @@ public class ProductWeb {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-10-17
+	 * @since 2024-10-23
 	 * <p>DESCRIPTION:상품 등록</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -209,7 +242,7 @@ public class ProductWeb {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-10-17
+	 * @since 2024-10-22
 	 * <p>DESCRIPTION:상품 등록 페이지</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>

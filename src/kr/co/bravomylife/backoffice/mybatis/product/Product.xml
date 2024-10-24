@@ -2,6 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.backoffice.mybatis.product.Product">
 
+	<select id="select" parameterType="productDto" resultType="productDto">
+		SELECT
+			SEQ_SLE
+			, SLE_NM
+			, DESCES
+			, IMG
+			, PRICE_SALE
+			, CD_CTG_B
+			, CD_CTG_M
+			, CD_STATE_SALE
+			, COUNT_STOCK
+			, POINT_STACK
+			, FLG_DELETE
+			, TO_CHAR(DT_SALE_START, 'YYYY-MM-DD')	DT_SALE_START
+			, TO_CHAR(DT_SALE_END, 'YYYY-MM-DD')	DT_SALE_END
+			, DISCOUNT
+		FROM
+			TB_SLE
+		WHERE
+			REGISTER		= #{register}
+			AND SEQ_SLE		= #{seq_sle}
+	</select>
+
 	<select id="list" parameterType="pagingDto" resultType="productDto">
 		SELECT
 			*
@@ -79,23 +102,6 @@
 			</otherwise>
 		</choose>
 	</sql>
-
-	<select id="select" parameterType="productDto" resultType="productDto">
-		SELECT
-			SEQ_SLE
-			, SLE_NM
-			, CD_WHERE_CTG
-			, PRICE_SALE
-			, CD_STATE_SALE
-			, CORP_NM
-			, TO_CHAR(DT_SALE_START, 'YYYY-MM-DD')	dt_sale_start
-			, TO_CHAR(DT_SALE_END, 'YYYY-MM-DD')	dt_sale_end
-		FROM
-			TB_SLE
-		WHERE
-			REGISTER		= #{register}
-			AND SEQ_SLE		= #{seq_sle}
-	</select>
 
 	<insert id="insert" parameterType="productDto">
 		INSERT INTO TB_SLE

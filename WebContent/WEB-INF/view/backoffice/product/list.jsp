@@ -156,7 +156,7 @@
 											${list.rnum}
 										</td>
 										<td>
-											<a href="/console/product/view.web?seq_sle=${list.sle_nm}" style="color: black;">
+											<a href="/console/product/view.web?seq_sle=${list.seq_sle}" style="color: black;">
 												<bravomylifeTag:substring text="${fn:escapeXml(list.sle_nm)}" length="60" />
 											</a>
 										</td>
@@ -194,7 +194,10 @@
 						<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages"/>
 						</div>
 						<br>
-						<a href="/console/product/productReg.web" class="btn btn-block btn-default" style="height: 100%; padding: 0;">판매 등록</a>
+						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
+						<a href="/console/product/productReg.web" class="btn btn-default" style="width: 150px;">판매 등록</a>
+						</div>
+						<br>
 					</div>
 				</div>
 			</div>

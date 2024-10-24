@@ -39,16 +39,16 @@ import kr.co.bravomylife.backoffice.product.dto.ProductDto;
 @Repository("kr.co.bravomylife.backoffice.product.dao.ProductDao")
 public class ProductDao extends BaseDao {
 	
+	public ProductDto select(ProductDto productDto) {
+		return sqlSessionBackoffice.selectOne("kr.co.bravomylife.backoffice.mybatis.product.Product.select", productDto);
+	}
+	
 	public int count(PagingDto pagingDto) {
 		return sqlSessionBackoffice.selectOne("kr.co.bravomylife.backoffice.mybatis.product.Product.count", pagingDto);
 	}
 	
 	public List<ProductDto> list(PagingDto pagingDto) {
 		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.product.Product.list", pagingDto);
-	}
-	
-	public List<ProductDto> listPrd(ProductDto productDto) {
-		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.product.Product.listPrd", productDto);
 	}
 	
 	public int insert(ProductDto productDto) {
