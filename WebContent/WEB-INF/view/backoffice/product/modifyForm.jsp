@@ -11,10 +11,22 @@
 	<%@ include file="/include/backoffice/css.jsp" %>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.2/tinymce.min.js"></script>
 	<script>
 		window.onload = function () {
-			// HTML Editor
+			updateCategory();
 			tinymce.init({selector:'textarea'});
+		}
+		
+		function commaValue(input) {
+			// 입력된 값에서 콤마를 제거
+			let value = input.value.replace(/,/g, '');
+			
+			// 숫자 형식으로 변환
+			let formattedValue = Number(value).toLocaleString();
+			
+			// 포맷된 값을 다시 입력 필드에 설정
+			input.value = formattedValue;
 		}
 		
 		$(function(){
@@ -26,7 +38,7 @@
 		})
 		
 		function updateCategory() {
-			var cd_ctg_b = document.getElementById("cd_ctg_b").value;
+			var cd_ctg_b = document.getElementById("cd_ctg_b").options[document.getElementById("cd_ctg_b").selectedIndex].value;
 			var cd_ctg_m = document.getElementById("cd_ctg_m");
 		
 			// 기존 옵션 삭제
@@ -69,12 +81,13 @@
 			var frmMain = document.getElementById("frmMain");
 			
 			if (document.getElementById("sle_nm").value == ""
-					|| document.getElementById("cd_where_ctg").value == "0"
-					|| document.getElementById("price_sale").value == ""
+					|| document.getElementById("price_sale").value == "0"
+					|| document.getElementById("cd_ctg_b").value == ""
+					|| document.getElementById("cd_ctg_m").value == ""
+					|| document.getElementById("cd_state_sale").value == ""
+					|| document.getElementById("flg_delete").value == ""
 					|| document.getElementById("dt_sale_start").value == ""
-					|| document.getElementById("dt_sale_end").value == ""
-					|| document.getElementById("cd_state_sale").value == "0"
-					|| tinymce.activeEditor.getContent() == "") {
+					|| document.getElementById("dt_sale_end").value == "") {
 				alert("필수 항목을 입력하세요!");
 				return;
 			}
@@ -86,7 +99,7 @@
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<form id="frmMain" method="POST">
+<form id="frmMain" method="POST" enctype="multipart/form-data">
 <input type="hidden" id="seq_sle"		name="seq_sle"			value="${productDto.seq_sle}"/>
 
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
@@ -113,15 +126,15 @@
 								<tr>
 									<th style="width: 150px;" >상품 상세 이미지</th>
 									<td>
-										<input type="file" id="fileOrig" name="fileOrig" />
 										<img src="/img/product/${productDto.desces}" height="200"/>
+										<input type="file" id="desces" name="files[1]" />
 									</td>
 								</tr>
 								<tr>
 									<th style="width: 150px;" >상품 이미지</th>
 									<td>
-										<input type="file" id="fileOrig" name="fileOrig" />
 										<img src="/img/product/${productDto.img}" height="200"/>
+										<input type="file" id="img" name="files[0]" />
 									</td>
 								</tr>
 								<tr>
@@ -144,43 +157,8 @@
 									<th style="width: 150px;">카테고리 중분류</th>
 									<td>
 										<select id="cd_ctg_m" name="cd_ctg_m">
+											<option value="0">선택</option>
 										</select>
-										<c:choose>
-											<c:when test="${productDto.cd_ctg_b == '1'}">
-												<select id="cd_ctg_b_1" name="cd_ctg_b_1" >
-													<option value="1" <c:if test="${productDto.cd_ctg_m == '1'}"> selected</c:if>>혈당/혈행/혈압</option>
-													<option value="2" <c:if test="${productDto.cd_ctg_m == '2'}"> selected</c:if>>항산화/면역력</option>
-													<option value="3" <c:if test="${productDto.cd_ctg_m == '3'}"> selected</c:if>>염증/항염</option>
-													<option value="4" <c:if test="${productDto.cd_ctg_m == '4'}"> selected</c:if>>관절/뼈/치아</option>
-													<option value="5" <c:if test="${productDto.cd_ctg_m == '5'}"> selected</c:if>>피로회복</option>
-													<option value="6" <c:if test="${productDto.cd_ctg_m == '6'}"> selected</c:if>>눈 건강</option>
-													<option value="7" <c:if test="${productDto.cd_ctg_m == '7'}"> selected</c:if>>장 건강</option>
-													<option value="8" <c:if test="${productDto.cd_ctg_m == '8'}"> selected</c:if>>두뇌/기억력</option>
-													<option value="9" <c:if test="${productDto.cd_ctg_m == '9'}"> selected</c:if>>위/간/갑상선</option>
-												</select>
-											</c:when>
-											
-											<c:when test="${productDto.cd_ctg_b == '2'}">
-												<select id="cd_ctg_b_2" name="cd_ctg_b_2" >
-													<option value="1" <c:if test="${productDto.cd_ctg_m == '1'}"> selected</c:if>>폴리코사놀</option>
-													<option value="2" <c:if test="${productDto.cd_ctg_m == '2'}"> selected</c:if>>오메가-3</option>
-													<option value="3" <c:if test="${productDto.cd_ctg_m == '3'}"> selected</c:if>>비타민/미네랄</option>
-													<option value="4" <c:if test="${productDto.cd_ctg_m == '4'}"> selected</c:if>>유산균</option>
-													<option value="5" <c:if test="${productDto.cd_ctg_m == '5'}"> selected</c:if>>글루코사민/MSM</option>
-													<option value="6" <c:if test="${productDto.cd_ctg_m == '6'}"> selected</c:if>>루테인</option>
-													<option value="7" <c:if test="${productDto.cd_ctg_m == '7'}"> selected</c:if>>코큐텐</option>
-													<option value="8" <c:if test="${productDto.cd_ctg_m == '8'}"> selected</c:if>>아르기닌</option>
-													<option value="9" <c:if test="${productDto.cd_ctg_m == '9'}"> selected</c:if>>밀크씨슬</option>
-												</select>
-											</c:when>
-											
-											<c:when test="${productDto.cd_ctg_b == '3'}">
-												<select id="cd_ctg_b_3" name="cd_ctg_b_3" >
-													<option value="1" <c:if test="${productDto.cd_ctg_m == '1'}"> selected</c:if>>남성</option>
-													<option value="2" <c:if test="${productDto.cd_ctg_m == '2'}"> selected</c:if>>여성</option>
-												</select>
-											</c:when>
-										</c:choose>
 									</td>
 								</tr>
 								<tr>
@@ -203,30 +181,30 @@
 								<tr>
 									<th style="width: 150px;" >포인트 적립률</th>
 									<td>
-										<input type="text" name="point_stack" id="point_stack" value="${productDto.point_stack}" required/>
+										<input type="text" name="point_stack" id="point_stack" value="${productDto.point_stack}" style="width:100px; text-align:right" required/>%
 								</tr>
 								<tr>
 									<th style="width: 150px;" >삭제 처리 여부</th>
 									<td>
-										<input type="text" name="flg_delete" id="flg_delete" value="${productDto.flg_delete}" required/>
+										<input type="text" name="flg_delete" id="flg_delete" value="${productDto.flg_delete}" style="width:100px; text-align:right" required/>
 									</td>
 								</tr>
 								<tr>
 									<th style="width: 150px;" >판매 시작 일시</th>
 									<td>
-										<input type="text" id="dt_sale_start" name="dt_sale_start" value="${productDto.dt_sale_start}" required/>
+										<input type="text" id="dt_sale_start" name="dt_sale_start" value="${productDto.dt_sale_start}" style="width:100px; text-align:right" required/>
 									</td>
 								</tr>
 								<tr>
 									<th style="width: 150px;" >판매 종료 일시</th>
 									<td>
-										<input type="text" id="dt_sale_end" name="dt_sale_end" value="${productDto.dt_sale_end}" required/>
+										<input type="text" id="dt_sale_end" name="dt_sale_end" value="${productDto.dt_sale_end}" style="width:100px; text-align:right" required/>
 									</td>
 								</tr>
 								<tr>
 									<th style="width: 150px;" >할인율</th>
 									<td>
-										<input type="text" id="discount" name="discount" value="${productDto.discount}" required/>
+										<input type="text" id="discount" name="discount" value="${productDto.discount}" style="width:100px; text-align:right" required/>%
 									</td>
 								</tr>
 								</tbody>

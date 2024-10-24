@@ -2,6 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.backoffice.mybatis.product.Product">
 
+	<update id="update" parameterType="productDto">
+		UPDATE
+			TB_SLE
+		SET
+			SLE_NM			= #{sle_nm}
+			, IMG			= #{img}
+			, DESCES 		= #{desces}
+			, PRICE_SALE	= #{price_sale}
+			, CD_CTG_B		= #{cd_ctg_b}
+			, CD_CTG_M		= #{cd_ctg_m}
+			, CD_STATE_SALE	= #{cd_state_sale}
+			, COUNT_STOCK	= #{count_stock}
+			, POINT_STACK	= #{point_stack}
+			, FLG_DELETE	= #{flg_delete}
+			, DT_SALE_START	= #{dt_sale_start}
+			, DT_SALE_END	= #{dt_sale_end}
+			, DISCOUNT		= #{discount}
+			, DT_UPT		= SYSDATE
+			, UPDATER		= #{updater}
+		WHERE
+			REGISTER		= #{register}
+			AND SEQ_SLE		= #{seq_sle}
+	</update>
+
 	<update id="re" parameterType="productDto">
 		UPDATE
 			TB_SLE
