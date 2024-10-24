@@ -39,6 +39,10 @@ import kr.co.bravomylife.backoffice.product.dto.ProductDto;
 @Repository("kr.co.bravomylife.backoffice.product.dao.ProductDao")
 public class ProductDao extends BaseDao {
 	
+	public int update(ProductDto productDto) {
+		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.product.Product.update", productDto);
+	}
+	
 	public int out(ProductDto productDto) {
 		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.product.Product.out", productDto);
 	}

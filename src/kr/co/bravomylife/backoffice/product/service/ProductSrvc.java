@@ -48,6 +48,26 @@ public class ProductSrvc {
 	/**
 	 * @return boolean
 	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@Transactional("txBackoffice")
+	public boolean update(ProductDto productDto) {
+		
+		int result = productDao.update(productDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	/**
+	 * @return boolean
+	 * 
 	 * @since 2024-10-24
 	 * <p>DESCRIPTION: 품절(처리)</p>
 	 * <p>IMPORTANT:</p>

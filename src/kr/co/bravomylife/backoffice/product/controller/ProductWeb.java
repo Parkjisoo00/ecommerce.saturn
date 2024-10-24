@@ -69,6 +69,109 @@ public class ProductWeb {
 	 * @param boardDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
+	 * @since 2024-08-08
+	 * <p>DESCRIPTION: 판매 상품 수정</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "/console/product/modifyProc.web")
+	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response
+																, ProductDto productDto
+																, FileUploadDto fileUploadDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		String message	= "";
+		
+		try {
+			productDto.setUpdater(1);
+			productDto.setRegister(1);
+			
+			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_product", "[UNDEFINED]");
+			String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max5MB"			, "[UNDEFINED]");
+			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.image"	, "[UNDEFINED]");
+			
+			logger.debug("업로드 경로 확인" + pathBase);
+			
+			//파일 개수 확인
+			int countFile = 0;
+			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
+
+			//파일 DTO에 배열 생성
+			FileDto[] fileDto = new FileDto[countFile];
+			//파일 업로드 수행
+			LinkedList<Object> uploadResult = FileUpload.upload(fileUploadDto, pathBase, maxSize, allowedExt, countFile);
+
+			//업로드 결과 확인
+			message	= (String)((Hashtable)uploadResult.getLast()).get("resultID");
+
+			//성공적으로 업로드된 경우 처리
+			if (message.equals("success")) {
+				
+				@SuppressWarnings("unchecked")
+				Hashtable<String, String> hashtable	= (Hashtable<String, String>)uploadResult.getLast();
+				
+				//파일 정보 처리 및 DTO 설정
+				
+				if (countFile == 2) { // 파일 개수가 2개일 경우
+					// 첫 번째 파일의 원본 파일명
+					
+					String fileNameSrc	= "";
+					String fileNameSve	= "";
+					
+					fileNameSrc		= (String)hashtable.get("files[0]_fileSrcName");
+					fileNameSve		= (String)hashtable.get("files[0]_fileSveNameRelative");
+					
+					// 백슬래시 제거
+					fileNameSve = fileNameSve.replace("\\", "");
+					
+					fileDto[0] = new FileDto();
+					fileDto[0].setFileNameOriginal(fileNameSrc);			// 파일 원본명
+					fileDto[0].setFileNameSave(fileNameSve);				// 파일 저장명(경로 포함)
+					
+					fileNameSrc		= (String)hashtable.get("files[1]_fileSrcName");
+					fileNameSve		= (String)hashtable.get("files[1]_fileSveNameRelative");
+					
+					// 백슬래시 제거
+					fileNameSve = fileNameSve.replace("\\", "");
+					
+					fileDto[1] = new FileDto();
+					fileDto[1].setFileNameOriginal(fileNameSrc);			// 파일 원본명
+					fileDto[1].setFileNameSave(fileNameSve);				// 파일 저장명(경로 포함)
+					
+					System.out.println("File Save Name: " + fileNameSve);
+
+				// 상품 DTO에 파일 정보 설정
+				productDto.setImg(fileDto[0].getFileNameSave()); // 첫 번째 이미지
+				productDto.setDesces(fileDto[1].getFileNameSave()); // 두 번째 이미지
+				}
+			}
+			
+			if (productSrvc.update(productDto)) {
+				request.setAttribute("script"	, "alert('수정되었습니다.');");
+				request.setAttribute("redirect"	, "/console/product/list.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("backoffice/product/list");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
 	 * @since 2024-10-24
 	 * <p>DESCRIPTION: 상품 수정 페이지</p>
 	 * <p>IMPORTANT:</p>

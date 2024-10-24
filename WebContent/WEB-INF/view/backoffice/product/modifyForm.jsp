@@ -11,9 +11,10 @@
 	<%@ include file="/include/backoffice/css.jsp" %>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.2/tinymce.min.js"></script>
 	<script>
 		window.onload = function () {
-			// HTML Editor
+			updateCategory();
 			tinymce.init({selector:'textarea'});
 		}
 		
@@ -26,7 +27,7 @@
 		})
 		
 		function updateCategory() {
-			var cd_ctg_b = document.getElementById("cd_ctg_b").value;
+			var cd_ctg_b = document.getElementById("cd_ctg_b").options[document.getElementById("cd_ctg_b").selectedIndex].value;
 			var cd_ctg_m = document.getElementById("cd_ctg_m");
 		
 			// 기존 옵션 삭제
@@ -69,12 +70,15 @@
 			var frmMain = document.getElementById("frmMain");
 			
 			if (document.getElementById("sle_nm").value == ""
-					|| document.getElementById("cd_where_ctg").value == "0"
-					|| document.getElementById("price_sale").value == ""
+					|| document.getElementById("desces").value == ""
+					|| document.getElementById("img").value == ""
+					|| document.getElementById("price_sale").value == "0"
+					|| document.getElementById("cd_ctg_b").value == ""
+					|| document.getElementById("cd_ctg_m").value == ""
+					|| document.getElementById("cd_state_sale").value == ""
+					|| document.getElementById("flg_delete").value == ""
 					|| document.getElementById("dt_sale_start").value == ""
-					|| document.getElementById("dt_sale_end").value == ""
-					|| document.getElementById("cd_state_sale").value == "0"
-					|| tinymce.activeEditor.getContent() == "") {
+					|| document.getElementById("dt_sale_end").value == "") {
 				alert("필수 항목을 입력하세요!");
 				return;
 			}
@@ -113,15 +117,15 @@
 								<tr>
 									<th style="width: 150px;" >상품 상세 이미지</th>
 									<td>
-										<input type="file" id="fileOrig" name="fileOrig" />
-										<img src="/img/product/${productDto.desces}" height="200"/>
+										<input type="file" id="desces" name="files[1]" />
+										<!-- <img src="/img/product/${productDto.desces}" height="200"/> -->
 									</td>
 								</tr>
 								<tr>
 									<th style="width: 150px;" >상품 이미지</th>
 									<td>
-										<input type="file" id="fileOrig" name="fileOrig" />
-										<img src="/img/product/${productDto.img}" height="200"/>
+										<input type="file" id="img" name="files[0]" />
+										<!-- <img src="/img/product/${productDto.img}" height="200"/> -->
 									</td>
 								</tr>
 								<tr>
@@ -144,43 +148,8 @@
 									<th style="width: 150px;">카테고리 중분류</th>
 									<td>
 										<select id="cd_ctg_m" name="cd_ctg_m">
+											<option value="0">선택</option>
 										</select>
-										<c:choose>
-											<c:when test="${productDto.cd_ctg_b == '1'}">
-												<select id="cd_ctg_b_1" name="cd_ctg_b_1" >
-													<option value="1" <c:if test="${productDto.cd_ctg_m == '1'}"> selected</c:if>>혈당/혈행/혈압</option>
-													<option value="2" <c:if test="${productDto.cd_ctg_m == '2'}"> selected</c:if>>항산화/면역력</option>
-													<option value="3" <c:if test="${productDto.cd_ctg_m == '3'}"> selected</c:if>>염증/항염</option>
-													<option value="4" <c:if test="${productDto.cd_ctg_m == '4'}"> selected</c:if>>관절/뼈/치아</option>
-													<option value="5" <c:if test="${productDto.cd_ctg_m == '5'}"> selected</c:if>>피로회복</option>
-													<option value="6" <c:if test="${productDto.cd_ctg_m == '6'}"> selected</c:if>>눈 건강</option>
-													<option value="7" <c:if test="${productDto.cd_ctg_m == '7'}"> selected</c:if>>장 건강</option>
-													<option value="8" <c:if test="${productDto.cd_ctg_m == '8'}"> selected</c:if>>두뇌/기억력</option>
-													<option value="9" <c:if test="${productDto.cd_ctg_m == '9'}"> selected</c:if>>위/간/갑상선</option>
-												</select>
-											</c:when>
-											
-											<c:when test="${productDto.cd_ctg_b == '2'}">
-												<select id="cd_ctg_b_2" name="cd_ctg_b_2" >
-													<option value="1" <c:if test="${productDto.cd_ctg_m == '1'}"> selected</c:if>>폴리코사놀</option>
-													<option value="2" <c:if test="${productDto.cd_ctg_m == '2'}"> selected</c:if>>오메가-3</option>
-													<option value="3" <c:if test="${productDto.cd_ctg_m == '3'}"> selected</c:if>>비타민/미네랄</option>
-													<option value="4" <c:if test="${productDto.cd_ctg_m == '4'}"> selected</c:if>>유산균</option>
-													<option value="5" <c:if test="${productDto.cd_ctg_m == '5'}"> selected</c:if>>글루코사민/MSM</option>
-													<option value="6" <c:if test="${productDto.cd_ctg_m == '6'}"> selected</c:if>>루테인</option>
-													<option value="7" <c:if test="${productDto.cd_ctg_m == '7'}"> selected</c:if>>코큐텐</option>
-													<option value="8" <c:if test="${productDto.cd_ctg_m == '8'}"> selected</c:if>>아르기닌</option>
-													<option value="9" <c:if test="${productDto.cd_ctg_m == '9'}"> selected</c:if>>밀크씨슬</option>
-												</select>
-											</c:when>
-											
-											<c:when test="${productDto.cd_ctg_b == '3'}">
-												<select id="cd_ctg_b_3" name="cd_ctg_b_3" >
-													<option value="1" <c:if test="${productDto.cd_ctg_m == '1'}"> selected</c:if>>남성</option>
-													<option value="2" <c:if test="${productDto.cd_ctg_m == '2'}"> selected</c:if>>여성</option>
-												</select>
-											</c:when>
-										</c:choose>
 									</td>
 								</tr>
 								<tr>
