@@ -56,7 +56,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST" >
-	<%@ include file="/include/backoffice/mainSide.jsp" %>
+	<%@ include file="/include/backoffice/loginMainSide.jsp" %>
 	
 
 
@@ -64,7 +64,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     
-    <section class="content-header">
+    <section class="content-header" style="display: flex; align-items: center; margin-left: 425px;" >
       <h1>
         관리자가입
         <small></small>
@@ -73,7 +73,7 @@
 
     <!-- Main content -->
 	
-    <section class="content">
+    <section class="content" style="display: flex; justify-content: center; align-items: center;" >
      
         <!-- left column -->
         <div class="col-md-6">
