@@ -212,7 +212,7 @@
 		<div class="col-md-3"></div>
 		<div class="col-md-8">
 			<div style="text-align: center;">
-				<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goList" />
+				<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
 			</div>
 			<div style="text-align: center;">
 				<a href="javascript:goWriteForm(2);" style="margin-top:10px; font-size: 15px !important; display: inline-block; padding: 10px 50px; color: black; background-color: #2b94d1; border: 1px solid #cccccc; border-radius: 2px;font-weight:700">등 록</a>

@@ -74,6 +74,16 @@
 		frmMain.submit();
 	}
 	
+	function consolegoList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/console/center/board/list.web";
+		frmMain.submit();
+	}
+	
+	
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -155,36 +165,55 @@
 								<th style="text-align: center;width: 15%">등록일</th>
 								<th style="text-align: center;width: 7%">조회수</th>
 							</tr>
-				<c:choose>
-					<c:when test="${empty list}">
-						<tr>
-							<td colspan="4" style="text-align:center">등록된 글이 없습니다.</td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${list}" var="list">
-							<tr>
-								<td style="text-align: center;">
-									${list.rnum}
-								</td>
-								<td style="text-align: left">
-									<c:if test="${list.flg_top == 'Y'}">[공지] </c:if>
-										<a href="javascript:goView(${list.seq_bbs});">
-											${list.title}
-										</a>
-								</td>
-								<td style="text-align: center;">
-									${list.dt_reg}
-								</td>
-								<td style="text-align: center;">
-									${list.readed}
-								</td>
-							</tr>
-						</c:forEach>
-					</c:otherwise>
-					</c:choose>
-				</tbody>
-				</table>
+							<c:choose>
+								<c:when test="${empty list}">
+									<tr>
+										<td colspan="4" style="text-align:center">등록된 글이 없습니다.</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${list}" var="list">
+										<tr>
+											<c:choose>
+												<c:when test="${list.flg_top == 'Y'}">
+													<td style="text-align: center;font-weight: bold;">
+														${list.rnum}
+													</td>
+													<td style="text-align: left;font-weight: bold;">
+															<a href="javascript:goView(${list.seq_bbs});">
+																${list.title}
+															</a>
+													</td>
+													<td style="text-align: center;font-weight: bold;">
+														${list.dt_reg}
+													</td>
+													<td style="text-align: center;font-weight: bold;">
+														${list.readed}
+													</td>
+												</c:when>
+												<c:otherwise>
+													<td style="text-align: center;">
+														${list.rnum}
+													</td>
+													<td style="text-align: left">
+															<a href="javascript:goView(${list.seq_bbs});">
+																${list.title}
+															</a>
+													</td>
+													<td style="text-align: center;">
+														${list.dt_reg}
+													</td>
+													<td style="text-align: center;">
+														${list.readed}
+													</td>
+												</c:otherwise>
+											</c:choose>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
 				<!-- /.table -->
 				</div>
 				<!-- /.mail-box-messages -->
@@ -210,7 +239,7 @@
 		<div class="col-md-3"></div>
 		<div class="col-md-8">
 			<div style="text-align: center;">
-				<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goList" />
+				<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
 			</div>
 			<div style="text-align: center;">
 				<a href="javascript:goWriteForm(1);" style="margin-top:10px; font-size: 15px !important; display: inline-block; padding: 10px 50px; color: black; background-color: #2b94d1; border: 1px solid #cccccc; border-radius: 2px;font-weight:700">등 록</a>

@@ -38,7 +38,17 @@
 	
 	frmMain.action="/console/center/board/writeProc.web";
 	frmMain.submit();
-}
+	}
+	
+	function consolegoList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/console/center/board/list.web";
+		frmMain.submit();
+	}
+	
 	
 </script>
 </head>
