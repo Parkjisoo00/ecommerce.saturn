@@ -52,42 +52,66 @@
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
-<section>
-	<div class="content-wrapper" >
-		<article class="txtCenter" style="padding-top: 150px;">
-		<div style="position: relative; width: 900px; margin-left: auto; margin-right: auto;">
-			<div class="brdSearchArea" style="float: right; position: relative; top: -20px;">
-				<select name="searchKey">
-					<option value="email"<c:if test="${paging.searchKey == 'email'}"> selected</c:if>>이메일</option>
-					<option value="mbr_nm"<c:if test="${paging.searchKey == 'mbr_nm'}"> selected</c:if>>성명</option>
-				</select>
-				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> <input type="submit" value="검색"/>
-			</div>
-			<div class="brdInfo" style="position: relative; top: 10px;">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
-			<br/>
-			<br/>
-			<table class="headTop_01" style="width: 900px; margin-left: auto; margin-right: auto">
-				<tr>
-					<th style="width: 5%">NO</th>
-					<th>이메일(아이디)</th>
-					<th style="width: 10%">상태</th>
-					<th style="width: 15%">성명</th>
-					<th style="width: 10%">구분</th>
-					<th style="width: 10%">등록일</th>
-				</tr>
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header" style="display: flex; align-items: center; margin-left: 215px;">
+		 <h1>
+        회원 관리
+      </h1>
+	</section>
+
+	<!-- Main content -->
+	<section class="content" style="display: flex; justify-content: center; align-items: center;">
+	
+		
+		<!-- /.col -->
+		<div class="col-md-9">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">회원 목록</h3>&nbsp;&nbsp;&nbsp;
+					<div class="box-tools pull-right">
+						<div class="has-feedback">
+							<div style="display: flex; align-items: center;">&nbsp;&nbsp;
+								<select class="form-control" name="searchKey" style="height: 30px;">
+									<option value="email"<c:if test="${paging.searchKey == 'email'}"> selected</c:if>>이메일</option>
+									<option value="mbr_nm"<c:if test="${paging.searchKey == 'mbr_nm'}"> selected</c:if>>성명</option>
+								</select>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="text" name="searchWord" id="searchWord" class="form-control input-sm" value="${paging.searchWord}"  />
+								&nbsp;&nbsp;
+								<input type="submit" value="검색"/>
+							</div>
+						</div>
+					</div>
+			<!-- /.box-tools -->
+				</div>
+			<!-- /.box-header -->
+			<div class="box-body no-padding">
+				<div class="table-responsive mailbox-messages">
+					<table class="table table-hover table-striped">
+						<tbody>
+							<tr>
+							<th style="width: 5%">NO</th>
+							<th>이메일(아이디)</th>
+							<th style="width: 10%">상태</th>
+							<th style="width: 15%">성명</th>
+							<th style="width: 10%">성별</th>
+							<th style="width: 10%">생년월일</th>
+							<th style="width: 10%">등록일</th>
+							</tr>
 				<c:choose>
 					<c:when test="${empty list}">
 						<tr>
-							<td colspan="6">등록된 구매자(회원)가 없습니다.</td>
+							<td colspan="5">등록된 구매자(회원)가 없습니다.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${list}" var="list">
-						<tr>
-							<td>
-								${list.rnum}
-							</td>
-							<td class="txtRight">
+							<tr>
+								<td style="text-align: center;">
+									${list.rnum}
+								</td>
+								<td class="txtRight">
 								<a href="javascript:goModifyForm(${list.seq_mbr});">
 									<bravomylifeTag:masking text="${list.email}" letter="*" count="13" mode="right" />
 								</a>
@@ -111,21 +135,45 @@
 								</c:choose>
 							</td>
 							<td>
+								${list.age}
+							</td>
+							<td>
 								${list.dt_reg}
 							</td>
-						</tr>
+							</tr>
 						</c:forEach>
 					</c:otherwise>
-				</c:choose>
-			</table>
-			<br/>
-			<div style="text-align: center; position: relative; top: 30px; left: -30px;">
-			<bravomylifeTag:page styleID="admin_text" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+					</c:choose>
+				</tbody>
+				</table>
+				<!-- /.table -->
+				</div>
+				<!-- /.mail-box-messages -->
 			</div>
+			<!-- /.box-body -->
+			<div class="box-footer no-padding">
+				<div class="mailbox-controls">
+				<!-- /.btn-group -->
+				<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><i class="fa fa-refresh"></i></button>
+					<span style="float: right;margin-right: 10px;margin-top: 5px;justify-content: center; ">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</span>
+				<div class="pull-right">
+				<div class="btn-group">
+					<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goList" />
+				</div>
+				<!-- /.btn-group -->
+				</div>
+				<!-- /.pull-right -->
+				</div>
+			</div>
+			</div>
+		  <!-- /. box -->
 		</div>
-		</article>
-	</div>
-</section>	
+	<!-- /.col -->
+	
+	<!-- /.row -->
+	</section>
+	<!-- /.content -->
+</div>
 <!-- /Maincontent -->
 
 	<%@ include file="/include/backoffice/footer.jsp" %>

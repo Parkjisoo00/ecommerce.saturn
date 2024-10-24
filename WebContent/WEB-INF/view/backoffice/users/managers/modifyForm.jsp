@@ -32,7 +32,7 @@
 
       <h1>
         관리자 관리
-        <small>관리자 정보 수정</small>
+        <small></small>
       </h1>
     </section>
 
@@ -42,7 +42,7 @@
         <div class="col-md-6">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">회원정보</h3>
+              <h3 class="box-title">관리자 정보 수정</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
