@@ -12,6 +12,13 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<style>
+		
+		@media (min-width: 1200px) {
+			.header__menu::after {width:100%;}
+		}
+		@media (min-width: 992px) {
+			.container, .container-lg, .container-md, .container-sm {max-width:100px;}
+		}
 			
 		.gnb li {
 		display: inline; /* 수평 배치 */
@@ -154,7 +161,7 @@
 				<div class="checkout__form__input">
 					<div>
 						<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">자주 찾는 질문(FAQ)</h6>
-						<h6 class="coupon__link" style="text-align: center; letter-spacing: 1.5px; border: none">
+						<h6 class="coupon__link" style="text-align: center;; border: none">
 							<c:if test="${paging.cd_bbs_type == 1}">
 								<a href="javascript:goList(1);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
 								<a href="javascript:goList(2);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>

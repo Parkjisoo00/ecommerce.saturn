@@ -101,7 +101,7 @@
 				</div>
 				<br/>
 				<br/>
-				<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
+				<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;width: 100%;">
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="checkout__form__input">
 							<input type="button" value="등록" style="width:100px; font-weight: 500; font-size: 16px;" onclick="javascript:writeProc(3);" />

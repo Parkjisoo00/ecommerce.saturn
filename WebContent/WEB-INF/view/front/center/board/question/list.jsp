@@ -11,7 +11,19 @@
 
 <head>
 	<%@ include file="/include/common/header.jsp" %>
-	<style></style>
+	<style>
+	.col-lg-12.col-md-12.col-sm-12 {padding-right:0;padding-left:0;}
+	#searchWord {width:calc(100% - 149px);}
+	
+	@media (min-width: 1200px) {
+			.header__menu::after {width:100%;}
+		}
+		@media (min-width: 992px) {
+			.container, .container-lg, .container-md, .container-sm {max-width:100px;}
+			#searchWord {width: 200px;}
+		}
+
+	</style>
 	<script>
 	
 	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
@@ -89,7 +101,7 @@
 				<div class="col-lg-12 col-md-12 col-sm-12">
 					<div class="checkout__form__input">
 					<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">1:1 문의</h6>
-					<h6 class="coupon__link" style="text-align: center; letter-spacing: 1.5px; border: none">
+					<h6 class="coupon__link" style=" border: none;">
 			
 					<c:if test="${paging.cd_bbs_type == 1}">
 					<a href="javascript:goList(1);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
@@ -131,9 +143,9 @@
 								<table class="headTop_01" style=" margin-left: auto; margin-right: auto; width: 100%">
 									<tr>
 										<th style="width: 5%">NO</th>
-										<th style="width: 10%">카테고리</th>
+										<th style="width: 18%">카테고리</th>
 										<th>제목</th>
-										<th style="width: 10%">작성자</th>
+										<th style="width: 15%">작성자</th>
 										<th style="width: 15%">등록일</th>
 									</tr>
 									<c:choose>

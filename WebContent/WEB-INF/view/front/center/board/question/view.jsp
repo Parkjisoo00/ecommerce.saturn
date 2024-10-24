@@ -11,6 +11,9 @@
 
 <head>
 	<%@ include file="/include/common/header.jsp" %>
+	<style>
+
+	</style>
 	<script>
 	
 	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
@@ -82,12 +85,11 @@
 
 	<!-- Breadcrumb Begin -->
 	<!-- Breadcrumb End -->
-<section class="shop spad">
+<section class="blog-details spad">
 	<div class="container">
-		<article class="txtCenter">
-			<div class="col-lg-12 col-md-12 col-sm-12">
+		<div class="col-lg-12 col-md-6">
 				<div class="blog__details__content">
-					<div class="blog__details__item">
+					
 					
 					<br/>
 					<br/>
@@ -180,8 +182,9 @@
 			</c:if>
 	 -->
 	 		</div>
-		</article>
-	</div>
+		
+	
+	
 </section>
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
