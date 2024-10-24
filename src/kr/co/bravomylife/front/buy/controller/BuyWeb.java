@@ -106,10 +106,18 @@ public class BuyWeb extends Common {
 			
 			List<SaleDto> check = (List<SaleDto>) pagingListDto.getList();
 			
-			int tPoint		= check.get(0).getTotal_point();
-			int pCount		= check.get(0).getSle_count();
-			String eDate	= check.get(0).getEarliest_date();
-			String lDate	= check.get(0).getLatest_date();
+			int tPoint = 0;
+			int pCount = 0;
+			String eDate = "";
+			String lDate = "";
+			
+			if (check != null && !check.isEmpty()) {
+			
+			tPoint		= check.get(0).getTotal_point();
+			pCount		= check.get(0).getSle_count();
+			eDate	= check.get(0).getEarliest_date();
+			lDate	= check.get(0).getLatest_date();
+			}
 			
 			mav.addObject("pCount"	, pCount);
 			mav.addObject("tPoint"	, tPoint);

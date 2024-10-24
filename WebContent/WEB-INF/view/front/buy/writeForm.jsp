@@ -295,7 +295,7 @@
 <input type="hidden" name="seq_sle"				id="seq_sle"		value="${saleDto.seq_sle}"/>
 <input type="hidden" name="sle_nm"				id="sle_nm"			value="${saleDto.sle_nm}"/>
 <input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"		value="${saleDto.cd_ctg_m}"/>
-<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"		value="${saleDto.cd_ctg_b}"/>\
+<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"		value="${saleDto.cd_ctg_b}"/>
 <input type="hidden" name="price_sale"			id="price_sale"		value="${saleDto.price_sale}"/>
 <input type="hidden" name="discount"			id="discount"		value="${saleDto.discount}"/>
 <input type="hidden" name="corp_nm"				id="corp_nm"		value="${saleDto.corp_nm}"/>
@@ -321,13 +321,13 @@
 	<!-- Product Details Section Begin -->
 	<section class="product-details spad">
 		<div class="container">
-			<div class="row">
+			<div class="row" style="justify-content: center;">
 				<div class="col-lg-6" style="display: flex; justify-content: center; align-items: center;">
 					<div class="product__details__pic">
 						<img data-hash="product-1" class="product__big__img" src="/img/product/${saleDto.img}" alt="판매상품 이미지" style="width: 450px; height: 450px; cursor: pointer" onclick="window.open(this.src)">
 					</div>
 				</div>
-				<div class="col-lg-6" style="padding-right: 0;">
+				<div class="col-lg-6">
 					<div class="product__details__text">
 						<h6 class="pd-main">${saleDto.sle_nm}</h6>
 						<input type="hidden" name="buyList[0].sle_nm" value="${saleDto.sle_nm}" />
@@ -480,7 +480,6 @@
 						<h5 class="pd-h5">이런 상품은 어떠세요?</h5><h5 class=pd-subh5>지금 보고 계시는 상품과 관련된 상품들입니다.</h5>
 					</div>
 				</div>
-				<div class="row" style="justify-content: center;">
 				<c:forEach var="list" items="${list}">
 					<div class="col-lg-3 col-md-6" style="padding: 0px !important;">
 						<div class="product__item">
@@ -557,7 +556,6 @@
 						</div>
 					</div>
 				</c:forEach>
-				</div>
 				<div class="col-lg-12" style="padding: 0;">
 					<div class="product__details__tab">
 						<ul class="nav nav-tabs" role="tablist">

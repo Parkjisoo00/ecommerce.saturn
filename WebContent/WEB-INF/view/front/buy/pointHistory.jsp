@@ -56,17 +56,7 @@ alert("평점 확인" + value);
 	<!-- Header Section End -->
 
 	<!-- Breadcrumb Begin -->
-	<ul class="my-custom-ul" >
-				<li><a style="font-size :30px" href="/front/myPage/" class="menuLnb">	마이 페이지</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/modifyForm.web" class="menuLnb">개인정보 수정</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goList(3);" class="menuLnb">문의 이력</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">포인트</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">맞춤건강 결과표</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/myLike.web" class="menuLnb">찜한 상품</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/reviewListPage.web" class="menuLnb">리뷰관리</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/history.web" class="menuLnb">구매이력</a></li>
-				<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/withdraw.web" class="menuLnb">회원 탈퇴</a></li>
-	</ul>
+		<%@ include file="/include/front/mygnb.jsp" %>
 	<!-- Breadcrumb End -->
 
 	<!-- Checkout Section Begin -->
@@ -75,20 +65,34 @@ alert("평점 확인" + value);
 			<div class="row">
 				<div class="col-lg-12" style="padding: 0;">
 					<div class="col-lg-6 col-md-6 col-sm-6" style="margin-bottom: 100px !important; padding: 0px !important; max-width: 100% !important; flex: 0 0 100% !important; border-bottom: none;">
-						<div class="cart__total__procced" style="padding-left: 15px !important; text-align: right; display: flex; justify-content: space-between; align-items: center;">
-							<div style="text-align: left;">
-								<p style="margin-top: 0px !important; margin-bottom: 0px !important;">
-									<span style="font-size: 16px;">
-										고객님께서는 <span id="totalItems" style="font-size: 24px; font-weight: 600 !important;">${eDate} </span>일  ~  
-										<span id="totalPriceFinal" style="font-size: 24px; font-weight: 600 !important;"> ${lDate}</span>일 동안 
-									</span>
-									<span style="font-size: 16px;">
-										총 <span id="totalItems" style="font-size: 24px;">${pCount}</span>개 상품에서
-												<img src="/img/cartbtn/totalPoint.png" style="padding-left: 10px; padding-right: 10px; vertical-align: -4px;">
-											<span id="totalPriceFinal" style="font-size: 24px; font-weight: 600 !important; color: #346aff !important;"><fmt:formatNumber value="${tPoint}" type="number" /></span> 포인트를 적립했습니다.
-									</span>
-								</p>
-							</div>
+						<c:choose>
+							<c:when test="${empty pCount || pCount == 0}">
+							<div class="cart__total__procced" style="padding-left: 15px !important; text-align: right; display: flex; justify-content: center; align-items: center;">
+								<div style="text-align: center;">
+									<p style="margin-top: 0px !important; margin-bottom: 0px !important;">
+										<span style="font-size: 16px; text-align: center !important; font-family: 'Noto Sans KR', sans-serif !important;">
+											포인트 이력이 없습니다.
+										</span>
+									</p>
+								</div>
+							</c:when>
+							<c:otherwise>
+							<div class="cart__total__procced" style="padding-left: 15px !important; text-align: right; display: flex; justify-content: space-between; align-items: center;">
+								<div style="text-align: left;">
+										<p style="margin-top: 0px !important; margin-bottom: 0px !important;">
+											<span style="font-size: 16px;">
+												고객님께서는 <span id="totalItems" style="font-size: 24px; font-weight: 600 !important;">${eDate} </span>일  ~  
+												<span id="totalPriceFinal" style="font-size: 24px; font-weight: 600 !important;"> ${lDate}</span>일 동안 
+											</span>
+											<span style="font-size: 16px;">
+												총 <span id="totalItems" style="font-size: 24px;">${pCount}</span>개 상품에서
+														<img src="/img/cartbtn/totalPoint.png" style="padding-left: 10px; padding-right: 10px; vertical-align: -4px;">
+													<span id="totalPriceFinal" style="font-size: 24px; font-weight: 600 !important; color: #346aff !important;"><fmt:formatNumber value="${tPoint}" type="number" /></span> 포인트를 적립했습니다.
+											</span>
+										</p>
+									</div>
+							</c:otherwise>
+						</c:choose>
 						</div>
 					</div>
 					<h6 class="lowgnb-title" style="padding-bottom: 5px; text-align: left; font-size: 30px;">포인트 이력</h6>
@@ -111,7 +115,7 @@ alert("평점 확인" + value);
 							<c:choose>
 								<c:when test="${empty list}">
 									<tr style="text-align: center; border-bottom: 1px solid #707070;">
-										<td colspan="6"> 포인트 이력이 없습니다</td>
+										<td colspan="6"> 포인트 이력이 없습니다.</td>
 									</tr>
 								</c:when>
 								<c:otherwise>
