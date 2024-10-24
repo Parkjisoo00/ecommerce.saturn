@@ -18,6 +18,17 @@
 			tinymce.init({selector:'textarea'});
 		}
 		
+		function commaValue(input) {
+			// 입력된 값에서 콤마를 제거
+			let value = input.value.replace(/,/g, '');
+			
+			// 숫자 형식으로 변환
+			let formattedValue = Number(value).toLocaleString();
+			
+			// 포맷된 값을 다시 입력 필드에 설정
+			input.value = formattedValue;
+		}
+		
 		$(function(){
 			$('#dt_sale_start').datepicker({dateFormat:'yy-mm-dd'});
 		})
@@ -70,8 +81,6 @@
 			var frmMain = document.getElementById("frmMain");
 			
 			if (document.getElementById("sle_nm").value == ""
-					|| document.getElementById("desces").value == ""
-					|| document.getElementById("img").value == ""
 					|| document.getElementById("price_sale").value == "0"
 					|| document.getElementById("cd_ctg_b").value == ""
 					|| document.getElementById("cd_ctg_m").value == ""
@@ -90,7 +99,7 @@
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<form id="frmMain" method="POST">
+<form id="frmMain" method="POST" enctype="multipart/form-data">
 <input type="hidden" id="seq_sle"		name="seq_sle"			value="${productDto.seq_sle}"/>
 
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
@@ -117,15 +126,15 @@
 								<tr>
 									<th style="width: 150px;" >상품 상세 이미지</th>
 									<td>
+										<img src="/img/product/${productDto.desces}" height="200"/>
 										<input type="file" id="desces" name="files[1]" />
-										<!-- <img src="/img/product/${productDto.desces}" height="200"/> -->
 									</td>
 								</tr>
 								<tr>
 									<th style="width: 150px;" >상품 이미지</th>
 									<td>
+										<img src="/img/product/${productDto.img}" height="200"/>
 										<input type="file" id="img" name="files[0]" />
-										<!-- <img src="/img/product/${productDto.img}" height="200"/> -->
 									</td>
 								</tr>
 								<tr>
@@ -172,30 +181,30 @@
 								<tr>
 									<th style="width: 150px;" >포인트 적립률</th>
 									<td>
-										<input type="text" name="point_stack" id="point_stack" value="${productDto.point_stack}" required/>
+										<input type="text" name="point_stack" id="point_stack" value="${productDto.point_stack}" style="width:100px; text-align:right" required/>%
 								</tr>
 								<tr>
 									<th style="width: 150px;" >삭제 처리 여부</th>
 									<td>
-										<input type="text" name="flg_delete" id="flg_delete" value="${productDto.flg_delete}" required/>
+										<input type="text" name="flg_delete" id="flg_delete" value="${productDto.flg_delete}" style="width:100px; text-align:right" required/>
 									</td>
 								</tr>
 								<tr>
 									<th style="width: 150px;" >판매 시작 일시</th>
 									<td>
-										<input type="text" id="dt_sale_start" name="dt_sale_start" value="${productDto.dt_sale_start}" required/>
+										<input type="text" id="dt_sale_start" name="dt_sale_start" value="${productDto.dt_sale_start}" style="width:100px; text-align:right" required/>
 									</td>
 								</tr>
 								<tr>
 									<th style="width: 150px;" >판매 종료 일시</th>
 									<td>
-										<input type="text" id="dt_sale_end" name="dt_sale_end" value="${productDto.dt_sale_end}" required/>
+										<input type="text" id="dt_sale_end" name="dt_sale_end" value="${productDto.dt_sale_end}" style="width:100px; text-align:right" required/>
 									</td>
 								</tr>
 								<tr>
 									<th style="width: 150px;" >할인율</th>
 									<td>
-										<input type="text" id="discount" name="discount" value="${productDto.discount}" required/>
+										<input type="text" id="discount" name="discount" value="${productDto.discount}" style="width:100px; text-align:right" required/>%
 									</td>
 								</tr>
 								</tbody>
