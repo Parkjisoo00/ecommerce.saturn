@@ -87,6 +87,52 @@ public class BuyWeb extends Common {
 	 * @param boardDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
+	 * @since 2024-010-24
+	 * <p>DESCRIPTION: 리뷰 관리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/front/buy/pointHistory.web")
+	public ModelAndView pointHistory(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			pagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			PagingListDto pagingListDto = buySrvc.pointHistory(pagingDto);
+			
+			List<SaleDto> check = (List<SaleDto>) pagingListDto.getList();
+			
+			int tPoint		= check.get(0).getTotal_point();
+			int pCount		= check.get(0).getSle_count();
+			String eDate	= check.get(0).getEarliest_date();
+			String lDate	= check.get(0).getLatest_date();
+			
+			mav.addObject("pCount"	, pCount);
+			mav.addObject("tPoint"	, tPoint);
+			mav.addObject("eDate"	, eDate);
+			mav.addObject("lDate"	, lDate);
+			mav.addObject("list"	, pagingListDto.getList());
+			
+			mav.setViewName("front/buy/pointHistory");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".pointHistory()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
 	 * @since 2024-010-17
 	 * <p>DESCRIPTION: 리뷰 관리</p>
 	 * <p>IMPORTANT:</p>

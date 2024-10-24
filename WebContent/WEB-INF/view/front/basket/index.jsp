@@ -333,11 +333,11 @@
 													</c:if>
 												</td>
 												<td class="cart-td">
-													<span style="color: #346aff !important;"><fmt:formatNumber value="${list.point_value}" type="number" /></span>포인트
+													<span style="color: #346aff !important;"><fmt:formatNumber value="${list.point_value}" type="number" /></span> 포인트
 													<input type="hidden" name="buyList[${status.index}].point" value="${list.point_value}">
 												</td>
 												<td class="cart-td" data-total-point="${list.total_point}">
-													<span class="totalPointDisplay" style="color: #346aff !important; font-size: 13px !important; font-weight: bold !important;">${list.format_total_point}</span>포인트
+													<span class="totalPointDisplay" style="color: #346aff !important; font-size: 13px !important; font-weight: bold !important;">${list.format_total_point}</span> 포인트
 													<input type="hidden" name="buyList[${status.index}].total_point_sum" value="${list.total_point}">
 												</td>
 												<td class="cart-td" style="font-size: 16px !important; color: #707070 !important; font-weight: bold;" data-total-price="${list.total_price}">

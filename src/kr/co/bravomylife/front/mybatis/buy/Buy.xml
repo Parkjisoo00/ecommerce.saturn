@@ -2,6 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.buy.Buy">
 	
+	<select id="pointCount" parameterType="pagingDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(ROWNUM)
+		FROM
+			TB_BUY_DTL dtl
+		LEFT JOIN
+			TB_MBR_MST mst
+		ON
+			dtl.SEQ_MBR = mst.SEQ_MBR
+		WHERE
+		<include refid="pointWhere" />
+	</select>
+	
+	<sql id="pointWhere">
+		mst.SEQ_MBR = #{seq_mbr}
+		AND dtl.POINT != 0
+	</sql>
+	
+	<select id="pointHistory" parameterType="pagingDto" resultType="saleDto">
+		SELECT
+			*
+		FROM
+			(
+			SELECT
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY dtl.DT_REG DESC) rnum
+				, mst.SEQ_MBR
+				, dtl.POINT
+				, dtl.PRICE
+				, dtl.POINT * dtl.COUNT point_value
+				, dtl.COUNT
+				, dtl.SLE_NM
+				, dtl.SEQ_SLE
+				, sle.CD_CTG_M
+				, sle.CD_CTG_B
+				, TO_CHAR(dtl.DT_REG, 'YYYY-MM-DD') dt_reg
+				, sle.IMG
+				, TO_CHAR(MIN(dtl.DT_REG) OVER (), 'YYYY-MM-DD') earliest_date
+				, TO_CHAR(MAX(dtl.DT_REG) OVER (), 'YYYY-MM-DD') latest_date
+				, COUNT(dtl.SEQ_SLE) OVER () sle_count
+				, SUM(dtl.POINT * dtl.COUNT) OVER () total_point
+			FROM
+				TB_MBR_MST mst
+			LEFT JOIN
+				TB_BUY_DTL dtl
+			ON
+				mst.SEQ_MBR = dtl.SEQ_MBR
+			LEFT JOIN
+				TB_SLE sle
+			ON
+				sle.SEQ_SLE = dtl.SEQ_SLE
+			WHERE
+				<include refid="pointWhere" />
+			)
+		<![CDATA[
+		WHERE
+			rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+		]]> 
+		ORDER BY
+			rnum
+	</select>
 	
 	<select id="selectTotal" parameterType="buyDetailDto" resultType="java.lang.String">
 		SELECT
@@ -26,15 +86,15 @@
 					, (SELECT DECODE(mst.CD_STATE, 1, '결제', 2, '취소', 3, '교환', 4, '환불','미완성') from TB_BUY_MST mst where mst.seq_buy_mst = dtl.seq_buy_mst) cd_state
 					, (SELECT DECODE(mst.CD_STATE_PAY, 'null', '결제전', 'N', '실패', 'Y', '성공', 'C', '취소', 'error') from TB_BUY_MST mst where mst.seq_buy_mst = dtl.seq_buy_mst)  cd_state_pay
 					, (SELECT DECODE(mst.CD_STATE_DELIVERY, 'C', '판매 확인중', 'P', '배송 준비중', 'D', '배송중', 'Y', '배송 완료','등록') from TB_BUY_MST mst where mst.seq_buy_mst = dtl.seq_buy_mst)  cd_state_delivery
-					, sle.SEQ_SLE									
+					, sle.SEQ_SLE
 					, sle.SLE_NM
 					, sle.IMG
 					, sle.DISCOUNT
-					, sle.PRICE_SALE								
-					, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100))		discount_sale
-					, sle.cd_ctg_m									
+					, sle.PRICE_SALE
+					, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+					, sle.cd_ctg_m
 					, sle.cd_ctg_b	
-					, sle.FLG_DELETE					
+					, sle.FLG_DELETE
 				FROM 
 					TB_BUY_DTL dtl 
 				INNER JOIN 
@@ -46,7 +106,6 @@
 				)
 					ORDER BY dt_reg DESC
 	</select>
-	
 	
 	<select id="historyList" parameterType="buyDetailDto" resultType="buyDetailDto">
 			SELECT *
@@ -62,15 +121,15 @@
 					, (SELECT DECODE(mst.CD_STATE, 1, '결제', 2, '취소', 3, '교환', 4, '환불','미완성') from TB_BUY_MST mst where mst.seq_buy_mst = dtl.seq_buy_mst) cd_state
 					, (SELECT DECODE(mst.CD_STATE_PAY, 'null', '결제전', 'N', '실패', 'Y', '성공', 'C', '취소', 'error') from TB_BUY_MST mst where mst.seq_buy_mst = dtl.seq_buy_mst)  cd_state_pay
 					, (SELECT DECODE(mst.CD_STATE_DELIVERY, 'C', '판매 확인중', 'P', '배송 준비중', 'D', '배송중', 'Y', '배송 완료','등록') from TB_BUY_MST mst where mst.seq_buy_mst = dtl.seq_buy_mst)  cd_state_delivery
-					, sle.SEQ_SLE									
+					, sle.SEQ_SLE
 					, sle.SLE_NM
 					, sle.IMG
 					, sle.DISCOUNT
-					, sle.PRICE_SALE								
-					, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100))		discount_sale
-					, sle.cd_ctg_m									
-					, sle.cd_ctg_b	
-					, sle.FLG_DELETE					
+					, sle.PRICE_SALE
+					, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+					, sle.cd_ctg_m
+					, sle.cd_ctg_b
+					, sle.FLG_DELETE
 				FROM 
 					TB_BUY_DTL dtl 
 				INNER JOIN 

@@ -101,13 +101,12 @@
 		frmMain.submit();
 	}
 	
-	function goList(value) {
+	function goPages(value) {
 		
 		var frmMain = document.getElementById("frmMain");
-
-		document.getElementById("cd_bbs_type").value = value;
-				
-		frmMain.action="/front/center/board/myPageNotice/list.web";
+		
+		frmMain.currentPage.setAttribute("value", value);
+		frmMain.action="/front/sale/ingredient_list.web";
 		frmMain.submit();
 	}
 	
@@ -153,16 +152,16 @@ alert("평점 확인" + value);
 					<div class="product__details__tab" style="padding-left: 17px !important; padding-right: 17px !important; padding-top: 0px !important;">
 						<ul class="nav nav-tabs" role="tablist" style="margin-bottom: 0px !important; border: 1px solid #d9d9d9 !important; display: flex !important; justify-content: space-between !important;">
 							<li class="nav-item" style="background-color: #f9f9f9 !important; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important; margin-right: 0px !important; border-right: 1px solid #d9d9d9 !important;">
-								<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" style="display: inline-block !important;">작성 가능한 후기 (${count})</a>
+								<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" style="display: inline-block !important;">상품후기 작성(${count})</a>
 							</li>
 							<li class="nav-item" style="background-color: #f9f9f9 !important; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important;">
-								<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" style="display: inline-block !important;">작성한 후기(${reviwCount})</a>
+								<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" style="display: inline-block !important;">상품후기 목록(${reviwCount})</a>
 							</li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tabs-1" role="tabpanel">
 							<h6 class="cart-title" style="border-top: 1px solid #d9d9d9 !important; padding-top: 40px !important;  font-weight: normal !important; margin-bottom: 0px !important; ">*이미지를 클릭하면 상품으로 이동합니다</h6>
-								<div class="review-form" style="border-left: 1px solid #ddd !important; border-right: 1px solid #ddd !important; border-top: 0px !important; border-bottom: 1px solid #ddd !important">
+								<div class="review-form" style="border-radius: 5px !important; border-left: 1px solid #ddd !important; border-right: 1px solid #ddd !important; border-bottom: 1px solid #ddd !important">
 									<c:choose>
 										<c:when test="${empty list}">
 											<div class="review-name" style="border-bottom: 0px !important; padding: 20px 20px 20px 30px !important; display: block !important; text-align: center; ">
@@ -173,7 +172,7 @@ alert("평점 확인" + value);
 										</c:when>
 									<c:otherwise>
 										<c:forEach var="list" items="${list}">
-												<div class="review-name" style="border-top: 1px solid #aaa !important; border-bottom: 0px !important; padding: 20px 20px 20px 30px !important;">
+												<div class="review-name" style="border-top: 0px !important; padding: 20px 20px 20px 30px !important;">
 													<div class="photoreview" style="padding: 0px !important;">
 														<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
 															<img src="${list.img}" style="height: 100px !important;">
@@ -205,7 +204,7 @@ alert("평점 확인" + value);
 							</div>
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
 							<h6 class="cart-title" style="border-top: 1px solid #d9d9d9 !important; padding-top: 40px !important;  font-weight: normal !important; margin-bottom: 0px !important; ">*상품명을 클릭하면 상품으로 이동합니다.</h6>
-							<div class="review-form" style="border-left: 1px solid #ddd !important; border-right: 1px solid #ddd !important; display: flex; flex-direction: column; border-top: 0px !important; margin: 0px !important; width: 100% !important; padding-bottom: 20px !important;">
+							<div class="review-form" style="border-radius: 5px !important; border-left: 1px solid #ddd !important; border-right: 1px solid #ddd !important; display: flex; flex-direction: column; border-bottom: 1px solid #ddd !important; width: 100% !important;">
 								<c:choose>
 									<c:when test="${empty reviewList}">
 										<div class="review-name" style="border-bottom: 0px !important; padding: 20px 20px 20px 30px !important; display: block !important; text-align: center; ">
@@ -216,8 +215,9 @@ alert("평점 확인" + value);
 									</c:when>
 										<c:otherwise>
 											<c:forEach var="review" items="${reviewList}">
-												<div class="review-title" style="border-bottom: 0px !important; border-top: 1px solid #aaa !important; padding-left: 0px !important; padding-top: 0px !important">
-													<div class="review-name" style="padding: 10px 15px !important; border-top: 0px !important">
+												<div class="review-title" style="border-top: 0px !important; border-bottom: 0px !important; padding-left: 0px !important; padding-top: 0px !important">
+													
+													<div class="review-name" style="border-top: 0px !important; padding: 10px 15px !important; border-top: 0px !important">
 														<div class="photoreview" style="width: unset !important; display: inline-block; padding: 0 !important;">
 															<a href="javascript:goWriteForm('${review.seq_sle}', '${review.cd_ctg_m}', '${review.cd_ctg_b}');">
 																<img src="${review.img}" style="width: 50px !important; height: 50px !important; vertical-align: middle !important;">
@@ -304,7 +304,7 @@ alert("평점 확인" + value);
 														</c:otherwise>
 													</c:choose>
 												</div>
-													<div class="review-name" style="padding: 10px 15px 40px 15px !important; display: block !important; border-top: 0px !important; border-bottom: 0px !important;">
+													<div class="review-name" style="border-bottom: 1px solid #ddd !important; padding: 10px 15px 40px 15px !important; display: block !important; border-top: 0px !important;">
 														<div class="reviewsub">
 															${review.rate_review}
 														</div>

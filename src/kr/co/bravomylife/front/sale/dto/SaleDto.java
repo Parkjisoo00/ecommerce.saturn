@@ -79,12 +79,47 @@ public class SaleDto {
 	private int list_count			= 0;
 	private int writeReview_count	= 0;
 	private int seq_review_img		= 0;
+	private int point				= 0;
+	private String earliest_date	= "";
+	private String latest_date		= "";
+	private int sle_count			= 0;
+	private int total_point			= 0;
 	
 	
 	private String searchKey		= "";
 	private String searchWord		= "";
 	
 	
+	public int getTotal_point() {
+		return total_point;
+	}
+	public void setTotal_point(int total_point) {
+		this.total_point = total_point;
+	}
+	public int getSle_count() {
+		return sle_count;
+	}
+	public void setSle_count(int sle_count) {
+		this.sle_count = sle_count;
+	}
+	public String getEarliest_date() {
+		return earliest_date;
+	}
+	public void setEarliest_date(String earliest_date) {
+		this.earliest_date = earliest_date;
+	}
+	public String getLatest_date() {
+		return latest_date;
+	}
+	public void setLatest_date(String latest_date) {
+		this.latest_date = latest_date;
+	}
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
 	public int getSeq_review_img() {
 		return seq_review_img;
 	}

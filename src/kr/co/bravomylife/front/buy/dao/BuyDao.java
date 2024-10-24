@@ -27,6 +27,8 @@ import org.springframework.stereotype.Service;
 import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
 import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
 import kr.co.bravomylife.front.common.dao.BaseDao;
+import kr.co.bravomylife.front.common.dto.PagingDto;
+import kr.co.bravomylife.front.sale.dto.SaleDto;
 
 /**
  * @version 1.0.0
@@ -38,6 +40,14 @@ import kr.co.bravomylife.front.common.dao.BaseDao;
  */
 @Service("kr.co.bravomylife.front.buy.dao.BuyDao")
 public class BuyDao extends BaseDao {
+	
+	public List<SaleDto> pointHistory(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.buy.Buy.pointHistory", pagingDto);
+	}
+	
+	public int pointCount(PagingDto pagingDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.buy.Buy.pointCount", pagingDto);
+	}
 	
 	public int checkBasket(BuyDetailDto buyDetailDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.basket.Basket.checkBasket", buyDetailDto);

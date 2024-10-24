@@ -32,6 +32,8 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import kr.co.bravomylife.front.buy.dao.BuyDao;
 import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
 import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
+import kr.co.bravomylife.front.common.dto.PagingDto;
+import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.pay.dao.PayDao;
 import kr.co.bravomylife.front.pay.dto.PayDto;
 
@@ -51,6 +53,22 @@ public class BuySrvc {
 	
 	@Inject
 	PayDao payDao;
+	
+	public PagingListDto pointHistory(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		int totalLine = buyDao.pointCount(pagingDto);
+		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(buyDao.pointHistory(pagingDto));
+		
+		return pagingListDto;
+	}
 	
 	@Transactional("txFront")
 	public boolean update(String deal_num, int updater, String flg_success) {

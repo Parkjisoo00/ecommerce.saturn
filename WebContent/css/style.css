@@ -610,7 +610,7 @@ table.headTop_pd th, table.headTop_pd td {
 
 .review-form {
 	margin: 0 auto !important;
-	border-top: 1px solid #111 !important;
+	border-top: 1px solid #ddd !important;
 	border-bottom: 1px solid #ccc !important;
 }
 

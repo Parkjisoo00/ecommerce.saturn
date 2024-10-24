@@ -224,7 +224,6 @@ public class SaleDao extends BaseDao {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.totalCount", pagingDto);
 	}
 	
-	
 	public int myLikeCount(PagingDto pagingDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.myLikeCount", pagingDto);
 	}
