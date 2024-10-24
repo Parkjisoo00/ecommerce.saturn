@@ -75,7 +75,7 @@ public class BoardDao extends BaseDao {
 	 * <p>EXAMPLE:</p>
 	 */
 	public int deleteFlag(BoardDto boardDto) {
-		return sqlSessionBackoffice.update("kr.co.himedia.ecommerce.backoffice.mybatis.center.Board.deleteFlag", boardDto);
+		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.center.Board.deleteFlag", boardDto);
 	}
 	
 	/**
@@ -88,7 +88,7 @@ public class BoardDao extends BaseDao {
 	 * <p>EXAMPLE:</p>
 	 */
 	public BoardDto selectQuestion(BoardDto boardDto) {
-		return sqlSessionBackoffice.selectOne("kr.co.himedia.ecommerce.backoffice.mybatis.center.Board.selectQuestion", boardDto);
+		return sqlSessionBackoffice.selectOne("kr.co.bravomylife.backoffice.mybatis.center.Board.selectQuestion", boardDto);
 	}
 	
 	/**
@@ -101,7 +101,7 @@ public class BoardDao extends BaseDao {
 	 * <p>EXAMPLE:</p>
 	 */
 	public int update(BoardDto boardDto) {
-		return sqlSessionBackoffice.update("kr.co.himedia.ecommerce.backoffice.mybatis.center.Board.update", boardDto);
+		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.center.Board.update", boardDto);
 	}
 	
 	/**

@@ -1,25 +1,42 @@
-<!-- html 설정 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<!-- JSP 파일이 위치한 경로 입력 -->
-<%@ page info="/WEB-INF/view/backoffice/center/board/notice/view.jsp" %>
-<!-- 이 부분은 필요에 따라 추가하는 것이 맞으므로 개별 판단에 따라 추가하거나 삭제해도 되고 사용하지 않더라도 그대로 넣어둬도 무방하다고 판단 -->
-<%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page info="/WEB-INF/view/backoffice/center/board/notice/writeForm.jsp" %>
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
 <!DOCTYPE html>
-<html lang="kor">
-
+<html>
 <head>
-	<%@ include file="/include/common/header.jsp" %>
-	<script>
-	
-	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
+	<%@ include file="/include/backoffice/header.jsp" %>
+	<%@ include file="/include/backoffice/css.jsp" %>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+<script>
 	function goList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.cd_bbs_type.setAttribute("value", value);
-		frmMain.action = "/backoffice/center/board/list.web";
+		frmMain.action = "/console/center/board/list.web";
+		frmMain.submit();
+	}
+	
+	function remove(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("cd_bbs_type").value = value;
+		frmMain.action="/console/center/board/remove.web";
+		frmMain.submit();
+	}
+	
+	function modifyForm(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("cd_bbs_type").value = value;
+		frmMain.action="/console/center/board/modifyForm.web";
 		frmMain.submit();
 	}
 	
@@ -35,115 +52,112 @@
 		frmMain.submit();
 		
 		frmMain.target = "_self";
-		
 	}
-	
-	
-	
-	</script>
-
-	<!-- Google Font -->
-	<%@ include file="/include/common/webfont.jsp" %>
-
-	<!-- Css Styles -->
-	<%@ include file="/include/common/css.jsp" %>
+</script>
 </head>
-
-<body>
-<form id="frmMain" method="POST">
-<input type="hidden" id="type"			name="type" />
-<input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
+<body class="hold-transition skin-blue sidebar-mini">
+<form id="frmMain" method="POST" enctype="multipart/form-data" >
+<input type="hidden" id="type"		name="type" />
+<input type="hidden" id="sequence"	name="sequence" />
+<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"	value="${boardDto.cd_bbs_type}" />
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${boardDto.seq_bbs}" />
+<%@ include file="/include/backoffice/mainSide.jsp" %>
 
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
+<!-- Main content -->
+		<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+		고객 센터
+		</h1>
+	</section>
+
+	<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-md-3">
+		<div class="box box-solid">
+			<div class="box-header with-border">
+				<h3 class="box-title">고객 센터</h3>
+
+			<div class="box-tools">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+				</button>
+			</div>
+			</div>
+			<div class="box-body no-padding">
+				<ul class="nav nav-pills nav-stacked">
+					<li class="active"><a href="javascript:consolegoList(1);"><i class="fa fa-bullhorn"></i> 공지사항</a>
+					<li class="active"><a href="javascript:consolegoList(2);"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
+					<li class="active"><a href="javascript:consolegoList(3);"><i class="fa fa-fw fa-user"></i> 1:1문의 <span class="label label-warning pull-right">65</span></a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.box-body -->
+		</div>
+		<!-- /. box -->
+		<!-- /.box -->
+		</div>
+		<div class="col-md-8">
+			<div class="box box-primary">
+			
+			<!-- /.box-header -->
+			<div class="box-body no-padding">
+				<div class="mailbox-read-info">
+				<h3 style="font-size:50px; text-align:center">${boardDto.title}</h3>
+				<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자:Bravo My Life
+					<span class="mailbox-read-time pull-right" style="font-size:25px">${boardDto.dt_reg}</span></h5>
+				</div>
+
+				<div class="form-group" style="padding: 10px;border-bottom: 1px solid #f4f4f4;margin-bottom: 1px;">
+				<label>카테고리(*)</label>
+					<select class="form-control" id="cd_ctg" name="cd_ctg" style="height: 34px;margin-bottom: 15px;"disabled>
+						<option value="0"<c:if test="${boardDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
+						<option value="1"<c:if test="${boardDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
+						<option value="2"<c:if test="${boardDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
+						<option value="3"<c:if test="${boardDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
+						<option value="4"<c:if test="${boardDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
+						<option value="5"<c:if test="${boardDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
+						<option value="6"<c:if test="${boardDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
+						<option value="9"<c:if test="${boardDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
+					</select>
+				</div>
+				<!-- /.mailbox-read-info -->
+				<!-- /.mailbox-controls -->
+				<div class="mailbox-read-message"style="font-size:20px">
+				${boardDto.content}
+				</div>
+				<!-- /.mailbox-read-message -->
+			<!-- /.box-footer -->
+			<div class="box-footer">
+				<div class="pull-right">
+					<button type="submit" class="btn btn-primary" onclick="modifyForm(2);"><i class="fa fa-pencil"></i> 수정</button>
+					<button type="button" class="btn btn-default" onclick="goList(2);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
+				</div>
+				<button type="button" onclick="javascript:remove(2);" class="btn btn-default"><i class="fa fa-trash-o"></i> 삭제</button>
+			</div>
+			<!-- /.box-footer -->
+			</div>
+			<!-- /. box -->
+		</div>
+		<!-- /.col -->
 	</div>
-
-	<!-- Header Section Begin -->
-	<!-- 페이지의 상단에 보이는 로고 및 로그인 / 회원가입 코드 -->
-		<%@ include file="/include/front/maingnb.jsp" %>
-	<!-- Header Section End -->
-
-	<!-- Breadcrumb Begin -->
-	<!-- Breadcrumb End -->
-<section class="shop spad">
-	<div class="container">
-		<article class="txtCenter">
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">제목 <span></span></p>
-					<input type="text" id="title" name="title" value="${boardDto.title}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
-				</div>
-			</div>
-			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">카테고리 <span></span></p>
-						<select id="cd_ctg" name="cd_ctg" style="margin-left: 300px;" disabled >
-							<option value="0"<c:if test="${boardDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
-							<option value="1"<c:if test="${boardDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
-							<option value="2"<c:if test="${boardDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
-							<option value="3"<c:if test="${boardDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
-							<option value="4"<c:if test="${boardDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
-							<option value="5"<c:if test="${boardDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
-							<option value="6"<c:if test="${boardDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
-							<option value="9"<c:if test="${boardDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
-						</select>
-				</div>
-			</div>
-			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">내용 <span></span></p>
-					<input type="text" id="title" name="title" value="${boardDto.content}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
-				</div>
-			</div>
-			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<c:if test="${boardDto.file_orig != ''}">
-						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">첨부 파일 <span></span></p>
-							<a href="javascript:download('BbsFaq', ${boardDto.seq_bbs});" style="margin-left: 300px;" >다운로드</a>
-					</c:if>		
-				</div>
-			</div>
-			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">등록 일자 <span></span></p>
-					<input type="text" id="title" name="title" value="${boardDto.dt_reg}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
-				</div>
-			</div>
-			<br/>
-			<br/>
-			<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
-				<div class="col-lg-12 col-md-12 col-sm-12">
-					<div class="checkout__form__input">
-					<c:if test="${boardDto.seq_reply == 0}">
-						<input type="button" value="삭제" style="width:100px" onclick="javascript:remove(3);" />
-						<input type="button" value="수정" style="width:100px" onclick="javascript:modifyForm(3);" /> 
-					</c:if>
-						<input type="button" value="목록" style="width:100px" onclick="javascript:goList(3);"/>
-					</div>
-				</div>
-			</div>
-		</article>
 	</div>
-</section>
-	<iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>
-	<!-- Instagram Begin -->
-	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
-	<%@ include file="/include/common/footerpic.jsp" %>
-	<!-- Instagram End -->
-
-	<!-- Footer Section Begin -->
-	<%@ include file="/include/common/footer.jsp" %>
-	<!-- Footer Section End -->
-
-	<!-- Js Plugins -->
-	<%@ include file="/include/common/js.jsp" %>
-</form>
+	<!-- /.row -->
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /Maincontent -->
+	<%@ include file="/include/backoffice/footer.jsp" %>
+	<%@ include file="/include/backoffice/sideBar.jsp" %>
+	<%@ include file="/include/backoffice/js.jsp" %>
+	</form>
+	<script src="/backoffice/js/bootstrap3-wysihtml5.all.min.js"></script>
+	<script>
+	$(function () {
+	//Add text editor
+	$("#content").wysihtml5();
+	});
+</script>
 </body>
 </html>
