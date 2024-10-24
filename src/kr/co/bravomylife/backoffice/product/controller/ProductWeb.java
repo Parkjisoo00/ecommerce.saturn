@@ -66,6 +66,156 @@ public class ProductWeb {
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-24
+	 * <p>DESCRIPTION: 상품 수정 페이지</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/product/modifyForm.web")
+	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, ProductDto productDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			productDto.setRegister(1);
+			
+			ProductDto _productDto = productSrvc.select(productDto);
+			
+			mav.addObject("productDto", _productDto);
+			mav.setViewName("backoffice/product/modifyForm");
+			}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-24
+	 * <p>DESCRIPTION: 판매 목록 삭제</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/product/out.web")
+	public ModelAndView out(HttpServletRequest request, HttpServletResponse response, ProductDto productDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			productDto.setRegister(1);
+			productDto.setUpdater(1);
+			
+			if (productSrvc.out(productDto)) {
+				request.setAttribute("script"	, "alert('품절 되었습니다.');");
+				request.setAttribute("redirect"	, "/console/product/list.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".out()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-24
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/product/re.web")
+	public ModelAndView re(HttpServletRequest request, HttpServletResponse response, ProductDto productDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			productDto.setRegister(1);
+			productDto.setUpdater(1);
+			
+			if (productSrvc.re(productDto)) {
+				request.setAttribute("script"	, "alert('판매 재개가 되었습니다.');");
+				request.setAttribute("redirect"	, "/console/product/list.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".re()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-24
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/product/stop.web")
+	public ModelAndView stop(HttpServletRequest request, HttpServletResponse response, ProductDto productDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			productDto.setRegister(1);
+			productDto.setUpdater(1);
+			
+			if (productSrvc.stop(productDto)) {
+				request.setAttribute("script"	, "alert('판매 중지 되었습니다.');");
+				request.setAttribute("redirect"	, "/console/product/list.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".stop()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
 	 * @since 2024-10-24

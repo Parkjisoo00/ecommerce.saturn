@@ -2,6 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.backoffice.mybatis.product.Product">
 
+	<update id="re" parameterType="productDto">
+		UPDATE
+			TB_SLE
+		SET
+			CD_STATE_SALE	= 2
+			, DT_UPT		= SYSDATE
+			, UPDATER		= #{updater}
+		WHERE
+			REGISTER		= #{register}
+			AND SEQ_SLE		= #{seq_sle}
+	</update>
+
+	<update id="out" parameterType="productDto">
+		UPDATE
+			TB_SLE
+		SET
+			CD_STATE_SALE	= 9
+			, DT_UPT		= SYSDATE
+			, UPDATER		= #{updater}
+		WHERE
+			REGISTER		= #{register}
+			AND SEQ_SLE		= #{seq_sle}
+	</update>
+
+	<update id="stop" parameterType="productDto">
+		UPDATE
+			TB_SLE
+		SET
+			CD_STATE_SALE	= 3
+			, DT_UPT		= SYSDATE
+			, UPDATER		= #{updater}
+		WHERE
+			REGISTER		= #{register}
+			AND SEQ_SLE		= #{seq_sle}
+	</update>
+
 	<select id="select" parameterType="productDto" resultType="productDto">
 		SELECT
 			SEQ_SLE
@@ -107,7 +143,7 @@
 		INSERT INTO TB_SLE
 			(SEQ_SLE, SLE_NM, PRICE_SALE, IMG, DESCES, CD_CTG_B, CD_CTG_M, CD_STATE_SALE, PRD_TYPE, COUNT_STOCK, CORP_NM, FLG_DELETE, DT_SALE_START, DT_SALE_END, DISCOUNT, DT_REG, REGISTER, POINT_STACK)
 		VALUES
-			(SQ_SEQ_SLE.NEXTVAL, #{sle_nm}, #{price_sale}, #{img}, #{desces}, #{cd_ctg_b}, #{cd_ctg_m}, #{cd_state_sale}, #{prd_type}, #{count_stock}, #{corp_nm}, 'N', TO_DATE(#{dt_sale_start}, 'YYYY-MM-DD HH24:MI:SS'), TO_DATE(#{dt_sale_end}, 'YYYY-MM-DD HH24:MI:SS'), #{discount}, SYSDATE, #{register}, #{point_stack})
+			(SQ_SEQ_SLE.NEXTVAL, #{sle_nm}, #{price_sale}, #{img}, #{desces}, #{cd_ctg_b}, #{cd_ctg_m}, #{cd_state_sale}, #{prd_type}, #{count_stock}, #{corp_nm}, 'N', TO_DATE(#{dt_sale_start}, 'YYYY-MM-DD HH24:MI:SS'), TO_DATE(#{dt_sale_end}, 'YYYY-MM-DD HH24:MI:SS'), #{discount}, SYSDATE, 1, #{point_stack})
 	</insert>
 
 </mapper>

@@ -46,6 +46,66 @@ public class ProductSrvc {
 	ProductDao productDao;
 	
 	/**
+	 * @return boolean
+	 * 
+	 * @since 2024-10-24
+	 * <p>DESCRIPTION: 품절(처리)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@Transactional("txBackoffice")
+	public boolean out(ProductDto productDto) {
+		
+		int result = productDao.out(productDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	/**
+	 * @return boolean
+	 * 
+	 * @since 2024-10-24
+	 * <p>DESCRIPTION: 재개(처리)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@Transactional("txBackoffice")
+	public boolean re(ProductDto productDto) {
+		
+		int result = productDao.re(productDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	/**
+	 * @return boolean
+	 * 
+	 * @since 2024-10-24
+	 * <p>DESCRIPTION: 판매 목록 중지(처리)</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@Transactional("txBackoffice")
+	public boolean stop(ProductDto productDto) {
+		
+		int result = productDao.stop(productDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	/**
 	 * @return SaleDto
 	 * 
 	 * @since 2024-10-24

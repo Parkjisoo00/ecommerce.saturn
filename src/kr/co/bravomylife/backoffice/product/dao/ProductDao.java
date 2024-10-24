@@ -39,6 +39,18 @@ import kr.co.bravomylife.backoffice.product.dto.ProductDto;
 @Repository("kr.co.bravomylife.backoffice.product.dao.ProductDao")
 public class ProductDao extends BaseDao {
 	
+	public int out(ProductDto productDto) {
+		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.product.Product.out", productDto);
+	}
+	
+	public int re(ProductDto productDto) {
+		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.product.Product.re", productDto);
+	}
+	
+	public int stop(ProductDto productDto) {
+		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.product.Product.stop", productDto);
+	}
+	
 	public ProductDto select(ProductDto productDto) {
 		return sqlSessionBackoffice.selectOne("kr.co.bravomylife.backoffice.mybatis.product.Product.select", productDto);
 	}

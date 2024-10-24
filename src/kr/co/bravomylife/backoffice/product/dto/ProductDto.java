@@ -49,6 +49,8 @@ public class ProductDto {
 	private String dt_reg			= "";	// 등록일
 	private int register			= 0;	// 등록자(관리자)
 	private int point_stack		= 0;	// 포인트 적립률
+	private String dt_upt			= "";	// 수정일
+	private int updater			= 0;	// 수정자
 	
 	
 	public int getRnum() {
@@ -164,6 +166,18 @@ public class ProductDto {
 	}
 	public void setPoint_stack(int point_stack) {
 		this.point_stack = point_stack;
+	}
+	public String getDt_upt() {
+		return dt_upt;
+	}
+	public void setDt_upt(String dt_upt) {
+		this.dt_upt = dt_upt;
+	}
+	public int getUpdater() {
+		return updater;
+	}
+	public void setUpdater(int updater) {
+		this.updater = updater;
 	}
 	
 }
