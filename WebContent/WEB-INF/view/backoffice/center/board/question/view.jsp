@@ -14,6 +14,22 @@
 	<script>
 	
 	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
+	
+	function download(type, sequence) {
+		
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", type);
+		frmMain.sequence.setAttribute("value", sequence);
+		frmMain.action = "/front/center/board/download.web";
+		frmMain.target = "frmBlank";
+		frmMain.submit();
+		
+		frmMain.target = "_self";
+		
+	}
+	
 	function goList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -34,6 +50,7 @@
 
 <body>
 <form id="frmMain" method="POST">
+
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" id="sequence"		name="sequence" />
 <input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
@@ -103,6 +120,12 @@
 			<br/>
 			<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
 			<div class="col-lg-12 col-md-12 col-sm-12">
+			<div class="checkout__form__input">
+				<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 235px;">
+					<c:if test="${boardDto.file_orig != ''}">
+						<a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
+					</c:if>
+			</div>
 				<div class="checkout__form__input">
 				<c:if test="${boardDto.seq_reply == 0}">
 					<input type="button" value="삭제" style="width:100px" onclick="javascript:remove(3);" />

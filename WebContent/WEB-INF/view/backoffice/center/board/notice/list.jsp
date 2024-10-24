@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ page info="/WEB-INF/view/backoffice/login/loginForm.jsp" %>
+<%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,6 +64,16 @@
 		frmMain.target = "";
 		frmMain.submit();
 	}
+	
+	function consolegoList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/console/center/board/list.web";
+		frmMain.submit();
+	}
+	
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -99,9 +110,9 @@
 			</div>
 			<div class="box-body no-padding">
 				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="#"><i class="fa fa-bullhorn"></i> 공지사항</a>
-					<li class="active"><a href="#"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
-					<li class="active"><a href="#"><i class="fa fa-fw fa-user"></i> 1:1문의 <span class="label label-warning pull-right">65</span></a>
+					<li class="active"><a href="javascript:consolegoList(1);"><i class="fa fa-bullhorn"></i> 공지사항</a>
+					<li class="active"><a href="javascript:consolegoList(2);"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
+					<li class="active"><a href="javascript:consolegoList(3);"><i class="fa fa-fw fa-user"></i> 1:1문의 <span class="label label-warning pull-right">65</span></a>
 					</li>
 				</ul>
 			</div>
@@ -111,7 +122,7 @@
 		<!-- /.box -->
 		</div>
 		<!-- /.col -->
-		<div class="col-md-9">
+		<div class="col-md-8">
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">공지 사항</h3>&nbsp;&nbsp;&nbsp;
@@ -119,7 +130,7 @@
 						<div class="has-feedback">
 							<div style="display: flex; align-items: center;">&nbsp;&nbsp;
 								<select class="form-control" name="searchKey" style="height: 30px;">
-									<option value="title" <c:if test="${paging.searchKey == 'title'}">  selected</c:if>>제목</option>
+									<option>제목</option>
 									<option value="contents" <c:if test="${paging.searchKey == 'contents'}">  selected</c:if>>내용</option>
 									<option value="title+contents" <c:if test="${paging.searchKey == 'title+contents'}">  selected</c:if>>제목 또는 내용</option>
 								</select>
@@ -138,16 +149,16 @@
 					<table class="table table-hover table-striped">
 						<tbody>
 							<tr>
-							<th style="text-align: center;width: 5% ">NO</th>
-							<th style="width: 10%">카테고리</th>
-							<th style="text-align: center;">제목</th>
-							<th style="text-align: center;width: 15%">등록일</th>
-							<th style="text-align: center;width: 7%">조회수</th>
+								<th style="text-align: center;width: 5% ">NO</th>
+								
+								<th style="text-align: center;">제목</th>
+								<th style="text-align: center;width: 15%">등록일</th>
+								<th style="text-align: center;width: 7%">조회수</th>
 							</tr>
 				<c:choose>
 					<c:when test="${empty list}">
 						<tr>
-							<td colspan="5">등록된 글이 없습니다.</td>
+							<td colspan="4" style="text-align:center">등록된 글이 없습니다.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
@@ -155,9 +166,6 @@
 							<tr>
 								<td style="text-align: center;">
 									${list.rnum}
-								</td>
-								<td>
-								${list.ctg_nm}
 								</td>
 								<td style="text-align: left">
 									<c:if test="${list.flg_top == 'Y'}">[공지] </c:if>
@@ -187,9 +195,9 @@
 				<!-- /.btn-group -->
 				<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><i class="fa fa-refresh"></i></button>
 					<span style="float: right;margin-right: 10px;margin-top: 5px;justify-content: center; ">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</span>
+				
 				<div class="pull-right">
 				<div class="btn-group">
-					<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goList" />
 				</div>
 				<!-- /.btn-group -->
 				</div>
@@ -198,6 +206,15 @@
 			</div>
 			</div>
 		  <!-- /. box -->
+		</div>
+		<div class="col-md-3"></div>
+		<div class="col-md-8">
+			<div style="text-align: center;">
+				<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goList" />
+			</div>
+			<div style="text-align: center;">
+				<a href="javascript:goWriteForm(1);" style="margin-top:10px; font-size: 15px !important; display: inline-block; padding: 10px 50px; color: black; background-color: #2b94d1; border: 1px solid #cccccc; border-radius: 2px;font-weight:700">등 록</a>
+			</div>
 		</div>
 	<!-- /.col -->
 	</div>

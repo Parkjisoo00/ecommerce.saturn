@@ -101,6 +101,7 @@ public class BoardWeb extends Common{
 			
 			// [TODO-개선: 타입이 정의되어 있지 않을 경우 처리]
 			if (type.equals("BbsNotice")) boardDto.setCd_bbs_type(1);
+			else if (type.equals("BbsFaq")) boardDto.setCd_bbs_type(2);
 			else if (type.equals("BbsQuestion")) boardDto.setCd_bbs_type(3);
 			
 			boardDto.setSeq_bbs((int)sequence);
@@ -109,9 +110,23 @@ public class BoardWeb extends Common{
 			boardDto.setFile_orig(boardDto.getFile_orig());
 			boardDto.setFile_save(boardDto.getFile_save());
 			
-			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
+			if (boardDto.getCd_bbs_type() == 1) {
+				String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_notice", "[UNDEFINED]");
+				file = new File(pathBase + "" + File.separator + boardDto.getFile_save());
+				}
+			else if (boardDto.getCd_bbs_type() == 2) {
+				String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_faq", "[UNDEFINED]");
+				file = new File(pathBase + "" + File.separator + boardDto.getFile_save());
+				}
+			else if (boardDto.getCd_bbs_type() == 3) {
+				String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_question", "[UNDEFINED]");
+				file = new File(pathBase + "" + File.separator + boardDto.getFile_save());
+				}
+			else if (boardDto.getCd_bbs_type() == 4) {
+				String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_new", "[UNDEFINED]");
+				file = new File(pathBase + "" + File.separator + boardDto.getFile_save());
+				}
 			
-			file = new File(pathBase + "" + File.separator + boardDto.getFile_save());
 			
 			fileDownloadDto.setFile_original(boardDto.getFile_orig());
 			fileDownloadDto.setFile_size(file.length());
@@ -338,8 +353,9 @@ public class BoardWeb extends Common{
 			//contents = contents.replace("<span>", "").replace("</span>", "");
 			
 			
-			
-			// boardDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			logger.debug("작성 내용 확인" + " = " + boardDto.getCd_bbs_type());
+			boardDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			logger.debug("작성 SEQ_MNG 확인" + " = " + boardDto.getRegister());
 			
 			// **************************
 			// For Board File
@@ -350,32 +366,33 @@ public class BoardWeb extends Common{
 
 			
 			if (boardDto.getCd_bbs_type() == 1) {
-				pathBase		= dynamicProperties.getMessage("backoffice.upload.path_notice", "[UNDEFINED]");
+				pathBase	= dynamicProperties.getMessage("backoffice.upload.path_notice"			, "[UNDEFINED]");
+				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
+				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+			}
+			else if (boardDto.getCd_bbs_type() == 2) {
+				pathBase	= dynamicProperties.getMessage("backoffice.upload.path_faq"				, "[UNDEFINED]");
 				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
 				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 			}
 			else if (boardDto.getCd_bbs_type() == 3) {
-				pathBase		= dynamicProperties.getMessage("backoffice.upload.path_question", "[UNDEFINED]");
+				pathBase	= dynamicProperties.getMessage("backoffice.upload.path_question", "[UNDEFINED]");
 				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
 				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 			}
 			else if (boardDto.getCd_bbs_type() == 4) {
 				
-				pathBase		= "D:/Business/Eclipse/com.github.ecommerce7th.saturn/WebContent/img/news";
+				pathBase	= dynamicProperties.getMessage("backoffice.upload.path_new", "[UNDEFINED]");
 				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
 				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
-				
 			}
 			else {
-				pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
-				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
-				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+				request.setAttribute("script"	, "alert('게시판 타입이 이상합니다.');");
 			}
 			
-			
-			//String pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
-			//String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
-			//String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+			// String pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
+			// String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
+			// String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 			
 			int countFile = 0;
 			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
