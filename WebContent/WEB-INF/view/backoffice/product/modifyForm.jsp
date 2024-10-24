@@ -127,14 +127,14 @@
 									<th style="width: 150px;" >상품 상세 이미지</th>
 									<td>
 										<img src="/img/product/${productDto.desces}" height="200"/>
-										<input type="file" id="desces" name="files[1]" />
+										<input type="file" id="desces" name="files[1]" disabled/>
 									</td>
 								</tr>
 								<tr>
 									<th style="width: 150px;" >상품 이미지</th>
 									<td>
 										<img src="/img/product/${productDto.img}" height="200"/>
-										<input type="file" id="img" name="files[0]" />
+										<input type="file" id="img" name="files[0]" disabled/>
 									</td>
 								</tr>
 								<tr>
