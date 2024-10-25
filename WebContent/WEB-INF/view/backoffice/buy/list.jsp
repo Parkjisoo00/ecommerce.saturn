@@ -32,15 +32,23 @@
 		frmMain.submit();
 	}
 
-	function goModifyState(seq_buy_mst, cd_state, cd_state_delivery) {
+	function goModifyState(seq_buy_mst) {
 		
 		if (confirm("상태를 변경하시겠습니까?")) {
 			var frmMain = document.getElementById("frmMain");
 			
-			document.getElementById("seq_buy_mst").value = seq_buy_mst;
-			document.getElementById("cd_state").value = cd_state;
-			document.getElementById("cd_state_delivery").value = cd_state_delivery;
+			cd_state = document.getElementById("select_1").options[document.getElementById("select_1").selectedIndex].value;
+			cd_state_delivery = document.getElementById("select_3").options[document.getElementById("select_3").selectedIndex].value;
 			
+			document.getElementById("seq_buy_mst").value = seq_buy_mst;
+			// select_1의 선택된 value
+			document.getElementById("cd_state").value = cd_state;
+			// select_3의 선택된 value
+			document.getElementById("cd_state_delivery").value = cd_state_delivery;
+
+			//alert(cd_state);
+			//alert(cd_state_delivery);
+			//return;
 			
 			frmMain.action="/console/buy/modifyProc.web";
 			frmMain.submit();
@@ -60,9 +68,9 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST" action="/console/buy/list.web">
-<input type="hidden" name="seq_buy_mst"		id="seq_buy_mst" />
-<input type="hidden" name="cd_state"	id="cd_state" />
-<input type="hidden" name="cd_state_pay"	id="cd_state_pay" />
+<input type="hidden" name="seq_buy_mst"			id="seq_buy_mst" />
+<input type="hidden" name="cd_state"			id="cd_state" />
+<input type="hidden" name="cd_state_pay"		id="cd_state_pay" />
 <input type="hidden" name="cd_state_delivery"	id="cd_state_delivery" />
 <input type="hidden" name="currentPage"	id="currentPage" value="${paging.currentPage}" />	
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
@@ -112,9 +120,9 @@
 							<tr>
 							<th style="width: 5%;text-align: center;">NO</th>
 							<th style="text-align: center;">이메일(아이디)</th>
-							<th style="width: 10%; text-align: center;">성명</th>
-							<th style="width: 5%;text-align: center;">주문 번호</th>
-							<th style="width: 15%;text-align: center;">구매상품 정보</th>
+							<th style="width: 7%; text-align: center;">성명</th>
+							<th style="width: 7%;text-align: center;">주문 번호</th>
+							<th style="width: 25%;text-align: center;">구매상품 정보</th>
 							<th style="width: 10%;text-align: center;">주문일</th>
 							<th style="width: 10%;text-align: center;">구매상품 상태</th>
 							<th style="width: 10%;text-align: center;">결제 상태</th>
@@ -150,7 +158,7 @@
 									${list.dt_reg}
 								</td>
 								<td style="text-align: center;">
-									<select style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst}, this.value);">
+									<select id="select_1" style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst});">
 										<option value="1"<c:if test="${list.cd_state == 1}"> selected</c:if>>주문완료</option>
 										<option value="2"<c:if test="${list.cd_state == 2}"> selected</c:if>>취소</option>
 										<option value="3"<c:if test="${list.cd_state == 3}"> selected</c:if>>교환</option>
@@ -161,15 +169,15 @@
 								</td>
 								<td style="text-align: center;">
 									<select style="background:#F0F0F0" disabled>
-										<option value="NULL"<c:if test="${list.cd_state_pay == 'NULL'}"> selected</c:if>>실패</option>
+										<option value=""<c:if test="${list.cd_state_pay == ''}"> selected</c:if>>실패</option>
 										<option value="N"<c:if test="${list.cd_state_pay == 'N'}"> selected</c:if>>실패</option>
 										<option value="Y"<c:if test="${list.cd_state_pay == 'Y'}"> selected</c:if>>성공</option>
 										<option value="C"<c:if test="${list.cd_state_pay == 'C'}"> selected</c:if>>취소</option>
 									</select>
 								</td>
 								<td style="text-align: center;">
-									<select style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst}, this.value);">
-										<option value="NULL"<c:if test="${list.cd_state_delivery == 'NULL'}"> selected</c:if>>등록</option>
+									<select id="select_3" style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst});">
+										<option value=""<c:if test="${list.cd_state_delivery == ''}"> selected</c:if>>등록</option>
 										<option value="C"<c:if test="${list.cd_state_delivery == 'C'}"> selected</c:if>>판매 확인중</option>
 										<option value="P"<c:if test="${list.cd_state_delivery == 'P'}"> selected</c:if>>배송 준비중</option>
 										<option value="D"<c:if test="${list.cd_state_delivery == 'D'}"> selected</c:if>>배송중</option>
