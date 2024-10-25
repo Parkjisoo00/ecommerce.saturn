@@ -120,6 +120,7 @@ public class MemberWeb extends Common {
 			_memberDto.setAddr1(aes.decode(_memberDto.getAddr1()));
 			_memberDto.setAddr2(aes.decode(_memberDto.getAddr2()));
 			
+			
 			mav.addObject("memberDto", _memberDto);
 			
 			mav.setViewName("backoffice/users/member/modifyForm");
@@ -138,7 +139,7 @@ public class MemberWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			memberDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			memberDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MNG")));
 			
 			if (memberSrvc.update(memberDto)) {
 				request.setAttribute("script"	, "alert('적용되었습니다.');");

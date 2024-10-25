@@ -91,13 +91,13 @@
 					<table class="table table-hover table-striped">
 						<tbody>
 							<tr>
-							<th style="width: 5%">NO</th>
-							<th>이메일(아이디)</th>
-							<th style="width: 10%">상태</th>
-							<th style="width: 15%">성명</th>
-							<th style="width: 10%">성별</th>
-							<th style="width: 10%">생년월일</th>
-							<th style="width: 10%">등록일</th>
+							<th style="width: 5%; text-align: center;">NO</th>
+							<th style="text-align: center;">이메일(아이디)</th>
+							<th style="width: 15%; text-align: center;">성명</th>
+							<th style="width: 10%; text-align: center;">상태</th>
+							<th style="width: 10%; text-align: center;">성별</th>
+							<th style="width: 10%; text-align: center;">생년월일</th>
+							<th style="width: 10%; text-align: center;">등록일</th>
 							</tr>
 				<c:choose>
 					<c:when test="${empty list}">
@@ -111,12 +111,15 @@
 								<td style="text-align: center;">
 									${list.rnum}
 								</td>
-								<td class="txtRight">
+								<td class="txtRight" style="text-align: center;">
 								<a href="javascript:goModifyForm(${list.seq_mbr});">
 									<bravomylifeTag:masking text="${list.email}" letter="*" count="13" mode="right" />
 								</a>
 							</td>
-							<td>
+							<td style="text-align: center;">
+								<bravomylifeTag:masking text="${list.mbr_nm}" letter="*" count="1" mode="left" />
+							</td>
+							<td style="text-align: center;">
 								<select style="background:#F0F0F0" disabled>
 									<option value="0"<c:if test="${list.cd_state == 0}"> selected</c:if>>대기</option>
 									<option value="1"<c:if test="${list.cd_state == 1}"> selected</c:if>>사용중</option>
@@ -125,19 +128,17 @@
 									<option value="9"<c:if test="${list.cd_state == 9}"> selected</c:if>>강퇴</option>
 								</select>
 							</td>
-							<td>
-								<bravomylifeTag:masking text="${list.mbr_nm}" letter="*" count="1" mode="left" />
-							</td>
-							<td>
+							
+							<td style="text-align: center;">
 								<c:choose>
 									<c:when test="${list.gender == 'M'}">남</c:when>
 									<c:otherwise>여</c:otherwise>
 								</c:choose>
 							</td>
-							<td>
+							<td style="text-align: center;">
 								${list.age}
 							</td>
-							<td>
+							<td style="text-align: center;">
 								${list.dt_reg}
 							</td>
 							</tr>
