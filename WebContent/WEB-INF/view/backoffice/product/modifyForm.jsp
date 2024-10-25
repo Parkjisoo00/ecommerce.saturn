@@ -213,8 +213,8 @@
 					</div>
 					<div class="mailbox-controls">
 						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
-							<input type="button" value="수정" class="btn btn-default" style="width: 150px" onclick="javascript:modifyProc();" />
-							<input type="button" value="목록" class="btn btn-default" style="width: 150px" onclick="javascript:location.href='/console/product/list.web';"/>
+							<input type="button" value="수정" class="btn btn-primary" style="width: 150px" onclick="javascript:modifyProc();" />
+							<input type="button" value="목록" class="btn btn-primary" style="width: 150px" onclick="javascript:location.href='/console/product/list.web';"/>
 						</div>
 					</div>
 				</div>

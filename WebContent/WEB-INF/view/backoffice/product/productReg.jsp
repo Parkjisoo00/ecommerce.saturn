@@ -42,13 +42,25 @@
 					|| document.getElementById("desces").value == ""
 					|| document.getElementById("cd_ctg_b").value == "0"
 					|| document.getElementById("cd_ctg_m").value == "0"
-					|| document.getElementById("cd_state_sale").value == ""
-					|| document.getElementById("prd_type").value == ""
+					|| document.getElementById("cd_state_sale").value == "0"
+					|| document.getElementById("prd_type").value == "0"
 					|| document.getElementById("count_stock").value == 0
 					|| document.getElementById("corp_nm").value == ""
 					|| document.getElementById("dt_sale_start").value == ""
 					|| document.getElementById("dt_sale_end").value == "") {
 				alert("필수 항목을 입력하세요!");
+				return;
+			}
+			var discount = parseInt(document.getElementById("discount").value.trim());
+			var point_stack = parseInt(document.getElementById("point_stack").value.trim());
+
+			if (isNaN(discount) || discount < 0 || discount > 99) {
+				alert("할인율은 0에서 99 사이의 숫자만 입력 가능합니다.");
+				return;
+			}
+
+			if (isNaN(point_stack) || point_stack < 0 || point_stack > 99) {
+				alert("포인트 적립률은 0에서 99 사이의 숫자만 입력 가능합니다.");
 				return;
 			}
 			document.getElementById("price_sale").value = document.getElementById("price_sale").value.replaceAll(",", "");
@@ -172,10 +184,11 @@
 								<th>판매 상품 상태</th>
 									<td>
 										<select class="form-control" id="cd_state_sale" name="cd_state_sale" required>
-											<option value="1">대기(1)</option>
-											<option value="2">판매(2)</option>
-											<option value="3">중지(3)</option>
-											<option value="9">재고소진(9)</option>
+											<option value="0">선택하세요</option>
+											<option value="1">대기</option>
+											<option value="2">판매</option>
+											<option value="3">중지</option>
+											<option value="9">재고소진</option>
 										</select>
 									</td>
 								</tr>
@@ -183,13 +196,14 @@
 									<th style="width: 150px;" >판매 상품 섭취 타입</th>
 									<td>
 										<select class="form-control" id="prd_type" name="prd_type" required>
-											<option value="1">액상(1)</option>
-											<option value="2">정(2)</option>
-											<option value="3">캡슐(3)</option>
-											<option value="4">베지캡슐(4)</option>
-											<option value="5">젤리(5)</option>
-											<option value="6">분말(6)</option>
-											<option value="7">츄어블(7)</option>
+											<option value="0">선택하세요</option>
+											<option value="1">액상</option>
+											<option value="2">정</option>
+											<option value="3">캡슐</option>
+											<option value="4">베지캡슐</option>
+											<option value="5">젤리</option>
+											<option value="6">분말</option>
+											<option value="7">츄어블</option>
 										</select>
 									</td>
 								</tr>
@@ -222,7 +236,7 @@
 								<tr>
 									<th style="width: 150px;" >할인율</th>
 									<td>
-										<input type="text" id="discount" name="discount" class="form-control"  autocomplete="off">
+										<input type="text" id="discount" name="discount" class="form-control" autocomplete="off" max="99">
 									</td>
 								</tr>
 								<tr>

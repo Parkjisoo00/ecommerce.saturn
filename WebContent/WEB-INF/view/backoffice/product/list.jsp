@@ -146,7 +146,7 @@
 							<c:choose>
 								<c:when test="${empty list}">
 									<tr>
-										<td colspan="6">등록된 상품이 없습니다.</td>
+										<td colspan="6" style="text-align: center; vertical-align: middle;">등록된 상품이 없습니다.</td>
 									</tr>
 								</c:when>
 								<c:otherwise>
@@ -190,13 +190,13 @@
 								</c:otherwise>
 							</c:choose>
 						</table>
-						<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
+						<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important; font-size: 20px; letter-spacing: 2px;">
 						<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages"/>
 						</div>
 						<br>
-						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
-						<a href="/console/product/productReg.web" class="btn btn-default" style="width: 150px;">판매 등록</a>
-						</div>
+							<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
+							<a href="/console/product/productReg.web" class="btn btn-primary" style="width: 150px;">상품 등록</a>
+							</div>
 						<br>
 					</div>
 				</div>
