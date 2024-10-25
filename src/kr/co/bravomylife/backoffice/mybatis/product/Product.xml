@@ -7,8 +7,12 @@
 			TB_SLE
 		SET
 			SLE_NM			= #{sle_nm}
+			<if test="img != null and img != ''">
 			, IMG			= #{img}
+			</if>
+			<if test="desces != null and desces != ''">
 			, DESCES 		= #{desces}
+			</if>
 			, PRICE_SALE	= #{price_sale}
 			, CD_CTG_B		= #{cd_ctg_b}
 			, CD_CTG_M		= #{cd_ctg_m}

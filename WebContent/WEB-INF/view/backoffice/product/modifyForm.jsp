@@ -127,14 +127,14 @@
 									<th style="width: 150px;" >상품 상세 이미지</th>
 									<td>
 										<img src="/img/product/${productDto.desces}" height="200"/>
-										<input type="file" id="desces" name="files[1]" disabled/>
+										<input type="file" id="desces" name="files[1]" />
 									</td>
 								</tr>
 								<tr>
 									<th style="width: 150px;" >상품 이미지</th>
 									<td>
 										<img src="/img/product/${productDto.img}" height="200"/>
-										<input type="file" id="img" name="files[0]" disabled/>
+										<input type="file" id="img" name="files[0]" />
 									</td>
 								</tr>
 								<tr>
@@ -213,7 +213,7 @@
 					</div>
 					<div class="mailbox-controls">
 						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
-							<input type="button" value="등록" class="btn btn-default" style="width: 150px" onclick="javascript:modifyProc();" />
+							<input type="button" value="수정" class="btn btn-default" style="width: 150px" onclick="javascript:modifyProc();" />
 							<input type="button" value="목록" class="btn btn-default" style="width: 150px" onclick="javascript:location.href='/console/product/list.web';"/>
 						</div>
 					</div>

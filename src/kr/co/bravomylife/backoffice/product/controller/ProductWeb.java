@@ -114,9 +114,6 @@ public class ProductWeb {
 				
 				//파일 정보 처리 및 DTO 설정
 				
-				if (countFile == 2) { // 파일 개수가 2개일 경우
-					// 첫 번째 파일의 원본 파일명
-					
 					String fileNameSrc	= "";
 					String fileNameSve	= "";
 					
@@ -145,18 +142,21 @@ public class ProductWeb {
 				// 상품 DTO에 파일 정보 설정
 				productDto.setImg(fileDto[0].getFileNameSave()); // 첫 번째 이미지
 				productDto.setDesces(fileDto[1].getFileNameSave()); // 두 번째 이미지
+				
+			
+			
+				if (productSrvc.update(productDto)) {
+					request.setAttribute("script"	, "alert('수정되었습니다.');");
+					request.setAttribute("redirect"	, "/console/product/list.web");
+				
+				}
+				else {
+					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+					request.setAttribute("redirect"	, "/");
 				}
 			}
 			
-			if (productSrvc.update(productDto)) {
-				request.setAttribute("script"	, "alert('수정되었습니다.');");
-				request.setAttribute("redirect"	, "/console/product/list.web");
-			}
-			else {
-				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
-				request.setAttribute("redirect"	, "/");
-			}
-			mav.setViewName("backoffice/product/list");
+			mav.setViewName("forward:/servlet/result.web");
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".modifyProc()] " + e.getMessage(), e);
