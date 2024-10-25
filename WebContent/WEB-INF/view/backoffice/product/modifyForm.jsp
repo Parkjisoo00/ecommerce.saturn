@@ -13,11 +13,189 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.2/tinymce.min.js"></script>
 	<script>
-		window.onload = function () {
-			updateCategory();
-			tinymce.init({selector:'textarea'});
+		
+	// HTML Editor
+	tinymce.init({selector:'textarea'});
+
+	// [최초 또는 변경 시 코드 설정]
+	var cd_ctg_b = "${productDto.cd_ctg_b}";
+	var cd_ctg_m = "${productDto.cd_ctg_m}";
+	
+	window.onload = function() {
+		var objStruct = new Array();
+		
+		objStruct.push({value:"1", text:"기능별"});
+		objStruct.push({value:"2", text:"성분별"});
+		objStruct.push({value:"3", text:"대상별"});
+		
+		// 대/중/소분류 선택박스(Select) 생성
+		createSelect("span_cd_ctg_1", "cd_ctg_b", objStruct	, "선택", cd_ctg_b	, 100);
+		createSelect("span_cd_ctg_2", "cd_ctg_m", null		, "선택", ""		, 100);
+		setCategory2();
+		
+		document.getElementById("cd_ctg_b").onchange = function() {
+			cd_ctg_b = this.value;
+			setCategory2();
+		}
+	}
+	
+	function setCategory2(){
+		
+		var objStruct= new Array();
+		
+		// 기능별(01)
+		if (cd_ctg_b == "1") {
+			objStruct.push({value:"1", text:"혈당/혈행/혈압"});
+			objStruct.push({value:"2", text:"항산화/면역력"});
+			objStruct.push({value:"3", text:"염증/항염"});
+			objStruct.push({value:"4", text:"관절/뼈/치아"});
+			objStruct.push({value:"5", text:"피로회복"});
+			objStruct.push({value:"6", text:"눈 건강"});
+			objStruct.push({value:"7", text:"장 건강"});
+			objStruct.push({value:"8", text:"두뇌/기억력"});
+			objStruct.push({value:"9", text:"위/간/갑상선"});
+		}
+		// 성분별(02)
+		else if (cd_ctg_b == "2") {
+			objStruct.push({value:"1", text:"폴리코사놀"});
+			objStruct.push({value:"2", text:"오메가-3"});
+			objStruct.push({value:"3", text:"비타민/미네랄"});
+			objStruct.push({value:"4", text:"유산균"});
+			objStruct.push({value:"5", text:"글루코사민/MSM"});
+			objStruct.push({value:"6", text:"루테인"});
+			objStruct.push({value:"7", text:"코큐텐"});
+			objStruct.push({value:"8", text:"아르기닌"});
+			objStruct.push({value:"9", text:"밀크씨슬"});
+		}
+		// 대상별(03)
+		else if (cd_ctg_b == "3") {
+			objStruct.push({value:"1", text:"남성"});
+			objStruct.push({value:"2", text:"여성"});
 		}
 		
+		// 대분류 코드에 해당하는 중분류 옵션(Option) 생성(없으면 중분류 초기화)
+		if (cd_ctg_b == "")	createOption("cd_ctg_m", null, "선택", "");
+		else createOption("cd_ctg_m", objStruct, "선택", cd_ctg_m);
+	}
+	
+	
+	/**
+	 * @author pluto#plutozone.com
+	 * @since 2016-01-07
+	 *
+	 * <p>DESCRIPTION: 셀렉트 생성(Create Select)</p>
+	 * <p>IMPORTANT:</p>
+	 */
+	function createSelect(objParentId, objID, objStruct, defaultValue, setValue, width) {
+		var combobox		= document.createElement("select");
+		combobox.id			= objID;
+		combobox.name		= objID;
+		
+		if (width == undefined) width = "100";
+		combobox.setAttribute("style", "width: " + width + "px; padding-top: 0px; padding-bottom: 0px;");
+		
+		var option		= null;
+		if (defaultValue) {
+			option = new Option(defaultValue, "");
+			combobox.options[0] = option;
+		}
+		
+		if (objStruct && objStruct.length > 0) {
+			var j = 0;
+			var optionCount = combobox.options.length;
+			for (var i=optionCount; i < objStruct.length+optionCount; i++) {
+				option = new Option(objStruct[j].text, objStruct[j].value);
+				combobox.options[i] = option;
+				
+				j++;
+			}
+		}
+		
+		setSelect(combobox, setValue);
+		document.getElementById(objParentId).appendChild(combobox);
+	}
+
+	/**
+	 * @author pluto#plutozone.com
+	 * @since 2016-01-07
+	 *
+	 * <p>DESCRIPTION: 옵션 생성(Create Option)</p>
+	 * <p>IMPORTANT:</p>
+	 */
+	function createOption(objID, objStruct, defaultValue, setValue) {
+
+		var combobox	= document.getElementById(objID);
+		
+		for (var i = 0; i < combobox.options.length; i++) {
+			combobox.options.length = i;
+		}
+		
+		var option		= null;
+		if (defaultValue) {
+			option = new Option(defaultValue, "");
+			combobox.options[0] = option;
+		}
+			
+		if (objStruct && objStruct.length > 0) {
+			var j = 0;
+			var optionCount = combobox.options.length;
+			for (var i=optionCount; i < objStruct.length+optionCount; i++) {
+				option = new Option(objStruct[j].text, objStruct[j].value);
+				combobox.options[i] = option;
+				j++;
+			}
+		}	
+		setOption(combobox, setValue);
+	}
+
+	/**
+	 * @author pluto#plutozone.com
+	 * @since 2016-01-07
+	 *
+	 * <p>DESCRIPTION: 값 얻기(Get Value)</p>
+	 * <p>IMPORTANT:</p>
+	 */
+	function getOptionValue(objThis) {
+		if (!objThis) return "";
+		return objThis.options[objThis.selectedIndex].value;
+	}
+	
+	/**
+	 * @author pluto#plutozone.com
+	 * @since 2016-01-07
+	 *
+	 * <p>DESCRIPTION: 값 설정(Set Value)</p>
+	 * <p>IMPORTANT:</p>
+	 */
+	function setSelect(objThis, value) {
+		if (!objThis) return;
+		
+		for (var i = 0; i < objThis.options.length; i++) {
+			if (objThis.options[i].value == value) {
+				objThis.options.selectedIndex = i;
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * @author pluto#plutozone.com
+	 * @since 2016-01-07
+	 *
+	 * <p>DESCRIPTION: 값 설정(Set Value)</p>
+	 * <p>IMPORTANT:</p>
+	 */
+	function setOption(objThis, value) {
+		if (!objThis) return;
+		
+		for (var i = 0; i < objThis.options.length; i++) {
+			if (objThis.options[i].value == value) {
+				objThis.options.selectedIndex = i;
+				break;
+			}
+		}
+	}
+	
 		function commaValue(input) {
 			// 입력된 값에서 콤마를 제거
 			let value = input.value.replace(/,/g, '');
@@ -36,46 +214,6 @@
 			$(function(){
 		$('#dt_sale_end').datepicker({dateFormat:'yy-mm-dd'});
 		})
-		
-		function updateCategory() {
-			var cd_ctg_b = document.getElementById("cd_ctg_b").options[document.getElementById("cd_ctg_b").selectedIndex].value;
-			var cd_ctg_m = document.getElementById("cd_ctg_m");
-		
-			// 기존 옵션 삭제
-			cd_ctg_m.innerHTML = '';
-		
-			// 대분류에 따라 중분류 옵션 추가
-			if (cd_ctg_b == '1') {
-				cd_ctg_m.innerHTML = `
-					<option value="1" ${productDto.cd_ctg_m == '1' ? 'selected' : ''}>혈당/혈행/혈압</option>
-					<option value="2" ${productDto.cd_ctg_m == '2' ? 'selected' : ''}>항산화/면역력</option>
-					<option value="3" ${productDto.cd_ctg_m == '3' ? 'selected' : ''}>염증/항염</option>
-					<option value="4" ${productDto.cd_ctg_m == '4' ? 'selected' : ''}>관절/뼈/치아</option>
-					<option value="5" ${productDto.cd_ctg_m == '5' ? 'selected' : ''}>피로회복</option>
-					<option value="6" ${productDto.cd_ctg_m == '6' ? 'selected' : ''}>눈 건강</option>
-					<option value="7" ${productDto.cd_ctg_m == '7' ? 'selected' : ''}>장 건강</option>
-					<option value="8" ${productDto.cd_ctg_m == '8' ? 'selected' : ''}>두뇌/기억력</option>
-					<option value="9" ${productDto.cd_ctg_m == '9' ? 'selected' : ''}>위/간/갑상선</option>
-				`;
-			} else if (cd_ctg_b == '2') {
-				cd_ctg_m.innerHTML = `
-					<option value="1" ${productDto.cd_ctg_m == '1' ? 'selected' : ''}>폴리코사놀</option>
-					<option value="2" ${productDto.cd_ctg_m == '2' ? 'selected' : ''}>오메가-3</option>
-					<option value="3" ${productDto.cd_ctg_m == '3' ? 'selected' : ''}>비타민/미네랄</option>
-					<option value="4" ${productDto.cd_ctg_m == '4' ? 'selected' : ''}>유산균</option>
-					<option value="5" ${productDto.cd_ctg_m == '5' ? 'selected' : ''}>글루코사민/MSM</option>
-					<option value="6" ${productDto.cd_ctg_m == '6' ? 'selected' : ''}>루테인</option>
-					<option value="7" ${productDto.cd_ctg_m == '7' ? 'selected' : ''}>코큐텐</option>
-					<option value="8" ${productDto.cd_ctg_m == '8' ? 'selected' : ''}>아르기닌</option>
-					<option value="9" ${productDto.cd_ctg_m == '9' ? 'selected' : ''}>밀크씨슬</option>
-				`;
-			} else if (cd_ctg_b == '3') {
-				cd_ctg_m.innerHTML = `
-					<option value="1" ${productDto.cd_ctg_m == '1' ? 'selected' : ''}>남성</option>
-					<option value="2" ${productDto.cd_ctg_m == '2' ? 'selected' : ''}>여성</option>
-				`;
-			}
-		}
 		
 		function modifyProc(value) {
 			var frmMain = document.getElementById("frmMain");
@@ -146,19 +284,13 @@
 								<tr>
 									<th style="width: 150px;" >카테고리 대분류</th>
 									<td>
-										<select id="cd_ctg_b" name="cd_ctg_b" onchange="updateCategory()">
-											<option value="1"<c:if test="${productDto.cd_ctg_b == '1'}"> selected</c:if>>기능별</option>
-											<option value="2"<c:if test="${productDto.cd_ctg_b == '2'}"> selected</c:if>>성분별</option>
-											<option value="3"<c:if test="${productDto.cd_ctg_b == '3'}"> selected</c:if>>대상별</option>
-										</select>
+										<span id="span_cd_ctg_1"></span>
 									</td>
 								</tr>
 								<tr>
 									<th style="width: 150px;">카테고리 중분류</th>
 									<td>
-										<select id="cd_ctg_m" name="cd_ctg_m">
-											<option value="0">선택</option>
-										</select>
+										<span id="span_cd_ctg_2"></span>
 									</td>
 								</tr>
 								<tr>
@@ -213,8 +345,8 @@
 					</div>
 					<div class="mailbox-controls">
 						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
-							<input type="button" value="수정" class="btn btn-default" style="width: 150px" onclick="javascript:modifyProc();" />
-							<input type="button" value="목록" class="btn btn-default" style="width: 150px" onclick="javascript:location.href='/console/product/list.web';"/>
+							<input type="button" value="수정" class="btn btn-primary" style="width: 150px" onclick="javascript:modifyProc();" />
+							<input type="button" value="목록" class="btn btn-primary" style="width: 150px" onclick="javascript:location.href='/console/product/list.web';"/>
 						</div>
 					</div>
 				</div>

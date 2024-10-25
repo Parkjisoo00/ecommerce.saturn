@@ -54,6 +54,7 @@
 			AND SEQ_BBS_PARENT	= #{seq_bbs}
 	</select>
 	
+	
 	<update id="deleteFlag" parameterType="boardDto">
 		UPDATE
 			TB_BBS
@@ -67,6 +68,7 @@
 			AND SEQ_BBS = #{seq_bbs}
 	</update>
 	
+	
 	<update id="replied" parameterType="boardDto">
 		UPDATE
 			TB_BBS
@@ -77,6 +79,18 @@
 		WHERE
 			CD_BBS_TYPE		= #{cd_bbs_type}
 			AND SEQ_BBS		= #{seq_bbs}
+	</update>
+	
+	<update id="deleteQuestionReply" parameterType="boardDto">
+		UPDATE
+			TB_BBS
+		SET
+			FLG_REPLY	= NULL
+			, DT_UPT	= SYSDATE
+			, UPDATER	= #{updater}
+		WHERE
+			CD_BBS_TYPE		= #{cd_bbs_type}
+			AND SEQ_BBS		= #{seq_bbs_question}
 	</update>
 	
 	<insert id="insert" parameterType="boardDto">
@@ -107,6 +121,7 @@
 				, TITLE
 				, DECODE(CD_CTG, 1, '가입 및 탈퇴', 2, '상품', 3, '구매', 4, '결제', 5, '배송', 6, '환불', 9, '기타' ) CTG_NM
 				, FLG_TOP
+				, REGISTER
 				, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
 				, READED
 			FROM
@@ -153,6 +168,7 @@
 			, FILE_SAVE
 			, FILE_ORIG
 			, READED
+			, REGISTER
 			, TO_CHAR(DT_REG, 'YYYY-MM-DD HH24:MI:SS') dt_reg
 		FROM
 			TB_BBS

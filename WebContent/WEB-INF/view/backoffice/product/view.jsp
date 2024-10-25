@@ -186,11 +186,11 @@
 					</div>
 					<div class="mailbox-controls">
 						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
-							<input type="button" value="판매중지" class="btn btn-default" style="width: 150px" onclick="javascript:stop();"/>
-							<input type="button" value="판매 재개" class="btn btn-default" style="width: 150px"onclick="javascript:re();" />
-							<input type="button" value="품절" class="btn btn-default" style="width: 150px" onclick="javascript:out();" />
-							<input type="button" value="수정" class="btn btn-default" style="width: 150px" onclick="javascript:modifyForm();" />
-							<input type="button" value="목록" class="btn btn-default" style="width: 150px" onclick="javascript:location.href='/console/product/list.web';"/>
+							<input type="button" value="판매중지" class="btn btn-primary" style="width: 150px" onclick="javascript:stop();"/>
+							<input type="button" value="판매 재개" class="btn btn-primary" style="width: 150px"onclick="javascript:re();" />
+							<input type="button" value="품절" class="btn btn-primary" style="width: 150px" onclick="javascript:out();" />
+							<input type="button" value="수정" class="btn btn-primary" style="width: 150px" onclick="javascript:modifyForm();" />
+							<input type="button" value="목록" class="btn btn-primary" style="width: 150px" onclick="javascript:location.href='/console/product/list.web';"/>
 						</div>
 					</div>
 				</div>

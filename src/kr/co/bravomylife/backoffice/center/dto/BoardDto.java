@@ -30,29 +30,46 @@ package kr.co.bravomylife.backoffice.center.dto;
  */
 public class BoardDto {
 	
-	private int rnum			= 0;	// 글 순번
-	private int seq_bbs			= 0;	// 글 일련번호
-	private int seq_bbs_parent	= 0;	// 글 상위 일련번호
-	private int seq_reply		= 0;	// 답변 일련번호
-	private int cd_bbs_type		= 0;	// 게시판 종류: 공지사항(1), 자주 찾는 질문(2), 질의 응답(3)
-	private String title		= "";	// 제목
-	private int cd_ctg			= 0;	// 카테고리 코드
-	private String ctg_nm		= "";	// 카테고리 명칭
-	private String content		= "";	// 내용
-	private String flg_delete	= "";	// 삭제 여부
-	private String flg_top		= "";	// 최상위 여부
-	private String flg_reply	= "";	// 답변 여부
-	private int readed			= 0;	// 조회수
-	private String file_save	= "";	// 저장 파일명
-	private String file_orig	= "";	// 원본 파일명
-	private String dt_reg		= "";	// 등록 일시
-	private int register		= 0;	// 등록자
-	private String dt_upt		= "";	// 수정 일시
-	private int updater			= 0;	// 수정자
+	private int rnum			= 0;		// 글 순번
+	private int seq_bbs			= 0;		// 글 일련번호
+	private int seq_bbs_parent	= 0;		// 글 상위 일련번호
+	private int seq_reply		= 0;		// 답변 일련번호
+	private int cd_bbs_type		= 0;		// 게시판 종류: 공지사항(1), 자주 찾는 질문(2), 질의 응답(3)
+	private String title		= "";		// 제목
+	private int cd_ctg			= 0;		// 카테고리 코드
+	private String ctg_nm		= "";		// 카테고리 명칭
+	private String content		= "";		// 내용
+	private String flg_delete	= "";		// 삭제 여부
+	private String flg_top		= "";		// 최상위 여부
+	private String flg_reply	= "";		// 답변 여부
+	private int readed			= 0;		// 조회수
+	private String file_save	= "";		// 저장 파일명
+	private String file_orig	= "";		// 원본 파일명
+	private String dt_reg		= "";		// 등록 일시
+	private int register		= 0;		// 등록자
+	private String dt_upt		= "";		// 수정 일시
+	private int updater			= 0;		// 수정자
+	
+	
+	private int count_flg_reply_null = 0;	//미답변 개수
+	private int seq_bbs_question = 0;
 	
 	
 	
 	
+	
+	public int getSeq_bbs_question() {
+		return seq_bbs_question;
+	}
+	public void setSeq_bbs_question(int seq_bbs_question) {
+		this.seq_bbs_question = seq_bbs_question;
+	}
+	public int getCount_flg_reply_null() {
+		return count_flg_reply_null;
+	}
+	public void setCount_flg_reply_null(int count_flg_reply_null) {
+		this.count_flg_reply_null = count_flg_reply_null;
+	}
 	public String getFile_save() {
 		return file_save;
 	}

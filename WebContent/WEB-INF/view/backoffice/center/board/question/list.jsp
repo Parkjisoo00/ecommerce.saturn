@@ -124,7 +124,8 @@
 		<div class="col-md-8">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">1대1 문의</h3>&nbsp;&nbsp;&nbsp;
+					<h3 class="box-title">1대1 문의 </h3>&nbsp;&nbsp;&nbsp;
+			
 					<div class="box-tools pull-right">
 						<div class="has-feedback">
 							<div style="display: flex; align-items: center;">&nbsp;&nbsp;
@@ -160,19 +161,24 @@
 						<td colspan="5" style="text-align:center">등록된 글이 없습니다.</td>
 						</tr>
 					</c:when>
-					<c:otherwise>
+					<c:otherwise>	
 						<c:forEach items="${list}" var="list">
 							<tr>
 								<td style="text-align: center;">
 									${list.rnum}
+									
 								</td>
 								<td>
 								${list.ctg_nm}
 							</td>
 								<td style="text-align: left">
 									<a href="javascript:goView(${list.seq_bbs});">
-										<c:if test="${list.seq_reply == 0}">[미답변] </c:if>
-										<c:if test="${list.seq_reply > 0}">[답변 완료] </c:if>
+										<c:if test="${list.seq_reply == 0}">
+										<span style="color: red;">[미답변]</span>
+										</c:if>
+										<c:if test="${list.seq_reply > 0}">
+										<span style="color: blue;">[답변 완료]</span>
+										</c:if>
 										${list.title}
 									</a>
 								</td>
