@@ -220,10 +220,8 @@ public class BoardWeb extends Common{
 			}
 			else if (boardDto.getCd_bbs_type() == 3) {
 				
-				BoardDto boardReplyDto = boardSrvc.selectReply(boardDto);
-				
-				mav.addObject("boardReplyDto", boardReplyDto);
-				
+				BoardDto boardQuestionDto = boardSrvc.selectQuestion(_boardDto);
+				mav.addObject("boardQuestionDto", boardQuestionDto);
 				mav.setViewName("backoffice/center/board/question/modifyForm");
 			}
 			else if (boardDto.getCd_bbs_type() == 4) {

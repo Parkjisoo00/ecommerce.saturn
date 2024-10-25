@@ -75,7 +75,7 @@
 <input type="hidden" id="type"		name="type" />
 <input type="hidden" id="sequence"	name="sequence" />
 <input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"	value="${boardDto.cd_bbs_type}" />
-<input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${boardReplyDto.seq_bbs}" />
+<input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${boardDto.seq_bbs}" />
 <%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
@@ -120,35 +120,35 @@
 			<div class="box-body no-padding">
 				<div class="mailbox-read-info">
 				<h3 style="font-size:50px; text-align:center">
-					<c:if test="${boardDto.seq_reply == 0}">[미답변] </c:if>
-					<c:if test="${boardDto.seq_reply > 0}">[답변 완료] </c:if>제목:${boardDto.title}</h3>
-				<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자: &nbsp;${boardDto.register}
-					<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardDto.dt_reg}</span></h5>
+					<c:if test="${boardQuestionDto.seq_reply == 0}">[미답변] </c:if>
+					<c:if test="${boardQuestionDto.seq_reply > 0}">[답변 완료] </c:if>제목:${boardQuestionDto.title}</h3>
+				<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자: &nbsp;${boardQuestionDto.register}
+					<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardQuestionDto.dt_reg}</span></h5>
 				</div>
 
 				<div class="form-group" style="padding: 10px;border-bottom: 1px solid #f4f4f4;margin-bottom: 1px;">
 				<label>카테고리(*)</label>
 					<select class="form-control" id="cd_ctg" name="cd_ctg" style="height: 34px;margin-bottom: 15px;"disabled>
-						<option value="0"<c:if test="${boardDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
-						<option value="1"<c:if test="${boardDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
-						<option value="2"<c:if test="${boardDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
-						<option value="3"<c:if test="${boardDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
-						<option value="4"<c:if test="${boardDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
-						<option value="5"<c:if test="${boardDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
-						<option value="6"<c:if test="${boardDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
-						<option value="9"<c:if test="${boardDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
+						<option value="0"<c:if test="${boardQuestionDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
+						<option value="1"<c:if test="${boardQuestionDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
+						<option value="2"<c:if test="${boardQuestionDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
+						<option value="3"<c:if test="${boardQuestionDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
+						<option value="4"<c:if test="${boardQuestionDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
+						<option value="5"<c:if test="${boardQuestionDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
+						<option value="6"<c:if test="${boardQuestionDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
+						<option value="9"<c:if test="${boardQuestionDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
 					</select>
 				</div>
 				<!-- /.mailbox-read-info -->
 				<!-- /.mailbox-controls -->
 				<div class="mailbox-read-message"style="font-size:20px">
-				${boardDto.content}
+				${boardQuestionDto.content}
 				</div>
-				<c:if test="${boardDto.file_orig != ''}">	
+				<c:if test="${boardQuestionDto.file_orig != ''}">	
 					<div class="box-footer">
 						<ul class="mailbox-attachments clearfix" style="text-align:center">	
-							<c:if test="${boardDto.file_orig != ''}">
-								<a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
+							<c:if test="${boardQuestionDto.file_orig != ''}">
+								<a href="javascript:download('BbsQuestion', ${boardQuestionDto.seq_bbs});">[첨부파일 다운로드]</a>
 							</c:if>
 						</ul>
 					</div>
@@ -169,12 +169,12 @@
 			<div class="box-body">
 				<div class="form-group">
 					<label>제목(*)</label>
-					<input class="form-control" placeholder=""id="title" name="title" value= "${boardReplyDto.title}"required >
+					<input class="form-control" placeholder=""id="title" name="title" value= "${boardDto.title}"required >
 				</div>
 				<div class="form-group" >
 				<label>내용(*)</label> 
 					<textarea id="content" class="form-control" style="height: 250px"id="content" name="content" required>
-					${boardReplyDto.content}
+					${boardDto.content}
 					</textarea>
 				</div>
 				<div class="form-group">
@@ -183,11 +183,11 @@
 						<input type="file" id="files[0]" name="files[0]">
 					</div>
 					<p class="help-block">최대 10 MB</p>
-					<c:if test="${boardReplyDto.file_orig != ''}">
-						<p>저장됬던 파일: ${boardReplyDto.file_orig}</p>
+					<c:if test="${boardDto.file_orig != ''}">
+						<p>저장됬던 파일: ${boardDto.file_orig}</p>
 					</c:if>
-					<c:if test="${boardReplyDto.file_orig != ''}">
-						<a href="javascript:download('BbsQuestion', ${boardReplyDto.seq_bbs});">[첨부파일 다운로드]</a>
+					<c:if test="${boardDto.file_orig != ''}">
+						<a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
 					</c:if>
 				</div>
 			</div>
