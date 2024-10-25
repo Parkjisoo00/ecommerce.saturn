@@ -137,6 +137,15 @@
 				<div class="mailbox-read-message"style="font-size:20px">
 				${boardDto.content}
 				</div>
+				<c:if test="${boardDto.file_orig != ''}">	
+					<div class="box-footer">
+						<ul class="mailbox-attachments clearfix" style="text-align:center">	
+							<c:if test="${boardDto.file_orig != ''}">
+								<a href="javascript:download('BbsNotice', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
+							</c:if>
+						</ul>
+					</div>
+				</c:if>	
 				<!-- /.mailbox-read-message -->
 			<!-- /.box-footer -->
 			<div class="box-footer">

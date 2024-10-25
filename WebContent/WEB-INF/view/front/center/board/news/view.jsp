@@ -77,14 +77,13 @@
 			<div class="col-lg-8 col-md-8 col-sm-8">
 				<div class="blog__details__content">
 					<div class="blog__details__item">
-						<img src="/img/news/${boardDto.file_save}" alt="" style="margin-left: 200px;" />
 						<br />
 						<br />
 						<br />
 						<br />
 						<br />
 						<br />
-						
+							
 						<div class="blog__details__item__title">
 							<span class="tip">게시글 제목</span>
 							<h4>${boardDto.title}</h4>
@@ -99,13 +98,15 @@
 			<div class="blog__details__quote">
 			<div class="icon"><i class="fa fa-quote-left"></i></div>
 				<p>${boardDto.content}</p>
+				<img src="/img/news/${boardDto.file_save}" alt="" style="margin-top: 100px;" />
 			</div>
 			<br />
 			<br />
 			<br />
 			<br />
-
+			
 			<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
+				
 				<div class="col-lg-12 col-md-12 col-sm-12">
 					<div class="checkout__form__input">
 					<c:if test="${boardDto.seq_reply == 0}">

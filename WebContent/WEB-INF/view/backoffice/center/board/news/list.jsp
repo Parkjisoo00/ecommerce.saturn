@@ -1,20 +1,24 @@
-<!-- html 설정 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<!-- JSP 파일이 위치한 경로 입력 -->
-<%@ page info="/WEB-INF/view/backoffice/center/board/news/list.jsp" %>
-<!-- 이 부분은 필요에 따라 추가하는 것이 맞으므로 개별 판단에 따라 추가하거나 삭제해도 되고 사용하지 않더라도 그대로 넣어둬도 무방하다고 판단 -->
-<%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page info="/WEB-INF/view/backoffice/login/loginForm.jsp" %>
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
 <!DOCTYPE html>
-<html lang="kor">
-
+<html>
 <head>
-	<%@ include file="/include/common/header.jsp" %>
-	<script>
+	<%@ include file="/include/backoffice/header.jsp" %>
 	
-	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
+	<%@ include file="/include/backoffice/css.jsp" %>
 	
+<script>
+
+	function search() {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.action="/console/center/board/ list.web";
+			
+		frmMain.submit();
+		}
+
 	function goWriteForm(value) {
 		
 		document.getElementById("seq_bbs").remove();
@@ -60,119 +64,201 @@
 		frmMain.target = "";
 		frmMain.submit();
 	}
-	</script>
-
-	<!-- Google Font -->
-	<%@ include file="/include/common/webfont.jsp" %>
-
-	<!-- Css Styles -->
-	<%@ include file="/include/common/css.jsp" %>
+	
+	function consolegoList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/console/center/board/list.web";
+		frmMain.submit();
+	}
+	
+	function consolegoList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/console/center/board/list.web";
+		frmMain.submit();
+	}
+	
+	
+</script>
 </head>
-
-<body>
+<body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST">
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" name="seq_bbs"		id="seq_bbs" />
 <input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
+<%@ include file="/include/backoffice/mainSide.jsp" %>
 
-	<!-- Header Section Begin -->
-	<!-- 페이지의 상단에 보이는 로고 및 로그인 / 회원가입 코드 -->
-		<%@ include file="/include/front/maingnb.jsp" %>
-	<!-- Header Section End -->
-
-	<!-- Breadcrumb Begin -->
-	<!-- Breadcrumb End -->
-
-	<section class="shop spad">
-		<div class="container">
-			<div class="col-lg-12" style="padding: 0 !important;">
-		<div>
-			<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">새소식</h6>
-			<h6 class="coupon__link" style="text-align: center; letter-spacing: 1.5px; border: none">
-					
-		</h6>
-		</div>
-			</div>
-			<div class="brdSearchArea">
-			<div style="display: flex; justify-content: flex-end;margin-bottom: 10px;">
-				<select name="searchKey">
-					<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
-					<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
-					<option value="title+contents"<c:if test="${paging.searchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
-				</select>
-				<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> 
-				<input type="submit" value="검색"/>
-			</div>
-			<div class="row">
-				<div class="col-lg-12 col-md-12">
-				<div class="brdInfo">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</div>
-				<table class="headTop_01" style=" margin-left: auto; margin-right: auto; width: 100%">
-				<tr>
-					<th style="width: 5%">NO</th>
-					<th>제목</th>
-					<th style="width: 15%">등록일</th>
-					<th style="width: 7%">조회수</th>
-				</tr>
-				<c:choose>
-					<c:when test="${empty list}">
-						<tr>
-							<td colspan="5">등록된 글이 없습니다.</td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${list}" var="list">
-							<tr>
-								<td>
-									${list.rnum}
-								</td>
-								<td style="text-align: left">
-									<c:if test="${list.flg_top == 'Y'}">[새소식] </c:if>
-										<a href="javascript:goView(${list.seq_bbs});">
-											${list.title}
-										</a>
-								</td>
-								<td>
-									${list.dt_reg}
-								</td>
-								<td>
-									${list.readed}
-								</td>
-							</tr>
-						</c:forEach>
-					</c:otherwise>
-					</c:choose>
-				</table>
-					<div class="row">
-					<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;" >
-						<a href="javascript:goWriteForm(4);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">등록</a>
-						<br>
-						<br>
-						<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
-					</div>
-						
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
+<!-- Main content -->
+	  <div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+		고객 센터
+		</h1>
 	</section>
 
-	<!-- Instagram Begin -->
-	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
-	<%@ include file="/include/common/footerpic.jsp" %>
-	<!-- Instagram End -->
+	<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-md-3">
+		
 
-	<!-- Footer Section Begin -->
-	<%@ include file="/include/common/footer.jsp" %>
-	<!-- Footer Section End -->
+		<div class="box box-solid">
+			<div class="box-header with-border">
+				<h3 class="box-title">고객 센터</h3>
 
-	<!-- Js Plugins -->
-	<%@ include file="/include/common/js.jsp" %>
-</form>
+			<div class="box-tools">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+				</button>
+			</div>
+			</div>
+			<div class="box-body no-padding">
+				<ul class="nav nav-pills nav-stacked">
+					<li class="active"><a href="javascript:consolegoList(1);"><i class="fa fa-bullhorn"></i> 공지사항</a>
+					<li class="active"><a href="javascript:consolegoList(2);"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
+					<li class="active"><a href="javascript:consolegoList(3);"><i class="fa fa-fw fa-user"></i> 1:1문의 <span class="label label-warning pull-right">65</span></a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.box-body -->
+		</div>
+		<!-- /. box -->
+		<!-- /.box -->
+		</div>
+		<!-- /.col -->
+		<div class="col-md-8">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">공지 사항</h3>&nbsp;&nbsp;&nbsp;
+					<div class="box-tools pull-right">
+						<div class="has-feedback">
+							<div style="display: flex; align-items: center;">&nbsp;&nbsp;
+								<select class="form-control" name="searchKey" style="height: 30px;">
+									<option>제목</option>
+									<option value="contents" <c:if test="${paging.searchKey == 'contents'}">  selected</c:if>>내용</option>
+									<option value="title+contents" <c:if test="${paging.searchKey == 'title+contents'}">  selected</c:if>>제목 또는 내용</option>
+								</select>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="text" name="searchWord" id="searchWord" class="form-control input-sm" value="${paging.searchWord}" required onKeyPress="if (event.keyCode == 13) search();" />
+								&nbsp;&nbsp;
+								<input type="submit" value="검색"/>
+							</div>
+						</div>
+					</div>
+			<!-- /.box-tools -->
+				</div>
+			<!-- /.box-header -->
+			<div class="box-body no-padding">
+				<div class="table-responsive mailbox-messages">
+					<table class="table table-hover table-striped">
+						<tbody>
+							<tr>
+								<th style="text-align: center;width: 5% ">NO</th>
+								
+								<th style="text-align: center;">제목</th>
+								<th style="text-align: center;width: 15%">등록일</th>
+								<th style="text-align: center;width: 7%">조회수</th>
+							</tr>
+							<c:choose>
+								<c:when test="${empty list}">
+									<tr>
+										<td colspan="4" style="text-align:center">등록된 글이 없습니다.</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${list}" var="list">
+										<tr>
+											<c:choose>
+												<c:when test="${list.flg_top == 'Y'}">
+													<td style="text-align: center;font-weight: bold;">
+														${list.rnum}
+													</td>
+													<td style="text-align: left;font-weight: bold;">
+															<a href="javascript:goView(${list.seq_bbs});">
+																${list.title}
+															</a>
+													</td>
+													<td style="text-align: center;font-weight: bold;">
+														${list.dt_reg}
+													</td>
+													<td style="text-align: center;font-weight: bold;">
+														${list.readed}
+													</td>
+												</c:when>
+												<c:otherwise>
+													<td style="text-align: center;">
+														${list.rnum}
+													</td>
+													<td style="text-align: left">
+															<a href="javascript:goView(${list.seq_bbs});">
+																${list.title}
+															</a>
+													</td>
+													<td style="text-align: center;">
+														${list.dt_reg}
+													</td>
+													<td style="text-align: center;">
+														${list.readed}
+													</td>
+												</c:otherwise>
+											</c:choose>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+				<!-- /.table -->
+				</div>
+				<!-- /.mail-box-messages -->
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer no-padding">
+				<div class="mailbox-controls">
+				<!-- /.btn-group -->
+				<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><i class="fa fa-refresh"></i></button>
+					<span style="float: right;margin-right: 10px;margin-top: 5px;justify-content: center; ">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</span>
+				
+				<div class="pull-right">
+				<div class="btn-group">
+				</div>
+				<!-- /.btn-group -->
+				</div>
+				<!-- /.pull-right -->
+				</div>
+			</div>
+			</div>
+		  <!-- /. box -->
+		</div>
+		<div class="col-md-3"></div>
+		<div class="col-md-8">
+			<div style="text-align: center;">
+				<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+			</div>
+			<div style="text-align: center;">
+				<a href="javascript:goWriteForm(1);" style="margin-top:10px; font-size: 15px !important; display: inline-block; padding: 10px 50px; color: black; background-color: #2b94d1; border: 1px solid #cccccc; border-radius: 2px;font-weight:700">등 록</a>
+			</div>
+		</div>
+	<!-- /.col -->
+	</div>
+	<!-- /.row -->
+</section>
+	<!-- /.content -->
+</div>
+<!-- /Maincontent -->
+
+	<%@ include file="/include/backoffice/footer.jsp" %>
+
+	<%@ include file="/include/backoffice/sideBar.jsp" %>
+
+	<%@ include file="/include/backoffice/js.jsp" %>
+	
+	</form>
 </body>
 </html>

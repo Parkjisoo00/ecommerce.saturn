@@ -52,12 +52,27 @@
 		frmMain.submit();
 	}
 	
+	function download(type, sequence) {
+		
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", type);
+		frmMain.sequence.setAttribute("value", sequence);
+		frmMain.action = "/console/center/board/download.web";
+		frmMain.target = "frmBlank";
+		frmMain.submit();
+		
+		frmMain.target = "_self";
+	}
 	
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST" enctype="multipart/form-data" >
-<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
+<input type="hidden" id="type"		name="type" />
+<input type="hidden" id="sequence"	name="sequence" />
+<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"	/>
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${boardDto.seq_bbs}" />
 <%@ include file="/include/backoffice/mainSide.jsp" %>
 
@@ -114,13 +129,19 @@
 					${boardDto.content}
 					</textarea>
 			</div>
-			<div class="form-group">
-				<div class="btn btn-default btn-file">
-					<i class="fa fa-paperclip"></i> 첨부 파일
-					<input type="file" id="files[0]" name="files[0]">
+				<div class="form-group">
+					<div class="btn btn-default btn-file">
+						<i class="fa fa-paperclip"></i> 첨부 파일:
+						<input type="file" id="files[0]" name="files[0]">
+					</div>
+					<p class="help-block">최대 10 MB</p>
+					<c:if test="${boardDto.file_orig != ''}">
+						<p>저장됬던 파일: ${boardDto.file_orig}</p>
+					</c:if>
+					<c:if test="${boardDto.file_orig != ''}">
+						<a href="javascript:download('BbsNotice', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
+					</c:if>
 				</div>
-				<p class="help-block">최대 10 MB</p>
-			</div>
 			</div>
 			<!-- /.box-body -->
 			<div class="box-footer">

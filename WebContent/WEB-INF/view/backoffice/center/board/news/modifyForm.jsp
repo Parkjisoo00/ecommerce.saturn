@@ -123,43 +123,30 @@
 					<input class="form-control" value="${boardDto.title}" id="title" name="title" required >
 				</div>
 				<div class="form-group" >
-				<label>카테고리(*)</label>
-					<select class="form-control" id="cd_ctg" name="cd_ctg" style="height: 34px;margin-bottom: 15px;"required>
-						<option value="0"<c:if test="${boardDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
-						<option value="1"<c:if test="${boardDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
-						<option value="2"<c:if test="${boardDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
-						<option value="3"<c:if test="${boardDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
-						<option value="4"<c:if test="${boardDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
-						<option value="5"<c:if test="${boardDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
-						<option value="6"<c:if test="${boardDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
-						<option value="9"<c:if test="${boardDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
-					</select>
-				</div>
-				<div class="form-group" >
 					<label>내용(*)</label> 
 						<textarea id="content" class="form-control" style="height: 250px"id="content" name="content" required>
 						${boardDto.content}
 						</textarea>
 				</div>
 				<div class="form-group">
-					<div class="btn btn-default btn-file">
-						<i class="fa fa-paperclip"></i> 첨부 파일:
-						<input type="file" id="files[0]" name="files[0]">
-					</div>
-					<p class="help-block">최대 10 MB</p>
-					<c:if test="${boardDto.file_orig != ''}">
-						<p>저장됬던 파일: ${boardDto.file_orig}</p>
-					</c:if>
-					<c:if test="${boardDto.file_orig != ''}">
-						<a href="javascript:download('BbsNotice', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
-					</c:if>
+						<div class="btn btn-default btn-file">
+							<i class="fa fa-paperclip"></i> 첨부 파일:
+							<input type="file" id="files[0]" name="files[0]">
+						</div>
+						<p class="help-block">최대 10 MB</p>
+						<c:if test="${boardDto.file_orig != ''}">
+							<p>저장됬던 파일: ${boardDto.file_orig}</p>
+						</c:if>
+						<c:if test="${boardDto.file_orig != ''}">
+							<a href="javascript:download('BbsNotice', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
+						</c:if>
 				</div>
 			</div>
 			<!-- /.box-body -->
 			<div class="box-footer">
 			<div class="pull-right">
-				<button type="submit" class="btn btn-primary" onclick="modifyProc(2);"><i class="fa fa-pencil"></i> 수정</button>
-				<button type="button" class="btn btn-default" onclick="goList(2);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
+				<button type="submit" class="btn btn-primary" onclick="modifyProc(4);"><i class="fa fa-pencil"></i> 수정</button>
+				<button type="button" class="btn btn-default" onclick="goList(4);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
 			</div>
 			<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><a>다시쓰기</a></button>
 			</div>

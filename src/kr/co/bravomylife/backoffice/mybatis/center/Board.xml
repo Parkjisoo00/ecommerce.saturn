@@ -28,6 +28,12 @@
 			, FLG_TOP	= #{flg_top}
 			, DT_UPT	= SYSDATE
 			, UPDATER	= #{updater}
+			<if test="file_save != null and file_save != ''">
+			, FILE_SAVE = #{file_save}
+			</if>
+			<if test="file_orig != null and file_orig !=''">
+			, FILE_ORIG = #{file_orig}
+			</if>
 		WHERE
 			CD_BBS_TYPE		= #{cd_bbs_type}
 			AND SEQ_BBS		= #{seq_bbs}

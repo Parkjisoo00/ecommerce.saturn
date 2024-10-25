@@ -122,34 +122,28 @@
 				<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자:Bravo My Life
 					<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardDto.dt_reg}</span></h5>
 				</div>
+				<!-- /.mailbox-read-info -->
+				<!-- /.mailbox-controls -->
 				<div class="mailbox-read-message"style="font-size:20px">
-					${boardDto.content}
+				${boardDto.content}
+				<img src="/img/news/${boardDto.file_save}" alt="" style="margin-top: 50px;max-width: 50%;" />
 				</div>
-			<c:if test="${boardDto.file_orig != ''}">	
-				<div class="box-footer">
-					<ul class="mailbox-attachments clearfix" style="text-align:center">	
-						<c:if test="${boardDto.file_orig != ''}">
-							<a href="javascript:download('BbsNotice', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
-						</c:if>
-					</ul>
-				</div>
-			</c:if>	
 				<!-- /.mailbox-read-message -->
 			<!-- /.box-footer -->
-				<div class="box-footer">
-					<div class="pull-right">
-						<button type="submit" class="btn btn-primary" onclick="modifyForm(1);"><i class="fa fa-pencil"></i> 수정</button>
-						<button type="button" class="btn btn-default" onclick="goList(1);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
-					</div>
-					<button type="button" onclick="javascript:remove(1);" class="btn btn-default"><i class="fa fa-trash-o"></i> 삭제</button>
+			<div class="box-footer">
+				<div class="pull-right">
+					<button type="submit" class="btn btn-primary" onclick="modifyForm(4);"><i class="fa fa-pencil"></i> 수정</button>
+					<button type="button" class="btn btn-default" onclick="goList(4);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
 				</div>
+				<button type="button" onclick="javascript:remove(4);" class="btn btn-default"><i class="fa fa-trash-o"></i> 삭제</button>
+			</div>
 			<!-- /.box-footer -->
-				</div>
+			</div>
 			<!-- /. box -->
 		</div>
 		<!-- /.col -->
 	</div>
-</div>
+	</div>
 	<!-- /.row -->
 	</section>
 	<!-- /.content -->
