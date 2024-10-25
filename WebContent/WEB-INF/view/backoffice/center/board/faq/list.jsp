@@ -151,7 +151,7 @@
 						<tbody>
 							<tr>
 								<th style="text-align: center;width: 5% ">NO</th>
-								<th style="width: 10%">카테고리</th>
+								<th style="text-align: center;width: 10%">카테고리</th>
 								<th style="text-align: center;">제목</th>
 								<th style="text-align: center;width: 15%">등록일</th>
 								<th style="text-align: center;width: 7%">조회수</th>

@@ -220,9 +220,10 @@ public class BoardWeb extends Common{
 			}
 			else if (boardDto.getCd_bbs_type() == 3) {
 				
-				BoardDto boardQuestionDto = boardSrvc.selectQuestion(_boardDto);
+				BoardDto boardReplyDto = boardSrvc.selectReply(boardDto);
 				
-				mav.addObject("boardQuestionDto", boardQuestionDto);
+				mav.addObject("boardReplyDto", boardReplyDto);
+				
 				mav.setViewName("backoffice/center/board/question/modifyForm");
 			}
 			else if (boardDto.getCd_bbs_type() == 4) {
@@ -335,8 +336,8 @@ public class BoardWeb extends Common{
 				boardDto.setFile_orig(fileNameSrc);
 				boardDto.setFile_save(fileNameSve);
 			
-				logger.debug("+++++++++++++++++++++++++++++++++작성 SEQ_MNG 확인" + " = " + boardDto.getFile_orig());
-				logger.debug("+++++++++++++++++++++++++++++++++작성 SEQ_MNG 확인" + " = " + boardDto.getFile_save());
+				//logger.debug("+++++++++++++++++++++++++++++++++작성 SEQ_MNG 확인" + " = " + boardDto.getFile_orig());
+				//logger.debug("+++++++++++++++++++++++++++++++++작성 SEQ_MNG 확인" + " = " + boardDto.getFile_save());
 			
 			if (boardSrvc.update(boardDto)) {
 				request.setAttribute("script"	, "alert('수정되었습니다.');");

@@ -102,9 +102,15 @@ public class BoardSrvc {
 	@Transactional("txBackoffice")
 	public boolean deleteFlag(BoardDto boardDto) {
 		
-		int result = boardDao.deleteFlag(boardDto);
+		int result = 0;
 		
-		if (result == 1) return true;
+		if (boardDto.getCd_bbs_type() == 3) {
+			result += boardDao.deleteQuestionReply(boardDto);
+		}
+		
+		result += boardDao.deleteFlag(boardDto);
+		
+		if (result == ((boardDto.getCd_bbs_type() == 3) ? 2 : 1)) return true;
 		else {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return false;
@@ -131,6 +137,8 @@ public class BoardSrvc {
 			return false;
 		}
 	}
+	
+	
 	
 	/**
 	 * @param boardDto [게시판 빈]

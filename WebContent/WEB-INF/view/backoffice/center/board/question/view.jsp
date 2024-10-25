@@ -22,20 +22,16 @@
 		frmMain.submit();
 	}
 	
-	function remove(value) {
-		
+	function remove() {
 		var frmMain = document.getElementById("frmMain");
 		
-		document.getElementById("cd_bbs_type").value = value;
 		frmMain.action="/console/center/board/remove.web";
 		frmMain.submit();
 	}
 	
-	function modifyForm(value) {
-		
+	function modifyForm() {
 		var frmMain = document.getElementById("frmMain");
 		
-		document.getElementById("cd_bbs_type").value = value;
 		frmMain.action="/console/center/board/modifyForm.web";
 		frmMain.submit();
 	}
@@ -61,17 +57,17 @@
 		frmMain.cd_bbs_type.setAttribute("value", value);
 		frmMain.action = "/console/center/board/list.web";
 		frmMain.submit();
-	}
-	
-	
+	}	
+		
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST" enctype="multipart/form-data" >
 <input type="hidden" id="type"		name="type" />
 <input type="hidden" id="sequence"	name="sequence" />
-<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"	value="${boardDto.cd_bbs_type}" />
-<input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${boardDto.seq_bbs}" />
+<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"					value="${boardDto.cd_bbs_type}" />
+<input type="hidden" id="seq_bbs"		name="seq_bbs"						value="${boardReplyDto.seq_bbs}" />
+<input type="hidden" id="seq_bbs_question"		name="seq_bbs_question"		value="${boardDto.seq_bbs}" />
 <%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
@@ -115,22 +111,24 @@
 			<!-- /.box-header -->
 			<div class="box-body no-padding">
 				<div class="mailbox-read-info">
-				<h3 style="font-size:50px; text-align:center">제목:${boardDto.title}</h3>
-				<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자:Bravo My Life
+				<h3 style="font-size:50px; text-align:center">
+					<c:if test="${boardDto.seq_reply == 0}">[미답변] </c:if>
+					<c:if test="${boardDto.seq_reply > 0}">[답변 완료] </c:if>제목:${boardDto.title}</h3>
+				<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자: &nbsp;${boardDto.register}
 					<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardDto.dt_reg}</span></h5>
 				</div>
 
 				<div class="form-group" style="padding: 10px;border-bottom: 1px solid #f4f4f4;margin-bottom: 1px;">
 				<label>카테고리(*)</label>
-					<select class="form-control" id="cd_ctg" name="cd_ctg" style="height: 34px;margin-bottom: 15px;"required>
-						<option value="0">선택</option>
-						<option value="1">가입 및 탈퇴</option>
-						<option value="2">상품</option>
-						<option value="3">구매</option>
-						<option value="4">결제</option>
-						<option value="5">배송</option>
-						<option value="6">환불</option>
-						<option value="9">기타</option>
+					<select class="form-control" id="cd_ctg" name="cd_ctg" style="height: 34px;margin-bottom: 15px;"disabled>
+						<option value="0"<c:if test="${boardDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
+						<option value="1"<c:if test="${boardDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
+						<option value="2"<c:if test="${boardDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
+						<option value="3"<c:if test="${boardDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
+						<option value="4"<c:if test="${boardDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
+						<option value="5"<c:if test="${boardDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
+						<option value="6"<c:if test="${boardDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
+						<option value="9"<c:if test="${boardDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
 					</select>
 				</div>
 				<!-- /.mailbox-read-info -->
@@ -138,13 +136,30 @@
 				<div class="mailbox-read-message"style="font-size:20px">
 				${boardDto.content}
 				</div>
+				<c:if test="${boardDto.file_orig != ''}">	
+					<div class="box-footer">
+						<ul class="mailbox-attachments clearfix" style="text-align:center">	
+							<c:if test="${boardDto.file_orig != ''}">
+								<a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
+							</c:if>
+						</ul>
+					</div>
+				</c:if>	
 				<!-- /.mailbox-read-message -->
 			<!-- /.box-footer -->
 			<div class="box-footer">
 				<div class="pull-right">
-					<button type="submit" class="btn btn-primary" onclick="modifyForm(3);"><i class="fa fa-pencil"></i> 답변</button>
+					<c:if test="${boardDto.seq_reply == 0}">
+						<a href="/console/center/board/writeForm.web?cd_bbs_type=3&seq_bbs=${boardDto.seq_bbs}" style="padding: 6px 12px;
+						text-decoration: none;color: #ffffff;background-color: #3c8dbc;border: 1px solid #007BFF;border-radius: 4px;
+						font-size: 14px;cursor: pointer;text-align:center">답변 등록</a>
+					</c:if>
+					<c:if test="${boardDto.seq_reply > 0}">
+						
+					</c:if>
 					<button type="button" class="btn btn-default" onclick="goList(3);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
 				</div>
+				<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><i class="fa fa-refresh"></i></button>
 			</div>
 			<!-- /.box-footer -->
 			</div>
@@ -152,6 +167,49 @@
 		</div>
 		<!-- /.col -->
 	</div>
+	<div class="col-md-3">
+	</div>
+	<c:if test="${boardDto.seq_reply > 0}">
+	<div class="col-md-8">
+			<div class="box box-primary">
+			
+			<!-- /.box-header -->
+			<div class="box-body no-padding">
+				<div class="mailbox-read-info">
+				<h3 style="font-size:50px; text-align:center">제목:${boardReplyDto.title}</h3>
+				<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자:Bravo My Life
+					<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardReplyDto.dt_reg}</span></h5>
+				</div>
+				<!-- /.mailbox-read-info -->
+				<!-- /.mailbox-controls -->
+				<div class="mailbox-read-message"style="font-size:20px">
+				${boardReplyDto.content}
+				</div>
+				<c:if test="${boardReplyDto.file_orig != ''}">	
+					<div class="box-footer">
+						<ul class="mailbox-attachments clearfix" style="text-align:center">	
+							<c:if test="${boardReplyDto.file_orig != ''}">
+								<a href="javascript:download('BbsQuestion', ${boardReplyDto.seq_bbs});">[첨부파일 다운로드]</a>
+							</c:if>
+						</ul>
+					</div>
+				</c:if>	
+				<!-- /.mailbox-read-message -->
+			<!-- /.box-footer -->
+			<div class="box-footer">
+				<div class="pull-right">
+					<button type="submit" class="btn btn-primary" onclick="modifyForm(3);"><i class="fa fa-pencil"></i> 수정</button>
+					<button type="button" class="btn btn-default" onclick="goList(3);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
+				</div>
+				<button type="button" onclick="javascript:remove(3);" class="btn btn-default"><i class="fa fa-trash-o"></i> 삭제</button>
+			</div>
+			<!-- /.box-footer -->
+			</div>
+			<!-- /. box -->
+		</div>
+		<!-- /.col -->
+	</div>
+	</c:if>
 	</div>
 	<!-- /.row -->
 	</section>

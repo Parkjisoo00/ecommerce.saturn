@@ -274,7 +274,7 @@ public class BoardWeb extends Common {
 			boardDto.setFile_orig(boardDto.getFile_orig());
 			boardDto.setFile_save(boardDto.getFile_save());
 			
-			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
+			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_question", "[UNDEFINED]");
 			
 			logger.debug("경로 확인" +pathBase);
 			
@@ -531,7 +531,7 @@ public class BoardWeb extends Common {
 			}
 			*/
 			
-			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path", "[UNDEFINED]");
+			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_question", "[UNDEFINED]");
 			String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
 			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 			

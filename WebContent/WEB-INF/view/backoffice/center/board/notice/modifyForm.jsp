@@ -123,6 +123,19 @@
 					<label style="float: right;margin-right: 5px;">최상위</label>
 					<input class="form-control" value="${boardDto.title}" id="title" name="title" required >
 				</div>
+				<div class="form-group" >
+				<label>카테고리(*)</label>
+					<select class="form-control" id="cd_ctg" name="cd_ctg" style="height: 34px;margin-bottom: 15px;"required>
+						<option value="0"<c:if test="${boardDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
+						<option value="1"<c:if test="${boardDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
+						<option value="2"<c:if test="${boardDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
+						<option value="3"<c:if test="${boardDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
+						<option value="4"<c:if test="${boardDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
+						<option value="5"<c:if test="${boardDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
+						<option value="6"<c:if test="${boardDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
+						<option value="9"<c:if test="${boardDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
+					</select>
+				</div>
 			<div class="form-group" >
 				<label>내용(*)</label> 
 					<textarea id="content" class="form-control" style="height: 250px"id="content" name="content" required>
