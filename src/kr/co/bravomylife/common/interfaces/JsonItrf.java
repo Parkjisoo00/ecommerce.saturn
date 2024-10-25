@@ -72,4 +72,53 @@ public class JsonItrf {
 		
 		return responseDto;
 	}
+	
+	/**
+	 * @param Object(requestSellerInfosDto 등) [요청 빈(Bean)]
+	 * @param typeReference [응답 클래스]
+	 * @param url [URL]
+	 * @return Object(ResponseSellerInfosDto 등)
+	 * 
+	 * @since 2024-10-25
+	 * <p>DESCRIPTION: JSON HTTP/S Client(POST) for ResponseDto Bean</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@SuppressWarnings({"rawtypes"})
+	public static Object connectGet(Object requestDto, TypeReference typeReference, String url) {
+		
+		ObjectMapper objectMapper	= new ObjectMapper();
+		// String requestJSON			= "";
+		String responseJSON			= "";
+		Object responseDto			= new Object();
+		
+		try {
+			// requestJSON		= objectMapper.writeValueAsString(requestDto);
+			
+			// System.out.println("\n" + "requestJSON: " + requestJSON);
+			if (url.startsWith("https")) {
+				// HttpsJson httpsJson = new HttpsJson(url);
+				// responseJSON		= httpsJson.connectPost(requestJSON, 3000);
+			}
+			else {
+				HttpJson httpJson	= new HttpJson(url);
+				responseJSON		= httpJson.connectGet(3000);
+			}
+			// System.out.println("\n" + "responseJSON: " + responseJSON + "\n");
+			
+			responseDto = objectMapper.readValue(responseJSON, typeReference);
+		}
+		catch (JsonProcessingException e) {
+			logger.error("[kr.co.bravomylife.common.interfaces.JsonItrf.connectPost(requestDto, TypeReference, String)] " + e.getMessage(), e);
+		}
+		catch (IOException e) {
+			logger.error("[kr.co.bravomylife.common.interfaces.JsonItrf.connectPost(requestDto, TypeReference, String)] " + e.getMessage(), e);
+		}
+		catch (Exception e) {
+			logger.error("[kr.co.bravomylife.common.interfaces.JsonItrf.connectPost(requestDto, TypeReference, String)] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return responseDto;
+	}
 }

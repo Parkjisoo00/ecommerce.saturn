@@ -53,7 +53,7 @@
 											<a href="#" style="display: block; margin-bottom: 20px; font-size: 20px;">- 맞춤 건강 추천</a>
 										</div>
 										<div>
-											<a href="#" style="display: block; margin-bottom: 20px; font-size: 20px;">- 안심 조회 서비스</a>
+											<a href="/front/center/board/personalHealth/list.web" style="display: block; margin-bottom: 20px; font-size: 20px;">- 안심 조회 서비스</a>
 										</div>
 										<div>
 											<a href="#" style="display: block; margin-bottom: 20px; font-size: 20px;">- 건강 정보</a>

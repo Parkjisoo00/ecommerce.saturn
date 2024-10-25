@@ -1,3 +1,24 @@
+/**
+ * YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS PROGRAM
+ * IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF HIMEDIA.CO.KR.
+ * HIMEDIA.CO.KR OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS PROGRAM.
+ * COPYRIGHT (C) 2024 HIMEDIA.CO.KR ALL RIGHTS RESERVED.
+ *
+ * 하기 프로그램에 대한 저작권을 포함한 지적재산권은 himedia.co.kr에 있으며,
+ * himedia.co.kr이 명시적으로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
+ * himedia.co.kr의 지적재산권 침해에 해당된다.
+ * Copyright (C) 2024 himedia.co.kr All Rights Reserved.
+ *
+ *
+ * Program		: kr.co.himedia.ecommerce
+ * Description	:
+ * Environment	: JRE 1.7 or more
+ * File			: FileUpload.java
+ * Notes		:
+ * History		: [NO][Programmer][Description]
+ *				: [20240808130001][pluto@himedia.co.kr][CREATE: Initial Release]
+ *				: [20240923173500][pluto@himedia.co.kr][REPORT: MultipartFile does not support files with size 0, so Controller needs to handle files with size 0.]
+ */
 package kr.co.bravomylife.common.file;
 
 import java.io.File;
@@ -18,9 +39,9 @@ import kr.co.bravomylife.common.dto.FileUploadDto;
 
 /**
  * @version 1.0.0
- * @author cydgate4957@gmail.com
+ * @author pluto@himedia.co.kr
  * 
- * @since 2024-09-30
+ * @since 2024-08-08
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
@@ -37,7 +58,7 @@ public class FileUpload {
 	 * @param count [파일 갯수]
 	 * @return LinkedList
 	 * 
-	 * @since 2024-09-30
+	 * @since 2015-12-23
 	 * <p>DESCRIPTION: 파일 빈(Bean, fileUploadDto), 루트경로(pathBase), 최대크기(maxSize), 허용된 확장자(allowedExt) 및 개수(count) 형태로 업로드</p>
 	 * <p>IMPORTANT: 특정 파일(예: 멤버십 카드 이미지)일 경우 JSP/Java(Bean)에서 INPUT NAME으로 수정 제어(등록/수정/삭제 등)할 것</p>
 	 * <p>EXAMPLE:<br>
@@ -96,7 +117,7 @@ public class FileUpload {
 			
 			if (null != files && files.size() > 0 && files.size() == count) {
 				
-				for (MultipartFile multipartFiles : files) {
+				for (MultipartFile multipartFile : files) {
 					
 					// Initialize
 					resultID			= "success";
@@ -105,70 +126,73 @@ public class FileUpload {
 					fileSveNameRelative	= "";
 					fileSveSize			= 0;
 					
-					// File exist
-					if (!multipartFiles.isEmpty()) {
-						
-						fileSrcName = multipartFiles.getOriginalFilename();
-						fileSveName = getfileSveName(fileSrcName);
-						fileSveSize = multipartFiles.getSize();
-						
-						isExtension	= isExtension(fileSrcName, allowedExt);
-						isSize 		= fileSveSize > Long.parseLong(maxSize) ? false : true;
-						
-						// Check Extension
-						if (!isExtension) {
-							ht.put("resultID", "허용되지 않은 확장자입니다!");
-							ht.put("fileSrcName", fileSrcName);
-							ht.put("fileSveNameRelative", fileSveNameRelative);
-							ht.put("fileSveSize", Long.toString(fileSveSize));
+					// [2024-10-07][pluto@himedia.co.kr][REPORT: When Index of multipartFile is null]
+					if (multipartFile != null) {
+						// File exist
+						if (!multipartFile.isEmpty()) {
 							
-							resultList.add(ht);
-							break;
-						}
-						// Check Size
-						else if (!isSize) {
-							ht.put("resultID", "파일 크기를 초과하였습니다!");
-							ht.put("fileSrcName", fileSrcName);
-							ht.put("fileSveNameRelative", fileSveNameRelative);
-							ht.put("fileSveSize", Long.toString(fileSveSize));
+							fileSrcName = multipartFile.getOriginalFilename();
+							fileSveName = getfileSveName(fileSrcName);
+							fileSveSize = multipartFile.getSize();
 							
-							resultList.add(ht);
-							break;
+							isExtension	= isExtension(fileSrcName, allowedExt);
+							isSize 		= fileSveSize > Long.parseLong(maxSize) ? false : true;
+							
+							// Check Extension
+							if (!isExtension) {
+								ht.put("resultID", "허용되지 않은 확장자입니다!");
+								ht.put("fileSrcName", fileSrcName);
+								ht.put("fileSveNameRelative", fileSveNameRelative);
+								ht.put("fileSveSize", Long.toString(fileSveSize));
+								
+								resultList.add(ht);
+								break;
+							}
+							// Check Size
+							else if (!isSize) {
+								ht.put("resultID", "파일 크기를 초과하였습니다!");
+								ht.put("fileSrcName", fileSrcName);
+								ht.put("fileSveNameRelative", fileSveNameRelative);
+								ht.put("fileSveSize", Long.toString(fileSveSize));
+								
+								resultList.add(ht);
+								break;
+							}
+							else {
+								String folderName		= getFolderName(pathBase);
+								fileSveNameRelative		= folderName + File.separator + fileSveName;
+								
+								InputStream is 			= multipartFile.getInputStream();
+								FileOutputStream fos 	= new FileOutputStream(pathBase + File.separator + fileSveNameRelative);
+								FileCopyUtils.copy(is, fos);
+								is.close();
+								fos.close();
+								
+								ht.put("resultID", "success");
+								ht.put(multipartFile.getName() + "_fileSrcName", fileSrcName);
+								ht.put(multipartFile.getName() + "_fileSveNameRelative", fileSveNameRelative);
+								ht.put(multipartFile.getName() + "_fileSveSize",  Long.toString(fileSveSize));
+								
+								resultList.add(ht);
+								savedList.add(fileSveNameRelative);
+							}
 						}
+						// [2024-09-23][pluto@himedia.co.kr][REPORT: MultipartFile does not support files with size 0, so Controller needs to handle files with size 0.]
+						// File is not attached or size is 0
 						else {
-							String folderName		= getFolderName(pathBase);
-							fileSveNameRelative		= folderName + File.separator + fileSveName;
-							
-							InputStream is 			= multipartFiles.getInputStream();
-							FileOutputStream fos 	= new FileOutputStream(pathBase + File.separator + fileSveNameRelative);
-							FileCopyUtils.copy(is, fos);
-							is.close();
-							fos.close();
-							
 							ht.put("resultID", "success");
-							ht.put(multipartFiles.getName() + "_fileSrcName", fileSrcName);
-							ht.put(multipartFiles.getName() + "_fileSveNameRelative", fileSveNameRelative);
-							ht.put(multipartFiles.getName() + "_fileSveSize",  Long.toString(fileSveSize));
-							
+							ht.put(multipartFile.getName() + "_fileSrcName", fileSrcName);
+							ht.put(multipartFile.getName() + "_fileSveNameRelative", fileSveNameRelative);
+							ht.put(multipartFile.getName() + "_fileSveSize",  Long.toString(fileSveSize));
 							resultList.add(ht);
-							savedList.add(fileSveNameRelative);
 						}
+						//logger.debug("ht.size()=" + ht.size());
 					}
-					// [2024-09-23][cydgate4957@gmail.com][REPORT: MultipartFile does not support files with size 0, so Controller needs to handle files with size 0.]
-					// File is not attached or size is 0
-					else {
-						ht.put("resultID", "success");
-						ht.put(multipartFiles.getName() + "_fileSrcName", fileSrcName);
-						ht.put(multipartFiles.getName() + "_fileSveNameRelative", fileSveNameRelative);
-						ht.put(multipartFiles.getName() + "_fileSveSize",  Long.toString(fileSveSize));
-						resultList.add(ht);
-					}
-					// logger.debug("ht.size()=" + ht.size());
 				}
 			}
 		}
 		catch (Exception e) {
-			logger.error("[kr.co.bravomylife.common.file.FileUpload.upload()] " + e.getMessage(), e);
+			logger.error("[com.plutozone.common.file.FileUpload.upload()] " + e.getMessage(), e);
 		}
 		finally {
 			if (!resultID.equals("success") ) {
@@ -185,7 +209,7 @@ public class FileUpload {
 	 * @param pathBase [베이스 경로]
 	 * @return String
 	 * 
-	 * @since 2024-09-30
+	 * @since 2015-12-23
 	 * <p>DESCRIPTION: 폴더명(yyyy / MM / dd / HH 형태) 얻기</p>
 	 * <p>IMPORTANT: 파라미터는 데이터 타입 및 형식을 만족하여야 한다.</p>
 	 * <p>EXAMPLE:</p>
@@ -221,7 +245,7 @@ public class FileUpload {
 	 * @param fileSrcName [파일 원본명]
 	 * @return String
 	 * 
-	 * @since 2024-09-30
+	 * @since 2015-12-23
 	 * <p>DESCRIPTION: 파일명(원본 파일명 + yyyyMMddHHmmss 형태) 얻기</p>
 	 * <p>IMPORTANT: 파라미터는 데이터 타입 및 형식을 만족하여야 한다.</p>
 	 * <p>EXAMPLE:</p>
@@ -241,7 +265,7 @@ public class FileUpload {
 	 * @param allowedExt [허용 확장자]
 	 * @return boolean
 	 * 
-	 * @since 2024-09-30
+	 * @since 2015-12-23
 	 * <p>DESCRIPTION: 파일 확장자 허용 여부</p>
 	 * <p>IMPORTANT: 파라미터는 데이터 타입 및 형식을 만족하여야 한다.</p>
 	 * <p>EXAMPLE:</p>
@@ -261,7 +285,7 @@ public class FileUpload {
 	 * @param fileSrcName [파일 원본명]
 	 * @return boolean
 	 * 
-	 * @since 2024-09-30
+	 * @since 2015-12-23
 	 * <p>DESCRIPTION: 파일 확장자 얻기</p>
 	 * <p>IMPORTANT: 파라미터는 데이터 타입 및 형식을 만족하여야 한다.</p>
 	 * <p>EXAMPLE:</p>
@@ -275,7 +299,7 @@ public class FileUpload {
 	 * @param fileSveNameRelative [저장 파일명]
 	 * @return boolean
 	 * 
-	 * @since 2024-09-30
+	 * @since 2015-12-23
 	 * <p>DESCRIPTION: 파일 삭제</p>
 	 * <p>IMPORTANT: 파라미터는 데이터 타입 및 형식을 만족하여야 한다.</p>
 	 * <p>EXAMPLE:</p>

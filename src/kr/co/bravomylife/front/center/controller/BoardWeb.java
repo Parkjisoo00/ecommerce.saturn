@@ -21,8 +21,13 @@
 package kr.co.bravomylife.front.center.controller;
 
 import java.io.File;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -35,19 +40,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import kr.co.bravomylife.front.center.service.BoardSrvc;
 import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.common.component.SessionCmpn;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
+import kr.co.bravomylife.front.sale.dto.ResponseInfosDto;
+import kr.co.bravomylife.front.sale.dto.RowDataDto;
 import kr.co.bravomylife.common.dto.FileDownloadDto;
 import kr.co.bravomylife.common.dto.FileDto;
 import kr.co.bravomylife.common.dto.FileUploadDto;
 import kr.co.bravomylife.common.file.FileUpload;
+import kr.co.bravomylife.common.interfaces.JsonItrf;
 import kr.co.bravomylife.front.center.dto.BoardDto;
 
 /**
@@ -70,6 +82,78 @@ public class BoardWeb extends Common {
 	
 	@Inject
 	BoardSrvc boardSrvc;
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-25
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	 
+	@RequestMapping(value = "/front/board/searchItem.json", method = RequestMethod.POST, headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
+	public @ResponseBody Map<String, Object> searchItem(HttpServletRequest request, @RequestBody Map<String, String> item) {
+		
+		Map<String, Object> response = new HashMap<>();
+		List<RowDataDto> responseList = new ArrayList<>();
+		
+		try {
+			
+			String keyId = "3b028aec34844276be28";
+			String serviceId = "C003";
+			String dataType = "json";
+			String startIdx = "1";
+			String endIdx = "100";
+			String prdlst_nm = URLEncoder.encode(item.get("prdlst_nm"), "UTF-8");
+			
+			String url = "http://openapi.foodsafetykorea.go.kr/api/" + keyId + "/" + serviceId + "/" + dataType + "/" + startIdx + "/" + endIdx + "/PRDLST_NM=" + prdlst_nm;
+			
+			logger.debug("보내는 URL 값 확인" + url);
+			
+			ResponseInfosDto responseDto = (ResponseInfosDto) JsonItrf.connectGet(
+					null, 
+					new TypeReference<ResponseInfosDto>() {}, 
+					url
+				);
+			debuggingJSON(responseDto);
+			response.put("responseList", responseList);
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".searchItem()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return response;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-25
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/center/board/personalHealth/list.web")
+	public ModelAndView Healthlist(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			mav.setViewName("front/center/board/personalHealth/list");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".Healthlist()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]

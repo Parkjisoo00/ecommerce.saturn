@@ -35,6 +35,55 @@ public class HttpJson {
 	}
 	
 	/**
+	 * @param timeout [타임아웃(초)]
+	 * @return String
+	 * @throws IOException 
+	 * @since 2017-07-28
+	 * <p>DESCRIPTION: 특정 URL로 요청(GET 방식)하고 텍스트로 응답</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public String connectGet(int timeout) throws IOException {
+		
+		String response = "";
+		
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		
+		conn.setConnectTimeout(timeout);
+		conn.setReadTimeout(timeout);
+		
+		conn.setRequestMethod("GET");
+		
+		conn.setRequestProperty("accept", "*/*");
+		conn.setDoInput(true);
+		/* Only POST
+		conn.setDoOutput(true);
+		
+		OutputStream os = conn.getOutputStream();
+		os.write(requestJSON.getBytes("UTF-8"));
+		os.flush();
+		os.close();
+		*/
+		
+		if (conn.getResponseCode() != 200) {
+			/** 필요 시 에러 상세는 별도 확인할 것 */
+			throw new RuntimeException("HTTP Error Code: " + conn.getResponseCode());
+		}
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream()), "UTF-8"));
+		
+		String line = "";
+		while ((line = br.readLine()) != null) {
+			response += line;
+		}
+		
+		br.close();
+		conn.disconnect();
+		
+		return response;
+	}
+	
+	/**
 	 * @param requestJSON [요청 JSON]
 	 * @param timeout [타임아웃(초단위)]
 	 * @return String
