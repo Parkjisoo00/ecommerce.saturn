@@ -222,7 +222,6 @@ public class FileUpload {
 								+ File.separator + Datetime.getNow("MM")
 								+ File.separator + Datetime.getNow("dd")
 								+ File.separator + Datetime.getNow("HH");
-		
 								
 		String folderName	= Datetime.getNow("yyyyMMddHH");
 		
