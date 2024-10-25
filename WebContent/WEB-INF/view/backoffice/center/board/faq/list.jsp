@@ -69,6 +69,8 @@
 		
 		var frmMain = document.getElementById("frmMain");
 		
+		document.getElementById("searchWord").remove();
+		
 		frmMain.cd_bbs_type.setAttribute("value", value);
 		frmMain.action = "/console/center/board/list.web";
 		frmMain.submit();
@@ -154,39 +156,61 @@
 								<th style="text-align: center;width: 15%">등록일</th>
 								<th style="text-align: center;width: 7%">조회수</th>
 							</tr>
-				<c:choose>
-					<c:when test="${empty list}">
-						<tr>
-							<td colspan="5" style="text-align:center">등록된 글이 없습니다.</td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${list}" var="list">
-							<tr>
-								<td style="text-align: center;">
-									${list.rnum}
-								</td>
-								<td>
-								${list.ctg_nm}
-								</td>
-								<td style="text-align: left">
-									<c:if test="${list.flg_top == 'Y'}">[공지] </c:if>
-										<a href="javascript:goView(${list.seq_bbs});">
-											${list.title}
-										</a>
-								</td>
-								<td style="text-align: center;">
-									${list.dt_reg}
-								</td>
-								<td style="text-align: center;">
-									${list.readed}
-								</td>
-							</tr>
-						</c:forEach>
-					</c:otherwise>
-					</c:choose>
-				</tbody>
-				</table>
+							<c:choose>
+								<c:when test="${empty list}">
+									<tr>
+										<td colspan="4" style="text-align:center">등록된 글이 없습니다.</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${list}" var="list">
+										<tr>
+											<c:choose>
+												<c:when test="${list.flg_top == 'Y'}">
+													<td style="text-align: center;font-weight: bold;">
+														${list.rnum}
+													</td>
+													<td style="text-align: center;font-weight: bold;">
+														${list.ctg_nm}
+													</td>
+													<td style="text-align: left;font-weight: bold;">
+														<a href="javascript:goView(${list.seq_bbs});">
+															${list.title}
+														</a>
+													</td>
+													<td style="text-align: center;font-weight: bold;">
+														${list.dt_reg}
+													</td>
+													<td style="text-align: center;font-weight: bold;">
+														${list.readed}
+													</td>
+												</c:when>
+												<c:otherwise>
+													<td style="text-align: center;">
+														${list.rnum}
+													</td>
+													<td style="text-align: center;">
+													${list.ctg_nm}
+													</td>
+													<td style="text-align: left">
+															<a href="javascript:goView(${list.seq_bbs});">
+																${list.title}
+															</a>
+													</td>
+													<td style="text-align: center;">
+														${list.dt_reg}
+													</td>
+													<td style="text-align: center;">
+														${list.readed}
+													</td>
+												</c:otherwise>
+											</c:choose>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
 				<!-- /.table -->
 				</div>
 				<!-- /.mail-box-messages -->

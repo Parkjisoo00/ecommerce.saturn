@@ -66,17 +66,9 @@
 	}
 	
 	function consolegoList(value) {
-		
 		var frmMain = document.getElementById("frmMain");
 		
-		frmMain.cd_bbs_type.setAttribute("value", value);
-		frmMain.action = "/console/center/board/list.web";
-		frmMain.submit();
-	}
-	
-	function consolegoList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
+		document.getElementById("searchWord").remove();
 		
 		frmMain.cd_bbs_type.setAttribute("value", value);
 		frmMain.action = "/console/center/board/list.web";
@@ -135,12 +127,12 @@
 		<div class="col-md-8">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">공지 사항</h3>&nbsp;&nbsp;&nbsp;
+					<h3 class="box-title">새소식</h3>&nbsp;&nbsp;&nbsp;
 					<div class="box-tools pull-right">
 						<div class="has-feedback">
 							<div style="display: flex; align-items: center;">&nbsp;&nbsp;
 								<select class="form-control" name="searchKey" style="height: 30px;">
-									<option>제목</option>
+									<option value="title" <c:if test="${paging.searchKey == 'title'}">  selected</c:if>>제목</option>
 									<option value="contents" <c:if test="${paging.searchKey == 'contents'}">  selected</c:if>>내용</option>
 									<option value="title+contents" <c:if test="${paging.searchKey == 'title+contents'}">  selected</c:if>>제목 또는 내용</option>
 								</select>
@@ -160,7 +152,6 @@
 						<tbody>
 							<tr>
 								<th style="text-align: center;width: 5% ">NO</th>
-								
 								<th style="text-align: center;">제목</th>
 								<th style="text-align: center;width: 15%">등록일</th>
 								<th style="text-align: center;width: 7%">조회수</th>
@@ -180,9 +171,9 @@
 														${list.rnum}
 													</td>
 													<td style="text-align: left;font-weight: bold;">
-															<a href="javascript:goView(${list.seq_bbs});">
-																${list.title}
-															</a>
+														<a href="javascript:goView(${list.seq_bbs});">
+															${list.title}
+														</a>
 													</td>
 													<td style="text-align: center;font-weight: bold;">
 														${list.dt_reg}

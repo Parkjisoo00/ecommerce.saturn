@@ -107,18 +107,31 @@
 					<label style="float: right;margin-right: 5px;">최상위</label>
 					<input class="form-control" placeholder=""id="title" name="title" required >
 				</div>
-			<div class="form-group" >
-				<label>내용(*)</label> 
-					<textarea id="content" class="form-control" style="height: 250px"id="content" name="content" required>
-					</textarea>
-			</div>
-			<div class="form-group">
-				<div class="btn btn-default btn-file">
-					<i class="fa fa-paperclip"></i> 첨부 파일
-					<input type="file" id="files[0]" name="files[0]">
+				<div class="form-group">
+					<label>카테고리(*)</label>
+					<select class="form-control" id="cd_ctg" name="cd_ctg" style="height: 34px;"required>
+						<option value="0">선택</option>
+						<option value="1">가입 및 탈퇴</option>
+						<option value="2">상품</option>
+						<option value="3">구매</option>
+						<option value="4">결제</option>
+						<option value="5">배송</option>
+						<option value="6">환불</option>
+						<option value="9">기타</option>
+					</select>
 				</div>
-				<p class="help-block">최대 10 MB</p>
-			</div>
+				<div class="form-group" >
+					<label>내용(*)</label> 
+						<textarea id="content" class="form-control" style="height: 250px"id="content" name="content" required>
+						</textarea>
+				</div>
+				<div class="form-group">
+					<div class="btn btn-default btn-file">
+						<i class="fa fa-paperclip"></i> 첨부 파일
+						<input type="file" id="files[0]" name="files[0]">
+					</div>
+					<p class="help-block">최대 10 MB</p>
+				</div>
 			</div>
 			<!-- /.box-body -->
 			<div class="box-footer">

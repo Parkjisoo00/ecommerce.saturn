@@ -69,20 +69,12 @@
 		
 		var frmMain = document.getElementById("frmMain");
 		
-		frmMain.cd_bbs_type.setAttribute("value", value);
-		frmMain.action = "/console/center/board/list.web";
-		frmMain.submit();
-	}
-	
-	function consolegoList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
+		document.getElementById("searchWord").remove();
 		
 		frmMain.cd_bbs_type.setAttribute("value", value);
 		frmMain.action = "/console/center/board/list.web";
 		frmMain.submit();
 	}
-	
 	
 </script>
 </head>
@@ -140,7 +132,7 @@
 						<div class="has-feedback">
 							<div style="display: flex; align-items: center;">&nbsp;&nbsp;
 								<select class="form-control" name="searchKey" style="height: 30px;">
-									<option>제목</option>
+									<option value="title" <c:if test="${paging.searchKey == 'title'}">  selected</c:if>>제목</option>
 									<option value="contents" <c:if test="${paging.searchKey == 'contents'}">  selected</c:if>>내용</option>
 									<option value="title+contents" <c:if test="${paging.searchKey == 'title+contents'}">  selected</c:if>>제목 또는 내용</option>
 								</select>
@@ -160,7 +152,7 @@
 						<tbody>
 							<tr>
 								<th style="text-align: center;width: 5% ">NO</th>
-								
+								<th style="text-align: center;width: 10%">카테고리</th>
 								<th style="text-align: center;">제목</th>
 								<th style="text-align: center;width: 15%">등록일</th>
 								<th style="text-align: center;width: 7%">조회수</th>
@@ -179,10 +171,13 @@
 													<td style="text-align: center;font-weight: bold;">
 														${list.rnum}
 													</td>
+													<td style="text-align: center;font-weight: bold;">
+														${list.ctg_nm}
+													</td>
 													<td style="text-align: left;font-weight: bold;">
-															<a href="javascript:goView(${list.seq_bbs});">
-																${list.title}
-															</a>
+														<a href="javascript:goView(${list.seq_bbs});">
+															${list.title}
+														</a>
 													</td>
 													<td style="text-align: center;font-weight: bold;">
 														${list.dt_reg}
@@ -194,6 +189,9 @@
 												<c:otherwise>
 													<td style="text-align: center;">
 														${list.rnum}
+													</td>
+													<td style="text-align: center;">
+													${list.ctg_nm}
 													</td>
 													<td style="text-align: left">
 															<a href="javascript:goView(${list.seq_bbs});">
