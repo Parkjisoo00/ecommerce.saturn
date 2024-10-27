@@ -22,11 +22,9 @@ package kr.co.bravomylife.front.center.controller;
 
 import java.io.File;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -88,6 +86,72 @@ public class BoardWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
+	 * @since 2024-10-27
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/center/board/personalHealth/searchView.web")
+	public ModelAndView searchView(HttpServletRequest request, HttpServletResponse response, String prdlst_report_no) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		logger.debug("받아온 prdlst_report_no 값 확인" + prdlst_report_no);
+		
+		try {
+			
+			String keyId = "3b028aec34844276be28";
+			String serviceId = "C003";
+			String dataType = "json";
+			String startIdx = "1";
+			String endIdx = "100";
+			String _prdlst_report_no = URLEncoder.encode(prdlst_report_no, "UTF-8");
+			
+			String url = "http://openapi.foodsafetykorea.go.kr/api/" + keyId + "/" + serviceId + "/" + dataType + "/" + startIdx + "/" + endIdx + "/PRDLST_REPORT_NO=" + _prdlst_report_no;
+			
+			logger.debug("보내는 URL 값 확인" + url);
+			
+			ResponseInfosDto responseDto = (ResponseInfosDto) JsonItrf.connectGet(
+					null, 
+					new TypeReference<ResponseInfosDto>() {}, 
+					url
+				);
+			
+			debuggingJSON(responseDto);
+			debuggingJSON(responseDto.getC003().getRow());
+			
+			RowDataDto rowDataDto = new RowDataDto();
+			
+			rowDataDto.setBssh_nm(responseDto.getC003().getRow()[0].getBssh_nm());
+			rowDataDto.setPrdlst_nm(responseDto.getC003().getRow()[0].getPrdlst_nm());
+			rowDataDto.setPrdlst_report_no(responseDto.getC003().getRow()[0].getPrdlst_report_no());
+			rowDataDto.setPrms_dt(responseDto.getC003().getRow()[0].getPrms_dt());
+			rowDataDto.setPog_daycnt(responseDto.getC003().getRow()[0].getPog_daycnt());
+			rowDataDto.setDispos(responseDto.getC003().getRow()[0].getDispos());
+			rowDataDto.setNtk_mthd(responseDto.getC003().getRow()[0].getNtk_mthd());
+			rowDataDto.setPrdt_shap_cd_nm(responseDto.getC003().getRow()[0].getPrdt_shap_cd_nm());
+			rowDataDto.setCstdy_mthd(responseDto.getC003().getRow()[0].getCstdy_mthd());
+			rowDataDto.setIftkn_atnt_matr_cn(responseDto.getC003().getRow()[0].getIftkn_atnt_matr_cn());
+			rowDataDto.setPrimary_fnclty(responseDto.getC003().getRow()[0].getPrimary_fnclty());
+			rowDataDto.setStdr_stnd(responseDto.getC003().getRow()[0].getStdr_stnd());
+			rowDataDto.setRawmtrl_nm(responseDto.getC003().getRow()[0].getRawmtrl_nm());
+			
+			mav.addObject("rowDataDto", rowDataDto);
+			mav.setViewName("front/center/board/personalHealth/searchView");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".searchView()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
 	 * @since 2024-10-25
 	 * <p>DESCRIPTION:</p>
 	 * <p>IMPORTANT:</p>
@@ -98,7 +162,6 @@ public class BoardWeb extends Common {
 	public @ResponseBody Map<String, Object> searchItem(HttpServletRequest request, @RequestBody Map<String, String> item) {
 		
 		Map<String, Object> response = new HashMap<>();
-		List<RowDataDto> responseList = new ArrayList<>();
 		
 		try {
 			
@@ -118,8 +181,10 @@ public class BoardWeb extends Common {
 					new TypeReference<ResponseInfosDto>() {}, 
 					url
 				);
+			
 			debuggingJSON(responseDto);
-			response.put("responseList", responseList);
+			
+			response.put("responseDto", responseDto);
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".searchItem()] " + e.getMessage(), e);
@@ -139,16 +204,16 @@ public class BoardWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/center/board/personalHealth/list.web")
-	public ModelAndView Healthlist(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/front/center/board/personalHealth/searchForm.web")
+	public ModelAndView searchForm(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			mav.setViewName("front/center/board/personalHealth/list");
+			mav.setViewName("front/center/board/personalHealth/searchForm");
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".Healthlist()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".searchForm()] " + e.getMessage(), e);
 		}
 		finally {}
 		

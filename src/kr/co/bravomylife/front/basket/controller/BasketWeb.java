@@ -218,6 +218,7 @@ public class BasketWeb extends Common {
 				formattedItem.setDt_reg(item.getDt_reg());
 				formattedItem.setDiscount(item.getDiscount());
 				formattedItem.setPrice_sale(item.getPrice_sale());
+				formattedItem.setPoint_stack(item.getPoint_stack());
 				
 				formattedItem.setFormat_total_price(formatter.format(item.getTotal_price()));
 				formattedItem.setFormat_total_point(formatter.format(item.getTotal_point()));

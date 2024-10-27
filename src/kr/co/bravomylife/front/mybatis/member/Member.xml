@@ -2,6 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.member.Member">
 	
+	<select id="currentBasket" parameterType="memberDto" resultType="memberDto">
+		SELECT
+			COUNT(bsk.seq_sle) current_basket
+		FROM
+			TB_MBR_MST mst
+		LEFT JOIN
+			TB_BSK bsk
+		ON
+			mst.SEQ_MBR = bsk.SEQ_MBR
+		WHERE
+			mst.SEQ_MBR = #{seq_mbr}
+			AND bsk.FLG_DELETE = 'N'
+	</select>
+	
 	<update id="updateMyPasswd" parameterType="memberDto">
 		UPDATE
 			TB_MBR_MST

@@ -25,9 +25,11 @@
 .modal-content {
 	margin: auto;
 	display: block;
-	width: 80%;
+	 width: 100%;
 	max-width: 700px;
 	position: relative;
+	max-height: 80%;
+	object-fit: contain;
 }
 
 .close {
@@ -46,6 +48,7 @@
 @media only screen and (max-width: 700px) {
 	.modal-content {
 		width: 100%;
+		max-height: 80%;
 	}
 }
 </style>

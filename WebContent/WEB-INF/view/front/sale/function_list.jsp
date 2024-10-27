@@ -220,12 +220,16 @@
 													</div>
 												</c:when>
 												<c:otherwise>
-													<div class="product__price">
-														<span><fmt:formatNumber value="${list.price_sale}" type="number" /></span>
-														 <span style="text-decoration: none; color : #ff4c2e">-<fmt:formatNumber value="${list.discount}" type="number" />%</span>
-														 <span style="text-decoration: none; color: black; font-size: 1.3em">
-														 	<fmt:formatNumber value="${list.discount_sale}" type="number" />
-														 </span>원
+													<div class="product__price" style="display: flex; align-items: center; justify-content: center;">
+														<span style="margin-left:0px !important; font-size: 16px !important;">
+															<fmt:formatNumber value="${list.price_sale}" type="number" />
+														</span>
+														<span class="discount-rate" style="padding-top: 1px !important; margin-left:4px !important; margin-top:2px !important; font-size: 13px !important; text-decoration: none;">
+															${list.discount}%
+														</span>
+														<span style="text-decoration: none; color: black; font-size: 1.3em; margin-left: 7px;">
+															<fmt:formatNumber value="${list.discount_sale}" type="number" />
+														</span>원
 													</div>
 												</c:otherwise>
 											</c:choose>
@@ -235,10 +239,8 @@
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-						<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
-							<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
-						</div>
-					</div>
+				<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
+					<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
 				</div>
 			</div>
 		</div>

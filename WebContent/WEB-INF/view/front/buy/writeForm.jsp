@@ -25,9 +25,11 @@
 .modal-content {
 	margin: auto;
 	display: block;
-	width: 80%;
+	 width: 100%;
 	max-width: 700px;
 	position: relative;
+	max-height: 80%;
+	object-fit: contain;
 }
 
 .close {
@@ -46,6 +48,7 @@
 @media only screen and (max-width: 700px) {
 	.modal-content {
 		width: 100%;
+		max-height: 80%;
 	}
 }
 </style>
@@ -377,11 +380,25 @@
 								</c:if>
 							</div>
 							<ul class="pd-ul">
+							<c:choose>
+								<c:when test="${saleDto.discount == null || saleDto.discount == 0}">
 								<li>
 									<div>
-									<span class="pd-title">원가</span>
+									<span class="pd-title">가격</span>
 										<label for="stockin" class="pd-label">
-											<span class="pd-text"><fmt:formatNumber value="${saleDto.price_sale}" type="number" /></span>
+											<span class="pd-text" style="font-weight: bold !important;"><fmt:formatNumber value="${saleDto.price_sale}" type="number" /></span>
+											<span class="pd-text">원</span>
+											<input type="hidden" name="buyList[0].price"value="${saleDto.price_sale}" />
+										</label>
+									</div>
+								</li>
+								</c:when>
+								<c:otherwise>
+								<li>
+									<div>
+									<span class="pd-title">가격</span>
+										<label for="stockin" class="pd-label">
+											<span class="pd-text" style="font-weight: bold !important; color: #b1b0b0 !important; text-decoration: line-through !important;"><fmt:formatNumber value="${saleDto.price_sale}" type="number" /></span>
 											<span class="pd-text">원</span>
 										</label>
 									</div>
@@ -390,20 +407,22 @@
 									<div>
 									<span class="pd-title">판매가</span>
 										<label for="stockin" class="pd-label">
-											<span class="pd-text" style="color: #ff4c2e !important;"><fmt:formatNumber value="${saleDto.discount_sale}" type="number" /></span>
+											<span class="pd-text" style="color: #ff4c2e !important; font-weight: bold !important;"><fmt:formatNumber value="${saleDto.discount_sale}" type="number" /></span>
 											<span class="pd-text">원</span>
 											<input type="hidden" name="buyList[0].price"value="${saleDto.discount_sale}" />
-											<span class="pd-text" style="color: #ff4c2e !important;">(${saleDto.discount}%)</span>
+											<span class="discount-rate" style="padding-top: 1px !important; font-size: 13px !important; display: inline-block; width: auto;">${saleDto.discount}% 할인</span>
 										</label>
 									</div>
 								</li>
+								</c:otherwise>
+								</c:choose>
 								<li>
 									<div>
 									<span class="pd-title">적립 포인트</span>
 										<label for="stockin" class="pd-label">
-											<span class="pd-text">${saleDto.point_value}</span>
+											<span class="pd-text" style="font-weight: bold !important;">${saleDto.point_value}</span>
 											<span class="pd-text">적립</span>
-											<span class="pd-text" style="color: #346aff !important;">(${saleDto.point_stack}%)</span>
+											<span class="discount-rate" style="background: #346aff !important; padding-left: 5px !important; padding-right: 3px !important; padding-top: 1px !important; font-size: 13px !important; display: inline-block; width: auto;">${saleDto.point_stack}% 적립</span>
 											<input type="hidden" name="buyList[0].point" value="${saleDto.point_value}" />
 										</label>
 									</div>
@@ -544,12 +563,17 @@
 											</span>원</div>
 									</c:when>
 									<c:otherwise>
-										<div class="product__price">
-											<span><fmt:formatNumber value="${list.price_sale}" type="number" /></span>
-											 <span style="text-decoration: none; color : #ff4c2e">-${list.discount}%</span>
-											 <span style="text-decoration: none; color: black; font-size: 1.3em">
-											 	<fmt:formatNumber value="${list.discount_sale}" type="number" />
-											 </span>원</div>
+										<div class="product__price" style="display: flex; align-items: center; justify-content: center;">
+											<span style="margin-left:0px !important; font-size: 16px !important;">
+												<fmt:formatNumber value="${list.price_sale}" type="number" />
+											</span>
+											<span class="discount-rate" style="padding-top: 1px !important; margin-left:4px !important; margin-top:2px !important; font-size: 13px !important; text-decoration: none;">
+												${list.discount}%
+											</span>
+											<span style="text-decoration: none; color: black; font-size: 1.3em; margin-left: 7px;">
+												<fmt:formatNumber value="${list.discount_sale}" type="number" />
+											</span>원
+										</div>
 									</c:otherwise>
 								</c:choose>
 							</div>
@@ -602,7 +626,7 @@
 												<div class="review-form" style="display: flex; flex-direction: column; border-top: 0px !important; margin: 0px !important; width: 100% !important; padding-bottom: 25px !important; margin-bottom: 20px !important">
 													<div class="review-title" style="border-bottom: 0px !important; border-top: 0px !important; padding-left: 0px !important; padding-top: 0px !important">
 														<div>
-															<span class="reviewsub" style="font-weight: bold !important; font-size: 14px !important;">${review.mbr_nm}</span>
+															<span class="reviewsub" style="font-weight: bold !important; font-size: 14px !important;"><bravomylifeTag:masking text="${review.mbr_nm}" letter="*" count="1" mode="left" /></span>
 														</div>
 														<div>
 															<div class="product-name" style="padding: 0px !important; display: flex; align-items: center;">

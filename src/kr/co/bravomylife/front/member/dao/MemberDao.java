@@ -37,6 +37,10 @@ import kr.co.bravomylife.front.member.dto.MemberDto;
 @Repository("kr.co.bravomylife.front.member.dao.MemberDao")
 public class MemberDao extends BaseDao {
 	
+	public MemberDto currentBasket(MemberDto memberDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.currentBasket", memberDto);
+	}
+	
 	public int pointUpdate(BuyMasterDto buyMasterDto) {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.member.Member.pointUpdate", buyMasterDto);
 	}

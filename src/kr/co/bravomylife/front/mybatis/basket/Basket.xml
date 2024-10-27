@@ -136,6 +136,7 @@
 			, PRICE
 			, COUNT
 			, IMG
+			, POINT_STACK
 			, PRICE * (POINT_STACK / 100) POINT_VALUE
 			, CD_CTG_M
 			, CD_CTG_B

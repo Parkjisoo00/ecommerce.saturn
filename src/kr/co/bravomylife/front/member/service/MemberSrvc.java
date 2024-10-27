@@ -49,6 +49,10 @@ public class MemberSrvc {
 	@Inject
 	TermAgreeDao termAgreeDao;
 	
+	public MemberDto currentBasket(MemberDto memberDto) {
+		return memberDao.currentBasket(memberDto);
+	}
+	
 	@Transactional("txFront")
 	public boolean pointInsert(BuyMasterDto buyMasterDto) {
 		

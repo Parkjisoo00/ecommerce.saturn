@@ -22,7 +22,8 @@ package kr.co.bravomylife.front.member.controller;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.inject.Inject;
@@ -83,6 +84,46 @@ public class MemberWeb extends Common {
 	
 	@Inject
 	SaleSrvc saleSrvc;
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-27
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	 
+	@RequestMapping(value = "/front/member/currentBasket.json", method = RequestMethod.POST, headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
+	public @ResponseBody Map<String, Object> currentBasket(HttpServletRequest request) {
+		
+		Map<String, Object> response = new HashMap<>();
+		MemberDto memberDto = new MemberDto();
+		
+		String check = "[UNDEFINED]";
+		
+		try {
+			
+			if (!check.equals(getSession(request, "SEQ_MBR"))) {
+				
+				memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+				
+				logger.debug("SEQ_MBR 확인" + memberDto.getSeq_mbr());
+				
+				MemberDto _memberDto = memberSrvc.currentBasket(memberDto);
+				
+				response.put("memberDto", _memberDto);
+			}
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".currentBasket()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return response;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]

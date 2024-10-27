@@ -55,8 +55,15 @@ public class MemberDto {
 	private int	updater		= 0;
 	private int point			= 0;
 	private int total_point		= 0;
+	private int current_basket	= 0;
 	
 	
+	public int getCurrent_basket() {
+		return current_basket;
+	}
+	public void setCurrent_basket(int current_basket) {
+		this.current_basket = current_basket;
+	}
 	public int getPoint() {
 		return point;
 	}

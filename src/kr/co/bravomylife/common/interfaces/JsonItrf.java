@@ -109,13 +109,13 @@ public class JsonItrf {
 			responseDto = objectMapper.readValue(responseJSON, typeReference);
 		}
 		catch (JsonProcessingException e) {
-			logger.error("[kr.co.bravomylife.common.interfaces.JsonItrf.connectPost(requestDto, TypeReference, String)] " + e.getMessage(), e);
+			logger.error("[kr.co.bravomylife.common.interfaces.JsonItrf.connectGet(requestDto, TypeReference, String)] " + e.getMessage(), e);
 		}
 		catch (IOException e) {
-			logger.error("[kr.co.bravomylife.common.interfaces.JsonItrf.connectPost(requestDto, TypeReference, String)] " + e.getMessage(), e);
+			logger.error("[kr.co.bravomylife.common.interfaces.JsonItrf.connectGet(requestDto, TypeReference, String)] " + e.getMessage(), e);
 		}
 		catch (Exception e) {
-			logger.error("[kr.co.bravomylife.common.interfaces.JsonItrf.connectPost(requestDto, TypeReference, String)] " + e.getMessage(), e);
+			logger.error("[kr.co.bravomylife.common.interfaces.JsonItrf.connectGet(requestDto, TypeReference, String)] " + e.getMessage(), e);
 		}
 		finally {}
 		

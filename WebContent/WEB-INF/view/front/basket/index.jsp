@@ -323,7 +323,7 @@
 												</td>
 												<td class="cart-td">
 													<div>
-														<span style="font-size: 16px !important;"><fmt:formatNumber value="${list.price}" type="number" />원</span>
+														<span><fmt:formatNumber value="${list.price}" type="number" />원</span>
 														<input type="hidden" name="buyList[${status.index}].price" value="${list.price}">
 													</div>
 													<c:if test="${list.discount != null && list.discount != 0}">
@@ -333,8 +333,15 @@
 													</c:if>
 												</td>
 												<td class="cart-td">
-													<span style="color: #346aff !important;"><fmt:formatNumber value="${list.point_value}" type="number" /></span> 포인트
-													<input type="hidden" name="buyList[${status.index}].point" value="${list.point_value}">
+													<div>
+														<span style="color: #346aff !important;"><fmt:formatNumber value="${list.point_value}" type="number" /></span> 포인트
+														<input type="hidden" name="buyList[${status.index}].point" value="${list.point_value}">
+													</div>
+													<c:if test="${list.point_stack != null && list.point_stack != 0}">
+													<div style="padding-top: 1px !important; margin-bottom: 1px !important;">
+														<span class="discount-rate" style="background: #346aff !important;">${list.point_stack}% 적립</span>
+													</div>
+													</c:if>
 												</td>
 												<td class="cart-td" data-total-point="${list.total_point}">
 													<span class="totalPointDisplay" style="color: #346aff !important; font-size: 13px !important; font-weight: bold !important;">${list.format_total_point}</span> 포인트

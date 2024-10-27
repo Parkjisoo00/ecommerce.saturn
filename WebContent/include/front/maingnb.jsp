@@ -44,7 +44,7 @@
 				<span class="icon_bag_alt" 
 					style="font-size: 20px; display: inline-block; position: relative; width: 20px; height: 20px;">
 				</span>
-				<div class="tip" style="position: absolute; top: -12px; right: -12px; font-size: 15px; width: 12px; height: 12px; display: flex; transform: translate(-30%, -30%);">
+				<div id="basket-count" class="tip" style="position: absolute; top: -12px; right: -12px; font-size: 15px; width: 12px; height: 12px; display: flex; transform: translate(-30%, -30%);">
 					2
 				</div>
 			</li>
@@ -148,3 +148,29 @@
 			<i class="fa fa-bars"></i>
 	</div>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+$(document).ready(function () {
+	
+	function basketData() {
+		
+		$.ajax({
+			type: "POST",
+			url: "/front/member/currentBasket.json",
+			dataType: "json",
+			contentType: "application/json; charset=UTF-8",
+			success: function (res) {
+				
+				if (res.memberDto) {
+					
+					$("#basket-count").text(res.memberDto.current_basket);
+				} else {
+					
+					$("#basket-count").text(0);
+				}
+			},
+		});
+	}
+	basketData();
+});
+</script>

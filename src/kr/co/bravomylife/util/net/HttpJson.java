@@ -49,6 +49,12 @@ public class HttpJson {
 		
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		
+		/*
+		System.out.println("-------------------------");
+		System.out.println(url);
+		System.out.println("-------------------------");
+		*/
+		
 		conn.setConnectTimeout(timeout);
 		conn.setReadTimeout(timeout);
 		
