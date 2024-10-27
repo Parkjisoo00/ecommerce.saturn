@@ -59,6 +59,28 @@ public class SaleSrvc {
 	@Inject
 	SaleDao saleDao;
 	
+	public PagingListDto mainList() {
+		
+		PagingDto pagingDto = new PagingDto();
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		pagingDto.setLinePerPage(10);
+		pagingDto.setTotalPage(1);
+		
+		int totalPage = pagingDto.getTotalPage();
+		
+		int totalLine = saleDao.mainCount(pagingDto);
+		
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(saleDao.mainList(pagingDto));
+		
+		return pagingListDto;
+	}
+	
 	@Transactional("txFront")
 	public boolean reviewDelete(SaleDto saleDto) {
 		

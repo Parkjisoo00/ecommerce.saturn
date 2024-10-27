@@ -40,6 +40,14 @@ import kr.co.bravomylife.front.sale.dto.SaleFileDto;
 @Repository("kr.co.bravomylife.front.sale.dao.SaleDao")
 public class SaleDao extends BaseDao {
 	
+	public List<SaleDto> mainList(PagingDto pagingDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.mainList", pagingDto);
+	}
+	
+	public int mainCount(PagingDto pagingDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.sale.Sale.mainCount", pagingDto);
+	}
+	
 	public int reviewDelete(SaleDto saleDto) {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.sale.Sale.reviewDelete", saleDto);
 	}
