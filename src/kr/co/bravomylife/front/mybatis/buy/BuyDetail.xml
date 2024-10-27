@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.buy.BuyDetail">
 	
+	<insert id="insertBest" parameterType="buyDetailDto">
+		INSERT INTO TB_BEST
+			(SEQ_BEST, SEQ_SLE, FLG_BEST, REGISTER, DT_REG)
+		VALUES
+			(SQ_SEQ_BEST.NEXTVAL, #{seq_sle}, 'N', #{register}, SYSDATE)
+	</insert>
+	
 	<insert id="insert" parameterType="buyDetailDto">
 		INSERT INTO TB_BUY_DTL
 			(SEQ_BUY_DTL, SEQ_BUY_MST, SEQ_SLE, SEQ_MBR, SEQ_REVIEW, SLE_NM, COUNT, PRICE, POINT, FLG_REVIEW, DT_REG, REGISTER)

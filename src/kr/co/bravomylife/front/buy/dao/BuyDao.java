@@ -41,6 +41,10 @@ import kr.co.bravomylife.front.sale.dto.SaleDto;
 @Service("kr.co.bravomylife.front.buy.dao.BuyDao")
 public class BuyDao extends BaseDao {
 	
+	public int insertBest(BuyDetailDto buyDetailDto) {
+		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.buy.BuyDetail.insertBest", buyDetailDto);
+	}
+	
 	public List<SaleDto> pointHistory(PagingDto pagingDto) {
 		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.buy.Buy.pointHistory", pagingDto);
 	}

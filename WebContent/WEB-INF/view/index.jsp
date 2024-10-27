@@ -252,19 +252,19 @@
 					</div>
 				</div>
 			</div>
-			<div class="row property__gallery" style="display: flex; justify-content: center; align-items: center;">
+			<div class="row property__gallery" style="display: flex; justify-content: center;">
 				<c:forEach var="list" items="${list}">
-					<div class="col-lg-3 col-md-6" style="padding: 0px !important;">
+					<div class="col-lg-2 col-md-6" style="padding: 0px !important; flex: 0 0 16.6% !important;">
 						<div class="product__item">
 							<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');" style="display: flex; justify-content: center; align-items: center;">
-								<div class="product__item__pic set-bg" data-setbg="${list.img}" style="width: 180px; height: 180px;">
+								<div style="height: 200px; width: 200px;" class="product__item__pic set-bg" data-setbg="${list.img}">
 								<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
 									<div class="label new">베스트</div>
 								</c:if>
 								</div>
 							</a>
 							<div class="product__item__text">
-								<h6 style="line-height: 1.5em; min-height: 3em;"><a style="font-size: 15px;">${list.sle_nm}</a></h6>
+								<h6 style="line-height: 1.5em; min-height: 3em; padding-left: 15px !important; padding-right: 15px !important;"><a style="font-size: 15px;">${list.sle_nm}</a></h6>
 									<div class="rating">
 										<c:if test="${list.star == 0}">
 											<i class="fa fa-star" style="color: #e0e0e0;"></i>
@@ -314,7 +314,8 @@
 										<div class="product__price">
 											<span style="text-decoration: none; font-size: 1.3em; color: black;">
 												<fmt:formatNumber value="${list.price_sale}" type="number" />
-											</span>원</div>
+											</span>원
+										</div>
 									</c:when>
 									<c:otherwise>
 										<div class="product__price" style="display: flex; align-items: center; justify-content: center;">

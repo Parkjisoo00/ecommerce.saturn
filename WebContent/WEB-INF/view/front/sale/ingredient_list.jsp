@@ -159,14 +159,14 @@
 								<div class="col-lg-2 col-md-6">
 									<div class="product__item">
 										<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');" style="display: flex; justify-content: center; align-items: center;">
-											<div class="product__item__pic set-bg" data-setbg="/img/product/${list.img}">
+											<div style="height: 200px; width: 200px;" class="product__item__pic set-bg" data-setbg="/img/product/${list.img}">
 											<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
 												<div class="label new">베스트</div>
 											</c:if>
 											</div>
 										</a>
 										<div class="product__item__text">
-											<h6 style="line-height: 1.5em; min-height: 3em;"><a href="#" style="font-size: 15px;">${list.sle_nm}</a></h6>
+											<h6 style="line-height: 1.5em; min-height: 3em;"><a style="font-size: 15px;">${list.sle_nm}</a></h6>
 												<div class="rating">
 													<c:if test="${list.star == 0}">
 														<i class="fa fa-star" style="color: #e0e0e0;"></i>

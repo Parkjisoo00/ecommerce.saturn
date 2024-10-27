@@ -689,6 +689,28 @@
 			GROUP BY
 				SEQ_SLE
 		),
+		best AS (
+			SELECT
+				SEQ_SLE
+				, MAX(FLG_BEST) AS FLG_BEST
+			FROM
+				TB_BEST
+			GROUP BY
+				SEQ_SLE
+		),
+		likeTbl AS (
+			SELECT
+				SEQ_SLE
+				, SEQ_MBR
+				, MAX(FLG_LIKE) AS FLG_LIKE
+			FROM
+				TB_LIKE
+			WHERE
+				SEQ_MBR = #{seq_mbr}
+			GROUP BY
+				SEQ_SLE
+				, SEQ_MBR
+		),
 		buy_dtl AS (
 			SELECT
 				SEQ_SLE
