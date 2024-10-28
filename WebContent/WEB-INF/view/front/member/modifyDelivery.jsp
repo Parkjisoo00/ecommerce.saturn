@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<%@ page info="/WEB-INF/view/front/member/modifyForm.jsp" %>
+<%@ page info="/WEB-INF/view/front/member/modifyDelivery.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="kor">
@@ -44,6 +44,26 @@
 		frmMain.action = "/front/center/board/myPageNotice/list.web";
 		frmMain.submit();
 	}
+	
+	function writeFormDelivery(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("seq_mbr_addr").value = value;
+		
+		frmMain.action = "/front/member/writeFormDelivery.web";
+		frmMain.submit();
+	}
+	
+	function deleteDelivery(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("seq_mbr_addr").value = value;
+		
+		frmMain.action="/front/member/deleteDelivery.web";
+		frmMain.submit();
+	}
 	</script>
 </head>
 <body>
@@ -61,21 +81,23 @@
 	<!-- Breadcrumb End -->
 
 				<!-- Checkout Section Begin -->
-				<section class="checkout spad" >
-					<div class="container">
-						<form id="frmMain" method="POST" class="checkout__form">
-						<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		/>
-							<div class="row"style="display: flex; justify-content: center; align-items: center;">
+					<section class="checkout spad" >
+						<div class="container">
+							<form id="frmMain" method="POST" class="checkout__form">
+							<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		/>
+							<input type="hidden" name="seq_mbr_addr"		id="seq_mbr_addr"		value="0"/>
+								<div class="row"style="display: flex; justify-content: center; align-items: center;">
 								<div class="col-lg-8">
 									<h5 style="font-size :30px; border-bottom: 0px !important;">배송지 관리</h5>
+									<h6 class="cart-title" style="font-size: 16px !important;">*배송지는 최대 3개까지 등록할 수 있습니다.</h6>
 									<div class="shop__cart__table">
 										<table class="cart-table" style="border-bottom: 1px solid #818181; border-top: 1px solid #818181;">
 											<thead>
 												<tr>
-													<th class="health-head" style="width:20% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">주소</th>
+													<th class="health-head" style="width:10% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">주소</th>
 													<th class="health-head" style="background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">도로명</th>
-													<th class="health-head" style="width:25% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">상세</th>
-													<th class="health-head" style="width:15% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">등록일</th>
+													<th class="health-head" style="width:20% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">상세</th>
+													<th class="health-head" style="width:29% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">등록일</th>
 												</tr>
 											</thead>
 											<tbody id="dataBody">
@@ -99,18 +121,15 @@
 															<td class="health-body" style="text-align: center !important; border-bottom: 0px !important;">
 																${list.addr2}
 															</td>
-															<td class="health-body" style="text-align: center !important; border-bottom: 0px !important;">
-																${list.dt_reg}
-																
-															</td>
-															</tr>
-														<tr>
-															<td style="padding-bottom: 15px !important; padding-top: 0px !important; text-align: center; vertical-align: middle;">
-																<span style="display: inline-flex; gap: 10px; align-items: center;">
-																	<a class="reviewBtn" href="javascript:deliveryWriteForm('${list.seq_mbr_addr}');">
+															<td class="health-body" style="display: flex; align-items: center; justify-content: space-between; text-align: left; border-bottom: 0px !important;">
+																<div>
+																	${list.dt_reg}
+																</div>
+																<span style="white-space: nowrap;">
+																	<a class="reviewBtn" style="font-size: 12px !important; font-weight: normal !important; border: 0px !important;" href="javascript:writeFormDelivery('${list.seq_mbr_addr}');">
 																		수정
 																	</a>
-																	<a class="reviewBtn" href="javascript:deliveryDel('${list.seq_mbr_addr}');">
+																	<a class="reviewBtn" style="font-size: 12px !important; font-weight: normal !important; border: 0px !important;" href="javascript:deleteDelivery('${list.seq_mbr_addr}');">
 																		삭제
 																	</a>
 																</span>
@@ -139,7 +158,7 @@
 										<!-- 수정 버튼 -->
 										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="checkout__form__input">
-												<input type="button" value="추가하기" style="width: 100%; text-align: center;" id="registerId" onClick="checkModifyDelivery();"/>
+												<input type="button" value="배송지 추가하기" style="width: 100%; text-align: center;" id="registerId" onClick="checkModifyDelivery();"/>
 											</div>
 										</div>
 									</div>
@@ -147,7 +166,7 @@
 								</div>
 							</form>
 						</div>
-			</section>
+					</section>
 
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
@@ -188,7 +207,7 @@
 					}
 					else {
 						
-						alert("배송지는 2개까지 추가할 수 있습니다.");
+						alert("배송지는 3개까지 추가할 수 있습니다.");
 					}
 				},
 			});

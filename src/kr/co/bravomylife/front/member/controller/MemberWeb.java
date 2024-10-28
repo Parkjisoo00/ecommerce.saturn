@@ -22,7 +22,9 @@ package kr.co.bravomylife.front.member.controller;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -96,6 +98,121 @@ public class MemberWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
+	@RequestMapping(value = "/front/member/deleteDelivery.web")
+	public ModelAndView deleteDelivery(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			memberSrvc.deleteDelivery(memberDto);
+			
+			request.setAttribute("script"	, "alert('배송지가 삭제되었습니다.');");
+			request.setAttribute("redirect"	, "/front/member/modifyDelivery.web");
+			
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".deleteDelivery()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-28
+	 * <p>DESCRIPTION:마이 페이지 수정</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/member/writeProcDelivery.web")
+	public ModelAndView writeProcDelivery(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+			
+			memberDto.setPost(aes.encode(memberDto.getPost()));
+			memberDto.setAddr1(aes.encode(memberDto.getAddr1()));
+			memberDto.setAddr2(aes.encode(memberDto.getAddr2()));
+			
+			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			memberSrvc.writeProcDelivery(memberDto);
+			
+			request.setAttribute("script"	, "alert('배송지가 수정되었습니다.');");
+			request.setAttribute("redirect"	, "/front/member/modifyDelivery.web");
+			
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".writeProcDelivery()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-28
+	 * <p>DESCRIPTION:마이 페이지 수정</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/member/writeFormDelivery.web")
+	public ModelAndView writeFormDelivery(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+			
+			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			MemberDto _memberDto = memberSrvc.writeFomrDelivery(memberDto);
+			
+			_memberDto.setPost(aes.decode(_memberDto.getPost()));
+			_memberDto.setAddr1(aes.decode(_memberDto.getAddr1()));
+			_memberDto.setAddr2(aes.decode(_memberDto.getAddr2()));
+			_memberDto.setDt_reg(_memberDto.getDt_reg());
+			
+			mav.addObject("memberDto", _memberDto);
+			mav.setViewName("front/member/writeFormDelivery");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".writeFormDelivery()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-28
+	 * <p>DESCRIPTION:마이 페이지 수정</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
 	@RequestMapping(value = "/front/member/modifyDeliveryProc.web")
 	public ModelAndView modifyDeliveryProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
@@ -103,7 +220,14 @@ public class MemberWeb extends Common {
 		
 		try {
 			
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+			
 			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			memberDto.setPost(aes.encode(memberDto.getPost()));
+			memberDto.setAddr1(aes.encode(memberDto.getAddr1()));
+			memberDto.setAddr2(aes.encode(memberDto.getAddr2()));
 			
 			memberSrvc.modifyDeliveryProc(memberDto);
 			
@@ -165,6 +289,7 @@ public class MemberWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/front/member/modifyDelivery.web")
 	public ModelAndView modifyDelivery(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
@@ -172,9 +297,30 @@ public class MemberWeb extends Common {
 		
 		try {
 			
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+			
 			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
 			MemberListDto memberListDto = memberSrvc.deliveryList(memberDto);
+			
+			List<MemberDto> _memberListDto = (List<MemberDto>)memberListDto.getList();
+			List<MemberDto> MemberList = new ArrayList<>();
+			
+			for (MemberDto member : _memberListDto) {
+				
+				 MemberDto _MemberDto = new MemberDto();
+				
+				_MemberDto.setSeq_mbr_addr(member.getSeq_mbr_addr());
+				_MemberDto.setPost(aes.decode(member.getPost()));
+				_MemberDto.setAddr1(aes.decode(member.getAddr1()));
+				_MemberDto.setAddr2(aes.decode(member.getAddr2()));
+				_MemberDto.setDt_reg(member.getDt_reg());
+				
+				MemberList.add(_MemberDto);
+			}
+			
+			memberListDto.setList(MemberList);
 			
 			mav.addObject("list", memberListDto.getList());
 			mav.setViewName("front/member/modifyDelivery");

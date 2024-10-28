@@ -50,6 +50,44 @@ public class MemberSrvc {
 	@Inject
 	TermAgreeDao termAgreeDao;
 	
+	@Transactional("txFront")
+	public boolean deleteDelivery(MemberDto memberDto) {
+		
+		int result = 0;
+		
+		result = memberDao.deleteDelivery(memberDto);
+		
+		if(result == 1) {
+			
+			return true;
+		}
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	@Transactional("txFront")
+	public boolean writeProcDelivery(MemberDto memberDto) {
+		
+		int result = 0;
+		
+		result = memberDao.writeProcDelivery(memberDto);
+		
+		if(result == 1) {
+			
+			return true;
+		}
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	public MemberDto writeFomrDelivery(MemberDto memberDto) {
+		return memberDao.writeFomrDelivery(memberDto);
+	}
+	
 	public MemberDto select(MemberDto memberDto) {
 		return memberDao.select(memberDto);
 	}
@@ -78,7 +116,7 @@ public class MemberSrvc {
 		
 		result = memberDao.deliveryCheck(memberDto);
 		
-		if(result < 2) {
+		if(result < 3) {
 			
 			return true;
 		}
@@ -180,6 +218,7 @@ public class MemberSrvc {
 		// 회원 정보
 		result += memberDao.insertMaster(memberDto);
 		result += memberDao.insertDetail(memberDto);
+		result += memberDao.insertAddr(memberDto);
 		
 		// 약관 정보
 		TermAgreeDto termAgreeDto = new TermAgreeDto();
@@ -196,7 +235,7 @@ public class MemberSrvc {
 		}
 		
 		// 회원(2개) + 약관(3개)
-		if (result == 2 + 3) return true;
+		if (result == 3 + 3) return true;
 		else {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return false;

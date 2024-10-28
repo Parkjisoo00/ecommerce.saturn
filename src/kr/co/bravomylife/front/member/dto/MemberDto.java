@@ -57,8 +57,15 @@ public class MemberDto {
 	private int total_point		= 0;
 	private int current_basket	= 0;
 	private int delivery_count	= 0;
+	private int seq_mbr_addr	= 0;
 	
 	
+	public int getSeq_mbr_addr() {
+		return seq_mbr_addr;
+	}
+	public void setSeq_mbr_addr(int seq_mbr_addr) {
+		this.seq_mbr_addr = seq_mbr_addr;
+	}
 	public int getDelivery_count() {
 		return delivery_count;
 	}
