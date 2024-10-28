@@ -94,7 +94,14 @@
 					<br/>
 					<div class="blog__details__item__title">
 						<span class="tip" style="margin-left: 270px;">문의글 제목</span>
-						<h4 style="margin-left: 270px;">${boardDto.title}</h4>
+						<h4 style="margin-left: 270px;">
+							<c:if test="${boardDto.seq_reply == 0}">
+								<span style="color: red;">[미답변]</span>
+							</c:if>
+							<c:if test="${boardDto.seq_reply > 0}">
+								<span style="color: blue;">[답변 완료]</span>
+							</c:if>${boardDto.title}
+						</h4>
 						<ul>
 							<li><span style="margin-left: 270px; font-size: 16px;">[등록 일자]</span></li>
 							<li style="font-size: 16px;">${boardDto.dt_reg}</li>
@@ -179,9 +186,9 @@
 				</div>
 					</div>
 				</div>
-			</c:if>
+				</c:if>
 			
-			</div>
+		</div>
 	<!-- 답변 부분 추후 작업 
 				<c:if test="${boardDto.seq_reply > 0}">
 				<br/>

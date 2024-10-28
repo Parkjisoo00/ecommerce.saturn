@@ -92,68 +92,112 @@
 	<!-- Breadcrumb Begin -->
 		<%@ include file="/include/front/mygnb.jsp" %>
 	<!-- Breadcrumb End -->
-<section class="shop spad">
+<section class="shop spad"style="min-height: calc(100vh - 100px); ">
 	<div class="container">
 		<article class="txtCenter">
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">제목 <span></span></p>
-					<input type="text" id="title" name="title" value="${boardDto.title}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
+		<div class="col-lg-12 col-md-6">
+				<div class="blog__details__content">
+					<br/>
+					<br/>
+					<br/>
+					<div class="blog__details__item__title">
+						<span class="tip" style="margin-left: 270px;">문의글 제목</span>
+						
+						<h4 style="margin-left: 270px;">
+							<c:if test="${boardDto.seq_reply == 0}">
+								<span style="color: red;">[미답변]</span>
+							</c:if>
+							<c:if test="${boardDto.seq_reply > 0}">
+								<span style="color: blue;">[답변 완료]</span>
+							</c:if>${boardDto.title}
+						</h4>
+						<ul>
+							<li><span style="margin-left: 270px; font-size: 16px;">[등록 일자]</span></li>
+							<li style="font-size: 16px;">${boardDto.dt_reg}</li>
+						</ul>
+						<ul>
+							<li><span style="margin-left: 270px; font-size: 16px;">[카테고리]</span></li>
+							<li style="font-size: 16px;">
+								<select id="cd_ctg" name="cd_ctg" disabled >
+									<option value="0"<c:if test="${boardDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
+									<option value="1"<c:if test="${boardDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
+									<option value="2"<c:if test="${boardDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
+									<option value="3"<c:if test="${boardDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
+									<option value="4"<c:if test="${boardDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
+									<option value="5"<c:if test="${boardDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
+									<option value="6"<c:if test="${boardDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
+									<option value="9"<c:if test="${boardDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
+								</select>
+							</li>
+						</ul>
+					</div>
+					<br/>
+					<br/>
+					<div class="col-lg-9 col-md-9 col-sm-9">
+						<div class="blog__details__quote" style="margin-left: 250px;">
+							<p>${boardDto.content}</p>
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="checkout__form__input">
+								<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 235px;">
+							<c:if test="${boardDto.file_orig != ''}">
+								<a style="color:blue;"href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
+							</c:if>
+							</div>
+						</div>
+						<br/>
+						<br/>
+						<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
+							<div class="col-lg-12 col-md-12 col-sm-12">
+								<div class="checkout__form__input" style="margin-left: 100px;">
+								<c:if test="${boardDto.seq_reply == 0}">
+									<input type="button" value="삭제" style="width:100px" onclick="javascript:remove(3);" />
+									 <input type="button" value="수정" style="width:100px" onclick="javascript:modifyForm(3);" /> 
+								</c:if>
+									<input type="button" value="목록" style="width:100px" onclick="javascript:goMyList(3);"/>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
+				<c:if test="${boardDto.seq_reply > 0}">
+				<div class="blog__details__content">
+					<br/>
+					<br/>
+					<br/>
+					<div class="blog__details__item__title" style="margin-top:0px">
+						<span class="tip" style="margin-left: 270px;">답변</span>
+						<h4 style="margin-left: 270px;">${boardReplyDto.title}</h4>
+						<ul>
+							<li><span style="margin-left: 270px; font-size: 16px;">[등록 일자]</span></li>
+							<li style="font-size: 16px;">${boardReplyDto.dt_reg}</li>
+						</ul>
+					</div>
+					<br/>
+					<br/>
+					<div class="col-lg-9 col-md-9 col-sm-9">
+					<div class="blog__details__quote" style="margin-left: 250px;">
+						<p>${boardReplyDto.content}</p>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="checkout__form__input">
+							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 235px;">
+							<c:if test="${boardReplyDto.file_orig != ''}">
+								<a style="color:blue;"href="javascript:download('BbsQuestion', ${boardReplyDto.seq_bbs});">[첨부파일 다운로드]</a>
+							</c:if>
+						</div>
+					</div>
 			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">카테고리 <span></span></p>
-						<select id="cd_ctg" name="cd_ctg" style="margin-left: 300px;" disabled >
-							<option value="0"<c:if test="${boardDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
-							<option value="1"<c:if test="${boardDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
-							<option value="2"<c:if test="${boardDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
-							<option value="3"<c:if test="${boardDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
-							<option value="4"<c:if test="${boardDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
-							<option value="5"<c:if test="${boardDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
-							<option value="6"<c:if test="${boardDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
-							<option value="9"<c:if test="${boardDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
-						</select>
+			<br/>
+				<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+					</div>
 				</div>
-			</div>
-			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">내용 <span></span></p>
-					<input type="text" id="content" name="content" value="${boardDto.content}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
+					</div>
 				</div>
-			</div>
-			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-				<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">
-					<c:if test="${boardDto.file_orig != ''}">
-						<a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});">첨부파일 다운로드</a>
-					</c:if>
-				</div>
-			</div>
-			<br/>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 300px;">등록 일자 <span></span></p>
-					<input type="text" id="dt_reg" name="dt_reg" value="${boardDto.dt_reg}" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-left: 300px;" />
-				</div>
-			</div>
-			<br/>
-			<br/>
-			<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-				<c:if test="${boardDto.seq_reply == 0}">
-					<input type="button" value="삭제" style="width:100px" onclick="javascript:remove(3);" />
-					 <input type="button" value="수정" style="width:100px" onclick="javascript:modifyForm(3);" /> 
 				</c:if>
-					<input type="button" value="목록" style="width:100px" onclick="javascript:goList(3);"/>
-				</div>
-			</div>
-			</div>
 			
+		</div>
 	<!-- 답변 부분 추후 작업 
 				<c:if test="${boardDto.seq_reply > 0}">
 				<br/>
