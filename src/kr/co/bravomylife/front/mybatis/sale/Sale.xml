@@ -2,6 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.sale.Sale">
 
+	<update id="schedule_best_y">
+	UPDATE
+		TB_BEST
+	SET
+		FLG_BEST = 'Y'
+		, DT_UPT = SYSDATE
+	WHERE
+		SEQ_BEST IN (
+			SELECT
+				SEQ_BEST
+			FROM (
+				SELECT
+					SEQ_BEST
+				FROM
+					TB_BEST
+				ORDER BY
+					COUNT DESC
+				)
+		<![CDATA[
+		WHERE ROWNUM <= 20
+		]]>
+		)
+	</update>
+
+	<update id="schedule_best_n">
+		UPDATE
+			TB_BEST
+		SET
+			FLG_BEST		=	'N'
+			, DT_UPT		=	SYSDATE
+	</update>
+
 	<select id="mainCount" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
 			COUNT(ROWNUM)

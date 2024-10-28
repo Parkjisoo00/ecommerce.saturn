@@ -21,6 +21,9 @@
 	<aop:aspectj-autoproxy />
 	<beans:bean name="commonAop" class="kr.co.bravomylife.common.aop.CommonAop" />
 	
+	<task:annotation-driven />
+	<beans:bean id="systemScheduler" class="kr.co.bravomylife.common.scheduler.SystemSchd" />
+	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- MAX Size: 10MB + 1Byte -->
 		<!-- <beans:property name="maxUploadSize" value="10485761" /> -->

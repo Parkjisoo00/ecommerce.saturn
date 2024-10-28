@@ -59,6 +59,16 @@ public class SaleSrvc {
 	@Inject
 	SaleDao saleDao;
 	
+	public int schedule_best() {
+		
+		int result = 0;
+		
+		result += saleDao.schedule_best_n();
+		result += saleDao.schedule_best_y();
+		
+		return result;
+	}
+	
 	public PagingListDto mainList() {
 		
 		PagingDto pagingDto = new PagingDto();
