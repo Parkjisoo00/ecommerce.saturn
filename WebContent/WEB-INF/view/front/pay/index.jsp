@@ -219,12 +219,13 @@
 								<td class="customer-td1">배송주소</td>
 								<td class="customer-td2">
 									<input class="customer-input" type="text" id="post" name="post" size="5" autocomplete="off" value="${memberDto.post}"/>
+									<input class="customer-input" type="hidden" id="seq_mbr_addr" name="seq_mbr_addr" value=""/>
 									<label for="addr1">도로명</label>
-									<input class="customer-input" type="text"	id="addr1"	name="addr1" size="40" autocomplete="off" value="${memberDto.addr1}"/>
+									<input class="customer-input" style="width:300px" type="text" id="addr1" name="addr1" size="40" autocomplete="off" value="${memberDto.addr1}"/>
 									<span id="guide" style="color:#999; display:none"></span>
 									<label for="addr2">상세</label>
-									<input style="width:40px" class="customer-input" type="text"	id="addr2"	name="addr2" size="20" placeholder="상세 주소" autocomplete="off" value="${memberDto.addr2}"/>
-									<input class="customer-button" type="button" onclick="#" value="배송지 변경">
+									<input style="width:100px" class="customer-input" type="text" id="addr2" name="addr2" size="20" placeholder="상세 주소" autocomplete="off" value="${memberDto.addr2}"/>
+									<input class="customer-button" type="button" onclick="changeDeliveryAddress()" value="배송지 변경">
 								</td>
 							</tr>
 							</tbody>
@@ -276,6 +277,11 @@
 				</div>
 			</div>
 		</section>
+	<div id="deliveryModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border: 1px solid #ccc; padding: 20px; z-index: 1000; width: 400px; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">
+		<button type="button" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 18px; cursor: pointer;" onclick="closeModal()">×</button>
+			<h3 style="margin-top: 0; text-align: center; margin-bottom: 30px;">배송지 변경</h3>
+		<div id="deliveryList" style="margin-top: 15px;"></div>
+	</div>
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
 	<%@ include file="/include/common/footerpic.jsp" %>
@@ -377,6 +383,64 @@
 				KCP_Pay_Execute(form);
 			}
 			catch (e) {	}
+		}
+		
+		function changeDeliveryAddress() {
+			$.ajax({
+				type: "POST",
+				url: "/front/buy/deliveryChanges.json",
+				dataType: "json",
+				contentType: "application/json; charset=UTF-8",
+				success: function(res) {
+					
+					var deliveryListContainer = $('#deliveryList');
+					deliveryListContainer.empty();
+					
+					if (res && res.length > 0) {
+						
+						res.forEach(function(item, index) {
+							
+							var seqMbrAddr = item.seq_mbr_addr;
+							var post = item.post;
+							var addr1 = item.addr1;
+							var addr2 = item.addr2;
+							
+							var deliveryDiv = 
+								
+								'<div style="border: 1px solid #e0e0e0; border-radius: 2px; font-family: 돋움, Dotum, sans-serif !important; margin-bottom: 15px;">' +
+									'<div style="padding: 15px;">' +
+										'<div style="font-size: 16px; line-height: 20px; white-space: nowrap; font-weight: bold; margin-bottom: 10px;">배송지 상세 정보</div>' +
+										'<div style="margin-bottom: 5px; font-size: 14px;"> ' + post + '</div>' +
+										'<div style="margin-bottom: 5px; font-size: 14px;"> ' + addr1 + '</div>' +
+										'<div style="margin-bottom: 5px; font-size: 14px;"> ' + addr2 + '</div>' +
+										'<div>' +
+										'<a id="btnPay" class="cart-btn" style="cursor: pointer; background: white; color: #346aff !important; border: 1px solid #346aff; margin: 0; display: inline-block; padding: 4px 12px; text-align: center;" ' +
+											'onclick="selectAddress(\'' + seqMbrAddr + '\', \'' + post + '\', \'' + addr1 + '\', \'' + addr2 + '\')">선택</a>' +
+									'</div>' +
+									'</div>' +
+								'</div>';
+								
+							deliveryListContainer.append(deliveryDiv);
+						});
+						$('#deliveryModal').show();
+						$('#modalOverlay').show();
+					}
+				},
+			});
+		}
+		
+		function closeModal() {
+			$('#deliveryModal').hide();
+			$('#modalOverlay').hide();
+		}
+		
+		function selectAddress(seq_mbr_addr, post, addr1, addr2) {
+			$('#seq_mbr_addr').val(seq_mbr_addr);
+			$('#post').val(post);
+			$('#addr1').val(addr1);
+			$('#addr2').val(addr2);
+			
+			closeModal();
 		}
 	</script>
 	<script type="text/javascript" src="https://testpay.kcp.co.kr/plugin/payplus_web.jsp"></script>

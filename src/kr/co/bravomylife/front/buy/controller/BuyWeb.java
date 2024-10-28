@@ -21,9 +21,11 @@
 package kr.co.bravomylife.front.buy.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.inject.Inject;
@@ -37,6 +39,7 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.common.dto.FileUploadDto;
@@ -48,6 +51,8 @@ import kr.co.bravomylife.front.buy.service.BuySrvc;
 import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
+import kr.co.bravomylife.front.member.dto.MemberDto;
+import kr.co.bravomylife.front.member.service.MemberSrvc;
 import kr.co.bravomylife.front.sale.dto.ImageData;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
 import kr.co.bravomylife.front.sale.dto.SaleFileDto;
@@ -80,6 +85,55 @@ public class BuyWeb extends Common {
 	
 	@Inject
 	SaleSrvc saleSrvc;
+	
+	@Inject
+	MemberSrvc memberSrvc;
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-28
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	 
+	@RequestMapping(value = "/front/buy/deliveryChanges.json", method = RequestMethod.POST, headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
+	public @ResponseBody List<Map<String, Object>> deliveryChanges(HttpServletRequest request) {
+		
+		List<Map<String, Object>> responseList = new ArrayList<>();
+		MemberDto memberDto = new MemberDto();
+		
+		try {
+			
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+			
+			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			List<MemberDto> memberList = memberSrvc.deliveryChanges(memberDto);
+			
+			for (MemberDto member : memberList) {
+				
+				Map<String, Object> map = new HashMap<>();
+				
+				map.put("seq_mbr_addr", member.getSeq_mbr_addr());
+				map.put("post", aes.decode(member.getPost()));
+				map.put("addr1", aes.decode(member.getAddr1()));
+				map.put("addr2", aes.decode(member.getAddr2()));
+				
+				responseList.add(map);
+			}
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".deliveryChanges()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return responseList;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -581,7 +635,7 @@ public class BuyWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/buy/writeProc.web")
-	public ModelAndView writeProc(HttpServletRequest request, HttpServletResponse response, BuyDetailListDto buyDetailListDto, int usePoint) {
+	public ModelAndView writeProc(HttpServletRequest request, HttpServletResponse response, BuyDetailListDto buyDetailListDto, int usePoint, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
@@ -638,7 +692,7 @@ public class BuyWeb extends Common {
 				buyMasterDto.setTotal_point(totalPoint);
 				buyMasterDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 				
-				if (buySrvc.insert(buyMasterDto, listBuyDetailDto, "N/A")) {
+				if (buySrvc.insert(buyMasterDto, listBuyDetailDto, "N/A",memberDto)) {
 					request.setAttribute("script"	, "alert('추후 결제 페이지로 이동 예정');");
 					request.setAttribute("redirect"	, "/");
 				}

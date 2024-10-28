@@ -45,8 +45,15 @@ public class BuyMasterDto {
 	private int updater					= 0;
 	private int total_point				= 0;
 	private int use_point				= 0;
+	private int seq_mbr_addr			= 0;
 	
 	
+	public int getSeq_mbr_addr() {
+		return seq_mbr_addr;
+	}
+	public void setSeq_mbr_addr(int seq_mbr_addr) {
+		this.seq_mbr_addr = seq_mbr_addr;
+	}
 	public int getUse_point() {
 		return use_point;
 	}

@@ -60,8 +60,15 @@ public class BuyDetailDto {
 	private String flg_delete				= "";
 	private int point_stack					= 0;
 	private int price_sale					= 0;
+	private int seq_mbr_addr			= 0;
 	
 	
+	public int getSeq_mbr_addr() {
+		return seq_mbr_addr;
+	}
+	public void setSeq_mbr_addr(int seq_mbr_addr) {
+		this.seq_mbr_addr = seq_mbr_addr;
+	}
 	public int getSeq_best() {
 		return seq_best;
 	}

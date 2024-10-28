@@ -33,6 +33,7 @@ public class PayDto {
 	private int seq_pay			= 0;
 	private int seq_mbr			= 0;
 	private int seq_buy_mst		= 0;
+	private int seq_buy_dtl		= 0;
 	private int cd_pg			= 0;
 	private String deal_num		= "";
 	private String cd_response	= "";
@@ -42,6 +43,12 @@ public class PayDto {
 	private int register		= 0;
 	
 	
+	public int getSeq_buy_dtl() {
+		return seq_buy_dtl;
+	}
+	public void setSeq_buy_dtl(int seq_buy_dtl) {
+		this.seq_buy_dtl = seq_buy_dtl;
+	}
 	public int getSeq_pay() {
 		return seq_pay;
 	}

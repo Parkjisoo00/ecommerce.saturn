@@ -20,6 +20,8 @@
  */
 package kr.co.bravomylife.front.member.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -49,6 +51,10 @@ public class MemberSrvc {
 	
 	@Inject
 	TermAgreeDao termAgreeDao;
+	
+	public List<MemberDto> deliveryChanges(MemberDto memberDto) {
+		return memberDao.deliveryChanges(memberDto);
+	}
 	
 	@Transactional("txFront")
 	public boolean deleteDelivery(MemberDto memberDto) {

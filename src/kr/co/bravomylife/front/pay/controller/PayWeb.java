@@ -163,7 +163,9 @@ public class PayWeb extends Common {
 	}
 	
 	@RequestMapping(value = "/front/pay/payup/order.json", method = RequestMethod.POST)
-	public @ResponseBody Map<String,Object> order(@RequestParam Map<String, String> param, HttpServletRequest request, BuyDetailListDto buyDetailListDto) throws NoSuchAlgorithmException {
+	public @ResponseBody Map<String,Object> order(@RequestParam Map<String, String> param, HttpServletRequest request, BuyDetailListDto buyDetailListDto, MemberDto memberDto) throws NoSuchAlgorithmException {
+		
+		logger.debug("post 값 확인" + memberDto.getPost());
 		
 		Map<String,Object> returnMap = new HashMap<>();
 		// Map<String,String> map = new HashMap<>();
@@ -268,9 +270,10 @@ public class PayWeb extends Common {
 					buyMasterDto.setBuy_price(totalPrice);
 					buyMasterDto.setTotal_point(totalPoint);
 					buyMasterDto.setUse_point(usePoint);
+					buyMasterDto.setSeq_mbr_addr(memberDto.getSeq_mbr_addr());
 					buyMasterDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 					
-					if (!buySrvc.insert(buyMasterDto, (ArrayList<BuyDetailDto>) buyDetailListDto.getBuyList(), deal_num)) {
+					if (!buySrvc.insert(buyMasterDto, (ArrayList<BuyDetailDto>) buyDetailListDto.getBuyList(), deal_num, memberDto)) {
 						// 구매 정보 저장 에러
 						returnMap.put("responseCode", "B001");
 						returnMap.put("responseMsg", "[ERROR]구매 정보 저장");
