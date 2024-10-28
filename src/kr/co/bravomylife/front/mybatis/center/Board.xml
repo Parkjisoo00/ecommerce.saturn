@@ -103,6 +103,7 @@
 				, IMG
 				, CD_BBS_TYPE
 				, FILE_ORIG
+				, CD_CTG
 				, DECODE(LOWER(SUBSTR(FILE_ORIG, INSTR(FILE_ORIG, '.', -1, 1) + 1))
 					, 'xlsx', 'xls'
 					, 'xls'	, 'xls'

@@ -113,6 +113,27 @@
 		frmMain.submit();
 	}
 	
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/front/center/board/list.web";
+		frmMain.submit();
+	}
+	
+	function goMyList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("cd_bbs_type").value = value;
+		document.getElementById("currentPage").remove();
+		
+		frmMain.action = "/front/center/board/myPageNotice/list.web";
+		frmMain.submit();
+	}
+	
+	
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -148,7 +169,7 @@ alert("평점 확인" + value);
 	<!-- Breadcrumb End -->
 
 	<!-- Checkout Section Begin -->
-	<section class="checkout spad" style="min-height: calc(100vh - 200px);">
+	<section class="checkout spad" style="min-height: calc(100vh - 100px);">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12" style="padding: 0;">

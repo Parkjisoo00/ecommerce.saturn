@@ -34,12 +34,20 @@
 		frmMain.action="/front/center/board/myPageNotice/view.web";
 		frmMain.submit();
 	}
+	
 	function goList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
-		document.getElementById("searchWord").value = "";
-		document.getElementById("currentPage").value = "1";
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/front/center/board/list.web";
+		frmMain.submit();
+	}
+	
+	function goMyList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
 		document.getElementById("cd_bbs_type").value = value;
 		
 		frmMain.action = "/front/center/board/myPageNotice/list.web";
@@ -84,7 +92,7 @@
 		<%@ include file="/include/front/mygnb.jsp" %>
 	<!-- Breadcrumb End -->
 
-	<section class="shop spad"style="min-height: calc(100vh - 200px); ">
+	<section class="shop spad"style="min-height: calc(100vh - 100px); ">
 		<div class="container">
 			<div class="col-lg-12" style="padding: 0 !important;">
 				<div class="col-lg-12 col-md-12 col-sm-12">
@@ -135,8 +143,12 @@
 													</td>
 													<td style="text-align: left">
 														<a href="javascript:goView(${list.seq_bbs});">
-															<c:if test="${list.seq_reply == 0}">[미답변] </c:if>
-															<c:if test="${list.seq_reply > 0}">[답변 완료] </c:if>
+															<c:if test="${list.seq_reply == 0}">
+															<span style="color: red;">[미답변]</span>
+															</c:if>
+															<c:if test="${list.seq_reply > 0}">
+															<span style="color: blue;">[답변 완료]</span>
+															</c:if>
 															${list.title}
 														</a>
 													</td>

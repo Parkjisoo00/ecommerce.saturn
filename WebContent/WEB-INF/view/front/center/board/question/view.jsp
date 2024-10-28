@@ -89,14 +89,19 @@
 	<div class="container">
 		<div class="col-lg-12 col-md-6">
 				<div class="blog__details__content">
-					
-					
 					<br/>
 					<br/>
 					<br/>
 					<div class="blog__details__item__title">
 						<span class="tip" style="margin-left: 270px;">문의글 제목</span>
-						<h4 style="margin-left: 270px;">${boardDto.title}</h4>
+						<h4 style="margin-left: 270px;">
+							<c:if test="${boardDto.seq_reply == 0}">
+								<span style="color: red;">[미답변]</span>
+							</c:if>
+							<c:if test="${boardDto.seq_reply > 0}">
+								<span style="color: blue;">[답변 완료]</span>
+							</c:if>${boardDto.title}
+						</h4>
 						<ul>
 							<li><span style="margin-left: 270px; font-size: 16px;">[등록 일자]</span></li>
 							<li style="font-size: 16px;">${boardDto.dt_reg}</li>
@@ -120,33 +125,70 @@
 					<br/>
 					<br/>
 					<div class="col-lg-9 col-md-9 col-sm-9">
+						<div class="blog__details__quote" style="margin-left: 250px;">
+							<p>${boardDto.content}</p>
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="checkout__form__input">
+								<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 235px;">
+							<c:if test="${boardDto.file_orig != ''}">
+								<a style="color:blue;"href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
+							</c:if>
+							</div>
+						</div>
+						<br/>
+						<br/>
+						<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
+							<div class="col-lg-12 col-md-12 col-sm-12">
+								<div class="checkout__form__input" style="margin-left: 100px;">
+								<c:if test="${boardDto.seq_reply == 0}">
+									<input type="button" value="삭제" style="width:100px" onclick="javascript:remove(3);" />
+									 <input type="button" value="수정" style="width:100px" onclick="javascript:modifyForm(3);" /> 
+								</c:if>
+									<input type="button" value="목록" style="width:100px" onclick="javascript:goList(3);"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<c:if test="${boardDto.seq_reply > 0}">
+				<div class="blog__details__content">
+					<br/>
+					<br/>
+					<br/>
+					<div class="blog__details__item__title" style="margin-top:0px">
+						<span class="tip" style="margin-left: 270px;">답변</span>
+						<h4 style="margin-left: 270px;">${boardReplyDto.title}</h4>
+						<ul>
+							<li><span style="margin-left: 270px; font-size: 16px;">[등록 일자]</span></li>
+							<li style="font-size: 16px;">${boardReplyDto.dt_reg}</li>
+						</ul>
+					</div>
+					<br/>
+					<br/>
+					<div class="col-lg-9 col-md-9 col-sm-9">
 					<div class="blog__details__quote" style="margin-left: 250px;">
-						<p>${boardDto.content}</p>
+						<p>${boardReplyDto.content}</p>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-				<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 235px;">
-					<c:if test="${boardDto.file_orig != ''}">
-						<a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
-					</c:if>
+						<div class="checkout__form__input">
+							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 235px;">
+							<c:if test="${boardReplyDto.file_orig != ''}">
+								<a style="color:blue;"href="javascript:download('BbsQuestion', ${boardReplyDto.seq_bbs});">[첨부파일 다운로드]</a>
+							</c:if>
+						</div>
+					</div>
+			<br/>
+			<br/>
+				<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+					</div>
 				</div>
-			</div>
-			<br/>
-			<br/>
-			<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input" style="margin-left: 100px;">
-				<c:if test="${boardDto.seq_reply == 0}">
-					<input type="button" value="삭제" style="width:100px" onclick="javascript:remove(3);" />
-					 <input type="button" value="수정" style="width:100px" onclick="javascript:modifyForm(3);" /> 
+					</div>
+				</div>
 				</c:if>
-					<input type="button" value="목록" style="width:100px" onclick="javascript:goList(3);"/>
-				</div>
-			</div>
-			</div>
-			</div>
-			</div>
-			</div>
+			
+		</div>
 	<!-- 답변 부분 추후 작업 
 				<c:if test="${boardDto.seq_reply > 0}">
 				<br/>

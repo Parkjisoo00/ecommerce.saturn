@@ -58,7 +58,7 @@
 		color: #000; /* 검정 글자 */
 		cursor: text;
 		padding: 20px;
-		width: 1100px;
+		width: 100%;
 		border: 1px solid #ddd; /* 테두리 */
 		border-radius: 5px; /* 둥근 모서리 */
 		margin: 5px 0; /* 여백 */
@@ -142,18 +142,21 @@
 			}
 		}
 	-->
-	<!-- 
+	
 	function download(type, sequence) {
+		
 		
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.type.setAttribute("value", type);
 		frmMain.sequence.setAttribute("value", sequence);
-		frmMain.action = "/front/center/board/download.web";
+		frmMain.action = "/console/center/board/download.web";
 		frmMain.target = "frmBlank";
 		frmMain.submit();
+		
+		frmMain.target = "_self";
 	}
-	-->
+		
 	function goView(value) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -265,13 +268,50 @@
 					<br/>
 					<!-- 공지사항 리스트를 반복문으로 출력 -->
 					<c:forEach items="${list}" var="list">
-					<button class="accordion" type="button">[공지]${list.title}</button>
-						<div class="panel">
-							<div class="accordion2" >
-							<a href="javascript:download('BbsNotice', ${list.seq_bbs});">[첨부파일 다운로드]</a>
-								${list.content}
-							</div>
-						</div>
+						<c:choose>
+							<c:when test="${list.flg_top == 'Y'}">
+							<button class="accordion" type="button" style="font-weight: bold;">[공지]${list.title}</button>
+								<div class="panel">
+									<select class="form-control" id="cd_ctg" name="cd_ctg" style="margin-bottom: 6px;"disabled>
+										<option value="0"<c:if test="${list.cd_ctg == '0'}"> selected</c:if>>선택</option>
+										<option value="1"<c:if test="${list.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
+										<option value="2"<c:if test="${list.cd_ctg == '2'}"> selected</c:if>>상품</option>
+										<option value="3"<c:if test="${list.cd_ctg == '3'}"> selected</c:if>>구매</option>
+										<option value="4"<c:if test="${list.cd_ctg == '4'}"> selected</c:if>>결제</option>
+										<option value="5"<c:if test="${list.cd_ctg == '5'}"> selected</c:if>>배송</option>
+										<option value="6"<c:if test="${list.cd_ctg == '6'}"> selected</c:if>>환불</option>
+										<option value="9"<c:if test="${list.cd_ctg == '9'}"> selected</c:if>>기타</option>
+									</select>
+									<div class="accordion2" >
+										<c:if test="${list.file_orig != ''}">
+											<a style="color:blue" href="javascript:download('BbsNotice', ${list.seq_bbs});">[첨부파일 다운로드]</a>
+										</c:if>
+											${list.content}
+									</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+							<button class="accordion" type="button">[공지]${list.title}</button>
+								<div class="panel">
+									<select class="form-control" id="cd_ctg" name="cd_ctg" style="margin-bottom: 6px;"disabled>
+										<option value="0"<c:if test="${list.cd_ctg == '0'}"> selected</c:if>>선택</option>
+										<option value="1"<c:if test="${list.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
+										<option value="2"<c:if test="${list.cd_ctg == '2'}"> selected</c:if>>상품</option>
+										<option value="3"<c:if test="${list.cd_ctg == '3'}"> selected</c:if>>구매</option>
+										<option value="4"<c:if test="${list.cd_ctg == '4'}"> selected</c:if>>결제</option>
+										<option value="5"<c:if test="${list.cd_ctg == '5'}"> selected</c:if>>배송</option>
+										<option value="6"<c:if test="${list.cd_ctg == '6'}"> selected</c:if>>환불</option>
+										<option value="9"<c:if test="${list.cd_ctg == '9'}"> selected</c:if>>기타</option>
+									</select>
+									<div class="accordion2" >
+										<c:if test="${list.file_orig != ''}">
+											<a style="color:blue" href="javascript:download('BbsNotice', ${list.seq_bbs});">[첨부파일 다운로드]</a>
+										</c:if>
+											${list.content}
+									</div>
+								</div>
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>
 					<br/>
 					<br/>

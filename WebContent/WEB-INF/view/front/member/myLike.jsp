@@ -100,6 +100,22 @@
 		frmMain.submit();
 	}
 	
+	function goMyList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("cd_bbs_type").value = value;
+		
+		document.getElementById("currentPage").remove();
+		document.getElementById("count").remove();
+		document.getElementById("discount_sale").remove();
+		document.getElementById("point_stack").remove();
+		document.getElementById("price_sale").remove();
+		document.getElementById("discount").remove();
+		
+		frmMain.action = "/front/center/board/myPageNotice/list.web";
+		frmMain.submit();
+	}
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -138,7 +154,7 @@
 	<!-- Breadcrumb End -->
 
 	<!-- Shop Cart Section Begin -->
-	<section class="shop-cart spad" style="min-height: calc(100vh - 200px);" >
+	<section class="shop-cart spad" style="min-height: calc(100vh - 100px);" >
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
