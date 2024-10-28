@@ -16,6 +16,7 @@
 		<typeAlias type="kr.co.bravomylife.backoffice.buy.dto.BuyDetailDto"					alias="buyDetailDto" />
 		<typeAlias type="kr.co.bravomylife.backoffice.buy.dto.BuyDetailListDto"				alias="buyDetailListDto" />
 		<typeAlias type="kr.co.bravomylife.backoffice.buy.dto.BuyMasterDto"					alias="buyMasterDto" />
+		<typeAlias type="kr.co.bravomylife.backoffice.statistics.dto.MemberAgeDto"			alias="MemberAgeDto" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="kr/co/bravomylife/backoffice/mybatis/center/Board.xml" />
@@ -25,5 +26,6 @@
 		<mapper resource="kr/co/bravomylife/backoffice/mybatis/users/Managers.xml" />
 		<mapper resource="kr/co/bravomylife/backoffice/mybatis/users/Member.xml" />
 		<mapper resource="kr/co/bravomylife/backoffice/mybatis/buy/Buy.xml" />
+		<mapper resource="kr/co/bravomylife/backoffice/mybatis/statistics/Member.xml" />
 	</mappers>
 </configuration>

@@ -51,8 +51,7 @@ import kr.co.bravomylife.util.Datetime;
  * <p>IMPORTANT:</p>
  */
 @Controller("kr.co.bravomylife.backoffice.login.controller.LoginWeb")
-
-	public class LoginWeb extends Common{
+public class LoginWeb extends Common{
 	
 	@Autowired
 	Properties staticProperties;
