@@ -13,6 +13,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 	<script src="/backoffice/js/bootstrap3-wysihtml5.all.min.js"></script>
 	<script src="/backoffice/js/jquery.slimscroll.min.js"></script>
+	<script src="/backoffice/js/morris/morris.min.js"></script>
 	<script src="/backoffice/js/fastclick.js"></script>
 	<script src="/backoffice/js/app.min.js"></script>
 	<script src="/backoffice/js/demo.js"></script>
