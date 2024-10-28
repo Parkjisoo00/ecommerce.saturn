@@ -43,6 +43,9 @@ public class MemberSrvc {
 	@Inject
 	MemberDao memberDao;
 	
+	public List<MemberAgeDto> sellingBest() {
+		return memberDao.sellingBest();
+	}
 	public List<MemberAgeDto> memberAge() {
 		return memberDao.memberAge();
 	}

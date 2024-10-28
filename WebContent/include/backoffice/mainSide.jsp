@@ -117,8 +117,8 @@
 						</span>
 					</a>
 					<ul class="treeview-menu">
-						<li><a href="/console/statistics/index.web""><i class="fa fa-circle-o"></i> 회원별 통계</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Icons</a></li>
+						<li><a href="/console/statistics/index.web"><i class="fa fa-circle-o"></i> 회원별 통계</a></li>
+						<li><a href="/console/statistics/index1.web"><i class="fa fa-circle-o"></i> 인기 상품 통계</a></li>
 						<li><a href="#"><i class="fa fa-circle-o"></i> Buttons</a></li>
 						<li><a href="#"><i class="fa fa-circle-o"></i> Sliders</a></li>
 						<li><a href="#"><i class="fa fa-circle-o"></i> Timeline</a></li>

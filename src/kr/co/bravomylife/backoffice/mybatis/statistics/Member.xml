@@ -39,6 +39,27 @@
 		) ageData
 		GROUP BY gender, ageGroup
 	]]>
-</select>
+	</select>
 
+	<select id="sellingBest" resultType="memberAgeDto">
+		 SELECT
+			TO_CHAR(dt_reg, 'YYYY-MM') AS month,
+			SUM(CASE WHEN seq_sle = 335 THEN count ELSE 0 END) AS product1,
+			SUM(CASE WHEN seq_sle = 344 THEN count ELSE 0 END) AS product2,
+			SUM(CASE WHEN seq_sle = 343 THEN count ELSE 0 END) AS product3,
+			SUM(CASE WHEN seq_sle = 336 THEN count ELSE 0 END) AS product4,
+			SUM(CASE WHEN seq_sle = 5 THEN count ELSE 0 END) AS product5,
+			SUM(CASE WHEN seq_sle = 6 THEN count ELSE 0 END) AS product6,
+			SUM(CASE WHEN seq_sle = 7 THEN count ELSE 0 END) AS product7,
+			SUM(CASE WHEN seq_sle = 8 THEN count ELSE 0 END) AS product8,
+			SUM(CASE WHEN seq_sle = 9 THEN count ELSE 0 END) AS product9,
+			SUM(CASE WHEN seq_sle = 10 THEN count ELSE 0 END) AS product10
+		FROM
+			tb_best
+		GROUP BY
+			TO_CHAR(dt_reg, 'YYYY-MM')
+		ORDER BY
+			TO_CHAR(dt_reg, 'YYYY-MM')
+	</select>
+	
 </mapper> 

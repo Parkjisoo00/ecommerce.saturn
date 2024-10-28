@@ -64,6 +64,36 @@ public class StatisticsWeb extends Common{
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
+	@RequestMapping(value = "/console/statistics/index1.web")
+	public ModelAndView index1(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		try {
+			List<MemberAgeDto> listsellingBest = memberSrvc.sellingBest();
+			
+			mav.addObject("listsellingBest", listsellingBest);
+			
+			mav.setViewName("backoffice/statistics/index1");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".index()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-28
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
 	@RequestMapping(value = "/console/statistics/index.web")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		
