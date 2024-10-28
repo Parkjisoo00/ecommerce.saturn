@@ -31,7 +31,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import kr.co.bravomylife.backoffice.buy.dao.BuyDao;
 import kr.co.bravomylife.backoffice.common.dto.PagingDto;
 import kr.co.bravomylife.backoffice.common.dto.PagingListDto;
-import kr.co.bravomylife.backoffice.buy.dto.BuyDetailDto;
+
 import kr.co.bravomylife.backoffice.buy.dto.BuyDto;
 
 /**
@@ -71,8 +71,8 @@ public class BuySrvc {
 			return false;
 		}
 	}
-	public List<BuyDetailDto> select(BuyDetailDto buyDetailDto) {
-		return buyDao.select(buyDetailDto);  // DAO의 select 메서드 호출
+	public List<BuyDto> selectList(BuyDto buyDto) {
+		return buyDao.selectList(buyDto);  // DAO의 select 메서드 호출
 	}
 
 	public BuyDto select(BuyDto buyDto) {
@@ -99,6 +99,7 @@ public class BuySrvc {
 		
 		return pagingListDto;
 	}
+
 
 
 

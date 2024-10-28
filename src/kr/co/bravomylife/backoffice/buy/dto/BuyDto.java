@@ -50,8 +50,43 @@ public class BuyDto {
 	
 	private int seq_buy_dtl				= 0;
 	
+	private int count			= 0;
+	private int price			= 0;
+	private String sle_nm		= "";
+	private int point			= 0;
+	private String flg_review		= "";
 	
 	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public String getSle_nm() {
+		return sle_nm;
+	}
+	public void setSle_nm(String sle_nm) {
+		this.sle_nm = sle_nm;
+	}
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
+	public String getFlg_review() {
+		return flg_review;
+	}
+	public void setFlg_review(String flg_review) {
+		this.flg_review = flg_review;
+	}
 	public int getSeq_buy_dtl() {
 		return seq_buy_dtl;
 	}

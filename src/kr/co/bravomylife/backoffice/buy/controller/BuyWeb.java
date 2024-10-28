@@ -38,7 +38,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.bravomylife.backoffice.common.Common;
 import kr.co.bravomylife.backoffice.common.dto.PagingDto;
 import kr.co.bravomylife.backoffice.common.dto.PagingListDto;
-import kr.co.bravomylife.backoffice.buy.dto.BuyDetailDto;
+
 import kr.co.bravomylife.backoffice.buy.dto.BuyDto;
 import kr.co.bravomylife.util.security.SKwithAES;
 import kr.co.bravomylife.backoffice.buy.service.BuySrvc;
@@ -69,14 +69,28 @@ public class BuyWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 
 		try {
+			//System.out.println("Received seq_buy_dtl: " + buyDto.getSeq_buy_dtl());
+			//System.out.println(buyDto);
+
+			
 			// 매개변수로 전달된 buyDto를 이용해 구매 정보 조회
 			BuyDto _buyDto = buySrvc.select(buyDto); 
 			mav.addObject("buyDto", _buyDto);
+			
+			
+
+
+			List<BuyDto> buyDtoList = buySrvc.selectList(buyDto);
+			mav.addObject("buyDtoList", buyDtoList);
 	
 			// 구매 상세 내역 리스트 조회 및 추가
-			List<BuyDetailDto> buyDetailList = buySrvc.select(new BuyDetailDto());
-			mav.addObject("buyDetailList", buyDetailList);
+			//List<BuyDetailDto> buyDetailList = buySrvc.select(new BuyDetailDto());
+			//mav.addObject("buyDetailList", buyDetailList);
 	
+		
+			
+			
+			
 			mav.setViewName("backoffice/buy/view");  // JSP 파일 설정
 		} catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".view()] " + e.getMessage(), e);
@@ -90,6 +104,9 @@ public class BuyWeb extends Common {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
+		logger.debug("그냥 서브밋");
+		
+		
 		try {
 			
 			// 대칭키 암호화(AES-256)
@@ -98,7 +115,23 @@ public class BuyWeb extends Common {
 			
 			String searchWord = pagingDto.getSearchWord();
 			pagingDto.setSearchWord(aes.encode(searchWord));
+			
+			pagingDto.setSearchWord(aes.encode(pagingDto.getSearchWord()));
+			
+			
+			
+			logger.debug("searchKey: " + pagingDto.getSearchKey());
+			logger.debug("암호화된 searchWord: " + pagingDto.getSearchWord());
+			
+			// 검색 조건 설정
+			// String searchCdState = request.getParameter("searchCdState");
+			// String searchCdStatePay = request.getParameter("searchCdStatePay");
+			// String searchCdStateDelivery = request.getParameter("searchCdStateDelivery");
+			
+			// logger.debug("searchCdState 값 확인" + searchCdState);
+			
 
+			
 			PagingListDto pagingListDto = buySrvc.list(pagingDto);
 			
 			@SuppressWarnings("unchecked")
@@ -115,6 +148,9 @@ public class BuyWeb extends Common {
 			pagingDto.setSearchWord(searchWord);
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
+			// mav.addObject("searchCdState", searchCdState);
+			// mav.addObject("searchCdStatePay", searchCdStatePay);
+			// mav.addObject("searchCdStateDelivery", searchCdStateDelivery);
 			
 			mav.setViewName("backoffice/buy/list");
 		}

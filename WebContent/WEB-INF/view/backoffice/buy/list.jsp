@@ -22,6 +22,48 @@
 	</style>
 	<script>
 	
+	// JavaScript로 옵션을 동적으로 업데이트
+	// JavaScript로 검색 옵션을 동적으로 업데이트
+	function updateSearchOptions() {
+		const searchKey = document.getElementById("searchKey").value;
+		const searchWordContainer = document.getElementById("searchWordContainer");
+
+		if (searchKey === "cd_state") {
+			searchWordContainer.innerHTML = `
+				<select id="searchWord" name="searchWord" class="form-control" style="height: 30px;">
+					<option value="">옵션 선택</option>
+					<option value="1">주문완료</option>
+					<option value="2">취소</option>
+					<option value="3">교환</option>
+					<option value="4">환불</option>
+				</select>
+			`;
+		} else if (searchKey === "cd_state_pay") {
+			searchWordContainer.innerHTML = `
+				<select id="searchWord" name="searchWord" class="form-control" style="height: 30px;">
+					<option value="">옵션 선택</option>
+					<option value="N">실패</option>
+					<option value="Y">성공</option>
+					<option value="C">취소</option>
+				</select>
+			`;
+		} else if (searchKey === "cd_state_delivery") {
+			searchWordContainer.innerHTML = `
+				<select id="searchWord" name="searchWord" class="form-control" style="height: 30px;">
+					<option value="">옵션 선택</option>
+					<option value="C">판매 확인중</option>
+					<option value="P">배송 준비중</option>
+					<option value="D">배송중</option>
+					<option value="Y">배송완료</option>
+				</select>
+			`;
+		} else if (searchKey === "email" || searchKey === "mbr_nm") {
+			searchWordContainer.innerHTML = `
+				<input type="text" id="searchWord" name="searchWord" class="form-control" style="height: 30px;" placeholder="검색어 입력">
+			`;
+		}
+	}
+	
 	function goView(value) {
 
 		var frmMain = document.getElementById("frmMain");
@@ -35,6 +77,7 @@
 	function goModifyState(seq_buy_mst) {
 		
 		if (confirm("상태를 변경하시겠습니까?")) {
+			
 			var frmMain = document.getElementById("frmMain");
 			
 			cd_state = document.getElementById("select_1").options[document.getElementById("select_1").selectedIndex].value;
@@ -79,9 +122,9 @@
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header" style="display: flex; align-items: center; margin-left: 215px;">
-		 <h1>
-        주문 관리
-      </h1>
+		<h1>
+		주문 관리
+		</h1>
 	</section>
 
 	<!-- Main content -->
@@ -96,15 +139,22 @@
 					<div class="box-tools pull-right">
 						<div class="has-feedback">
 							<div style="display: flex; align-items: center;">&nbsp;&nbsp;
-								<select class="form-control" name="searchKey" style="height: 30px;">
-									<option value="email"<c:if test="${paging.searchKey == 'email'}"> selected</c:if>>이메일</option>
-									<option value="mbr_nm"<c:if test="${paging.searchKey == 'mbr_nm'}"> selected</c:if>>성명</option>
-									<option value="cd_state"<c:if test="${paging.searchKey == 'cd_state'}"> selected</c:if>>구매상품 상태</option>
-									<option value="cd_state_pay"<c:if test="${paging.searchKey == 'cd_state_pay'}"> selected</c:if>>결제 상태</option>
-									<option value="cd_state_delivery"<c:if test="${paging.searchKey == 'cd_state_delivery'}"> selected</c:if>>배송상태</option>
+								<select id="searchKey" class="form-control" name="searchKey" style="height: 30px;" onchange="updateSearchOptions()">
+							<!-- 첫 번째 검색 기준 선택 -->
+								
+									<option value="">검색 기준 선택</option>
+									<option value="email">이메일</option>
+									<option value="mbr_nm">성명</option>
+									<option value="cd_state">구매상품 상태</option>
+									<option value="cd_state_pay">결제 상태</option>
+									<option value="cd_state_delivery">배송 상태</option>
 								</select>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="text" name="searchWord" id="searchWord" class="form-control input-sm" value="${paging.searchWord}"  />
+								
+								<!-- 두 번째 검색 옵션 또는 입력 필드 (검색 기준에 따라 변경됨) -->
+								<span id="searchWordContainer">
+									<input type="text" id="searchWord" name="searchWord" class="form-control" />
+								</span>
+								
 								&nbsp;&nbsp;
 								<input type="submit" value="검색"/>
 							</div>
@@ -164,12 +214,9 @@
 										<option value="3"<c:if test="${list.cd_state == 3}"> selected</c:if>>교환</option>
 										<option value="4"<c:if test="${list.cd_state == 4}"> selected</c:if>>환불</option>
 									</select>
-									
-									
 								</td>
 								<td style="text-align: center;">
 									<select style="background:#F0F0F0" disabled>
-										<option value=""<c:if test="${list.cd_state_pay == ''}"> selected</c:if>>실패</option>
 										<option value="N"<c:if test="${list.cd_state_pay == 'N'}"> selected</c:if>>실패</option>
 										<option value="Y"<c:if test="${list.cd_state_pay == 'Y'}"> selected</c:if>>성공</option>
 										<option value="C"<c:if test="${list.cd_state_pay == 'C'}"> selected</c:if>>취소</option>
@@ -177,7 +224,6 @@
 								</td>
 								<td style="text-align: center;">
 									<select id="select_3" style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst});">
-										<option value=""<c:if test="${list.cd_state_delivery == ''}"> selected</c:if>>등록</option>
 										<option value="C"<c:if test="${list.cd_state_delivery == 'C'}"> selected</c:if>>판매 확인중</option>
 										<option value="P"<c:if test="${list.cd_state_delivery == 'P'}"> selected</c:if>>배송 준비중</option>
 										<option value="D"<c:if test="${list.cd_state_delivery == 'D'}"> selected</c:if>>배송중</option>

@@ -41,10 +41,16 @@ public class BuyDetailDto {
 	private int point			= 0;
 	private int seq_mbr					= 0;
 	private int rnum						= 0;
+	private String flg_review		= "";
 	
 	
 	
-	
+	public String getFlg_review() {
+		return flg_review;
+	}
+	public void setFlg_review(String flg_review) {
+		this.flg_review = flg_review;
+	}
 	public int getSeq_buy_dtl() {
 		return seq_buy_dtl;
 	}

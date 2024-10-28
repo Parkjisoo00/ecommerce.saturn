@@ -26,7 +26,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.bravomylife.backoffice.common.dao.BaseDao;
 import kr.co.bravomylife.backoffice.common.dto.PagingDto;
-import kr.co.bravomylife.backoffice.buy.dto.BuyDetailDto;
+
 import kr.co.bravomylife.backoffice.buy.dto.BuyDto;
 
 /**
@@ -49,8 +49,8 @@ public class BuyDao extends BaseDao {
 	}
 	
 	
-	public List<BuyDetailDto> select(BuyDetailDto buyDetailDto) {
-		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.buy.Buy.select", buyDetailDto);
+	public List<BuyDto> selectList(BuyDto buyDto) {
+		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.buy.Buy.selectList", buyDto);
 	}
 
 	
