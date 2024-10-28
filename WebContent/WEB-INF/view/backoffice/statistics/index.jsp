@@ -35,7 +35,13 @@
 			var optionsMale = {
 				title: '남성 나이대 통계',
 				width: 500,
-				height: 400
+				height: 400,
+				colors: ['#0033ff', '#0099ff', '#00ccff','#00ffff', '#3300ff', '#3333ff'] ,
+				pieSliceTextStyle: {
+					color: 'black'
+					,fontSize: 13
+				}
+				
 			};
 			var chartMale = new google.visualization.PieChart(document.getElementById('chart_div_male'));
 			chartMale.draw(maleData, optionsMale);
@@ -45,7 +51,13 @@
 			var optionsFemale = {
 				title: '여성 나이대 통계',
 				width: 500,
-				height: 400
+				height: 400,
+				colors: ['#6600ff', '#9900ff', '#9999ff', '#cc99ff', '#ccccff', '#cc00ff'],
+				pieSliceTextStyle: {
+					color: 'black'
+					,fontSize: 13
+				}
+				
 			};
 			var chartFemale = new google.visualization.PieChart(document.getElementById('chart_div_female'));
 			chartFemale.draw(femaleData, optionsFemale);
