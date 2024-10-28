@@ -2,11 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.buy.BuyDetail">
 	
-	<insert id="insertBest" parameterType="buyDetailDto">
+	<insert id="insertBestMst" parameterType="buyDetailDto">
 		INSERT INTO TB_BEST
-			(SEQ_BEST, SEQ_SLE, FLG_BEST, REGISTER, DT_REG)
+			(SEQ_BEST, SEQ_SLE, FLG_BEST, DT_REG, COUNT, DT_UPT)
 		VALUES
-			(SQ_SEQ_BEST.NEXTVAL, #{seq_sle}, 'N', #{register}, SYSDATE)
+			(#{seq_best}, #{seq_sle}, NULL, SYSDATE, #{count}, NULL)
+	</insert>
+	
+	<update id="updateBestMst" parameterType="buyDetailDto">
+		UPDATE
+			TB_BEST
+		SET
+			COUNT			= COUNT + #{count}
+			, DT_UPT		= SYSDATE
+		WHERE
+			SEQ_SLE			= #{seq_sle}
+	</update>
+	
+	<select id="insertBestCheck" parameterType="buyDetailDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(SEQ_SLE)
+		FROM
+			TB_BEST
+		WHERE
+			SEQ_SLE		= #{seq_sle}
+	</select>
+	
+	<insert id="insertBest" parameterType="buyDetailDto">
+		INSERT INTO TB_BEST_DTL
+			(SEQ_BEST_DTL, SEQ_BEST, SEQ_SLE, DT_REG)
+		VALUES
+			(SQ_SEQ_BEST_DTL.NEXTVAL, #{seq_best}, #{seq_sle}, SYSDATE)
 	</insert>
 	
 	<insert id="insert" parameterType="buyDetailDto">
@@ -18,6 +44,10 @@
 	
 	<select id="sequence" resultType="java.lang.Integer">
 		SELECT SQ_SEQ_BUY_DTL.NEXTVAL FROM DUAL
+	</select>
+	
+	<select id="sequenceBest" resultType="java.lang.Integer">
+		SELECT SQ_SEQ_BEST.NEXTVAL FROM DUAL
 	</select>
 	
 </mapper>

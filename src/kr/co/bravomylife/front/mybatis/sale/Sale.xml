@@ -22,10 +22,14 @@
 			, sle.SLE_NM
 			, sle.IMG
 			, sle.PRICE_SALE
-			, sle.cd_ctg_b
-			, sle.cd_ctg_m
+			, sle.CD_CTG_B
+			, sle.CD_CTG_M
+			, sle.PRD_TYPE
+			, sle.CORP_NM
 			, sle.DISCOUNT
+			, sle.COUNT_STOCK
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
 			, rate_summary.total_count
 			, ROUND(CASE 
 				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
@@ -34,21 +38,27 @@
 			, best.FLG_BEST
 		FROM
 			TB_SLE sle
-		LEFT OUTER JOIN (
+		LEFT JOIN (
 			SELECT
-				SEQ_SLE,
-				SUM(RATE_STAR) total_star_rate,
-				SUM(COUNT) total_count
+				SEQ_SLE
+				, SUM(RATE_STAR) total_star_rate
+				, SUM(COUNT) total_count
 			FROM
 				TB_RATE
 			GROUP BY SEQ_SLE
 		) rate_summary
 		ON
-			sle.SEQ_SLE			= rate_summary.SEQ_SLE
-		LEFT JOIN
-			TB_BEST best
+			sle.SEQ_SLE = rate_summary.SEQ_SLE
+		LEFT JOIN (
+			SELECT
+				SEQ_SLE,
+				MAX(FLG_BEST) flg_best
+			FROM
+				TB_BEST
+			GROUP BY SEQ_SLE
+		) best
 		ON
-			sle.SEQ_SLE			= best.SEQ_SLE
+			sle.SEQ_SLE = best.SEQ_SLE
 		WHERE
 		<include refid="mainwhere" />
 		)
@@ -606,10 +616,14 @@
 			, sle.SLE_NM
 			, sle.IMG
 			, sle.PRICE_SALE
-			, sle.cd_ctg_b
-			, sle.cd_ctg_m
+			, sle.CD_CTG_B
+			, sle.CD_CTG_M
+			, sle.PRD_TYPE
+			, sle.CORP_NM
 			, sle.DISCOUNT
+			, sle.COUNT_STOCK
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
 			, rate_summary.total_count
 			, ROUND(CASE 
 				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
@@ -618,21 +632,27 @@
 			, best.FLG_BEST
 		FROM
 			TB_SLE sle
-		LEFT OUTER JOIN (
+		LEFT JOIN (
 			SELECT
-				SEQ_SLE,
-				SUM(RATE_STAR) total_star_rate,
-				SUM(COUNT) total_count
+				SEQ_SLE
+				, SUM(RATE_STAR) total_star_rate
+				, SUM(COUNT) total_count
 			FROM
 				TB_RATE
 			GROUP BY SEQ_SLE
 		) rate_summary
 		ON
-			sle.SEQ_SLE			= rate_summary.SEQ_SLE
-		LEFT JOIN
-			TB_BEST best
+			sle.SEQ_SLE = rate_summary.SEQ_SLE
+		LEFT JOIN (
+			SELECT
+				SEQ_SLE,
+				MAX(FLG_BEST) flg_best
+			FROM
+				TB_BEST
+			GROUP BY SEQ_SLE
+		) best
 		ON
-			sle.SEQ_SLE			= best.SEQ_SLE
+			sle.SEQ_SLE = best.SEQ_SLE
 		WHERE
 		<include refid="detailwhere" />
 		)

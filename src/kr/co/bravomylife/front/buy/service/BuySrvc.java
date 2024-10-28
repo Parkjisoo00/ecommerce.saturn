@@ -121,6 +121,7 @@ public class BuySrvc {
 		// 구매 상세 정보들
 		for (int loop = 0; loop < listBuyDetailDto.size(); loop++) {
 			
+			listBuyDetailDto.get(loop).setSeq_best(buyDao.sequenceBest());
 			listBuyDetailDto.get(loop).setSeq_buy_dtl(buyDao.sequenceDetail());
 			listBuyDetailDto.get(loop).setSeq_buy_mst(buyMasterDto.getSeq_buy_mst());
 			listBuyDetailDto.get(loop).setRegister(buyMasterDto.getRegister());
@@ -128,6 +129,16 @@ public class BuySrvc {
 			result += buyDao.insertDetail(listBuyDetailDto.get(loop));
 			result += buyDao.updateCountStock(listBuyDetailDto.get(loop));
 			
+			int check = buyDao.insertBestCheck(listBuyDetailDto.get(loop));
+			
+			if (check >= 1) {
+				
+				buyDao.updateBestMst(listBuyDetailDto.get(loop));
+			}
+			else if (check == 0) {
+				
+				buyDao.insertBestMst(listBuyDetailDto.get(loop));
+			}
 			bestCount = listBuyDetailDto.get(loop).getCount();
 			
 			for (int _loop = 0; _loop < bestCount; _loop++) {

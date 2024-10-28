@@ -30,21 +30,23 @@ package kr.co.bravomylife.front.buy.dto;
  */
 public class BuyDetailDto {
 	
-	private int seq_buy_dtl		= 0;
-	private int seq_buy_mst		= 0;
-	private int seq_sle			= 0;
-	private String deal_num		= "";
-	private int count			= 0;
-	private int price			= 0;
-	private String dt_reg		= "";
-	private int register		= 0;
-	private String sle_nm		= "";
-	private int point			= 0;
-	private int total_price_sum			= 0;
-	private int total_point_sum			= 0;
-	private String format_total_price	= "";
-	private String format_total_point	= "";
-	private int seq_mbr					= 0;
+	private int seq_buy_dtl					= 0;
+	private int seq_buy_mst					= 0;
+	private int seq_sle						= 0;
+	private String deal_num					= "";
+	private int count						= 0;
+	private int price						= 0;
+	private String dt_reg					= "";
+	private int register					= 0;
+	private String sle_nm					= "";
+	private int point						= 0;
+	private int total_price_sum				= 0;
+	private int total_point_sum				= 0;
+	private String format_total_price		= "";
+	private String format_total_point		= "";
+	private int seq_mbr						= 0;
+	private int seq_best					= 0;
+	private int seq_best_dtl				= 0;
 	
 	private int rnum						= 0;
 	private String cd_state					= "";
@@ -53,16 +55,25 @@ public class BuyDetailDto {
 	private String img						= "";
 	private int discount					= 0;
 	private int discount_sale				= 0;
-	private String cd_ctg_b					= "";	
+	private String cd_ctg_b					= "";
 	private String cd_ctg_m					= "";
 	private String flg_delete				= "";
 	private int point_stack					= 0;
-	private int price_sale			= 0;
+	private int price_sale					= 0;
 	
 	
-	
-	
-	
+	public int getSeq_best() {
+		return seq_best;
+	}
+	public void setSeq_best(int seq_best) {
+		this.seq_best = seq_best;
+	}
+	public int getSeq_best_dtl() {
+		return seq_best_dtl;
+	}
+	public void setSeq_best_dtl(int seq_best_dtl) {
+		this.seq_best_dtl = seq_best_dtl;
+	}
 	public int getPrice_sale() {
 		return price_sale;
 	}

@@ -41,6 +41,22 @@ import kr.co.bravomylife.front.sale.dto.SaleDto;
 @Service("kr.co.bravomylife.front.buy.dao.BuyDao")
 public class BuyDao extends BaseDao {
 	
+	public int insertBestMst(BuyDetailDto buyDetailDto) {
+		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.buy.BuyDetail.insertBestMst", buyDetailDto);
+	}
+	
+	public int updateBestMst(BuyDetailDto buyDetailDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.buy.BuyDetail.updateBestMst", buyDetailDto);
+	}
+	
+	public int insertBestCheck(BuyDetailDto buyDetailDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.buy.BuyDetail.insertBestCheck", buyDetailDto);
+	}
+	
+	public int sequenceBest() {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.buy.BuyDetail.sequenceBest");
+	}
+	
 	public int insertBest(BuyDetailDto buyDetailDto) {
 		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.buy.BuyDetail.insertBest", buyDetailDto);
 	}
