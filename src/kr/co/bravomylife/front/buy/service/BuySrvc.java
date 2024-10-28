@@ -128,14 +128,12 @@ public class BuySrvc {
 			result += buyDao.insertDetail(listBuyDetailDto.get(loop));
 			result += buyDao.updateCountStock(listBuyDetailDto.get(loop));
 			
-			/*
 			bestCount = listBuyDetailDto.get(loop).getCount();
 			
 			for (int _loop = 0; _loop < bestCount; _loop++) {
 				
 				buyDao.insertBest(listBuyDetailDto.get(loop));
 			}
-			*/
 			
 			buyDao.updateBasket(listBuyDetailDto.get(loop));
 			/*
