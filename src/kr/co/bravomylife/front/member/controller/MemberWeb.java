@@ -49,6 +49,7 @@ import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.member.dto.MemberDto;
+import kr.co.bravomylife.front.member.dto.MemberListDto;
 import kr.co.bravomylife.front.member.service.MemberSrvc;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
 import kr.co.bravomylife.front.sale.service.SaleSrvc;
@@ -84,6 +85,107 @@ public class MemberWeb extends Common {
 	
 	@Inject
 	SaleSrvc saleSrvc;
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-28
+	 * <p>DESCRIPTION:마이 페이지 수정</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/member/modifyDeliveryProc.web")
+	public ModelAndView modifyDeliveryProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			memberSrvc.modifyDeliveryProc(memberDto);
+			
+			request.setAttribute("script"	, "alert('배송지가 추가되었습니다.');");
+			request.setAttribute("redirect"	, "/front/member/modifyDelivery.web");
+			
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyDeliveryProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-28
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	 
+	@RequestMapping(value = "/front/member/deliveryCheck.json", method = RequestMethod.POST, headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
+	public @ResponseBody Map<String, Object> deliveryCheck(HttpServletRequest request) {
+		
+		Map<String, Object> response = new HashMap<>();
+		MemberDto memberDto = new MemberDto();
+		
+		boolean check = true;
+		
+		try {
+			
+			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			check = memberSrvc.deliveryCheck(memberDto);
+			
+			response.put("check", check);
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".deliveryCheck()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return response;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-28
+	 * <p>DESCRIPTION:마이 페이지 수정</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/member/modifyDelivery.web")
+	public ModelAndView modifyDelivery(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			MemberListDto memberListDto = memberSrvc.deliveryList(memberDto);
+			
+			mav.addObject("list", memberListDto.getList());
+			mav.setViewName("front/member/modifyDelivery");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyDelivery()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]

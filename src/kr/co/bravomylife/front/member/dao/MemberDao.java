@@ -20,6 +20,8 @@
  */
 package kr.co.bravomylife.front.member.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
@@ -36,6 +38,18 @@ import kr.co.bravomylife.front.member.dto.MemberDto;
  */
 @Repository("kr.co.bravomylife.front.member.dao.MemberDao")
 public class MemberDao extends BaseDao {
+	
+	public List<MemberDto> deliveryList(MemberDto memberDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.member.Member.deliveryList", memberDto);
+	}
+	
+	public int modifyDeliveryProc(MemberDto memberDto) {
+		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.member.Member.modifyDeliveryProc", memberDto);
+	}
+	
+	public int deliveryCheck(MemberDto memberDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.deliveryCheck", memberDto);
+	}
 	
 	public MemberDto currentBasket(MemberDto memberDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.currentBasket", memberDto);

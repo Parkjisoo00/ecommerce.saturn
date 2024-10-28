@@ -51,13 +51,20 @@ public class MemberDto {
 	private String	dt_reg		= "";
 	private String	dt_upt		= "";
 	private String	cause		= "";
-	private int	register	= 0;
-	private int	updater		= 0;
+	private int	register		= 0;
+	private int	updater			= 0;
 	private int point			= 0;
 	private int total_point		= 0;
 	private int current_basket	= 0;
+	private int delivery_count	= 0;
 	
 	
+	public int getDelivery_count() {
+		return delivery_count;
+	}
+	public void setDelivery_count(int delivery_count) {
+		this.delivery_count = delivery_count;
+	}
 	public int getCurrent_basket() {
 		return current_basket;
 	}

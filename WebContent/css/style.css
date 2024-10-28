@@ -2044,7 +2044,7 @@ ol {
 }
 
 .product__item__pic .label {
-	font-size: 12px;
+	font-size: 16px;
 	color: #ffffff;
 	font-weight: 500;
 	display: inline-block;
@@ -2056,7 +2056,7 @@ ol {
 }
 
 .product__item__pic .label.new {
-	background: #36a300;
+	background: #346aff;
 }
 
 .product__item__pic .label.stockout {

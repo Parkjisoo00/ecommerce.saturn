@@ -30,6 +30,7 @@ import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
 import kr.co.bravomylife.front.member.dao.MemberDao;
 import kr.co.bravomylife.front.member.dao.TermAgreeDao;
 import kr.co.bravomylife.front.member.dto.MemberDto;
+import kr.co.bravomylife.front.member.dto.MemberListDto;
 import kr.co.bravomylife.front.member.dto.TermAgreeDto;
 
 /**
@@ -48,6 +49,44 @@ public class MemberSrvc {
 	
 	@Inject
 	TermAgreeDao termAgreeDao;
+	
+	public MemberDto select(MemberDto memberDto) {
+		return memberDao.select(memberDto);
+	}
+	
+	@Transactional("txFront")
+	public boolean modifyDeliveryProc(MemberDto memberDto) {
+		
+		int result = 0;
+		
+		result = memberDao.modifyDeliveryProc(memberDto);
+		
+		if(result == 1) {
+			
+			return true;
+		}
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	@Transactional("txFront")
+	public boolean deliveryCheck(MemberDto memberDto) {
+		
+		int result = 0;
+		
+		result = memberDao.deliveryCheck(memberDto);
+		
+		if(result < 2) {
+			
+			return true;
+		}
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
 	
 	public MemberDto currentBasket(MemberDto memberDto) {
 		return memberDao.currentBasket(memberDto);
@@ -186,8 +225,13 @@ public class MemberSrvc {
 		}
 	}
 	
-	public MemberDto select(MemberDto memberDto) {
-		return memberDao.select(memberDto);
+	public MemberListDto deliveryList(MemberDto memberDto) {
+		
+		MemberListDto memberListDto = new MemberListDto();
+		
+		memberListDto.setList(memberDao.deliveryList(memberDto));
+		
+		return memberListDto;
 	}
 	
 		public boolean withdraw(MemberDto memberDto) {

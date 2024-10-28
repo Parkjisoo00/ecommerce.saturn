@@ -10,5 +10,5 @@
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/reviewListPage.web" class="menuLnb">상품후기 관리</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/history.web" class="menuLnb">구매내역</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/withdraw.web" class="menuLnb">회원 탈퇴</a></li>
-	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">배송지 관리</a></li>
+	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/modifyDelivery.web" class="menuLnb">배송지 관리</a></li>
 </ul>
