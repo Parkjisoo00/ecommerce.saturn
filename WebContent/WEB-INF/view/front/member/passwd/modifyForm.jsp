@@ -65,7 +65,16 @@
 	function goList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
-
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/front/center/board/list.web";
+		frmMain.submit();
+	}
+	
+	function goMyList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
 		document.getElementById("cd_bbs_type").value = value;
 		
 		frmMain.action = "/front/center/board/myPageNotice/list.web";
@@ -97,7 +106,7 @@
 	<!-- Breadcrumb Begin -->
 	<!-- Breadcrumb End -->
 
-	<section class="checkout spad" style="min-height: calc(100vh - 200px); ">
+	<section class="checkout spad" style="min-height: calc(100vh - 100px); ">
 		<div class="container">
 			<form action="/front/member/passwd/modifyProc.web" id="frmMain" method="POST" class="checkout__form">
 			<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		/>

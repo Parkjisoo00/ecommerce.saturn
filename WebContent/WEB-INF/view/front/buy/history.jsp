@@ -85,6 +85,21 @@
 		frmMain.submit();
 	}
 	
+	function goMyList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("cd_bbs_type").value = value;
+		
+		document.getElementById("count").remove();
+		document.getElementById("discount").remove();
+		document.getElementById("discount_sale").remove();
+		document.getElementById("price_sale").remove();
+		document.getElementById("point_stack").remove();
+		
+		frmMain.action = "/front/center/board/myPageNotice/list.web";
+		frmMain.submit();
+	}
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -123,7 +138,7 @@
 	<!-- Breadcrumb End -->
 
 	<!-- Shop Cart Section Begin -->
-	<section class="shop-cart spad" style="min-height: calc(100vh - 200px);">
+	<section class="shop-cart spad" style="min-height: calc(100vh - 100px);">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -148,7 +163,7 @@
 								<c:choose>
 									<c:when test="${empty list}">
 										<tr style="text-align: center; border-bottom: 1px solid #707070;">
-											<td colspan="7">구매한 상품이 없습니다</td>
+											<td colspan="9">구매한 상품이 없습니다</td>
 										</tr>
 									</c:when>
 									<c:otherwise>

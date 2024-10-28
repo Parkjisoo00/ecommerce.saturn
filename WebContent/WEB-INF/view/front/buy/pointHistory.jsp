@@ -28,6 +28,27 @@
 		frmMain.action="/front/sale/ingredient_list.web";
 		frmMain.submit();
 	}
+	
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/front/center/board/list.web";
+		frmMain.submit();
+	}
+	
+	function goMyList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("cd_bbs_type").value = value;
+		document.getElementById("currentPage").remove();
+		
+		frmMain.action = "/front/center/board/myPageNotice/list.web";
+		frmMain.submit();
+	}
+	
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -45,6 +66,7 @@ alert("평점 확인" + value);
 <input type="hidden" name="seq_sle"			id="seq_sle"/>
 <input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>
 <input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
+<input type="hidden" name="cd_bbs_type"		id="cd_bbs_type"/>
 <input type="hidden" name="currentPage"		id="currentPage"	value="${paging.currentPage}"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -60,7 +82,7 @@ alert("평점 확인" + value);
 	<!-- Breadcrumb End -->
 
 	<!-- Checkout Section Begin -->
-	<section class="checkout spad">
+	<section class="checkout spad" style="min-height: calc(100vh - 100px);">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12" style="padding: 0;">

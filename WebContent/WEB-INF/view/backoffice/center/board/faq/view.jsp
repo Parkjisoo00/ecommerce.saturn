@@ -141,7 +141,7 @@
 					<div class="box-footer">
 						<ul class="mailbox-attachments clearfix" style="text-align:center">	
 							<c:if test="${boardDto.file_orig != ''}">
-								<a href="javascript:download('BbsNotice', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
+								<a href="javascript:download('BbsFaq', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
 							</c:if>
 						</ul>
 					</div>

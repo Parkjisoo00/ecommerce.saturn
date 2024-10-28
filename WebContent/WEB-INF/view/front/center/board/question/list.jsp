@@ -165,8 +165,12 @@
 													</td>
 													<td style="text-align: left">
 														<a href="javascript:goView(${list.seq_bbs});">
-															<c:if test="${list.seq_reply == 0}">[미답변] </c:if>
-															<c:if test="${list.seq_reply > 0}">[답변 완료] </c:if>
+															<c:if test="${list.seq_reply == 0}">
+															<span style="color: red;">[미답변]</span>
+															</c:if>
+															<c:if test="${list.seq_reply > 0}">
+															<span style="color: blue;">[답변 완료]</span>
+															</c:if>
 															${list.title}
 														</a>
 													</td>
