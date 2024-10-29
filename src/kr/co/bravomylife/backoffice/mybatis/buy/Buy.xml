@@ -124,9 +124,7 @@
 	</select>
 
 	<sql id="where">
-			<![CDATA[
-			buy_mst.CD_STATE > -1
-			]]>
+			(buy_mst.CD_STATE IS NULL OR buy_mst.CD_STATE IN (1, 2, 3, 4))
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchKey == 'mbr_nm'">
 					AND mbr_mst.MBR_NM = #{searchWord}
@@ -135,13 +133,28 @@
 					AND mbr_mst.EMAIL = #{searchWord}
 				</if>
 				<if test="searchKey == 'cd_state'">
-					AND buy_mst.CD_STATE = #{searchWord}
+					<if test="searchWord == '9'">
+						AND buy_mst.CD_STATE = NULL
+					</if>
+					<if test="searchWord != '9'">
+						AND buy_mst.CD_STATE = #{searchWord}
+					</if>
 				</if>
 				<if test="searchKey == 'cd_state_pay'">
-					AND buy_mst.CD_STATE_PAY = #{searchWord}
+					<if test="searchWord == '9'">
+						AND buy_mst.CD_STATE_PAY = NULL
+					</if>
+					<if test="searchWord != '9'">
+						AND buy_mst.CD_STATE_PAY = #{searchWord}
+					</if>
 				</if>
 				<if test="searchKey == 'cd_state_delivery'">
-					AND buy_mst.CD_STATE_DELIVERY = #{searchWord}
+					<if test="searchWord == '9'">
+						AND buy_mst.CD_STATE_DELIVERY = NULL
+					</if>
+					<if test="searchWord != '9'">
+						AND buy_mst.CD_STATE_DELIVERY = #{searchWord}
+					</if>
 				</if>
 			</if>
 	</sql>

@@ -10,6 +10,7 @@
 			, CD_STATE		= 1
 			, DT_UPT		= SYSDATE
 			, UPDATER		= #{updater}
+			, CD_STATE_DELIVERY = 'C'
 		WHERE
 			SEQ_BUY_MST 	= #{seq_buy_mst}
 	</update>

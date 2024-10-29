@@ -42,7 +42,8 @@
 				searchWordContainer.innerHTML = `
 					<select id="searchWord" name="searchWord">
 						<option value="">선택</option>
-						<option value="1">주문완료</option>
+						<option value="9">결제실패</option>
+						<option value="1">결제완료</option>
 						<option value="2">취소</option>
 						<option value="3">교환</option>
 						<option value="4">환불</option>
@@ -52,6 +53,7 @@
 				searchWordContainer.innerHTML = `
 					<select id="searchWord" name="searchWord">
 						<option value="">선택</option>
+						<option value="9">결제실패</option>
 						<option value="N">실패</option>
 						<option value="Y">성공</option>
 						<option value="C">취소</option>
@@ -61,6 +63,7 @@
 				searchWordContainer.innerHTML = `
 					<select id="searchWord" name="searchWord">
 						<option value="">선택</option>
+						<option value="9">결제실패</option>
 						<option value="C">판매 확인중</option>
 						<option value="P">배송 준비중</option>
 						<option value="D">배송중</option>
@@ -184,7 +187,8 @@
 										<c:when test="${paging.searchKey == 'cd_state'}">
 											<select id="searchWord" name="searchWord" style="height: 30px;">
 												<option value="" <c:if test="${paging.searchWord == ''}">selected</c:if>>선택</option>
-												<option value="1" <c:if test="${paging.searchWord == '1'}">selected</c:if>>주문완료</option>
+												<option value="9" <c:if test="${paging.searchWord == '9'}">selected</c:if>>결제실패</option>
+												<option value="1" <c:if test="${paging.searchWord == '1'}">selected</c:if>>결제완료</option>
 												<option value="2" <c:if test="${paging.searchWord == '2'}">selected</c:if>>취소</option>
 												<option value="3" <c:if test="${paging.searchWord == '3'}">selected</c:if>>교환</option>
 												<option value="4" <c:if test="${paging.searchWord == '4'}">selected</c:if>>환불</option>
@@ -193,6 +197,7 @@
 										<c:when test="${paging.searchKey == 'cd_state_pay'}">
 											<select id="searchWord" name="searchWord" style="height: 30px;">
 												<option value="" <c:if test="${paging.searchWord == ''}">selected</c:if>>선택</option>
+												<option value="9" <c:if test="${paging.searchWord == '9'}">selected</c:if>>결제실패</option>
 												<option value="N" <c:if test="${paging.searchWord == 'N'}">selected</c:if>>실패</option>
 												<option value="Y" <c:if test="${paging.searchWord == 'Y'}">selected</c:if>>성공</option>
 												<option value="C" <c:if test="${paging.searchWord == 'C'}">selected</c:if>>취소</option>
@@ -201,6 +206,7 @@
 										<c:when test="${paging.searchKey == 'cd_state_delivery'}">
 											<select id="searchWord" name="searchWord" style="height: 30px;">
 												<option value="" <c:if test="${paging.searchWord == ''}">selected</c:if>>선택</option>
+												<option value="9" <c:if test="${paging.searchWord == '9'}">selected</c:if>>결제실패</option>
 												<option value="C" <c:if test="${paging.searchWord == 'C'}">selected</c:if>>판매 확인중</option>
 												<option value="P" <c:if test="${paging.searchWord == 'P'}">selected</c:if>>배송 준비중</option>
 												<option value="D" <c:if test="${paging.searchWord == 'D'}">selected</c:if>>배송중</option>
@@ -269,7 +275,8 @@
 								<!-- 주문 목록에서 각 주문의 상태(주문 상태, 결제 상태, 배송 상태)를 관리자가 선택할 수 있도록 -->
 								<td style="text-align: center;">
 									<select id="select_1" style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst});">
-										<option value="1"<c:if test="${list.cd_state == 1}"> selected</c:if>>주문완료</option>
+										<option value="9"<c:if test="${list.cd_state == 9}"> selected</c:if>>결제실패</option>
+										<option value="1"<c:if test="${list.cd_state == 1}"> selected</c:if>>결제완료</option>
 										<option value="2"<c:if test="${list.cd_state == 2}"> selected</c:if>>취소</option>
 										<option value="3"<c:if test="${list.cd_state == 3}"> selected</c:if>>교환</option>
 										<option value="4"<c:if test="${list.cd_state == 4}"> selected</c:if>>환불</option>
@@ -277,6 +284,7 @@
 								</td>
 								<td style="text-align: center;">
 									<select style="background:#F0F0F0" disabled>
+										<option value="9"<c:if test="${list.cd_state_pay == '9'}"> selected</c:if>>결제실패</option>
 										<option value="N"<c:if test="${list.cd_state_pay == 'N'}"> selected</c:if>>실패</option>
 										<option value="Y"<c:if test="${list.cd_state_pay == 'Y'}"> selected</c:if>>성공</option>
 										<option value="C"<c:if test="${list.cd_state_pay == 'C'}"> selected</c:if>>취소</option>
@@ -284,6 +292,7 @@
 								</td>
 								<td style="text-align: center;">
 									<select id="select_3" style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst});">
+										<option value="9"<c:if test="${list.cd_state_delivery == '9'}"> selected</c:if>>결제실패</option>
 										<option value="C"<c:if test="${list.cd_state_delivery == 'C'}"> selected</c:if>>판매 확인중</option>
 										<option value="P"<c:if test="${list.cd_state_delivery == 'P'}"> selected</c:if>>배송 준비중</option>
 										<option value="D"<c:if test="${list.cd_state_delivery == 'D'}"> selected</c:if>>배송중</option>
