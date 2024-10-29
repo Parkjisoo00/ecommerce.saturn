@@ -167,6 +167,9 @@
 			, FLG_TOP
 			, FILE_SAVE
 			, FILE_ORIG
+			, SEQ_SLE
+			, CD_CTG_B
+			, CD_CTG_M			
 			, READED
 			, REGISTER
 			, TO_CHAR(DT_REG, 'YYYY-MM-DD HH24:MI:SS') dt_reg

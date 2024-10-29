@@ -51,7 +51,40 @@ public class BoardDto {
 	private String dt_upt		= "";	// 수정 일시
 	private int updater			= 0;	// 수정자
 	
+	private String cd_ctg_b			= "";	// 중분류
+	private String cd_ctg_m			= "";	// 대분류
+	private Integer seq_sle			= 0;	// 판매 상품 일련번호
+	private String sle_nm			= "";	// 판매 상품명
 	
+	
+	
+	
+	
+	
+	public String getSle_nm() {
+		return sle_nm;
+	}
+	public void setSle_nm(String sle_nm) {
+		this.sle_nm = sle_nm;
+	}
+	public String getCd_ctg_b() {
+		return cd_ctg_b;
+	}
+	public void setCd_ctg_b(String cd_ctg_b) {
+		this.cd_ctg_b = cd_ctg_b;
+	}
+	public String getCd_ctg_m() {
+		return cd_ctg_m;
+	}
+	public void setCd_ctg_m(String cd_ctg_m) {
+		this.cd_ctg_m = cd_ctg_m;
+	}
+	public Integer getSeq_sle() {
+		return seq_sle;
+	}
+	public void setSeq_sle(Integer seq_sle) {
+		this.seq_sle = seq_sle;
+	}
 	public String getImg() {
 		return img;
 	}

@@ -963,14 +963,20 @@ public class BoardWeb extends Common {
 		try {
 			if ("GET".equalsIgnoreCase(request.getMethod())) {
 				mav.setViewName("front/center/board/myPageNotice/writeForm");
-			}
+			}			
 			else if ("POST".equalsIgnoreCase(request.getMethod())) {
-			if (boardDto.getCd_bbs_type() == 3) {
-				mav.setViewName("front/center/board/myPageNotice/writeForm");
-			}
-			else {
-				request.setAttribute("redirect"	, "/");
-				mav.setViewName("forward:/servlet/result.web");
+				if (boardDto.getCd_bbs_type() == 3) {
+					
+					mav.addObject("boardDto", boardDto);
+					
+					BoardDto _boardDto = boardSrvc.mySelect(boardDto);
+					mav.addObject("boardDtoNm", _boardDto);
+					
+					mav.setViewName("front/center/board/myPageNotice/writeForm");
+				}
+				else {
+					request.setAttribute("redirect"	, "/");
+					mav.setViewName("forward:/servlet/result.web");
 				}
 			}
 		}
@@ -1130,6 +1136,9 @@ public class BoardWeb extends Common {
 			BoardDto _boardDto = boardSrvc.select(boardDto);
 			
 			mav.addObject("boardDto", _boardDto);
+			
+			BoardDto myBoardDto = boardSrvc.mySelect(boardDto);
+			mav.addObject("boardDtoNm", myBoardDto);
 			
 			if (boardDto.getCd_bbs_type() == 3) {
 				mav.setViewName("/front/center/board/myPageNotice/modifyForm");

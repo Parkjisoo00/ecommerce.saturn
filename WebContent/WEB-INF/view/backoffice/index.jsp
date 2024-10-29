@@ -40,13 +40,13 @@
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">이메일</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off" >
+										<input type="text" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off" value="liqingmin@naver.com">
 									</div>
 							</div>
 							<div class="form-group">
 								<label for="inputPassword3" class="col-sm-2 control-label">비밀번호</label>
 									<div class="col-sm-10">
-										<input type="password" class="form-control" id="passwd" name="passwd" placeholder="Password" autocomplete="off" >
+										<input type="password" class="form-control" id="passwd" name="passwd" placeholder="Password" autocomplete="off" value="12345678!a">
 									</div>
 							</div>
 							<div class="form-group">

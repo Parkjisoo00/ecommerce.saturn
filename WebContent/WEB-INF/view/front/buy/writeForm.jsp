@@ -280,6 +280,26 @@
 		frmMain.action="/front/buy/writeForm.web";
 		frmMain.submit();
 	}
+	
+
+	function goWriteForm(value, value2, value3, value4) {
+		
+		if (!isLogin) {
+			alert("로그인이 필요합니다.");
+			return;
+		}
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.seq_sle.setAttribute("value", value2);
+		frmMain.cd_ctg_b.setAttribute("value", value3);
+		frmMain.cd_ctg_m.setAttribute("value", value4);
+		
+		frmMain.action = "/front/center/board/myPageNotice/writeForm.web";
+		frmMain.submit();
+	}
+	
 	</script>
 
 	<!-- Google Font -->
@@ -308,6 +328,7 @@
 <input type="hidden" name="currentPage"			id="currentPage"	value="${paging.currentPage}"/>
 <input type="hidden" name="buyList[0].img"							value="${saleDto.img}"/>
 <input type="hidden" name="buyList[0].seq_sle"						value="${saleDto.seq_sle}"/>
+<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -711,7 +732,12 @@
 								</div>
 							</div>
 							<div class="tab-pane" id="tabs-2" role="tabpanel">
-								<p>[TODO] 1대1 문의 게시판 코드 적용</p>
+								<div style="display: flex; flex-direction: column; align-items: center;">
+									<h4  style="font-size:25px; margin-top: 50px;margin-bottom: 50px;">*버튼을 클릭하면 1대1 문의 개시판으로 이동합니다.</h4>
+									<a href="javascript:goWriteForm('3','${saleDto.seq_sle}','${saleDto.cd_ctg_b}','${saleDto.cd_ctg_m}');" class="cart-btn" style="display: inline-block; margin: 0px; background: white; color: #346aff; border: 1px solid #346aff; margin-bottom: 10px;">
+										1대1 문의 이동
+									</a>
+								</div>
 							</div>
 						</div>
 					</div>

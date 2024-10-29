@@ -3,6 +3,16 @@
 <mapper namespace="kr.co.bravomylife.front.mybatis.center.Board">
 	
 
+	<select id="mySelect" parameterType="boardDto" resultType="boardDto">
+		SELECT
+			SLE_NM
+		FROM
+			TB_SLE
+		WHERE 
+			SEQ_SLE = #{seq_sle}
+	</select>
+
+
 	<update id="deleteFlag" parameterType="boardDto">
 		UPDATE
 			TB_BBS
@@ -54,28 +64,32 @@
 	
 	<select id="select" parameterType="boardDto" resultType="boardDto">
 		SELECT
-			SEQ_BBS
-			, TITLE
-			, (SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = TB_BBS.SEQ_BBS) seq_reply
-			, CD_CTG
-			, CONTENT
-			, FILE_SAVE
-			, FILE_ORIG
-			, IMG
-			, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
+			tb_reply.SEQ_BBS
+			, tb_reply.TITLE
+			, (SELECT bbs.SEQ_BBS FROM TB_BBS bbs WHERE bbs.SEQ_BBS_PARENT = tb_reply.SEQ_BBS) seq_reply
+			, tb_reply.CD_CTG
+			, tb_reply.CONTENT
+			, tb_reply.FILE_SAVE
+			, tb_reply.FILE_ORIG
+			, tb_reply.SEQ_SLE
+			, tb_reply.IMG
+			, tb_reply.CD_CTG_B
+			, tb_reply.CD_CTG_M
+			, TO_CHAR(tb_reply.DT_REG, 'YYYY-MM-DD') dt_reg
+			,sle.SLE_NM
 		FROM
-			TB_BBS
+			TB_BBS tb_reply inner join TB_SLE sle on tb_reply.seq_sle=sle.seq_sle
 		WHERE
-			CD_BBS_TYPE		= #{cd_bbs_type}
-			AND SEQ_BBS		= #{seq_bbs}
-			
+			tb_reply.CD_BBS_TYPE		= #{cd_bbs_type}
+			AND tb_reply.SEQ_BBS		= #{seq_bbs}
+
 	</select>
 	
 	<insert id="insert" parameterType="boardDto">
 		INSERT INTO TB_BBS
-			(SEQ_BBS, CD_BBS_TYPE, TITLE, CD_CTG, CONTENT, FILE_SAVE, FILE_ORIG, IMG, READED, DT_REG, REGISTER)
+			(SEQ_BBS, CD_BBS_TYPE, TITLE, CD_CTG, CONTENT, FILE_SAVE, FILE_ORIG, IMG, READED, SEQ_SLE, CD_CTG_B, CD_CTG_M, DT_REG, REGISTER)
 		VALUES
-			(#{seq_bbs}, #{cd_bbs_type}, #{title}, #{cd_ctg}, #{content}, #{file_save}, #{file_orig}, #{img}, 0, SYSDATE, #{register})
+			(#{seq_bbs}, #{cd_bbs_type}, #{title}, #{cd_ctg}, #{content}, #{file_save}, #{file_orig}, #{img}, 0, #{seq_sle}, #{cd_ctg_b}, #{cd_ctg_m},SYSDATE, #{register})
 	</insert>
 	
 	<select id="count" parameterType="pagingDto" resultType="java.lang.Integer">

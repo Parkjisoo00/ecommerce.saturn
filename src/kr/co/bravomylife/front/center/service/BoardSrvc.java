@@ -137,6 +137,19 @@ public class BoardSrvc {
 	
 	/**
 	 * @param boardDto [게시판 빈]
+	 * @return BoardDto
+	 * 
+	 * @since 2024-10-08
+	 * <p>DESCRIPTION: 고객센터 보기</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public BoardDto mySelect(BoardDto boardDto) {
+		return boardDao.mySelect(boardDto);
+	}
+	
+	/**
+	 * @param boardDto [게시판 빈]
 	 * @return boolean
 	 * 
 	 * @since 2024-07-10

@@ -78,46 +78,112 @@
 	<!-- Header Section End -->
 	<section class="shop spad">
 		<div class="container">
-		<article class="txtCenter">
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<div class="checkout__form__input">
-							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">제목 <span>*</span></p>
-							<input type="text" id="title" name="title" value="${boardDto.title}" style="width: 40%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; font-color: black;" required />
-						</div>
+			<article class="txtCenter">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="checkout__form__input">
+						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">제목 <span>*</span></p>
+						<input type="text" id="title" name="title" value="${boardDto.title}" style="width: 40%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; font-color: black;" required />
 					</div>
-					<br/>
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<div class="checkout__form__input">
-							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">카테고리 <span>*</span></p>
-							<select id="cd_ctg" name="cd_ctg" required >
-								<option value="0"<c:if test="${boardDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
-								<option value="1"<c:if test="${boardDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
-								<option value="2"<c:if test="${boardDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
-								<option value="3"<c:if test="${boardDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
-								<option value="4"<c:if test="${boardDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
-								<option value="5"<c:if test="${boardDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
-								<option value="6"<c:if test="${boardDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
-								<option value="9"<c:if test="${boardDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
+				</div>
+				<br/>
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="checkout__form__input">
+						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">카테고리 <span>*</span></p>
+						<select id="cd_ctg" name="cd_ctg" required >
+							<option value="0"<c:if test="${boardDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
+							<option value="1"<c:if test="${boardDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
+							<option value="2"<c:if test="${boardDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
+							<option value="3"<c:if test="${boardDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
+							<option value="4"<c:if test="${boardDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
+							<option value="5"<c:if test="${boardDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
+							<option value="6"<c:if test="${boardDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
+							<option value="9"<c:if test="${boardDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="checkout__form__input">
+						<p style="font-weight: bold; margin-top: 30px;margin-bottom: 5px; font-size: 16px;">상품이름 </p>
+						<c:choose>
+							<c:when test="${boardDto.seq_sle > 0}" >
+								<input type="text" id="sle_nm" name="sle_nm" value="${boardDto.sle_nm}" style="width: 40%; padding: 10px; border: 1px solid #ccc; width:15%;border-radius: 5px; font-size: 14px;"/>
+							</c:when>
+								
+							<c:when test="${boardDto.seq_sle == 0}">
+								<input type="text" id="sle_nm" name="sle_nm" placeholder="않 쓰셔도 됩니다" style="width: 40%; padding: 10px; border: 1px solid #ccc; width:15%;border-radius: 5px; font-size: 14px;"/>
+							</c:when>
+							</c:choose>
+					</div>
+				<div class="checkout__form__input">
+					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">상품 대분류</p>
+					<select id="cd_ctg_b" name="cd_ctg_b" disabled style="margin-bottom:10px">
+						<option value="0">대분류를 선택하세요</option>
+						<option value="1"<c:if test="${boardDto.cd_ctg_b == '1'}"> selected</c:if>>기능별</option>
+						<option value="2"<c:if test="${boardDto.cd_ctg_b == '2'}"> selected</c:if>>성분별</option>
+						<option value="3"<c:if test="${boardDto.cd_ctg_b == '3'}"> selected</c:if>>대상별</option>
+						</select>
+				</div>
+				<div class="checkout__form__input">
+					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">상품 중분류</p>
+					<c:choose>
+						<c:when test="${boardDto.cd_ctg_b == '1'}">
+							<select id="cd_ctg_m" name="cd_ctg_m" disabled>
+								<option value="1" <c:if test="${boardDto.cd_ctg_m == '1'}"> selected</c:if>>혈당/혈행/혈압</option>
+								<option value="2" <c:if test="${boardDto.cd_ctg_m == '2'}"> selected</c:if>>항산화/면역력</option>
+								<option value="3" <c:if test="${boardDto.cd_ctg_m == '3'}"> selected</c:if>>염증/항염</option>
+								<option value="4" <c:if test="${boardDto.cd_ctg_m == '4'}"> selected</c:if>>관절/뼈/치아</option>
+								<option value="5" <c:if test="${boardDto.cd_ctg_m == '5'}"> selected</c:if>>피로회복</option>
+								<option value="6" <c:if test="${boardDto.cd_ctg_m == '6'}"> selected</c:if>>눈 건강</option>
+								<option value="7" <c:if test="${boardDto.cd_ctg_m == '7'}"> selected</c:if>>장 건강</option>
+								<option value="8" <c:if test="${boardDto.cd_ctg_m == '8'}"> selected</c:if>>두뇌/기억력</option>
+								<option value="9" <c:if test="${boardDto.cd_ctg_m == '9'}"> selected</c:if>>위/간/갑상선</option>
 							</select>
-						</div>
+						</c:when>
+											
+						<c:when test="${boardDto.cd_ctg_b == '2'}">
+							<select id="cd_ctg_m" name="cd_ctg_m" disabled>
+								<option value="1" <c:if test="${boardDto.cd_ctg_m == '1'}"> selected</c:if>>폴리코사놀</option>
+								<option value="2" <c:if test="${boardDto.cd_ctg_m == '2'}"> selected</c:if>>오메가-3</option>
+								<option value="3" <c:if test="${boardDto.cd_ctg_m == '3'}"> selected</c:if>>비타민/미네랄</option>
+								<option value="4" <c:if test="${boardDto.cd_ctg_m == '4'}"> selected</c:if>>유산균</option>
+								<option value="5" <c:if test="${boardDto.cd_ctg_m == '5'}"> selected</c:if>>글루코사민/MSM</option>
+								<option value="6" <c:if test="${boardDto.cd_ctg_m == '6'}"> selected</c:if>>루테인</option>
+								<option value="7" <c:if test="${boardDto.cd_ctg_m == '7'}"> selected</c:if>>코큐텐</option>
+								<option value="8" <c:if test="${boardDto.cd_ctg_m == '8'}"> selected</c:if>>아르기닌</option>
+								<option value="9" <c:if test="${boardDto.cd_ctg_m == '9'}"> selected</c:if>>밀크씨슬</option>
+								</select>
+						</c:when>
+											
+						<c:when test="${boardDto.cd_ctg_b == '3'}" >
+							<select id="cd_ctg_m" name="cd_ctg_m" disabled>
+								<option value="1" <c:if test="${boardDto.cd_ctg_m == '1'}"> selected</c:if>>남성</option>
+								<option value="2" <c:if test="${boardDto.cd_ctg_m == '2'}"> selected</c:if>>여성</option>
+							</select>
+						</c:when>
+							
+						<c:when test="${boardDto.cd_ctg_b == ''}" >
+							<select id="cd_ctg_m" name="cd_ctg_m">
+								<option value="0">먼저 대분류를 선택하세요</option>
+							</select>
+						</c:when>
+						</c:choose>
 					</div>
-					<br/>
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<div class="checkout__form__input">
-							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">내용 <span>*</span></p>
-								<textarea id="content" name="content" required >${boardDto.content}</textarea>
-						</div>
+				</div>
+				<br/>
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="checkout__form__input">
+						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">내용 <span>*</span></p>
+						<textarea id="content" name="content" required >${boardDto.content}</textarea>
 					</div>
-					<br/>
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<div class="checkout__form__input">
-							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">첨부 파일 <span></span></p>
-								<input type="file" id="files[0]" name="files[0]" required />
-						</div>
-					</div>
-					<br/>
-					<br/>
-					<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
+				</div>
+				<br/>
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">첨부 파일 <span></span></p>
+					<input type="file" id="files[0]" name="files[0]" />
+				</div>
+				<br/>
+				<br/>
+				<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="checkout__form__input">
 							<input type="button" value="저장" style="width:100px; font-weight: bold; font-size: 16px;" onclick="javascript:modifyProc(3);" />

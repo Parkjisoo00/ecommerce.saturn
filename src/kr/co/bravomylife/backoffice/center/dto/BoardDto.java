@@ -54,10 +54,33 @@ public class BoardDto {
 	private int count_flg_reply_null = 0;	//미답변 개수
 	private int seq_bbs_question = 0;
 	
+	private String cd_ctg_b			= "";	// 중분류
+	private String cd_ctg_m			= "";	// 대분류
+	private Integer seq_sle			= 0;	// 판매 상품 일련번호
 	
 	
 	
+
+
 	
+	public String getCd_ctg_b() {
+		return cd_ctg_b;
+	}
+	public void setCd_ctg_b(String cd_ctg_b) {
+		this.cd_ctg_b = cd_ctg_b;
+	}
+	public String getCd_ctg_m() {
+		return cd_ctg_m;
+	}
+	public void setCd_ctg_m(String cd_ctg_m) {
+		this.cd_ctg_m = cd_ctg_m;
+	}
+	public Integer getSeq_sle() {
+		return seq_sle;
+	}
+	public void setSeq_sle(Integer seq_sle) {
+		this.seq_sle = seq_sle;
+	}
 	public int getSeq_bbs_question() {
 		return seq_bbs_question;
 	}
