@@ -30,11 +30,11 @@ package kr.co.bravomylife.front.member.dto;
  */
 public class MemberDto {
 
-	private int	seq_mbr		= 0;
+	private int	seq_mbr			= 0;
 	private String 	email		= "";
 	private String	passwd		= "";
 	private String flg_sur		= "";
-	private int	cd_state	= 0;
+	private int	cd_state		= 0;
 	private String	mbr_nm		= "";
 	private String 	age			= "";
 	private String	gender		= "";
@@ -59,8 +59,64 @@ public class MemberDto {
 	private int delivery_count	= 0;
 	private int seq_mbr_addr	= 0;
 	private String flg_default	= "";
+	private String img			= "";
+	private String sle_nm		= "";
+	private Integer seq_sle		= 0;
+	private int count			= 0;
+	private int seq_buy_dtl		= 0;
+	private int seq_buy_mst		= 0;
+	private String dt_delivery	= "";
+	private String cd_state_delivery = "";
 	
 	
+	public String getCd_state_delivery() {
+		return cd_state_delivery;
+	}
+	public void setCd_state_delivery(String cd_state_delivery) {
+		this.cd_state_delivery = cd_state_delivery;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public String getSle_nm() {
+		return sle_nm;
+	}
+	public void setSle_nm(String sle_nm) {
+		this.sle_nm = sle_nm;
+	}
+	public Integer getSeq_sle() {
+		return seq_sle;
+	}
+	public void setSeq_sle(Integer seq_sle) {
+		this.seq_sle = seq_sle;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getSeq_buy_dtl() {
+		return seq_buy_dtl;
+	}
+	public void setSeq_buy_dtl(int seq_buy_dtl) {
+		this.seq_buy_dtl = seq_buy_dtl;
+	}
+	public int getSeq_buy_mst() {
+		return seq_buy_mst;
+	}
+	public void setSeq_buy_mst(int seq_buy_mst) {
+		this.seq_buy_mst = seq_buy_mst;
+	}
+	public String getDt_delivery() {
+		return dt_delivery;
+	}
+	public void setDt_delivery(String dt_delivery) {
+		this.dt_delivery = dt_delivery;
+	}
 	public String getFlg_default() {
 		return flg_default;
 	}

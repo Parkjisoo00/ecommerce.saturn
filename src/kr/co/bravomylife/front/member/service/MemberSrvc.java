@@ -52,6 +52,10 @@ public class MemberSrvc {
 	@Inject
 	TermAgreeDao termAgreeDao;
 	
+	public MemberDto buyDelivertView(MemberDto memberDto) {
+		return memberDao.buyDelivertView(memberDto);
+	}
+	
 	@Transactional("txFront")
 	public boolean deliveryDelCheck(MemberDto memberDto) {
 		

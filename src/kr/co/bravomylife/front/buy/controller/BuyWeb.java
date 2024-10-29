@@ -92,6 +92,47 @@ public class BuyWeb extends Common {
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-010-29
+	 * <p>DESCRIPTION: 리뷰 관리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/buy/buyDelivertView.web")
+	public ModelAndView buyDelivertView(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes		= new SKwithAES(staticKey);
+			
+			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			MemberDto _memberDto = memberSrvc.buyDelivertView(memberDto);
+			
+			_memberDto.setPost(aes.decode(_memberDto.getPost()));
+			_memberDto.setAddr1(aes.decode(_memberDto.getAddr1()));
+			_memberDto.setAddr2(aes.decode(_memberDto.getAddr2()));
+			_memberDto.setMbr_nm(aes.decode(_memberDto.getMbr_nm()));
+			
+			mav.addObject("memberDto"	, _memberDto);
+			mav.setViewName("front/buy/deliveryView");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".buyDelivertView()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
 	 * @since 2024-10-28

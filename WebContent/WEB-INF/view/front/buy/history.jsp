@@ -51,23 +51,24 @@
 		frmMain.submit();
 	}
 	
-	function review(value, value2, value3, value4) {
+	function delivery(value, value2, value3, value4) {
 	
-	var frmMain = document.getElementById("frmMain");
-	
-	document.getElementById("count").remove();
-	document.getElementById("discount").remove();
-	document.getElementById("discount_sale").remove();
-	document.getElementById("price_sale").remove();
-	document.getElementById("point_stack").remove();
-	
-	frmMain.seq_sle.setAttribute("value", value);
-	frmMain.cd_ctg_m.setAttribute("value", value2);
-	frmMain.cd_ctg_b.setAttribute("value", value3);
-	frmMain.seq_buy_dtl.setAttribute("value", value4);
-	frmMain.action="/front/buy/review.web";
-	frmMain.submit();
-}
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("count").remove();
+		document.getElementById("discount").remove();
+		document.getElementById("discount_sale").remove();
+		document.getElementById("price_sale").remove();
+		document.getElementById("point_stack").remove();
+		
+		frmMain.seq_sle.setAttribute("value", value);
+		frmMain.seq_buy_dtl.setAttribute("value", value2);
+		frmMain.seq_buy_mst.setAttribute("value", value3);
+		frmMain.seq_mbr_addr.setAttribute("value", value4);
+		
+		frmMain.action="/front/buy/buyDelivertView.web";
+		frmMain.submit();
+	}
 	
 	function goList(value) {
 		
@@ -122,6 +123,8 @@
 <input type="hidden" name="price_sale"			id="price_sale"			/>
 <input type="hidden" name="discount"			id="discount"			/>
 <input type="hidden" name="seq_buy_dtl"			id="seq_buy_dtl"		/>
+<input type="hidden" name="seq_buy_mst"			id="seq_buy_mst"		/>
+<input type="hidden" name="seq_mbr_addr"		id="seq_mbr_addr"		/>
 <input type="hidden" name="cd_bbs_type"	id="cd_bbs_type"				/>
 
 	<!-- Page Preloder -->
@@ -151,27 +154,24 @@
 										<th class="cart-th" style="width: 5%">
 										<th class="cart-th" >상품정보</th>
 										<th class="cart-th" style="width: 10%">수량</th>
-										<th class="cart-th" style="width: 10%">상품 금액</th>
-										<th class="cart-th" style="width: 20%">구매 날자</th>
-										<th class="cart-th" style="width: 10%">구매 상태</th>
-										<th class="cart-th" style="width: 10%">결재 상태</th>
-										<th class="cart-th" style="width: 10%">배송 상태</th>
-										<th class="cart-th" style="width: 10%">상품처리(미정)</th>
+										<th class="cart-th" style="width: 10%">상품금액</th>
+										<th class="cart-th" style="width: 20%">구매일</th>
+										<th class="cart-th" style="width: 10%">상태</th>
+										<th class="cart-th" style="width: 10%">배송정보</th>
+										<th class="cart-th" style="width: 10%"></th>
 									</tr>
 								</thead>
 								<tbody>
 								<c:choose>
 									<c:when test="${empty list}">
 										<tr style="text-align: center; border-bottom: 1px solid #707070;">
-											<td colspan="9">구매한 상품이 없습니다</td>
+											<td colspan="8">구매한 상품이 없습니다</td>
 										</tr>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="list" items="${list}">
 											<tr style="border: 0;">
-												
 												<td class="cart-td" style="text-align: center; vertical-align: middle;">
-												
 													<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden; display: inline-block;">
 														<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
 															<img class="cart-img" src="${list.img}" class="cart-img">
@@ -194,18 +194,14 @@
 													${list.cd_state}
 												</td>
 												<td class="cart-td" style="text-align: center !important;">
-													${list.cd_state_pay}
-												</td>
-												<td class="cart-td" style="text-align: center !important;">
 													${list.cd_state_delivery}
 												</td>
-												
 												<td class="cart-td">
 													<div style="display: flex; flex-direction: column; align-items: center;">
 														<a href="javascript:setBasket('${list.seq_sle}', '${list.sle_nm}', '${list.discount_sale}', '${list.count}'
 														, '${list.img}', '${list.point_stack}', '${list.cd_ctg_m}', '${list.cd_ctg_b}', '${list.price_sale}', '${list.discount}');" 
 														class="cart-btn" style="background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;margin-top:0px">장바구니 담기</a>
-														<a href="javascript:review('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}', '${list.seq_buy_dtl}');" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">후기 작성하기</a>
+														<a href="javascript:delivery('${list.seq_sle}', '${list.seq_buy_mst}', '${list.seq_buy_dtl}', '${list.seq_mbr_addr}');" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">배송조회 확인</a>
 													</div>
 												</td>
 											</tr>

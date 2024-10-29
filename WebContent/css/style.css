@@ -484,6 +484,20 @@ table.headTop_pd th, table.headTop_pd td {
 }
 
 /*----------------------------------------*/
+/* delivery
+/*----------------------------------------*/
+
+.delivery_div_head {
+	margin-top: 14px !important;
+	padding: 20px 0px 15px !important;
+	border: 1px solid rgb(204, 204, 204) !important;
+	color: rgb(51, 51, 51) !important;
+	background-color: rgb(238, 238, 238) !important;
+	text-align: center !important;
+	font-family: "Montserrat", sans-serif !important;
+}
+
+/*----------------------------------------*/
 /* Cart Css
 /*----------------------------------------*/
 

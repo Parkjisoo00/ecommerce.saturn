@@ -81,7 +81,7 @@
 										<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;font-weight:700;color:#341d08">포인트:&nbsp;
 										<span style="font-size: 25px; font-weight: 700; color: #341d08;">${memberDto.total_point}</span></span>
 									</div>
-					<h6 class="lowgnb-title" style="padding-bottom: 5px; text-align: left; font-size: 30px;">찜 리스트</h6>
+					<h6 class="lowgnb-title" style="padding-bottom: 5px; text-align: left; font-size: 30px;">찜한 상품</h6>
 					<div class="mypage-header">
 						<h6 class="cart-title" style="font-size:15px">*이미지를 클릭하면 상품으로 이동합니다.</h6>
 						<div class="mypage-header-right-group">
@@ -149,18 +149,17 @@
 										<th class="cart-th" style="width: 5%">
 										<th class="cart-th" >상품정보</th>
 										<th class="cart-th" style="width: 10%">수량</th>
-										<th class="cart-th" style="width: 10%">상품 금액</th>
-										<th class="cart-th" style="width: 20%">구매 날자</th>
-										<th class="cart-th" style="width: 10%">구매 상태</th>
-										<th class="cart-th" style="width: 10%">결재 상태</th>
-										<th class="cart-th" style="width: 10%">배송 상태</th>
+										<th class="cart-th" style="width: 10%">상품금액</th>
+										<th class="cart-th" style="width: 20%">구매일</th>
+										<th class="cart-th" style="width: 10%">상태</th>
+										<th class="cart-th" style="width: 10%">배송정보</th>
 									</tr>
 								</thead>
 								<tbody>
 								<c:choose>
 									<c:when test="${empty historyList}">
 										<tr style="text-align: center; border-bottom: 1px solid #707070;">
-											<td colspan="8">구매한 상품이 없습니다</td>
+											<td colspan="7">구매한 상품이 없습니다</td>
 										</tr>
 									</c:when>
 									<c:otherwise>
@@ -191,12 +190,8 @@
 													${historyList.cd_state}
 												</td>
 												<td class="cart-td" style="text-align: center !important;">
-													${historyList.cd_state_pay}
-												</td>
-												<td class="cart-td" style="text-align: center !important;">
 													${historyList.cd_state_delivery}
 												</td>
-
 											</tr>
 										</c:forEach>
 									</c:otherwise>
@@ -204,9 +199,6 @@
 								</tbody>
 							</table>
 						</div>
-						
-						
-						
 					</div>
 				</div>
 			</form>
