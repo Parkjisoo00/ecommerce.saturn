@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.member.Member">
 	
+	<select id="deliveryDelCheck" parameterType="memberDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(seq_mbr_addr)
+		FROM
+			TB_MBR_ADDR
+		WHERE
+			SEQ_MBR = #{seq_mbr}
+			AND SEQ_MBR_ADDR = #{seq_mbr_addr}
+			AND FLG_DEFAULT = 'Y'
+			AND FLG_DELETE = 'N'
+	</select>
+	
 	<select id="deliveryChanges" parameterType="memberDto" resultType="memberDto">
 		SELECT
 			SEQ_MBR_ADDR
@@ -20,6 +32,7 @@
 			TB_MBR_ADDR
 		SET
 			FLG_DELETE	= 'Y'
+			, FLG_DEFAULT = 'N'
 			, DT_UPT	= SYSDATE
 			, UPDATER	= #{seq_mbr}
 		WHERE
@@ -36,6 +49,7 @@
 			, ADDR2		= #{addr2}
 			, DT_UPT	= SYSDATE
 			, UPDATER	= #{seq_mbr}
+			, FLG_DEFAULT = #{flg_default}
 		WHERE
 			SEQ_MBR		= #{seq_mbr}
 			AND SEQ_MBR_ADDR = #{seq_mbr_addr}
@@ -44,6 +58,7 @@
 	<select id="writeFomrDelivery" parameterType="memberDto" resultType="memberDto">
 		SELECT
 			SEQ_MBR_ADDR
+			, FLG_DEFAULT
 			, POST
 			, ADDR1
 			, ADDR2
@@ -59,6 +74,7 @@
 	<select id="deliveryList" parameterType="memberDto" resultType="memberDto">
 		SELECT
 			SEQ_MBR_ADDR
+			, FLG_DEFAULT
 			, POST
 			, ADDR1
 			, ADDR2
@@ -72,9 +88,9 @@
 	
 	<insert id="modifyDeliveryProc" parameterType="memberDto">
 		INSERT INTO TB_MBR_ADDR
-			(SEQ_MBR_ADDR, SEQ_MBR, POST, ADDR1, ADDR2, FLG_DELETE, DT_REG, REGISTER, DT_UPT, UPDATER)
+			(SEQ_MBR_ADDR, SEQ_MBR, POST, ADDR1, ADDR2, FLG_DELETE, FLG_DEFAULT, DT_REG, REGISTER, DT_UPT, UPDATER)
 		VALUES
-			(SQ_SEQ_MBR_ADDR.NEXTVAL, #{seq_mbr}, #{post}, #{addr1}, #{addr2}, 'N', SYSDATE, #{seq_mbr}, NULL, NULL)
+			(SQ_SEQ_MBR_ADDR.NEXTVAL, #{seq_mbr}, #{post}, #{addr1}, #{addr2}, 'N', 'N', SYSDATE, #{seq_mbr}, NULL, NULL)
 	</insert>
 	
 	<select id="deliveryCheck" parameterType="memberDto" resultType="java.lang.Integer">
@@ -288,20 +304,20 @@
 			, mst.MBR_NM
 			, mst.GENDER
 			, mst.PHONE
-			, dtl.POST
-			, dtl.ADDR1
-			, dtl.ADDR2
-			, dtl.FLG_EMAIL
-			, dtl.FLG_SMS
+			, addr.POST
+			, addr.ADDR1
+			, addr.ADDR2
+			, addr.SEQ_MBR_ADDR
 			, mst.TOTAL_POINT
 		FROM
 			TB_MBR_MST mst
-		INNER JOIN
-			TB_MBR_DTL dtl
+		LEFT JOIN
+			TB_MBR_ADDR addr
 		ON
-			mst.SEQ_MBR = dtl.SEQ_MBR
+			mst.SEQ_MBR = addr.SEQ_MBR
 		WHERE
 			mst.SEQ_MBR = #{seq_mbr}
+			AND addr.FLG_DEFAULT = 'Y'
 	</select>
 
 	<insert id="insertMaster" parameterType="memberDto">

@@ -61,8 +61,26 @@
 		
 		document.getElementById("seq_mbr_addr").value = value;
 		
-		frmMain.action="/front/member/deleteDelivery.web";
-		frmMain.submit();
+		var myData = {seq_mbr_addr: $("#seq_mbr_addr").val()};
+		
+		$.ajax({
+			type: "POST",
+			url: "/front/member/deliveryDelCheck.json",
+			dataType: "json",
+			contentType: "application/json; charset=UTF-8",
+			data: JSON.stringify(myData),
+			success: function(res) {
+				
+				if (res.check) {
+					
+					alert("기본 배송지는 삭제할 수 없습니다.");
+				} else {
+					
+					frmMain.action = "/front/member/deleteDelivery.web";
+					frmMain.submit();
+				}
+			},
+		});
 	}
 	</script>
 </head>
@@ -96,8 +114,8 @@
 												<tr>
 													<th class="health-head" style="width:10% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">주소</th>
 													<th class="health-head" style="background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">도로명</th>
-													<th class="health-head" style="width:20% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">상세</th>
-													<th class="health-head" style="width:29% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">등록일</th>
+													<th class="health-head" style="width:18% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">상세</th>
+													<th class="health-head" style="width:28% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">등록일</th>
 												</tr>
 											</thead>
 											<tbody id="dataBody">
@@ -116,7 +134,12 @@
 																${list.post}
 															</td>
 															<td class="health-body" style="text-align: center !important; border-bottom: 0px !important;">
-																${list.addr1}
+															<c:if test="${list.flg_default == 'Y'}">
+																<div style="display: flex; align-items: center;">${list.addr1}<span class="delivery_address" style="margin-top: 2.6px !important;">기본배송지</span></div>
+															</c:if>
+															<c:if test="${list.flg_default == 'N'}">
+																<div style="display: flex; align-items: center;">${list.addr1}</div>
+															</c:if>
 															</td>
 															<td class="health-body" style="text-align: center !important; border-bottom: 0px !important;">
 																${list.addr2}

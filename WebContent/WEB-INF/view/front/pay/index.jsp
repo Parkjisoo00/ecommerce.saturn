@@ -205,7 +205,7 @@
 							<tbody>
 							<tr style="border: 0;">
 								<td class="customer-td1">이름</td>
-								<td class="customer-td2">${memberDto.mbr_nm}</td>
+								<td class="customer-td2"><div style="display: flex; align-items: center;">${memberDto.mbr_nm} <span class="delivery_address">기본배송지</span></div></td>
 							</tr>
 							<tr style="border: 0;">
 								<td class="customer-td1">이메일</td>
@@ -219,7 +219,7 @@
 								<td class="customer-td1">배송주소</td>
 								<td class="customer-td2">
 									<input class="customer-input" type="text" id="post" name="post" size="5" autocomplete="off" value="${memberDto.post}"/>
-									<input class="customer-input" type="hidden" id="seq_mbr_addr" name="seq_mbr_addr" value=""/>
+									<input class="customer-input" type="hidden" id="seq_mbr_addr" name="seq_mbr_addr" value="${memberDto.seq_mbr_addr}"/>
 									<label for="addr1">도로명</label>
 									<input class="customer-input" style="width:300px" type="text" id="addr1" name="addr1" size="40" autocomplete="off" value="${memberDto.addr1}"/>
 									<span id="guide" style="color:#999; display:none"></span>

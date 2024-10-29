@@ -39,6 +39,10 @@ import kr.co.bravomylife.front.member.dto.MemberDto;
 @Repository("kr.co.bravomylife.front.member.dao.MemberDao")
 public class MemberDao extends BaseDao {
 	
+	public int deliveryDelCheck(MemberDto memberDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.deliveryDelCheck", memberDto);
+	}
+	
 	public List<MemberDto> deliveryChanges(MemberDto memberDto) {
 		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.member.Member.deliveryChanges", memberDto);
 	}

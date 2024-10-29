@@ -58,8 +58,15 @@ public class MemberDto {
 	private int current_basket	= 0;
 	private int delivery_count	= 0;
 	private int seq_mbr_addr	= 0;
+	private String flg_default	= "";
 	
 	
+	public String getFlg_default() {
+		return flg_default;
+	}
+	public void setFlg_default(String flg_default) {
+		this.flg_default = flg_default;
+	}
 	public int getSeq_mbr_addr() {
 		return seq_mbr_addr;
 	}

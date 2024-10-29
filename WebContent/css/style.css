@@ -807,6 +807,34 @@ table.headTop_pd th, table.headTop_pd td {
 	height: 27px !important;
 }
 
+.delivery_address {
+	display: inline-block !important;
+	height: 18px !important;
+	margin-left: 4px !important;
+	padding: 2px 2px 0 !important;
+	font-size: 11px !important;
+	font-family: dotum, sans-serif !important;
+	line-height: 14px !important;
+	vertical-align: middle !important;
+	border-radius: 8px !important;
+	color: #555 !important;
+	border: 1px solid #555 !important;
+}
+
+.delivery_checkbox {
+	width: 24px !important;
+	height: 24px !important;
+	-webkit-border-radius: 1px !important;
+	vertical-align: middle !important;
+	cursor: pointer !important;
+	display: inline !important;
+	margin-right: 4px !important;
+	border: 1px solid #ccc !important;
+	border-radius: 1px !important;
+	background-color: #fff !important;
+	box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
 /*----------------------------------------*/
 /* CheckOut Css
 /*----------------------------------------*/

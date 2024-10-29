@@ -94,6 +94,42 @@ public class MemberWeb extends Common {
 	 * @return ModelAndView
 	 * 
 	 * @since 2024-10-28
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	 
+	@RequestMapping(value = "/front/member/deliveryDelCheck.json", method = RequestMethod.POST, headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
+	public @ResponseBody Map<String, Object> deliveryDelCheck(HttpServletRequest request, @RequestBody MemberDto memberDto) {
+		
+		Map<String, Object> response = new HashMap<>();
+		
+		boolean check = true;
+		
+		try {
+			
+			logger.debug("seq_mbr_addr 확인" + memberDto.getSeq_mbr_addr());
+			
+			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			check = memberSrvc.deliveryDelCheck(memberDto);
+			
+			response.put("check", check);
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".deliveryDelCheck()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return response;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-28
 	 * <p>DESCRIPTION:마이 페이지 수정</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -133,14 +169,26 @@ public class MemberWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/member/writeProcDelivery.web")
-	public ModelAndView writeProcDelivery(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+	public ModelAndView writeProcDelivery(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto, String deliveryDefault) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		logger.debug("deliveryDefault 값 확인" + deliveryDefault);
 		
 		try {
 			
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
+			
+			if ("true".equals(deliveryDefault)) {
+				
+				memberDto.setFlg_default("Y");
+			}
+			else {
+				
+				memberDto.setFlg_default("N");
+			}
+			
 			
 			memberDto.setPost(aes.encode(memberDto.getPost()));
 			memberDto.setAddr1(aes.encode(memberDto.getAddr1()));
@@ -191,6 +239,7 @@ public class MemberWeb extends Common {
 			_memberDto.setAddr1(aes.decode(_memberDto.getAddr1()));
 			_memberDto.setAddr2(aes.decode(_memberDto.getAddr2()));
 			_memberDto.setDt_reg(_memberDto.getDt_reg());
+			_memberDto.setFlg_default(_memberDto.getFlg_default());
 			
 			mav.addObject("memberDto", _memberDto);
 			mav.setViewName("front/member/writeFormDelivery");
@@ -316,6 +365,7 @@ public class MemberWeb extends Common {
 				_MemberDto.setAddr1(aes.decode(member.getAddr1()));
 				_MemberDto.setAddr2(aes.decode(member.getAddr2()));
 				_MemberDto.setDt_reg(member.getDt_reg());
+				_MemberDto.setFlg_default(member.getFlg_default());
 				
 				MemberList.add(_MemberDto);
 			}

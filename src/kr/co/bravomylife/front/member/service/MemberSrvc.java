@@ -52,6 +52,23 @@ public class MemberSrvc {
 	@Inject
 	TermAgreeDao termAgreeDao;
 	
+	@Transactional("txFront")
+	public boolean deliveryDelCheck(MemberDto memberDto) {
+		
+		int result = 0;
+		
+		result = memberDao.deliveryDelCheck(memberDto);
+		
+		if(result == 1) {
+			
+			return true;
+		}
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
 	public List<MemberDto> deliveryChanges(MemberDto memberDto) {
 		return memberDao.deliveryChanges(memberDto);
 	}

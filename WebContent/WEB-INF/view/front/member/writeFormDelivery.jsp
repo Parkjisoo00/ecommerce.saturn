@@ -69,6 +69,16 @@
 							<div class="row"style="display: flex; justify-content: center; align-items: center;">
 								<div class="col-lg-8">
 									<h5 style="font-size :30px; border-bottom: 0px !important;">배송지 수정</h5>
+										<c:if test="${memberDto.flg_default == 'Y'}">
+										<div style="padding-bottom: 10px !important; display: flex; align-items: center; justify-content: left;">
+											<input name="deliveryDefault" value="true" type="checkbox" class="delivery_checkbox" checked><span>기본 배송지로 선택</span>
+										</div>
+										</c:if>
+										<c:if test="${memberDto.flg_default == 'N'}">
+										<div style="padding-bottom: 10px !important; display: flex; align-items: center; justify-content: left;">
+											<input name="deliveryDefault" value="true" type="checkbox" class="delivery_checkbox"><span>기본 배송지로 선택</span>
+										</div>
+										</c:if>
 									<div class="row">
 										<!-- 주소 -->
 										<div class="col-lg-12 col-md-6 col-sm-6">
