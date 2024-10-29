@@ -169,9 +169,9 @@
 
 	<insert id="insert" parameterType="productDto">
 		INSERT INTO TB_SLE
-			(SEQ_SLE, SLE_NM, PRICE_SALE, IMG, DESCES, CD_CTG_B, CD_CTG_M, CD_STATE_SALE, PRD_TYPE, COUNT_STOCK, CORP_NM, FLG_DELETE, DT_SALE_START, DT_SALE_END, DISCOUNT, DT_REG, REGISTER, POINT_STACK)
+			(SEQ_SLE, SLE_NM, PRICE_SALE, IMG, DESCES, CD_CTG_B, CD_CTG_M, CD_STATE_SALE, PRD_TYPE, COUNT_STOCK, CORP_NM, FLG_DELETE, DT_SALE_START, DT_SALE_END, DISCOUNT, DT_REG, REGISTER, POINT_STACK, ORIGIN_SALE, MARGIN_RATE)
 		VALUES
-			(SQ_SEQ_SLE.NEXTVAL, #{sle_nm}, #{price_sale}, #{img}, #{desces}, #{cd_ctg_b}, #{cd_ctg_m}, #{cd_state_sale}, #{prd_type}, #{count_stock}, #{corp_nm}, 'N', TO_DATE(#{dt_sale_start}, 'YYYY-MM-DD HH24:MI:SS'), TO_DATE(#{dt_sale_end}, 'YYYY-MM-DD HH24:MI:SS'), #{discount}, SYSDATE, 1, #{point_stack})
+			(SQ_SEQ_SLE.NEXTVAL, #{sle_nm}, ((#{origin_sale} * (#{margin_rate} / 100)) + #{origin_sale}), #{img}, #{desces}, #{cd_ctg_b}, #{cd_ctg_m}, #{cd_state_sale}, #{prd_type}, #{count_stock}, #{corp_nm}, 'N', TO_DATE(#{dt_sale_start}, 'YYYY-MM-DD HH24:MI:SS'), TO_DATE(#{dt_sale_end}, 'YYYY-MM-DD HH24:MI:SS'), #{discount}, SYSDATE, 1, #{point_stack}, #{origin_sale}, #{margin_rate})
 	</insert>
 
 </mapper>

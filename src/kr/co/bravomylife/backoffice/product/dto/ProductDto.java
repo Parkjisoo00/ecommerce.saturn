@@ -34,7 +34,7 @@ public class ProductDto {
 	private int seq_sle			= 0;
 	private String sle_nm			= "";	// 판매 상품명
 	private String img				= "";	// 판매 상품 이미
-	private int price_sale			= 0;	// 판매 상품 원가
+	private int price_sale			= 0;	// 판매 상품 가격
 	private String desces			= "";	// 판매 상품 상세설명(이미지)
 	private String cd_ctg_b			= "";	// 중분류
 	private String cd_ctg_m			= "";	// 대분류
@@ -51,7 +51,8 @@ public class ProductDto {
 	private int point_stack		= 0;	// 포인트 적립률
 	private String dt_upt			= "";	// 수정일
 	private int updater			= 0;	// 수정자
-	
+	private int origin_sale		= 0;	// 상품 원가
+	private int margin_rate		= 0;	// 마진률
 	
 	public int getRnum() {
 		return rnum;
@@ -179,5 +180,16 @@ public class ProductDto {
 	public void setUpdater(int updater) {
 		this.updater = updater;
 	}
-	
+	public int getOrigin_sale() {
+		return origin_sale;
+	}
+	public void setOrigin_sale(int origin_sale) {
+		this.origin_sale = origin_sale;
+	}
+	public int getMargin_rate() {
+		return margin_rate;
+	}
+	public void setMargin_rate(int margin_rate) {
+		this.margin_rate = margin_rate;
+	}
 }

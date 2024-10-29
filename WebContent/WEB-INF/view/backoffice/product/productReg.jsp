@@ -38,7 +38,6 @@
 			
 			if (document.getElementById("sle_nm").value == ""
 					|| document.getElementById("img").value == ""
-					|| document.getElementById("price_sale").value == ""
 					|| document.getElementById("desces").value == ""
 					|| document.getElementById("cd_ctg_b").value == "0"
 					|| document.getElementById("cd_ctg_m").value == "0"
@@ -63,7 +62,7 @@
 				alert("포인트 적립률은 0에서 99 사이의 숫자만 입력 가능합니다.");
 				return;
 			}
-			document.getElementById("price_sale").value = document.getElementById("price_sale").value.replaceAll(",", "");
+			document.getElementById("origin_sale").value = document.getElementById("origin_sale").value.replaceAll(",", "");
 			
 			frmMain.action = "/backoffice/product/productRegProc.web";
 			frmMain.submit();
@@ -144,9 +143,9 @@
 									</td>
 								</tr>
 								<tr>
-									<th style="width: 150px;" >판매 상품 원가</th>
+									<th style="width: 150px;" >상품 원가</th>
 									<td>
-										<input type="text" class="form-control" id="price_sale" name="price_sale" onkeyup="commaValue(this);" required autocomplete="off">
+										<input type="text" class="form-control" id="origin_sale" name="origin_sale" onkeyup="commaValue(this);" required autocomplete="off">
 									</td>
 								</tr>
 								<tr>
@@ -237,6 +236,12 @@
 									<th style="width: 150px;" >할인율</th>
 									<td>
 										<input type="text" id="discount" name="discount" class="form-control" autocomplete="off" max="99">
+									</td>
+								</tr>
+								<tr>
+									<th style="width: 150px;" >마진률</th>
+									<td>
+										<input type="text" id="margin_rate" name="margin_rate" class="form-control" autocomplete="off" max="30">
 									</td>
 								</tr>
 								<tr>
