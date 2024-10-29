@@ -83,6 +83,12 @@
 									</td>
 								</tr>
 								<tr>
+									<th style="width: 150px;" >상품 원가</th>
+									<td>
+										<fmt:formatNumber value="${productDto.origin_sale}" type="number" />원
+									</td>
+								</tr>
+								<tr>
 									<th style="width: 150px;" >카테고리 대분류</th>
 									<td>
 										<select id="cd_ctg_b" name="cd_ctg_b" disabled>
@@ -178,6 +184,12 @@
 									<th style="width: 150px;" >할인율</th>
 									<td>
 										${productDto.discount}
+									</td>
+								</tr>
+								<tr>
+									<th style="width: 150px;" >마진률</th>
+									<td>
+										${productDto.margin_rate}
 									</td>
 								</tr>
 								</tbody>

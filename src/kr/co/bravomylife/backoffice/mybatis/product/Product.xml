@@ -13,7 +13,7 @@
 			<if test="desces != null and desces != ''">
 			, DESCES 		= #{desces}
 			</if>
-			, PRICE_SALE	= #{price_sale}
+			, ORIGIN_SALE	= #{origin_sale}
 			, CD_CTG_B		= #{cd_ctg_b}
 			, CD_CTG_M		= #{cd_ctg_m}
 			, CD_STATE_SALE	= #{cd_state_sale}
@@ -23,6 +23,7 @@
 			, DT_SALE_START	= #{dt_sale_start}
 			, DT_SALE_END	= #{dt_sale_end}
 			, DISCOUNT		= #{discount}
+			, MARGIN_RATE	= #{margin_rate}
 			, DT_UPT		= SYSDATE
 			, UPDATER		= #{updater}
 		WHERE
@@ -73,6 +74,7 @@
 			, DESCES
 			, IMG
 			, PRICE_SALE
+			, ORIGIN_SALE
 			, CD_CTG_B
 			, CD_CTG_M
 			, CD_STATE_SALE
@@ -82,6 +84,7 @@
 			, TO_CHAR(DT_SALE_START, 'YYYY-MM-DD')	DT_SALE_START
 			, TO_CHAR(DT_SALE_END, 'YYYY-MM-DD')	DT_SALE_END
 			, DISCOUNT
+			, MARGIN_RATE
 		FROM
 			TB_SLE
 		WHERE

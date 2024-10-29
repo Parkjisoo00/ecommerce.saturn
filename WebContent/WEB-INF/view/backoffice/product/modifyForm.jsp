@@ -219,7 +219,7 @@
 			var frmMain = document.getElementById("frmMain");
 			
 			if (document.getElementById("sle_nm").value == ""
-					|| document.getElementById("price_sale").value == "0"
+					|| document.getElementById("origin_sale").value == "0"
 					|| document.getElementById("cd_ctg_b").value == ""
 					|| document.getElementById("cd_ctg_m").value == ""
 					|| document.getElementById("cd_state_sale").value == ""
@@ -229,7 +229,7 @@
 				alert("필수 항목을 입력하세요!");
 				return;
 			}
-			document.getElementById("price_sale").value = document.getElementById("price_sale").value.replaceAll(",", "");
+			document.getElementById("origin_sale").value = document.getElementById("origin_sale").value.replaceAll(",", "");
 			
 			frmMain.action="/console/product/modifyProc.web";
 			frmMain.submit();
@@ -276,9 +276,9 @@
 									</td>
 								</tr>
 								<tr>
-									<th style="width: 150px;" >판매 가격</th>
+									<th style="width: 150px;" >상품 원가</th>
 									<td>
-										<input type="text" id="price_sale" name="price_sale" value="<fmt:formatNumber value="${productDto.price_sale}" type="number" />" style="width:100px; text-align:right" onkeyup="commaValue(this);" required/>원
+										<input type="text" id="origin_sale" name="origin_sale" value="<fmt:formatNumber value="${productDto.origin_sale}" type="number" />" style="width:100px; text-align:right" onkeyup="commaValue(this);" required/>원
 									</td>
 								</tr>
 								<tr>
@@ -337,6 +337,12 @@
 									<th style="width: 150px;" >할인율</th>
 									<td>
 										<input type="text" id="discount" name="discount" value="${productDto.discount}" style="width:100px; text-align:right" required/>%
+									</td>
+								</tr>
+								<tr>
+									<th style="width: 150px;" >마진률</th>
+									<td>
+										<input type="text" id="margin_rate" name="margin_rate" value="${productDto.margin_rate}" style="width:100px; text-align:right" required/>%
 									</td>
 								</tr>
 								</tbody>
