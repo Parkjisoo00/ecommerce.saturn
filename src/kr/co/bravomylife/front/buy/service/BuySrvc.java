@@ -34,7 +34,6 @@ import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
 import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
-import kr.co.bravomylife.front.member.dto.MemberDto;
 import kr.co.bravomylife.front.pay.dao.PayDao;
 import kr.co.bravomylife.front.pay.dto.PayDto;
 
@@ -99,7 +98,6 @@ public class BuySrvc {
 		buyMasterDto.setCd_state_pay(flg_success);	// 결제 완료(Y), 결제 전(N), 결제 취소(C)
 		buyMasterDto.setUpdater(updater);
 		result += buyDao.update(buyMasterDto);
-		buyDao.updateDetail(buyMasterDto);
 		
 		if (result == 2) return true;
 		else {
@@ -109,19 +107,10 @@ public class BuySrvc {
 	}
 	
 	@Transactional("txFront")
-	public boolean insert(BuyMasterDto buyMasterDto, ArrayList<BuyDetailDto> listBuyDetailDto, String deal_num, MemberDto memberDto) {
+	public boolean insert(BuyMasterDto buyMasterDto, ArrayList<BuyDetailDto> listBuyDetailDto, String deal_num) {
 			
 		int result = 0;
 		int bestCount = 0;
-		
-		// 결제 정보
-		PayDto payDto = new PayDto();
-		payDto.setSeq_pay(payDao.sequence());
-		payDto.setSeq_mbr(buyMasterDto.getSeq_mbr());
-		payDto.setSeq_buy_mst(buyMasterDto.getSeq_buy_mst());
-		payDto.setDeal_num(deal_num);
-		payDto.setRegister(buyMasterDto.getSeq_mbr());
-		result += payDao.insert(payDto);
 		
 		// int check = 0;
 		
@@ -136,14 +125,6 @@ public class BuySrvc {
 			listBuyDetailDto.get(loop).setSeq_buy_dtl(buyDao.sequenceDetail());
 			listBuyDetailDto.get(loop).setSeq_buy_mst(buyMasterDto.getSeq_buy_mst());
 			listBuyDetailDto.get(loop).setRegister(buyMasterDto.getRegister());
-			listBuyDetailDto.get(loop).setSeq_mbr_addr(memberDto.getSeq_mbr_addr());
-			
-			int seq_buy_dtl = listBuyDetailDto.get(loop).getSeq_buy_dtl();
-			
-			payDto.setSeq_buy_dtl(seq_buy_dtl);
-			payDto.setSeq_pay(payDao.sequence());
-			
-			payDao.insertDetail(payDto);
 			
 			result += buyDao.insertDetail(listBuyDetailDto.get(loop));
 			result += buyDao.updateCountStock(listBuyDetailDto.get(loop));
@@ -176,6 +157,16 @@ public class BuySrvc {
 			}
 			*/
 		}
+		
+		// 결제 정보
+		PayDto payDto = new PayDto();
+		payDto.setSeq_pay(payDao.sequence());
+		payDto.setSeq_mbr(buyMasterDto.getSeq_mbr());
+		payDto.setSeq_buy_mst(buyMasterDto.getSeq_buy_mst());
+		payDto.setDeal_num(deal_num);
+		payDto.setRegister(buyMasterDto.getSeq_mbr());
+		result += payDao.insert(payDto);
+		
 		if (result == 1 + listBuyDetailDto.size() + listBuyDetailDto.size() + 1) return true;
 		else {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
