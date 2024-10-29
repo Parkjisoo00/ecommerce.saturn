@@ -38,7 +38,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.bravomylife.backoffice.common.Common;
 import kr.co.bravomylife.backoffice.common.dto.PagingDto;
 import kr.co.bravomylife.backoffice.common.dto.PagingListDto;
-
+import kr.co.bravomylife.backoffice.users.dto.MemberDto;
 import kr.co.bravomylife.backoffice.buy.dto.BuyDto;
 import kr.co.bravomylife.util.security.SKwithAES;
 import kr.co.bravomylife.backoffice.buy.service.BuySrvc;
@@ -104,8 +104,6 @@ public class BuyWeb extends Common {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
-		logger.debug("그냥 서브밋");
-		
 		
 		try {
 			
@@ -114,23 +112,13 @@ public class BuyWeb extends Common {
 			SKwithAES aes		= new SKwithAES(staticKey);
 			
 			String searchWord = pagingDto.getSearchWord();
-			pagingDto.setSearchWord(aes.encode(searchWord));
 			
-			pagingDto.setSearchWord(aes.encode(pagingDto.getSearchWord()));
-			
-			
-			
-			logger.debug("searchKey: " + pagingDto.getSearchKey());
-			logger.debug("암호화된 searchWord: " + pagingDto.getSearchWord());
-			
-			// 검색 조건 설정
-			// String searchCdState = request.getParameter("searchCdState");
-			// String searchCdStatePay = request.getParameter("searchCdStatePay");
-			// String searchCdStateDelivery = request.getParameter("searchCdStateDelivery");
-			
-			// logger.debug("searchCdState 값 확인" + searchCdState);
-			
-
+			if ("mbr_nm".equals(pagingDto.getSearchKey()) || ("email".equals(pagingDto.getSearchKey()))) {
+				if (searchWord != null && searchWord != "") {
+					pagingDto.setSearchWord(aes.encode(searchWord));
+				}
+				
+			}
 			
 			PagingListDto pagingListDto = buySrvc.list(pagingDto);
 			
@@ -142,15 +130,9 @@ public class BuyWeb extends Common {
 				list.get(loop).setMbr_nm(aes.decode(list.get(loop).getMbr_nm()));
 			}
 			
-
-			//logger.debug("받아온 cd_state_pay 확인" + list.get(0).getCd_state_pay());
-			
 			pagingDto.setSearchWord(searchWord);
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
-			// mav.addObject("searchCdState", searchCdState);
-			// mav.addObject("searchCdStatePay", searchCdStatePay);
-			// mav.addObject("searchCdStateDelivery", searchCdStateDelivery);
 			
 			mav.setViewName("backoffice/buy/list");
 		}

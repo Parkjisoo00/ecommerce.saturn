@@ -4,29 +4,29 @@
 
 
 	<select id="search" parameterType="pagingDto" resultType="buyDto">
-	    SELECT 
-	        buy_mst.SEQ_MBR,
-	        buy_dtl.SLE_NM,
-	        buy_dtl.COUNT,
-	        buy_dtl.PRICE,
-	        buy_dtl.POINT,
-	        buy_dtl.FLG_REVIEW,
-	        TO_CHAR(buy_dtl.DT_REG, 'YYYY-MM-DD') AS dt_reg
-	    FROM 
-	        TB_BUY_MST buy_mst
-	    LEFT JOIN 
-	        TB_BUY_DTL buy_dtl ON buy_mst.SEQ_BUY_MST = buy_dtl.SEQ_BUY_MST
-	    WHERE 
-	        1 = 1
-	        <if test="searchCdState != null and searchCdState != ''">
-	            AND buy_dtl.CD_STATE = #{searchCdState}
-	        </if>
-	        <if test="searchCdStatePay != null and searchCdStatePay != ''">
-	            AND buy_dtl.CD_STATE_PAY = #{searchCdStatePay}
-	        </if>
-	        <if test="searchCdStateDelivery != null and searchCdStateDelivery != ''">
-	            AND buy_dtl.CD_STATE_DELIVERY = #{searchCdStateDelivery}
-	        </if>
+		SELECT 
+			buy_mst.SEQ_MBR,
+			buy_dtl.SLE_NM,
+			buy_dtl.COUNT,
+			buy_dtl.PRICE,
+			buy_dtl.POINT,
+			buy_dtl.FLG_REVIEW,
+			TO_CHAR(buy_dtl.DT_REG, 'YYYY-MM-DD') AS dt_reg
+		FROM 
+			TB_BUY_MST buy_mst
+		LEFT JOIN 
+			TB_BUY_DTL buy_dtl ON buy_mst.SEQ_BUY_MST = buy_dtl.SEQ_BUY_MST
+		WHERE 
+			1 = 1
+			<if test="searchCdState != null and searchCdState != ''">
+				AND buy_dtl.CD_STATE = #{searchCdState}
+			</if>
+			<if test="searchCdStatePay != null and searchCdStatePay != ''">
+				AND buy_dtl.CD_STATE_PAY = #{searchCdStatePay}
+			</if>
+			<if test="searchCdStateDelivery != null and searchCdStateDelivery != ''">
+				AND buy_dtl.CD_STATE_DELIVERY = #{searchCdStateDelivery}
+			</if>
 	</select>
 
 
