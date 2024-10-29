@@ -185,7 +185,7 @@
 							</select>
 						</c:when>
 						
-						<c:when test="${boardDto.cd_ctg_b == ''}">
+						<c:when test="${boardDto.cd_ctg_b == 0}">
 							<select class="form-control"  id="cd_ctg_m" name="cd_ctg_m"style="height: 34px;margin-bottom: 15px;"disabled>
 								<option value="0">선택 없음</option>
 							</select>

@@ -78,7 +78,7 @@
 			, TO_CHAR(tb_reply.DT_REG, 'YYYY-MM-DD') dt_reg
 			,sle.SLE_NM
 		FROM
-			TB_BBS tb_reply inner join TB_SLE sle on tb_reply.seq_sle=sle.seq_sle
+			TB_BBS tb_reply left outer join TB_SLE sle on tb_reply.seq_sle=sle.seq_sle
 		WHERE
 			tb_reply.CD_BBS_TYPE		= #{cd_bbs_type}
 			AND tb_reply.SEQ_BBS		= #{seq_bbs}

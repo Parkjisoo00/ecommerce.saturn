@@ -186,7 +186,7 @@
 							</select>
 						</c:when>
 						
-						<c:when test="${boardDto.cd_ctg_b == ''}">
+						<c:when test="${boardDto.cd_ctg_b == 0}">
 							<option value="0">선택 없음</option>
 						</c:when>
 					</c:choose>
