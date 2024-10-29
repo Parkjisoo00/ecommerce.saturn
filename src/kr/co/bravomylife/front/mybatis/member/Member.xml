@@ -13,6 +13,7 @@
 			, sle.IMG
 			, dtl.COUNT
 			, mbr_mst.MBR_NM
+			, TO_CHAR(SYSDATE, 'MM-DD') dt_reg
 		FROM
 			TB_BUY_DTL dtl
 		LEFT JOIN

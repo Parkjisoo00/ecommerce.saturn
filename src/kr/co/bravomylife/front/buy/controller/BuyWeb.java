@@ -118,6 +118,7 @@ public class BuyWeb extends Common {
 			_memberDto.setAddr1(aes.decode(_memberDto.getAddr1()));
 			_memberDto.setAddr2(aes.decode(_memberDto.getAddr2()));
 			_memberDto.setMbr_nm(aes.decode(_memberDto.getMbr_nm()));
+			_memberDto.setDt_reg(_memberDto.getDt_reg());
 			
 			mav.addObject("memberDto"	, _memberDto);
 			mav.setViewName("front/buy/deliveryView");

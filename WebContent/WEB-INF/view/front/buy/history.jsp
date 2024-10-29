@@ -156,8 +156,7 @@
 										<th class="cart-th" style="width: 10%">수량</th>
 										<th class="cart-th" style="width: 10%">상품금액</th>
 										<th class="cart-th" style="width: 20%">구매일</th>
-										<th class="cart-th" style="width: 10%">상태</th>
-										<th class="cart-th" style="width: 10%">배송정보</th>
+										<th class="cart-th" style="width: 10%">결제상태</th>
 										<th class="cart-th" style="width: 10%"></th>
 									</tr>
 								</thead>
@@ -165,7 +164,7 @@
 								<c:choose>
 									<c:when test="${empty list}">
 										<tr style="text-align: center; border-bottom: 1px solid #707070;">
-											<td colspan="8">구매한 상품이 없습니다</td>
+											<td colspan="7">구매한 상품이 없습니다</td>
 										</tr>
 									</c:when>
 									<c:otherwise>
@@ -193,15 +192,12 @@
 												<td class="cart-td" style="text-align: center !important;">
 													${list.cd_state}
 												</td>
-												<td class="cart-td" style="text-align: center !important;">
-													${list.cd_state_delivery}
-												</td>
 												<td class="cart-td">
-													<div style="display: flex; flex-direction: column; align-items: center;">
+													<div style="display: flex; flex-direction: column; align-items: center; ">
 														<a href="javascript:setBasket('${list.seq_sle}', '${list.sle_nm}', '${list.discount_sale}', '${list.count}'
 														, '${list.img}', '${list.point_stack}', '${list.cd_ctg_m}', '${list.cd_ctg_b}', '${list.price_sale}', '${list.discount}');" 
-														class="cart-btn" style="background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;margin-top:0px">장바구니 담기</a>
-														<a href="javascript:delivery('${list.seq_sle}', '${list.seq_buy_mst}', '${list.seq_buy_dtl}', '${list.seq_mbr_addr}');" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">배송조회 확인</a>
+														class="cart-btn" style="padding: 5px 10px 5px !important; font-size: 13px !important; background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;margin-top:0px">장바구니 담기</a>
+														<a href="javascript:delivery('${list.seq_sle}', '${list.seq_buy_mst}', '${list.seq_buy_dtl}', '${list.seq_mbr_addr}');" class="cart-btn" style="padding: 5px 10px 5px !important; font-size: 13px !important; margin-top: 10px !important; background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">배송조회 확인</a>
 													</div>
 												</td>
 											</tr>
@@ -245,5 +241,6 @@
 <script>
 </script>
 </form>
+<iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>
 </body>
 </html>

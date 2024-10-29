@@ -351,11 +351,11 @@ COMMENT ON COLUMN "TB_BUY_MST"."BUY_POINT" IS '구매 상품 총 포인트';
 
 COMMENT ON COLUMN "TB_BUY_MST"."FLG_DELETE" IS '삭제 처리 여부 : N(기본값), Y(삭제 처리)';
 
-COMMENT ON COLUMN "TB_BUY_MST"."CD_STATE" IS '구매 상품 상태 : 1(결제), 2(취소), 3(교환), 4(환불)';
+COMMENT ON COLUMN "TB_BUY_MST"."CD_STATE" IS '구매 상품 상태 : 결제 실패(NULL),1(결제), 2(취소), 3(교환), 4(환불)';
 
-COMMENT ON COLUMN "TB_BUY_MST"."CD_STATE_PAY" IS '결제 상태 코드: 결제 전(NULL), 실패(N), 성공(Y),  취소(C)';
+COMMENT ON COLUMN "TB_BUY_MST"."CD_STATE_PAY" IS '결제 상태 코드: 결제 실패(NULL), 실패(N), 성공(Y),  취소(C)';
 
-COMMENT ON COLUMN "TB_BUY_MST"."CD_STATE_DELIVERY" IS '배송 상태 코드: 등록(NULL), 판매 확인중(C), 배송 준비중(P), 배송중(D), 배송 완료(Y)';
+COMMENT ON COLUMN "TB_BUY_MST"."CD_STATE_DELIVERY" IS '배송 상태 코드: 결제 실패(NULL), 판매 확인중(C), 배송 준비중(P), 배송중(D), 배송 완료(Y)';
 
 COMMENT ON COLUMN "TB_BUY_MST"."USE_POINT" IS '가용 포인트';
 

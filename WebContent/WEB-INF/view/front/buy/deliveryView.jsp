@@ -82,27 +82,45 @@ alert("평점 확인" + value);
 				<div class="row"style="display: flex; justify-content: center; align-items: center;">
 					<div class="col-lg-8">
 						<h5 style="font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;">배송 조회</h5>
-						<div class="delivery_div_head">
+						<div class="delivery_div_head" style="border-radius: 2px !important; padding: 22px 0px 17px !important;">
 							<div style="font-size: 28px !important;">
-							날짜
+							${memberDto.dt_reg}<span style="font-size: 23px !important;"> 일</span>
 							</div>
+							<c:if test="${memberDto.cd_state_delivery == 'C'}">
 							<div style="margin-top: 8px !important; font-size: 18px !important;">
-							${memberDto.cd_state_delivery}
+							고객님이 주문하신 상품이 <span style="font-size: 28px !important;">판매 확인중</span>입니다.
+							</div>
+							</c:if>
+							<c:if test="${memberDto.cd_state_delivery == 'P'}">
+							<div style="margin-top: 8px !important; font-size: 18px !important;">
+							고객님이 주문하신 상품이 <span style="font-size: 28px !important;">배송 준비중</span>입니다.
+							</div>
+							</c:if>
+							<c:if test="${memberDto.cd_state_delivery == 'D'}">
+							<div style="margin-top: 8px !important; font-size: 18px !important;">
+							고객님이 주문하신 상품이 <span style="font-size: 28px !important;">배송중</span>입니다.
+							</div>
+							</c:if>
+							<c:if test="${memberDto.cd_state_delivery == 'Y'}">
+							<div style="margin-top: 8px !important; font-size: 18px !important;">
+							고객님이 주문하신 상품이 <span style="font-size: 28px !important;">배송 완료</span> 되었습니다.
+							</div>
+							</c:if>
+						</div>
+						<div class="delivery_div_head" style="background: white !important; height: 200px !important; padding: 15px 10px 10px !important; border-radius: 2px !important;">
+							<div style="text-align: left; padding-bottom: 15px !important;">
+								<span style="margin-right: 30px !important;">상품 정보</span>${memberDto.sle_nm}, ${memberDto.count}개
+							</div>
+							<div style="text-align: left;">
+								<span style="margin-right: 30px !important;">받는 사람</span>${memberDto.mbr_nm}
+							</div>
+							<div style="text-align: left;">
+								<span style="margin-right: 30px !important;">받는 주소</span>${memberDto.post}<span style="padding-left: 10px !important;">${memberDto.addr1}</span>
+							</div>
+							<div style="text-align: left;">
+								<span style="margin-right: 30px !important;">상세 주소</span>${memberDto.addr2}
 							</div>
 						</div>
-						
-<div class="delivery_div_head" style="border-bottom: 0px !important; background: white !important; height: 200px !important; border-left: 0px !important; border-right: 0px !important; border-top: 0px !important;">
-    <div style="text-align: left;">
-    <span style="margin-right: 10px !important;">받는 사람</span>${memberDto.mbr_nm}
-    </div>
-    <div style="text-align: left;">
-    <span style="margin-right: 10px !important;">받는 주소</span>${memberDto.post}<span>${memberDto.addr1}</span>
-    </div>
-    <div style="text-align: left;">
-    <span style="margin-right: 10px !important;">상세 주소</span>${memberDto.addr2}
-    </div>
-</div>
-
 					</div>
 				</div>
 			</form>

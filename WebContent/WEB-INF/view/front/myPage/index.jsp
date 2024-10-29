@@ -151,15 +151,14 @@
 										<th class="cart-th" style="width: 10%">수량</th>
 										<th class="cart-th" style="width: 10%">상품금액</th>
 										<th class="cart-th" style="width: 20%">구매일</th>
-										<th class="cart-th" style="width: 10%">상태</th>
-										<th class="cart-th" style="width: 10%">배송정보</th>
+										<th class="cart-th" style="width: 10%">결제상태</th>
 									</tr>
 								</thead>
 								<tbody>
 								<c:choose>
 									<c:when test="${empty historyList}">
 										<tr style="text-align: center; border-bottom: 1px solid #707070;">
-											<td colspan="7">구매한 상품이 없습니다</td>
+											<td colspan="6">구매한 상품이 없습니다</td>
 										</tr>
 									</c:when>
 									<c:otherwise>
@@ -188,9 +187,6 @@
 												</td>
 												<td class="cart-td" style="text-align: center !important;">
 													${historyList.cd_state}
-												</td>
-												<td class="cart-td" style="text-align: center !important;">
-													${historyList.cd_state_delivery}
 												</td>
 											</tr>
 										</c:forEach>

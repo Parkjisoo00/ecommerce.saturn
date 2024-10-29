@@ -48,7 +48,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h6 class="lowgnb-title" style="padding-bottom: 20px; text-align: left; font-weight: bold; font-size: 36px;">안심 조회 서비스</h6>
+					<div style="text-align: center; margin-bottom: 30px !important;">
+						<img src="/img/personalhealth/healthSearch.png">
+					</div>
+					<h6 class="lowgnb-title" style="text-align: center; font-weight: bold; font-size: 36px;">안심 조회 서비스</h6>
 						<div style="margin-bottom: 20px !important">
 							<div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 20px !important;">
 								<input class="search-container" type="text" id="prdlst_nm" name="prdlst_nm" onkeydown="checkEnter(event)" />

@@ -108,8 +108,6 @@ public class MemberWeb extends Common {
 		
 		try {
 			
-			logger.debug("seq_mbr_addr 확인" + memberDto.getSeq_mbr_addr());
-			
 			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
 			check = memberSrvc.deliveryDelCheck(memberDto);

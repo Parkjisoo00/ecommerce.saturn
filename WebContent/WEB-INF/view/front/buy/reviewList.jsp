@@ -231,7 +231,7 @@ alert("평점 확인" + value);
 							<div class="review-form" style="border-radius: 5px !important; border-left: 1px solid #ddd !important; border-right: 1px solid #ddd !important; display: flex; flex-direction: column; border-bottom: 1px solid #ddd !important; width: 100% !important;">
 								<c:choose>
 									<c:when test="${empty reviewList}">
-										<div class="review-name" style="border-bottom: 0px !important; padding: 20px 20px 20px 30px !important; display: block !important; text-align: center; ">
+										<div class="review-name" style="border-bottom: 0px !important; border-top: 0px !important; padding: 20px 20px 20px 30px !important; display: block !important; text-align: center; ">
 											<p style="margin-bottom: 200px !important; margin-top: 200px !important; display: inline-block; text-align: center;">
 												등록된 상품후기가 없습니다.
 											</p>
