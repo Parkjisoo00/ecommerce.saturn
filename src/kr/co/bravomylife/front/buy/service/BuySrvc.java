@@ -34,6 +34,7 @@ import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
 import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
+import kr.co.bravomylife.front.member.dto.MemberDto;
 import kr.co.bravomylife.front.pay.dao.PayDao;
 import kr.co.bravomylife.front.pay.dto.PayDto;
 
@@ -74,7 +75,7 @@ public class BuySrvc {
 	public boolean update(String deal_num, int updater, String flg_success) {
 		
 		int result = 0;
-		
+				
 		// Null 체크 필요
 		if (deal_num == null || flg_success == null) {
 				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -93,6 +94,8 @@ public class BuySrvc {
 				return false;
 			}
 			
+			System.out.println("seq_buy_mst 확인" + payDto.getSeq_buy_mst());
+			
 		BuyMasterDto buyMasterDto = new BuyMasterDto();
 		buyMasterDto.setSeq_buy_mst(payDto.getSeq_buy_mst());
 		buyMasterDto.setCd_state_pay(flg_success);	// 결제 완료(Y), 결제 전(N), 결제 취소(C)
@@ -107,12 +110,10 @@ public class BuySrvc {
 	}
 	
 	@Transactional("txFront")
-	public boolean insert(BuyMasterDto buyMasterDto, ArrayList<BuyDetailDto> listBuyDetailDto, String deal_num) {
+	public boolean insert(BuyMasterDto buyMasterDto, ArrayList<BuyDetailDto> listBuyDetailDto, String deal_num, MemberDto memberDto) {
 			
 		int result = 0;
 		int bestCount = 0;
-		
-		// int check = 0;
 		
 		// 구매 마스터 정보
 		buyMasterDto.setSeq_buy_mst(buyDao.sequenceMaster());
@@ -125,6 +126,7 @@ public class BuySrvc {
 			listBuyDetailDto.get(loop).setSeq_buy_dtl(buyDao.sequenceDetail());
 			listBuyDetailDto.get(loop).setSeq_buy_mst(buyMasterDto.getSeq_buy_mst());
 			listBuyDetailDto.get(loop).setRegister(buyMasterDto.getRegister());
+			listBuyDetailDto.get(loop).setSeq_mbr_addr(memberDto.getSeq_mbr_addr());
 			
 			result += buyDao.insertDetail(listBuyDetailDto.get(loop));
 			result += buyDao.updateCountStock(listBuyDetailDto.get(loop));
@@ -147,15 +149,6 @@ public class BuySrvc {
 			}
 			
 			buyDao.updateBasket(listBuyDetailDto.get(loop));
-			/*
-			check += buyDao.checkBasket(listBuyDetailDto.get(loop));
-			
-			
-			if (check == listBuyDetailDto.size()) {
-				
-				buyDao.updateBasket(listBuyDetailDto.get(loop));
-			}
-			*/
 		}
 		
 		// 결제 정보

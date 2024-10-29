@@ -16,9 +16,9 @@
 	
 	<insert id="insert" parameterType="buyMasterDto">
 		INSERT INTO TB_BUY_MST
-			(SEQ_BUY_MST, SEQ_MBR, BUY_INFO, BUY_COUNT, BUY_PRICE, BUY_POINT,FLG_DELETE, CD_STATE_PAY, CD_STATE_DELIVERY, USE_POINT, DT_REG, REGISTER)
+			(SEQ_BUY_MST, SEQ_MBR, SEQ_MBR_ADDR ,BUY_INFO, BUY_COUNT, BUY_PRICE, BUY_POINT,FLG_DELETE, CD_STATE, CD_STATE_PAY, CD_STATE_DELIVERY, USE_POINT, DT_REG, REGISTER)
 		VALUES
-			(#{seq_buy_mst}, #{seq_mbr}, #{buy_info}, #{buy_count}, #{buy_price}, #{total_point},'N', NULL, NULL, #{use_point}, SYSDATE, #{seq_mbr})
+			(#{seq_buy_mst}, #{seq_mbr}, #{seq_mbr_addr}, #{buy_info}, #{buy_count}, #{buy_price}, #{total_point},'N', NULL, NULL, NULL, #{use_point}, SYSDATE, #{seq_mbr})
 	</insert>
 	
 	<select id="sequence" resultType="java.lang.Integer">

@@ -320,9 +320,9 @@
 	
 	<insert id="insertAddr" parameterType="memberDto">
 		INSERT INTO TB_MBR_ADDR
-			(SEQ_MBR_ADDR, SEQ_MBR, POST, ADDR1, ADDR2, FLG_DELETE, DT_REG, REGISTER, DT_UPT, UPDATER)
+			(SEQ_MBR_ADDR, SEQ_MBR, POST, ADDR1, ADDR2, FLG_DELETE, FLG_DEFAULT, DT_REG, REGISTER, DT_UPT, UPDATER)
 		VALUES
-			(SQ_SEQ_MBR_ADDR.NEXTVAL, #{seq_mbr}, #{post}, #{addr1}, #{addr2}, 'N', SYSDATE, #{seq_mbr}, NULL, NULL)
+			(SQ_SEQ_MBR_ADDR.NEXTVAL, #{seq_mbr}, #{post}, #{addr1}, #{addr2}, 'N', 'Y', SYSDATE, #{seq_mbr}, NULL, NULL)
 	</insert>
 	
 	<select id="sequence" resultType="java.lang.Integer">
