@@ -38,7 +38,6 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.bravomylife.backoffice.common.Common;
 import kr.co.bravomylife.backoffice.common.dto.PagingDto;
 import kr.co.bravomylife.backoffice.common.dto.PagingListDto;
-import kr.co.bravomylife.backoffice.users.dto.MemberDto;
 import kr.co.bravomylife.backoffice.buy.dto.BuyDto;
 import kr.co.bravomylife.util.security.SKwithAES;
 import kr.co.bravomylife.backoffice.buy.service.BuySrvc;
@@ -67,29 +66,20 @@ public class BuyWeb extends Common {
 	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, BuyDto buyDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
-
+		
 		try {
 			//System.out.println("Received seq_buy_dtl: " + buyDto.getSeq_buy_dtl());
 			//System.out.println(buyDto);
-
 			
 			// 매개변수로 전달된 buyDto를 이용해 구매 정보 조회
 			BuyDto _buyDto = buySrvc.select(buyDto); 
 			mav.addObject("buyDto", _buyDto);
 			
-			
-
-
 			List<BuyDto> buyDtoList = buySrvc.selectList(buyDto);
 			mav.addObject("buyDtoList", buyDtoList);
-	
 			// 구매 상세 내역 리스트 조회 및 추가
 			//List<BuyDetailDto> buyDetailList = buySrvc.select(new BuyDetailDto());
 			//mav.addObject("buyDetailList", buyDetailList);
-	
-		
-			
-			
 			
 			mav.setViewName("backoffice/buy/view");  // JSP 파일 설정
 		} catch (Exception e) {
