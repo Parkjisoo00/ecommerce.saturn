@@ -75,7 +75,7 @@ public class CenterWeb extends Common {
 			PagingListDto _pagingListDto = saleSrvc.mainSubList();
 			
 			mav.addObject("list"	, pagingListDto.getList());
-			mav.addObject("_list"	, _pagingListDto.getList());
+			mav.addObject("subList"	, _pagingListDto.getList());
 			mav.setViewName("index");
 		}
 		catch (Exception e) {
