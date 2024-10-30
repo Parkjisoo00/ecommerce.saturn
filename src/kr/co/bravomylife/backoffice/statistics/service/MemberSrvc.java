@@ -28,6 +28,9 @@ import org.springframework.stereotype.Service;
 
 import kr.co.bravomylife.backoffice.statistics.dao.MemberDao;
 import kr.co.bravomylife.backoffice.statistics.dto.MemberAgeDto;
+import kr.co.bravomylife.backoffice.statistics.dto.MemberIncomeDto;
+import kr.co.bravomylife.front.sale.dao.SaleDao;
+
 
 /**
  * @version 1.0.0
@@ -41,6 +44,9 @@ import kr.co.bravomylife.backoffice.statistics.dto.MemberAgeDto;
 public class MemberSrvc {
 
 	@Inject
+	SaleDao saleDao;
+	
+	@Inject
 	MemberDao memberDao;
 	
 	public List<MemberAgeDto> sellingBest() {
@@ -49,4 +55,10 @@ public class MemberSrvc {
 	public List<MemberAgeDto> memberAge() {
 		return memberDao.memberAge();
 	}
+	public List<MemberIncomeDto> incomeRegion(MemberIncomeDto memberIncomeDto) {
+		return memberDao.incomeRegion(memberIncomeDto);
+	}
+	
+
+	
 }

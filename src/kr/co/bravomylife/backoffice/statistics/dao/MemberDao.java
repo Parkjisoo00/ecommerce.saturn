@@ -26,6 +26,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.bravomylife.backoffice.common.dao.BaseDao;
 import kr.co.bravomylife.backoffice.statistics.dto.MemberAgeDto;
+import kr.co.bravomylife.backoffice.statistics.dto.MemberIncomeDto;
 
 /**
  * @version 1.0.0
@@ -45,5 +46,8 @@ public class MemberDao extends BaseDao{
 	public List<MemberAgeDto> memberAge() {
 		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.statistics.Member.memberAge");
 	}
-
+	
+	public List<MemberIncomeDto> incomeRegion(MemberIncomeDto memberIncomeDto) {
+		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.statistics.Member.incomeRegion", memberIncomeDto);
+	}
 }

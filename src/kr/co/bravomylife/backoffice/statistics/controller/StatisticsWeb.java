@@ -34,7 +34,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.backoffice.common.Common;
 import kr.co.bravomylife.backoffice.statistics.dto.MemberAgeDto;
+import kr.co.bravomylife.backoffice.statistics.dto.MemberIncomeDto;
 import kr.co.bravomylife.backoffice.statistics.service.MemberSrvc;
+
 
 /**
  * @version 1.0.0
@@ -114,4 +116,35 @@ public class StatisticsWeb extends Common{
 		return mav;
 	}
 	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-28
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/statistics/index2.web")
+	public ModelAndView index2(HttpServletRequest request, HttpServletResponse response, MemberIncomeDto memberIncomeDto) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		try {
+			
+			List<MemberIncomeDto> listIncomeRegion = memberSrvc.incomeRegion(memberIncomeDto);
+			
+			mav.addObject("list", listIncomeRegion);
+			
+			mav.setViewName("backoffice/statistics/index2");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".index()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+
 }
