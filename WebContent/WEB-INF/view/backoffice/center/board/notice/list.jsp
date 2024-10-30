@@ -241,7 +241,8 @@
 				<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
 			</div>
 			<div style="text-align: center;">
-				<a href="javascript:goWriteForm(1);" style="margin-top:10px; font-size: 15px !important; display: inline-block; padding: 10px 50px; color: black; background-color: #2b94d1; border: 1px solid #cccccc; border-radius: 2px;font-weight:700">등 록</a>
+				<a href="javascript:goWriteForm(1);" class="btn btn-primary" style="width: 150px;">등 록</a>
+				
 			</div>
 		</div>
 	<!-- /.col -->

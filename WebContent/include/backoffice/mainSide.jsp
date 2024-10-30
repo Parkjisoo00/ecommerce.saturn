@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <header class="main-header">
     <!-- Logo -->
-    <a href="../../index2.html" class="logo">
+    <a href="http://127.0.0.1:8080/console/login/loginForm.web" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>관</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>관리자</b></span>
+      <span class="logo-lg"><b>BRAVO My Life 관리자</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -85,46 +86,6 @@
 					</ul>
 					 -->
 					</li>
-					<li>
-					<a href="#">
-						<i class="fa fa-th"></i> <span>Widgets</span>
-						<span class="pull-right-container">
-						<small class="label pull-right bg-green">new</small>
-						</span>
-					</a>
-					</li>
-					<li class="treeview">
-					<a href="#">
-						<i class="fa fa-pie-chart"></i>
-						<span>Charts</span>
-						<span class="pull-right-container">
-						<i class="fa fa-angle-left pull-right"></i>
-						</span>
-					</a>
-					<ul class="treeview-menu">
-						<li><a href="#"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Morris</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Flot</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Inline charts</a></li>
-					</ul>
-					</li>
-					<li class="treeview">
-					<a href="#">
-						<i class="fa fa-laptop"></i>
-						<span>통계</span>
-						<span class="pull-right-container">
-						<i class="fa fa-angle-left pull-right"></i>
-						</span>
-					</a>
-					<ul class="treeview-menu">
-						<li><a href="/console/statistics/index.web"><i class="fa fa-circle-o"></i> 회원별 통계</a></li>
-						<li><a href="/console/statistics/index1.web"><i class="fa fa-circle-o"></i> 인기 상품 통계</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Buttons</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Sliders</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Timeline</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Modals</a></li>
-					</ul>
-					</li>
 					<li class="treeview">
 					<a href="#">
 						<i class="fa fa-edit"></i> <span>상품</span>
@@ -151,9 +112,51 @@
 						<li><a href="javascript:consolegoList(4)"><i class="fa fa-fw fa-commenting-o"></i> 새소식</a></li>
 					</ul>
 					</li>
+					<li class="treeview">
+					<a href="#">
+						<i class="fa fa-laptop"></i>
+						<span>통계</span>
+						<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+						</span>
+					</a>
+					<ul class="treeview-menu">
+						<li><a href="/console/statistics/index.web"><i class="fa fa-circle-o"></i> 회원별 통계</a></li>
+						<li><a href="/console/statistics/index1.web"><i class="fa fa-circle-o"></i> 인기 상품 통계</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> Buttons</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> Sliders</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> Timeline</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> Modals</a></li>
+					</ul>
+					</li>
 					<li>
 					<a href="#">
-						<i class="fa fa-calendar"></i> <span>Calendar</span>
+						<i class="fa fa-th"></i> <span>page</span>
+						<span class="pull-right-container">
+						<small class="label pull-right bg-green">new</small>
+						</span>
+					</a>
+					</li>
+					<li class="treeview">
+					<a href="#">
+						<i class="fa fa-pie-chart"></i>
+						<span>page</span>
+						<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+						</span>
+					</a>
+					<ul class="treeview-menu">
+						<li><a href="#"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> Morris</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> Flot</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+					</ul>
+					</li>
+
+					
+					<li>
+					<a href="#">
+						<i class="fa fa-calendar"></i> <span>page</span>
 						<span class="pull-right-container">
 						<small class="label pull-right bg-red">3</small>
 						<small class="label pull-right bg-blue">17</small>
@@ -162,7 +165,7 @@
 					</li>
 					<li>
 					<a href="#">
-						<i class="fa fa-envelope"></i> <span>Mailbox</span>
+						<i class="fa fa-envelope"></i> <span>page</span>
 						<span class="pull-right-container">
 						<small class="label pull-right bg-yellow">12</small>
 						<small class="label pull-right bg-green">16</small>
@@ -172,7 +175,7 @@
 					</li>
 					<li class="treeview">
 					<a href="#">
-						<i class="fa fa-folder"></i> <span>Examples</span>
+						<i class="fa fa-folder"></i> <span>page</span>
 						<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 						</span>
@@ -191,7 +194,7 @@
 					</li>
 					<li class="treeview">
 					<a href="#">
-						<i class="fa fa-share"></i> <span>Multilevel</span>
+						<i class="fa fa-share"></i> <span>page</span>
 						<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 						</span>
@@ -222,7 +225,7 @@
 						<li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
 					</ul>
 					</li>
-					<li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+					<li><a href="#"><i class="fa fa-book"></i> <span>page</span></a></li>
 					<li class="header">LABELS</li>
 					<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
 					<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>

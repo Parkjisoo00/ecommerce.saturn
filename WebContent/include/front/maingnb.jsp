@@ -135,12 +135,7 @@
 			<li style="display: inline-block; margin: 0 57px;">
 				<a href="/front/center/board/introduce/.web" 
 				style="font-size: 18px; font-weight: bold;">소개</a>
-				<ul class="dropdown" style="top: 100%; left: 0; list-style: none;">
-					<li><a href="javascript:consolegoList(1);" >공지사항</a></li>
-					<li><a href="javascript:consolegoList(2);" >자주 묻는 질문</a></li>
-					<li><a href="javascript:consolegoList(3);" >1대1 문의 사항</a></li>
-					<li><a href="javascript:consolegoList(4);" >새소식</a></li>
-				</ul>
+				
 			</li>
 		</ul>
 	</nav>
