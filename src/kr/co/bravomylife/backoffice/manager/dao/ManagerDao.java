@@ -47,11 +47,11 @@ public class ManagerDao extends BaseDao {
 	public int updateState(ManagerDto managerDto) {
 		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.manager.Manager.updateState", managerDto);
 	}
-	
-	public int update(ManagerDto managerDto) {
-		return sqlSessionBackoffice.insert("kr.co.bravomylife.backoffice.mybatis.manager.Manager.update", managerDto);
-	}
 	*/
+	public int update(ManagerDto managerDto) {
+		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.manager.Manager.update", managerDto);
+	}
+	
 	public ManagerDto select(ManagerDto managerDto) {
 		return sqlSessionBackoffice.selectOne("kr.co.bravomylife.backoffice.mybatis.manager.Manager.select", managerDto);
 	}

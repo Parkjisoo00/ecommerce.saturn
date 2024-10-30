@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import kr.co.bravomylife.backoffice.manager.dto.ManagerDto;
-
+import kr.co.bravomylife.front.member.dto.MemberDto;
 import kr.co.bravomylife.backoffice.manager.dao.ManagerDao;
 
 /**
@@ -43,6 +43,16 @@ public class ManagerSrvc {
 	
 	@Inject
 	ManagerDao managerDao;
+	
+	@Transactional("txFront")
+	public boolean update(ManagerDto managerDto) {
+				
+		if (managerDao.update(managerDto) == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
 	
 	/*
 	@Transactional("txFront")

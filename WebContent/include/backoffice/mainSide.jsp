@@ -35,7 +35,7 @@
         <!-- 세션이 있으면 -->
         <c:if test="${not empty sessionScope.SEQ_MNG}">
           <li class="dropdown user user-menu">
-            <a href="/console/myPage/"  title="<%=session.getAttribute("NAME")%>" style="font-weight: bold; font-size: 1.2em;">[마이페이지]</a>
+            <a href="/console/myPage/index.web"  title="<%=session.getAttribute("NAME")%>" style="font-weight: bold; font-size: 1.2em;">[마이페이지]</a>
               <span class="hidden-xs">          
               </span>
             </a>

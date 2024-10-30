@@ -43,6 +43,8 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.bravomylife.backoffice.common.Common;
 import kr.co.bravomylife.backoffice.manager.dto.ManagerDto;
 import kr.co.bravomylife.backoffice.manager.service.ManagerSrvc;
+import kr.co.bravomylife.front.member.dto.MemberDto;
+import kr.co.bravomylife.util.security.SKwithAES;
 
 
 /**
@@ -66,6 +68,83 @@ public class ManagerWeb extends Common {
 	private ManagerSrvc managerSrvc;
 	
 
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-30
+	 * <p>DESCRIPTION: 마이페이지 수정 처리</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	@RequestMapping(value = "/console/manager/modifyProc.web")
+	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, ManagerDto managerDto) {
+
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			int seq_mng = Integer.parseInt(getSession(request, "SEQ_MNG"));
+			managerDto.setSeq_mng(seq_mng);
+			managerDto.setUpdater(seq_mng);
+			
+			
+			
+			if (managerSrvc.update(managerDto)) {
+				request.setAttribute("script"	, "alert('수정되었습니다.');");
+				request.setAttribute("redirect"	, "/console/myPage/index.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-30
+	 * <p>DESCRIPTION:마이 페이지 수정</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	
+	@RequestMapping(value = "/console/manager/modifyForm.web")
+	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, ManagerDto managerDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+
+				managerDto.setSeq_mng(Integer.parseInt(getSession(request, "SEQ_MNG")));
+							
+				ManagerDto _managerDto = managerSrvc.select(managerDto);
+							
+							
+				mav.addObject("managerDto", _managerDto);
+							
+				mav.setViewName("backoffice/manager/modifyForm");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".main()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
