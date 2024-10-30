@@ -17,6 +17,9 @@ public class PagingDto {
 	
 	private String searchKey	= "";
 	private String searchWord	= "";
+	private String searchCdState	= "";
+	private String searchCdStatePay	= "";
+	private String searchCdStateDelivery	= "";
 	
 	private Integer cd_bbs_type	= 0;
 	private int cd_ctg			= 0;
@@ -32,6 +35,24 @@ public class PagingDto {
 	private String cd_state_sale= "";
 	
 	
+	public String getSearchCdState() {
+		return searchCdState;
+	}
+	public void setSearchCdState(String searchCdState) {
+		this.searchCdState = searchCdState;
+	}
+	public String getSearchCdStatePay() {
+		return searchCdStatePay;
+	}
+	public void setSearchCdStatePay(String searchCdStatePay) {
+		this.searchCdStatePay = searchCdStatePay;
+	}
+	public String getSearchCdStateDelivery() {
+		return searchCdStateDelivery;
+	}
+	public void setSearchCdStateDelivery(String searchCdStateDelivery) {
+		this.searchCdStateDelivery = searchCdStateDelivery;
+	}
 	public int getTotalLine() {
 		return totalLine;
 	}
