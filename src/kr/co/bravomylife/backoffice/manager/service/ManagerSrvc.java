@@ -27,7 +27,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import kr.co.bravomylife.backoffice.manager.dto.ManagerDto;
-import kr.co.bravomylife.front.member.dto.MemberDto;
 import kr.co.bravomylife.backoffice.manager.dao.ManagerDao;
 
 /**

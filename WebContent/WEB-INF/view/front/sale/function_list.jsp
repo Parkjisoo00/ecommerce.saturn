@@ -138,7 +138,7 @@
 <input type="hidden" name="filter"			id="filter"			value="${paging.filter}"/>
 <input type="hidden" name="type"			id="type"/>
 <input type="hidden" name="currentPage"		id="currentPage"	value="${paging.currentPage}"/>
-<input type="hidden" name="searchWord"		id="searchWord" />
+<input type="hidden" name="searchWord"		id="searchWord"		value="${paging.searchWord}"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>

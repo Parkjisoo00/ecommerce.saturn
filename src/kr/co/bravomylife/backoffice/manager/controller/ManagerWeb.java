@@ -43,8 +43,6 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.bravomylife.backoffice.common.Common;
 import kr.co.bravomylife.backoffice.manager.dto.ManagerDto;
 import kr.co.bravomylife.backoffice.manager.service.ManagerSrvc;
-import kr.co.bravomylife.front.member.dto.MemberDto;
-import kr.co.bravomylife.util.security.SKwithAES;
 
 
 /**
