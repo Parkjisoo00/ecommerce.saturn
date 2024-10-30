@@ -11,6 +11,10 @@
 	<script>
 	function goTypeT(value, value2, value3, value4, value5, selectOrValue) {
 		
+		var first_cd_ctg		= document.getElementById("first_cd_ctg").value;
+		var second_cd_ctg		= document.getElementById("second_cd_ctg").value;
+		var _searchWord			= document.getElementById("_searchWord").value;
+		
 		var frmMain = document.getElementById("frmMain");
 		
 		document.getElementById("currentPage").value = "1";
@@ -18,7 +22,10 @@
 		frmMain.filter.setAttribute("value", value2);
 		frmMain.corp_nm.setAttribute("value", value3);
 		frmMain.prd_type.setAttribute("value", value4);
-		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+		frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+		frmMain.searchWord.setAttribute("value", _searchWord);
 		
 		if (selectOrValue instanceof HTMLElement && selectOrValue.tagName === 'SELECT') {
 			frmMain.elements["linePerPage"].value = selectOrValue.value;
@@ -131,6 +138,7 @@
 <input type="hidden" name="filter"			id="filter"			value="${paging.filter}"/>
 <input type="hidden" name="type"			id="type"/>
 <input type="hidden" name="currentPage"		id="currentPage"	value="${paging.currentPage}"/>
+<input type="hidden" name="searchWord"		id="searchWord" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -258,6 +266,9 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
+	
+<script>
+</script>
 </form>
 </body>
 </html>

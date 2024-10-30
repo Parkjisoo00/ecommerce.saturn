@@ -927,6 +927,27 @@
 		<if test="filter == 'BestP'">
 			AND best.FLG_BEST IS NOT NULL AND best.FLG_BEST = 'Y'
 		</if>
+		<if test="searchWord != null and searchWord != ''">
+			AND UPPER(sle.SLE_NM) LIKE UPPER('%' || #{searchWord} || '%')
+		</if>
+		<choose>
+			<when test="cd_ctg_b == 9 and cd_ctg_m == 10">
+				AND sle.cd_ctg_b IN (1, 2, 3)
+				AND sle.cd_ctg_m IN (1, 2, 3, 4, 5, 6, 7, 8, 9)
+			</when>
+			<when test="(cd_ctg_b == 1 or cd_ctg_b == 2) and (cd_ctg_m == 1 or cd_ctg_m == 2 or cd_ctg_m == 3 or cd_ctg_m == 4 or cd_ctg_m == 5 or cd_ctg_m == 6 or cd_ctg_m == 7 or cd_ctg_m == 8 or cd_ctg_m == 9)">
+				AND sle.cd_ctg_b = #{cd_ctg_b}
+				AND sle.cd_ctg_m = #{cd_ctg_m}
+			</when>
+			<when test="cd_ctg_b == 3 and (cd_ctg_m == 1 or cd_ctg_m == 2)">
+				AND sle.cd_ctg_b = #{cd_ctg_b}
+				AND sle.cd_ctg_m = #{cd_ctg_m}
+			</when>
+			<otherwise>
+				AND sle.cd_ctg_b = #{cd_ctg_b}
+				AND sle.cd_ctg_m IN (1, 2, 3, 4, 5, 6, 7, 8, 9)
+			</otherwise>
+		</choose>
 	</sql>
 
 	<select id="ingredientCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -1037,6 +1058,9 @@
 		</if>
 		<if test="filter == 'BestP'">
 			AND best.FLG_BEST IS NOT NULL AND best.FLG_BEST = 'Y'
+		</if>
+		<if test="searchWord != null and searchWord != ''">
+			AND UPPER(sle.SLE_NM) LIKE UPPER('%' || #{searchWord} || '%')
 		</if>
 	</sql>
 
@@ -1149,6 +1173,9 @@
 		<if test="filter == 'BestP'">
 			AND best.FLG_BEST IS NOT NULL AND best.FLG_BEST = 'Y'
 		</if>
+		<if test="searchWord != null and searchWord != ''">
+			AND UPPER(sle.SLE_NM) LIKE UPPER('%' || #{searchWord} || '%')
+		</if>
 	</sql>
 
 	<select id="genderCount" parameterType="pagingDto" resultType="java.lang.Integer">
@@ -1259,6 +1286,9 @@
 		</if>
 		<if test="filter == 'BestP'">
 			AND best.FLG_BEST IS NOT NULL AND best.FLG_BEST = 'Y'
+		</if>
+		<if test="searchWord != null and searchWord != ''">
+			AND UPPER(sle.SLE_NM) LIKE UPPER('%' || #{searchWord} || '%')
 		</if>
 	</sql>
 	

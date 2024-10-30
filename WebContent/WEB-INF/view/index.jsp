@@ -36,7 +36,15 @@
 	<script>
 		function goTypeT(value) {
 			
+			var first_cd_ctg		= document.getElementById("first_cd_ctg").value;
+			var second_cd_ctg		= document.getElementById("second_cd_ctg").value;
+			var _searchWord			= document.getElementById("_searchWord").value;
+			
 			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+			frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+			frmMain.searchWord.setAttribute("value", _searchWord);
 			
 			frmMain.type.setAttribute("value", value);
 			frmMain.action = "/front/sale/total_list.web";
@@ -121,12 +129,14 @@
 
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" id="corp_nm"		name="corp_nm" />
-<input type="hidden" id="prd_type"		name="prd_type" />
-<input type="hidden" id="filter"		name="filter" />
-<input type="hidden" id="cd_ctg_m"		name="cd_ctg_m" />
-<input type="hidden" id="type"			name="type" />
-<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" />
+<input type="hidden" name="corp_nm"			id="corp_nm" />
+<input type="hidden" name="prd_type"		id="prd_type" />
+<input type="hidden" name="filter"			id="filter" />
+<input type="hidden" name="cd_ctg_m"		id="cd_ctg_m" />
+<input type="hidden" name="cd_ctg_b"		id="cd_ctg_b" />
+<input type="hidden" name="type"			id="type"/>
+<input type="hidden" name="cd_bbs_type"		id="cd_bbs_type" />
+<input type="hidden" name="searchWord"		id="searchWord" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
