@@ -34,76 +34,87 @@
 	
 	</style>
 	<script>
-		function goTypeT(value) {
-			
-			var first_cd_ctg		= document.getElementById("first_cd_ctg").value;
-			var second_cd_ctg		= document.getElementById("second_cd_ctg").value;
-			var _searchWord			= document.getElementById("_searchWord").value;
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
-			frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
-			frmMain.searchWord.setAttribute("value", _searchWord);
-			
-			frmMain.type.setAttribute("value", value);
-			frmMain.action = "/front/sale/total_list.web";
-			frmMain.submit();
-		}
+	function goWriteForm(value, value2, value3) {
 		
-		function goTypeF(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.type.setAttribute("value", value);
-			frmMain.action = "/front/sale/function_list.web";
-			frmMain.submit();
-		}
+		var frmMain = document.getElementById("frmMain");
 		
-		function goTypeI(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.type.setAttribute("value", value);
-			frmMain.action = "/front/sale/ingredient_list.web";
-			frmMain.submit();
-		}
+		frmMain.seq_sle.setAttribute("value", value);
+		frmMain.cd_ctg_m.setAttribute("value", value2);
+		frmMain.cd_ctg_b.setAttribute("value", value3);
+		frmMain.action="/front/buy/writeForm.web";
+		frmMain.submit();
+	}
+	
+	function goTypeT(value) {
 		
-		function goTypeG(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.type.setAttribute("value", value);
-			frmMain.action = "/front/sale/gender_list.web";
-			frmMain.submit();
-		}
-				
-		function goList(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.cd_bbs_type.setAttribute("value", value);
-			frmMain.action = "/front/center/board/list.web";
-			frmMain.submit();
-		}
+		var first_cd_ctg		= document.getElementById("first_cd_ctg").value;
+		var second_cd_ctg		= document.getElementById("second_cd_ctg").value;
+		var _searchWord			= document.getElementById("_searchWord").value;
 		
-		function consolegoList(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.cd_bbs_type.setAttribute("value", value);
-			frmMain.action = "/console/center/board/list.web";
-			frmMain.submit();
-		}
+		var frmMain = document.getElementById("frmMain");
 		
-		function hpSurgoList(value) {
+		frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+		frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+		frmMain.searchWord.setAttribute("value", _searchWord);
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeF(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/function_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeI(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/ingredient_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeG(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/gender_list.web";
+		frmMain.submit();
+	}
 			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.cd_bbs_type.setAttribute("value", value);
-			frmMain.action = "/front/hpSur/ingredient.web";
-			frmMain.submit();
-		}
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/front/center/board/list.web";
+		frmMain.submit();
+	}
+	
+	function consolegoList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/console/center/board/list.web";
+		frmMain.submit();
+	}
+	
+	function hpSurgoList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/front/hpSur/ingredient.web";
+		frmMain.submit();
+	}
 	</script>
 <!-- Google Font -->
 <%@ include file="/include/common/webfont.jsp" %>
@@ -134,6 +145,7 @@
 <input type="hidden" name="filter"			id="filter" />
 <input type="hidden" name="cd_ctg_m"		id="cd_ctg_m" />
 <input type="hidden" name="cd_ctg_b"		id="cd_ctg_b" />
+<input type="hidden" name="seq_sle"			id="seq_sle" />
 <input type="hidden" name="type"			id="type"/>
 <input type="hidden" name="cd_bbs_type"		id="cd_bbs_type" />
 <input type="hidden" name="searchWord"		id="searchWord" />
@@ -244,7 +256,6 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -254,16 +265,109 @@
 
 	<!-- Product Section Begin -->
 	<section class="product" style="width: 70%; margin-left: auto; margin-right: auto;">
-		<div class="container-fluid p-0">
-			<div class="row" style="display: flex; justify-content: center;">
-				<div class="col-lg-4 col-md-4">
-					<div class="section-title" style="text-align: center;">
-						<h4>브라보 마이 라이프 인기 상품</h4>
-					</div>
-				</div>
-			</div>
-			<div class="row property__gallery" style="display: flex; justify-content: center;">
-				<c:forEach var="list" items="${list}">
+		<div class="container-fluid p-0" style="display: flex; justify-content: center;">
+			<div class="container" style="margin: 0px !important; max-width: 1350px !important;">
+				<div class="row">
+					<div class="col-lg-12" style="padding: 0;">
+						<div class="product__details__tab" style="width: 100% !important; padding-top: 0px !important;">
+							<ul class="nav nav-tabs" role="tablist" style="margin-bottom: 30px !important; border: 1px solid #d9d9d9 !important; display: flex !important; justify-content: space-between !important;">
+								<li class="nav-item" onclick="toggleActive(this)" style="background-color: #72baf5; margin-bottom: 0px !important; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important; margin-right: 0px !important; border-right: 1px solid #d9d9d9 !important;">
+									<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" style="font-weight: normal !important; background-color: #72baf5; color: white; display: inline-block !important;" onclick="event.preventDefault(); toggleActive(this.parentElement);">추천 인기상품</a>
+								</li>
+								<li class="nav-item" onclick="toggleActive(this)" style="margin-bottom: 0px !important; background-color: #f9f9f9; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important;">
+									<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" style="font-weight: normal !important; color: black; display: inline-block !important;" onclick="event.preventDefault(); toggleActive(this.parentElement);">추천 최신상품</a>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="tabs-1" role="tabpanel">
+									<div class="row property__gallery" style="display: flex; justify-content: center;">
+									<c:forEach var="list" items="${list}">
+										<div class="col-lg-2 col-md-6" style="padding: 0px !important; flex: 0 0 16.6% !important;">
+											<div class="product__item">
+												<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');" style="display: flex; justify-content: center; align-items: center;">
+													<div style="height: 200px; width: 200px;" class="product__item__pic set-bg" data-setbg="${list.img}">
+													<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
+														<div class="label new">인기상품</div>
+													</c:if>
+													</div>
+												</a>
+												<div class="product__item__text" style="padding-left: 15px !important; padding-right: 15px !important;">
+												<h6 style="line-height: 1.5em; min-height: 3em; font-weight: 400 !important; margin: 0px !important;"><a style="font-size: 15px;">${list.sle_nm}</a></h6>
+													<div class="rating">
+														<c:if test="${list.star == 0}">
+															<i class="fa fa-star" style="color: #e0e0e0;"></i>
+															<i class="fa fa-star" style="color: #e0e0e0;"></i>
+															<i class="fa fa-star" style="color: #e0e0e0;"></i>
+															<i class="fa fa-star" style="color: #e0e0e0;"></i>
+															<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.total_count}개 상품평</span>
+														</c:if>
+														<c:if test="${list.star == 1}">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star" style="color: #e0e0e0;"></i>
+															<i class="fa fa-star" style="color: #e0e0e0;"></i>
+															<i class="fa fa-star" style="color: #e0e0e0;"></i>
+															<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.total_count}개 상품평</span>
+														</c:if>
+														<c:if test="${list.star == 2}">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star" style="color: #e0e0e0;"></i>
+															<i class="fa fa-star" style="color: #e0e0e0;"></i>
+															<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.total_count}개 상품평</span>
+														</c:if>
+														<c:if test="${list.star == 3}">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star" style="color: #e0e0e0;"></i>
+															<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.total_count}개 상품평</span>
+														</c:if>
+														<c:if test="${list.star == 4}">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star" style="color: #e0e0e0;"></i><span class="rate">${list.total_count}개 상품평</span>
+														</c:if>
+														<c:if test="${list.star == 5}">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i><span class="rate">${list.total_count}개 상품평</span>
+														</c:if>
+													</div>
+													<c:choose>
+													<c:when test="${list.discount == null || list.discount == 0}">
+														<div class="product__price">
+															<span style="text-decoration: none; font-size: 1.3em; color: black;">
+																<fmt:formatNumber value="${list.price_sale}" type="number" />
+															</span>원
+														</div>
+													</c:when>
+														<c:otherwise>
+															<div class="product__price" style="display: flex; align-items: center; justify-content: center;">
+																<span style="margin-left:0px !important; font-size: 16px !important;">
+																	<fmt:formatNumber value="${list.price_sale}" type="number" />
+																</span>
+																<span class="discount-rate" style="padding-top: 1px !important; margin-left:4px !important; margin-top:2px !important; font-size: 13px !important; text-decoration: none;">
+																	${list.discount}%
+																</span>
+																<span style="text-decoration: none; color: black; font-size: 1.3em; margin-left: 7px;">
+																	<fmt:formatNumber value="${list.discount_sale}" type="number" />
+																</span>원
+															</div>
+														</c:otherwise>
+													</c:choose>
+													</div>
+												</div>
+											</div>
+										</c:forEach>
+									</div>
+								</div>
+							<div class="tab-pane" id="tabs-3" role="tabpanel">
+							<div class="row property__gallery" style="display: flex; justify-content: center;">
+							<c:forEach var="list" items="${list}">
 					<div class="col-lg-2 col-md-6" style="padding: 0px !important; flex: 0 0 16.6% !important;">
 						<div class="product__item">
 							<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');" style="display: flex; justify-content: center; align-items: center;">
@@ -273,8 +377,8 @@
 								</c:if>
 								</div>
 							</a>
-							<div class="product__item__text">
-								<h6 style="line-height: 1.5em; min-height: 3em; padding-left: 15px !important; padding-right: 15px !important;"><a style="font-size: 15px;">${list.sle_nm}</a></h6>
+							<div class="product__item__text" style="padding-left: 15px !important; padding-right: 15px !important;">
+								<h6 style="line-height: 1.5em; min-height: 3em; font-weight: 400 !important; margin: 0px !important;"><a style="font-size: 15px;">${list.sle_nm}</a></h6>
 									<div class="rating">
 										<c:if test="${list.star == 0}">
 											<i class="fa fa-star" style="color: #e0e0e0;"></i>
@@ -345,7 +449,15 @@
 						</div>
 					</div>
 				</c:forEach>
+				</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+			
+		
 		</div>
 	</section>
 	<!-- Product Section End -->
@@ -361,6 +473,92 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
+<script>
+	$(document).ready(function() {
+	
+	$('<style>.nav::before { display: none; }</style>').appendTo('head');
+	$('<style>.nav::after { display: none; }</style>').appendTo('head');
+	});
+
+	document.addEventListener("DOMContentLoaded", function() {
+		
+		var navLinks = document.querySelectorAll(".nav-link");
+		var navItems = document.querySelectorAll(".nav-item");
+		var currentIndex = 1;
+		var autoSwitchInterval;
+		var autoSwitchDelay = 10000;
+		
+		var observer = new MutationObserver(function(mutations) {
+			
+			mutations.forEach(function(mutation) {
+				
+				if (mutation.type === "attributes" && mutation.attributeName === "class") {
+					
+					var target = mutation.target;
+					
+					if (target.classList.contains("active")) {
+						
+						target.style.backgroundColor = "#72baf5";
+						target.style.color = "white";
+						target.parentElement.style.backgroundColor = "#72baf5";
+					} else {
+						
+						target.style.backgroundColor = "#f9f9f9";
+						target.style.color = "black";
+						target.parentElement.style.backgroundColor = "#f9f9f9";
+					}
+				}
+			});
+		});
+		navLinks.forEach(function(navLink) {
+			
+			observer.observe(navLink, { attributes: true });
+		});
+		
+		function startAutoSwitch() {
+			
+			autoSwitchInterval = setInterval(function() {
+				
+				toggleActive(navItems[currentIndex]);
+				currentIndex = (currentIndex + 1) % navItems.length;
+			}, autoSwitchDelay);
+		}
+		
+		function resetAutoSwitch() {
+			
+			clearInterval(autoSwitchInterval);
+			setTimeout(startAutoSwitch, 15000);
+		}
+		
+		function handleClick(element) {
+			
+			toggleActive(element);
+			resetAutoSwitch();
+		}
+		
+		function toggleActive(element) {
+			
+			document.querySelectorAll('.nav-item').forEach(item => {
+				
+				item.style.backgroundColor = '#f9f9f9';
+				var link = item.querySelector('.nav-link');
+				if (link) {
+					
+					link.classList.remove('active');
+					link.style.color = 'black';
+				}
+			});
+			element.style.backgroundColor = '#72baf5';
+			var link = element.querySelector('.nav-link');
+			if (link) {
+				
+				link.classList.add('active');
+				link.style.color = 'white';
+			}
+		}
+		startAutoSwitch();
+	});
+</script>
 </form>
 </body>
 </html>

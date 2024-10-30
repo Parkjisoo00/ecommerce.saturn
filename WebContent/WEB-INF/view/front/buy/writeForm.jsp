@@ -733,7 +733,7 @@
 							</div>
 							<div class="tab-pane" id="tabs-2" role="tabpanel">
 								<div style="display: flex; flex-direction: column; align-items: center;">
-									<h4  style="font-size:25px; margin-top: 50px;margin-bottom: 50px;">*버튼을 클릭하면 1대1 문의 개시판으로 이동합니다.</h4>
+									<h4  style="font-size:25px; margin-top: 50px;margin-bottom: 50px;">*1대1 문의 개시판으로 이동합니다.</h4>
 									<a href="javascript:goWriteForm('3','${saleDto.seq_sle}','${saleDto.cd_ctg_b}','${saleDto.cd_ctg_m}');" class="cart-btn" style="display: inline-block; margin: 0px; background: white; color: #346aff; border: 1px solid #346aff; margin-bottom: 10px;">
 										1대1 문의 이동
 									</a>
