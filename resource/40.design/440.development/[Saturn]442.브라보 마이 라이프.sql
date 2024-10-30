@@ -329,6 +329,7 @@ CREATE TABLE "TB_BUY_MST" (
 	"CD_STATE_PAY"	CHAR(1)		NULL,
 	"CD_STATE_DELIVERY"	CHAR(1)		NULL,
 	"USE_POINT"	NUMBER(10)		NULL,
+	"DELIVERY_REQUEST"	VARCHAR2(128)		NULL,
 	"DT_REG"	DATE		NOT NULL,
 	"REGISTER"	NUMBER(10)		NOT NULL,
 	"DT_UPT"	DATE		NULL,
@@ -358,6 +359,8 @@ COMMENT ON COLUMN "TB_BUY_MST"."CD_STATE_PAY" IS '결제 상태 코드: 결제 �
 COMMENT ON COLUMN "TB_BUY_MST"."CD_STATE_DELIVERY" IS '배송 상태 코드: 결제 실패(NULL), 판매 확인중(C), 배송 준비중(P), 배송중(D), 배송 완료(Y)';
 
 COMMENT ON COLUMN "TB_BUY_MST"."USE_POINT" IS '가용 포인트';
+
+COMMENT ON COLUMN "TB_BUY_MST"."DELIVERY_REQUEST" IS '배송 요청사항';
 
 COMMENT ON COLUMN "TB_BUY_MST"."DT_REG" IS '등록 일시';
 
