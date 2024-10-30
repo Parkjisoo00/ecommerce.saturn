@@ -2,35 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.backoffice.mybatis.buy.Buy">
 
-
-	<select id="search" parameterType="pagingDto" resultType="buyDto">
-		SELECT 
-			buy_mst.SEQ_MBR,
-			buy_dtl.SLE_NM,
-			buy_dtl.COUNT,
-			buy_dtl.PRICE,
-			buy_dtl.POINT,
-			buy_dtl.FLG_REVIEW,
-			TO_CHAR(buy_dtl.DT_REG, 'YYYY-MM-DD') AS dt_reg
-		FROM 
-			TB_BUY_MST buy_mst
-		LEFT JOIN 
-			TB_BUY_DTL buy_dtl ON buy_mst.SEQ_BUY_MST = buy_dtl.SEQ_BUY_MST
-		WHERE 
-			1 = 1
-			<if test="searchCdState != null and searchCdState != ''">
-				AND buy_dtl.CD_STATE = #{searchCdState}
-			</if>
-			<if test="searchCdStatePay != null and searchCdStatePay != ''">
-				AND buy_dtl.CD_STATE_PAY = #{searchCdStatePay}
-			</if>
-			<if test="searchCdStateDelivery != null and searchCdStateDelivery != ''">
-				AND buy_dtl.CD_STATE_DELIVERY = #{searchCdStateDelivery}
-			</if>
-	</select>
-
-
-
 	<select id="selectList" parameterType="buyDto" resultType="buyDto">
 		SELECT
 		/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY buy_dtl.DT_REG DESC) rnum
@@ -133,26 +104,17 @@
 					AND mbr_mst.EMAIL = #{searchWord}
 				</if>
 				<if test="searchKey == 'cd_state'">
-					<if test="searchWord == '9'">
-						AND buy_mst.CD_STATE = NULL
-					</if>
-					<if test="searchWord != '9'">
+					<if test="searchWord != 'all'">
 						AND buy_mst.CD_STATE = #{searchWord}
 					</if>
 				</if>
 				<if test="searchKey == 'cd_state_pay'">
-					<if test="searchWord == '9'">
-						AND buy_mst.CD_STATE_PAY = NULL
-					</if>
-					<if test="searchWord != '9'">
+					<if test="searchWord != 'all'">
 						AND buy_mst.CD_STATE_PAY = #{searchWord}
 					</if>
 				</if>
 				<if test="searchKey == 'cd_state_delivery'">
-					<if test="searchWord == '9'">
-						AND buy_mst.CD_STATE_DELIVERY = NULL
-					</if>
-					<if test="searchWord != '9'">
+					<if test="searchWord != 'all'">
 						AND buy_mst.CD_STATE_DELIVERY = #{searchWord}
 					</if>
 				</if>

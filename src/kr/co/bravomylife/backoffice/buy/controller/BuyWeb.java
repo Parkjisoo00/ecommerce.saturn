@@ -104,10 +104,9 @@ public class BuyWeb extends Common {
 			String searchWord = pagingDto.getSearchWord();
 			
 			if ("mbr_nm".equals(pagingDto.getSearchKey()) || ("email".equals(pagingDto.getSearchKey()))) {
-				if (searchWord != null && searchWord != "") {
+				if (searchWord != null && !searchWord.equals("")) {
 					pagingDto.setSearchWord(aes.encode(searchWord));
-				}
-				
+				} 
 			}
 			
 			PagingListDto pagingListDto = buySrvc.list(pagingDto);
