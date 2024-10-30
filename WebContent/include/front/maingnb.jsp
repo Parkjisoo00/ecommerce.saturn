@@ -17,15 +17,34 @@
 			<a href="/front/member/registerForm.web">회원가입</a>
 		</div>
 	</div>
-<header class="header" style="background-color: #341d08; height: 160px; position: relative;">
+<header class="header" style="background-color: #341d08; height: 240px; position: relative;">
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xl-3 col-lg-2">
 		</div>
 	</div>
 </div>
-<div class="header__logo" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+<div class="header__logo" style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);">
 	<a href="/"><img src="/img/logo/logo3.png" alt=""></a>
+</div>
+<div class="header__right" style="position: absolute; bottom: -55px; right: 32.4% !important;">
+	<div class="header__right__auth" style="display: flex; align-items: center; gap: 5px;">
+		<div style="display: flex; justify-content: center; align-items: center; margin-bottom: 40px !important;">
+		<select class="search-container" id="first_cd_ctg" style=" width: 120px !important; height: 45px !important; font-size: 18px !important;">
+			<option value="9">상품명</option>
+			<option value="1">기능별</option>
+			<option value="2">성분별</option>
+			<option value="3">대상별</option>
+		</select>
+		<select  class="search-container" id="second_cd_ctg" style=" width: 170px !important; height: 45px !important; font-size: 18px !important;">
+			<option value="10">전체검색</option>
+		</select>
+		<input class="search-container" type="text" id="_searchWord" onkeydown="checkEnter(event)" style="height: 45px !important; font-size: 18px !important; width: 300px !important;"/>
+		<a class="health-btn" href="javascript:goTypeT('', '', '', '', '', '');" style="margin-left: 10px; height: 45px !important; font-size: 18px !important;">
+			검색
+		</a>
+		</div>
+	</div>
 </div>
 <div class="header__right" style="position: absolute; bottom: -10px; right: 19%;">
 <div class="header__right__auth" style="display: flex; align-items: center; gap: 5px;">
@@ -64,7 +83,7 @@
 	</div>
 	 -->
 <div class="col-xl-12 col-lg-12" style="margin: 0 auto; float: none; width: 90%;">
-	<nav class="header__menu" >
+	<nav class="header__menu" style="margin-bottom: 20px !important;">
 		<ul style="display: inline-block; width: 90%; list-style: none;">
 			<li class="active" style="display: inline-block; margin: 0 57px;">
 				<a href="javascript:goTypeT('', '', '', '', '', '');">
@@ -135,10 +154,9 @@
 			<li style="display: inline-block; margin: 0 57px;">
 				<a href="/front/center/board/introduce/.web" 
 				style="font-size: 18px; font-weight: bold;">소개</a>
-				
 			</li>
 		</ul>
-	</nav>
+	</nav>	
 	<div class="canvas__open">
 			<i class="fa fa-bars"></i>
 	</div>
@@ -168,4 +186,62 @@ $(document).ready(function () {
 	}
 	basketData();
 });
+
+var secondSelect = document.getElementById("second_cd_ctg");
+var options = {
+	"9": [{ value: "10", text: "전체검색" }],
+	"1": [
+		{ value: "10", text: "전체검색" },
+		{ value: "1", text: "혈당/혈행/혈압" },
+		{ value: "2", text: "항산화/면역력" },
+		{ value: "3", text: "염증/항염" },
+		{ value: "4", text: "관절/뼈/치아" },
+		{ value: "5", text: "피로회복" },
+		{ value: "6", text: "눈 건강" },
+		{ value: "7", text: "장 건강" },
+		{ value: "8", text: "두뇌/기억력" },
+		{ value: "9", text: "위/간/갑상선" }
+	],
+	"2": [
+		{ value: "10", text: "전체검색" },
+		{ value: "1", text: "폴리코사놀" },
+		{ value: "2", text: "오메가-3" },
+		{ value: "3", text: "비타민/미네랄" },
+		{ value: "4", text: "유산균" },
+		{ value: "5", text: "글루코사민/MSM" },
+		{ value: "6", text: "루테인" },
+		{ value: "7", text: "코큐텐" },
+		{ value: "8", text: "아르기닌" },
+		{ value: "9", text: "밀크씨슬" }
+	],
+	"3": [
+		{ value: "10", text: "전체검색" },
+		{ value: "1", text: "남성" },
+		{ value: "2", text: "여성" }
+	]
+};
+
+document.getElementById("first_cd_ctg").addEventListener("change", function() {
+	var selectedValue = this.value;
+	var selectedOptions = options[selectedValue] || [];
+	
+	secondSelect.innerHTML = "";
+	
+	selectedOptions.forEach(option => {
+		
+		var opt = document.createElement("option");
+		opt.value = option.value;
+		opt.textContent = option.text;
+		secondSelect.appendChild(opt);
+	});
+});
+
+function checkEnter(event) {
+	
+	if (event.keyCode === 13) {
+		
+		event.preventDefault();
+		goTypeT();
+	}
+}
 </script>
