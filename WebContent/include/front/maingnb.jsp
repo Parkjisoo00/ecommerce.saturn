@@ -5,38 +5,34 @@
 <div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
 		<div class="offcanvas__close">+</div>
+		
 		<div class="offcanvas__logo">
 			<a href="./index.html"><img src="/img/logo/logo3.png" alt=""></a>
 		</div>
+		
 		<div id="mobile-menu-wrap" style="text-align:left; margin-left: -60px;display: flex;flex-wrap:wrap"></div>
+		
 		<div class="offcanvas__auth" style="text-align: left;">
 			<a href="/front/login/loginForm.web">로그인</a>
 			<a href="/front/member/registerForm.web">회원가입</a>
 		</div>
 		
-	
-		
-		<select class="search-container" id="first_cd_ctg" style=" width: 100px !important; height: 45px !important; font-size: 18px !important;">
+		<select class="search-container" id="first_cd_ctg" style=" width: 100px !important; height: 45px !important; font-size: 18px !important; margin-right:5px">
 			<option value="9">상품명</option>
 			<option value="1">기능별</option>
 			<option value="2">성분별</option>
 			<option value="3">대상별</option>
 		</select>
+		
 		<select  class="search-container" id="second_cd_ctg" style=" width: 120px !important; height: 45px !important; font-size: 18px !important;">
 			<option value="10">전체검색</option>
 		</select>
 		<div>
-		<input class="search-container" type="text" id="_searchWord" onkeydown="checkEnter(event)" style="height: 45px !important;  width: 140px !important;margin-top:20px"/>
+		<input class="search-container" type="text" id="_searchWord" onkeydown="checkEnter(event)" style="height: 45px !important;  width: 157px !important;margin-top:20px"/>
 		<a class="health-btn" href="javascript:goTypeT('', '', '', '', '', '');" style="margin-left: 10px; height: 42px !important; font-size: 17px !important ;margin-buttom:20px !important">
 			검색
 		</a>
 		</div>
-
-
-		
-		
-		
-		
 	</div>
 <header class="header" style="background-color: #341d08; height: 240px; position: relative;">
 <div class="container-fluid">
