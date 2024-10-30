@@ -11,12 +11,13 @@
 		<typeAlias type="kr.co.bravomylife.backoffice.manager.dto.ManagerDto"				alias="managerDto" />
 		<typeAlias type="kr.co.bravomylife.backoffice.login.dto.LoginDto"					alias="loginDto" />
 		<typeAlias type="kr.co.bravomylife.backoffice.users.dto.ManagersDto"				alias="managersDto" />
-		<typeAlias type="kr.co.bravomylife.backoffice.users.dto.MemberDto"				alias="memberDto" />
+		<typeAlias type="kr.co.bravomylife.backoffice.users.dto.MemberDto"					alias="memberDto" />
 		<typeAlias type="kr.co.bravomylife.backoffice.buy.dto.BuyDto"						alias="buyDto" />
 		<typeAlias type="kr.co.bravomylife.backoffice.buy.dto.BuyDetailDto"					alias="buyDetailDto" />
 		<typeAlias type="kr.co.bravomylife.backoffice.buy.dto.BuyDetailListDto"				alias="buyDetailListDto" />
 		<typeAlias type="kr.co.bravomylife.backoffice.buy.dto.BuyMasterDto"					alias="buyMasterDto" />
 		<typeAlias type="kr.co.bravomylife.backoffice.statistics.dto.MemberAgeDto"			alias="MemberAgeDto" />
+		<typeAlias type="kr.co.bravomylife.backoffice.statistics.dto.MemberIncomeDto"		alias="memberIncomeDto" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="kr/co/bravomylife/backoffice/mybatis/center/Board.xml" />
