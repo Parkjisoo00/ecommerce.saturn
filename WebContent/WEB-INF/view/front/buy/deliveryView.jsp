@@ -84,7 +84,7 @@ alert("평점 확인" + value);
 						<h5 style="font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;">배송 조회</h5>
 						<div class="delivery_div_head" style="border-radius: 2px !important; padding: 22px 0px 17px !important;">
 							<div style="font-size: 28px !important;">
-							${memberDto.dt_reg}<span style="font-size: 23px !important;"> 일</span>
+							${memberDto.dt_reg}
 							</div>
 							<c:if test="${memberDto.cd_state_delivery == 'C'}">
 							<div style="margin-top: 8px !important; font-size: 18px !important;">
@@ -107,9 +107,9 @@ alert("평점 확인" + value);
 							</div>
 							</c:if>
 						</div>
-						<div class="delivery_div_head" style="background: white !important; height: 200px !important; padding: 15px 10px 10px !important; border-radius: 2px !important;">
-							<div style="text-align: left; padding-bottom: 15px !important;">
-								<span style="margin-right: 30px !important;">상품 정보</span>${memberDto.sle_nm}, ${memberDto.count}개
+						<div class="delivery_div_head" style="background: white !important; padding: 15px 10px 10px !important; border-radius: 2px !important;">
+							<div style="text-align: left; padding-bottom: 25px !important; padding-top: 15px !important;">
+								<span style="padding-right: 30px !important; margin-right: 30px !important; border-right: 1px solid rgb(204, 204, 204) !important;">상품 정보</span>${memberDto.sle_nm}, ${memberDto.count}개
 							</div>
 							<div style="text-align: left;">
 								<span style="margin-right: 30px !important;">받는 사람</span>${memberDto.mbr_nm}
@@ -119,6 +119,9 @@ alert("평점 확인" + value);
 							</div>
 							<div style="text-align: left;">
 								<span style="margin-right: 30px !important;">상세 주소</span>${memberDto.addr2}
+							</div>
+							<div style="text-align: left; padding-top: 15px !important;">
+								<span style="margin-right: 30px !important;">요청 사항</span>${memberDto.delivery_request}
 							</div>
 						</div>
 					</div>

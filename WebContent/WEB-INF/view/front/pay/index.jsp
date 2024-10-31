@@ -160,6 +160,20 @@
 		frmMain.action = "/front/buy/writeProc.web";
 		frmMain.submit();
 	}
+	
+	function checkMaxLength() {
+		
+		var input = document.getElementById("delivery_request");
+		var maxLength = 50;
+		
+		var currentLength = input.value.length;
+		
+		if (currentLength > maxLength) {
+			
+			alert("최대 50글자까지 입력할 수 있습니다.");
+			input.value = input.value.substring(0, maxLength);
+		}
+	}
 	</script>
 </head>
 	<!-- Google Font -->
@@ -205,7 +219,7 @@
 							<tbody>
 							<tr style="border: 0;">
 								<td class="customer-td1">이름</td>
-								<td class="customer-td2"><div style="display: flex; align-items: center;">${memberDto.mbr_nm} <span class="delivery_address">기본배송지</span></div></td>
+								<td class="customer-td2"><div style="display: flex; align-items: center;">${memberDto.mbr_nm} <span class="delivery_address">기본 배송정보</span></div></td>
 							</tr>
 							<tr style="border: 0;">
 								<td class="customer-td1">이메일</td>
@@ -218,16 +232,39 @@
 							<tr style="border: 0;">
 								<td class="customer-td1">배송주소</td>
 								<td class="customer-td2">
-									<input class="customer-input" type="text" id="post" name="post" size="5" autocomplete="off" value="${memberDto.post}"/>
+									<input class="customer-input" type="text" id="post" name="post" size="5" autocomplete="off" value="${memberDto.post}" readonly/>
 									<input class="customer-input" type="hidden" id="seq_mbr_addr" name="seq_mbr_addr" value="${memberDto.seq_mbr_addr}"/>
 									<label for="addr1">도로명</label>
-									<input class="customer-input" style="width:300px" type="text" id="addr1" name="addr1" size="40" autocomplete="off" value="${memberDto.addr1}"/>
+									<input class="customer-input" style="width:300px" type="text" id="addr1" name="addr1" size="40" autocomplete="off" value="${memberDto.addr1}" readonly/>
 									<span id="guide" style="color:#999; display:none"></span>
 									<label for="addr2">상세</label>
-									<input style="width:100px" class="customer-input" type="text" id="addr2" name="addr2" size="20" placeholder="상세 주소" autocomplete="off" value="${memberDto.addr2}"/>
+									<input style="width:100px" class="customer-input" type="text" id="addr2" name="addr2" size="20" placeholder="상세 주소" autocomplete="off" value="${memberDto.addr2}" readonly/>
 									<input class="customer-button" type="button" onclick="changeDeliveryAddress()" value="배송지 변경">
 								</td>
 							</tr>
+							<tr style="border: 0;">
+								<td class="customer-td1">배송 요청사항</td>
+								<td class="customer-td2">
+									<input class="customer-input" style="width:300px" type="text" id="delivery_request" name="delivery_request" autocomplete="off" oninput="checkMaxLength()"/> *최대 50글자까지 입력할 수 있습니다.
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<h5 class="customer-title">배송정보</h5>
+					<div class="shop__cart__table">
+						<table class="customer-table" style="border: 1px solid #e4e4e4 !important;">
+							<thead style="border-bottom: 1px solid #dbdbdb !important;">
+								<tr style="border-color: #707070 !important;">
+									<th class="customer-th" style="color: #00891a !important;">${memberDto.dt_reg} <span style="font-weight: normal !important; font-size: 16px !important; color: #00891a !important;"> 도착보장</span></th>
+								</tr>
+							</thead>
+							<tbody>
+							<c:forEach var="list" items="${buyList}">
+							<tr style="border: 0;">
+								<td class="customer-td2" style="border-bottom: 0px !important; font-size: 16px !important;">${list.sle_nm}, ${list.count}개</td>
+							</tr>
+							</c:forEach>
 							</tbody>
 						</table>
 					</div>

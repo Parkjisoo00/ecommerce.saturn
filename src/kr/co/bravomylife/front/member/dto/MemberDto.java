@@ -66,9 +66,16 @@ public class MemberDto {
 	private int seq_buy_dtl		= 0;
 	private int seq_buy_mst		= 0;
 	private String dt_delivery	= "";
-	private String cd_state_delivery = "";
+	private String cd_state_delivery	= "";
+	private String delivery_request		= "";
 	
 	
+	public String getDelivery_request() {
+		return delivery_request;
+	}
+	public void setDelivery_request(String delivery_request) {
+		this.delivery_request = delivery_request;
+	}
 	public String getCd_state_delivery() {
 		return cd_state_delivery;
 	}

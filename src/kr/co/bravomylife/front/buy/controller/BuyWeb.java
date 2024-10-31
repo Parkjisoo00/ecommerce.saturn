@@ -114,11 +114,14 @@ public class BuyWeb extends Common {
 			
 			MemberDto _memberDto = memberSrvc.buyDelivertView(memberDto);
 			
+			logger.debug("배송 요청사항 확인" + _memberDto.getDelivery_request());
+			
 			_memberDto.setPost(aes.decode(_memberDto.getPost()));
 			_memberDto.setAddr1(aes.decode(_memberDto.getAddr1()));
 			_memberDto.setAddr2(aes.decode(_memberDto.getAddr2()));
 			_memberDto.setMbr_nm(aes.decode(_memberDto.getMbr_nm()));
 			_memberDto.setDt_reg(_memberDto.getDt_reg());
+			_memberDto.setDelivery_request(_memberDto.getDelivery_request());
 			
 			mav.addObject("memberDto"	, _memberDto);
 			mav.setViewName("front/buy/deliveryView");

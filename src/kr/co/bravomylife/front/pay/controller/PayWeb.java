@@ -166,6 +166,7 @@ public class PayWeb extends Common {
 	public @ResponseBody Map<String,Object> order(@RequestParam Map<String, String> param, HttpServletRequest request, BuyDetailListDto buyDetailListDto, MemberDto memberDto) throws NoSuchAlgorithmException {
 		
 		logger.debug("post 값 확인" + memberDto.getPost());
+		logger.debug("요청사항 값 확인" + memberDto.getDelivery_request());
 		
 		Map<String,Object> returnMap = new HashMap<>();
 		// Map<String,String> map = new HashMap<>();
@@ -271,6 +272,7 @@ public class PayWeb extends Common {
 					buyMasterDto.setTotal_point(totalPoint);
 					buyMasterDto.setUse_point(usePoint);
 					buyMasterDto.setSeq_mbr_addr(memberDto.getSeq_mbr_addr());
+					buyMasterDto.setDelivery_request(memberDto.getDelivery_request());
 					buyMasterDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 					
 					if (!buySrvc.insert(buyMasterDto, (ArrayList<BuyDetailDto>) buyDetailListDto.getBuyList(), deal_num, memberDto)) {

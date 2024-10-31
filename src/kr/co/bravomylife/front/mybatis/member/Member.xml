@@ -9,11 +9,12 @@
 			, addr.ADDR1
 			, addr.ADDR2
 			, mst.CD_STATE_DELIVERY
+			, mst.DELIVERY_REQUEST
 			, sle.SLE_NM
 			, sle.IMG
 			, dtl.COUNT
 			, mbr_mst.MBR_NM
-			, TO_CHAR(SYSDATE, 'MM-DD') dt_reg
+			, TO_CHAR(SYSDATE, 'MM"월"" "D"일"') dt_reg
 		FROM
 			TB_BUY_DTL dtl
 		LEFT JOIN
@@ -123,6 +124,7 @@
 		WHERE
 			SEQ_MBR = #{seq_mbr}
 			AND FLG_DELETE = 'N'
+		ORDER BY dt_reg DESC
 	</select>
 	
 	<insert id="modifyDeliveryProc" parameterType="memberDto">
@@ -348,6 +350,7 @@
 			, addr.ADDR2
 			, addr.SEQ_MBR_ADDR
 			, mst.TOTAL_POINT
+			, TO_CHAR(SYSDATE + 3, 'MM"월"" "D"일"') dt_reg
 		FROM
 			TB_MBR_MST mst
 		LEFT JOIN

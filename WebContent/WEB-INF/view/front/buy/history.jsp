@@ -62,8 +62,8 @@
 		document.getElementById("point_stack").remove();
 		
 		frmMain.seq_sle.setAttribute("value", value);
-		frmMain.seq_buy_dtl.setAttribute("value", value2);
-		frmMain.seq_buy_mst.setAttribute("value", value3);
+		frmMain.seq_buy_mst.setAttribute("value", value2);
+		frmMain.seq_buy_dtl.setAttribute("value", value3);
 		frmMain.seq_mbr_addr.setAttribute("value", value4);
 		
 		frmMain.action="/front/buy/buyDelivertView.web";
@@ -125,7 +125,7 @@
 <input type="hidden" name="seq_buy_dtl"			id="seq_buy_dtl"		/>
 <input type="hidden" name="seq_buy_mst"			id="seq_buy_mst"		/>
 <input type="hidden" name="seq_mbr_addr"		id="seq_mbr_addr"		/>
-<input type="hidden" name="cd_bbs_type"	id="cd_bbs_type"				/>
+<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		/>
 
 	<!-- Page Preloder -->
 	<div id="preloder">

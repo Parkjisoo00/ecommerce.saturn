@@ -754,6 +754,14 @@ table.headTop_pd th, table.headTop_pd td {
 	border-top: 2px solid #cecece !important;
 }
 
+.customer-th {
+	font-size: 16px !important;
+	font-family: "돋움", Dotum, sans-serif !important;
+	line-height: 26px !important;
+	padding: 10px 15px 10px 20px !important;
+	background-color: #eee !important;
+}
+
 .customer-td1 {
 	width: 130px !important;
 	font-size: 12px !important;

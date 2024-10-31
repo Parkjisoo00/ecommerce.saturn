@@ -46,8 +46,15 @@ public class BuyMasterDto {
 	private int total_point				= 0;
 	private int use_point				= 0;
 	private int seq_mbr_addr			= 0;
+	private String delivery_request		= "";
 	
 	
+	public String getDelivery_request() {
+		return delivery_request;
+	}
+	public void setDelivery_request(String delivery_request) {
+		this.delivery_request = delivery_request;
+	}
 	public int getSeq_mbr_addr() {
 		return seq_mbr_addr;
 	}

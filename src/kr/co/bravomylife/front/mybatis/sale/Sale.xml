@@ -39,6 +39,16 @@
 			COUNT(ROWNUM)
 		FROM
 			TB_SLE sle
+		LEFT JOIN (
+			SELECT
+				SEQ_SLE,
+				MAX(FLG_BEST) flg_best
+			FROM
+				TB_BEST
+			GROUP BY SEQ_SLE
+		) best
+		ON
+			sle.SEQ_SLE = best.SEQ_SLE
 		WHERE
 		<include refid="mainSubwhere" />
 	</select>
@@ -103,6 +113,7 @@
 	<sql id="mainSubwhere">
 		sle.CD_STATE_SALE		= 2
 		AND sle.FLG_DELETE		= 'N'
+		AND (best.FLG_BEST IS NULL OR best.FLG_BEST = 'N')
 		<![CDATA[
 		AND sle.COUNT_STOCK > 0
 		]]>
@@ -126,7 +137,7 @@
 		FROM
 		(
 		SELECT
-			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY best.FLG_BEST, best.TOTAL_COUNT_BEST DESC) rnum
+			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY NVL(best.flg_best, 'N') DESC) rnum
 			, sle.SEQ_SLE
 			, sle.SLE_NM
 			, sle.IMG
@@ -144,8 +155,7 @@
 				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
 				ELSE 0
 			END, 0) star
-			, best.FLG_BEST
-			, best.TOTAL_COUNT_BEST
+			, NVL(best.flg_best, 'N') AS FLG_BEST
 		FROM
 			TB_SLE sle
 		LEFT JOIN (
@@ -162,8 +172,7 @@
 		LEFT JOIN (
 			SELECT
 				SEQ_SLE,
-				MAX(FLG_BEST) flg_best,
-				SUM(COUNT) total_count_best
+				MAX(NVL(FLG_BEST, 'N')) AS flg_best
 			FROM
 				TB_BEST
 			GROUP BY SEQ_SLE
@@ -176,7 +185,7 @@
 		<![CDATA[
 		WHERE rnum <= ${linePerPage}
 		]]>
-		ORDER BY FLG_BEST, TOTAL_COUNT_BEST, rnum
+		ORDER BY rnum
 	</select>
 
 	<sql id="mainwhere">
@@ -722,7 +731,7 @@
 		FROM
 		(
 		SELECT
-			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY best.FLG_BEST, sle.DT_REG DESC) rnum
+			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY NVL(best.flg_best, 'N') DESC, sle.DT_REG DESC) rnum
 			, sle.SEQ_SLE
 			, sle.SLE_NM
 			, sle.IMG
@@ -740,7 +749,7 @@
 				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
 				ELSE 0
 			END, 0) star
-			, best.FLG_BEST
+			, NVL(best.flg_best, 'N') AS FLG_BEST
 		FROM
 			TB_SLE sle
 		LEFT JOIN (
@@ -757,7 +766,7 @@
 		LEFT JOIN (
 			SELECT
 				SEQ_SLE,
-				MAX(FLG_BEST) flg_best
+				MAX(NVL(FLG_BEST, 'N')) AS flg_best
 			FROM
 				TB_BEST
 			GROUP BY SEQ_SLE
@@ -770,7 +779,7 @@
 		<![CDATA[
 		WHERE rnum <= ${linePerPage}
 		]]>
-		ORDER BY FLG_BEST, rnum
+		ORDER BY rnum
 	</select>
 
 	<sql id="detailwhere">
@@ -927,7 +936,7 @@
 		FROM
 		(
 		SELECT
-			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY best.FLG_BEST, sle.DT_REG DESC) rnum
+			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY NVL(best.flg_best, 'N') DESC, sle.DT_REG DESC) rnum
 			, sle.SEQ_SLE
 			, sle.SLE_NM
 			, sle.IMG
@@ -945,7 +954,7 @@
 				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
 				ELSE 0
 			END, 0) star
-			, best.FLG_BEST
+			, NVL(best.flg_best, 'N') AS FLG_BEST
 		FROM
 			TB_SLE sle
 		LEFT JOIN (
@@ -962,7 +971,7 @@
 		LEFT JOIN (
 			SELECT
 				SEQ_SLE,
-				MAX(FLG_BEST) flg_best
+				MAX(NVL(FLG_BEST, 'N')) AS flg_best
 			FROM
 				TB_BEST
 			GROUP BY SEQ_SLE
@@ -975,7 +984,7 @@
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]>
-		ORDER BY FLG_BEST
+		ORDER BY rnum
 		<if test="filter == 'LowP'">
 			, DISCOUNT_SALE ASC
 		</if>
@@ -985,7 +994,6 @@
 		<if test="filter == 'DtReg'">
 			, DT_REG DESC
 		</if>
-		, rnum
 	</select>
 
 	<sql id="totalwhere">
@@ -1050,7 +1058,7 @@
 		FROM
 		(
 		SELECT
-			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY best.FLG_BEST, sle.DT_REG DESC) rnum
+			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY NVL(best.flg_best, 'N') DESC, sle.DT_REG DESC) rnum
 			, sle.SEQ_SLE
 			, sle.SLE_NM
 			, sle.IMG
@@ -1068,7 +1076,7 @@
 				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
 				ELSE 0
 			END, 0) star
-			, best.FLG_BEST
+			, NVL(best.flg_best, 'N') AS FLG_BEST
 		FROM
 			TB_SLE sle
 		LEFT JOIN (
@@ -1085,7 +1093,7 @@
 		LEFT JOIN (
 			SELECT
 				SEQ_SLE,
-				MAX(FLG_BEST) flg_best
+				MAX(NVL(FLG_BEST, 'N')) AS flg_best
 			FROM
 				TB_BEST
 			GROUP BY SEQ_SLE
@@ -1098,7 +1106,7 @@
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]>
-		ORDER BY FLG_BEST
+		ORDER BY rnum
 		<if test="filter == 'LowP'">
 			, DISCOUNT_SALE ASC
 		</if>
@@ -1108,7 +1116,6 @@
 		<if test="filter == 'DtReg'">
 			, DT_REG DESC
 		</if>
-		, rnum
 	</select>
 
 	<sql id="ingredientwhere">
@@ -1164,7 +1171,7 @@
 		FROM
 		(
 		SELECT
-			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY best.FLG_BEST, sle.DT_REG DESC) rnum
+			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY NVL(best.flg_best, 'N') DESC, sle.DT_REG DESC) rnum
 			, sle.SEQ_SLE
 			, sle.SLE_NM
 			, sle.IMG
@@ -1182,7 +1189,7 @@
 				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
 				ELSE 0
 			END, 0) star
-			, best.FLG_BEST
+			, NVL(best.flg_best, 'N') AS FLG_BEST
 		FROM
 			TB_SLE sle
 		LEFT JOIN (
@@ -1199,7 +1206,7 @@
 		LEFT JOIN (
 			SELECT
 				SEQ_SLE,
-				MAX(FLG_BEST) flg_best
+				MAX(NVL(FLG_BEST, 'N')) AS flg_best
 			FROM
 				TB_BEST
 			GROUP BY SEQ_SLE
@@ -1212,7 +1219,7 @@
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]>
-		ORDER BY FLG_BEST
+		ORDER BY rnum
 		<if test="filter == 'LowP'">
 			, DISCOUNT_SALE ASC
 		</if>
@@ -1222,7 +1229,6 @@
 		<if test="filter == 'DtReg'">
 			, DT_REG DESC
 		</if>
-		, rnum
 	</select>
 
 	<sql id="functionwhere">
@@ -1278,7 +1284,7 @@
 		FROM
 		(
 		SELECT
-			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY best.FLG_BEST, sle.DT_REG DESC) rnum
+			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY NVL(best.flg_best, 'N') DESC, sle.DT_REG DESC) rnum
 			, sle.SEQ_SLE
 			, sle.SLE_NM
 			, sle.IMG
@@ -1296,7 +1302,7 @@
 				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
 				ELSE 0
 			END, 0) star
-			, best.FLG_BEST
+			, NVL(best.flg_best, 'N') AS FLG_BEST
 		FROM
 			TB_SLE sle
 		LEFT JOIN (
@@ -1313,7 +1319,7 @@
 		LEFT JOIN (
 			SELECT
 				SEQ_SLE,
-				MAX(FLG_BEST) flg_best
+				MAX(NVL(FLG_BEST, 'N')) AS flg_best
 			FROM
 				TB_BEST
 			GROUP BY SEQ_SLE
@@ -1326,7 +1332,7 @@
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]>
-		ORDER BY FLG_BEST
+		ORDER BY rnum
 		<if test="filter == 'LowP'">
 			, DISCOUNT_SALE ASC
 		</if>
@@ -1336,7 +1342,6 @@
 		<if test="filter == 'DtReg'">
 			, DT_REG DESC
 		</if>
-		, rnum
 	</select>
 
 	<sql id="genderwhere">
