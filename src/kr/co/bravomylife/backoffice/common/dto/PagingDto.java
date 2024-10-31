@@ -15,11 +15,11 @@ public class PagingDto {
 	private int linePerPage	= 10;
 	private int currentPage	= 1;
 	
-	private String searchKey	= "";
-	private String searchWord	= "";
-	private String searchCdState	= "";
-	private String searchCdStatePay	= "";
-	private String searchCdStateDelivery	= "";
+	private String searchKey				= "";
+	private String searchWord				= "";
+	private String searchKeyState			= "";
+	private String searchKeyPay			= "";
+	private String searchKeyDelivery	= "";
 	
 	private Integer cd_bbs_type	= 0;
 	private int cd_ctg			= 0;
@@ -35,23 +35,24 @@ public class PagingDto {
 	private String cd_state_sale= "";
 	
 	
-	public String getSearchCdState() {
-		return searchCdState;
+	
+	public String getSearchKeyState() {
+		return searchKeyState;
 	}
-	public void setSearchCdState(String searchCdState) {
-		this.searchCdState = searchCdState;
+	public void setSearchKeyState(String searchKeyState) {
+		this.searchKeyState = searchKeyState;
 	}
-	public String getSearchCdStatePay() {
-		return searchCdStatePay;
+	public String getSearchKeyPay() {
+		return searchKeyPay;
 	}
-	public void setSearchCdStatePay(String searchCdStatePay) {
-		this.searchCdStatePay = searchCdStatePay;
+	public void setSearchKeyPay(String searchKeyPay) {
+		this.searchKeyPay = searchKeyPay;
 	}
-	public String getSearchCdStateDelivery() {
-		return searchCdStateDelivery;
+	public String getSearchKeyDelivery() {
+		return searchKeyDelivery;
 	}
-	public void setSearchCdStateDelivery(String searchCdStateDelivery) {
-		this.searchCdStateDelivery = searchCdStateDelivery;
+	public void setSearchKeyDelivery(String searchKeyDelivery) {
+		this.searchKeyDelivery = searchKeyDelivery;
 	}
 	public int getTotalLine() {
 		return totalLine;

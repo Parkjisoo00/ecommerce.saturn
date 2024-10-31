@@ -31,69 +31,31 @@
 </style>
 	<script>
 	
-	// JavaScript로 옵션을 동적으로 업데이트
-	// JavaScript로 검색 옵션을 동적으로 업데이트
-	function updateSearchOptions() {
-		const searchKey = document.getElementById("searchKey").value;
-		const searchWordContainer = document.getElementById("searchWordContainer");
-		
 
-			if (searchKey == "cd_state") {
-				searchWordContainer.innerHTML = `
-					<select id="searchWord" name="searchWord">
-						<option value="">선택</option>
-						<option value="1">결제 완료</option>
-						<option value="2">취소</option>
-						<option value="3">교환</option>
-						<option value="4">환불</option>
-						<option value="all">전체</option>
-					</select>
-				`;
-			} else if (searchKey == "cd_state_pay") {
-				searchWordContainer.innerHTML = `
-					<select id="searchWord" name="searchWord">
-						<option value="">선택</option>
-						<option value="N">실패</option>
-						<option value="Y">성공</option>
-						<option value="C">취소</option>
-						<option value="all">전체</option>
-					</select>
-				`;
-			} else if (searchKey == "cd_state_delivery") {
-				searchWordContainer.innerHTML = `
-					<select id="searchWord" name="searchWord">
-						<option value="">선택</option>
-						<option value="C">판매 확인중</option>
-						<option value="P">배송 준비중</option>
-						<option value="D">배송중</option>
-						<option value="Y">배송완료</option>
-						<option value="all">전체</option>
-					</select>
-				`;
-			} else if (searchKey == "email" || searchKey == "mbr_nm") {
-				searchWordContainer.innerHTML = `
-					<input type="text" id="searchWord" name="searchWord" class="form-control" style="height: 30px;" placeholder="검색어 입력">
-				`;
-			}
-	}
-	
-	
 	
 	function validateSearch() {
 		const searchKey = document.getElementById("searchKey").value;
-		const searchWord = document.getElementById("searchWord").value;
-
+	
+		const searchKeyState = document.getElementById("searchKeyState").value;
+		const searchKeyPay = document.getElementById("searchKeyPay").value;
+		const searchKeyDelivery = document.getElementById("searchKeyDelivery").value;
+		
+		console.log("searchKeyState:", searchKeyState);
+		console.log("searchKeyPay:", searchKeyPay);
+		console.log("searchKeyDelivery:", searchKeyDelivery);
+/*
 		if (!searchKey) {
-			alert("검색 기준을 선택하세요.");
+			alert("검색어를 입력하세요");
 			return false;
 		}
 
-		if (!searchWord) {
-			alert("검색어 또는 옵션을 선택하세요.");
+		if (!searchWordState && !searchWordPay && !searchWordDelivery) {
+			alert("옵션을 선택하세요.");
 			return false;
 		}
 
 		return true;
+		*/
 	}
 	
 	function goView(value) {
@@ -172,57 +134,43 @@
 						<div class="has-feedback">
 							<div style="display: flex; align-items: center; ">&nbsp;&nbsp;
 							<div class="search-container">
-								<select id="searchKey" name="searchKey" style="height: 30px;" onchange="updateSearchOptions()">
-							<!-- 첫 번째 검색 기준 선택 -->
-								
-									<option value=""<c:if test="${paging.searchKey == ''}"> selected</c:if>>검색 기준 선택</option>
+								<select id="searchKey" name="searchKey">
 									<option value="email"<c:if test="${paging.searchKey == 'email'}"> selected</c:if>>이메일</option>
 									<option value="mbr_nm"<c:if test="${paging.searchKey == 'mbr_nm'}"> selected</c:if>>성명</option>
-									<option value="cd_state"<c:if test="${paging.searchKey == 'cd_state'}"> selected</c:if>>구매상품 상태</option>
-									<option value="cd_state_pay"<c:if test="${paging.searchKey == 'cd_state_pay'}"> selected</c:if>>결제 상태</option>
-									<option value="cd_state_delivery"<c:if test="${paging.searchKey == 'cd_state_delivery'}"> selected</c:if>>배송 상태</option>
 								</select>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<!-- 검색 기준을 선택했을 때 해당 조건에 맞는 입력 필드를 동적으로 변경 -->
-								<span id="searchWordContainer">
-									<c:choose>
-										<c:when test="${paging.searchKey == 'cd_state'}">
-											<select id="searchWord" name="searchWord" style="height: 30px;">
-												<option value="" <c:if test="${paging.searchWord == ''}">selected</c:if>>선택</option>
-												<option value="1" <c:if test="${paging.searchWord == '1'}">selected</c:if>>결제완료</option>
-												<option value="2" <c:if test="${paging.searchWord == '2'}">selected</c:if>>취소</option>
-												<option value="3" <c:if test="${paging.searchWord == '3'}">selected</c:if>>교환</option>
-												<option value="4" <c:if test="${paging.searchWord == '4'}">selected</c:if>>환불</option>
-												<option value="all" <c:if test="${paging.searchWord == 'all'}">selected</c:if>>전체</option>
-											</select>
-										</c:when>
-										<c:when test="${paging.searchKey == 'cd_state_pay'}">
-											<select id="searchWord" name="searchWord" style="height: 30px;">
-												<option value="" <c:if test="${paging.searchWord == ''}">selected</c:if>>선택</option>
-												<option value="N" <c:if test="${paging.searchWord == 'N'}">selected</c:if>>실패</option>
-												<option value="Y" <c:if test="${paging.searchWord == 'Y'}">selected</c:if>>성공</option>
-												<option value="C" <c:if test="${paging.searchWord == 'C'}">selected</c:if>>취소</option>
-												<option value="all" <c:if test="${paging.searchWord == 'all'}">selected</c:if>>전체</option>
-											</select>
-										</c:when>
-										<c:when test="${paging.searchKey == 'cd_state_delivery'}">
-											<select id="searchWord" name="searchWord" style="height: 30px;">
-												<option value="" <c:if test="${paging.searchWord == ''}">selected</c:if>>선택</option>
-												<option value="C" <c:if test="${paging.searchWord == 'C'}">selected</c:if>>판매 확인중</option>
-												<option value="P" <c:if test="${paging.searchWord == 'P'}">selected</c:if>>배송 준비중</option>
-												<option value="D" <c:if test="${paging.searchWord == 'D'}">selected</c:if>>배송중</option>
-												<option value="Y" <c:if test="${paging.searchWord == 'Y'}">selected</c:if>>배송완료</option>
-												<option value="all" <c:if test="${paging.searchWord == 'all'}">selected</c:if>>전체</option>
-											</select>
-										</c:when>
-										<c:otherwise>
-											<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" />
-										</c:otherwise>
-									</c:choose>
-								</span>
-								
+								<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" />
 								&nbsp;&nbsp;
-								<input type="submit" onclick="if(validateSearch()) { executeSearch(); }" value="검색"/>
+								구매 상태&nbsp;
+								<select id="searchKeyState" name="searchKeyState">
+									<option value="all" <c:if test="${paging.searchKeyState == 'all'}">selected</c:if>>전체</option>
+									<option value="1" <c:if test="${paging.searchKeyState == '1'}">selected</c:if>>결제완료</option>
+									<option value="2" <c:if test="${paging.searchKeyState == '2'}">selected</c:if>>취소</option>
+									<option value="3" <c:if test="${paging.searchKeyState == '3'}">selected</c:if>>교환</option>
+									<option value="4" <c:if test="${paging.searchKeyState == '4'}">selected</c:if>>환불</option>
+
+								</select>
+								&nbsp;&nbsp;
+								결제 상태&nbsp;
+								<select id="searchKeyPay" name="searchKeyPay">
+									<option value="all" <c:if test="${paging.searchKeyPay == 'all'}">selected</c:if>>전체</option>	
+									<option value="N" <c:if test="${paging.searchKeyPay == 'N'}">selected</c:if>>실패</option>
+									<option value="Y" <c:if test="${paging.searchKeyPay == 'Y'}">selected</c:if>>성공</option>
+									<option value="C" <c:if test="${paging.searchKeyPay == 'C'}">selected</c:if>>취소</option>
+									
+								</select>
+								&nbsp;&nbsp;
+								배송 상태&nbsp;
+								<select id="searchKeyDelivery" name="searchKeyDelivery">
+									<option value="all" <c:if test="${paging.searchKeyDelivery == 'all'}">selected</c:if>>전체</option>
+									<option value="C" <c:if test="${paging.searchKeyDelivery == 'C'}">selected</c:if>>판매 확인중</option>
+									<option value="P" <c:if test="${paging.searchKeyDelivery == 'P'}">selected</c:if>>배송 준비중</option>
+									<option value="D" <c:if test="${paging.searchKeyDelivery == 'D'}">selected</c:if>>배송중</option>
+									<option value="Y" <c:if test="${paging.searchKeyDelivery == 'Y'}">selected</c:if>>배송완료</option>
+									
+								</select>
+
+								&nbsp;&nbsp;
+								<input type="submit" onclick="if(validateSearch()) { executeSearch(); }" value="검색"/>	
 							</div>	
 							</div>
 						</div>
@@ -277,28 +225,29 @@
 								<!-- 주문 목록에서 각 주문의 상태(주문 상태, 결제 상태, 배송 상태)를 관리자가 선택할 수 있도록 -->
 								<td style="text-align: center;">
 									<select id="select_1" style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst});">
+										<option value="NULL"<c:if test="${list.cd_state == NULL}"> selected</c:if>>결제중단</option>
 										<option value="1"<c:if test="${list.cd_state == 1}"> selected</c:if>>결제완료</option>
 										<option value="2"<c:if test="${list.cd_state == 2}"> selected</c:if>>취소</option>
 										<option value="3"<c:if test="${list.cd_state == 3}"> selected</c:if>>교환</option>
 										<option value="4"<c:if test="${list.cd_state == 4}"> selected</c:if>>환불</option>
-										<option value="all"<c:if test="${list.cd_state == 'all'}"> selected</c:if>>전체</option>
 									</select>
 								</td>
 								<td style="text-align: center;">
 									<select style="background:#F0F0F0" disabled>
+										<option value="NULL"<c:if test="${list.cd_state_pay == NULL}"> selected</c:if>>결제중단</option>
 										<option value="N"<c:if test="${list.cd_state_pay == 'N'}"> selected</c:if>>실패</option>
 										<option value="Y"<c:if test="${list.cd_state_pay == 'Y'}"> selected</c:if>>성공</option>
 										<option value="C"<c:if test="${list.cd_state_pay == 'C'}"> selected</c:if>>취소</option>
-										<option value="all"<c:if test="${list.cd_state_pay == 'all'}"> selected</c:if>>전체</option>
 									</select>
 								</td>
 								<td style="text-align: center;">
 									<select id="select_3" style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst});">
+										<option value="NULL"<c:if test="${list.cd_state_delivery == NULL}"> selected</c:if>>결제중단</option>
 										<option value="C"<c:if test="${list.cd_state_delivery == 'C'}"> selected</c:if>>판매 확인중</option>
 										<option value="P"<c:if test="${list.cd_state_delivery == 'P'}"> selected</c:if>>배송 준비중</option>
 										<option value="D"<c:if test="${list.cd_state_delivery == 'D'}"> selected</c:if>>배송중</option>
 										<option value="Y"<c:if test="${list.cd_state_delivery == 'Y'}"> selected</c:if>>배송완료</option>
-										<option value="all"<c:if test="${list.cd_state_delivery == 'all'}"> selected</c:if>>전체</option>
+
 									</select>
 								</td>
 							</tr>

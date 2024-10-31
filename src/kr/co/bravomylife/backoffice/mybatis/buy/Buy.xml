@@ -103,21 +103,17 @@
 				<if test="searchKey == 'email'">
 					AND mbr_mst.EMAIL = #{searchWord}
 				</if>
-				<if test="searchKey == 'cd_state'">
-					<if test="searchWord != 'all'">
-						AND buy_mst.CD_STATE = #{searchWord}
-					</if>
-				</if>
-				<if test="searchKey == 'cd_state_pay'">
-					<if test="searchWord != 'all'">
-						AND buy_mst.CD_STATE_PAY = #{searchWord}
-					</if>
-				</if>
-				<if test="searchKey == 'cd_state_delivery'">
-					<if test="searchWord != 'all'">
-						AND buy_mst.CD_STATE_DELIVERY = #{searchWord}
-					</if>
-				</if>
+			</if>
+			
+			<if test="searchKeyState != null and searchKeyState != '' and searchKeyState != 'all'">
+				AND buy_mst.CD_STATE = #{searchKeyState}
+			</if>
+			
+			<if test="searchKeyPay != null and searchKeyPay != '' and searchKeyPay != 'all'">
+				AND buy_mst.CD_STATE_PAY = #{searchKeyPay}
+			</if>
+			<if test="searchKeyDelivery != null and searchKeyDelivery != '' and searchKeyDelivery != 'all'">
+				AND buy_mst.CD_STATE_DELIVERY = #{searchKeyDelivery}
 			</if>
 	</sql>
 	
