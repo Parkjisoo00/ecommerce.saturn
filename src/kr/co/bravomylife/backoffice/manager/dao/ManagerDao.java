@@ -24,6 +24,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.bravomylife.backoffice.common.dao.BaseDao;
 import kr.co.bravomylife.backoffice.manager.dto.ManagerDto;
+import kr.co.bravomylife.front.member.dto.MemberDto;
 
 
 
@@ -39,15 +40,14 @@ import kr.co.bravomylife.backoffice.manager.dto.ManagerDto;
  */
 @Repository("kr.co.bravomylife.backoffice.manager.dao.ManagerDao")
 public class ManagerDao extends BaseDao {
-	/*
-	public int updateStateM(ManagerDto managerDto) {
-		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.manager.Manager.updateStateM", managerDto);
+	
+	public int updateMyPasswd(ManagerDto managerDto) {
+		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.manager.Manager.updateMyPasswd", managerDto);
 	}
 	
-	public int updateState(ManagerDto managerDto) {
-		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.manager.Manager.updateState", managerDto);
+	public ManagerDto selectMyPasswd(ManagerDto managerDto) {
+		return sqlSessionBackoffice.selectOne("kr.co.bravomylife.backoffice.mybatis.manager.Manager.selectMyPasswd", managerDto);
 	}
-	*/
 	public int update(ManagerDto managerDto) {
 		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.manager.Manager.update", managerDto);
 	}

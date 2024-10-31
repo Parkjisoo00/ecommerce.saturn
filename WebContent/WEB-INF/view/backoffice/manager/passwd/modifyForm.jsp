@@ -22,20 +22,67 @@
     vertical-align: top;
 	</style>
 	<script>
+
+function checkModify() {
+		
+	if (confirm("정보를 변경하시겠습니까?")) {
+		
+		var frmMain		= document.getElementById("frmMain");
 	
-	function execDaumPostcode() {
-		new daum.Postcode({
-			oncomplete: function(data) {
-				document.getElementById('post').value = data.zonecode;  // 우편번호
-				document.getElementById('addr1').value = data.roadAddress;  // 도로명 주소
-			}
-		}).open();
-	}	
+		var passwd = $("#passwd").val();	// 현재 비밀번호
+		
+		var confirmPasswd	= $("#confirmPasswd").val();
+		var confirmPasswd_	= $("#confirmPasswd_").val();
+		
+		// 현재 비밀번호가 비어 있는지 확인
+		if (!passwd) {
+			alert("현재 비밀번호를 입력해주세요!");
+			return false;
+		}
+		
+		// 신규 비밀번호가 비어 있는지 확인
+		if (!confirmPasswd) {
+			alert("신규 비밀번호를 입력해주세요!");
+			return false;
+		}
+		
+		// 비밀번호 확인이 비어 있는지 확인
+		if (!confirmPasswd_) {
+			alert("신규 비밀번호 확인을 입력해주세요!");
+			return false;
+		}
+		
+		// 신규 비밀번호와 비밀번호 확인이 일치하는지 확인
+		if (confirmPasswd != confirmPasswd_) {
+			alert("신규 비밀번호와 비밀번호 확인이 일치하지 않습니다!");
+			return false;
+		}
+		
+		// 비밀번호가 규칙에 맞는지 확인 (예: 최소 8자, 대문자 포함)
+		if (confirmPasswd.length < 8) {
+			alert("신규 비밀번호는 최소 8자 이상이어야 합니다!");
+			return false;
+		}
+		
+		if (confirmPasswd.length > 16) {
+			alert("신규 비밀번호는 최대 16자 입니다!");
+			return false;
+		}
+		
+		
+		// 폼을 제출
+		
+		frmMain.action = "/console/manager/passwd/modifyProc.web";
+		frmMain.submit();
+		}
+	}
 	
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<form id="frmMain" method="POST" action="/console/manager/modifyForm.web">
+<form id="frmMain" method="POST">
+
+
 
 
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
@@ -47,7 +94,7 @@
 			<div class="col-md-6" style="display: flex; justify-content: center; align-items: center; ">
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title">개인 정보 확인/수정</h3>
+						<h3 class="box-title">비밀번호 변경</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body no-padding">
@@ -55,46 +102,21 @@
 							<table class="table table-hover table-striped">
 								<tbody>
 								<tr>
-									<th style="width: 150px;" >이메일</th>
+									<th style="width: 150px;" >현재 비밀번호 *</th>
 									<td>
-										<input type="text" id="email" name="email" required value="${managerDto.email}" style="flex: 1; min-width: 250px;" disabled autocomplete="off"/>
+										<input type="password" id="passwd" name="passwd"  />
 									</td>
 								</tr>
 								<tr>
-									<th style="width: 150px;" >성명</th>
+									<th style="width: 150px;" >신규 비밀번호 * (영문 대/소문자 구분, 숫자, 특수문자 포함 8~16자 필수 입력)</th>
 									<td>
-										<input type="text" id="age" name="age" value="${managerDto.mng_nm}" maxlength="10" style="flex: 1; min-width: 250px;" disabled autocomplete="off"/>
+										<input type="password" id="confirmPasswd" name="confirmPasswd"  />
 									</td>
 								</tr>
 								<tr>
-									<th style="width: 150px;" >연락처</th>
+									<th style="width: 150px;" >신규 비밀번호 확인 *</th>
 									<td>
-										<input type="text" id="phone1" name="phone1" value="${fn:split(managerDto.phone, '-')[0]}" style="text-align:center;" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-											maxlength="3" autocomplete="off"/>
-										-
-										<input type="text" id="phone2" name="phone2" value="${fn:split(managerDto.phone, '-')[1]}" style="text-align:center;" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-											maxlength="4" autocomplete="off"/>
-										-
-										<input type="text" id="phone3" name="phone3" value="${fn:split(managerDto.phone, '-')[2]}" style="text-align:center;" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-											maxlength="4" autocomplete="off"/>
-										<input type="hidden" id="phone" name="phone"/>
-									</td>
-								</tr>
-								<tr>
-									<th style="width: 150px;" >주소</th>
-									<td>
-										<input type="text" id="post" name="post" size="5" readonly value="${managerDto.post}"/>
-										<br>
-										<br>
-											<label for="addr1">도로명</label>
-											<input type="text"	id="addr1"	name="addr1" size="40" readonly value="${managerDto.addr1}"/>
-											<span id="guide" style="color:#999; display:none"></span>
-										<br>
-										<br>	
-											<label for="addr2">상세</label>
-											<input type="text"	id="addr2"	name="addr2" size="20" value="${managerDto.addr2}" placeholder="상세 주소" />
-											
-											<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
+										<input type="password" id="confirmPasswd_" name="confirmPasswd_"  />
 									</td>
 								</tr>
 								<tr>
@@ -113,7 +135,7 @@
 					<br>
 					<div class="col-md-6">
 						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
-							<input type="button" value="수정" class="btn btn-primary" style="width: 150px" onclick="checkModify();" />
+							<input type="button" value="수정" style="width: 150px" onclick="checkModify();" />
 							<input type="button" value="뒤로가기" class="btn btn-primary" style="width: 150px" onclick="javascript:location.href='/console/myPage/index.web';"/>
 						</div>
 					</div>

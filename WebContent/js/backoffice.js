@@ -5,6 +5,8 @@
  * <p>DESCRIPTION: 다음 우편번호 찾기(https://postcode.map.daum.net/guide)</p>
  * <p>IMPORTANT:</p>
  */
+
+
 function checkModify() {
 	if (confirm("정보를 변경하시겠습니까?")) {
 	var isSubmit	= true;

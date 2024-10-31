@@ -59,7 +59,7 @@
 					<div class="box-body no-padding">
 						<ul class="nav nav-pills nav-stacked">
 							<li class="active"><a href="/console/manager/modifyForm.web"><i class="fa fa-fw fa-user"></i> 개인정보 확인/수정</a>
-							<li class="active"><a href=""><i class="fa fa-fw fa-user"></i> 비밀번호 변경</a>
+							<li class="active"><a href="/console/manager/passwd/modifyForm.web"><i class="fa fa-fw fa-user"></i> 비밀번호 변경</a>
 							</li>
 						</ul>
 					</div>

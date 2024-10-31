@@ -43,6 +43,23 @@ public class ManagerSrvc {
 	@Inject
 	ManagerDao managerDao;
 	
+	
+	@Transactional("txFront")
+	public boolean updateMyPasswd(ManagerDto managerDto) {
+		
+		int result = managerDao.updateMyPasswd(managerDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+public ManagerDto selectMyPasswd(ManagerDto managerDto) {
+	return managerDao.selectMyPasswd(managerDto);
+}
+	
 	@Transactional("txFront")
 	public boolean update(ManagerDto managerDto) {
 				
@@ -53,23 +70,7 @@ public class ManagerSrvc {
 		}
 	}
 	
-	/*
-	@Transactional("txFront")
-	public boolean updateState(ManagerDto managerDto) {
-		
-		int result = managerDao.updateState(managerDto);
-		
-		if (result == 1) {
-			return true;
-		}
-		else if (result == 0) {
-			managerDao.updateState(managerDto);
-			return false;
-		}
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			return false;
-	}
-	*/
+	
 	public int selectDuplicate(ManagerDto managerDto) {
 		return managerDao.selectDuplicate(managerDto);
 	}

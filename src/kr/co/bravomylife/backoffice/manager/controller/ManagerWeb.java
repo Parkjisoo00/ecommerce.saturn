@@ -84,17 +84,17 @@ public class ManagerWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			int seq_mng = Integer.parseInt(getSession(request, "SEQ_MNG"));
-			managerDto.setSeq_mng(seq_mng);
-			managerDto.setUpdater(seq_mng);
 			
-			
+			managerDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			managerDto.setSeq_mng(Integer.parseInt(getSession(request, "SEQ_MNG")));
 			
 			if (managerSrvc.update(managerDto)) {
+				
 				request.setAttribute("script"	, "alert('수정되었습니다.');");
 				request.setAttribute("redirect"	, "/console/myPage/index.web");
 			}
 			else {
+				
 				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
 				request.setAttribute("redirect"	, "/");
 			}
@@ -103,6 +103,7 @@ public class ManagerWeb extends Common {
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".modifyProc()] " + e.getMessage(), e);
+			e.printStackTrace();
 		}
 		finally {}
 		
@@ -129,8 +130,14 @@ public class ManagerWeb extends Common {
 				managerDto.setSeq_mng(Integer.parseInt(getSession(request, "SEQ_MNG")));
 							
 				ManagerDto _managerDto = managerSrvc.select(managerDto);
-							
-							
+				/*	
+				_managerDto.setEmail(_managerDto.getEmail());
+				_managerDto.setMng_nm(_managerDto.getMng_nm());
+				_managerDto.setPhone(_managerDto.getPhone());
+				_managerDto.setPost(_managerDto.getPost());
+				_managerDto.setAddr1(_managerDto.getAddr1());
+				_managerDto.setAddr2(_managerDto.getAddr2());
+				*/			
 				mav.addObject("managerDto", _managerDto);
 							
 				mav.setViewName("backoffice/manager/modifyForm");
