@@ -12,22 +12,33 @@
 		// Google Charts 라이브러리 로드 완료 후 실행
 		google.charts.load('current', {'packages':['line']});
 		google.charts.setOnLoadCallback(drawChart);
-
+		
 		function drawChart() {
 			var data = new google.visualization.DataTable();
+			
+			// 월 및 상품명들
 			data.addColumn('number', '월');
-
 			<c:forEach var="item" items="${listsellingBestName}">
 				data.addColumn('number', '${item.name}');
 			</c:forEach>
-
-			// 월, 
-			data.addRows = [
-				<c:forEach var="item" items="${listsellingBestList}" varStatus="status">
-					[${item.month}, ],
-				</c:forEach>
-			];
 			
+			// 월 및 상품들의 판매 수량
+			/*
+			data.addRows([
+				[3,  10,   8,   0,   0,   0,   0,   0,   0,   0,  12],
+				[4,   0,   0,   0,   0,   0,   0,   0,   2,   0,   0],
+				[5,   0,   0,   0,   0,   0,   1,   0,   0,   0,   0],
+				[7,   0,   0,   3,   0,   0,   0,   0,   0,   0,   0],
+				[8,   0,   0,   0,   0,   2,   0,   0,   0,   0,   0],
+				[9,   0,   0,   0,   0,   0,   0,   0,   0,   1,   0],
+				[10,  0,   0,   0,  13,   0,  11,  11,   0,   0,  12],
+			]);
+			*/
+			data.addRows([
+				<c:forEach var="item" items="${listsellingBestList}" varStatus="status">
+					[${item.month}, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+				</c:forEach>
+			]);
 			var options = {
 				chart: {
 					title: '2024년 많이 팔린 상품 TOP 10',
@@ -36,8 +47,8 @@
 				width: 900,
 				height: 500
 			};
-
-			var chart = new google.visualization.LineChart(document.getElementById('linechart_material'));
+			
+			var chart = new google.charts.Line(document.getElementById('linechart_material'));
 			chart.draw(data, options);
 		}
 	</script>

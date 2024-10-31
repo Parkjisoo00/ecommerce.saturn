@@ -157,6 +157,8 @@
 			) top
 		where
 			top.rank &lt; 4
+		order by
+			seq_sle
 	</select>
 	
 	<select id="memberRegisterWithdraw" resultType="memberAgeDto">
