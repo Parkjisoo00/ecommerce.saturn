@@ -10,30 +10,34 @@
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script>
 		// Google Charts 라이브러리 로드 완료 후 실행
-		google.charts.load('current', {'packages':['corechart']});
-		google.charts.setOnLoadCallback(drawCharts);
-		
-		function drawCharts() {
-					
-			// 차트 6 - 스택된 세로 막대 그래프
-			
-			var data = google.visualization.arrayToDataTable([
-				['날짜', 'Best1', 'Best2', 'Best3', 'Best4', 'Best5', 'Best6', 'Best7', 'Best8', 'Best9', 'Best10'],
-				<c:forEach items="${listsellingBest}" var="sales">
-					['${sales.month}', ${sales.product1}, ${sales.product2}, ${sales.product3}, ${sales.product4}, ${sales.product5}, ${sales.product6}, ${sales.product7}, ${sales.product8}, ${sales.product9}, ${sales.product10}]
-					<c:if test="${!salesStatus.last}">,</c:if>
-				</c:forEach>
-			]);
+		google.charts.load('current', {'packages':['line']});
+		google.charts.setOnLoadCallback(drawChart);
 
+		function drawChart() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('number', '월');
+
+			<c:forEach var="item" items="${listsellingBestName}">
+				data.addColumn('number', '${item.name}');
+			</c:forEach>
+
+			// 월, 
+			data.addRows = [
+				<c:forEach var="item" items="${listsellingBestList}" varStatus="status">
+					[${item.month}, ],
+				</c:forEach>
+			];
+			
 			var options = {
-				title: '월별 인기 상품 판매 통계',
-				width: 800,
-				height: 400,
-				colors: ['#ccffcc', '#ccff99', '#ccff66', '#ccff33', '#ccff00', '#99ffcc', '#99ff99', '#99ff66', '#99ff33', '#99ff00'],
-				isStacked: true
+				chart: {
+					title: '2024년 많이 팔린 상품 TOP 10',
+					subtitle: '월별 판매량',
+				},
+				width: 900,
+				height: 500
 			};
 
-			var chart = new google.visualization.ColumnChart(document.getElementById('chart_div_best'));
+			var chart = new google.visualization.LineChart(document.getElementById('linechart_material'));
 			chart.draw(data, options);
 		}
 	</script>
@@ -44,8 +48,8 @@
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
-	<div style="display: flex; justify-content: center;">
-		<div id="chart_div_best" style="width: 700px; height: 800px;"></div>
+	<div style="display: flex; justify-content: space-around; align-items: center;">
+		<div id="linechart_material"></div>
 	</div>
 <!-- /Maincontent -->
 

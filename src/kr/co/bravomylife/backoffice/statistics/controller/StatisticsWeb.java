@@ -72,9 +72,11 @@ public class StatisticsWeb extends Common{
 		ModelAndView mav = new ModelAndView();
 		
 		try {
-			List<MemberAgeDto> listsellingBest = memberSrvc.sellingBest();
+			List<MemberAgeDto> listsellingBestName = memberSrvc.sellingBestName();
+			List<MemberAgeDto> listsellingBestList = memberSrvc.sellingBestList();
 			
-			mav.addObject("listsellingBest", listsellingBest);
+			mav.addObject("listsellingBestName", listsellingBestName);
+			mav.addObject("listsellingBestList", listsellingBestList);
 			
 			mav.setViewName("backoffice/statistics/index1");
 		}

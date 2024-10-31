@@ -39,8 +39,12 @@ import kr.co.bravomylife.backoffice.statistics.dto.MemberIncomeDto;
 @Repository("kr.co.bravomylife.backoffice.statistics.dao.MemberDao")
 public class MemberDao extends BaseDao{
 	
-	public List<MemberAgeDto> sellingBest() {
-		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.statistics.Member.sellingBest");
+	public List<MemberAgeDto> sellingBestList() {
+		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.statistics.Member.sellingBestList");
+	}
+	
+	public List<MemberAgeDto> sellingBestName() {
+		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.statistics.Member.sellingBestName");
 	}
 	
 	public List<MemberAgeDto> memberAge() {

@@ -105,25 +105,71 @@
 	]]>
 	</select>
 
-	<select id="sellingBest" resultType="memberAgeDto">
-		 SELECT
-			TO_CHAR(dt_reg, 'YYYY-MM') AS month,
-			SUM(CASE WHEN seq_sle = 335 THEN count ELSE 0 END) AS product1,
-			SUM(CASE WHEN seq_sle = 344 THEN count ELSE 0 END) AS product2,
-			SUM(CASE WHEN seq_sle = 343 THEN count ELSE 0 END) AS product3,
-			SUM(CASE WHEN seq_sle = 336 THEN count ELSE 0 END) AS product4,
-			SUM(CASE WHEN seq_sle = 5 THEN count ELSE 0 END) AS product5,
-			SUM(CASE WHEN seq_sle = 6 THEN count ELSE 0 END) AS product6,
-			SUM(CASE WHEN seq_sle = 7 THEN count ELSE 0 END) AS product7,
-			SUM(CASE WHEN seq_sle = 8 THEN count ELSE 0 END) AS product8,
-			SUM(CASE WHEN seq_sle = 9 THEN count ELSE 0 END) AS product9,
-			SUM(CASE WHEN seq_sle = 10 THEN count ELSE 0 END) AS product10
-		FROM
-			tb_best
-		GROUP BY
-			TO_CHAR(dt_reg, 'YYYY-MM')
-		ORDER BY
-			TO_CHAR(dt_reg, 'YYYY-MM')
+	<select id="sellingBestName" resultType="memberAgeDto">
+		select
+			distinct top.seq_sle
+			, (SELECT SLE_NM FROM TB_SLE sle WHERE sle.SEQ_SLE = top.seq_sle) name
+		from
+			(
+			select
+				month
+				, seq_sle
+				, count
+				, rank() over(partition by month order by count desc) rank
+			from
+				(
+				select
+					TO_NUMBER(TO_CHAR(dt_reg, 'MM')) month, seq_sle, sum(count) as count
+				from
+					tb_buy_dtl
+				where
+					TO_NUMBER(TO_CHAR(dt_reg, 'YYYY')) = 2024
+				group by
+					TO_NUMBER(TO_CHAR(dt_reg, 'MM')), seq_sle
+				) order by seq_sle
+			) top
+		where
+			top.rank &lt; 4
 	</select>
 	
+	<select id="sellingBestList" resultType="memberAgeDto">
+		select
+			top.month, top.seq_sle, top.count, top.rank
+			, (SELECT SLE_NM FROM TB_SLE sle WHERE sle.SEQ_SLE = top.seq_sle) name
+		from
+			(
+			select
+				month
+				, seq_sle
+				, count
+				, rank() over(partition by month order by count desc) rank
+			from
+				(
+				select
+					TO_NUMBER(TO_CHAR(dt_reg, 'MM')) month, seq_sle, sum(count) as count
+				from
+					tb_buy_dtl
+				where
+					TO_NUMBER(TO_CHAR(dt_reg, 'YYYY')) = 2024
+				group by
+					TO_NUMBER(TO_CHAR(dt_reg, 'MM')), seq_sle
+				) order by month asc, seq_sle
+			) top
+		where
+			top.rank &lt; 4
+	</select>
+	
+	<select id="memberRegisterWithdraw" resultType="memberAgeDto">
+		SELECT 
+			TO_CHAR(dt_reg, 'YYYY-MM') AS month,
+			COUNT(*) AS subscriber_count
+		FROM 
+			tb_mbr_mst
+		WHERE 
+			dt_reg >= TRUNC(ADD_MONTHS(SYSDATE, -12))
+		GROUP BY 
+			TO_CHAR(dt_reg, 'YYYY-MM')
+		ORDER BY 
+			month
+	</select>
 </mapper> 
