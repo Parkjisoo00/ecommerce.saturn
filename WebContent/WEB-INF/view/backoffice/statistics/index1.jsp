@@ -36,15 +36,20 @@
 			*/
 			data.addRows([
 				<c:forEach var="item" items="${listsellingBestList}" varStatus="status">
-					[${item.month}, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+					<c:set var="month_new" value="${item.month}" />
+						<c:if test="${month_new != month_old}">
+							[${item.month}, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+						</c:if>
+					<c:set var="month_old" value="${item.month}" />
 				</c:forEach>
 			]);
+			
 			var options = {
 				chart: {
 					title: '2024년 많이 팔린 상품 TOP 10',
 					subtitle: '월별 판매량',
 				},
-				width: 900,
+				width: 1024,
 				height: 500
 			};
 			
