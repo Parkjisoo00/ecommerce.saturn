@@ -36,6 +36,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +50,7 @@ import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.member.dto.MemberDto;
 import kr.co.bravomylife.front.member.service.MemberSrvc;
 import kr.co.bravomylife.front.pay.component.PayCmpn;
+import kr.co.bravomylife.front.pay.service.ApiService;
 import kr.co.bravomylife.util.security.SKwithAES;
 import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
 import kr.co.bravomylife.front.buy.service.BuySrvc;
@@ -80,7 +82,98 @@ public class PayWeb extends Common {
 	
 	@Inject
 	private MemberSrvc memberSrvc;
-
+	
+	@Inject
+	ApiService apiService;
+	
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-31
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping("/front/pay/cancelForm.web")
+	public ModelAndView cancel(HttpServletRequest request, HttpServletResponse response, BuyDetailDto buyDetailDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			buyDetailDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			BuyDetailDto _buyDetailDto = buySrvc.cancel(buyDetailDto);
+			
+			mav.addObject("buyDetailDto"	, _buyDetailDto);
+			mav.setViewName("front/buy/cancelForm");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".cancel()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-10-31
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/pay/cancleOrder.json",  method = RequestMethod.POST, consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
+	public @ResponseBody Map<String, Object> cancelOrder(HttpServletRequest request, @RequestBody Map<String, String> item) {
+		
+		Map<String, Object> response = new HashMap<>();
+		
+		System.out.println(item.toString());
+		
+		try {
+		
+		Map<String,String> map = new HashMap<>();
+		// 페이업 서버 통신 apiService 사용
+		String url = "https://api.testpayup.co.kr/v2/api/payment/himedia/cancel2";
+		
+		String merchantId = "himedia";
+		String transactionId = item.get("deal_num");
+		String signature =	"";
+		String apiCertKey =	"ac805b30517f4fd08e3e80490e559f8e";
+		String p = "|";
+		
+		map.put("merchantId",merchantId);
+		map.put("transactionId",transactionId);
+		
+		signature = apiService.getSHA256Hash(merchantId+p+transactionId+p+apiCertKey);
+		
+		map.put("signature",signature);
+		
+		Map<String,Object> apiResult = apiService.JsonApi(url, map);
+		
+		//apiResultAPI 결과가 있음
+		
+		//3.결과 값 확인
+		System.out.println(apiResult.toString()); //{responseCode=6001, responseMsg=카드유효기간 월(expireMonth)은 필수 입니다.}
+		System.out.println(apiResult.get("responseCode")); //0000
+		System.out.println(apiResult.get("responseMsg")); //카드유효기간 월(expireMonth)은 필수 입니다
+		
+		response.putAll(apiResult);
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".cancelOrder()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return response;
+	}
+	
 	@RequestMapping(value = "/front/pay/payup/pay.web")
 	public ModelAndView pay(@RequestParam Map<String,String> param, HttpServletRequest request) throws NoSuchAlgorithmException {
 		

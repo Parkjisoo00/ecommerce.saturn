@@ -275,7 +275,7 @@
 									<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" style="font-weight: normal !important; background-color: #72baf5; color: white; display: inline-block !important;" >추천 인기상품</a>
 								</li>
 								<li class="nav-item" style="margin-bottom: 0px !important; background-color: #f9f9f9; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important;">
-									<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" style="font-weight: normal !important; color: black; display: inline-block !important;">추천 최신상품</a>
+									<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" style="font-weight: normal !important; color: black; display: inline-block !important;">추천 신상품</a>
 								</li>
 							</ul>
 							<div class="tab-content">

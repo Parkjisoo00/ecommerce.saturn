@@ -55,6 +55,10 @@ public class BuySrvc {
 	@Inject
 	PayDao payDao;
 	
+	public BuyDetailDto cancel(BuyDetailDto buyDetailDto) {
+		return buyDao.cancel(buyDetailDto);
+	}
+	
 	public PagingListDto pointHistory(PagingDto pagingDto) {
 		
 		PagingListDto pagingListDto = new PagingListDto();
@@ -203,7 +207,4 @@ public class BuySrvc {
 	public List<BuyDetailDto> historyList(BuyDetailDto buyDetailDto) {
 		return buyDao.historyList(buyDetailDto);
 	}
-
-
-	
 }

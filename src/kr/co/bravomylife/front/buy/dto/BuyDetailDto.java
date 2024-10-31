@@ -47,6 +47,9 @@ public class BuyDetailDto {
 	private int seq_mbr						= 0;
 	private int seq_best					= 0;
 	private int seq_best_dtl				= 0;
+	private int total_price					= 0;
+	private int seq_pay						= 0;
+	
 	
 	private int rnum						= 0;
 	private String cd_state					= "";
@@ -63,6 +66,18 @@ public class BuyDetailDto {
 	private int seq_mbr_addr			= 0;
 	
 	
+	public int getSeq_pay() {
+		return seq_pay;
+	}
+	public void setSeq_pay(int seq_pay) {
+		this.seq_pay = seq_pay;
+	}
+	public int getTotal_price() {
+		return total_price;
+	}
+	public void setTotal_price(int total_price) {
+		this.total_price = total_price;
+	}
 	public int getSeq_mbr_addr() {
 		return seq_mbr_addr;
 	}

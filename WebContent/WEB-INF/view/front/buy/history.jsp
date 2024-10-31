@@ -55,12 +55,6 @@
 	
 		var frmMain = document.getElementById("frmMain");
 		
-		document.getElementById("count").remove();
-		document.getElementById("discount").remove();
-		document.getElementById("discount_sale").remove();
-		document.getElementById("price_sale").remove();
-		document.getElementById("point_stack").remove();
-		
 		frmMain.seq_sle.setAttribute("value", value);
 		frmMain.seq_buy_mst.setAttribute("value", value2);
 		frmMain.seq_buy_dtl.setAttribute("value", value3);
@@ -70,13 +64,25 @@
 		frmMain.submit();
 	}
 	
+	function cancelForm(value, value2, value3) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.seq_sle.setAttribute("value", value);
+		frmMain.seq_buy_mst.setAttribute("value", value2);
+		frmMain.seq_buy_dtl.setAttribute("value", value3);
+		
+		frmMain.action="/front/pay/cancelForm.web";
+		frmMain.submit();
+	}
+	
 	function goList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
 		document.getElementById("count").remove();
 		document.getElementById("discount").remove();
-		document.getElementById("discount_sale").remove();
+		
 		document.getElementById("price_sale").remove();
 		document.getElementById("point_stack").remove();
 
@@ -91,10 +97,8 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		document.getElementById("cd_bbs_type").value = value;
-		
 		document.getElementById("count").remove();
 		document.getElementById("discount").remove();
-		document.getElementById("discount_sale").remove();
 		document.getElementById("price_sale").remove();
 		document.getElementById("point_stack").remove();
 		
@@ -112,19 +116,19 @@
 <body>
 <form id="frmMain" method="POST">
 <input type="hidden" name="item"				id="item"/>
-<input type="hidden" name="point_stack"			id="point_stack"		/>
-<input type="hidden" name="discount_sale"		id="discount_sale"		/>
+<input type="hidden" name="point_stack"			id="point_stack"		value="0"/>
+<input type="hidden" name="discount_sale"		id="discount_sale"		value="0"/>
 <input type="hidden" name="img"					id="img"				/>
 <input type="hidden" name="seq_sle"				id="seq_sle"			/>
 <input type="hidden" name="sle_nm"				id="sle_nm"				/>
 <input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"			/>
 <input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"			/>
-<input type="hidden" name="count"				id="count"				/>
-<input type="hidden" name="price_sale"			id="price_sale"			/>
-<input type="hidden" name="discount"			id="discount"			/>
-<input type="hidden" name="seq_buy_dtl"			id="seq_buy_dtl"		/>
+<input type="hidden" name="count"				id="count"				value="0"/>
+<input type="hidden" name="price_sale"			id="price_sale"			value="0"/>
+<input type="hidden" name="discount"			id="discount"			value="0"/>
+<input type="hidden" name="seq_buy_dtl"			id="seq_buy_dtl"		value="0"/>
 <input type="hidden" name="seq_buy_mst"			id="seq_buy_mst"		/>
-<input type="hidden" name="seq_mbr_addr"		id="seq_mbr_addr"		/>
+<input type="hidden" name="seq_mbr_addr"		id="seq_mbr_addr"		value="0"/>
 <input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		/>
 
 	<!-- Page Preloder -->
@@ -145,7 +149,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h6 class="lowgnb-title" style="padding-bottom: 20px; text-align: left; font-size: 35px;">구매 이력</h6>
+					<h6 class="lowgnb-title" style="padding-bottom: 20px; text-align: left; font-size: 35px;">주문 내역</h6>
 					<h6 class="cart-title">*이미지를 클릭하면 상품으로 이동합니다</h6>
 						<div class="shop__cart__table" style="border: 1px solid #dbdbdb; border-radius: 4px;">
 							<table id="productBasket" class="cart-table">
@@ -198,6 +202,7 @@
 														, '${list.img}', '${list.point_stack}', '${list.cd_ctg_m}', '${list.cd_ctg_b}', '${list.price_sale}', '${list.discount}');" 
 														class="cart-btn" style="padding: 5px 10px 5px !important; font-size: 13px !important; background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;margin-top:0px">장바구니 담기</a>
 														<a href="javascript:delivery('${list.seq_sle}', '${list.seq_buy_mst}', '${list.seq_buy_dtl}', '${list.seq_mbr_addr}');" class="cart-btn" style="padding: 5px 10px 5px !important; font-size: 13px !important; margin-top: 10px !important; background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">배송조회 확인</a>
+														<a href="javascript:cancelForm('${list.seq_sle}', '${list.seq_buy_mst}', '${list.seq_buy_dtl}');" class="cart-btn" style="padding: 5px 10px 5px !important; font-size: 13px !important; margin-top: 10px !important; background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">주문취소 요청</a>
 													</div>
 												</td>
 											</tr>
