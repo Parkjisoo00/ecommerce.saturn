@@ -13,7 +13,9 @@
 		frmMain.seq_sle.setAttribute("value", value);
 		frmMain.cd_ctg_m.setAttribute("value", value2);
 		frmMain.cd_ctg_b.setAttribute("value", value3);
+		
 		frmMain.action="/front/buy/writeForm.web";
+		
 		frmMain.submit();
 	}
 	
@@ -79,13 +81,7 @@
 	function goList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("count").remove();
-		document.getElementById("discount").remove();
-		
-		document.getElementById("price_sale").remove();
-		document.getElementById("point_stack").remove();
-
+	
 		document.getElementById("cd_bbs_type").value = value;
 		
 		frmMain.action = "/front/center/board/myPageNotice/list.web";
@@ -97,11 +93,7 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		document.getElementById("cd_bbs_type").value = value;
-		document.getElementById("count").remove();
-		document.getElementById("discount").remove();
-		document.getElementById("price_sale").remove();
-		document.getElementById("point_stack").remove();
-		
+
 		frmMain.action = "/front/center/board/myPageNotice/list.web";
 		frmMain.submit();
 	}

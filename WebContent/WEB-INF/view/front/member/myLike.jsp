@@ -6,19 +6,15 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
+	$(function() {
+		location.reload();
+	});
 	
 	function remove(value) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.seq_sle.setAttribute("value", value);
-		
-		document.getElementById("count").remove();
-		document.getElementById("currentPage").remove();
-		document.getElementById("discount_sale").remove();
-		document.getElementById("point_stack").remove();
-		document.getElementById("price_sale").remove();
-		document.getElementById("discount").remove();
 		
 		frmMain.action="/front/member/likeRemove.web";
 		frmMain.submit();
@@ -27,14 +23,7 @@
 	function goWriteForm(value, value2, value3) {
 		
 		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("count").remove();
-		document.getElementById("currentPage").remove();
-		document.getElementById("discount_sale").remove();
-		document.getElementById("point_stack").remove();
-		document.getElementById("price_sale").remove();
-		document.getElementById("discount").remove();
-		
+
 		frmMain.seq_sle.setAttribute("value", value);
 		frmMain.cd_ctg_m.setAttribute("value", value2);
 		frmMain.cd_ctg_b.setAttribute("value", value3);
@@ -47,14 +36,7 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.currentPage.setAttribute("value", value);
-		
-		document.getElementById("count").remove();
-		document.getElementById("discount_sale").remove();
-		document.getElementById("point_stack").remove();
-		document.getElementById("price_sale").remove();
-		document.getElementById("discount").remove();
-		
-		
+
 		frmMain.action="/front/member/myLike.web";
 		frmMain.submit();
 	}
@@ -86,14 +68,7 @@
 	function goList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("count").remove();
-		document.getElementById("currentPage").remove();
-		document.getElementById("discount_sale").remove();
-		document.getElementById("point_stack").remove();
-		document.getElementById("price_sale").remove();
-		document.getElementById("discount").remove();
-
+	
 		document.getElementById("cd_bbs_type").value = value;
 		
 		frmMain.action = "/front/center/board/myPageNotice/list.web";
@@ -105,17 +80,11 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		document.getElementById("cd_bbs_type").value = value;
-		
-		document.getElementById("currentPage").remove();
-		document.getElementById("count").remove();
-		document.getElementById("discount_sale").remove();
-		document.getElementById("point_stack").remove();
-		document.getElementById("price_sale").remove();
-		document.getElementById("discount").remove();
-		
+
 		frmMain.action = "/front/center/board/myPageNotice/list.web";
 		frmMain.submit();
 	}
+	
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -127,16 +96,16 @@
 <body>
 <form id="frmMain" method="POST">
 <input type="hidden" name="item"				id="item"/>
-<input type="hidden" name="point_stack"			id="point_stack"		/>
-<input type="hidden" name="discount_sale"		id="discount_sale"		/>
+<input type="hidden" name="point_stack"			id="point_stack"		value="0"/>
+<input type="hidden" name="discount_sale"		id="discount_sale"		value="0"/>
 <input type="hidden" name="img"					id="img"				/>
 <input type="hidden" name="seq_sle"				id="seq_sle"			/>
 <input type="hidden" name="sle_nm"				id="sle_nm"				/>
 <input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"			/>
 <input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"			/>
-<input type="hidden" name="count"				id="count"				/>
-<input type="hidden" name="price_sale"			id="price_sale"			/>
-<input type="hidden" name="discount"			id="discount"			/>
+<input type="hidden" name="count"				id="count"				value="0"/>
+<input type="hidden" name="price_sale"			id="price_sale"			value="0"/>
+<input type="hidden" name="discount"			id="discount"			value="0"/>
 <input type="hidden" name="cd_bbs_type"	id="cd_bbs_type" value="${paging.cd_bbs_type}" />
 <input type="hidden" name="currentPage"	id="currentPage" value="${paging.currentPage}" />
 
@@ -222,7 +191,7 @@
 			</div>
 		</div>
 		<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
-		<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
+			<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
 		</div>
 	</section>
 <div id="loadingSpinner" style=" display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">

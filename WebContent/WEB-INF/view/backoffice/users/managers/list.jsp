@@ -25,9 +25,7 @@
 	function goModifyForm(value) {
 		
 		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("cd_state").remove();
-		
+
 		document.getElementById("seq_mng").value = value;
 		frmMain.action="/console/users/managers/modifyForm.web";
 		frmMain.submit();
@@ -47,7 +45,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST" action="/console/users/managers/list.web">
 <input type="hidden" name="seq_mng"		id="seq_mng" />
-<input type="hidden" name="cd_state"	id="cd_state" />
+<input type="hidden" name="cd_state"	id="cd_state" value="0"/>
 <input type="hidden" name="currentPage"	id="currentPage" value="${paging.currentPage}" />	
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 

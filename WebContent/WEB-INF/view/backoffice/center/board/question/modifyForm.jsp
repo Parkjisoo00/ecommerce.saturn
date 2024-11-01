@@ -45,16 +45,6 @@
 		frmMain.submit();
 	}
 	
-	function goWriteForm(value) {
-		
-		document.getElementById("seq_bbs").remove();
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.action="/console/center/board/writeForm.web";
-		frmMain.submit();
-	}
-	
 	function modifyProc(value) {
 		var frmMain = document.getElementById("frmMain");
 		document.getElementById("cd_bbs_type").value = value;

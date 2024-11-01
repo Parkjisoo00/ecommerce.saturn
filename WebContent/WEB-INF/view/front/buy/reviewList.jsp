@@ -116,9 +116,10 @@
 	function goList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
+	
+		document.getElementById("cd_bbs_type").value = value;
 		
-		frmMain.cd_bbs_type.setAttribute("value", value);
-		frmMain.action = "/front/center/board/list.web";
+		frmMain.action = "/front/center/board/myPageNotice/list.web";
 		frmMain.submit();
 	}
 	
@@ -127,12 +128,10 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		document.getElementById("cd_bbs_type").value = value;
-		document.getElementById("currentPage").remove();
-		
+
 		frmMain.action = "/front/center/board/myPageNotice/list.web";
 		frmMain.submit();
 	}
-	
 	
 	</script>
 	<!-- Google Font -->

@@ -29,8 +29,6 @@
 	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
 	function goWriteForm() {
 		
-		document.getElementById("seq_bbs").remove();
-		
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.action="/front/center/board/writeForm.web";
@@ -78,7 +76,7 @@
 
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" name="seq_bbs"		id="seq_bbs" />
+<input type="hidden" name="seq_bbs"		id="seq_bbs"  value="0"/>
 <input type="hidden" name="a"		id="a" value="${paging.register}"/>
 <input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />

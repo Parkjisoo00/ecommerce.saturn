@@ -9,6 +9,7 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
+	
 	function goWriteForm(value, value2, value3) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -32,9 +33,10 @@
 	function goList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
+	
+		document.getElementById("cd_bbs_type").value = value;
 		
-		frmMain.cd_bbs_type.setAttribute("value", value);
-		frmMain.action = "/front/center/board/list.web";
+		frmMain.action = "/front/center/board/myPageNotice/list.web";
 		frmMain.submit();
 	}
 	
@@ -43,8 +45,7 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		document.getElementById("cd_bbs_type").value = value;
-		document.getElementById("currentPage").remove();
-		
+
 		frmMain.action = "/front/center/board/myPageNotice/list.web";
 		frmMain.submit();
 	}
@@ -112,7 +113,7 @@ alert("평점 확인" + value);
 													<span id="totalPriceFinal" style="font-size: 24px; font-weight: 600 !important; color: #346aff !important;"><fmt:formatNumber value="${tPoint}" type="number" /></span> 포인트를 적립했습니다.
 											</span>
 										</p>
-									</div>
+								</div>
 							</c:otherwise>
 						</c:choose>
 						</div>

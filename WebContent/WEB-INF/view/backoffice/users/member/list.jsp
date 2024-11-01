@@ -26,8 +26,6 @@
 		
 		var frmMain = document.getElementById("frmMain");
 		
-		document.getElementById("cd_state").remove();
-		
 		document.getElementById("seq_mbr").value = value;
 		frmMain.action="/console/users/member/modifyForm.web";
 		frmMain.submit();
@@ -47,7 +45,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST" action="/console/users/member/list.web">
 <input type="hidden" name="seq_mbr"		id="seq_mbr" />
-<input type="hidden" name="cd_state"	id="cd_state" />
+<input type="hidden" name="cd_state"	id="cd_state" value="0"/>
 <input type="hidden" name="currentPage"	id="currentPage" value="${paging.currentPage}" />	
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 

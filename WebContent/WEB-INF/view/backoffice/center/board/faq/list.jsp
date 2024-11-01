@@ -21,8 +21,6 @@
 
 	function goWriteForm(value) {
 		
-		document.getElementById("seq_bbs").remove();
-		
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.action="/console/center/board/writeForm.web";
@@ -68,8 +66,6 @@
 	function consolegoList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("searchWord").remove();
 		
 		frmMain.cd_bbs_type.setAttribute("value", value);
 		frmMain.action = "/console/center/board/list.web";
@@ -238,9 +234,6 @@
 		<div class="col-md-8">
 			<div style="text-align: center;">
 				<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
-			</div>
-			<div style="text-align: center;">
-				<a href="javascript:goWriteForm(2);" class="btn btn-primary" style="width: 150px;">등 록</a>
 			</div>
 		</div>
 	<!-- /.col -->
