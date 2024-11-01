@@ -102,6 +102,7 @@
 						<li class="active"><a href="javascript:consolegoList(2);"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
 						<li class="active"><a href="javascript:consolegoList(3);"><i class="fa fa-fw fa-user"></i> 1:1문의</a>
 						<li class="active"><a href="javascript:consolegoList(4);"><i class="fa fa-fw fa-commenting-o"></i> 새소식</a>
+						<li class="active"><a href="javascript:consolegoList(5);"><i class="fa fa-fw fa-comment-o"></i> 소개</a>
 						</li>
 					</ul>
 				</div>
@@ -139,14 +140,14 @@
 							<p>저장됬던 파일: ${boardDto.file_orig}</p>
 						</c:if>
 						<c:if test="${boardDto.file_orig != ''}">
-							<a href="javascript:download('BbsNotice', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
+							<a href="javascript:download('BbsNews', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
 						</c:if>
 				</div>
 			</div>
 			<!-- /.box-body -->
 			<div class="box-footer">
 			<div class="pull-right">
-				<button type="submit" class="btn btn-primary" onclick="modifyProc(4);"><i class="fa fa-pencil"></i> 수정</button>
+				<button type="button" class="btn btn-primary" onclick="modifyProc(4);"><i class="fa fa-pencil"></i> 수정</button>
 				<button type="button" class="btn btn-default" onclick="goList(4);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
 			</div>
 			<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><a>다시쓰기</a></button>

@@ -20,7 +20,7 @@
 		}
 
 	function goWriteForm(value) {
-
+		
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.action="/console/center/board/writeForm.web";
@@ -66,11 +66,12 @@
 	function consolegoList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
-
+		
 		frmMain.cd_bbs_type.setAttribute("value", value);
 		frmMain.action = "/console/center/board/list.web";
 		frmMain.submit();
 	}
+	
 	
 </script>
 </head>
@@ -125,7 +126,7 @@
 		<div class="col-md-8">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">공지 사항</h3>&nbsp;&nbsp;&nbsp;
+					<h3 class="box-title">소개</h3>&nbsp;&nbsp;&nbsp;
 					<div class="box-tools pull-right">
 						<div class="has-feedback">
 							<div style="display: flex; align-items: center;">&nbsp;&nbsp;
@@ -150,7 +151,6 @@
 						<tbody>
 							<tr>
 								<th style="text-align: center;width: 5% ">NO</th>
-								<th style="text-align: center;width: 10%">카테고리</th>
 								<th style="text-align: center;">제목</th>
 								<th style="text-align: center;width: 15%">등록일</th>
 								<th style="text-align: center;width: 7%">조회수</th>
@@ -169,9 +169,6 @@
 													<td style="text-align: center;font-weight: bold;">
 														${list.rnum}
 													</td>
-													<td style="text-align: center;font-weight: bold;">
-														${list.ctg_nm}
-													</td>
 													<td style="text-align: left;font-weight: bold;">
 														<a href="javascript:goView(${list.seq_bbs});">
 															${list.title}
@@ -187,9 +184,6 @@
 												<c:otherwise>
 													<td style="text-align: center;">
 														${list.rnum}
-													</td>
-													<td style="text-align: center;">
-													${list.ctg_nm}
 													</td>
 													<td style="text-align: left">
 															<a href="javascript:goView(${list.seq_bbs});">
@@ -238,8 +232,7 @@
 				<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
 			</div>
 			<div style="text-align: center;">
-				<a href="javascript:goWriteForm(1);" class="btn btn-primary" style="width: 150px;">등 록</a>
-				
+				<a href="javascript:goWriteForm(5);" class="btn btn-primary" style="width: 150px;">등 록</a>
 			</div>
 		</div>
 	<!-- /.col -->

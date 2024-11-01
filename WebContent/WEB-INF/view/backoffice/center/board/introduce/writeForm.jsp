@@ -21,20 +21,11 @@
 	}
 
 	function writeProc(value) {
-		var frmMain = document.getElementById("frmMain");
-		document.getElementById("cd_bbs_type").value = value;
 		
-		if (document.getElementById("title").value == ""
-				|| document.getElementById("content").value == "") {
-			alert("필수 항목을 입력하세요!");
-			return;
-		}
-	
-	if(document.getElementById("flg_top").checked){
-		document.getElementById("flg_top").value = 'Y';
-	}else{
-		document.getElementById("flg_top").value = 'N';
-	}
+		document.getElementById("cd_bbs_type").value = value;
+		var frmMain = document.getElementById("frmMain");
+
+		document.getElementById("content").value =" ";
 	
 	frmMain.action="/console/center/board/writeProc.web";
 	frmMain.submit();
@@ -55,6 +46,8 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST" enctype="multipart/form-data" >
 <input type="hidden" id="cd_bbs_type" name="cd_bbs_type" />
+<input type="hidden" id="title" name="title" />
+<input type="hidden" id="content" name="content" />
 <%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
@@ -105,28 +98,8 @@
 			<div class="box-body">
 				<div class="form-group">
 					<label>제목(*)</label>
-					<input type="checkbox" id= "flg_top" name="flg_top" value="" style="float: right;margin-right: 10px;"/> 
-					<label style="float: right;margin-right: 5px;">최상위</label>
 					<input class="form-control" placeholder=""id="title" name="title" required >
 				</div>
-			<div class="form-group">
-				<label>카테고리(*)</label>
-				<select class="form-control" id="cd_ctg" name="cd_ctg" style="height: 34px;"required>
-					<option value="0">선택</option>
-					<option value="1">가입 및 탈퇴</option>
-					<option value="2">상품</option>
-					<option value="3">구매</option>
-					<option value="4">결제</option>
-					<option value="5">배송</option>
-					<option value="6">환불</option>
-					<option value="9">기타</option>
-				</select>
-			</div>
-			<div class="form-group" >
-				<label>내용(*)</label> 
-					<textarea id="content" class="form-control" style="height: 250px"id="content" name="content" required>
-					</textarea>
-			</div>
 			<div class="form-group">
 				<div class="btn btn-default btn-file">
 					<i class="fa fa-paperclip"></i> 첨부 파일
@@ -138,8 +111,8 @@
 			<!-- /.box-body -->
 			<div class="box-footer">
 			<div class="pull-right">
-				<button type="submit" class="btn btn-primary" onclick="writeProc(2);"><i class="fa fa-pencil"></i> 등록</button>
-				<button type="button" class="btn btn-default" onclick="goList(2);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
+				<button type="submit" class="btn btn-primary" onclick="writeProc(5);"><i class="fa fa-pencil"></i> 등록</button>
+				<button type="button" class="btn btn-default" onclick="goList(4);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
 			</div>
 			<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><a>다시쓰기</a></button>
 			</div>
@@ -159,10 +132,6 @@
 	</form>
 	<script src="/backoffice/js/bootstrap3-wysihtml5.all.min.js"></script>
 	<script>
-	$(function () {
-	//Add text editor
-	$("#content").wysihtml5();
-	});
 </script>
 </body>
 </html>

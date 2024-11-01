@@ -103,6 +103,8 @@ public class BoardWeb extends Common{
 			if (type.equals("BbsNotice")) boardDto.setCd_bbs_type(1);
 			else if (type.equals("BbsFaq")) boardDto.setCd_bbs_type(2);
 			else if (type.equals("BbsQuestion")) boardDto.setCd_bbs_type(3);
+			else if (type.equals("BbsNews")) boardDto.setCd_bbs_type(4);
+			else if (type.equals("BbsIntroduce")) boardDto.setCd_bbs_type(5);
 			
 			boardDto.setSeq_bbs((int)sequence);
 			
@@ -124,6 +126,10 @@ public class BoardWeb extends Common{
 				}
 			else if (boardDto.getCd_bbs_type() == 4) {
 				String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_new", "[UNDEFINED]");
+				file = new File(pathBase + "" + File.separator + boardDto.getFile_save());
+				}
+			else if (boardDto.getCd_bbs_type() == 5) {
+				String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_introduce", "[UNDEFINED]");
 				file = new File(pathBase + "" + File.separator + boardDto.getFile_save());
 				}
 			
@@ -227,6 +233,9 @@ public class BoardWeb extends Common{
 			else if (boardDto.getCd_bbs_type() == 4) {
 				mav.setViewName("backoffice/center/board/news/modifyForm");
 			}
+			else if (boardDto.getCd_bbs_type() == 5) {
+				mav.setViewName("backoffice/center/board/introduce/modifyForm");
+			}
 			else {
 				request.setAttribute("redirect"	, "/");
 				mav.setViewName("forward:/servlet/result.web");
@@ -282,8 +291,13 @@ public class BoardWeb extends Common{
 				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 			}
 			else if (boardDto.getCd_bbs_type() == 4) {
-				
 				pathBase	= dynamicProperties.getMessage("backoffice.upload.path_news", "[UNDEFINED]");
+				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
+				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+			}
+			
+			else if (boardDto.getCd_bbs_type() == 5) {
+				pathBase	= dynamicProperties.getMessage("backoffice.upload.path_introduce", "[UNDEFINED]");
 				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
 				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 			}
@@ -394,6 +408,9 @@ public class BoardWeb extends Common{
 			else if (boardDto.getCd_bbs_type() == 4) {
 				mav.setViewName("backoffice/center/board/news/writeForm");
 			}
+			else if (boardDto.getCd_bbs_type() == 5) {
+				mav.setViewName("backoffice/center/board/introduce/writeForm");
+			}
 			else {
 				request.setAttribute("redirect"	, "/");
 				mav.setViewName("forward:/servlet/result.web");
@@ -468,6 +485,12 @@ public class BoardWeb extends Common{
 			else if (boardDto.getCd_bbs_type() == 4) {
 				
 				pathBase	= dynamicProperties.getMessage("backoffice.upload.path_news", "[UNDEFINED]");
+				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
+				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+			}
+			else if (boardDto.getCd_bbs_type() == 5) {
+				
+				pathBase	= dynamicProperties.getMessage("backoffice.upload.path_introduce", "[UNDEFINED]");
 				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
 				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 			}
@@ -596,6 +619,9 @@ public class BoardWeb extends Common{
 			else if (pagingDto.getCd_bbs_type() == 4) {
 				mav.setViewName("backoffice/center/board/news/list");
 			}
+			else if (pagingDto.getCd_bbs_type() == 5) {
+				mav.setViewName("backoffice/center/board/introduce/list");
+			}
 			else {
 				request.setAttribute("redirect"	, "/");
 				mav.setViewName("forward:/servlet/result.web");
@@ -655,6 +681,9 @@ public class BoardWeb extends Common{
 				}
 				else if (boardDto.getCd_bbs_type() == 4) {
 					mav.setViewName("backoffice/center/board/news/view");
+				}
+				else if (boardDto.getCd_bbs_type() == 5) {
+					mav.setViewName("backoffice/center/board/introduce/view");
 				}
 				else {
 					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");

@@ -2,7 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.center.Board">
 	
-
+	<select id="introduceSelect" parameterType="boardDto" resultType="boardDto">
+		SELECT * FROM (
+			SELECT
+				SEQ_BBS
+				, TITLE
+				, FILE_SAVE
+				, FILE_ORIG
+				, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
+			FROM
+				TB_BBS 
+			WHERE
+				CD_BBS_TYPE	= 5
+			ORDER BY
+				seq_bbs desc
+			) WHERE ROWNUM = 1
+	</select>
+	
 	<select id="mySelect" parameterType="boardDto" resultType="boardDto">
 		SELECT
 			SLE_NM

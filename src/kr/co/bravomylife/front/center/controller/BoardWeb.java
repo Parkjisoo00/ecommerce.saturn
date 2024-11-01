@@ -256,12 +256,17 @@ public class BoardWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/center/board/introduce/")
-	public ModelAndView introduce(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/front/center/board/introduce/index.web")
+	public ModelAndView introduce(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			
+			BoardDto _boardDto = boardSrvc.introduceSelect(boardDto);
+			
+			mav.addObject("boardDto", _boardDto);
+			
 			mav.setViewName("front/center/board/introduce/index");
 		}
 		catch (Exception e) {
