@@ -10,7 +10,7 @@
 		WHERE 
 			CD_STATE = 1 AND CD_STATE_DELIVERY = 'C'
 	</update>
-
+	
 	<select id="selectList" parameterType="buyDto" resultType="buyDto">
 		SELECT
 		/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY buy_dtl.DT_REG DESC) rnum
@@ -27,8 +27,7 @@
 			TB_BUY_DTL buy_dtl ON buy_mst.SEQ_BUY_MST = buy_dtl.SEQ_BUY_MST
 		WHERE buy_mst.SEQ_BUY_MST = #{seq_buy_mst}
 	</select>
-
-
+	
 	<select id="select" parameterType="buyDto" resultType="buyDto">
 		SELECT
 			SEQ_MBR
@@ -43,7 +42,7 @@
 			TB_BUY_DTL 
 		WHERE SEQ_BUY_DTL = #{seq_buy_dtl} 
 	</select>
-
+	
 	<update id="update" parameterType ="buyDto">
 		UPDATE
 			TB_BUY_MST
@@ -55,7 +54,7 @@
 		WHERE
 			SEQ_BUY_MST = #{seq_buy_mst}
 	</update>
-
+	
 	<select id="count" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
 			COUNT(ROWNUM)
@@ -64,7 +63,7 @@
 		WHERE
 		<include refid="where" />
 	</select>
-
+	
 	<select id="list" parameterType="pagingDto" resultType="buyDto">
 		SELECT
 			*
@@ -98,14 +97,27 @@
 		ORDER BY
 			rnum
 	</select>
-
+	
 	<sql id="where">
-			buy_mst.CD_STATE = #{cd_state}
-			AND buy_mst.CD_STATE_PAY = #{cd_state_pay}
-			AND buy_mst.CD_STATE_DELIVERY = #{cd_state_delivery}
-
+			buy_mst.CD_STATE IS NULL OR buy_mst.CD_STATE IN (1, 2, 3, 4)
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchKey == 'mbr_nm'">
+					AND mbr_mst.MBR_NM = #{searchWord}
+				</if>
+				<if test="searchKey == 'email'">
+					AND mbr_mst.EMAIL = #{searchWord}
+				</if>
+			</if>
+			
+			<if test="cd_state != null and cd_state != '' and cd_state != 'all'">
+				AND buy_mst.CD_STATE = #{cd_state}
+			</if>
+			
+			<if test="cd_state_pay != null and cd_state_pay != '' and cd_state_pay != 'all'">
+				AND buy_mst.CD_STATE_PAY = #{cd_state_pay}
+			</if>
+			<if test="cd_state_delivery != null and cd_state_delivery != '' and cd_state_delivery != 'all'">
+				AND buy_mst.CD_STATE_DELIVERY = #{cd_state_delivery}
+			</if>
 	</sql>
-	
-	
 </mapper>
-
