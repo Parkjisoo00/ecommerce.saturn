@@ -170,7 +170,7 @@
 				</ul>
 			</li>
 			<li style="display: inline-block; margin: 0 57px;">
-				<a href="/front/center/board/introduce/.web" 
+				<a href="/front/center/board/introduce/index.web" 
 				style="font-size: 18px; font-weight: bold;">소개</a>
 			</li>
 		</ul>
@@ -273,10 +273,10 @@ function checkEnter(event) {
 	if (event.keyCode === 13) {
 		
 		event.preventDefault();
-		goTypeT();
+		
+		goTypeTx('pc');
 	}
 }
-
 
 var secondSelectAndroid = document.getElementById("second_cd_ctg_android");
 
@@ -339,15 +339,5 @@ document.getElementById("first_cd_ctg_android").addEventListener("change", funct
 });
 
 document.getElementById("first_cd_ctg_android").dispatchEvent(new Event("change"));
-
-function checkEnter(event) {
-	
-	if (event.keyCode === 13) {
-		
-		event.preventDefault();
-		goTypeT();
-	}
-}
-
 
 </script>
