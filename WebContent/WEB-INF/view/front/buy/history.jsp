@@ -152,7 +152,6 @@
 										<th class="cart-th" style="width: 10%">수량</th>
 										<th class="cart-th" style="width: 10%">상품금액</th>
 										<th class="cart-th" style="width: 20%">구매일</th>
-										<th class="cart-th" style="width: 10%">결제상태</th>
 										<th class="cart-th" style="width: 10%"></th>
 									</tr>
 								</thead>
@@ -185,16 +184,13 @@
 												<td class="cart-td" style="text-align: center !important;">
 													${list.dt_reg}
 												</td>
-												<td class="cart-td" style="text-align: center !important;">
-													${list.cd_state}
-												</td>
 												<td class="cart-td">
 													<div style="display: flex; flex-direction: column; align-items: center; ">
 														<a href="javascript:setBasket('${list.seq_sle}', '${list.sle_nm}', '${list.discount_sale}', '${list.count}'
 														, '${list.img}', '${list.point_stack}', '${list.cd_ctg_m}', '${list.cd_ctg_b}', '${list.price_sale}', '${list.discount}');" 
 														class="cart-btn" style="padding: 5px 10px 5px !important; font-size: 13px !important; background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;margin-top:0px">장바구니 담기</a>
 														<a href="javascript:delivery('${list.seq_sle}', '${list.seq_buy_mst}', '${list.seq_buy_dtl}', '${list.seq_mbr_addr}');" class="cart-btn" style="padding: 5px 10px 5px !important; font-size: 13px !important; margin-top: 10px !important; background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">배송조회 확인</a>
-														<a href="javascript:cancelForm('${list.seq_sle}', '${list.seq_buy_mst}', '${list.seq_buy_dtl}');" class="cart-btn" style="padding: 5px 10px 5px !important; font-size: 13px !important; margin-top: 10px !important; background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">주문취소 요청</a>
+														<a href="javascript:cancelForm('${list.seq_sle}', '${list.seq_buy_mst}', '${list.seq_buy_dtl}');" class="cart-btn" style="padding: 5px 10px 5px !important; font-size: 13px !important; margin-top: 10px !important; background: white; color: #2c2c2c; border: 1px solid #2c2c2c;">주문취소 신청</a>
 													</div>
 												</td>
 											</tr>

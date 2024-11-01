@@ -134,6 +134,8 @@ public class PayWeb extends Common {
 		
 		Map<String, Object> response = new HashMap<>();
 		
+		buyDetailDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+		
 		try {
 		
 		Map<String,String> map = new HashMap<>();
@@ -164,7 +166,7 @@ public class PayWeb extends Common {
 			buySrvc.updateCancle(buyDetailDto);
 			response.put("message", "주문 취소가 신청되었습니다.");
 		}
-		else if (apiResult.get("responseCode").equals("1005")) {
+		else {
 			
 			response.put("message", "주문 취소가 처리중입니다.");
 		}

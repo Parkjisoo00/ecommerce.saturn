@@ -24,7 +24,6 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.bravomylife.backoffice.common.dao.BaseDao;
 import kr.co.bravomylife.backoffice.manager.dto.ManagerDto;
-import kr.co.bravomylife.front.member.dto.MemberDto;
 
 
 

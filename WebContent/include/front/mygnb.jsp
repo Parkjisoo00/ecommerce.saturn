@@ -8,7 +8,7 @@
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">맞춤건강 결과 조회</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/myLike.web" class="menuLnb">찜한 상품</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/reviewListPage.web" class="menuLnb">상품후기 관리</a></li>
-	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/history.web" class="menuLnb">주문 내역</a></li>
+	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/history.web" class="menuLnb">주문 목록</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/withdraw.web" class="menuLnb">회원 탈퇴</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/modifyDelivery.web" class="menuLnb">배송지 관리</a></li>
 </ul>

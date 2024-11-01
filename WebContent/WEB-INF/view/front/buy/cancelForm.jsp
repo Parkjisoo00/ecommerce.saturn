@@ -8,6 +8,60 @@
 
 <head>
 	<%@ include file="/include/common/header.jsp" %>
+<style>
+#modalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+	display: none;
+	z-index: 9998;
+	font-family: 돋움, Dotum, sans-serif !important;
+}
+
+/* 모달 스타일 */
+#resultModal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 20px;
+	width: 300px;
+	border-radius: 4px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center; /* 텍스트 가운데 정렬 */
+	font-family: 돋움, Dotum, sans-serif !important;
+	display: none;
+	z-index: 9999;
+}
+
+/* 버튼 컨테이너 */
+#buttonContainer {
+	width: 100%;
+	text-align: center; /* 버튼을 가로 중앙 정렬 */
+	margin-top: 15px;
+}
+
+/* 버튼 스타일 */
+#closeModalBtn {
+	cursor: pointer;
+	background: white;
+	color: #346aff !important;
+	border: 1px solid #346aff;
+	padding: 4px 12px;
+	border-radius: 4px;
+	font-weight: 600;
+	font-size: 14px;
+	font-family: 돋움, Dotum, sans-serif !important;
+	font-weight: normal;
+}
+</style>
 	<script>
 	function goWriteForm(value, value2, value3) {
 		
@@ -47,29 +101,6 @@
 		
 		frmMain.action = "/front/center/board/myPageNotice/list.web";
 		frmMain.submit();
-	}
-		
-	function cancelOrder() {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		var myData = {deal_num: $("#deal_num").val(), seq_sle: $("#seq_sle").val(), seq_buy_mst: $("#seq_buy_mst").val(), seq_buy_dtl: $("#seq_buy_dtl").val(), seq_pay: $("#seq_pay").val()};
-		
-		$.ajax({
-			type: "POST",
-			url: "/front/pay/cancleOrder.json",
-			dataType: "json",
-			contentType: "application/json; charset=UTF-8",
-			data: JSON.stringify(myData),
-			success: function(res) {
-				
-				console.log(res.responseCode);
-				console.log(res.cancelDateTime);
-				console.log(res.message);
-				
-				
-			},
-		});
 	}
 	</script>
 	<!-- Google Font -->
@@ -113,10 +144,16 @@ alert("평점 확인" + value);
 				<div class="row"style="display: flex; justify-content: center; align-items: center;">
 					<div class="col-lg-8">
 						<c:if test="${buyDetailDto.cd_state == 1}">
-						<h5 style="padding-left: 24px !important; font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;">주문 취소</h5>
+							<h5 style="font-family: 'Noto Sans KR', sans-serif !important; padding-left: 24px !important; font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;">주문 취소</h5>
 						</c:if>
 						<c:if test="${buyDetailDto.cd_state == 2}">
-						<h5 style="padding-left: 24px !important; font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;">주문 취소가 처리중입니다.</h5>
+							<h5 style="font-family: 'Noto Sans KR', sans-serif !important; padding-left: 24px !important; font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;"><span style="font-weight:normal !important; font-size: 20px !important;">${buyDetailDto.dt_upt}의</span > 주문 취소가 <span style="font-weight:normal !important; font-size: 20px !important;">${buyDetailDto.dt_reg}에</span> 처리중입니다.</h5>
+						</c:if>
+						<c:if test="${buyDetailDto.cd_state == 3}">
+							<h5 style="font-family: 'Noto Sans KR', sans-serif !important; padding-left: 24px !important; font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;"><span style="font-weight:normal !important; font-size: 20px !important;">${buyDetailDto.dt_upt}의</span > 교환 신청이 <span style="font-weight:normal !important; font-size: 20px !important;">${buyDetailDto.dt_reg}에</span> 처리중입니다.</h5>
+						</c:if>
+						<c:if test="${buyDetailDto.cd_state == 4}">
+							<h5 style="font-family: 'Noto Sans KR', sans-serif !important; padding-left: 24px !important; font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;"><span style="font-weight:normal !important; font-size: 20px !important;">${buyDetailDto.dt_upt}의</span > 환불 신청이 <span style="font-weight:normal !important; font-size: 20px !important;">${buyDetailDto.dt_reg}에</span> 처리중입니다.</h5>
 						</c:if>
 						<div class="cancle-layout">	
 							<div class="cancle-top" style=" margin-bottom: 24px !important;">
@@ -202,23 +239,36 @@ alert("평점 확인" + value);
 									</div>
 								</div>
 							</div>
+							<div style="display: flex; gap: 20px; justify-content: flex-end;">
 							<c:choose>
 								<c:when test="${buyDetailDto.cd_state == 1}">
-									<div style="margin-bottom: 24px !important; text-align: right !important;">
-										<button type="button" onclick="cancelOrder()" class="cancle-button">주문 취소하기</button>
+									<div style="margin-bottom: 24px; text-align: right;">
+										<button type="button" onclick="cancelOrder('2')" class="cancle-button">주문 취소</button>
+									</div>
+									<div style="margin-bottom: 24px; text-align: right;">
+										<button type="button" onclick="cancelOrder('3')" class="cancle-button" style="background: white !important; color: #346aff !important; border: 1px solid #346aff;">교환 신청</button>
+									</div>
+									<div style="margin-bottom: 24px; text-align: right;">
+										<button type="button" onclick="cancelOrder('4')" class="cancle-button" style="background: white !important; color: #346aff !important; border: 1px solid #346aff;">환불 신청</button>
 									</div>
 								</c:when>
 								<c:otherwise>
-									<div style="margin-bottom: 24px !important; text-align: right !important;">
-									</div>
 								</c:otherwise>
 							</c:choose>
+							</div>
 						</div>
 					</div>
 				</div>
 			</form>
 		</div>
 	</section>
+	<div id="modalOverlay"></div>
+	<div id="resultModal">
+		<div id="modalMessage" style="font-weight: bold;"></div>
+		<div id="buttonContainer">
+			<button id="closeModalBtn">닫기</button>
+		</div>
+	</div>
 <!-- Checkout Section end -->
 
 	<!-- Instagram Begin -->
@@ -233,6 +283,43 @@ alert("평점 확인" + value);
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>	
 <script>
+	function cancelOrder(value) {
+		
+		var cd_state = value;
+		
+		var myData = {
+				
+			deal_num: $("#deal_num").val(),
+			seq_sle: $("#seq_sle").val(),
+			seq_buy_mst: $("#seq_buy_mst").val(),
+			seq_buy_dtl: $("#seq_buy_dtl").val(),
+			seq_pay: $("#seq_pay").val(),
+			cd_state: cd_state
+		};
+		
+		$.ajax({
+			
+			type: "POST",
+			url: "/front/pay/cancleOrder.json",
+			dataType: "json",
+			contentType: "application/json; charset=UTF-8",
+			data: JSON.stringify(myData),
+			success: function(res) {
+				
+				$("#modalMessage").text(res.message);
+				$("#modalOverlay").show();
+				$("#resultModal").show();
+			},
+		});
+	}
+	
+	$(document).on('click', '#closeModalBtn', function() {
+		
+		$('#modalOverlay').hide();
+		$('#resultModal').hide();
+		
+		window.location.href = "/front/buy/history.web";
+	});
 </script>
 </body>
 </html>

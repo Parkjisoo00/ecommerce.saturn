@@ -37,6 +37,7 @@ public class BuyDetailDto {
 	private int count						= 0;
 	private int price						= 0;
 	private String dt_reg					= "";
+	private String dt_upt					= "";
 	private int register					= 0;
 	private String sle_nm					= "";
 	private int point						= 0;
@@ -66,6 +67,12 @@ public class BuyDetailDto {
 	private int seq_mbr_addr			= 0;
 	
 	
+	public String getDt_upt() {
+		return dt_upt;
+	}
+	public void setDt_upt(String dt_upt) {
+		this.dt_upt = dt_upt;
+	}
 	public int getSeq_pay() {
 		return seq_pay;
 	}

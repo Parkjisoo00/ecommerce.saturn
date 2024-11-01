@@ -42,7 +42,7 @@ import kr.co.bravomylife.front.sale.dto.SaleDto;
 public class BuyDao extends BaseDao {
 	
 	public int updateCancle(BuyDetailDto buyDetailDto) {
-		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.buy.BuyDetail.updateCancle", buyDetailDto);
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.buy.Buy.updateCancle", buyDetailDto);
 	}
 	
 	public BuyDetailDto cancel(BuyDetailDto buyDetailDto) {

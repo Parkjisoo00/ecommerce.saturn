@@ -134,7 +134,7 @@
 						</div>
 						
 						
-					<h6 class="lowgnb-title" style="padding-bottom: 5px; text-align: left; font-size: 30px;">구매 이력</h6>
+					<h6 class="lowgnb-title" style="padding-bottom: 5px; text-align: left; font-size: 30px;">주문 내역</h6>
 						<div class="mypage-header">
 					<h6 class="cart-title" style="font-size:15px">*이미지를 클릭하면 상품으로 이동합니다.</h6>
 						<div class="mypage-header-right-group">
@@ -151,7 +151,6 @@
 										<th class="cart-th" style="width: 10%">수량</th>
 										<th class="cart-th" style="width: 10%">상품금액</th>
 										<th class="cart-th" style="width: 20%">구매일</th>
-										<th class="cart-th" style="width: 10%">결제상태</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -184,9 +183,6 @@
 												</td>
 												<td class="cart-td" style="text-align: center !important;">
 													${historyList.dt_reg}
-												</td>
-												<td class="cart-td" style="text-align: center !important;">
-													${historyList.cd_state}
 												</td>
 											</tr>
 										</c:forEach>

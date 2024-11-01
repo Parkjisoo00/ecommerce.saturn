@@ -314,7 +314,7 @@
 				</div>
 			</div>
 		</section>
-	<div id="deliveryModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border: 1px solid #ccc; padding: 20px; z-index: 1000; width: 400px; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">
+	<div id="deliveryModal" style="border-radius: 4px !important; display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border: 1px solid #ccc; padding: 20px; z-index: 1000; width: 400px; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">
 		<button type="button" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 18px; cursor: pointer;" onclick="closeModal()">×</button>
 			<h3 style="margin-top: 0; text-align: center; margin-bottom: 30px;">배송지 변경</h3>
 		<div id="deliveryList" style="margin-top: 15px;"></div>
@@ -451,7 +451,7 @@
 										'<div style="margin-bottom: 5px; font-size: 14px;"> ' + addr1 + '</div>' +
 										'<div style="margin-bottom: 5px; font-size: 14px;"> ' + addr2 + '</div>' +
 										'<div>' +
-										'<a id="btnPay" class="cart-btn" style="cursor: pointer; background: white; color: #346aff !important; border: 1px solid #346aff; margin: 0; display: inline-block; padding: 4px 12px; text-align: center;" ' +
+										'<a id="btnPay" class="cart-btn" style="font-weight: normal; cursor: pointer; background: white; color: #346aff !important; border: 1px solid #346aff; margin: 0; display: inline-block; padding: 4px 12px; text-align: center;" ' +
 											'onclick="selectAddress(\'' + seqMbrAddr + '\', \'' + post + '\', \'' + addr1 + '\', \'' + addr2 + '\')">선택</a>' +
 									'</div>' +
 									'</div>' +
