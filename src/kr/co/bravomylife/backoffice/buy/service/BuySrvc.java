@@ -48,6 +48,19 @@ public class BuySrvc {
 	@Inject
 	BuyDao buyDao;
 	
+
+	@Transactional("txFront")
+	public int updateDeliveryStatus(BuyDto buyDto) {
+		int result = buyDao.updateDeliveryStatus(buyDto);
+		
+		if (result != 1) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return result;
+		
+		
+	}
+	
 	@Transactional("txFront")
 	public boolean updateLast(BuyDto buyDto) {
 		

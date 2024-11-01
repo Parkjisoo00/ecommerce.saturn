@@ -40,6 +40,10 @@ import kr.co.bravomylife.backoffice.buy.dto.BuyDto;
 @Repository("kr.co.bravomylife.backoffice.buy.dao.BuyDao")
 public class BuyDao extends BaseDao {
 	
+	public int updateDeliveryStatus(BuyDto buyDto) {
+		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.buy.Buy.updateDeliveryStatus", buyDto);
+	}
+	
 	public int updateLast(BuyDto buyDto) {
 		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.buy.Buy.updateLast", buyDto);
 	}

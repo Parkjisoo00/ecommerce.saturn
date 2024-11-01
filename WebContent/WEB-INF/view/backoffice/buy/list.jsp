@@ -32,6 +32,20 @@
 	<script>
 	
 
+	function updateDeliveryStatus() {
+		if (confirm("해당 조건에 맞는 모든 항목을 업데이트하시겠습니까?")) {
+			fetch('/console/buy/updateDeliveryStatus.web', {
+				method: 'POST'
+			}).then(response => {
+				if (response.ok) {
+					alert("배송 상태가 성공적으로 업데이트되었습니다.");
+					
+				} else {
+					alert("업데이트에 실패했습니다.");
+				}
+			}).catch(error => console.error('Error:', error));
+		}
+	}
 	
 	function validateSearch() {
 		const searchKey = document.getElementById("searchKey").value;
@@ -77,8 +91,11 @@
 			cd_state = document.getElementById("select_1").options[document.getElementById("select_1").selectedIndex].value;
 			cd_state_delivery = document.getElementById("select_3").options[document.getElementById("select_3").selectedIndex].value;
 			
+			//console.log("cd_state value:", cd_state);
+			
 			document.getElementById("seq_buy_mst").value = seq_buy_mst;
 			// select_1의 선택된 value
+			//alert(cd_state)
 			document.getElementById("cd_state").value = cd_state;
 			// select_3의 선택된 value
 			document.getElementById("cd_state_delivery").value = cd_state_delivery;
@@ -266,10 +283,12 @@
 				<div class="mailbox-controls">
 				<!-- /.btn-group -->
 				<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><i class="fa fa-refresh"></i></button>
+				&nbsp;&nbsp;
+				<button onclick="updateDeliveryStatus()">배송 상태 업데이트</button>
 					<span style="float: right;margin-right: 10px;margin-top: 5px;justify-content: center; ">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</span>
 				<div class="pull-right">
 				<div class="btn-group">
-					<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goList" />
+					<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
 				</div>
 				<!-- /.btn-group -->
 				</div>

@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.backoffice.mybatis.buy.Buy">
 
+	<update id="updateDeliveryStatus">
+		UPDATE 
+			TB_BUY_MST
+		SET 
+			CD_STATE_DELIVERY = 'D'
+		WHERE 
+			CD_STATE = 1 AND CD_STATE_DELIVERY = 'C'
+	</update>
+
 	<select id="selectList" parameterType="buyDto" resultType="buyDto">
 		SELECT
 		/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY buy_dtl.DT_REG DESC) rnum
