@@ -133,12 +133,12 @@ public class BuyWeb extends Common {
 			
 			@SuppressWarnings("unchecked")
 			List<BuyDto> list = (List<BuyDto>) pagingListDto.getList();
-			/*
+			
 			for (int loop = 0; loop < list.size(); loop++) {
 				list.get(loop).setEmail(aes.decode(list.get(loop).getEmail()));
 				list.get(loop).setMbr_nm(aes.decode(list.get(loop).getMbr_nm()));
 			}
-			*/
+			
 			pagingDto.setSearchWord(searchWord);
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
