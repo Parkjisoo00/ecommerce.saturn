@@ -99,16 +99,7 @@ public class MemberWeb extends Common {
 			}
 			currentMemberDto.setEmail(decodedEmail);
 			
-			// 회원 이름 디코딩 처리
-			String encodedMbrNm = currentMemberDto.getMbr_nm();
-			String decodedMbrNm = null;
-			try {
-				decodedMbrNm = aes.decode(encodedMbrNm);
-			} catch (Exception e) {
-				logger.error("회원 이름 디코딩 오류: " + e.getMessage(), e);
-				decodedMbrNm = "디코딩 실패"; // 기본값 설정
-			}
-			currentMemberDto.setMbr_nm(decodedMbrNm);
+			list.get(loop).setMbr_nm(aes.decode(list.get(loop).getMbr_nm()));
 			}
 			
 			pagingDto.setSearchWord(searchWord);
