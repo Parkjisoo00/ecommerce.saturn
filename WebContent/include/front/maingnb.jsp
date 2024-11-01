@@ -207,63 +207,62 @@ $(document).ready(function () {
 });
 
 var secondSelect = document.getElementById("second_cd_ctg");
-
-// 서버에서 전달된 선택된 값 설정
-var selectedSecondValue = "${paging.cd_ctg_m}"; // 서버에서 전달된 두 번째 셀렉트 기본 선택 값
+var selectedSecondValue = "${paging.cd_ctg_m}";
 
 var options = {
-    "9": [{ value: "10", text: "전체검색" }],
-    "1": [
-        { value: "10", text: "전체검색" },
-        { value: "1", text: "혈당/혈행/혈압" },
-        { value: "2", text: "항산화/면역력" },
-        { value: "3", text: "염증/항염" },
-        { value: "4", text: "관절/뼈/치아" },
-        { value: "5", text: "피로회복" },
-        { value: "6", text: "눈 건강" },
-        { value: "7", text: "장 건강" },
-        { value: "8", text: "두뇌/기억력" },
-        { value: "9", text: "위/간/갑상선" }
-    ],
-    "2": [
-        { value: "10", text: "전체검색" },
-        { value: "1", text: "폴리코사놀" },
-        { value: "2", text: "오메가-3" },
-        { value: "3", text: "비타민/미네랄" },
-        { value: "4", text: "유산균" },
-        { value: "5", text: "글루코사민/MSM" },
-        { value: "6", text: "루테인" },
-        { value: "7", text: "코큐텐" },
-        { value: "8", text: "아르기닌" },
-        { value: "9", text: "밀크씨슬" }
-    ],
-    "3": [
-        { value: "10", text: "전체검색" },
-        { value: "1", text: "남성" },
-        { value: "2", text: "여성" }
-    ]
+		
+	"9": [{ value: "10", text: "전체검색" }],
+	"1": [
+		{ value: "10", text: "전체검색" },
+		{ value: "1", text: "혈당/혈행/혈압" },
+		{ value: "2", text: "항산화/면역력" },
+		{ value: "3", text: "염증/항염" },
+		{ value: "4", text: "관절/뼈/치아" },
+		{ value: "5", text: "피로회복" },
+		{ value: "6", text: "눈 건강" },
+		{ value: "7", text: "장 건강" },
+		{ value: "8", text: "두뇌/기억력" },
+		{ value: "9", text: "위/간/갑상선" }
+	],
+	"2": [
+		{ value: "10", text: "전체검색" },
+		{ value: "1", text: "폴리코사놀" },
+		{ value: "2", text: "오메가-3" },
+		{ value: "3", text: "비타민/미네랄" },
+		{ value: "4", text: "유산균" },
+		{ value: "5", text: "글루코사민/MSM" },
+		{ value: "6", text: "루테인" },
+		{ value: "7", text: "코큐텐" },
+		{ value: "8", text: "아르기닌" },
+		{ value: "9", text: "밀크씨슬" }
+	],
+	"3": [
+		{ value: "10", text: "전체검색" },
+		{ value: "1", text: "남성" },
+		{ value: "2", text: "여성" }
+	]
 };
 
 document.getElementById("first_cd_ctg").addEventListener("change", function() {
-    var selectedValue = this.value;
-    var selectedOptions = options[selectedValue] || [];
-    
-    // 두 번째 셀렉트 박스 옵션 초기화
-    secondSelect.innerHTML = "";
-
-    // 옵션 추가 및 선택 상태 반영
-    selectedOptions.forEach(option => {
-        var opt = document.createElement("option");
-        opt.value = option.value;
-        opt.textContent = option.text;
-
-        // 서버에서 받아온 값과 비교하여 선택 상태 설정
-        if (option.value === selectedSecondValue) {
-            opt.selected = true;
-        }
-        
-        secondSelect.appendChild(opt);
-    });
+	
+	var selectedValue = this.value;
+	var selectedOptions = options[selectedValue] || [];
+	
+	secondSelect.innerHTML = "";
+	
+	selectedOptions.forEach(option => {
+		
+		var opt = document.createElement("option");
+		opt.value = option.value;
+		opt.textContent = option.text;
+		
+		if (option.value === selectedSecondValue) {
+			
+			opt.selected = true;
+		}
+		
+		secondSelect.appendChild(opt);
+	});
 });
 
 document.getElementById("first_cd_ctg").dispatchEvent(new Event("change"));
@@ -279,63 +278,61 @@ function checkEnter(event) {
 }
 
 var secondSelectAndroid = document.getElementById("second_cd_ctg_android");
-
-//서버에서 전달된 선택된 값 설정
-var selectedSecondValueAndroid = "${paging.cd_ctg_m}"; // 서버에서 전달된 두 번째 셀렉트 기본 선택 값
+var selectedSecondValueAndroid = "${paging.cd_ctg_m}";
 
 var options = {
- "9": [{ value: "10", text: "전체검색" }],
- "1": [
-     { value: "10", text: "전체검색" },
-     { value: "1", text: "혈당/혈행/혈압" },
-     { value: "2", text: "항산화/면역력" },
-     { value: "3", text: "염증/항염" },
-     { value: "4", text: "관절/뼈/치아" },
-     { value: "5", text: "피로회복" },
-     { value: "6", text: "눈 건강" },
-     { value: "7", text: "장 건강" },
-     { value: "8", text: "두뇌/기억력" },
-     { value: "9", text: "위/간/갑상선" }
- ],
- "2": [
-     { value: "10", text: "전체검색" },
-     { value: "1", text: "폴리코사놀" },
-     { value: "2", text: "오메가-3" },
-     { value: "3", text: "비타민/미네랄" },
-     { value: "4", text: "유산균" },
-     { value: "5", text: "글루코사민/MSM" },
-     { value: "6", text: "루테인" },
-     { value: "7", text: "코큐텐" },
-     { value: "8", text: "아르기닌" },
-     { value: "9", text: "밀크씨슬" }
- ],
- "3": [
-     { value: "10", text: "전체검색" },
-     { value: "1", text: "남성" },
-     { value: "2", text: "여성" }
- ]
+		
+	"9": [{ value: "10", text: "전체검색" }],
+	"1": [
+		{ value: "10", text: "전체검색" },
+		{ value: "1", text: "혈당/혈행/혈압" },
+		{ value: "2", text: "항산화/면역력" },
+		{ value: "3", text: "염증/항염" },
+		{ value: "4", text: "관절/뼈/치아" },
+		{ value: "5", text: "피로회복" },
+		{ value: "6", text: "눈 건강" },
+		{ value: "7", text: "장 건강" },
+		{ value: "8", text: "두뇌/기억력" },
+		{ value: "9", text: "위/간/갑상선" }
+	],
+	"2": [
+		{ value: "10", text: "전체검색" },
+		{ value: "1", text: "폴리코사놀" },
+		{ value: "2", text: "오메가-3" },
+		{ value: "3", text: "비타민/미네랄" },
+		{ value: "4", text: "유산균" },
+		{ value: "5", text: "글루코사민/MSM" },
+		{ value: "6", text: "루테인" },
+		{ value: "7", text: "코큐텐" },
+		{ value: "8", text: "아르기닌" },
+		{ value: "9", text: "밀크씨슬" }
+	],
+	"3": [
+		{ value: "10", text: "전체검색" },
+		{ value: "1", text: "남성" },
+		{ value: "2", text: "여성" }
+	]
 };
 
 document.getElementById("first_cd_ctg_android").addEventListener("change", function() {
- var selectedValue = this.value;
- var selectedOptions = options[selectedValue] || [];
- 
- // 두 번째 셀렉트 박스 옵션 초기화
- secondSelectAndroid.innerHTML = "";
+	
+var selectedValue = this.value;
+var selectedOptions = options[selectedValue] || [];
 
- // 옵션 추가 및 선택 상태 반영
- selectedOptions.forEach(option => {
-     var opt = document.createElement("option");
-     opt.value = option.value;
-     opt.textContent = option.text;
+secondSelectAndroid.innerHTML = "";
 
-     // 서버에서 받아온 값과 비교하여 선택 상태 설정
-     if (option.value === selectedSecondValueAndroid) {
-         opt.selected = true;
-     }
-     
-     secondSelectAndroid.appendChild(opt);
- });
+	selectedOptions.forEach(option => {
+		
+		var opt = document.createElement("option");
+		opt.value = option.value;
+		opt.textContent = option.text;
+		
+		if (option.value === selectedSecondValueAndroid) {
+			
+			opt.selected = true;
+		}
+		secondSelectAndroid.appendChild(opt);
+	});
 });
 
 document.getElementById("first_cd_ctg_android").dispatchEvent(new Event("change"));
