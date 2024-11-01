@@ -222,6 +222,7 @@ public class BuyWeb extends Common {
 			mav.addObject("tPoint"	, tPoint);
 			mav.addObject("eDate"	, eDate);
 			mav.addObject("lDate"	, lDate);
+			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
 			
 			mav.setViewName("front/buy/pointHistory");
