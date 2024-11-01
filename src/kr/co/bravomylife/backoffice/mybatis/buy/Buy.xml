@@ -58,13 +58,9 @@
 
 	<select id="count" parameterType="pagingDto" resultType="java.lang.Integer">
 		SELECT
-			COUNT(*)
+			COUNT(ROWNUM)
 		FROM
 			TB_BUY_MST buy_mst
-		LEFT JOIN
-			TB_MBR_MST mbr_mst
-		ON
-			buy_mst.SEQ_MBR = mbr_mst.SEQ_MBR
 		WHERE
 		<include refid="where" />
 	</select>
@@ -104,26 +100,10 @@
 	</select>
 
 	<sql id="where">
-			(buy_mst.CD_STATE IS NULL OR buy_mst.CD_STATE IN (1, 2, 3, 4))
-			<if test="searchWord != null and searchWord != ''">
-				<if test="searchKey == 'mbr_nm'">
-					AND mbr_mst.MBR_NM = #{searchWord}
-				</if>
-				<if test="searchKey == 'email'">
-					AND mbr_mst.EMAIL = #{searchWord}
-				</if>
-			</if>
-			
-			<if test="searchKeyState != null and searchKeyState != '' and searchKeyState != 'all'">
-				AND buy_mst.CD_STATE = #{searchKeyState}
-			</if>
-			
-			<if test="searchKeyPay != null and searchKeyPay != '' and searchKeyPay != 'all'">
-				AND buy_mst.CD_STATE_PAY = #{searchKeyPay}
-			</if>
-			<if test="searchKeyDelivery != null and searchKeyDelivery != '' and searchKeyDelivery != 'all'">
-				AND buy_mst.CD_STATE_DELIVERY = #{searchKeyDelivery}
-			</if>
+			buy_mst.CD_STATE = #{cd_state}
+			AND buy_mst.CD_STATE_PAY = #{cd_state_pay}
+			AND buy_mst.CD_STATE_DELIVERY = #{cd_state_delivery}
+
 	</sql>
 	
 	

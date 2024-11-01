@@ -115,6 +115,11 @@ public class BuyWeb extends Common {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
+		logger.debug("Controller로 오는지 확인");
+		
+		logger.debug("확인" + pagingDto.getCd_state());
+		logger.debug("확인" + pagingDto.getCd_state_pay());
+		logger.debug("확인" + pagingDto.getCd_state_delivery());
 		
 		try {
 			
@@ -131,8 +136,6 @@ public class BuyWeb extends Common {
 			}
 			
 			PagingListDto pagingListDto = buySrvc.list(pagingDto);
-			
-
 			
 			@SuppressWarnings("unchecked")
 			List<BuyDto> list = (List<BuyDto>) pagingListDto.getList();
@@ -155,7 +158,16 @@ public class BuyWeb extends Common {
 				}
 				currentBuyDto.setEmail(decodedEmail);
 				
-				list.get(loop).setMbr_nm(aes.decode(list.get(loop).getMbr_nm()));
+				// 회원 이름 디코딩 처리
+				String encodedMbrNm = currentBuyDto.getMbr_nm();
+				String decodedMbrNm = null;
+				try {
+					decodedMbrNm = aes.decode(encodedMbrNm);
+				} catch (Exception e) {
+					logger.error("회원 이름 디코딩 오류: " + e.getMessage(), e);
+					decodedMbrNm = "디코딩 실패"; // 기본값 설정
+				}
+				currentBuyDto.setMbr_nm(decodedMbrNm);
 			}
 			
 			pagingDto.setSearchWord(searchWord);

@@ -3,11 +3,6 @@
 <%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
-<%
-	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-	response.setHeader("Pragma", "no-cache");
-	response.setDateHeader("Expires", 0);
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,8 +25,6 @@
 	}
 </style>
 	<script>
-	
-
 	function updateDeliveryStatus() {
 		if (confirm("해당 조건에 맞는 모든 항목을 업데이트하시겠습니까?")) {
 			fetch('/console/buy/updateDeliveryStatus.web', {
@@ -50,9 +43,9 @@
 	function validateSearch() {
 		const searchKey = document.getElementById("searchKey").value;
 	
-		const searchKeyState = document.getElementById("searchKeyState").value;
-		const searchKeyPay = document.getElementById("searchKeyPay").value;
-		const searchKeyDelivery = document.getElementById("searchKeyDelivery").value;
+		const searchKeyState = document.getElementById("_searchKeyState").value;
+		const searchKeyPay = document.getElementById("_searchKeyPay").value;
+		const searchKeyDelivery = document.getElementById("_searchKeyDelivery").value;
 		
 		console.log("searchKeyState:", searchKeyState);
 		console.log("searchKeyPay:", searchKeyPay);
@@ -70,10 +63,18 @@
 
 		return true;
 		*/
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_state.setAttribute("value", searchKeyState);
+		frmMain.cd_state_pay.setAttribute("value", searchKeyPay);
+		frmMain.cd_state_delivery.setAttribute("value", searchKeyDelivery);
+		
+		frmMain.action="/console/buy/list.web";
+		frmMain.submit();
 	}
 	
 	function goView(value) {
-
+		
 		var frmMain = document.getElementById("frmMain");
 		
 		document.getElementById("seq_buy_mst").value = value;
@@ -81,7 +82,7 @@
 		frmMain.action="/console/buy/view.web";
 		frmMain.submit();
 	}
-
+	
 	function goModifyState(seq_buy_mst , position) {
 		
 		if (confirm("상태를 변경하시겠습니까?")) {
@@ -99,7 +100,7 @@
 			document.getElementById("cd_state").value = cd_state;
 			// select_3의 선택된 value
 			document.getElementById("cd_state_delivery").value = cd_state_delivery;
-
+			
 			alert(cd_state);
 			alert(cd_state_delivery);
 			return;
@@ -118,11 +119,11 @@
 		frmMain.submit();
 	}
 	
-	</script>
+</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<form id="frmMain" method="POST" action="/console/buy/list.web">
-<input type="hidden" name="seq_buy_mst"			id="seq_buy_mst" />
+<form id="frmMain" method="POST">
+<input type="hidden" name="seq_buy_mst"			id="seq_buy_mst" value="0"/>
 <input type="hidden" name="cd_state"			id="cd_state" />
 <input type="hidden" name="cd_state_pay"		id="cd_state_pay" />
 <input type="hidden" name="cd_state_delivery"	id="cd_state_delivery" />
@@ -151,14 +152,14 @@
 						<div class="has-feedback">
 							<div style="display: flex; align-items: center; ">&nbsp;&nbsp;
 							<div class="search-container">
-								<select id="searchKey" name="searchKey">
+								<select id="searchKey">
 									<option value="email"<c:if test="${paging.searchKey == 'email'}"> selected</c:if>>이메일</option>
 									<option value="mbr_nm"<c:if test="${paging.searchKey == 'mbr_nm'}"> selected</c:if>>성명</option>
 								</select>
-								<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" />
+								<input type="text" id="searchWord" value="${paging.searchWord}" />
 								&nbsp;&nbsp;
 								구매 상태&nbsp;
-								<select id="searchKeyState" name="searchKeyState">
+								<select id="_searchKeyState">
 									<option value="all" <c:if test="${paging.searchKeyState == 'all'}">selected</c:if>>전체</option>
 									<option value="1" <c:if test="${paging.searchKeyState == '1'}">selected</c:if>>결제완료</option>
 									<option value="2" <c:if test="${paging.searchKeyState == '2'}">selected</c:if>>취소</option>
@@ -168,7 +169,7 @@
 								</select>
 								&nbsp;&nbsp;
 								결제 상태&nbsp;
-								<select id="searchKeyPay" name="searchKeyPay">
+								<select id="_searchKeyPay">
 									<option value="all" <c:if test="${paging.searchKeyPay == 'all'}">selected</c:if>>전체</option>	
 									<option value="N" <c:if test="${paging.searchKeyPay == 'N'}">selected</c:if>>실패</option>
 									<option value="Y" <c:if test="${paging.searchKeyPay == 'Y'}">selected</c:if>>성공</option>
@@ -177,7 +178,7 @@
 								</select>
 								&nbsp;&nbsp;
 								배송 상태&nbsp;
-								<select id="searchKeyDelivery" name="searchKeyDelivery">
+								<select id="_searchKeyDelivery">
 									<option value="all" <c:if test="${paging.searchKeyDelivery == 'all'}">selected</c:if>>전체</option>
 									<option value="C" <c:if test="${paging.searchKeyDelivery == 'C'}">selected</c:if>>판매 확인중</option>
 									<option value="P" <c:if test="${paging.searchKeyDelivery == 'P'}">selected</c:if>>배송 준비중</option>
@@ -187,7 +188,7 @@
 								</select>
 
 								&nbsp;&nbsp;
-								<input type="submit" onclick="if(validateSearch()) { executeSearch(); }" value="검색"/>	
+								<input type="button" onclick="validateSearch()" value="검색"/>	
 							</div>	
 							</div>
 						</div>
@@ -243,10 +244,10 @@
 								<td style="text-align: center;">
 									<select id="select_1_${status.index}" style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst},${status.index});">
 										<option value="NULL"<c:if test="${list.cd_state == NULL}"> selected</c:if>>결제중단</option>
-										<option value="1"<c:if test="${list.cd_state == 1}"> selected</c:if>>결제완료</option>
-										<option value="2"<c:if test="${list.cd_state == 2}"> selected</c:if>>취소</option>
-										<option value="3"<c:if test="${list.cd_state == 3}"> selected</c:if>>교환</option>
-										<option value="4"<c:if test="${list.cd_state == 4}"> selected</c:if>>환불</option>
+										<option value="1"<c:if test="${list.cd_state == '1'}"> selected</c:if>>결제완료</option>
+										<option value="2"<c:if test="${list.cd_state == '2'}"> selected</c:if>>취소</option>
+										<option value="3"<c:if test="${list.cd_state == '3'}"> selected</c:if>>교환</option>
+										<option value="4"<c:if test="${list.cd_state == '4'}"> selected</c:if>>환불</option>
 									</select>
 								</td>
 								<td style="text-align: center;">

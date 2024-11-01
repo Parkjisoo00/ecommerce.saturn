@@ -33,9 +33,29 @@ public class PagingDto {
 	private String corp_nm		= "";
 	private String prd_type		= "";
 	private String cd_state_sale= "";
+	private String cd_state				= "";
+	private String cd_state_pay			= "";
+	private String cd_state_delivery	= "";
 	
 	
-	
+	public String getCd_state() {
+		return cd_state;
+	}
+	public void setCd_state(String cd_state) {
+		this.cd_state = cd_state;
+	}
+	public String getCd_state_pay() {
+		return cd_state_pay;
+	}
+	public void setCd_state_pay(String cd_state_pay) {
+		this.cd_state_pay = cd_state_pay;
+	}
+	public String getCd_state_delivery() {
+		return cd_state_delivery;
+	}
+	public void setCd_state_delivery(String cd_state_delivery) {
+		this.cd_state_delivery = cd_state_delivery;
+	}
 	public String getSearchKeyState() {
 		return searchKeyState;
 	}
