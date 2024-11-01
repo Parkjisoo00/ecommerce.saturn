@@ -160,7 +160,7 @@
 			<!-- /.box-body -->
 			<div class="box-footer">
 			<div class="pull-right">
-				<button type="submit" class="btn btn-primary" onclick="modifyProc(2);"><i class="fa fa-pencil"></i> 수정</button>
+				<button type="button" class="btn btn-primary" onclick="modifyProc(2);"><i class="fa fa-pencil"></i> 수정</button>
 				<button type="button" class="btn btn-default" onclick="goList(2);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
 			</div>
 			<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><a>다시쓰기</a></button>

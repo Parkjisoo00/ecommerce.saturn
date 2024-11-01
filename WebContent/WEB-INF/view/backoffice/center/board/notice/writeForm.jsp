@@ -138,7 +138,7 @@
 			<!-- /.box-body -->
 			<div class="box-footer">
 			<div class="pull-right">
-				<button type="submit" class="btn btn-primary" onclick="writeProc(1);"><i class="fa fa-pencil"></i> 등록</button>
+				<button type="button" class="btn btn-primary" onclick="writeProc(1);"><i class="fa fa-pencil"></i> 등록</button>
 				<button type="button" class="btn btn-default" onclick="goList(1);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
 			</div>
 			<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><a>다시쓰기</a></button>

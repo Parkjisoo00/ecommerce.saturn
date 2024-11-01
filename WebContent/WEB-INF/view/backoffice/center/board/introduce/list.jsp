@@ -96,37 +96,31 @@
 <section class="content">
 	<div class="row">
 		<div class="col-md-3">
-		
-
-		<div class="box box-solid">
-			<div class="box-header with-border">
-				<h3 class="box-title">고객 센터</h3>
-
-			<div class="box-tools">
-				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-				</button>
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">고객 센터</h3>
+					<div class="box-tools">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+						</button>
+					</div>
+				</div>
+				<div class="box-body no-padding">
+					<ul class="nav nav-pills nav-stacked">
+						<li class="active"><a href="javascript:consolegoList(1);"><i class="fa fa-bullhorn"></i> 공지사항</a>
+						<li class="active"><a href="javascript:consolegoList(2);"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
+						<li class="active"><a href="javascript:consolegoList(3);"><i class="fa fa-fw fa-user"></i> 1:1문의</a>
+						<li class="active"><a href="javascript:consolegoList(4);"><i class="fa fa-fw fa-commenting-o"></i> 새소식</a>
+						<li class="active"><a href="javascript:consolegoList(5);"><i class="fa fa-fw fa-comment-o"></i> 소개</a>
+						</li>
+					</ul>
+				</div>
 			</div>
-			</div>
-			<div class="box-body no-padding">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="javascript:consolegoList(1);"><i class="fa fa-bullhorn"></i> 공지사항</a>
-					<li class="active"><a href="javascript:consolegoList(2);"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
-					<li class="active"><a href="javascript:consolegoList(3);"><i class="fa fa-fw fa-user"></i> 1:1문의</a>
-					<li class="active"><a href="javascript:consolegoList(4);"><i class="fa fa-fw fa-commenting-o"></i> 새소식</a>
-					<li class="active"><a href="javascript:consolegoList(5);"><i class="fa fa-fw fa-comment-o"></i> 소개</a>
-					</li>
-				</ul>
-			</div>
-			<!-- /.box-body -->
-		</div>
-		<!-- /. box -->
-		<!-- /.box -->
 		</div>
 		<!-- /.col -->
 		<div class="col-md-8">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">소개</h3>&nbsp;&nbsp;&nbsp;
+					<h3 class="box-title">소개(최신에 올린거로 소개 화면이 나옵니다.)</h3>&nbsp;&nbsp;&nbsp;
 					<div class="box-tools pull-right">
 						<div class="has-feedback">
 							<div style="display: flex; align-items: center;">&nbsp;&nbsp;

@@ -153,7 +153,7 @@
 			<!-- /.box-footer -->
 				<div class="box-footer">
 					<div class="pull-right">
-						<button type="submit" class="btn btn-primary" onclick="modifyForm(1);"><i class="fa fa-pencil"></i> 수정</button>
+						<button type="button" class="btn btn-primary" onclick="modifyForm(1);"><i class="fa fa-pencil"></i> 수정</button>
 						<button type="button" class="btn btn-default" onclick="goList(1);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
 					</div>
 					<button type="button" onclick="javascript:remove(1);" class="btn btn-default"><i class="fa fa-trash-o"></i> 삭제</button>

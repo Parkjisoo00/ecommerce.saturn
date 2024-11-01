@@ -105,7 +105,7 @@
 		<div class="col-md-8">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">등록하기</h3>
+					<h3 class="box-title">수정하기(수정하신 이미지로 소개 페이지가 나옵니다.)</h3>
 				</div>
 			<!-- /.box-header -->
 			<div class="box-body">
