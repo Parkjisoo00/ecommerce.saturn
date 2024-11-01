@@ -42,6 +42,13 @@
 
 <!-- Main content -->
 <div class="content-wrapper">
+
+	<section class="content-header" style="display: flex; align-items: center; margin-left: 415px;">
+		<h1>
+		MYPAGE
+		</h1>
+	</section>
+	
 	<section class="content" >
 		<div class="row" style="display: flex; justify-content: center; align-items: center;">
 			<div class="col-md-6" style="display: flex; justify-content: center; align-items: center; ">
@@ -55,21 +62,21 @@
 							<table class="table table-hover table-striped">
 								<tbody>
 								<tr>
-									<th style="width: 150px;" >이메일</th>
+									<th style="width: 150px; text-align: center;" >이메일</th>
 									<td>
-										<input type="text" id="email" name="email" required value="${managerDto.email}" style="flex: 1; min-width: 250px;" disabled autocomplete="off"/>
+										<input type="text" id="email" name="email" required value="${managerDto.email}" style="flex: 1; min-width: 250px; text-align: center;" disabled autocomplete="off"/>
 									</td>
 								</tr>
 								<tr>
-									<th style="width: 150px;" >성명</th>
+									<th style="width: 150px; text-align: center;" >성명</th>
 									<td>
-										<input type="text" id="age" name="age" value="${managerDto.mng_nm}" maxlength="10" style="flex: 1; min-width: 250px;" disabled autocomplete="off"/>
+										<input type="text" id="age" name="age" value="${managerDto.mng_nm}" maxlength="10" style="flex: 1; min-width: 250px; text-align: center;" disabled autocomplete="off"/>
 									</td>
 								</tr>
 								<tr>
-									<th style="width: 150px;" >연락처</th>
+									<th style="width: 150px; text-align: center;" >연락처</th>
 									<td>
-										<input type="text" id="phone1" name="phone1" value="${fn:split(managerDto.phone, '-')[0]}" style="text-align:center;" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+										<input type="text" id="phone1" name="phone1" value="${fn:split(managerDto.phone, '-')[0]}" style="text-align:center; " required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
 											maxlength="3" autocomplete="off"/>
 										-
 										<input type="text" id="phone2" name="phone2" value="${fn:split(managerDto.phone, '-')[1]}" style="text-align:center;" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
@@ -81,18 +88,18 @@
 									</td>
 								</tr>
 								<tr>
-									<th style="width: 150px;" >주소</th>
+									<th style="width: 150px; text-align: center;" >주소</th>
 									<td>
-										<input type="text" id="post" name="post" size="5" readonly value="${managerDto.post}"/>
+										<input type="text" id="post" name="post" style="text-align: center;" size="5" readonly value="${managerDto.post}"/>
 										<br>
 										<br>
-											<label for="addr1">도로명</label>
-											<input type="text"	id="addr1"	name="addr1" size="40" readonly value="${managerDto.addr1}"/>
+											<label for="addr1" style="text-align: center;">도로명</label>
+											<input type="text"	id="addr1"	name="addr1" style="text-align: center;" size="40" readonly value="${managerDto.addr1}"/>
 											<span id="guide" style="color:#999; display:none"></span>
 										<br>
 										<br>	
-											<label for="addr2">상세</label>
-											<input type="text"	id="addr2"	name="addr2" size="20" value="${managerDto.addr2}" placeholder="상세 주소" />
+											<label for="addr2" style="text-align: center;">상세</label>
+											<input type="text"	id="addr2"	name="addr2" style="text-align: center;" size="20" value="${managerDto.addr2}" placeholder="상세 주소" />
 											
 											<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
 									</td>
@@ -111,12 +118,12 @@
 					<br>
 					<br>
 					<br>
-					<div class="col-md-6">
-						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
+					
+						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px; position: relative; top: -20px;">
 							<input type="button" value="수정" class="btn btn-primary" style="width: 150px" onclick="checkModify();" />
 							<input type="button" value="뒤로가기" class="btn btn-primary" style="width: 150px" onclick="javascript:location.href='/console/myPage/index.web';"/>
 						</div>
-					</div>
+					
 				</div>
 			</div>
 		</div>

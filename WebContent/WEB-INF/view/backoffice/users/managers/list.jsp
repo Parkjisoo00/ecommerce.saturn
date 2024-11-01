@@ -111,11 +111,11 @@
 								</td>
 								<td class="txtRight" style="text-align: center;">
 								<a href="javascript:goModifyForm(${list.seq_mng});">
-									<bravomylifeTag:masking text="${list.email}" letter="*" count="13" mode="right" />
+									${list.email}"
 								</a>
 							</td>
 							<td style="text-align: center;">
-								<bravomylifeTag:masking text="${list.mng_nm}" letter="*" count="1" mode="left" />
+								${list.mng_nm}
 							</td>
 							<td style="text-align: center;">
 								<select style="background:#F0F0F0" disabled>

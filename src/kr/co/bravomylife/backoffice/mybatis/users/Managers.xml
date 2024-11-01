@@ -69,10 +69,10 @@
 			]]>
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchKey == 'mng_nm'">
-					AND MNG_NM = #{searchWord}
+					AND MNG_NM LIKE '%' || #{searchWord} || '%'
 				</if>
 				<if test="searchKey == 'email'">
-					AND EMAIL = #{searchWord}
+					AND EMAIL LIKE '%' || #{searchWord} || '%'
 				</if>
 			</if>
 		</where>

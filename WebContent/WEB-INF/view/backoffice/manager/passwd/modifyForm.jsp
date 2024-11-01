@@ -89,9 +89,16 @@ function checkModify() {
 
 <!-- Main content -->
 <div class="content-wrapper">
+
+	<section class="content-header" style="display: flex; align-items: center; margin-left: 485px;">
+		<h1>
+		MYPAGE
+		</h1>
+	</section>
+	
 	<section class="content" >
 		<div class="row" style="display: flex; justify-content: center; align-items: center;">
-			<div class="col-md-6" style="display: flex; justify-content: center; align-items: center; ">
+			<div class="col-md-5" style="display: flex; justify-content: center; align-items: center; ">
 				<div class="box box-primary">
 					<div class="box-header with-border">
 						<h3 class="box-title">비밀번호 변경</h3>
@@ -102,19 +109,19 @@ function checkModify() {
 							<table class="table table-hover table-striped">
 								<tbody>
 								<tr>
-									<th style="width: 150px;" >현재 비밀번호 *</th>
+									<th style="width: 300px; text-align: center;" >현재 비밀번호 *</th>
 									<td>
 										<input type="password" id="passwd" name="passwd"  />
 									</td>
 								</tr>
 								<tr>
-									<th style="width: 150px;" >신규 비밀번호 * (영문 대/소문자 구분, 숫자, 특수문자 포함 8~16자 필수 입력)</th>
+									<th style="width: 300px; text-align: center;" >신규 비밀번호 * &nbsp; (영문 대/소문자 구분, 숫자, 특수문자 포함 8~16자 필수 입력)</th>
 									<td>
 										<input type="password" id="confirmPasswd" name="confirmPasswd"  />
 									</td>
 								</tr>
 								<tr>
-									<th style="width: 150px;" >신규 비밀번호 확인 *</th>
+									<th style="width: 300px; text-align: center;" >신규 비밀번호 확인 *</th>
 									<td>
 										<input type="password" id="confirmPasswd_" name="confirmPasswd_"  />
 									</td>
@@ -133,12 +140,12 @@ function checkModify() {
 					<br>
 					<br>
 					<br>
-					<div class="col-md-6">
-						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
-							<input type="button" value="수정" style="width: 150px" onclick="checkModify();" />
+					
+						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px; position: relative; top: -20px;">
+							<input type="button" value="수정" class="btn btn-primary" style="width: 150px" onclick="checkModify();" />
 							<input type="button" value="뒤로가기" class="btn btn-primary" style="width: 150px" onclick="javascript:location.href='/console/myPage/index.web';"/>
 						</div>
-					</div>
+					
 				</div>
 			</div>
 		</div>
