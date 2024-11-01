@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script>
 		// Google Charts 라이브러리 로드 완료 후 실행
-		google.charts.load('current', {'packages':['line']});
+		google.charts.load('current', {'packages':['corechart']});
 		google.charts.setOnLoadCallback(drawChart);
 		
 		function drawChart() {
@@ -23,22 +23,19 @@
 			</c:forEach>
 			
 			// 월 및 상품들의 판매 수량
-			/*
-			data.addRows([
-				[3,  10,   8,   0,   0,   0,   0,   0,   0,   0,  12],
-				[4,   0,   0,   0,   0,   0,   0,   0,   2,   0,   0],
-				[5,   0,   0,   0,   0,   0,   1,   0,   0,   0,   0],
-				[7,   0,   0,   3,   0,   0,   0,   0,   0,   0,   0],
-				[8,   0,   0,   0,   0,   2,   0,   0,   0,   0,   0],
-				[9,   0,   0,   0,   0,   0,   0,   0,   0,   1,   0],
-				[10,  0,   0,   0,  13,   0,  11,  11,   0,   0,  12],
-			]);
-			*/
 			data.addRows([
 				<c:forEach var="item" items="${listsellingBestList}" varStatus="status">
 					<c:set var="month_new" value="${item.month}" />
 						<c:if test="${month_new != month_old}">
-							[${item.month}, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+						[
+							${item.month} 
+							<c:forEach var="nameItem" items="${listsellingBestName}">
+								, <c:choose>
+									<c:when test="${nameItem.seq_sle == item.seq_sle}">${item.count}</c:when>
+									<c:otherwise>0</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						],
 						</c:if>
 					<c:set var="month_old" value="${item.month}" />
 				</c:forEach>
@@ -49,11 +46,20 @@
 					title: '2024년 많이 팔린 상품 TOP 10',
 					subtitle: '월별 판매량',
 				},
-				width: 1024,
-				height: 500
+				width: 1200,
+				height: 800,
+				hAxis: {
+					title: '월',
+					ticks: [{v: 1, f: '1월'}, {v: 2, f: '2월'}, {v: 3, f: '3월'}, {v: 4, f: '4월'}, {v: 5, f: '5월'}, {v: 6, f: '6월'}, {v: 7, f: '7월'}, {v: 8, f: '8월'}, {v: 9, f: '9월'}, {v: 10, f: '10월'}, {v: 11, f: '11월'}, {v: 12, f: '12월'}]
+				},
+				vAxis: {
+					title: '판매 수량',
+					format: '0',
+					maxValue: 20
+				}
 			};
 			
-			var chart = new google.charts.Line(document.getElementById('linechart_material'));
+			var chart = new google.visualization.LineChart(document.getElementById('linechart_material'));
 			chart.draw(data, options);
 		}
 	</script>
@@ -64,9 +70,22 @@
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
-	<div style="display: flex; justify-content: space-around; align-items: center;">
-		<div id="linechart_material"></div>
-	</div>
+<div class="content-wrapper">
+	<section class="content">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h1 class="box-title">인기 상품 통계</h1>
+					</div>
+					<div style="display: flex; justify-content: space-around; align-items: center;">
+						<div id="linechart_material"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
 <!-- /Maincontent -->
 
 	<%@ include file="/include/backoffice/footer.jsp" %>

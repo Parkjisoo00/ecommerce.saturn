@@ -502,7 +502,7 @@ public class ProductWeb {
 	 */
 	
 	@RequestMapping(value = "/console/product/productReg.web")
-	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		

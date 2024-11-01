@@ -21,6 +21,7 @@
 package kr.co.bravomylife.backoffice.login.controller;
 
 
+import java.util.List;
 import java.util.Properties;
 
 import javax.inject.Inject;
@@ -38,7 +39,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.backoffice.common.Common;
 import kr.co.bravomylife.backoffice.login.dto.LoginDto;
+import kr.co.bravomylife.backoffice.login.dto.StatisticsBestDto;
+import kr.co.bravomylife.backoffice.login.dto.StatisticsDto;
 import kr.co.bravomylife.backoffice.login.service.LoginSrvc;
+import kr.co.bravomylife.backoffice.login.service.StatisticsSrvc;
 import kr.co.bravomylife.backoffice.manager.dto.ManagerDto;
 import kr.co.bravomylife.util.Datetime;
 
@@ -58,6 +62,9 @@ public class LoginWeb extends Common{
 	
 	@Inject
 	LoginSrvc loginSrvc;
+	
+	@Inject
+	StatisticsSrvc statisticsSrvc;
 	
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(LoginWeb.class);
@@ -108,16 +115,27 @@ public class LoginWeb extends Common{
 	 * <p>EXAMPLE:</p>
 	 */
 	
-	@RequestMapping(value = "/console/login/loginForm.web")
-	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/console/login/main.web")
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response, StatisticsDto statisticsDto, StatisticsBestDto statisticsBestDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			mav.setViewName("backoffice/login/loginForm");
+			
+			List<StatisticsDto> listIncomeRegion = statisticsSrvc.incomeRegion(statisticsDto);
+			List<StatisticsBestDto> listsellingBestName = statisticsSrvc.sellingBestName(statisticsBestDto);
+			List<StatisticsBestDto> listsellingBestList = statisticsSrvc.sellingBestList(statisticsBestDto);
+			List<StatisticsBestDto> listMemberAge = statisticsSrvc.memberAge(statisticsBestDto);
+			
+			mav.addObject("list", listIncomeRegion);
+			mav.addObject("listsellingBestName", listsellingBestName);
+			mav.addObject("listsellingBestList", listsellingBestList);
+			mav.addObject("listMemberAge", listMemberAge);
+			
+			mav.setViewName("backoffice/login/main");
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".loginForm()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".main()] " + e.getMessage(), e);
 		}
 		finally {}
 		
@@ -159,7 +177,7 @@ public class LoginWeb extends Common{
 												+ session.getAttribute("DT_LOGIN")
 												+ "반갑습니다."
 												+ "')");
-				request.setAttribute("redirect"	, "/console/login/loginForm.web");
+				request.setAttribute("redirect"	, "/console/login/main.web");
 			}
 			else {
 				request.setAttribute("script", "alert('이메일(아이디)과 비밀번호를 확인하세요!')");

@@ -40,18 +40,18 @@ import kr.co.bravomylife.backoffice.statistics.dto.MemberIncomeDto;
 public class MemberDao extends BaseDao{
 	
 	public List<MemberAgeDto> sellingBestList() {
-		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.statistics.Member.sellingBestList");
+		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.statistics.Statistics.sellingBestList");
 	}
 	
 	public List<MemberAgeDto> sellingBestName() {
-		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.statistics.Member.sellingBestName");
+		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.statistics.Statistics.sellingBestName");
 	}
 	
 	public List<MemberAgeDto> memberAge() {
-		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.statistics.Member.memberAge");
+		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.statistics.Statistics.memberAge");
 	}
 	
 	public List<MemberIncomeDto> incomeRegion(MemberIncomeDto memberIncomeDto) {
-		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.statistics.Member.incomeRegion", memberIncomeDto);
+		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.statistics.Statistics.incomeRegion", memberIncomeDto);
 	}
 }

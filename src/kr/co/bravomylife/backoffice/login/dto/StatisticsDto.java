@@ -10,82 +10,45 @@
  * Copyright (C) 2024 himedia.co.kr All Rights Reserved.
  *
  *
- * Program		: com.github.ecommorce
+ * Program		: kr.co.himedia.ecommerce
  * Description	:
  * Environment	: JRE 1.7 or more
- * File			: BoardDto.java
+ * File			: StatisticsDto.java
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20241008113457][lcm991224#gmail.com][CREATE: Initial Release]
+ *				: [20241101100940][whslsl88#gmail.com][CREATE: Initial Release]
  */
-package kr.co.bravomylife.backoffice.statistics.dto;
+package kr.co.bravomylife.backoffice.login.dto;
 
 /**
  * @version 1.0.0
- * @author lcm991224#gmail.com
+ * @author whslsl88#gmail.com
  * 
- * @since 2024-10-08
+ * @since 2024-11-01
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-public class MemberIncomeDto {
+public class StatisticsDto {
 	
-	private int seq_buy_dtl			= 0;
-	private int seq_buy_mst			= 0;
-	private int seq_sle				= 0;
-	private int price					= 0;
-	private int dt_reg					= 0;
-	private Integer count				= 0;
-	private Integer sale				= 0;
-	private Integer cost				= 0;
-	private Integer income				= 0;
-	private Integer moon				= 0;
+	private int seq_buy_dtl		= 0;
+	private int seq_buy_mst		= 0;
+	private int seq_sle			= 0;
+	private int price				= 0;
+	private int dt_reg				= 0;
+	private Integer count			= 0;
+	private Integer sale			= 0;
+	private Integer cost			= 0;
+	private Integer income			= 0;
+	private Integer moon			= 0;
 	
-	private int total_cost				= 0;
-	private int total_sale				= 0;
-	private int total_income			= 0;
+	private int total_cost			= 0;
+	private int total_sale			= 0;
+	private int total_income		= 0;
 	
-	private int year					= 0;
-	private int total_use				= 0;
-	private int total_income_point		= 0;
+	private int year				= 0;
+	private int total_use			= 0;
+	private int total_income_point	= 0;
 	
-	
-	public int getTotal_use() {
-		return total_use;
-	}
-	public void setTotal_use(int total_use) {
-		this.total_use = total_use;
-	}
-	public int getTotal_income_point() {
-		return total_income_point;
-	}
-	public void setTotal_income_point(int total_income_point) {
-		this.total_income_point = total_income_point;
-	}
-	public int getYear() {
-		return year;
-	}
-	public void setYear(int year) {
-		this.year = year;
-	}
-	public int getTotal_cost() {
-		return total_cost;
-	}
-	public void setTotal_cost(int total_cost) {
-		this.total_cost = total_cost;
-	}
-	public int getTotal_sale() {
-		return total_sale;
-	}
-	public void setTotal_sale(int total_sale) {
-		this.total_sale = total_sale;
-	}
-	public int getTotal_income() {
-		return total_income;
-	}
-	public void setTotal_income(int total_income) {
-		this.total_income = total_income;
-	}
 	public int getSeq_buy_dtl() {
 		return seq_buy_dtl;
 	}
@@ -146,7 +109,41 @@ public class MemberIncomeDto {
 	public void setMoon(Integer moon) {
 		this.moon = moon;
 	}
-
-
+	public int getTotal_cost() {
+		return total_cost;
+	}
+	public void setTotal_cost(int total_cost) {
+		this.total_cost = total_cost;
+	}
+	public int getTotal_sale() {
+		return total_sale;
+	}
+	public void setTotal_sale(int total_sale) {
+		this.total_sale = total_sale;
+	}
+	public int getTotal_income() {
+		return total_income;
+	}
+	public void setTotal_income(int total_income) {
+		this.total_income = total_income;
+	}
+	public int getYear() {
+		return year;
+	}
+	public void setYear(int year) {
+		this.year = year;
+	}
+	public int getTotal_use() {
+		return total_use;
+	}
+	public void setTotal_use(int total_use) {
+		this.total_use = total_use;
+	}
+	public int getTotal_income_point() {
+		return total_income_point;
+	}
+	public void setTotal_income_point(int total_income_point) {
+		this.total_income_point = total_income_point;
+	}
 	
 }

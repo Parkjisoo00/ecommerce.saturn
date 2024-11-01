@@ -13,12 +13,12 @@
  * Program		: kr.co.himedia.ecommerce
  * Description	:
  * Environment	: JRE 1.7 or more
- * File			: MemberSrvc.java
+ * File			: StatisticsSrvc.java
  * Notes		:
  * History		: [NO][Programmer][Description]
- *				: [20241028094728][whslsl88#gmail.com][CREATE: Initial Release]
+ *				: [20241101101000][whslsl88#gmail.com][CREATE: Initial Release]
  */
-package kr.co.bravomylife.backoffice.statistics.service;
+package kr.co.bravomylife.backoffice.login.service;
 
 import java.util.List;
 
@@ -26,42 +26,37 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import kr.co.bravomylife.backoffice.statistics.dao.MemberDao;
-import kr.co.bravomylife.backoffice.statistics.dto.MemberAgeDto;
-import kr.co.bravomylife.backoffice.statistics.dto.MemberIncomeDto;
-import kr.co.bravomylife.front.sale.dao.SaleDao;
-
+import kr.co.bravomylife.backoffice.login.dao.StatisticsDao;
+import kr.co.bravomylife.backoffice.login.dto.StatisticsBestDto;
+import kr.co.bravomylife.backoffice.login.dto.StatisticsDto;
 
 /**
  * @version 1.0.0
  * @author whslsl88#gmail.com
  * 
- * @since 2024-10-28
+ * @since 2024-11-01
  * <p>DESCRIPTION:</p>
  * <p>IMPORTANT:</p>
  */
-@Service("kr.co.bravomylife.backoffice.statistics.service.MemberSrvc")
-public class MemberSrvc {
+@Service("kr.co.bravomylife.backoffice.login.service.StatisticsSrvc")
+public class StatisticsSrvc {
+	
+	@Inject
+	StatisticsDao statisticsDao;
+	
+	public List<StatisticsBestDto> memberAge(StatisticsBestDto statisticsBestDto) {
+		return statisticsDao.memberAge(statisticsBestDto);
+	}
 
-	@Inject
-	SaleDao saleDao;
-	
-	@Inject
-	MemberDao memberDao;
-	
-	public List<MemberAgeDto> sellingBestName() {
-		return memberDao.sellingBestName();
+	public List<StatisticsBestDto> sellingBestName(StatisticsBestDto statisticsBestDto) {
+		return statisticsDao.sellingBestName(statisticsBestDto);
 	}
 	
-	public List<MemberAgeDto> sellingBestList() {
-		return memberDao.sellingBestList();
+	public List<StatisticsBestDto> sellingBestList(StatisticsBestDto statisticsBestDto) {
+		return statisticsDao.sellingBestList(statisticsBestDto);
 	}
 	
-	public List<MemberAgeDto> memberAge() {
-		return memberDao.memberAge();
+	public List<StatisticsDto> incomeRegion(StatisticsDto statisticsDto) {
+		return statisticsDao.incomeRegion(statisticsDto);
 	}
-	public List<MemberIncomeDto> incomeRegion(MemberIncomeDto memberIncomeDto) {
-		return memberDao.incomeRegion(memberIncomeDto);
-	}
-	
 }

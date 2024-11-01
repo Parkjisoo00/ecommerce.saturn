@@ -45,6 +45,4 @@ public class LoginSrvc {
 	public ManagerDto exist(LoginDto loginDto) {
 		return loginDao.exist(loginDto);
 	}
-	
-
 }

@@ -34,8 +34,8 @@
 			var maleData = google.visualization.arrayToDataTable(maleDataArray);
 			var optionsMale = {
 				title: '남성 나이대 통계',
-				width: 500,
-				height: 400,
+				width: 800,
+				height: 700,
 				colors: ['#0033ff', '#0099ff', '#00ccff','#00ffff', '#3300ff', '#3333ff'] ,
 				pieSliceTextStyle: {
 					color: 'black'
@@ -50,9 +50,9 @@
 			var femaleData = google.visualization.arrayToDataTable(femaleDataArray);
 			var optionsFemale = {
 				title: '여성 나이대 통계',
-				width: 500,
-				height: 400,
-				colors: ['#6600ff', '#9900ff', '#9999ff', '#cc99ff', '#ccccff', '#cc00ff'],
+				width: 800,
+				height: 700,
+				colors: ['#e39bcf', '#f778c3', '#fc00a8', '#ee5cd4', '#e792e3', '#ee548b'],
 				pieSliceTextStyle: {
 					color: 'black'
 					,fontSize: 13
@@ -70,10 +70,23 @@
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
-	<div style="display: flex; justify-content: space-around; align-items: center;">
-		<div id="chart_div_male" style="width: 100px; height: 800px;"></div>
-		<div id="chart_div_female" style="width: 300px; height: 800px;"></div>
-	</div>
+<div class="content-wrapper">
+	<section class="content">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h1 class="box-title">회원별 통계</h1>
+					</div>
+					<div style="display: flex">
+						<div id="chart_div_male" style="height: 800px;"></div>
+						<div id="chart_div_female" style="width: 50px; height: 800px;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
 <!-- /Maincontent -->
 
 	<%@ include file="/include/backoffice/footer.jsp" %>

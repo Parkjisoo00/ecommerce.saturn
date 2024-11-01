@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<%@ page info="/WEB-INF/view/backoffice/login/loginForm.jsp" %>
+<%@ page info="/WEB-INF/view/backoffice/statistics/index2.jsp" %>
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
 <!DOCTYPE html>
 <html>
@@ -7,11 +7,9 @@
 	<%@ include file="/include/backoffice/header.jsp" %>
 	
 	<%@ include file="/include/backoffice/css.jsp" %>
-	
 <script>
 function goYear(year) {
 	
-
 	var frmMain = document.getElementById("frmMain");
 
 	document.getElementById("year").value = year;

@@ -48,7 +48,7 @@ public class BackofficeItrc extends HandlerInterceptorAdapter {
 		try {
 			if (!sessionCmpn.isSession(request)) {
 				// response.sendRedirect(request.getContextPath() + "/reject.web");
-				response.sendRedirect(request.getContextPath() + "/backoffice/login/loginForm.web?url=" + request.getRequestURI());
+				response.sendRedirect(request.getContextPath() + "/backoffice/login/mainㄴ.web?url=" + request.getRequestURI());
 				return false;
 			}
 		}
