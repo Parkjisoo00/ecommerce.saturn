@@ -204,7 +204,7 @@
 		UPDATE
 			TB_MBR_MST
 		SET
-			EMAIL = '#' || SEQ_MBR || EMAIL
+			EMAIL = '_' || SEQ_MBR || EMAIL
 			, CD_STATE	= 8
 			, DT_UPT	= SYSDATE
 			, REGISTER	= #{register}
