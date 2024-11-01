@@ -82,8 +82,33 @@ public class MemberWeb extends Common {
 			List<MemberDto> list = (List<MemberDto>) pagingListDto.getList();
 			
 			for (int loop = 0; loop < list.size(); loop++) {
-				list.get(loop).setEmail(aes.decode(list.get(loop).getEmail()));
-				list.get(loop).setMbr_nm(aes.decode(list.get(loop).getMbr_nm()));
+			MemberDto currentMemberDto = list.get(loop);
+			String encodedEmail = currentMemberDto.getEmail();
+			String decodedEmail = null;
+		
+			// 이메일이 '_'로 시작하는 경우
+			if (encodedEmail.startsWith("_")) {
+				decodedEmail = encodedEmail; // 기본값 또는 적절한 처리
+			} else {
+				try {
+					decodedEmail = aes.decode(encodedEmail);
+				} catch (Exception e) {
+					logger.error("이메일 디코딩 오류: " + e.getMessage(), e);
+					decodedEmail = "디코딩 실패"; // 기본값 설정
+				}
+			}
+			currentMemberDto.setEmail(decodedEmail);
+			
+			// 회원 이름 디코딩 처리
+			String encodedMbrNm = currentMemberDto.getMbr_nm();
+			String decodedMbrNm = null;
+			try {
+				decodedMbrNm = aes.decode(encodedMbrNm);
+			} catch (Exception e) {
+				logger.error("회원 이름 디코딩 오류: " + e.getMessage(), e);
+				decodedMbrNm = "디코딩 실패"; // 기본값 설정
+			}
+			currentMemberDto.setMbr_nm(decodedMbrNm);
 			}
 			
 			pagingDto.setSearchWord(searchWord);

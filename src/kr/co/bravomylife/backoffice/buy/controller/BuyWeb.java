@@ -42,6 +42,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.bravomylife.backoffice.common.Common;
 import kr.co.bravomylife.backoffice.common.dto.PagingDto;
 import kr.co.bravomylife.backoffice.common.dto.PagingListDto;
+
 import kr.co.bravomylife.backoffice.buy.dto.BuyDto;
 import kr.co.bravomylife.util.security.SKwithAES;
 import kr.co.bravomylife.backoffice.buy.service.BuySrvc;
@@ -110,7 +111,7 @@ public class BuyWeb extends Common {
 	}
 	
 	@RequestMapping(value = "/console/buy/list.web")
-	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
+	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, BuyDto buyDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
@@ -135,8 +136,33 @@ public class BuyWeb extends Common {
 			List<BuyDto> list = (List<BuyDto>) pagingListDto.getList();
 			
 			for (int loop = 0; loop < list.size(); loop++) {
-				list.get(loop).setEmail(aes.decode(list.get(loop).getEmail()));
-				list.get(loop).setMbr_nm(aes.decode(list.get(loop).getMbr_nm()));
+				BuyDto currentBuyDto = list.get(loop);
+				String encodedEmail = currentBuyDto.getEmail();
+				String decodedEmail = null;
+
+				// 이메일이 '_'로 시작하는 경우
+				if (encodedEmail.startsWith("_")) {
+					decodedEmail = encodedEmail; // 기본값 또는 적절한 처리
+				} else {
+					try {
+						decodedEmail = aes.decode(encodedEmail);
+					} catch (Exception e) {
+						logger.error("이메일 디코딩 오류: " + e.getMessage(), e);
+						decodedEmail = "디코딩 실패"; // 기본값 설정
+					}
+				}
+				currentBuyDto.setEmail(decodedEmail);
+				
+				// 회원 이름 디코딩 처리
+				String encodedMbrNm = currentBuyDto.getMbr_nm();
+				String decodedMbrNm = null;
+				try {
+					decodedMbrNm = aes.decode(encodedMbrNm);
+				} catch (Exception e) {
+					logger.error("회원 이름 디코딩 오류: " + e.getMessage(), e);
+					decodedMbrNm = "디코딩 실패"; // 기본값 설정
+				}
+				currentBuyDto.setMbr_nm(decodedMbrNm);
 			}
 			
 			pagingDto.setSearchWord(searchWord);

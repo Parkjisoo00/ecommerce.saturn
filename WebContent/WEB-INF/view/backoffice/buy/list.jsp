@@ -82,14 +82,14 @@
 		frmMain.submit();
 	}
 
-	function goModifyState(seq_buy_mst) {
+	function goModifyState(seq_buy_mst , position) {
 		
 		if (confirm("상태를 변경하시겠습니까?")) {
 			
 			var frmMain = document.getElementById("frmMain");
 			
-			cd_state = document.getElementById("select_1").options[document.getElementById("select_1").selectedIndex].value;
-			cd_state_delivery = document.getElementById("select_3").options[document.getElementById("select_3").selectedIndex].value;
+			cd_state			= document.getElementById("select_1_" + position).options[document.getElementById("select_1_" + position).selectedIndex].value;
+			cd_state_delivery	= document.getElementById("select_3_" + position).options[document.getElementById("select_3_" + position).selectedIndex].value;
 			
 			//console.log("cd_state value:", cd_state);
 			
@@ -100,9 +100,9 @@
 			// select_3의 선택된 value
 			document.getElementById("cd_state_delivery").value = cd_state_delivery;
 
-			//alert(cd_state);
-			//alert(cd_state_delivery);
-			//return;
+			alert(cd_state);
+			alert(cd_state_delivery);
+			return;
 			
 			frmMain.action="/console/buy/modifyProc.web";
 			frmMain.submit();
@@ -217,7 +217,7 @@
 						</tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach items="${list}" var="list">
+						<c:forEach items="${list}" var="list" varStatus="status">
 							<tr>
 								<td style="text-align: center;">
 									${list.rnum}
@@ -241,7 +241,7 @@
 								</td>
 								<!-- 주문 목록에서 각 주문의 상태(주문 상태, 결제 상태, 배송 상태)를 관리자가 선택할 수 있도록 -->
 								<td style="text-align: center;">
-									<select id="select_1" style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst});">
+									<select id="select_1_${status.index}" style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst},${status.index});">
 										<option value="NULL"<c:if test="${list.cd_state == NULL}"> selected</c:if>>결제중단</option>
 										<option value="1"<c:if test="${list.cd_state == 1}"> selected</c:if>>결제완료</option>
 										<option value="2"<c:if test="${list.cd_state == 2}"> selected</c:if>>취소</option>
@@ -258,7 +258,7 @@
 									</select>
 								</td>
 								<td style="text-align: center;">
-									<select id="select_3" style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst});">
+									<select id="select_3_${status.index}" style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst},${status.index});">
 										<option value="NULL"<c:if test="${list.cd_state_delivery == NULL}"> selected</c:if>>결제중단</option>
 										<option value="C"<c:if test="${list.cd_state_delivery == 'C'}"> selected</c:if>>판매 확인중</option>
 										<option value="P"<c:if test="${list.cd_state_delivery == 'P'}"> selected</c:if>>배송 준비중</option>
