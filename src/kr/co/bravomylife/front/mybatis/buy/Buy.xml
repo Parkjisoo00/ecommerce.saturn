@@ -9,6 +9,7 @@
 			, pay.DEAL_NUM
 			, dtl.SEQ_BUY_DTL
 			, mst.SEQ_BUY_MST
+			, dtl.CD_STATE
 			, sle.SLE_NM
 			, sle.IMG
 			, dtl.COUNT

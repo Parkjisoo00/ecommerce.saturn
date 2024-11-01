@@ -55,6 +55,18 @@ public class BuySrvc {
 	@Inject
 	PayDao payDao;
 	
+	@Transactional("txFront")
+	public boolean updateCancle(BuyDetailDto buyDetailDto) {
+		
+		int result = buyDao.updateCancle(buyDetailDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
 	public BuyDetailDto cancel(BuyDetailDto buyDetailDto) {
 		return buyDao.cancel(buyDetailDto);
 	}

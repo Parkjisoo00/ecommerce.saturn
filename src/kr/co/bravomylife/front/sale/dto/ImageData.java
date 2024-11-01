@@ -20,6 +20,7 @@
  */
 package kr.co.bravomylife.front.sale.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,16 +35,22 @@ public class ImageData {
 	
 	private String file_save				= "";
 	private int seq_review_img				= 0;
-	private List<Integer> review_imgs		= null;
-	private List<String> flg_del			= null;
-	private List<Integer> review_imgIn		= null;
+	private List<Integer> review_imgs = new ArrayList<>();
+	private List<String> flg_del = new ArrayList<>();
+	private List<Integer> review_imgIn = new ArrayList<>();
 	
 	
-	public List<Integer> getReview_imgIn() {
-		return review_imgIn;
+	public String getFile_save() {
+		return file_save;
 	}
-	public void setReview_imgIn(List<Integer> review_imgIn) {
-		this.review_imgIn = review_imgIn;
+	public void setFile_save(String file_save) {
+		this.file_save = file_save;
+	}
+	public int getSeq_review_img() {
+		return seq_review_img;
+	}
+	public void setSeq_review_img(int seq_review_img) {
+		this.seq_review_img = seq_review_img;
 	}
 	public List<Integer> getReview_imgs() {
 		return review_imgs;
@@ -57,16 +64,10 @@ public class ImageData {
 	public void setFlg_del(List<String> flg_del) {
 		this.flg_del = flg_del;
 	}
-	public String getFile_save() {
-		return file_save;
+	public List<Integer> getReview_imgIn() {
+		return review_imgIn;
 	}
-	public void setFile_save(String file_save) {
-		this.file_save = file_save;
-	}
-	public int getSeq_review_img() {
-		return seq_review_img;
-	}
-	public void setSeq_review_img(int seq_review_img) {
-		this.seq_review_img = seq_review_img;
+	public void setReview_imgIn(List<Integer> review_imgIn) {
+		this.review_imgIn = review_imgIn;
 	}
 }

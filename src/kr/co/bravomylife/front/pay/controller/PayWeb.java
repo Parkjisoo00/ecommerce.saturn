@@ -130,20 +130,18 @@ public class PayWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/pay/cancleOrder.json",  method = RequestMethod.POST, consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
-	public @ResponseBody Map<String, Object> cancelOrder(HttpServletRequest request, @RequestBody Map<String, String> item) {
+	public @ResponseBody Map<String, Object> cancelOrder(HttpServletRequest request, @RequestBody BuyDetailDto buyDetailDto) {
 		
 		Map<String, Object> response = new HashMap<>();
-		
-		System.out.println(item.toString());
 		
 		try {
 		
 		Map<String,String> map = new HashMap<>();
-		// 페이업 서버 통신 apiService 사용
+		
 		String url = "https://api.testpayup.co.kr/v2/api/payment/himedia/cancel2";
 		
 		String merchantId = "himedia";
-		String transactionId = item.get("deal_num");
+		String transactionId = buyDetailDto.getDeal_num();
 		String signature =	"";
 		String apiCertKey =	"ac805b30517f4fd08e3e80490e559f8e";
 		String p = "|";
@@ -157,12 +155,19 @@ public class PayWeb extends Common {
 		
 		Map<String,Object> apiResult = apiService.JsonApi(url, map);
 		
-		//apiResultAPI 결과가 있음
+		System.out.println(apiResult.toString());
+		System.out.println(apiResult.get("responseCode"));
+		System.out.println(apiResult.get("responseMsg"));
 		
-		//3.결과 값 확인
-		System.out.println(apiResult.toString()); //{responseCode=6001, responseMsg=카드유효기간 월(expireMonth)은 필수 입니다.}
-		System.out.println(apiResult.get("responseCode")); //0000
-		System.out.println(apiResult.get("responseMsg")); //카드유효기간 월(expireMonth)은 필수 입니다
+		if (apiResult.get("responseCode").equals("0000")) {
+			
+			buySrvc.updateCancle(buyDetailDto);
+			response.put("message", "주문 취소가 신청되었습니다.");
+		}
+		else if (apiResult.get("responseCode").equals("1005")) {
+			
+			response.put("message", "주문 취소가 처리중입니다.");
+		}
 		
 		response.putAll(apiResult);
 		}

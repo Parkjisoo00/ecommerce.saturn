@@ -1,5 +1,6 @@
 package kr.co.bravomylife.common.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -14,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class FileUploadDto {
 	
-	private List<MultipartFile> files;
+	private List<MultipartFile> files = new ArrayList<>();
 	
 	
 	public List<MultipartFile> getFiles() {

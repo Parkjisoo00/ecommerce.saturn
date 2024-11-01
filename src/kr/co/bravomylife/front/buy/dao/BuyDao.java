@@ -41,6 +41,10 @@ import kr.co.bravomylife.front.sale.dto.SaleDto;
 @Service("kr.co.bravomylife.front.buy.dao.BuyDao")
 public class BuyDao extends BaseDao {
 	
+	public int updateCancle(BuyDetailDto buyDetailDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.buy.BuyDetail.updateCancle", buyDetailDto);
+	}
+	
 	public BuyDetailDto cancel(BuyDetailDto buyDetailDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.buy.Buy.cancel", buyDetailDto);
 	}
