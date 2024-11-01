@@ -123,148 +123,145 @@
 <form action= "/backoffice/product/productRegProc.web"id="frmMain" method="POST" enctype="multipart/form-data">
 
 <!-- Main content -->
-	<section class="content" >
-		<div class="content-wrapper" >
-			<div class="row" style="display: flex; justify-content: center; align-items: center;">
-				<div class="col-md-9" style="display: flex; justify-content: center; align-items: center; margin-right: -230px;">
-					<div class="box box-primary">
-						<div class="box-header with-border">
-							<h3 class="box-title">상품 등록</h3>
-						</div>
-						<!-- /.box-header -->
-						<div class="box-body no-padding">
-							<div class="table-responsive mailbox-messages">
-								<table class="table table-hover table-striped">
-									<tbody>
-									<tr>
-										<th style="width: 150px;" >판매 상품명</th>
-										<td>
-											<input type="text" id="sle_nm" name="sle_nm" class="form-control" required autocomplete="off">
-	
-										</td>
-									</tr>
-									<tr>
-										<th style="width: 150px;" >상품 원가</th>
-										<td>
-											<input type="text" class="form-control" id="origin_sale" name="origin_sale" onkeyup="commaValue(this);" required autocomplete="off">
-										</td>
-									</tr>
-									<tr>
-										<th style="width: 150px;" >판매 상품 이미지</th>
-										<td>
-											<input type="file" id="img" name="files[0]" required>
-										</td>
-									</tr>
-									<tr>
-										<th style="width: 150px;" >판매 상품 상세 이미지</th>
-										<td>
-											<input type="file" id="desces" name="files[1]" required>
-										</td>
-									</tr>
-									<tr>
-										<th style="width: 150px;" >카테고리 대분류</th>
-										<td>
-											<select class="form-control" id="cd_ctg_b" name="cd_ctg_b" onchange="updateCategoryMinor()" required>
-												<option value="0">선택하세요</option>
-												<option value="1">기능별</option>
-												<option value="2">성분별</option>
-												<option value="3">대상별</option>
-											</select>
-										</td>
-									</tr>
-									<tr>
-										<th style="width: 150px;" >카테고리 중분류</th>
-										<td>
-											<select class="form-control" id="cd_ctg_m" name="cd_ctg_m" required>
-												<option value="0">먼저 대분류를 선택하세요</option>
-											</select>
-										</td>
-									</tr>
-									<tr>
-									<th>판매 상품 상태</th>
-										<td>
-											<select class="form-control" id="cd_state_sale" name="cd_state_sale" required>
-												<option value="0">선택하세요</option>
-												<option value="1">대기</option>
-												<option value="2">판매</option>
-												<option value="3">중지</option>
-												<option value="9">재고소진</option>
-											</select>
-										</td>
-									</tr>
-									<tr>
-										<th style="width: 150px;" >판매 상품 섭취 타입</th>
-										<td>
-											<select class="form-control" id="prd_type" name="prd_type" required>
-												<option value="0">선택하세요</option>
-												<option value="1">액상</option>
-												<option value="2">정</option>
-												<option value="3">캡슐</option>
-												<option value="4">베지캡슐</option>
-												<option value="5">젤리</option>
-												<option value="6">분말</option>
-												<option value="7">츄어블</option>
-											</select>
-										</td>
-									</tr>
-									<tr>
-										<th style="width: 150px;" >판매 상품 재고</th>
-										<td>
-											<input type="text" id="count_stock" name="count_stock" class="form-control" onkeyup="commaValue(this);" required autocomplete="off">
-										</td>
-									</tr>
-									<tr>
-										<th style="width: 150px;" >판매 상품 브랜드</th>
-										<td>
-											<input type="text" id="corp_nm" name="corp_nm" class="form-control" required autocomplete="off">
-	
-										</td>
-									</tr>
-									<tr>
-										<th style="width: 150px;" >상품 판매 시작일</th>
-										<td>
-											<input type="text" id="dt_sale_start" name="dt_sale_start" required autocomplete="off">
-										</td>
-									</tr>
-									<tr>
-										<th style="width: 150px;" >상품 판매 종료일</th>
-										<td>
-											<input type="text" id="dt_sale_end" name="dt_sale_end" required autocomplete="off">
-	
-										</td>
-									</tr>
-									<tr>
-										<th style="width: 150px;" >할인율</th>
-										<td>
-											<input type="text" id="discount" name="discount" class="form-control" autocomplete="off" max="99">
-										</td>
-									</tr>
-									<tr>
-										<th style="width: 150px;" >마진률</th>
-										<td>
-											<input type="text" id="margin_rate" name="margin_rate" class="form-control" autocomplete="off" max="30">
-										</td>
-									</tr>
-									<tr>
-										<th style="width: 150px;" >포인트 적립률</th>
-										<td>
-											<input type="text" id="point_stack" name="point_stack" class="form-control"  autocomplete="off">
-										</td>
-									</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-						<div class="mailbox-controls">
-							<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
-								<input type="button" value="등록" class="btn btn-primary" style="width: 150px" onclick="javascript:productRegProc();"/>
-							</div>
-						</div>
+<div class="content-wrapper">
+	<section class="content-header" style="display: flex; align-items: center; margin-left: 215px;">
+		<h1>상품 등록</h1>
+	</section>
+	<section class="content" style="display: flex; justify-content: center; align-items: center;">
+		<div class="col-md-9">
+			<div class="box box-primary">
+				<div class="box-body no-padding">
+					<div class="table-responsive mailbox-messages">
+						<table class="table table-hover table-striped">
+							<tbody>
+							<tr>
+								<th style="width: 150px;" >판매 상품명</th>
+								<td>
+									<input type="text" id="sle_nm" name="sle_nm" class="form-control" required autocomplete="off">
+
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >상품 원가</th>
+								<td>
+									<input type="text" class="form-control" id="origin_sale" name="origin_sale" onkeyup="commaValue(this);" required autocomplete="off">
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >판매 상품 이미지</th>
+								<td>
+									<input type="file" id="img" name="files[0]" required>
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >판매 상품 상세 이미지</th>
+								<td>
+									<input type="file" id="desces" name="files[1]" required>
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >카테고리 대분류</th>
+								<td>
+									<select class="form-control" id="cd_ctg_b" name="cd_ctg_b" onchange="updateCategoryMinor()" required>
+										<option value="0">선택하세요</option>
+										<option value="1">기능별</option>
+										<option value="2">성분별</option>
+										<option value="3">대상별</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >카테고리 중분류</th>
+								<td>
+									<select class="form-control" id="cd_ctg_m" name="cd_ctg_m" required>
+										<option value="0">먼저 대분류를 선택하세요</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+							<th>판매 상품 상태</th>
+								<td>
+									<select class="form-control" id="cd_state_sale" name="cd_state_sale" required>
+										<option value="0">선택하세요</option>
+										<option value="1">대기</option>
+										<option value="2">판매</option>
+										<option value="3">중지</option>
+										<option value="9">재고소진</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >판매 상품 섭취 타입</th>
+								<td>
+									<select class="form-control" id="prd_type" name="prd_type" required>
+										<option value="0">선택하세요</option>
+										<option value="1">액상</option>
+										<option value="2">정</option>
+										<option value="3">캡슐</option>
+										<option value="4">베지캡슐</option>
+										<option value="5">젤리</option>
+										<option value="6">분말</option>
+										<option value="7">츄어블</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >판매 상품 재고</th>
+								<td>
+									<input type="text" id="count_stock" name="count_stock" class="form-control" onkeyup="commaValue(this);" required autocomplete="off">
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >판매 상품 브랜드</th>
+								<td>
+									<input type="text" id="corp_nm" name="corp_nm" class="form-control" required autocomplete="off">
+
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >상품 판매 시작일</th>
+								<td>
+									<input type="text" id="dt_sale_start" name="dt_sale_start" required autocomplete="off">
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >상품 판매 종료일</th>
+								<td>
+									<input type="text" id="dt_sale_end" name="dt_sale_end" required autocomplete="off">
+
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >할인율</th>
+								<td>
+									<input type="text" id="discount" name="discount" class="form-control" autocomplete="off" max="99">
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >마진률</th>
+								<td>
+									<input type="text" id="margin_rate" name="margin_rate" class="form-control" autocomplete="off" max="30">
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >포인트 적립률</th>
+								<td>
+									<input type="text" id="point_stack" name="point_stack" class="form-control"  autocomplete="off">
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="mailbox-controls">
+					<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
+						<input type="button" value="등록" class="btn btn-primary" style="width: 150px" onclick="javascript:productRegProc();"/>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+</div>
 <!-- /Maincontent -->
 
 	<%@ include file="/include/backoffice/footer.jsp" %>

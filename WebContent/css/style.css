@@ -327,6 +327,99 @@ table.headTop_01 th {
 }
 
 /*----------------------------------------*/
+/* introduce-background
+/*----------------------------------------*/
+.cancle-top {
+	background-color: rgb(255, 255, 255) !important;
+	padding: 16px !important;
+	border-radius: 8px !important;
+	font-family: "맑은 고딕", malgun gothic, apple sd gothic neo, "나눔고딕", nanumgothic, "돋움", dotum, sans-serif !important;
+}
+
+.cancle-body {
+	display: block !important;
+	margin-bottom: 16px !important;
+	font-family: "맑은 고딕", malgun gothic, apple sd gothic neo, "나눔고딕", nanumgothic, "돋움", dotum, sans-serif !important;
+}
+
+.cancle-middle {
+	box-sizing: border-box !important;
+	font-family: "맑은 고딕", malgun gothic, apple sd gothic neo, "나눔고딕", nanumgothic, "돋움", dotum, sans-serif !important;
+}
+
+.cancle-line {
+	height: 1px !important;
+	background-color: rgb(238, 238, 238) !important;
+	margin: 16px 0px !important;
+	width: 100% !important;
+	font-family: "맑은 고딕", malgun gothic, apple sd gothic neo, "나눔고딕", nanumgothic, "돋움", dotum, sans-serif !important;
+}
+
+.cancle-bottom {
+	margin-top: 16px !important;
+	font-family: "맑은 고딕", malgun gothic, apple sd gothic neo, "나눔고딕", nanumgothic, "돋움", dotum, sans-serif !important;
+}
+.cancle-layout {
+	min-height: 30vh !important;
+	background-color: rgb(245, 245, 245) !important;
+	line-height: 1.43 !important;
+	margin-top: 0px !important;
+	padding: 24px 24px !important;
+	border-bottom-left-radius: 8px !important;
+	border-bottom-right-radius: 8px !important;
+	font-family: "맑은 고딕", malgun gothic, apple sd gothic neo, "나눔고딕", nanumgothic, "돋움", dotum, sans-serif !important;
+}
+
+.cancle-span {
+	margin-bottom: 0px !important;
+	position: relative !important;
+	display: flex !important;
+	-webkit-box-pack: justify !important;
+	justify-content: space-between !important;
+	font-family: "맑은 고딕", malgun gothic, apple sd gothic neo, "나눔고딕", nanumgothic, "돋움", dotum, sans-serif !important;
+}
+
+.cancle-subSpan {
+	font-size: 1.25rem !important;
+	font-weight: bold !important;
+	margin-bottom: 16px !important;
+	display: block !important;
+	font-family: "맑은 고딕", malgun gothic, apple sd gothic neo, "나눔고딕", nanumgothic, "돋움", dotum, sans-serif !important;
+}
+
+.cancle-button {
+	display: inline-flex !important;
+	-webkit-box-pack: center !important;
+	justify-content: center !important;
+	-webkit-box-align: center !important;
+	align-items: center !important;
+	padding-left: 12px !important;
+	padding-right: 12px !important;
+	user-select: none !important;
+	cursor: pointer !important;
+	text-decoration: none !important;
+	outline: none !important;
+	appearance: none !important;
+	min-height: 2.5rem !important;
+	border-radius: 4px !important;
+	color: rgb(255, 255, 255) !important;
+	background-color: rgb(52, 106, 255) !important;
+	border: 1px solid rgb(52, 106, 255) !important;
+	-webkit-tap-highlight-color: rgb(31, 63, 153) !important;
+	font-size: 0.875rem !important;
+	font-family: "맑은 고딕", malgun gothic, apple sd gothic neo, "나눔고딕", nanumgothic, "돋움", dotum, sans-serif !important;
+}
+
+.cancle-footer {
+	display: flex !important;
+	flex-direction: row !important;
+	line-height: 1.5 !important;
+	-webkit-box-pack: justify !important;
+	justify-content: space-between !important;
+	letter-spacing: normal !important;
+}
+
+/*----------------------------------------*/
 /* Product Detail Text
 /*----------------------------------------*/
 

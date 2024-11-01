@@ -243,122 +243,122 @@
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
-	<section class="content" >
-		<div class="row" style="display: flex; justify-content: center; align-items: center;">
-			<div class="col-md-9" style="display: flex; justify-content: center; align-items: center; margin-right: -230px;">
-				<div class="box box-primary">
-					<div class="box-header with-border">
-						<h3 class="box-title">상품 정보 수정</h3>
+<div class="content-wrapper">
+	<section class="content-header" style="display: flex; align-items: center; margin-left: 215px;">
+		<h1>상품 정보 수정</h1>
+	</section>
+	<section class="content" style="display: flex; justify-content: center; align-items: center;">
+		<div class="col-md-9" >
+			<div class="box box-primary">
+				<div class="box-body no-padding">
+					<div class="table-responsive mailbox-messages">
+						<table class="table table-hover table-striped">
+							<tbody>
+							<tr>
+								<th style="width: 150px;" >판매 상품명</th>
+								<td>
+									<input type="text" name="sle_nm" id="sle_nm" value="${productDto.sle_nm}" required/>
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >상품 상세 이미지</th>
+								<td>
+									<img src="/img/product/${productDto.desces}" height="200"/>
+									<input type="file" id="desces" name="files[1]" />
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >상품 이미지</th>
+								<td>
+									<img src="/img/product/${productDto.img}" height="200"/>
+									<input type="file" id="img" name="files[0]" />
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >상품 원가</th>
+								<td>
+									<input type="text" id="origin_sale" name="origin_sale" value="<fmt:formatNumber value="${productDto.origin_sale}" type="number" />" style="width:100px; text-align:right" onkeyup="commaValue(this);" required/>원
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >카테고리 대분류</th>
+								<td>
+									<span id="span_cd_ctg_1"></span>
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;">카테고리 중분류</th>
+								<td>
+									<span id="span_cd_ctg_2"></span>
+								</td>
+							</tr>
+							<tr>
+							<th>판매 상태</th>
+								<td>
+									<select id="cd_state_sale" name="cd_state_sale">
+										<option value="1"<c:if test="${productDto.cd_state_sale == '1'}"> selected</c:if>>대기</option>
+										<option value="2"<c:if test="${productDto.cd_state_sale == '2'}"> selected</c:if>>판매</option>
+										<option value="3"<c:if test="${productDto.cd_state_sale == '3'}"> selected</c:if>>중지</option>
+										<option value="9"<c:if test="${productDto.cd_state_sale == '9'}"> selected</c:if>>품절</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >판매 상품 재고</th>
+								<td>
+									<input type="text" id="count_stock" name="count_stock" value="<fmt:formatNumber value="${productDto.count_stock}" type="number" />" style="width:100px; text-align:right" onkeyup="commaValue(this);" required/>개
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >포인트 적립률</th>
+								<td>
+									<input type="text" name="point_stack" id="point_stack" value="${productDto.point_stack}" style="width:100px; text-align:right" required/>%
+							</tr>
+							<tr>
+								<th style="width: 150px;" >삭제 처리 여부</th>
+								<td>
+									<input type="text" name="flg_delete" id="flg_delete" value="${productDto.flg_delete}" style="width:100px; text-align:right" required/>
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >판매 시작 일시</th>
+								<td>
+									<input type="text" id="dt_sale_start" name="dt_sale_start" value="${productDto.dt_sale_start}" style="width:100px; text-align:right" required/>
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >판매 종료 일시</th>
+								<td>
+									<input type="text" id="dt_sale_end" name="dt_sale_end" value="${productDto.dt_sale_end}" style="width:100px; text-align:right" required/>
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >할인율</th>
+								<td>
+									<input type="text" id="discount" name="discount" value="${productDto.discount}" style="width:100px; text-align:right" required/>%
+								</td>
+							</tr>
+							<tr>
+								<th style="width: 150px;" >마진률</th>
+								<td>
+									<input type="text" id="margin_rate" name="margin_rate" value="${productDto.margin_rate}" style="width:100px; text-align:right" required/>%
+								</td>
+							</tr>
+							</tbody>
+						</table>
 					</div>
-					<!-- /.box-header -->
-					<div class="box-body no-padding">
-						<div class="table-responsive mailbox-messages">
-							<table class="table table-hover table-striped">
-								<tbody>
-								<tr>
-									<th style="width: 150px;" >판매 상품명</th>
-									<td>
-										<input type="text" name="sle_nm" id="sle_nm" value="${productDto.sle_nm}" required/>
-									</td>
-								</tr>
-								<tr>
-									<th style="width: 150px;" >상품 상세 이미지</th>
-									<td>
-										<img src="/img/product/${productDto.desces}" height="200"/>
-										<input type="file" id="desces" name="files[1]" />
-									</td>
-								</tr>
-								<tr>
-									<th style="width: 150px;" >상품 이미지</th>
-									<td>
-										<img src="/img/product/${productDto.img}" height="200"/>
-										<input type="file" id="img" name="files[0]" />
-									</td>
-								</tr>
-								<tr>
-									<th style="width: 150px;" >상품 원가</th>
-									<td>
-										<input type="text" id="origin_sale" name="origin_sale" value="<fmt:formatNumber value="${productDto.origin_sale}" type="number" />" style="width:100px; text-align:right" onkeyup="commaValue(this);" required/>원
-									</td>
-								</tr>
-								<tr>
-									<th style="width: 150px;" >카테고리 대분류</th>
-									<td>
-										<span id="span_cd_ctg_1"></span>
-									</td>
-								</tr>
-								<tr>
-									<th style="width: 150px;">카테고리 중분류</th>
-									<td>
-										<span id="span_cd_ctg_2"></span>
-									</td>
-								</tr>
-								<tr>
-								<th>판매 상태</th>
-									<td>
-										<select id="cd_state_sale" name="cd_state_sale">
-											<option value="1"<c:if test="${productDto.cd_state_sale == '1'}"> selected</c:if>>대기</option>
-											<option value="2"<c:if test="${productDto.cd_state_sale == '2'}"> selected</c:if>>판매</option>
-											<option value="3"<c:if test="${productDto.cd_state_sale == '3'}"> selected</c:if>>중지</option>
-											<option value="9"<c:if test="${productDto.cd_state_sale == '9'}"> selected</c:if>>품절</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<th style="width: 150px;" >판매 상품 재고</th>
-									<td>
-										<input type="text" id="count_stock" name="count_stock" value="<fmt:formatNumber value="${productDto.count_stock}" type="number" />" style="width:100px; text-align:right" onkeyup="commaValue(this);" required/>개
-									</td>
-								</tr>
-								<tr>
-									<th style="width: 150px;" >포인트 적립률</th>
-									<td>
-										<input type="text" name="point_stack" id="point_stack" value="${productDto.point_stack}" style="width:100px; text-align:right" required/>%
-								</tr>
-								<tr>
-									<th style="width: 150px;" >삭제 처리 여부</th>
-									<td>
-										<input type="text" name="flg_delete" id="flg_delete" value="${productDto.flg_delete}" style="width:100px; text-align:right" required/>
-									</td>
-								</tr>
-								<tr>
-									<th style="width: 150px;" >판매 시작 일시</th>
-									<td>
-										<input type="text" id="dt_sale_start" name="dt_sale_start" value="${productDto.dt_sale_start}" style="width:100px; text-align:right" required/>
-									</td>
-								</tr>
-								<tr>
-									<th style="width: 150px;" >판매 종료 일시</th>
-									<td>
-										<input type="text" id="dt_sale_end" name="dt_sale_end" value="${productDto.dt_sale_end}" style="width:100px; text-align:right" required/>
-									</td>
-								</tr>
-								<tr>
-									<th style="width: 150px;" >할인율</th>
-									<td>
-										<input type="text" id="discount" name="discount" value="${productDto.discount}" style="width:100px; text-align:right" required/>%
-									</td>
-								</tr>
-								<tr>
-									<th style="width: 150px;" >마진률</th>
-									<td>
-										<input type="text" id="margin_rate" name="margin_rate" value="${productDto.margin_rate}" style="width:100px; text-align:right" required/>%
-									</td>
-								</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<div class="mailbox-controls">
-						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
-							<input type="button" value="수정" class="btn btn-primary" style="width: 150px" onclick="javascript:modifyProc();" />
-							<input type="button" value="목록" class="btn btn-primary" style="width: 150px" onclick="javascript:location.href='/console/product/list.web';"/>
-						</div>
+				</div>
+				<div class="mailbox-controls">
+					<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
+						<input type="button" value="수정" class="btn btn-primary" style="width: 150px" onclick="javascript:modifyProc();" />
+						<input type="button" value="목록" class="btn btn-primary" style="width: 150px" onclick="javascript:location.href='/console/product/list.web';"/>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+</div>
+	
 <!-- /Maincontent -->
 
 	<%@ include file="/include/backoffice/footer.jsp" %>

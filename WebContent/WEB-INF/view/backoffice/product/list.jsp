@@ -79,131 +79,131 @@
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
-<section>
-	<div class="content-wrapper" >
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="box">
-					<div class="box-header">
-						<h3 class="box-title" style="margin-bottom: 20px;">상품 리스트</h3>
-							<div style="display: flex; gap: 10px;">
-								<div class="input-group input-group-sm" style="width: 150px;">
-									<div class="form-group">
-										<select class="form-control" id="searchKey" name="searchKey" style="height: 30px;">
-											<option value="sle_nm">상품명</option>
-											<option value="corp_nm">브랜드명</option>
-											<option value="sle_nm_and_corp_nm">상품명 및 브랜드명</option>
-										</select>
-									</div>
-								</div>
-								<div class="input-group input-group-sm" style="width: 150px;">
-									<div class="form-group">
-										<select  class="form-control" id="cd_ctg_b" name="cd_ctg_b" onchange="updateCategoryMinor()" style="height: 30px;">
-											<option value="0">카테고리 대분류</option>
-											<option value="1">기능별</option>
-											<option value="2">성분별</option>
-											<option value="3">대상별</option>
-										</select>
-									</div>
-								</div>
-								<div class="input-group input-group-sm" style="width: 150px;">
-									<div class="form-group">
-										<select class="form-control" id="cd_ctg_m" name="cd_ctg_m" style="height: 30px;">
-											<option value="0">카테고리 중분류</option>
-										</select>
-									</div>
-								</div>
-								<div class="input-group input-group-sm" style="width: 150px;">
-									<div class="form-group">
-										<select class="form-control" id="cd_state_sale" name="cd_state_sale" style="height: 30px;">
-											<option value="0">상품 상태</option>
-											<option value="1">대기</option>
-											<option value="2">판매</option>
-											<option value="9">중지</option>
-											<option value="9">재고 소진</option>
-										</select>
-									</div>
-								</div>
-								<div class="input-group input-group-sm" style="width: 150px; display: flex; align-items: center  height: 30px;">
-									<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" class="form-control" placeholder="Search" style="flex: 1  height: 30px;">
-									<div class="input-group-btn">
-										<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-									</div>
+<div class="content-wrapper">
+	<section class="content-header" style="display: flex; align-items: center; margin-left: 215px;">
+		<h1>상품 리스트</h1>
+	</section>
+	<section class="content" style="display: flex; justify-content: center; align-items: center;">
+		<div class="col-md-9">
+			<div class="box box-primary">
+				<div class="box-body no-padding">
+						<div style="display: flex; gap: 10px;">
+							<div class="input-group input-group-sm" style="width: 150px;">
+								<div class="form-group">
+									<select class="form-control" id="searchKey" name="searchKey" style="height: 30px;">
+										<option value="sle_nm">상품명</option>
+										<option value="corp_nm">브랜드명</option>
+										<option value="sle_nm_and_corp_nm">상품명 및 브랜드명</option>
+									</select>
 								</div>
 							</div>
-					</div>
-					<div class="box-body table-responsive no-padding">
-					<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
-						<table class="table table-hover">
-							<tr>
-								<th>NO</th>
-								<th>상품명</th>
-								<th> 상품브랜드</th>
-								<th>상품 상태</th>
-								<th>상품 가격</th>
-								<th>상품 등록일</th>
-							</tr>
-							<c:choose>
-								<c:when test="${empty list}">
-									<tr>
-										<td colspan="6" style="text-align: center; vertical-align: middle;">등록된 상품이 없습니다.</td>
-									</tr>
-								</c:when>
-								<c:otherwise>
-									<c:forEach items="${list}" var="list">
-									<tr>		
-										<td>
-											${list.rnum}
-										</td>
-										<td>
-											<a href="/console/product/view.web?seq_sle=${list.seq_sle}" style="color: black;">
-												<bravomylifeTag:substring text="${fn:escapeXml(list.sle_nm)}" length="60" />
-											</a>
-										</td>
-										<td>
-											${list.corp_nm}
-										</td>
-										<td>
-											<c:choose>
-												<c:when test="${list.cd_state_sale == '1'}">
-													대기
-												</c:when>
-												<c:when test="${list.cd_state_sale == '2'}">
-													판매
-												</c:when>
-												<c:when test="${list.cd_state_sale == '3'}">
-													판매중지
-												</c:when>
-												<c:when test="${list.cd_state_sale == '9'}">
-													품절
-												</c:when>
-											</c:choose>
-										</td>
-										<td>
-											<fmt:formatNumber value="${list.price_sale}" type="number" />원
-										</td>
-										<td>
-											${list.dt_reg}
-										</td>
-									</tr>
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
-						</table>
-						<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important; font-size: 20px; letter-spacing: 2px;">
-						<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages"/>
+							<div class="input-group input-group-sm" style="width: 150px;">
+								<div class="form-group">
+									<select  class="form-control" id="cd_ctg_b" name="cd_ctg_b" onchange="updateCategoryMinor()" style="height: 30px;">
+										<option value="0">카테고리 대분류</option>
+										<option value="1">기능별</option>
+										<option value="2">성분별</option>
+										<option value="3">대상별</option>
+									</select>
+								</div>
+							</div>
+							<div class="input-group input-group-sm" style="width: 150px;">
+								<div class="form-group">
+									<select class="form-control" id="cd_ctg_m" name="cd_ctg_m" style="height: 30px;">
+										<option value="0">카테고리 중분류</option>
+									</select>
+								</div>
+							</div>
+							<div class="input-group input-group-sm" style="width: 150px;">
+								<div class="form-group">
+									<select class="form-control" id="cd_state_sale" name="cd_state_sale" style="height: 30px;">
+										<option value="0">상품 상태</option>
+										<option value="1">대기</option>
+										<option value="2">판매</option>
+										<option value="9">중지</option>
+										<option value="9">재고 소진</option>
+									</select>
+								</div>
+							</div>
+							<div class="input-group input-group-sm" style="width: 150px; display: flex; align-items: center  height: 30px;">
+								<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" class="form-control" placeholder="Search" style="flex: 1  height: 30px;">
+								<div class="input-group-btn">
+									<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+								</div>
+							</div>
 						</div>
-						<br>
-							<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
-							<a href="/console/product/productReg.web" class="btn btn-primary" style="width: 150px;">상품 등록</a>
-							</div>
-						<br>
+				</div>
+				<div class="box-body table-responsive no-padding">
+				<div class="brdInfo">전체 ${paging.totalLine}개[${paging.currentPage}/${paging.totalPage} 페이지]</div>
+					<table class="table table-hover">
+						<tr>
+							<th>NO</th>
+							<th>상품명</th>
+							<th> 상품브랜드</th>
+							<th>상품 상태</th>
+							<th>상품 가격</th>
+							<th>상품 등록일</th>
+						</tr>
+						<c:choose>
+							<c:when test="${empty list}">
+								<tr>
+									<td colspan="6" style="text-align: center; vertical-align: middle;">등록된 상품이 없습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${list}" var="list">
+								<tr>		
+									<td>
+										${list.rnum}
+									</td>
+									<td>
+										<a href="/console/product/view.web?seq_sle=${list.seq_sle}" style="color: black;">
+											<bravomylifeTag:substring text="${fn:escapeXml(list.sle_nm)}" length="60" />
+										</a>
+									</td>
+									<td>
+										${list.corp_nm}
+									</td>
+									<td>
+										<c:choose>
+											<c:when test="${list.cd_state_sale == '1'}">
+												대기
+											</c:when>
+											<c:when test="${list.cd_state_sale == '2'}">
+												판매
+											</c:when>
+											<c:when test="${list.cd_state_sale == '3'}">
+												판매중지
+											</c:when>
+											<c:when test="${list.cd_state_sale == '9'}">
+												품절
+											</c:when>
+										</c:choose>
+									</td>
+									<td>
+										<fmt:formatNumber value="${list.price_sale}" type="number" />원
+									</td>
+									<td>
+										${list.dt_reg}
+									</td>
+								</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</table>
+					<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important; font-size: 20px; letter-spacing: 2px;">
+					<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages"/>
 					</div>
+					<br>
+						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
+						<a href="/console/product/productReg.web" class="btn btn-primary" style="width: 150px;">상품 등록</a>
+						</div>
+					<br>
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
+	</section>
+</div>
 <!-- /Maincontent -->
 
 	<%@ include file="/include/backoffice/footer.jsp" %>

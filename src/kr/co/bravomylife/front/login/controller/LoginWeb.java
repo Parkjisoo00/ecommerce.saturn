@@ -182,7 +182,7 @@ import kr.co.bravomylife.util.servlet.Request;
 												+ "반갑습니다."
 												+ "')");
 				
-				request.setAttribute("redirect"	, "/index.jsp");
+				request.setAttribute("redirect"	, "/index.web");
 			}
 			else {
 				// logger.debug("해당 회원이 없거나 암호가 일치하지 않음");
