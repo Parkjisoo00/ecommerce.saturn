@@ -69,7 +69,7 @@ public class ProductWeb {
 	 * @param boardDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-08-08
+	 * @since 2024-10-24
 	 * <p>DESCRIPTION: 판매 상품 수정</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
