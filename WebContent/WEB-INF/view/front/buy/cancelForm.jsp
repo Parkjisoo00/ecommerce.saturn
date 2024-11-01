@@ -44,11 +44,11 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		document.getElementById("cd_bbs_type").value = value;
-
+		
 		frmMain.action = "/front/center/board/myPageNotice/list.web";
 		frmMain.submit();
 	}
-	
+		
 	function cancelOrder() {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -63,7 +63,9 @@
 			data: JSON.stringify(myData),
 			success: function(res) {
 				
-				
+				console.log(res.responseCode);
+				console.log(res.cancelDateTime);
+				console.log(res.message);
 				
 				
 			},
@@ -107,9 +109,15 @@ alert("평점 확인" + value);
 			<input type="hidden" 	id="total_price_sum"	value="${buyDetailDto.total_price_sum}"/>
 			<input type="hidden" 	id="seq_pay"			value="${buyDetailDto.seq_pay}"/>
 			<input type="hidden" 	id="deal_num"			value="${buyDetailDto.deal_num}"/>
+			<input type="hidden" 	id="cd_state"			value="${buyDetailDto.cd_state}"/>
 				<div class="row"style="display: flex; justify-content: center; align-items: center;">
 					<div class="col-lg-8">
+						<c:if test="${buyDetailDto.cd_state == 1}">
 						<h5 style="padding-left: 24px !important; font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;">주문 취소</h5>
+						</c:if>
+						<c:if test="${buyDetailDto.cd_state == 2}">
+						<h5 style="padding-left: 24px !important; font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;">주문 취소가 처리중입니다.</h5>
+						</c:if>
 						<div class="cancle-layout">	
 							<div class="cancle-top" style=" margin-bottom: 24px !important;">
 								<div class="cancle-body" style="font-weight: bold !important;">
@@ -194,9 +202,17 @@ alert("평점 확인" + value);
 									</div>
 								</div>
 							</div>
-							<div style="margin-bottom: 24px !important; text-align: right !important;">
-								<button type="button" onclick="cancelOrder()" class="cancle-button">주문 취소하기</button>
-							</div>
+							<c:choose>
+								<c:when test="${buyDetailDto.cd_state == 1}">
+									<div style="margin-bottom: 24px !important; text-align: right !important;">
+										<button type="button" onclick="cancelOrder()" class="cancle-button">주문 취소하기</button>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div style="margin-bottom: 24px !important; text-align: right !important;">
+									</div>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 				</div>
