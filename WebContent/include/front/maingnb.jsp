@@ -16,24 +16,24 @@
 			<a href="/front/login/loginForm.web">로그인</a>
 			<a href="/front/member/registerForm.web">회원가입</a>
 		</div>
-		<!-- 
-		<select class="search-container" id="first_cd_ctg" style=" width: 100px !important; height: 45px !important; font-size: 18px !important; margin-right:5px">
-			<option value="9">상품명</option>
-			<option value="1">기능별</option>
-			<option value="2">성분별</option>
-			<option value="3">대상별</option>
+
+		<select class="search-container" id="first_cd_ctg_android" style=" width: 100px !important; height: 45px !important; font-size: 18px !important; margin-right:5px">
+			<option value="9"<c:if test="${paging.cd_ctg_b == 9}">selected</c:if>>상품명</option>
+			<option value="1"<c:if test="${paging.cd_ctg_b == 1}">selected</c:if>>기능별</option>
+			<option value="2"<c:if test="${paging.cd_ctg_b == 2}">selected</c:if>>성분별</option>
+			<option value="3"<c:if test="${paging.cd_ctg_b == 3}">selected</c:if>>대상별</option>
 		</select>
 		
-		<select  class="search-container" id="second_cd_ctg" style=" width: 120px !important; height: 45px !important; font-size: 18px !important;">
+		<select  class="search-container" id="second_cd_ctg_android" style=" width: 120px !important; height: 45px !important; font-size: 18px !important;">
 			<option value="10">전체검색</option>
 		</select>
 		<div>
-		<input class="search-container" type="text" id="_searchWord" onkeydown="checkEnter(event)" style="height: 45px !important;  width: 157px !important;margin-top:20px"/>
-		<a class="health-btn" href="javascript:goTypeT('', '', '', '', '', '');" style="margin-left: 10px; height: 42px !important; font-size: 17px !important ;margin-buttom:20px !important">
+		<input class="search-container" type="text" id="_searchWord_android" onkeydown="checkEnter(event)" style="height: 45px !important;  width: 157px !important;margin-top:20px"/>
+		<a class="health-btn" href="javascript:goTypeTx('mobile');" style="margin-left: 10px; height: 42px !important; font-size: 17px !important ;margin-buttom:20px !important">
 			검색
 		</a>
 		</div>
-		 -->
+
 	</div>
 <header class="header" style="background-color: #341d08; height: 240px; position: relative;">
 <div class="container-fluid">
@@ -57,8 +57,8 @@
 		<select  class="search-container" id="second_cd_ctg" style=" width: 170px !important; height: 45px !important; font-size: 18px !important;">
 			<option value="10">전체검색</option>
 		</select>
-		<input class="search-container" value="${paging.searchWord}" type="text" id="_searchWord" onkeydown="checkEnter(event)" style="height: 45px !important; font-size: 18px !important; width: 300px !important;"/>
-		<a class="health-btn" href="javascript:goTypeT('', '', '', '', '', '');" style="margin-left: 10px; height: 45px !important; font-size: 18px !important;">
+		<input class="search-container" value="${paging.searchWord}" type="text" id="_searchWord_desktop" onkeydown="checkEnter(event)" style="height: 45px !important; font-size: 18px !important; width: 300px !important;"/>
+		<a class="health-btn" href="javascript:goTypeTx('pc');" style="margin-left: 10px; height: 45px !important; font-size: 18px !important;">
 			검색
 		</a>
 		</div>
@@ -276,4 +276,78 @@ function checkEnter(event) {
 		goTypeT();
 	}
 }
+
+
+var secondSelectAndroid = document.getElementById("second_cd_ctg_android");
+
+//서버에서 전달된 선택된 값 설정
+var selectedSecondValueAndroid = "${paging.cd_ctg_m}"; // 서버에서 전달된 두 번째 셀렉트 기본 선택 값
+
+var options = {
+ "9": [{ value: "10", text: "전체검색" }],
+ "1": [
+     { value: "10", text: "전체검색" },
+     { value: "1", text: "혈당/혈행/혈압" },
+     { value: "2", text: "항산화/면역력" },
+     { value: "3", text: "염증/항염" },
+     { value: "4", text: "관절/뼈/치아" },
+     { value: "5", text: "피로회복" },
+     { value: "6", text: "눈 건강" },
+     { value: "7", text: "장 건강" },
+     { value: "8", text: "두뇌/기억력" },
+     { value: "9", text: "위/간/갑상선" }
+ ],
+ "2": [
+     { value: "10", text: "전체검색" },
+     { value: "1", text: "폴리코사놀" },
+     { value: "2", text: "오메가-3" },
+     { value: "3", text: "비타민/미네랄" },
+     { value: "4", text: "유산균" },
+     { value: "5", text: "글루코사민/MSM" },
+     { value: "6", text: "루테인" },
+     { value: "7", text: "코큐텐" },
+     { value: "8", text: "아르기닌" },
+     { value: "9", text: "밀크씨슬" }
+ ],
+ "3": [
+     { value: "10", text: "전체검색" },
+     { value: "1", text: "남성" },
+     { value: "2", text: "여성" }
+ ]
+};
+
+document.getElementById("first_cd_ctg_android").addEventListener("change", function() {
+ var selectedValue = this.value;
+ var selectedOptions = options[selectedValue] || [];
+ 
+ // 두 번째 셀렉트 박스 옵션 초기화
+ secondSelectAndroid.innerHTML = "";
+
+ // 옵션 추가 및 선택 상태 반영
+ selectedOptions.forEach(option => {
+     var opt = document.createElement("option");
+     opt.value = option.value;
+     opt.textContent = option.text;
+
+     // 서버에서 받아온 값과 비교하여 선택 상태 설정
+     if (option.value === selectedSecondValueAndroid) {
+         opt.selected = true;
+     }
+     
+     secondSelectAndroid.appendChild(opt);
+ });
+});
+
+document.getElementById("first_cd_ctg_android").dispatchEvent(new Event("change"));
+
+function checkEnter(event) {
+	
+	if (event.keyCode === 13) {
+		
+		event.preventDefault();
+		goTypeT();
+	}
+}
+
+
 </script>
