@@ -12,22 +12,71 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 	<script type="text/javascript" src="/js/backoffice.js"></script>
-	<style>
+<style>
 	.search-container {
 		display: flex;
 		align-items: center; /* 세로 가운데 정렬 */
 		
 	}
-
+	
 	.search-container select,
 	.search-container input {
 		height: 30px;
+	}
+	#modalOverlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: transparent;
+		display: none;
+		z-index: 9998;
+		font-family: 돋움, Dotum, sans-serif !important;
+	}
+	
+	#resultModal {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: white;
+		padding: 20px;
+		width: 300px;
+		border-radius: 4px;
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center; /* 텍스트 가운데 정렬 */
+		font-family: 돋움, Dotum, sans-serif !important;
+		display: none;
+		z-index: 9999;
+	}
+	
+	#buttonContainer {
+		width: 100%;
+		text-align: center; /* 버튼을 가로 중앙 정렬 */
+		margin-top: 15px;
+	}
+	
+	#closeModalBtn {
+		cursor: pointer;
 	}
 </style>
 	<script>
 	function updateDeliveryStatus() {
 		
-		var myData = {size: sizeArray}
+		var seqBuyMstElements = document.getElementsByName("seq_buy_mst");
+		var seqBuyMstArray = [];
+		
+		for (var i = 0; i < seqBuyMstElements.length; i++) {
+			seqBuyMstArray.push(seqBuyMstElements[i].value);
+		}
+		
+		var myData = {
+			seq_buy_mst: seqBuyMstArray
+		};
 		
 		if (confirm("해당 조건에 맞는 모든 항목을 업데이트하시겠습니까?")) {
 			
@@ -39,19 +88,26 @@
 				data: JSON.stringify(myData),
 				success: function(res) {
 					
-					
-					
+					$("#modalMessage").text(res.message);
+					$("#modalOverlay").show();
+					$("#resultModal").show();
 				},
 			});
 		}
 	}
 	
+	$(document).on('click', '#closeModalBtn', function() {
+		
+		$('#modalOverlay').hide();
+		$('#resultModal').hide();
+	});
+	
 	function validateSearch() {
 		
-		const searchKey = document.getElementById("_searchKey").value;
-		const searchKeyState = document.getElementById("_searchKeyState").value;
-		const searchKeyPay = document.getElementById("_searchKeyPay").value;
-		const searchKeyDelivery = document.getElementById("_searchKeyDelivery").value;
+		var searchKey = document.getElementById("_searchKey").value;
+		var searchKeyState = document.getElementById("_searchKeyState").value;
+		var searchKeyPay = document.getElementById("_searchKeyPay").value;
+		var searchKeyDelivery = document.getElementById("_searchKeyDelivery").value;
 		
 		console.log("searchKey:", searchKey);
 		console.log("searchKeyState:", searchKeyState);
@@ -240,6 +296,7 @@
 							<tr>
 								<td style="text-align: center;">
 									${list.rnum}
+									<input type="hidden" name="seq_buy_mst" value="${list.seq_buy_mst}"/>
 								</td>
 								<td class="txtRight" style="text-align: center;">
 									<a href="javascript:goView(${list.seq_buy_mst});">
@@ -286,7 +343,7 @@
 									</select>
 								</td>
 								<td style="text-align: center;">
-									<button onclick="goModifyState(${list.seq_buy_mst},${status.index});">변경</button>
+									<button onclick="goModifyState(${list.seq_buy_mst}, ${status.index});">변경</button>
 								</td>
 							</tr>
 						</c:forEach>
@@ -305,7 +362,7 @@
 				<!-- /.btn-group -->
 				<button type="button" class="btn btn-default btn-sm" onclick="reload();"><i class="fa fa-refresh"></i></button>
 				&nbsp;&nbsp;
-				<button onclick="updateDeliveryStatus()">배송 상태 변경</button>
+				<button type="button" onclick="updateDeliveryStatus()">배송 상태 변경</button>
 					<span style="float: right;margin-right: 10px;margin-top: 5px;justify-content: center; ">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</span>
 				<div class="pull-right">
 				<div class="btn-group">
@@ -324,6 +381,13 @@
 	<!-- /.row -->
 	</section>
 	<!-- /.content -->
+</div>
+<div id="modalOverlay"></div>
+<div id="resultModal">
+	<div id="modalMessage" style="font-weight: bold;"></div>
+	<div id="buttonContainer">
+		<button id="closeModalBtn">닫기</button>
+	</div>
 </div>
 <!-- /Maincontent -->
 

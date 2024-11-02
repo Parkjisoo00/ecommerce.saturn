@@ -44,12 +44,9 @@ public class BuyDto {
 	private int register				= 0;
 	private String dt_upt				= "";
 	private int updater					= 0;
-
 	private String 	email				= "";
 	private String	mbr_nm				= "";
-	
 	private int seq_buy_dtl				= 0;
-	
 	private int count					= 0;
 	private int price					= 0;
 	private String sle_nm				= "";

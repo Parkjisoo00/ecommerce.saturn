@@ -21,7 +21,6 @@
 	font-family: 돋움, Dotum, sans-serif !important;
 }
 
-/* 모달 스타일 */
 #resultModal {
 	position: fixed;
 	top: 50%;
@@ -41,14 +40,12 @@
 	z-index: 9999;
 }
 
-/* 버튼 컨테이너 */
 #buttonContainer {
 	width: 100%;
 	text-align: center; /* 버튼을 가로 중앙 정렬 */
 	margin-top: 15px;
 }
 
-/* 버튼 스타일 */
 #closeModalBtn {
 	cursor: pointer;
 	background: white;

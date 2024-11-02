@@ -6,9 +6,11 @@
 		UPDATE 
 			TB_BUY_MST
 		SET 
-			CD_STATE_DELIVERY = 'D'
-		WHERE 
-			CD_STATE = 1 AND CD_STATE_DELIVERY = 'C'
+			CD_STATE_DELIVERY = 'P'
+		WHERE
+			SEQ_BUY_MST = #{seq_buy_mst}
+			AND CD_STATE = 1
+			AND CD_STATE_DELIVERY = 'C'
 	</update>
 	
 	<select id="selectList" parameterType="buyDto" resultType="buyDto">

@@ -36,7 +36,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -79,13 +79,23 @@ public class BuyWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/console/buy/updateDeliveryStatus.json", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
-	public @ResponseBody Map<String, Object> updateDeliveryStatus(@RequestBody BuyDto buyDto) {
+	public @ResponseBody Map<String, Object> updateDeliveryStatus(@RequestBody Map<String, List<Integer>> seq_buy_mst) {
 		
 		Map<String, Object> response = new HashMap<>();
 		
 		try {
 			
-			buySrvc.updateDeliveryStatus(buyDto);
+			List<Integer> _seq_buy_mst = seq_buy_mst.get("seq_buy_mst");
+			
+			for (Integer seqBuyMst : _seq_buy_mst) {
+				
+				BuyDto buyDto = new BuyDto();
+				buyDto.setSeq_buy_mst(seqBuyMst);
+				
+				buySrvc.updateDeliveryStatus(buyDto);
+				
+				response.put("message", "배송중으로 변경되었습니다.");
+			}
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".updateDeliveryStatus()] " + e.getMessage(), e);
@@ -228,7 +238,7 @@ public class BuyWeb extends Common {
 	}
 	
 	@RequestMapping(value = "/console/buy/modifyProc.web")
-	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, BuyDto buyDto) {
+	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, BuyDto buyDto, @RequestParam("seq_buy_mst") List<Integer> seq_buy_mst) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
@@ -237,8 +247,8 @@ public class BuyWeb extends Common {
 			buyDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MNG")));
 			
 			logger.debug("cd_state 확인" + buyDto.getCd_state());
-			logger.debug("cd_state 확인" + buyDto.getCd_state_delivery());
-			logger.debug("cd_state 확인" + buyDto.getSeq_buy_mst());
+			logger.debug("cd_state_delivery 확인" + buyDto.getCd_state_delivery());
+			logger.debug("cd_state_Seq_buy_mst 확인" + buyDto.getSeq_buy_mst());
 			
 			if (buyDto.getCd_state().equals("NULL")) {
 				
