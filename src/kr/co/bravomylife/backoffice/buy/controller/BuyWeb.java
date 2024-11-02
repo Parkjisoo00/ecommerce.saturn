@@ -83,6 +83,8 @@ public class BuyWeb extends Common {
 		
 		Map<String, Object> response = new HashMap<>();
 		
+		int result = 0;
+		
 		try {
 			
 			List<Integer> _seq_buy_mst = seq_buy_mst.get("seq_buy_mst");
@@ -92,9 +94,16 @@ public class BuyWeb extends Common {
 				BuyDto buyDto = new BuyDto();
 				buyDto.setSeq_buy_mst(seqBuyMst);
 				
-				buySrvc.updateDeliveryStatus(buyDto);
+				result += buySrvc.updateDeliveryStatus(buyDto);
 				
-				response.put("message", "배송중으로 변경되었습니다.");
+				if (result >= 1) {
+					
+					response.put("message", "배송중으로 변경되었습니다.");
+				}
+				else {
+					
+					response.put("message", "배송중으로 변경할 수 있는 상품이 없습니다.");
+				}
 			}
 		}
 		catch (Exception e) {

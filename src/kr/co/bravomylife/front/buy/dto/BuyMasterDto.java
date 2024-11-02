@@ -20,6 +20,8 @@
  */
 package kr.co.bravomylife.front.buy.dto;
 
+import java.util.List;
+
 /**
  * @version 1.0.0
  * @author cydgate4957@gmail.com
@@ -47,8 +49,15 @@ public class BuyMasterDto {
 	private int use_point				= 0;
 	private int seq_mbr_addr			= 0;
 	private String delivery_request		= "";
+	private List<BuyDataDto> buyDatas		= null;
 	
 	
+	public List<BuyDataDto> getBuyDatas() {
+		return buyDatas;
+	}
+	public void setBuyDatas(List<BuyDataDto> buyDatas) {
+		this.buyDatas = buyDatas;
+	}
 	public String getDelivery_request() {
 		return delivery_request;
 	}

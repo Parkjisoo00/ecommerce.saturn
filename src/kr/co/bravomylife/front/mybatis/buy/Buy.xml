@@ -2,6 +2,117 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.buy.Buy">
 	
+	<select id="buyListDtl" parameterType="pagingDto" resultType="BuyDetailDto">
+		SELECT
+			dtl.SEQ_BUY_MST
+			, dtl.SEQ_BUY_DTL
+			, dtl.SEQ_SLE
+			, dtl.SLE_NM
+			, dtl.COUNT
+			, dtl.PRICE
+			, TO_CHAR(dtl.DT_REG, 'YYYY-MM-DD') dt_reg
+			, sle.IMG
+		FROM
+			TB_BUY_DTL dtl
+		LEFT JOIN
+			TB_SLE sle
+		ON
+			dtl.SEQ_SLE = sle.SEQ_SLE
+		WHERE
+			SEQ_BUY_MST IN (
+				SELECT SEQ_BUY_MST
+				FROM TB_BUY_MST
+				WHERE SEQ_MBR = #{seq_mbr}
+								AND CD_STATE		= '1'
+								AND CD_STATE_PAY	= 'Y'
+			)
+	</select>
+	
+	<select id="buyCount" parameterType="pagingDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(ROWNUM)
+		FROM
+			TB_BUY_MST buy_mst
+		LEFT JOIN
+			TB_BUY_DTL buy_dtl
+		ON
+			buy_mst.SEQ_MBR = buy_dtl.SEQ_MBR
+			AND buy_mst.SEQ_BUY_MST = buy_dtl.SEQ_BUY_MST
+		WHERE
+		<include refid="buywhere" />
+	</select>
+
+	<select id="buyListMst" parameterType="pagingDto" resultType="BuyMasterDto">
+		SELECT
+			*
+		FROM
+		(
+		SELECT
+			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY buy_mst.DT_REG DESC) rnum
+			, buy_mst.SEQ_BUY_MST
+			, buy_mst.SEQ_MBR_ADDR
+			, buy_mst.SEQ_MBR
+			, TO_CHAR(buy_mst.DT_REG, 'YYYY-MM-DD') dt_reg
+			, buy_mst.DELIVERY_REQUEST
+			, mbr_addr.POST
+			, mbr_addr.ADDR1
+			, mbr_addr.ADDR2
+		FROM
+			TB_BUY_MST buy_mst
+		LEFT JOIN
+			TB_BUY_DTL buy_dtl
+		ON
+			buy_mst.SEQ_MBR = buy_dtl.SEQ_MBR
+			AND buy_mst.SEQ_BUY_MST = buy_dtl.SEQ_BUY_MST
+		LEFT JOIN
+			TB_MBR_ADDR mbr_addr
+		ON
+			buy_mst.SEQ_MBR_ADDR = mbr_addr.SEQ_MBR_ADDR
+			AND buy_mst.SEQ_MBR = mbr_addr.SEQ_MBR
+		WHERE
+		<include refid="buywhere" />
+		)
+		<![CDATA[
+		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+		]]>
+		ORDER BY rnum
+	</select>
+	
+	<sql id="buywhere">
+		buy_mst.SEQ_MBR				= #{seq_mbr}
+		AND buy_mst.CD_STATE		= '1'
+		AND buy_mst.CD_STATE_PAY	= 'Y'
+	</sql>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<update id="updateCancle" parameterType="buyDetailDto">
 		UPDATE
 			TB_BUY_MST

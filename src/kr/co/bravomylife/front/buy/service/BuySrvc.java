@@ -21,7 +21,9 @@
 package kr.co.bravomylife.front.buy.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -30,6 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import kr.co.bravomylife.front.buy.dao.BuyDao;
+import kr.co.bravomylife.front.buy.dto.BuyDataDto;
 import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
 import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
 import kr.co.bravomylife.front.common.dto.PagingDto;
@@ -54,6 +57,117 @@ public class BuySrvc {
 	
 	@Inject
 	PayDao payDao;
+	
+	@SuppressWarnings("unchecked")
+	public PagingListDto mergedBuyList(PagingListDto buyListMst, PagingListDto buyListDtl) {
+		
+		List<BuyMasterDto> buyListMstList = (List<BuyMasterDto>) buyListMst.getList();
+		List<BuyDetailDto> buyListDtlList = (List<BuyDetailDto>) buyListDtl.getList();
+		
+		Map<Integer, List<BuyDataDto>> buyMap = new HashMap<>();
+		
+		for (BuyDetailDto buyDtl : buyListDtlList) {
+			
+			int seqBuyMst = buyDtl.getSeq_buy_mst();
+			int seqBuyDtl = buyDtl.getSeq_buy_dtl();
+			int seqSle = buyDtl.getSeq_sle();
+			String sleNm = buyDtl.getSle_nm();
+			int count = buyDtl.getCount();
+			int price = buyDtl.getPrice();
+			String dtReg = buyDtl.getDt_reg();
+			String img = buyDtl.getImg();
+			
+			if (!buyMap.containsKey(seqBuyMst)) {
+				
+				buyMap.put(seqBuyMst, new ArrayList<>());
+			}
+			BuyDataDto buyDataDto = new BuyDataDto();
+			buyDataDto.setSeq_buy_dtl(seqBuyDtl);
+			buyDataDto.setSeq_sle(seqSle);
+			buyDataDto.setSle_nm(sleNm);
+			buyDataDto.setCount(count);
+			buyDataDto.setPrice(price);
+			buyDataDto.setDt_reg(dtReg);
+			buyDataDto.setImg(img);
+			
+			buyMap.get(seqBuyMst).add(buyDataDto);
+		}
+		for (BuyMasterDto buyMst : buyListMstList) {
+			
+			int seqBuyMst = buyMst.getSeq_buy_mst();
+			
+			List<BuyDataDto> buyDataList = buyMap.get(seqBuyMst);
+			
+			if (buyDataList != null) {
+				
+				buyMst.setBuyDatas(buyDataList);
+			}
+		}
+		PagingListDto mergedBuyListDto = new PagingListDto();
+		mergedBuyListDto.setPaging(buyListMst.getPaging());
+		mergedBuyListDto.setList(buyListMstList);
+		
+		return mergedBuyListDto;
+	}
+	
+	public PagingListDto buyListDtl(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		int totalLine = buyDao.buyCount(pagingDto);
+		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(buyDao.buyListDtl(pagingDto));
+		
+		return pagingListDto;
+	}
+	
+	public PagingListDto buyListMst(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		int totalLine = buyDao.buyCount(pagingDto);
+		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(buyDao.buyListMst(pagingDto));
+		
+		return pagingListDto;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@Transactional("txFront")
 	public boolean updateCancle(BuyDetailDto buyDetailDto) {
