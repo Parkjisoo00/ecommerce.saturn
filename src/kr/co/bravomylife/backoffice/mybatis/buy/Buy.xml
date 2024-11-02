@@ -48,9 +48,9 @@
 			TB_BUY_MST
 		SET
 			CD_STATE			= #{cd_state}
-			, CD_STATE_PAY		= #{cd_state_pay}
 			, CD_STATE_DELIVERY	= #{cd_state_delivery}
 			, UPDATER			= #{updater}
+			, DT_UPT			= SYSDATE
 		WHERE
 			SEQ_BUY_MST = #{seq_buy_mst}
 	</update>
@@ -60,6 +60,10 @@
 			COUNT(ROWNUM)
 		FROM
 			TB_BUY_MST buy_mst
+		LEFT JOIN 
+			TB_MBR_MST mbr_mst
+		ON
+			buy_mst.SEQ_MBR = mbr_mst.SEQ_MBR
 		WHERE
 		<include refid="where" />
 	</select>
@@ -99,25 +103,32 @@
 	</select>
 	
 	<sql id="where">
-			buy_mst.CD_STATE IS NULL OR buy_mst.CD_STATE IN (1, 2, 3, 4)
-			<if test="searchWord != null and searchWord != ''">
-				<if test="searchKey == 'mbr_nm'">
-					AND mbr_mst.MBR_NM = #{searchWord}
-				</if>
-				<if test="searchKey == 'email'">
-					AND mbr_mst.EMAIL = #{searchWord}
-				</if>
+		(buy_mst.CD_STATE IS NULL OR buy_mst.CD_STATE IN (1, 2, 3, 4))
+		<if test="searchWord != null and searchWord != ''">
+			<if test="searchKey == 'mbr_nm'">
+				AND UPPER(mbr_mst.MBR_NM) LIKE UPPER('%' || #{searchWord} || '%')
 			</if>
-			
-			<if test="cd_state != null and cd_state != '' and cd_state != 'all'">
-				AND buy_mst.CD_STATE = #{cd_state}
+			<if test="searchKey == 'email'">
+				AND UPPER(mbr_mst.EMAIL) LIKE UPPER('%' || #{searchWord} || '%')
 			</if>
-			
-			<if test="cd_state_pay != null and cd_state_pay != '' and cd_state_pay != 'all'">
-				AND buy_mst.CD_STATE_PAY = #{cd_state_pay}
-			</if>
-			<if test="cd_state_delivery != null and cd_state_delivery != '' and cd_state_delivery != 'all'">
-				AND buy_mst.CD_STATE_DELIVERY = #{cd_state_delivery}
-			</if>
+		</if>
+		<if test="cd_state != null and cd_state != '' and cd_state != 'all' and cd_state != 'NULL'">
+			AND buy_mst.CD_STATE = #{cd_state}
+		</if>
+		<if test="cd_state_pay != null and cd_state_pay != '' and cd_state_pay != 'all' and cd_state_pay != 'NULL'">
+			AND buy_mst.CD_STATE_PAY = #{cd_state_pay}
+		</if>
+		<if test="cd_state_delivery != null and cd_state_delivery != '' and cd_state_delivery != 'all' and cd_state_delivery != 'NULL'">
+			AND buy_mst.CD_STATE_DELIVERY = #{cd_state_delivery}
+		</if>
+		<if test="cd_state == 'NULL'">
+			AND buy_mst.CD_STATE IS NULL
+		</if>
+		<if test="cd_state_pay == 'NULL'">
+			AND buy_mst.CD_STATE_PAY IS NULL
+		</if>
+		<if test="cd_state_delivery == 'NULL'">
+			AND buy_mst.CD_STATE_DELIVERY IS NULL
+		</if>
 	</sql>
 </mapper>

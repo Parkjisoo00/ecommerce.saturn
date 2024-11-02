@@ -54,20 +54,18 @@ public class BuySrvc {
 	@Inject
 	BuyDao buyDao;
 	
-
-	@Transactional("txFront")
+	@Transactional("txBackoffice")
 	public int updateDeliveryStatus(BuyDto buyDto) {
+		
 		int result = buyDao.updateDeliveryStatus(buyDto);
 		
 		if (result != 1) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return result;
-		
-		
 	}
 	
-	@Transactional("txFront")
+	@Transactional("txBackoffice")
 	public boolean updateLast(BuyDto buyDto) {
 		
 		int result = buyDao.updateLast(buyDto);
@@ -90,16 +88,14 @@ public class BuySrvc {
 			return false;
 		}
 	}
+	
 	public List<BuyDto> selectList(BuyDto buyDto) {
 		return buyDao.selectList(buyDto);  // DAO의 select 메서드 호출
 	}
-
+	
 	public BuyDto select(BuyDto buyDto) {
 		return buyDao.select(buyDto);  // BuyDto에 대한 select 메서드 호출
 	}
-
-	
-	
 	
 	public PagingListDto list(PagingDto pagingDto) {
 		
@@ -113,8 +109,8 @@ public class BuySrvc {
 		pagingDto.setTotalPage(totalPage);
 		if (totalPage == 0) pagingDto.setCurrentPage(1);
 		
-		logger.debug("확인" + totalLine);
-		
+		logger.debug("확인" + pagingDto.getSearchKey());
+		logger.debug("확인" + pagingDto.getSearchWord());
 		logger.debug("확인" + pagingDto.getCd_state());
 		logger.debug("확인" + pagingDto.getCd_state_pay());
 		logger.debug("확인" + pagingDto.getCd_state_delivery());
@@ -124,8 +120,4 @@ public class BuySrvc {
 		
 		return pagingListDto;
 	}
-
-
-
-
 }

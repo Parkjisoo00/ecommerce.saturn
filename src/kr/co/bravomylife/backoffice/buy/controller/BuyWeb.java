@@ -20,7 +20,9 @@
  */
 package kr.co.bravomylife.backoffice.buy.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.inject.Inject;
@@ -30,9 +32,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -67,20 +68,31 @@ public class BuyWeb extends Common {
 	@Inject
 	BuySrvc buySrvc;
 	
-	
-	@RequestMapping(value = "/console/buy/updateDeliveryStatus.web", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity<String> updateDeliveryStatus() {
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-11-02
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/console/buy/updateDeliveryStatus.json", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
+	public @ResponseBody Map<String, Object> updateDeliveryStatus(@RequestBody BuyDto buyDto) {
+		
+		Map<String, Object> response = new HashMap<>();
+		
 		try {
 			
-			int updatedRows = buySrvc.updateDeliveryStatus(new BuyDto());
-			return ResponseEntity.ok("Updated rows: " + updatedRows);
-			
-		} catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".updateDeliveryStatus()] " + e.getMessage(), e);
-			
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Update failed");
+			buySrvc.updateDeliveryStatus(buyDto);
 		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".updateDeliveryStatus()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return response;
 	}
 	
 	@RequestMapping(value = "/console/buy/view.web")
@@ -117,6 +129,8 @@ public class BuyWeb extends Common {
 		
 		logger.debug("Controller로 오는지 확인");
 		
+		logger.debug("확인" + pagingDto.getSearchKey());
+		logger.debug("확인" + pagingDto.getSearchWord());
 		logger.debug("확인" + pagingDto.getCd_state());
 		logger.debug("확인" + pagingDto.getCd_state_pay());
 		logger.debug("확인" + pagingDto.getCd_state_delivery());
@@ -219,8 +233,21 @@ public class BuyWeb extends Common {
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			// buyDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_BUY_MST")));
-			System.out.println("....................................." + buyDto.getCd_state());
+			
+			buyDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MNG")));
+			
+			logger.debug("cd_state 확인" + buyDto.getCd_state());
+			logger.debug("cd_state 확인" + buyDto.getCd_state_delivery());
+			logger.debug("cd_state 확인" + buyDto.getSeq_buy_mst());
+			
+			if (buyDto.getCd_state().equals("NULL")) {
+				
+				buyDto.setCd_state(null);
+			}
+			if (buyDto.getCd_state_delivery().equals("NULL")) {
+				
+				buyDto.setCd_state_delivery(null);
+			}
 			
 			if (buySrvc.update(buyDto)) {
 				request.setAttribute("script"	, "alert('적용되었습니다.');");
@@ -228,7 +255,7 @@ public class BuyWeb extends Common {
 			}
 			else {
 				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
-				request.setAttribute("redirect"	, "/");
+				request.setAttribute("redirect"	, "/console/buy/list.web");
 			}
 			mav.setViewName("forward:/servlet/result.web");
 		}

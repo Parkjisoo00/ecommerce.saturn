@@ -26,45 +26,53 @@
 </style>
 	<script>
 	function updateDeliveryStatus() {
+		
+		var myData = {size: sizeArray}
+		
 		if (confirm("해당 조건에 맞는 모든 항목을 업데이트하시겠습니까?")) {
-			fetch('/console/buy/updateDeliveryStatus.web', {
-				method: 'POST'
-			}).then(response => {
-				if (response.ok) {
-					alert("배송 상태가 성공적으로 업데이트되었습니다.");
+			
+			$.ajax({
+				type: "POST",
+				url: "/console/buy/updateDeliveryStatus.json",
+				dataType: "json",
+				contentType: "application/json; charset=UTF-8",
+				data: JSON.stringify(myData),
+				success: function(res) {
 					
-				} else {
-					alert("업데이트에 실패했습니다.");
-				}
-			}).catch(error => console.error('Error:', error));
+					
+					
+				},
+			});
 		}
 	}
 	
 	function validateSearch() {
-		const searchKey = document.getElementById("searchKey").value;
-	
+		
+		const searchKey = document.getElementById("_searchKey").value;
 		const searchKeyState = document.getElementById("_searchKeyState").value;
 		const searchKeyPay = document.getElementById("_searchKeyPay").value;
 		const searchKeyDelivery = document.getElementById("_searchKeyDelivery").value;
 		
+		console.log("searchKey:", searchKey);
 		console.log("searchKeyState:", searchKeyState);
 		console.log("searchKeyPay:", searchKeyPay);
 		console.log("searchKeyDelivery:", searchKeyDelivery);
-/*
+		/*
 		if (!searchKey) {
 			alert("검색어를 입력하세요");
 			return false;
 		}
-
+		
 		if (!searchWordState && !searchWordPay && !searchWordDelivery) {
 			alert("옵션을 선택하세요.");
 			return false;
 		}
-
+		
 		return true;
 		*/
 		var frmMain = document.getElementById("frmMain");
 		
+		frmMain.searchKey.setAttribute("value", searchKey);
 		frmMain.cd_state.setAttribute("value", searchKeyState);
 		frmMain.cd_state_pay.setAttribute("value", searchKeyPay);
 		frmMain.cd_state_delivery.setAttribute("value", searchKeyDelivery);
@@ -92,22 +100,32 @@
 			cd_state			= document.getElementById("select_1_" + position).options[document.getElementById("select_1_" + position).selectedIndex].value;
 			cd_state_delivery	= document.getElementById("select_3_" + position).options[document.getElementById("select_3_" + position).selectedIndex].value;
 			
-			//console.log("cd_state value:", cd_state);
+			// console.log("cd_state value:", cd_state);
 			
 			document.getElementById("seq_buy_mst").value = seq_buy_mst;
 			// select_1의 선택된 value
-			//alert(cd_state)
+			// alert(cd_state)
 			document.getElementById("cd_state").value = cd_state;
 			// select_3의 선택된 value
 			document.getElementById("cd_state_delivery").value = cd_state_delivery;
 			
-			alert(cd_state);
-			alert(cd_state_delivery);
-			return;
-			
 			frmMain.action="/console/buy/modifyProc.web";
 			frmMain.submit();
 		}
+	}
+	
+	function reload() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.searchKey.setAttribute("value", "");
+		frmMain.searchWord.setAttribute("value", "");
+		frmMain.cd_state.setAttribute("value", "");
+		frmMain.cd_state_pay.setAttribute("value", "");
+		frmMain.cd_state_delivery.setAttribute("value", "");
+		
+		frmMain.action="/console/buy/list.web";
+		frmMain.submit();
 	}
 	
 	function goPage(value) {
@@ -124,10 +142,11 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST">
 <input type="hidden" name="seq_buy_mst"			id="seq_buy_mst" value="0"/>
-<input type="hidden" name="cd_state"			id="cd_state" />
+<input type="hidden" name="cd_state"			id="cd_state" value="${paging.cd_state}"/>
 <input type="hidden" name="cd_state_pay"		id="cd_state_pay" />
 <input type="hidden" name="cd_state_delivery"	id="cd_state_delivery" />
-<input type="hidden" name="currentPage"	id="currentPage" value="${paging.currentPage}" />	
+<input type="hidden" name="searchKey"			id="searchKey" />
+<input type="hidden" name="currentPage"			id="currentPage" value="${paging.currentPage}" />	
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
@@ -152,41 +171,40 @@
 						<div class="has-feedback">
 							<div style="display: flex; align-items: center; ">&nbsp;&nbsp;
 							<div class="search-container">
-								<select id="searchKey">
+								<select id="_searchKey">
 									<option value="email"<c:if test="${paging.searchKey == 'email'}"> selected</c:if>>이메일</option>
 									<option value="mbr_nm"<c:if test="${paging.searchKey == 'mbr_nm'}"> selected</c:if>>성명</option>
 								</select>
-								<input type="text" id="searchWord" value="${paging.searchWord}" />
+								<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" />
 								&nbsp;&nbsp;
 								구매 상태&nbsp;
 								<select id="_searchKeyState">
-									<option value="all" <c:if test="${paging.searchKeyState == 'all'}">selected</c:if>>전체</option>
-									<option value="1" <c:if test="${paging.searchKeyState == '1'}">selected</c:if>>결제완료</option>
-									<option value="2" <c:if test="${paging.searchKeyState == '2'}">selected</c:if>>취소</option>
-									<option value="3" <c:if test="${paging.searchKeyState == '3'}">selected</c:if>>교환</option>
-									<option value="4" <c:if test="${paging.searchKeyState == '4'}">selected</c:if>>환불</option>
-
+									<option value="all" <c:if test="${paging.cd_state == 'all'}">selected</c:if>>전체</option>
+									<option value="NULL"<c:if test="${paging.cd_state == 'NULL'}"> selected</c:if>>결제중단</option>
+									<option value="1" <c:if test="${paging.cd_state == '1'}">selected</c:if>>결제완료</option>
+									<option value="2" <c:if test="${paging.cd_state == '2'}">selected</c:if>>취소</option>
+									<option value="3" <c:if test="${paging.cd_state == '3'}">selected</c:if>>교환</option>
+									<option value="4" <c:if test="${paging.cd_state == '4'}">selected</c:if>>환불</option>
 								</select>
 								&nbsp;&nbsp;
 								결제 상태&nbsp;
 								<select id="_searchKeyPay">
-									<option value="all" <c:if test="${paging.searchKeyPay == 'all'}">selected</c:if>>전체</option>	
-									<option value="N" <c:if test="${paging.searchKeyPay == 'N'}">selected</c:if>>실패</option>
-									<option value="Y" <c:if test="${paging.searchKeyPay == 'Y'}">selected</c:if>>성공</option>
-									<option value="C" <c:if test="${paging.searchKeyPay == 'C'}">selected</c:if>>취소</option>
-									
+									<option value="all" <c:if test="${paging.cd_state_pay == 'all'}">selected</c:if>>전체</option>
+									<option value="NULL"<c:if test="${paging.cd_state_pay == 'NULL'}"> selected</c:if>>결제중단</option>
+									<option value="N" <c:if test="${paging.cd_state_pay == 'N'}">selected</c:if>>실패</option>
+									<option value="Y" <c:if test="${paging.cd_state_pay == 'Y'}">selected</c:if>>성공</option>
+									<option value="C" <c:if test="${paging.cd_state_pay == 'C'}">selected</c:if>>취소</option>
 								</select>
 								&nbsp;&nbsp;
 								배송 상태&nbsp;
 								<select id="_searchKeyDelivery">
-									<option value="all" <c:if test="${paging.searchKeyDelivery == 'all'}">selected</c:if>>전체</option>
-									<option value="C" <c:if test="${paging.searchKeyDelivery == 'C'}">selected</c:if>>판매 확인중</option>
-									<option value="P" <c:if test="${paging.searchKeyDelivery == 'P'}">selected</c:if>>배송 준비중</option>
-									<option value="D" <c:if test="${paging.searchKeyDelivery == 'D'}">selected</c:if>>배송중</option>
-									<option value="Y" <c:if test="${paging.searchKeyDelivery == 'Y'}">selected</c:if>>배송완료</option>
-									
+									<option value="all" <c:if test="${paging.cd_state_delivery == 'all'}">selected</c:if>>전체</option>
+									<option value="NULL"<c:if test="${paging.cd_state_delivery == 'NULL'}"> selected</c:if>>결제중단</option>
+									<option value="C" <c:if test="${paging.cd_state_delivery == 'C'}">selected</c:if>>판매 확인중</option>
+									<option value="P" <c:if test="${paging.cd_state_delivery == 'P'}">selected</c:if>>배송 준비중</option>
+									<option value="D" <c:if test="${paging.cd_state_delivery == 'D'}">selected</c:if>>배송중</option>
+									<option value="Y" <c:if test="${paging.cd_state_delivery == 'Y'}">selected</c:if>>배송완료</option>
 								</select>
-
 								&nbsp;&nbsp;
 								<input type="button" onclick="validateSearch()" value="검색"/>	
 							</div>	
@@ -206,15 +224,15 @@
 							<th style="width: 7%; text-align: center;">성명</th>
 							<th style="width: 7%;text-align: center;">주문 번호</th>
 							<th style="width: 25%;text-align: center;">구매상품 정보</th>
-							<th style="width: 10%;text-align: center;">주문일</th>
+							<th style="width: 8%;text-align: center;">주문일</th>
 							<th style="width: 10%;text-align: center;">구매상품 상태</th>
 							<th style="width: 10%;text-align: center;">결제 상태</th>
-							<th style="width: 10%;text-align: center;">배송 상태</th>
+							<th style="width: 15%;text-align: center;" colspan="2">배송 상태</th>
 							</tr>
 				<c:choose>
 					<c:when test="${empty list}">
 						<tr>
-							<td colspan="5">등록된 구매자(회원)가 없습니다.</td>
+							<td colspan="10">등록된 구매자(회원)가 없습니다.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
@@ -242,7 +260,7 @@
 								</td>
 								<!-- 주문 목록에서 각 주문의 상태(주문 상태, 결제 상태, 배송 상태)를 관리자가 선택할 수 있도록 -->
 								<td style="text-align: center;">
-									<select id="select_1_${status.index}" style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst},${status.index});">
+									<select id="select_1_${status.index}" style="background:#F0F0F0">
 										<option value="NULL"<c:if test="${list.cd_state == NULL}"> selected</c:if>>결제중단</option>
 										<option value="1"<c:if test="${list.cd_state == '1'}"> selected</c:if>>결제완료</option>
 										<option value="2"<c:if test="${list.cd_state == '2'}"> selected</c:if>>취소</option>
@@ -259,13 +277,16 @@
 									</select>
 								</td>
 								<td style="text-align: center;">
-									<select id="select_3_${status.index}" style="background:#F0F0F0" onchange="goModifyState(${list.seq_buy_mst},${status.index});">
+									<select id="select_3_${status.index}" style="background:#F0F0F0">
 										<option value="NULL"<c:if test="${list.cd_state_delivery == NULL}"> selected</c:if>>결제중단</option>
 										<option value="C"<c:if test="${list.cd_state_delivery == 'C'}"> selected</c:if>>판매 확인중</option>
 										<option value="P"<c:if test="${list.cd_state_delivery == 'P'}"> selected</c:if>>배송 준비중</option>
 										<option value="D"<c:if test="${list.cd_state_delivery == 'D'}"> selected</c:if>>배송중</option>
 										<option value="Y"<c:if test="${list.cd_state_delivery == 'Y'}"> selected</c:if>>배송완료</option>
 									</select>
+								</td>
+								<td style="text-align: center;">
+									<button onclick="goModifyState(${list.seq_buy_mst},${status.index});">변경</button>
 								</td>
 							</tr>
 						</c:forEach>
@@ -282,9 +303,9 @@
 			<div class="box-footer no-padding">
 				<div class="mailbox-controls">
 				<!-- /.btn-group -->
-				<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><i class="fa fa-refresh"></i></button>
+				<button type="button" class="btn btn-default btn-sm" onclick="reload();"><i class="fa fa-refresh"></i></button>
 				&nbsp;&nbsp;
-				<button onclick="updateDeliveryStatus()">배송 상태 업데이트</button>
+				<button onclick="updateDeliveryStatus()">배송 상태 변경</button>
 					<span style="float: right;margin-right: 10px;margin-top: 5px;justify-content: center; ">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</span>
 				<div class="pull-right">
 				<div class="btn-group">

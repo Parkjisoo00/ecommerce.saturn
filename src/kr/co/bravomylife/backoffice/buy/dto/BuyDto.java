@@ -37,7 +37,7 @@ public class BuyDto {
 	private int buy_count				= 0;
 	private int buy_price				= 0;
 	private String flg_delete			= "";
-	private String cd_state			= "";
+	private String cd_state				= "";
 	private String cd_state_pay			= "";
 	private String cd_state_delivery	= "";
 	private String dt_reg				= "";
@@ -45,16 +45,16 @@ public class BuyDto {
 	private String dt_upt				= "";
 	private int updater					= 0;
 
-	private String 	email		= "";
-	private String	mbr_nm		= "";
+	private String 	email				= "";
+	private String	mbr_nm				= "";
 	
 	private int seq_buy_dtl				= 0;
 	
-	private int count			= 0;
-	private int price			= 0;
-	private String sle_nm		= "";
-	private int point			= 0;
-	private String flg_review		= "";
+	private int count					= 0;
+	private int price					= 0;
+	private String sle_nm				= "";
+	private int point					= 0;
+	private String flg_review			= "";
 	
 	
 	public int getCount() {
