@@ -665,14 +665,6 @@ table.headTop_pd th, table.headTop_pd td {
 	vertical-align: middle !important;
 }
 
-.cart-img {
-	max-width: 100%;
-	max-height: 120px;
-	object-fit: contain;
-	border: 1px solid #dbdbdb;
-	border-radius: 2px
-}
-
 .cart-div {
 	display: flex;
 	justify-content: center;
@@ -781,6 +773,64 @@ table.headTop_pd th, table.headTop_pd td {
 	border-radius: 5px !important;
 	padding: 5px 10px !important;
 	display: inline-block;
+}
+/*----------------------------------------*/
+/* histoty Css
+/*----------------------------------------*/
+
+.history-div {
+	width: 1000px !important;
+	border: 1px solid #dbdbdb !important;
+	border-radius: 12px !important;
+	box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px 0px 1px 0px !important;
+	background-color: rgb(255, 255, 255) !important;
+	margin-bottom: 20px !important;
+	padding: 24px 24px 16px !important;
+}
+
+.history-head {
+	height: 28px !important;
+	display: flex !important;
+	-webkit-box-pack: justify !important;
+	justify-content: space-between !important;
+}
+
+.history-head-title {
+	display: inline-block !important;
+	width: 50% !important;
+	height: 28px !important;
+	font-size: 20px !important;
+	font-weight: bold !important;
+	font-stretch: normal !important;
+	font-style: normal !important;
+	line-height: 1.4 !important;
+	letter-spacing: -0.5px !important;
+	color: rgb(17, 17, 17) !important;
+	font-family: "맑은 고딕", malgun gothic, apple sd gothic neo, "나눔고딕", nanumgothic, "돋움", dotum, sans-serif !important;
+}
+
+.history-head-subtitle {
+	display: flex; align-items: center;
+	text-align: right;
+	font-size: 16px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.5;
+	letter-spacing: -0.5px;
+	color: rgb(52, 106, 255);
+	vertical-align: middle;
+	position: relative;
+	width: auto;
+	-webkit-box-pack: end;
+	justify-content: flex-end;
+}
+
+.history-table-div {
+	border-radius: 8px !important;
+	border: 1px solid rgb(238, 238, 238) !important;
+	background-color: rgb(255, 255, 255) !important;
+	margin-top: 16px !important;
 }
 
 /*----------------------------------------*/

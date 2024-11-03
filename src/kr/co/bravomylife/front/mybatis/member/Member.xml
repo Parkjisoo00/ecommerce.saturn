@@ -10,36 +10,23 @@
 			, addr.ADDR2
 			, mst.CD_STATE_DELIVERY
 			, mst.DELIVERY_REQUEST
-			, sle.SLE_NM
-			, sle.IMG
-			, dtl.COUNT
 			, mbr_mst.MBR_NM
 			, TO_CHAR(SYSDATE, 'MM"월"" "D"일"') dt_reg
 		FROM
-			TB_BUY_DTL dtl
-		LEFT JOIN
 			TB_MBR_ADDR addr
-		ON
-			dtl.SEQ_MBR = addr.SEQ_MBR
-			AND dtl.SEQ_MBR_ADDR = addr.SEQ_MBR_ADDR
 		LEFT JOIN
 			TB_BUY_MST mst
 		ON
-			dtl.SEQ_BUY_MST = mst.SEQ_BUY_MST
-		LEFT JOIN
-			TB_SLE sle
-		ON
-			dtl.SEQ_SLE = sle.SEQ_SLE
+			addr.SEQ_MBR_ADDR = mst.SEQ_MBR_ADDR
+			AND addr.SEQ_MBR = mst.SEQ_MBR
 		LEFT JOIN
 			TB_MBR_MST mbr_mst
 		ON
-			mbr_mst.SEQ_MBR = dtl.SEQ_MBR
+			addr.SEQ_MBR = mbr_mst.SEQ_MBR
 		WHERE
-			dtl.SEQ_MBR = #{seq_mbr}
-			AND dtl.SEQ_SLE = #{seq_sle}
-			AND dtl.SEQ_BUY_MST = #{seq_buy_mst}
-			AND dtl.SEQ_BUY_DTL = #{seq_buy_dtl}
-			AND dtl.SEQ_MBR_ADDR = #{seq_mbr_addr}
+			addr.SEQ_MBR = #{seq_mbr}
+			AND mst.SEQ_BUY_MST = #{seq_buy_mst}
+			AND addr.SEQ_MBR_ADDR = #{seq_mbr_addr}
 	</select>
 	
 	<select id="deliveryDelCheck" parameterType="memberDto" resultType="java.lang.Integer">

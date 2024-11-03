@@ -60,36 +60,6 @@
 }
 </style>
 	<script>
-	function goWriteForm(value, value2, value3) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.seq_sle.setAttribute("value", value);
-		frmMain.cd_ctg_m.setAttribute("value", value2);
-		frmMain.cd_ctg_b.setAttribute("value", value3);
-		frmMain.action="/front/buy/writeForm.web";
-		frmMain.submit();
-	}
-	
-	function goPages(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.currentPage.setAttribute("value", value);
-		frmMain.action="/front/sale/ingredient_list.web";
-		frmMain.submit();
-	}
-	
-	function goList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-	
-		document.getElementById("cd_bbs_type").value = value;
-		
-		frmMain.action = "/front/center/board/myPageNotice/list.web";
-		frmMain.submit();
-	}
-	
 	function goMyList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -129,28 +99,22 @@ alert("평점 확인" + value);
 	<section class="checkout spad" >
 		<div class="container">
 			<form id="frmMain" method="POST" class="checkout__form">
-			<input type="hidden" 	id="seq_sle"			value="${buyDetailDto.seq_sle}"/>
-			<input type="hidden" 	id="seq_buy_mst"		value="${buyDetailDto.seq_buy_mst}"/>
-			<input type="hidden" 	id="seq_buy_dtl"		value="${buyDetailDto.seq_buy_dtl}"/>
-			<input type="hidden" 	id="sle_nm"				value="${buyDetailDto.sle_nm}"/>
-			<input type="hidden" 	id="count"				value="${buyDetailDto.count}"/>
-			<input type="hidden" 	id="total_price_sum"	value="${buyDetailDto.total_price_sum}"/>
-			<input type="hidden" 	id="seq_pay"			value="${buyDetailDto.seq_pay}"/>
-			<input type="hidden" 	id="deal_num"			value="${buyDetailDto.deal_num}"/>
-			<input type="hidden" 	id="cd_state"			value="${buyDetailDto.cd_state}"/>
+			<input type="hidden" 	id="seq_buy_mst"		value="${cancel.seq_buy_mst}"/>
+			<input type="hidden" 	id="seq_pay"			value="${cancel.seq_pay}"/>
+			<input type="hidden" 	id="deal_num"			value="${cancel.deal_num}"/>
 				<div class="row"style="display: flex; justify-content: center; align-items: center;">
 					<div class="col-lg-8">
-						<c:if test="${buyDetailDto.cd_state == 1}">
+						<c:if test="${cancel.cd_state == 1}">
 							<h5 style="font-family: 'Noto Sans KR', sans-serif !important; padding-left: 24px !important; font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;">주문 취소</h5>
 						</c:if>
-						<c:if test="${buyDetailDto.cd_state == 2}">
-							<h5 style="font-family: 'Noto Sans KR', sans-serif !important; padding-left: 24px !important; font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;"><span style="font-weight:normal !important; font-size: 20px !important;">${buyDetailDto.dt_upt}의</span > 주문 취소가 <span style="font-weight:normal !important; font-size: 20px !important;">${buyDetailDto.dt_reg}에</span> 처리중입니다.</h5>
+						<c:if test="${cancel.cd_state == 2}">
+							<h5 style="font-family: 'Noto Sans KR', sans-serif !important; padding-left: 24px !important; font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;"><span style="font-weight:normal !important; font-size: 20px !important;">${cancel.dt_upt}의</span > 주문 취소가 <span style="font-weight:normal !important; font-size: 20px !important;">${cancel.dt_reg}에</span> 처리중입니다.</h5>
 						</c:if>
-						<c:if test="${buyDetailDto.cd_state == 3}">
-							<h5 style="font-family: 'Noto Sans KR', sans-serif !important; padding-left: 24px !important; font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;"><span style="font-weight:normal !important; font-size: 20px !important;">${buyDetailDto.dt_upt}의</span > 교환 신청이 <span style="font-weight:normal !important; font-size: 20px !important;">${buyDetailDto.dt_reg}에</span> 처리중입니다.</h5>
+						<c:if test="${cancel.cd_state == 3}">
+							<h5 style="font-family: 'Noto Sans KR', sans-serif !important; padding-left: 24px !important; font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;"><span style="font-weight:normal !important; font-size: 20px !important;">${cancel.dt_upt}의</span > 교환 신청이 <span style="font-weight:normal !important; font-size: 20px !important;">${cancel.dt_reg}에</span> 처리중입니다.</h5>
 						</c:if>
-						<c:if test="${buyDetailDto.cd_state == 4}">
-							<h5 style="font-family: 'Noto Sans KR', sans-serif !important; padding-left: 24px !important; font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;"><span style="font-weight:normal !important; font-size: 20px !important;">${buyDetailDto.dt_upt}의</span > 환불 신청이 <span style="font-weight:normal !important; font-size: 20px !important;">${buyDetailDto.dt_reg}에</span> 처리중입니다.</h5>
+						<c:if test="${cancel.cd_state == 4}">
+							<h5 style="font-family: 'Noto Sans KR', sans-serif !important; padding-left: 24px !important; font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;"><span style="font-weight:normal !important; font-size: 20px !important;">${cancel.dt_upt}의</span > 환불 신청이 <span style="font-weight:normal !important; font-size: 20px !important;">${cancel.dt_reg}에</span> 처리중입니다.</h5>
 						</c:if>
 						<div class="cancle-layout">	
 							<div class="cancle-top" style=" margin-bottom: 24px !important;">
@@ -159,21 +123,25 @@ alert("평점 확인" + value);
 								</div>
 								<div class="cancle-middle">
 									<div style="margin-bottom: 8px !important;">
+									<c:forEach var="cancelList" items="${cancelList}">
+									<c:forEach var="cancelDatas" items="${cancelList.buyDatas}">
 										<div style="display: flex !important; flex-direction: row !important;">
 											<div style="position: relative !important; width: 64px !important; margin-right: 16px !important;">
-												<img style="width: 64px !important; height: 64px !important;" src="${buyDetailDto.img}">
+												<img style="width: 64px !important; height: 64px !important;" src="${cancelDatas.img}">
 											</div>
 											<div style="flex: 1 1 0% !important; display: flex !important; user-select: none !important; overflow: hidden !important; align-items: normal !important;">
 												<div style="display: flex !important; flex-direction: column !important;">
 													<div style="display: flex !important; padding-bottom: 8px !important; line-height: 1.25rem !important;">
-														${buyDetailDto.sle_nm}
+														${cancelDatas.sle_nm}
 													</div>
-													<div style="padding-bottom: 0px !important;">
-														${buyDetailDto.count}개, <fmt:formatNumber value="${buyDetailDto.total_price}" type="number" /> 원
+													<div style="color: rgb(85, 85, 85) !important; padding-bottom: 0px !important;">
+													<fmt:formatNumber value="${cancelDatas.price}" type="number" />원 ${cancelDatas.count}개
 													</div>
 												</div>
 											</div>
 										</div>
+									</c:forEach>
+									</c:forEach>
 									</div>
 								</div>
 							</div>
@@ -194,7 +162,7 @@ alert("평점 확인" + value);
 										<div style="display: flex !important; flex-direction: column !important; text-align: right !important;">
 											<div class="cancle-footer" style="margin-bottom: 8px !important;">
 												<div style="font-weight: bold !important; font-weight: bold;box-sizing: border-box !important; display: flex !important; margin: 0 !important; padding: 0 !important;">
-													<fmt:formatNumber value="${buyDetailDto.total_price}" type="number" /> 원
+													<fmt:formatNumber value="${cancel.buy_price}" type="number" /> 원
 												</div>
 											</div>
 										</div>
@@ -228,7 +196,7 @@ alert("평점 확인" + value);
 											<div style="display: flex !important; flex-direction: column !important; text-align: right !important;">
 												<div class="cancle-footer" style="margin-bottom: 8px !important;">
 													<div style="font-weight: bold !important; color: red !important; box-sizing: border-box !important; display: flex !important; margin: 0 !important; padding: 0 !important;">
-														<fmt:formatNumber value="${buyDetailDto.total_price_sum}" type="number" /> 원
+														<fmt:formatNumber value="${cancel.total_price_sum}" type="number" /> 원
 													</div>
 												</div>
 											</div>
@@ -238,7 +206,7 @@ alert("평점 확인" + value);
 							</div>
 							<div style="display: flex; gap: 20px; justify-content: flex-end;">
 							<c:choose>
-								<c:when test="${buyDetailDto.cd_state == 1}">
+								<c:when test="${cancel.cd_state == 1}">
 									<div style="margin-bottom: 24px; text-align: right;">
 										<button type="button" onclick="cancelOrder('2')" class="cancle-button">주문 취소</button>
 									</div>
@@ -287,9 +255,7 @@ alert("평점 확인" + value);
 		var myData = {
 				
 			deal_num: $("#deal_num").val(),
-			seq_sle: $("#seq_sle").val(),
 			seq_buy_mst: $("#seq_buy_mst").val(),
-			seq_buy_dtl: $("#seq_buy_dtl").val(),
 			seq_pay: $("#seq_pay").val(),
 			cd_state: cd_state
 		};

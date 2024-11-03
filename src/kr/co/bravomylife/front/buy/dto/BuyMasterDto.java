@@ -32,26 +32,33 @@ import java.util.List;
  */
 public class BuyMasterDto {
 	
-	private int rnum					= 0;
-	private int seq_buy_mst				= 0;
-	private int seq_mbr					= 0;
-	private String buy_info				= "";
-	private int buy_count				= 0;
-	private int buy_price				= 0;
-	private String flg_delete			= "";
-	private String cd_state_pay			= ""; //결제상태코드:결제전(NULL), 실패(N), 성공(Y), 취소(C)
-	private String cd_state_delivery	= ""; //배송상태코드:등록(NULL), 확인중(C), 배송준비중(P), 배송중(D), 배송완료(Y)
-	private String dt_reg				= "";
-	private int register				= 0;
-	private String dt_upt				= "";
-	private int updater					= 0;
-	private int total_point				= 0;
-	private int use_point				= 0;
-	private int seq_mbr_addr			= 0;
-	private String delivery_request		= "";
+	private int rnum						= 0;
+	private int seq_buy_mst					= 0;
+	private int seq_mbr						= 0;
+	private String buy_info					= "";
+	private int buy_count					= 0;
+	private int buy_price					= 0;
+	private String flg_delete				= "";
+	private String cd_state_pay				= ""; //결제상태코드:결제전(NULL), 실패(N), 성공(Y), 취소(C)
+	private String cd_state_delivery		= ""; //배송상태코드:등록(NULL), 확인중(C), 배송준비중(P), 배송중(D), 배송완료(Y)
+	private String dt_reg					= "";
+	private int register					= 0;
+	private String dt_upt					= "";
+	private int updater						= 0;
+	private int total_point					= 0;
+	private int use_point					= 0;
+	private int seq_mbr_addr				= 0;
+	private String delivery_request			= "";
 	private List<BuyDataDto> buyDatas		= null;
+	private int seq_sle						= 0;
 	
 	
+	public int getSeq_sle() {
+		return seq_sle;
+	}
+	public void setSeq_sle(int seq_sle) {
+		this.seq_sle = seq_sle;
+	}
 	public List<BuyDataDto> getBuyDatas() {
 		return buyDatas;
 	}

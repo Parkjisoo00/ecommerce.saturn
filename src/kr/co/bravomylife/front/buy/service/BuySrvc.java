@@ -34,6 +34,8 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import kr.co.bravomylife.front.buy.dao.BuyDao;
 import kr.co.bravomylife.front.buy.dto.BuyDataDto;
 import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
+import kr.co.bravomylife.front.buy.dto.BuyDto;
+import kr.co.bravomylife.front.buy.dto.BuyListDto;
 import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
@@ -59,6 +61,153 @@ public class BuySrvc {
 	PayDao payDao;
 	
 	@SuppressWarnings("unchecked")
+	public BuyListDto mergedcancelList(BuyListDto cancelListMst, BuyListDto cancelListDtl) {
+		
+		List<BuyDto> cancelMst = (List<BuyDto>) cancelListMst.getList();
+		List<BuyDto> cancelDtl = (List<BuyDto>) cancelListDtl.getList();
+		
+		Map<Integer, List<BuyDataDto>> cancelMap = new HashMap<>();
+		
+		for (BuyDto listDtl : cancelDtl) {
+			
+			int seqBuyMst = listDtl.getSeq_buy_mst();
+			String sleNm = listDtl.getSle_nm();
+			int count = listDtl.getCount();
+			int price = listDtl.getPrice();
+			String img = listDtl.getImg();
+			int totalPrice = listDtl.getTotal_price();
+			
+			if (!cancelMap.containsKey(seqBuyMst)) {
+				
+				cancelMap.put(seqBuyMst, new ArrayList<>());
+			}
+			BuyDataDto buyDataDto = new BuyDataDto();
+			buyDataDto.setSle_nm(sleNm);
+			buyDataDto.setCount(count);
+			buyDataDto.setPrice(price);
+			buyDataDto.setImg(img);
+			buyDataDto.setTotal_price(totalPrice);
+			
+			cancelMap.get(seqBuyMst).add(buyDataDto);
+		}
+		for (BuyDto listMst : cancelMst) {
+			
+			int seqBuyMst = listMst.getSeq_buy_mst();
+			
+			List<BuyDataDto> cancelResultList = cancelMap.get(seqBuyMst);
+			
+			if (cancelResultList != null) {
+				
+				listMst.setBuyDatas(cancelResultList);
+			}
+		}
+		BuyListDto mergedCancelListDto = new BuyListDto();
+		mergedCancelListDto.setBuy(cancelListMst.getBuy());
+		mergedCancelListDto.setList(cancelMst);
+		
+		return mergedCancelListDto;
+	}
+	
+	public BuyListDto cancelDtl(BuyDto buyDto) {
+		
+		BuyListDto buyListDto = new BuyListDto();
+		
+		buyListDto.setList(buyDao.cancelDtl(buyDto));
+		
+		return buyListDto;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public BuyListDto cancelMst(BuyDto buyDto) {
+		
+		BuyListDto buyListDto = new BuyListDto();
+		
+		buyListDto.setList(buyDao.cancelMst(buyDto));
+		
+		List<BuyDto> buyList = (List<BuyDto>) buyListDto.getList();
+		
+		int seqButMst = buyList.get(0).getSeq_buy_mst();
+		int seqPay = buyList.get(0).getSeq_pay();
+		String dealNum = buyList.get(0).getDeal_num();
+		String cdState = buyList.get(0).getCd_state();
+		int buyPrice = buyList.get(0).getBuy_price();
+		int totalPriceSum = buyList.get(0).getTotal_price_sum();
+		
+		buyDto.setSeq_buy_mst(seqButMst);
+		buyDto.setSeq_pay(seqPay);
+		buyDto.setDeal_num(dealNum);
+		buyDto.setCd_state(cdState);
+		buyDto.setBuy_price(buyPrice);
+		buyDto.setTotal_price_sum(totalPriceSum);
+		
+		buyListDto.setBuy(buyDto);
+		
+		return buyListDto;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public BuyListDto mergedbuyDelivery(BuyListDto deliveryListMst, BuyListDto deliveryListDtl) {
+		
+		List<BuyDto> deliveryMst = (List<BuyDto>) deliveryListMst.getList();
+		List<BuyDto> deliveryDtl = (List<BuyDto>) deliveryListDtl.getList();
+		
+		Map<Integer, List<BuyDataDto>> deliveryMap = new HashMap<>();
+		
+		for (BuyDto listDtl : deliveryDtl) {
+			
+			int seqBuyMst = listDtl.getSeq_buy_mst();
+			String sleNm = listDtl.getSle_nm();
+			int count = listDtl.getCount();
+			int price = listDtl.getPrice();
+			
+			if (!deliveryMap.containsKey(seqBuyMst)) {
+				
+				deliveryMap.put(seqBuyMst, new ArrayList<>());
+			}
+			BuyDataDto buyDataDto = new BuyDataDto();
+			buyDataDto.setSle_nm(sleNm);
+			buyDataDto.setCount(count);
+			buyDataDto.setPrice(price);
+			
+			deliveryMap.get(seqBuyMst).add(buyDataDto);
+		}
+		for (BuyDto listMst : deliveryMst) {
+			
+			int seqBuyMst = listMst.getSeq_buy_mst();
+			
+			List<BuyDataDto> buyDeliveryList = deliveryMap.get(seqBuyMst);
+			
+			if (buyDeliveryList != null) {
+				
+				listMst.setBuyDatas(buyDeliveryList);
+			}
+		}
+		BuyListDto mergedDeliveryListDto = new BuyListDto();
+		mergedDeliveryListDto.setBuy(deliveryListMst.getBuy());
+		mergedDeliveryListDto.setList(deliveryMst);
+		
+		return mergedDeliveryListDto;
+	}
+	
+	public BuyListDto deliveryListDtl(BuyDto buyDto) {
+		
+		BuyListDto buyListDto = new BuyListDto();
+		
+		buyListDto.setList(buyDao.deliveryListDtl(buyDto));
+		
+		return buyListDto;
+	}
+	
+	public BuyListDto deliveryListMst(BuyDto buyDto) {
+		
+		BuyListDto buyListDto = new BuyListDto();
+		
+		buyListDto.setList(buyDao.deliveryListMst(buyDto));
+		
+		return buyListDto;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public PagingListDto mergedBuyList(PagingListDto buyListMst, PagingListDto buyListDtl) {
 		
 		List<BuyMasterDto> buyListMstList = (List<BuyMasterDto>) buyListMst.getList();
@@ -76,6 +225,12 @@ public class BuySrvc {
 			int price = buyDtl.getPrice();
 			String dtReg = buyDtl.getDt_reg();
 			String img = buyDtl.getImg();
+			int discount_sale = buyDtl.getDiscount_sale();
+			int point_stack = buyDtl.getPoint_stack();
+			String cd_ctg_m = buyDtl.getCd_ctg_m();
+			String cd_ctg_b = buyDtl.getCd_ctg_b();
+			int price_sale = buyDtl.getPrice_sale();
+			int discount = buyDtl.getDiscount();
 			
 			if (!buyMap.containsKey(seqBuyMst)) {
 				
@@ -89,6 +244,12 @@ public class BuySrvc {
 			buyDataDto.setPrice(price);
 			buyDataDto.setDt_reg(dtReg);
 			buyDataDto.setImg(img);
+			buyDataDto.setDiscount_sale(discount_sale);
+			buyDataDto.setPoint_stack(point_stack);
+			buyDataDto.setCd_ctg_m(cd_ctg_m);
+			buyDataDto.setCd_ctg_b(cd_ctg_b);
+			buyDataDto.setPrice_sale(price_sale);
+			buyDataDto.setDiscount(discount);
 			
 			buyMap.get(seqBuyMst).add(buyDataDto);
 		}
@@ -141,33 +302,6 @@ public class BuySrvc {
 		
 		return pagingListDto;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@Transactional("txFront")
 	public boolean updateCancle(BuyDetailDto buyDetailDto) {
@@ -297,39 +431,10 @@ public class BuySrvc {
 		}
 	}
 	
-	
-	/**
-	 * @return String
-	 * 
-	 * @since 2024-10-21
-	 * <p>DESCRIPTION: 마이페이지 구매이력 총 구매 금액</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
 	public String selectTotal(BuyDetailDto buyDetailDto) {
 		return buyDao.selectTotal(buyDetailDto);
 	}
 	
-	/**
-	 * @return List<BuyDto>
-	 * 
-	 * @since 2024-10-21
-	 * <p>DESCRIPTION: 마이페이지 구매이력 목록</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	public List<BuyDetailDto> list(BuyDetailDto buyDetailDto) {
-		return buyDao.list(buyDetailDto);
-	}
-	
-	/**
-	 * @return List<BuyDto>
-	 * 
-	 * @since 2024-10-21
-	 * <p>DESCRIPTION: 마이페이지 구매이력 목록</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
 	public List<BuyDetailDto> historyList(BuyDetailDto buyDetailDto) {
 		return buyDao.historyList(buyDetailDto);
 	}

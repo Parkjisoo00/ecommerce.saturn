@@ -25,6 +25,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
+import kr.co.bravomylife.front.buy.dto.BuyDto;
 import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
 import kr.co.bravomylife.front.common.dao.BaseDao;
 import kr.co.bravomylife.front.common.dto.PagingDto;
@@ -41,9 +42,21 @@ import kr.co.bravomylife.front.sale.dto.SaleDto;
 @Service("kr.co.bravomylife.front.buy.dao.BuyDao")
 public class BuyDao extends BaseDao {
 	
+	public List<BuyDto> cancelDtl(BuyDto buyDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.buy.Buy.cancelDtl", buyDto);
+	}
 	
+	public List<BuyDto> cancelMst(BuyDto buyDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.buy.Buy.cancelMst", buyDto);
+	}
 	
+	public List<BuyDto> deliveryListDtl(BuyDto buyDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.buy.Buy.deliveryListDtl", buyDto);
+	}
 	
+	public List<BuyDto> deliveryListMst(BuyDto buyDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.buy.Buy.deliveryListMst", buyDto);
+	}
 	
 	public List<BuyDetailDto> buyListDtl(PagingDto pagingDto) {
 		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.buy.Buy.buyListDtl", pagingDto);
@@ -56,20 +69,6 @@ public class BuyDao extends BaseDao {
 	public int buyCount(PagingDto pagingDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.buy.Buy.buyCount", pagingDto);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public int updateCancle(BuyDetailDto buyDetailDto) {
 		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.buy.Buy.updateCancle", buyDetailDto);
@@ -145,10 +144,6 @@ public class BuyDao extends BaseDao {
 	
 	public String selectTotal(BuyDetailDto buyDetailDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.buy.Buy.selectTotal", buyDetailDto);
-	}
-	
-	public List<BuyDetailDto> list(BuyDetailDto buyDetailDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.buy.Buy.list", buyDetailDto);
 	}
 	
 	public List<BuyDetailDto> historyList(BuyDetailDto buyDetailDto) {

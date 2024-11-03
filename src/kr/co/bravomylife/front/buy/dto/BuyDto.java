@@ -20,6 +20,8 @@
  */
 package kr.co.bravomylife.front.buy.dto;
 
+import java.util.List;
+
 /**
  * @version 1.0.0
  * @author cydgate4957@gmail.com
@@ -30,20 +32,111 @@ package kr.co.bravomylife.front.buy.dto;
  */
 public class BuyDto {
 	
-	private int seq_buy_mst				= 0;
-	private int seq_mbr					= 0;
-	private String buy_info				= "";
-	private int buy_count				= 0;
-	private int buy_price				= 0;
-	private String flg_delete			= "";
-	private String cd_state_pay			= "";
-	private String cd_state_delivery	= "";
-	private String dt_reg				= "";
-	private int register				= 0;
-	private String dt_upt				= "";
-	private int updater					= 0;
+	private int seq_buy_mst					= 0;
+	private int seq_mbr						= 0;
+	private String buy_info					= "";
+	private int buy_count					= 0;
+	private int buy_price					= 0;
+	private String flg_delete				= "";
+	private String cd_state_pay				= "";
+	private String cd_state_delivery		= "";
+	private String dt_reg					= "";
+	private int register					= 0;
+	private String dt_upt					= "";
+	private int updater						= 0;
+	private int seq_mbr_addr				= 0;
+	private int seq_sle						= 0;
+	private int seq_buy_dtl					= 0;
+	private String sle_nm					= "";
+	private int count						= 0;
+	private int price						= 0;
+	private List<BuyDataDto> buyDatas		= null;
+	private String img						= "";
+	private String cd_state					= "";
+	private int total_price					= 0;
+	private int seq_pay						= 0;
+	private String deal_num					= "";
+	private int total_price_sum				= 0;
 	
 	
+	public int getTotal_price_sum() {
+		return total_price_sum;
+	}
+	public void setTotal_price_sum(int total_price_sum) {
+		this.total_price_sum = total_price_sum;
+	}
+	public String getDeal_num() {
+		return deal_num;
+	}
+	public void setDeal_num(String deal_num) {
+		this.deal_num = deal_num;
+	}
+	public int getSeq_pay() {
+		return seq_pay;
+	}
+	public void setSeq_pay(int seq_pay) {
+		this.seq_pay = seq_pay;
+	}
+	public int getTotal_price() {
+		return total_price;
+	}
+	public void setTotal_price(int total_price) {
+		this.total_price = total_price;
+	}
+	public String getCd_state() {
+		return cd_state;
+	}
+	public void setCd_state(String cd_state) {
+		this.cd_state = cd_state;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public List<BuyDataDto> getBuyDatas() {
+		return buyDatas;
+	}
+	public void setBuyDatas(List<BuyDataDto> buyDatas) {
+		this.buyDatas = buyDatas;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getSeq_sle() {
+		return seq_sle;
+	}
+	public void setSeq_sle(int seq_sle) {
+		this.seq_sle = seq_sle;
+	}
+	public int getSeq_buy_dtl() {
+		return seq_buy_dtl;
+	}
+	public void setSeq_buy_dtl(int seq_buy_dtl) {
+		this.seq_buy_dtl = seq_buy_dtl;
+	}
+	public String getSle_nm() {
+		return sle_nm;
+	}
+	public void setSle_nm(String sle_nm) {
+		this.sle_nm = sle_nm;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getSeq_mbr_addr() {
+		return seq_mbr_addr;
+	}
+	public void setSeq_mbr_addr(int seq_mbr_addr) {
+		this.seq_mbr_addr = seq_mbr_addr;
+	}
 	public int getSeq_buy_mst() {
 		return seq_buy_mst;
 	}

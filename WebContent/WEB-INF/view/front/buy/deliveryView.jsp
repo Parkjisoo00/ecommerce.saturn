@@ -8,27 +8,32 @@
 
 <head>
 	<%@ include file="/include/common/header.jsp" %>
+	<style>
+	.order-info {
+		flex: 0 0 auto;
+	}
+	
+	.order-details {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	
+	@media (max-width: 768px) {
+		.order-info {
+			width: 100%;
+			margin-bottom: 15px;
+			text-align: left;
+		}
+		.order-details {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+	}
+	</style>
 	<script>
-	function goWriteForm(value, value2, value3) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.seq_sle.setAttribute("value", value);
-		frmMain.cd_ctg_m.setAttribute("value", value2);
-		frmMain.cd_ctg_b.setAttribute("value", value3);
-		frmMain.action="/front/buy/writeForm.web";
-		frmMain.submit();
-	}
-	
-	function goPages(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.currentPage.setAttribute("value", value);
-		frmMain.action="/front/sale/ingredient_list.web";
-		frmMain.submit();
-	}
-	
 	function goList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -84,32 +89,44 @@ alert("평점 확인" + value);
 						<h5 style="font-size :30px; border-bottom: 0px !important; padding-bottom: 0px !important;">배송 조회</h5>
 						<div class="delivery_div_head" style="border-radius: 2px !important; padding: 22px 0px 17px !important;">
 							<div style="font-size: 28px !important;">
-							${memberDto.dt_reg}
+							${memberDto.dt_reg} <span style="font-size: 18px !important;"> 주문하신</span>
 							</div>
 							<c:if test="${memberDto.cd_state_delivery == 'C'}">
 							<div style="margin-top: 8px !important; font-size: 18px !important;">
-							고객님이 주문하신 상품이 <span style="font-size: 28px !important;">판매 확인중</span>입니다.
+							고객님의 상품이 <span style="font-size: 28px !important;">판매 확인중</span>입니다.
 							</div>
 							</c:if>
 							<c:if test="${memberDto.cd_state_delivery == 'P'}">
 							<div style="margin-top: 8px !important; font-size: 18px !important;">
-							고객님이 주문하신 상품이 <span style="font-size: 28px !important;">배송 준비중</span>입니다.
+							고객님의 상품이 <span style="font-size: 28px !important;">배송 준비중</span>입니다.
 							</div>
 							</c:if>
 							<c:if test="${memberDto.cd_state_delivery == 'D'}">
 							<div style="margin-top: 8px !important; font-size: 18px !important;">
-							고객님이 주문하신 상품이 <span style="font-size: 28px !important;">배송중</span>입니다.
+							고객님의 상품이 <span style="font-size: 28px !important;">배송중</span>입니다.
 							</div>
 							</c:if>
 							<c:if test="${memberDto.cd_state_delivery == 'Y'}">
 							<div style="margin-top: 8px !important; font-size: 18px !important;">
-							고객님이 주문하신 상품이 <span style="font-size: 28px !important;">배송 완료</span> 되었습니다.
+							고객님의 상품이 <span style="font-size: 28px !important;">배송 완료</span> 되었습니다.
 							</div>
 							</c:if>
 						</div>
 						<div class="delivery_div_head" style="background: white !important; padding: 15px 10px 10px !important; border-radius: 2px !important;">
-							<div style="text-align: left; padding-bottom: 25px !important; padding-top: 15px !important;">
-								<span style="padding-right: 30px !important; margin-right: 30px !important; border-right: 1px solid rgb(204, 204, 204) !important;">상품 정보</span>${memberDto.sle_nm}, ${memberDto.count}개
+							<div style="display: flex; flex-wrap: wrap; align-items: flex-start; text-align: left; padding-bottom: 25px; padding-top: 15px;">
+								<div class="order-info">
+									<span style="margin-right: 30px;">주문 정보</span>
+								</div>
+								<div class="order-details">
+									<c:forEach var="buyDelivery" items="${buyDelivery}">
+										<c:forEach var="buyDatas" items="${buyDelivery.buyDatas}">
+											<div style="display: flex; align-items: center;">
+												<div>${buyDatas.sle_nm}</div>
+												<span style="margin-left: 15px; white-space: nowrap;">${buyDatas.count}개</span>
+											</div>
+										</c:forEach>
+									</c:forEach>
+								</div>
 							</div>
 							<div style="text-align: left;">
 								<span style="margin-right: 30px !important;">받는 사람</span>${memberDto.mbr_nm}
@@ -121,7 +138,12 @@ alert("평점 확인" + value);
 								<span style="margin-right: 30px !important;">상세 주소</span>${memberDto.addr2}
 							</div>
 							<div style="text-align: left; padding-top: 15px !important;">
+								<c:if test="${memberDto.delivery_request == ''}">
+								<span style="margin-right: 30px !important;">요청 사항</span>-
+								</c:if>
+								<c:if test="${memberDto.delivery_request != ''}">
 								<span style="margin-right: 30px !important;">요청 사항</span>${memberDto.delivery_request}
+								</c:if>
 							</div>
 						</div>
 					</div>

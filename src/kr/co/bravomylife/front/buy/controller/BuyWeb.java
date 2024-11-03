@@ -46,6 +46,8 @@ import kr.co.bravomylife.common.dto.FileUploadDto;
 import kr.co.bravomylife.common.file.FileUpload;
 import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
 import kr.co.bravomylife.front.buy.dto.BuyDetailListDto;
+import kr.co.bravomylife.front.buy.dto.BuyDto;
+import kr.co.bravomylife.front.buy.dto.BuyListDto;
 import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
 import kr.co.bravomylife.front.buy.service.BuySrvc;
 import kr.co.bravomylife.front.common.Common;
@@ -101,7 +103,7 @@ public class BuyWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/buy/buyDelivertView.web")
-	public ModelAndView buyDelivertView(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+	public ModelAndView buyDelivertView(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto, BuyDto buyDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
@@ -114,8 +116,6 @@ public class BuyWeb extends Common {
 			
 			MemberDto _memberDto = memberSrvc.buyDelivertView(memberDto);
 			
-			logger.debug("배송 요청사항 확인" + _memberDto.getDelivery_request());
-			
 			_memberDto.setPost(aes.decode(_memberDto.getPost()));
 			_memberDto.setAddr1(aes.decode(_memberDto.getAddr1()));
 			_memberDto.setAddr2(aes.decode(_memberDto.getAddr2()));
@@ -123,6 +123,16 @@ public class BuyWeb extends Common {
 			_memberDto.setDt_reg(_memberDto.getDt_reg());
 			_memberDto.setDelivery_request(_memberDto.getDelivery_request());
 			
+			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
+			
+			buyDto.setSeq_mbr(seqMbr);
+			
+			BuyListDto deliveryListDtl = buySrvc.deliveryListDtl(buyDto);
+			BuyListDto deliveryListMst = buySrvc.deliveryListMst(buyDto);
+			
+			BuyListDto mergedbuyDelivery = buySrvc.mergedbuyDelivery(deliveryListMst, deliveryListDtl);
+			
+			mav.addObject("buyDelivery", mergedbuyDelivery.getList());
 			mav.addObject("memberDto"	, _memberDto);
 			mav.setViewName("front/buy/deliveryView");
 		}
@@ -796,7 +806,7 @@ public class BuyWeb extends Common {
 			
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
-						
+			
 			SaleDto _saleDto	= saleSrvc.select(saleDto);
 			
 			mav.addObject("saleDto"		, _saleDto);
@@ -805,7 +815,6 @@ public class BuyWeb extends Common {
 			mav.addObject("reviewCount"		, reviewCount);
 			
 			PagingListDto _pagingListDto = saleSrvc.detailList(pagingDto);
-			mav.addObject("paging"	, _pagingListDto.getPaging());
 			mav.addObject("list"	, _pagingListDto.getList());
 			
 			PagingListDto _reviewListImgs = saleSrvc.reviewListImgs(reviewpagingDto);
@@ -819,6 +828,7 @@ public class BuyWeb extends Common {
 				reviewList.get(loop).setMbr_nm(aes.decode(reviewList.get(loop).getMbr_nm()));
 			}
 			
+			mav.addObject("paging"	, mergedPagingList.getPaging());
 			mav.addObject("reviewList", mergedPagingList.getList());
 			
 			mav.setViewName("front/buy/writeForm");
@@ -844,40 +854,22 @@ public class BuyWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/buy/history.web")
-	public ModelAndView history(HttpServletRequest request, HttpServletResponse response, BuyDetailDto buyDetailDto, PagingDto pagingDto) {
+	public ModelAndView history(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
 			
-			buyDetailDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
-			
-			
-			List<BuyDetailDto> list = buySrvc.list(buyDetailDto);
-			
-			
-			String total_price = buySrvc.selectTotal(buyDetailDto);
-			
-			
 			pagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			pagingDto.setCd_state("1");
 			
 			PagingListDto buyListDtl = buySrvc.buyListDtl(pagingDto);
 			PagingListDto buyListMst = buySrvc.buyListMst(pagingDto);
 			
 			PagingListDto mergedBuyList = buySrvc.mergedBuyList(buyListMst, buyListDtl);
 			
-			
-			
-			
-			
-			
-			
-			
-			mav.addObject("list", list);
-			
-			
+			mav.addObject("paging", mergedBuyList.getPaging());
 			mav.addObject("buyList", mergedBuyList.getList());
-			mav.addObject("total_price", total_price);
 			
 			mav.setViewName("front/buy/history");
 		}

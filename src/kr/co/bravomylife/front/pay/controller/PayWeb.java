@@ -46,6 +46,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
 import kr.co.bravomylife.front.buy.dto.BuyDetailListDto;
+import kr.co.bravomylife.front.buy.dto.BuyDto;
+import kr.co.bravomylife.front.buy.dto.BuyListDto;
 import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.member.dto.MemberDto;
 import kr.co.bravomylife.front.member.service.MemberSrvc;
@@ -98,21 +100,27 @@ public class PayWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping("/front/pay/cancelForm.web")
-	public ModelAndView cancel(HttpServletRequest request, HttpServletResponse response, BuyDetailDto buyDetailDto) {
+	public ModelAndView cancelForm(HttpServletRequest request, HttpServletResponse response, BuyDto buyDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
 			
-			buyDetailDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
 			
-			BuyDetailDto _buyDetailDto = buySrvc.cancel(buyDetailDto);
+			buyDto.setSeq_mbr(seqMbr);
 			
-			mav.addObject("buyDetailDto"	, _buyDetailDto);
+			BuyListDto cancelListDtl = buySrvc.cancelDtl(buyDto);
+			BuyListDto cancelListMst = buySrvc.cancelMst(buyDto);
+			
+			BuyListDto mergedcancel = buySrvc.mergedcancelList(cancelListMst, cancelListDtl);
+			
+			mav.addObject("cancel", mergedcancel.getBuy());
+			mav.addObject("cancelList", mergedcancel.getList());
 			mav.setViewName("front/buy/cancelForm");
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".cancel()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".cancelForm()] " + e.getMessage(), e);
 		}
 		finally {}
 		

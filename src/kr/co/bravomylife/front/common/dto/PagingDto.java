@@ -37,21 +37,27 @@ public class PagingDto {
 	private int total_price_sum	= 0;
 	private int total_point_sum	= 0;
 	private int review_count	= 0;
+	private String cd_state		="";
 	
-	
-	private String sle_nm			= "";	// 판매 상품명
-	private String img				= "";	// 판매 상품 이미지
-	private int price_sale			= 0;	// 판매 상품 원가
-	private int discount_sale		= 0;	// 판매가(원가에서 할인율%을 뺀 가격)
+	private String sle_nm			= "";
+	private String img				= "";
+	private int price_sale			= 0;
+	private int discount_sale		= 0;
 	private int rnum				= 0;
-	private int seq_like			= 0;	// 찜 일련번호(판매 상세 페이지에서 사용)
-	private String flg_delete		= "";	// 삭제 처리 여부
-	private String dt_upt			= "";	// 수정일
-	private int updater				= 0;	// 수정자
-	private String flg_like			= "";	// 찜 여부
-	private int discount		= 0;
+	private int seq_like			= 0;
+	private String flg_delete		= "";
+	private String dt_upt			= "";
+	private int updater				= 0;
+	private String flg_like			= "";
+	private int discount			= 0;
 	
 	
+	public String getCd_state() {
+		return cd_state;
+	}
+	public void setCd_state(String cd_state) {
+		this.cd_state = cd_state;
+	}
 	public int getDiscount() {
 		return discount;
 	}
