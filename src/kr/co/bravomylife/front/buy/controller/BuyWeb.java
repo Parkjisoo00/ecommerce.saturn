@@ -37,6 +37,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -94,10 +95,43 @@ public class BuyWeb extends Common {
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-11-04
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/buy/historyDelete.json",  method = RequestMethod.POST, consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
+	public @ResponseBody Map<String, Object> historyDelete(HttpServletRequest request, @RequestBody BuyDto buyDto) {
+		
+		Map<String, Object> response = new HashMap<>();
+		
+		int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
+		
+		try {
+			
+			buyDto.setSeq_mbr(seqMbr);
+			buyDto.setUpdater(seqMbr);
+			
+			buySrvc.historyDelete(buyDto);
+			
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".historyDelete()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return response;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
 	 * @param boardDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-010-29
+	 * @since 2024-011-04
 	 * <p>DESCRIPTION: 리뷰 관리</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -149,7 +183,7 @@ public class BuyWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-10-28
+	 * @since 2024-11-04
 	 * <p>DESCRIPTION:</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>

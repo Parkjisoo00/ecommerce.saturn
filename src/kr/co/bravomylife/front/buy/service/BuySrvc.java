@@ -60,6 +60,18 @@ public class BuySrvc {
 	@Inject
 	PayDao payDao;
 	
+	@Transactional("txFront")
+	public boolean historyDelete(BuyDto buyDto) {
+		
+		int result = buyDao.historyDelete(buyDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public BuyListDto mergedcancelList(BuyListDto cancelListMst, BuyListDto cancelListDtl) {
 		
