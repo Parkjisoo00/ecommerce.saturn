@@ -152,6 +152,7 @@
 									</otherwise>
 								</choose>
 								AND CD_STATE_PAY	= 'Y'
+								AND FLG_DELETE		= 'N'
 			)
 	</select>
 	
@@ -203,6 +204,7 @@
 			</otherwise>
 		</choose>
 		AND buy_mst.CD_STATE_PAY	= 'Y'
+		AND buy_mst.FLG_DELETE		= 'N'
 	</sql>
 	
 	<select id="pointCount" parameterType="pagingDto" resultType="java.lang.Integer">
