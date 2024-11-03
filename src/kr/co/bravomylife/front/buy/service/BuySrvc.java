@@ -132,6 +132,8 @@ public class BuySrvc {
 		String cdState = buyList.get(0).getCd_state();
 		int buyPrice = buyList.get(0).getBuy_price();
 		int totalPriceSum = buyList.get(0).getTotal_price_sum();
+		String dtReg = buyList.get(0).getDt_reg();
+		String dtUpt = buyList.get(0).getDt_upt();
 		
 		buyDto.setSeq_buy_mst(seqButMst);
 		buyDto.setSeq_pay(seqPay);
@@ -139,6 +141,8 @@ public class BuySrvc {
 		buyDto.setCd_state(cdState);
 		buyDto.setBuy_price(buyPrice);
 		buyDto.setTotal_price_sum(totalPriceSum);
+		buyDto.setDt_reg(dtReg);
+		buyDto.setDt_upt(dtUpt);
 		
 		buyListDto.setBuy(buyDto);
 		

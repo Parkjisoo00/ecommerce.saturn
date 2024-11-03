@@ -176,7 +176,7 @@ public class PayWeb extends Common {
 		}
 		else {
 			
-			response.put("message", "주문 취소가 처리중입니다.");
+			response.put("message", "주문 취소중 시스템 문제가 발생했습니다. 관리자에게 문의해주십시오.");
 		}
 		
 		response.putAll(apiResult);

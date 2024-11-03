@@ -132,16 +132,15 @@
 								</tbody>
 							</table>
 						</div>
-						
-						
-					<h6 class="lowgnb-title" style="padding-bottom: 5px; text-align: left; font-size: 30px;">주문 내역</h6>
+						<!-- 
+						<h6 class="lowgnb-title" style="padding-bottom: 5px; text-align: left; font-size: 30px;">주문 내역</h6>
 						<div class="mypage-header">
-					<h6 class="cart-title" style="font-size:15px">*이미지를 클릭하면 상품으로 이동합니다.</h6>
-						<div class="mypage-header-right-group">
-							<a href="/front/buy/history.web" ><h6 class="cart-title" style="font-size:20px">더보기 </h6></a>
-							<a href="/front/buy/history.web" style="padding-bottom: 13px;"><img src="/img/mypage/mypage3.png"></a>
+							<h6 class="cart-title" style="font-size:15px">*이미지를 클릭하면 상품으로 이동합니다.</h6>
+							<div class="mypage-header-right-group">
+								<a href="/front/buy/history.web" ><h6 class="cart-title" style="font-size:20px">더보기 </h6></a>
+								<a href="/front/buy/history.web" style="padding-bottom: 13px;"><img src="/img/mypage/mypage3.png"></a>
+							</div>
 						</div>
-					</div>
 						<div class="shop__cart__table" style="border: 1px solid #dbdbdb; border-radius: 4px;">
 							<table id="productBasket" class="cart-table">
 								<thead style="border-bottom: 1px solid #dbdbdb !important;">
@@ -191,6 +190,7 @@
 								</tbody>
 							</table>
 						</div>
+						 -->
 					</div>
 				</div>
 			</form>

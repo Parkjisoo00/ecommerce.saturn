@@ -28,7 +28,7 @@
 	transform: translate(-50%, -50%);
 	background-color: white;
 	padding: 20px;
-	width: 300px;
+	width: 600px;
 	border-radius: 4px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 	display: flex;
@@ -281,7 +281,7 @@ alert("평점 확인" + value);
 		$('#modalOverlay').hide();
 		$('#resultModal').hide();
 		
-		window.location.href = "/front/buy/history.web";
+		// window.location.href = "/front/buy/history.web";
 	});
 </script>
 </body>

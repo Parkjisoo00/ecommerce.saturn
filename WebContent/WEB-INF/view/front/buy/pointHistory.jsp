@@ -127,7 +127,7 @@ alert("평점 확인" + value);
 							<thead style="border-bottom: 1px solid #dbdbdb !important;">
 								<tr style="border-color: #707070 !important;">
 									<th class="cart-th" style="width: 10%">
-									<th class="cart-th" >상품정보</th>
+									<th class="cart-th" >주문정보</th>
 									<th class="cart-th" style="width: 15%">수량</th>
 									<th class="cart-th" style="width: 15%">개별포인트</th>
 									<th class="cart-th" style="width: 15%">합계포인트</th>

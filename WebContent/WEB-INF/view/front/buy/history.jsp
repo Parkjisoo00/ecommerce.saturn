@@ -144,49 +144,60 @@
 					<h6 class="lowgnb-title" style="padding-bottom: 20px; text-align: left; font-size: 35px;">주문 목록</h6>
 					<h6 class="cart-title">*이미지를 클릭하면 상품으로 이동합니다</h6>
 						<div class="shop__cart__table">
-						<c:forEach var="buyList" items="${buyList}">
-							<div class="history-div">
-								<div class="history-head">
-									<div class="history-head-title">${buyList.dt_reg} 주문</div>
-									<div class="history-head-subtitle">
-										<a href="javascript:delivery('${buyList.seq_buy_mst}', '${buyList.seq_mbr_addr}');" class="cart-btn" style="font-weight: normal; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: rgb(52, 106, 255) !important; border: 1px solid rgb(52, 106, 255);">배송조회 확인</a>
-										<a href="javascript:cancelForm('${buyList.seq_buy_mst}');" class="cart-btn" style="font-weight: normal; margin-right: 10px !important; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: #2c2c2c; border: 1px solid rgb(221, 221, 221);">주문취소 신청</a>
+						<c:choose>
+							<c:when test="${empty buyList}">
+								<div class="history-div">
+									<p style="margin-bottom: 100px !important; margin-top: 100px !important; text-align: center;">
+										등록된 주문 정보가 없습니다.
+									</p>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="buyList" items="${buyList}">
+									<div class="history-div">
+										<div class="history-head">
+											<div class="history-head-title">${buyList.dt_reg} 주문</div>
+											<div class="history-head-subtitle">
+												<a href="javascript:delivery('${buyList.seq_buy_mst}', '${buyList.seq_mbr_addr}');" class="cart-btn" style="font-weight: normal; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: rgb(52, 106, 255) !important; border: 1px solid rgb(52, 106, 255);">배송조회 확인</a>
+												<a href="javascript:cancelForm('${buyList.seq_buy_mst}');" class="cart-btn" style="font-weight: normal; margin-right: 10px !important; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: #2c2c2c; border: 1px solid rgb(221, 221, 221);">주문취소 신청</a>
+											</div>
+										</div>
+										<div class="history-table-div">
+											<table id="productBasket" class="cart-table">
+												<tbody>
+													<c:forEach var="buyDatas" items="${buyList.buyDatas}">
+														<tr style="border: 0;">
+															<td class="cart-td" style="text-align: center; vertical-align: middle;">
+																<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden; display: inline-block;">
+																	<a href="javascript:goWriteForm('${buyDatas.seq_sle}', '${buyDatas.cd_ctg_m}', '${buyDatas.cd_ctg_b}');">
+																		<img class="cart-img" src="${buyDatas.img}" class="cart-img">
+																	</a>
+																</div>
+															</td>
+															<td class="cart-td" style="text-align: left !important; font-size: 16px !important;">
+																<div>
+																${buyDatas.sle_nm}
+																</div>
+																<div style="color: rgb(85, 85, 85) !important;">
+																<fmt:formatNumber value="${buyDatas.price}" type="number" />원 ${buyDatas.count}개
+																</div>
+															</td>
+															<td class="cart-td" style="text-align: right !important; padding-right: 0px !important; padding-left: 0px !important;">
+																	<a href="javascript:setBasket('${buyDatas.seq_sle}', '${buyDatas.sle_nm}', '${buyDatas.discount_sale}', '${buyDatas.count}'
+																	, '${buyDatas.img}', '${buyDatas.point_stack}', '${buyDatas.cd_ctg_m}', '${buyDatas.cd_ctg_b}', '${buyDatas.price_sale}', '${buyDatas.discount}');" 
+																	class="cart-btn" style="letter-spacing: -0.5px !important; margin-left:10px !important; margin-right:15px !important; padding: 9px 15px 9px !important; font-weight: normal; font-size: 13px !important; color: #2c2c2c; border: 1px solid rgb(221, 221, 221); margin-top:0px;">장바구니 담기</a>
+															</td>
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+										<div style="margin-top: 10px !important;"></div>
 									</div>
-								</div>
-								<div class="history-table-div">
-									<table id="productBasket" class="cart-table">
-										<tbody>
-											<c:forEach var="buyDatas" items="${buyList.buyDatas}">
-												<tr style="border: 0;">
-													<td class="cart-td" style="text-align: center; vertical-align: middle;">
-														<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden; display: inline-block;">
-															<a href="javascript:goWriteForm('${buyDatas.seq_sle}', '${buyDatas.cd_ctg_m}', '${buyDatas.cd_ctg_b}');">
-																<img class="cart-img" src="${buyDatas.img}" class="cart-img">
-															</a>
-														</div>
-													</td>
-													<td class="cart-td" style="text-align: left !important; font-size: 16px !important;">
-														<div>
-														${buyDatas.sle_nm}
-														</div>
-														<div style="color: rgb(85, 85, 85) !important;">
-														<fmt:formatNumber value="${buyDatas.price}" type="number" />원 ${buyDatas.count}개
-														</div>
-													</td>
-													<td class="cart-td" style="text-align: right !important; padding-right: 0px !important; padding-left: 0px !important;">
-															<a href="javascript:setBasket('${buyDatas.seq_sle}', '${buyDatas.sle_nm}', '${buyDatas.discount_sale}', '${buyDatas.count}'
-															, '${buyDatas.img}', '${buyDatas.point_stack}', '${buyDatas.cd_ctg_m}', '${buyDatas.cd_ctg_b}', '${buyDatas.price_sale}', '${buyDatas.discount}');" 
-															class="cart-btn" style="letter-spacing: -0.5px !important; margin-left:10px !important; margin-right:15px !important; padding: 9px 15px 9px !important; font-weight: normal; font-size: 13px !important; color: #2c2c2c; border: 1px solid rgb(221, 221, 221); margin-top:0px;">장바구니 담기</a>
-													</td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-								</div>
-								<div style="margin-top: 10px !important;"></div>
-							</div>
-						</c:forEach>
-						<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+						<div style="text-align: center; width: 1000px; margin-top: 20px; color: black !important;">
 							<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
 						</div>
 					</div>

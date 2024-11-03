@@ -841,6 +841,43 @@ public class BuyWeb extends Common {
 		return mav;
 	}
 	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-11-03
+	 * <p>DESCRIPTION: 구매 이력</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/buy/cancelhistory.web")
+	public ModelAndView cancelhistory(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			pagingDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			PagingListDto buyListDtl = buySrvc.buyListDtl(pagingDto);
+			PagingListDto buyListMst = buySrvc.buyListMst(pagingDto);
+			
+			PagingListDto mergedBuyList = buySrvc.mergedBuyList(buyListMst, buyListDtl);
+			
+			mav.addObject("paging", mergedBuyList.getPaging());
+			mav.addObject("buyList", mergedBuyList.getList());
+			
+			mav.setViewName("front/buy/cancelHistory");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".cancelhistory()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -880,6 +917,4 @@ public class BuyWeb extends Common {
 		
 		return mav;
 	}
-	
-
 }

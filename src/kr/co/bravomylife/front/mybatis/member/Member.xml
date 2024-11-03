@@ -11,7 +11,7 @@
 			, mst.CD_STATE_DELIVERY
 			, mst.DELIVERY_REQUEST
 			, mbr_mst.MBR_NM
-			, TO_CHAR(SYSDATE, 'MM"월"" "D"일"') dt_reg
+			, TO_CHAR(SYSDATE, 'MM"월"" "DD"일"') dt_reg
 		FROM
 			TB_MBR_ADDR addr
 		LEFT JOIN
@@ -337,7 +337,7 @@
 			, addr.ADDR2
 			, addr.SEQ_MBR_ADDR
 			, mst.TOTAL_POINT
-			, TO_CHAR(SYSDATE + 3, 'MM"월"" "D"일"') dt_reg
+			, TO_CHAR(SYSDATE + 3, 'MM"월"" "DD"일"') dt_reg
 		FROM
 			TB_MBR_MST mst
 		LEFT JOIN

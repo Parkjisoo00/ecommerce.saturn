@@ -48,8 +48,8 @@
 			, pay.SEQ_PAY
 			, pay.DEAL_NUM
 			, mst.SEQ_MBR
-			, TO_CHAR(mst.DT_UPT, 'MM"월"" "D"일"') dt_upt
-			, TO_CHAR(SYSDATE, 'MM"월"" "D"일"') dt_reg
+			, TO_CHAR(mst.DT_UPT, 'MM"월"" "DD"일"') dt_upt
+			, TO_CHAR(SYSDATE, 'MM"월"" "DD"일"') dt_reg
 			, mst.BUY_PRICE
 			, (mst.BUY_PRICE - 2500) total_price_sum
 			, mst.CD_STATE
@@ -143,7 +143,14 @@
 				SELECT SEQ_BUY_MST
 				FROM TB_BUY_MST
 				WHERE SEQ_MBR = #{seq_mbr}
-								AND CD_STATE		= #{cd_state}
+								<choose>
+									<when test="cd_state != null and cd_state != ''">
+										AND CD_STATE		= #{cd_state}
+									</when>
+									<otherwise>
+										AND CD_STATE IN (2, 3, 4)
+									</otherwise>
+								</choose>
 								AND CD_STATE_PAY	= 'Y'
 			)
 	</select>
@@ -187,7 +194,14 @@
 	
 	<sql id="buywhere">
 		buy_mst.SEQ_MBR				= #{seq_mbr}
-		AND buy_mst.CD_STATE		= #{cd_state}
+		<choose>
+			<when test="cd_state != null and cd_state != ''">
+				AND buy_mst.CD_STATE		= #{cd_state}
+			</when>
+			<otherwise>
+				AND buy_mst.CD_STATE IN (2, 3, 4)
+			</otherwise>
+		</choose>
 		AND buy_mst.CD_STATE_PAY	= 'Y'
 	</sql>
 	
