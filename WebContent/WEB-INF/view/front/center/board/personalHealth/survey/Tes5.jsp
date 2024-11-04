@@ -66,11 +66,31 @@
 	<section class="checkout spad" >
 		<div class="container">
 			<form id="frmMain" method="POST" class="checkout__form">
+			<input type="hidden" name="cd_survey_type"								id="cd_survey_type"/>
+			<input type="hidden" name="gender"										id="gender"									value="${surveyDto.gender}"/>
+			<input type="hidden" name="mbr_nm"										id="mbr_nm"									value="${surveyDto.mbr_nm}"/>
+			<input type="hidden" name="user_age"									id="user_age"								value="${surveyDto.user_age}"/>
+			<c:forEach var="surveyListDto" items="${surveyListDto}"	varStatus="status">
+				<input type="hidden" name="surveyList[${status.index}].cd_ctg_m"	id="surveyList[${status.index}].cd_ctg_m"	value="${surveyListDto.cd_ctg_m}" />
+				<input type="hidden" name="surveyList[${status.index}].cd_ctg_b"	id="surveyList[${status.index}].cd_ctg_b"	value="${surveyListDto.cd_ctg_b}" />
+			</c:forEach>
 				
 				
 				<div class="row"style="display: flex; justify-content: center; align-items: center; margin-bottom: 30px !important;">
 					<div class="col-lg-12" style="max-width: 670px !important; width: 100% !important; text-align: center;">
-						내용1
+						${surveyDto.user_age} / ${surveyDto.mbr_nm}
+						<c:if test="${surveyDto.gender == 'M'}">
+						남성
+						</c:if>
+						<c:if test="${surveyDto.gender == 'F'}">
+						여성
+						</c:if>
+					</div>
+					<div class="col-lg-12" style="max-width: 670px !important; width: 100% !important; text-align: center;">
+						상품1
+					</div>
+					<div class="col-lg-12" style="max-width: 670px !important; width: 100% !important; text-align: center;">
+						상품2
 					</div>
 					<div class="checkout__form__input">
 						<input type="button" value="전체 상품 장바구니 담기" style="width: 100%; text-align: center;" id="registerId" onClick="setBasket();"/>

@@ -2,6 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.survey.Survey">
 
+	<select id="select" parameterType="surveyDto" resultType="surveyDto">
+		SELECT
+			SEQ_SLE
+		FROM (
+			SELECT
+				SEQ_SLE
+			FROM
+				TB_BEST
+			WHERE
+				CD_CTG_M = #{cd_ctg_m}
+				AND CD_CTG_B = #{cd_ctg_b}
+			ORDER BY
+				COUNT DESC, SEQ_SLE DESC
+		)
+		WHERE ROWNUM = 1
+	</select>
 
+	<select id="sequence" resultType="java.lang.Integer">
+		SELECT SQ_SEQ_HP_SUR.NEXTVAL FROM DUAL
+	</select>
+
+	<insert id="insertDtl" parameterType="surveyDto">
+		INSERT INTO TB_HP_SUR_DTL
+			(SEQ_HP_SUR_DTL, SEQ_HP_SUR, SEQ_MBR, CD_CTG_M, CD_CTG_B, SEQ_SLE)
+		VALUES
+			(SQ_SEQ_HP_SUR_DTL.NEXTVAL, #{seq_hp_sur}, #{seq_mbr}, #{cd_ctg_m}, #{cd_ctg_b}, #{seq_sle})
+	</insert>
+
+	<insert id="insert" parameterType="surveyDto">
+		INSERT INTO TB_HP_SUR
+			(SEQ_HP_SUR, SEQ_MBR, AGE, GENDER, REGISTER, DT_REG)
+		VALUES
+			(#{seq_hp_sur}, #{seq_mbr}, #{age}, #{gender}, #{seq_mbr}, SYSDATE)
+	</insert>
+
+	<select id="userInfo" parameterType="surveyDto" resultType="surveyDto">
+		SELECT
+			SEQ_MBR
+			, MBR_NM
+			, GENDER
+			, TO_CHAR(AGE, 'YYYY-MM-DD') age
+		FROM
+			TB_MBR_MST
+		WHERE
+			SEQ_MBR = #{seq_mbr}
+	</select>
 
 </mapper>

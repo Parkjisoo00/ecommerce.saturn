@@ -35,7 +35,8 @@ public class SurveyDto {
 	private int seq_sle					= 0;
 	private int seq_hp_sur				= 0;
 	private int seq_hp_sur_dtl			= 0;
-	private int age						= 0;
+	private String age					= "";
+	private int user_age				= 0;
 	private String gender				= "";
 	private int register				= 0;
 	private int updater					= 0;
@@ -43,8 +44,28 @@ public class SurveyDto {
 	private String dt_upt				= "";
 	private String cd_ctg_m				= "";
 	private String cd_ctg_b				= "";
+	private String cd_ctg				= "";
+	private String mbr_nm				= "";
 	
 	
+	public String getCd_ctg() {
+		return cd_ctg;
+	}
+	public void setCd_ctg(String cd_ctg) {
+		this.cd_ctg = cd_ctg;
+	}
+	public int getUser_age() {
+		return user_age;
+	}
+	public void setUser_age(int user_age) {
+		this.user_age = user_age;
+	}
+	public String getMbr_nm() {
+		return mbr_nm;
+	}
+	public void setMbr_nm(String mbr_nm) {
+		this.mbr_nm = mbr_nm;
+	}
 	public String getCd_survey_type() {
 		return cd_survey_type;
 	}
@@ -69,10 +90,10 @@ public class SurveyDto {
 	public void setSeq_hp_sur_dtl(int seq_hp_sur_dtl) {
 		this.seq_hp_sur_dtl = seq_hp_sur_dtl;
 	}
-	public int getAge() {
+	public String getAge() {
 		return age;
 	}
-	public void setAge(int age) {
+	public void setAge(String age) {
 		this.age = age;
 	}
 	public String getGender() {

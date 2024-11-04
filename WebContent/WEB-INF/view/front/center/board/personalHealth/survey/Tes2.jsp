@@ -50,12 +50,23 @@
 		<div class="container">
 			<form id="frmMain" method="POST" class="checkout__form">
 			<input type="hidden" name="cd_survey_type"				id="cd_survey_type"/>
-				
+			<input type="hidden" name="gender"						id="gender"			value="${surveyDto.gender}"/>
+			<input type="hidden" name="mbr_nm"						id="mbr_nm"			value="${surveyDto.mbr_nm}"/>
+			<input type="hidden" name="user_age"					id="user_age"		value="${surveyDto.user_age}"/>
+			
+			
 				<div class="row"style="display: flex; justify-content: center; align-items: center; margin-bottom: 30px !important;">
 					<div class="col-lg-12" style="max-width: 670px !important; width: 100% !important; text-align: center;">
-						<input type="text" required autocomplete="off" value=""/>이름
-						<input type="text" required autocomplete="off" value=""/>나이
-						<input type="text" required autocomplete="off" value=""/>성별
+						<input type="text" required autocomplete="off" value="${surveyDto.mbr_nm}"/>이름
+						<input type="text" required autocomplete="off" value="${surveyDto.user_age}"/>나이
+						<c:if test="${surveyDto.gender == 'M'}">
+						<input type="text" required autocomplete="off" value="남성"/>성별
+						<input type="hidden" name="cd_ctg" value="31"/>성별
+						</c:if>
+						<c:if test="${surveyDto.gender == 'F'}">
+						<input type="text" required autocomplete="off" value="여성"/>성별
+						<input type="hidden" name="cd_ctg" value="32"/>성별
+						</c:if>
 						<div class="checkout__form__input">
 							<input type="button" value="다음" style="width: 100%; text-align: center;" id="registerId" onClick="surveyProc('3');"/>
 						</div>

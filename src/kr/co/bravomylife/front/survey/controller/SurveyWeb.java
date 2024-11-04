@@ -20,12 +20,20 @@
  */
 package kr.co.bravomylife.front.survey.controller;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,7 +41,9 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.bravomylife.front.basket.controller.BasketWeb;
 import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.survey.dto.SurveyDto;
+import kr.co.bravomylife.front.survey.dto.SurveyListDto;
 import kr.co.bravomylife.front.survey.service.SurveySrvc;
+import kr.co.bravomylife.util.security.SKwithAES;
 
 /**
  * @version 1.0.0
@@ -49,6 +59,9 @@ public class SurveyWeb extends Common {
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(BasketWeb.class);
 	
+	@Autowired
+	Properties staticProperties;
+	
 	@Inject
 	private SurveySrvc surveySrvc;
 	
@@ -63,34 +76,103 @@ public class SurveyWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/center/board/surveyProc.web")
-	public ModelAndView surveyProc(HttpServletRequest request, HttpServletResponse response, SurveyDto surveyDto) {
+	public ModelAndView surveyProc(HttpServletRequest request, HttpServletResponse response, SurveyDto surveyDto, SurveyListDto surveyListDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		surveyDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 		
-		logger.debug("type 확인" + surveyDto.getCd_survey_type());
+		String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+		SKwithAES aes		= new SKwithAES(staticKey);
 		
 		try {
 			
 			if (surveyDto.getCd_survey_type().equals("2")) {
 				
-				//mav.addObject("surveyDto"	, surveyDto);
+				SurveyDto _surveyDto = surveySrvc.userInfo(surveyDto);
+				
+				_surveyDto.setMbr_nm(aes.decode(_surveyDto.getMbr_nm()));
+				String userBirth = _surveyDto.getAge();
+				
+				DateTimeFormatter ageFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				LocalDate userAge  = LocalDate.parse(userBirth, ageFormatter);
+				
+				LocalDate today = LocalDate.now();
+				
+				_surveyDto.setUser_age(Period.between(userAge, today).getYears()+1);
+				
+				mav.addObject("surveyDto"	, _surveyDto);
 				mav.setViewName("front/center/board/personalHealth/survey/Tes2");
 			}
 			else if (surveyDto.getCd_survey_type().equals("3")) {
 				
-				//mav.addObject("surveyDto"	, surveyDto);
+				surveyDto.setCd_ctg_b(surveyDto.getCd_ctg().substring(0, 1));
+				surveyDto.setCd_ctg_m(surveyDto.getCd_ctg().substring(1, 2));
+				
+				List<SurveyDto> surveyList = new ArrayList<>();
+				surveyList.add(surveyDto);
+				
+				surveyListDto.setSurveyList(surveyList);
+				
+				mav.addObject("surveyListDto"	, surveyListDto.getSurveyList());
+				mav.addObject("surveyDto"	, surveyDto);
 				mav.setViewName("front/center/board/personalHealth/survey/Tes3");
 			}
 			else if (surveyDto.getCd_survey_type().equals("4")) {
 				
-				//mav.addObject("surveyDto"	, surveyDto);
+				surveyDto.setCd_ctg_b(surveyDto.getCd_ctg().substring(0, 1));
+				surveyDto.setCd_ctg_m(surveyDto.getCd_ctg().substring(1, 2));
+				
+				List<SurveyDto> surveyList = surveyListDto.getSurveyList();
+				
+				SurveyDto _SurveyDto = new SurveyDto();
+				
+				_SurveyDto.setCd_ctg_b(surveyDto.getCd_ctg_b());
+				_SurveyDto.setCd_ctg_m(surveyDto.getCd_ctg_m());
+				
+				surveyList.add(_SurveyDto);
+				
+				mav.addObject("surveyListDto"	, surveyListDto.getSurveyList());
+				mav.addObject("surveyDto"	, surveyDto);
 				mav.setViewName("front/center/board/personalHealth/survey/Tes4");
 			}
 			else if (surveyDto.getCd_survey_type().equals("5")) {
 				
-				//mav.addObject("surveyDto"	, surveyDto);
+				surveyDto.setCd_ctg_b(surveyDto.getCd_ctg().substring(0, 1));
+				surveyDto.setCd_ctg_m(surveyDto.getCd_ctg().substring(1, 2));
+				surveyDto.setAge(Integer.toString(surveyDto.getUser_age()));
+				
+				List<SurveyDto> surveyList = surveyListDto.getSurveyList();
+				
+				SurveyDto _SurveyDto = new SurveyDto();
+				
+				_SurveyDto.setCd_ctg_b(surveyDto.getCd_ctg_b());
+				_SurveyDto.setCd_ctg_m(surveyDto.getCd_ctg_m());
+				
+				surveyList.add(_SurveyDto);
+				
+				SurveyListDto _surveyListDto = surveySrvc.selectList(surveyListDto);
+				
+				List<SurveyDto> _surveyList = _surveyListDto.getSurveyList();
+				List<SurveyDto> List = new ArrayList<>();
+				
+				for (SurveyDto survey : _surveyList) {
+					
+					SurveyDto resultSurvey = new SurveyDto();
+					
+					resultSurvey.setSeq_sle(survey.getSeq_sle());
+					resultSurvey.setCd_ctg_m(survey.getCd_ctg_m());
+					resultSurvey.setCd_ctg_b(survey.getCd_ctg_b());
+					
+					List.add(resultSurvey);
+				}
+				
+				surveyListDto.setSurveyList(List);
+				
+				surveySrvc.insert(surveyDto, surveyListDto);
+				
+				mav.addObject("surveyListDto"	, surveyListDto.getSurveyList());
+				mav.addObject("surveyDto"	, surveyDto);
 				mav.setViewName("front/center/board/personalHealth/survey/Tes5");
 			}
 			

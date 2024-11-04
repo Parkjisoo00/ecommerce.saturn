@@ -49,24 +49,32 @@
 	<section class="checkout spad" >
 		<div class="container">
 			<form id="frmMain" method="POST" class="checkout__form">
-			<input type="hidden" name="cd_survey_type"				id="cd_survey_type"/>
+			<input type="hidden" name="cd_survey_type"								id="cd_survey_type"/>
+			<input type="hidden" name="gender"										id="gender"			value="${surveyDto.gender}"/>
+			<input type="hidden" name="mbr_nm"										id="mbr_nm"			value="${surveyDto.mbr_nm}"/>
+			<input type="hidden" name="user_age"									id="user_age"		value="${surveyDto.user_age}"/>
+			<c:forEach var="surveyListDto" items="${surveyListDto}"	varStatus="status">
+				<input type="hidden" name="surveyList[${status.index}].cd_ctg_m"	id="surveyList[${status.index}].cd_ctg_m"	value="${surveyListDto.cd_ctg_m}" />
+				<input type="hidden" name="surveyList[${status.index}].cd_ctg_b"	id="surveyList[${status.index}].cd_ctg_b"	value="${surveyListDto.cd_ctg_b}" />
+			</c:forEach>
 				
 				<div class="row"style="display: flex; justify-content: center; align-items: center; margin-bottom: 30px !important;">
 					<div class="col-lg-12" style="max-width: 670px !important; width: 100% !important; text-align: center;">
-						<input type="checkbox" value="11"/>기능별1
-						<input type="checkbox" value="12"/>기능별2
-						<input type="checkbox" value="13"/>기능별3
-						<input type="checkbox" value="14"/>기능별4
-						<input type="checkbox" value="15"/>기능별5
-						<input type="checkbox" value="16"/>기능별6
-						<input type="checkbox" value="17"/>기능별7
-						<input type="checkbox" value="18"/>기능별8
-						<input type="checkbox" value="19"/>기능별9
+						<input type="checkbox" name="cd_ctg" value="11"/>기능별1
+						<input type="checkbox" name="cd_ctg" value="12"/>기능별2
+						<input type="checkbox" name="cd_ctg" value="13"/>기능별3
+						<input type="checkbox" name="cd_ctg" value="14"/>기능별4
+						<input type="checkbox" name="cd_ctg" value="15"/>기능별5
+						<input type="checkbox" name="cd_ctg" value="16"/>기능별6
+						<input type="checkbox" name="cd_ctg" value="17"/>기능별7
+						<input type="checkbox" name="cd_ctg" value="18"/>기능별8
+						<input type="checkbox" name="cd_ctg" value="19"/>기능별9
 					</div>
 					<div class="checkout__form__input">
 						<input type="button" value="다음" style="width: 100%; text-align: center;" id="registerId" onClick="surveyProc('4');"/>
 					</div>
 				</div>
+				
 				
 			</form>
 		</div>

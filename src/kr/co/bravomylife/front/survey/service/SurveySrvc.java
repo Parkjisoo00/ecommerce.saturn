@@ -20,7 +20,18 @@
  */
 package kr.co.bravomylife.front.survey.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
+import kr.co.bravomylife.front.survey.dao.SurveyDao;
+import kr.co.bravomylife.front.survey.dto.SurveyDto;
+import kr.co.bravomylife.front.survey.dto.SurveyListDto;
 
 /**
  * @version 1.0.0
@@ -32,5 +43,63 @@ import org.springframework.stereotype.Service;
  */
 @Service("kr.co.bravomylife.front.survey.service.SurveySrvc")
 public class SurveySrvc {
-
+	
+	@Inject
+	SurveyDao surveyDao;
+	
+	public SurveyListDto selectList(SurveyListDto surveyListDto) {
+		
+		List<SurveyDto> surveyList = surveyListDto.getSurveyList();
+		List<SurveyDto> _surveyList = new ArrayList<>();
+		
+		for (SurveyDto survey : surveyList) {
+			
+			SurveyDto surveyDto = new SurveyDto();
+			
+			surveyDto.setCd_ctg_m(survey.getCd_ctg_m());
+			surveyDto.setCd_ctg_b(survey.getCd_ctg_b());
+			
+			SurveyDto resultList = surveyDao.select(surveyDto);
+			
+			resultList.setCd_ctg_m(surveyDto.getCd_ctg_m());
+			resultList.setCd_ctg_b(surveyDto.getCd_ctg_b());
+			
+			_surveyList.add(resultList);
+		}
+		
+		surveyListDto.setSurveyList(_surveyList);
+		
+		return surveyListDto;
+	}
+	
+	@Transactional("txFront")
+	public boolean insert(SurveyDto surveyDto, SurveyListDto surveyListDto) {
+		
+		int result = 0;
+		
+		surveyDto.setSeq_hp_sur(surveyDao.sequence());
+		
+		result += surveyDao.insert(surveyDto);
+		
+		List<SurveyDto> surveyList = surveyListDto.getSurveyList();
+		
+		for(SurveyDto survey : surveyList) {
+			
+			surveyDto.setCd_ctg_m(survey.getCd_ctg_m());
+			surveyDto.setCd_ctg_b(survey.getCd_ctg_b());
+			surveyDto.setSeq_sle(survey.getSeq_sle());
+			
+			result += surveyDao.insertDtl(surveyDto);
+		}
+		
+		if (result == 1 + surveyList.size()) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	public SurveyDto userInfo(SurveyDto surveyDto) {
+		return surveyDao.userInfo(surveyDto);
+	}
 }

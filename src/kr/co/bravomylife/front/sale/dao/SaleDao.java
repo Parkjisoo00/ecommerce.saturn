@@ -255,7 +255,6 @@ public class SaleDao extends BaseDao {
 		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.listingLike", pagingDto);
 	}
 	
-	
 	public List<SaleDto> listingMyLike(PagingDto pagingDto) {
 		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.sale.Sale.listingMyLike", pagingDto);
 	}

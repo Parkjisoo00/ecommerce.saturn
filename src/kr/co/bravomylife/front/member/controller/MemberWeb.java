@@ -406,8 +406,6 @@ public class MemberWeb extends Common {
 				
 				memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 				
-				logger.debug("SEQ_MBR 확인" + memberDto.getSeq_mbr());
-				
 				MemberDto _memberDto = memberSrvc.currentBasket(memberDto);
 				
 				response.put("memberDto", _memberDto);
