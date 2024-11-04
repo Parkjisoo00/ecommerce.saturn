@@ -281,7 +281,6 @@
 		frmMain.submit();
 	}
 	
-
 	function WriteForm(value, value2, value3, value4) {
 		
 		if (!isLogin) {
@@ -299,7 +298,6 @@
 		frmMain.action = "/front/center/board/myPageNotice/writeForm.web";
 		frmMain.submit();
 	}
-	
 	</script>
 
 	<!-- Google Font -->

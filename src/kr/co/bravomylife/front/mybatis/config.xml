@@ -17,6 +17,7 @@
 		<typeAlias type="kr.co.bravomylife.front.buy.dto.BuyDetailListDto"				alias="buyDetailListDto" />
 		<typeAlias type="kr.co.bravomylife.front.buy.dto.BuyMasterDto"					alias="buyMasterDto" />
 		<typeAlias type="kr.co.bravomylife.front.pay.dto.PayDto"						alias="payDto" />
+		<typeAlias type="kr.co.bravomylife.front.survey.dto.SurveyDto"					alias="surveyDto" />
 		<typeAlias type="kr.co.bravomylife.front.sale.dto.SaleFileDto"					alias="saleFileDto" />
 	</typeAliases>
 	<mappers>
@@ -28,6 +29,7 @@
 		<mapper resource="kr/co/bravomylife/front/mybatis/buy/BuyDetail.xml" />
 		<mapper resource="kr/co/bravomylife/front/mybatis/buy/BuyMaster.xml" />
 		<mapper resource="kr/co/bravomylife/front/mybatis/pay/Pay.xml" />
+		<mapper resource="kr/co/bravomylife/front/mybatis/survey/Survey.xml" />
 		<mapper resource="kr/co/bravomylife/front/mybatis/center/Board.xml" />
 		<mapper resource="kr/co/bravomylife/front/mybatis/basket/Basket.xml" />
 	</mappers>

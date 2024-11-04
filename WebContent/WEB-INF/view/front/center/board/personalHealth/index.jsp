@@ -50,7 +50,7 @@
 								<div class="accordion" id="accordionExample">
 									<div class="card">
 										<div>
-											<a href="#" style="display: block; margin-bottom: 20px; font-size: 20px;">- 맞춤 건강 추천</a>
+											<a href="/front/center/board/surveyForm.web" style="display: block; margin-bottom: 20px; font-size: 20px;">- 맞춤 건강 추천</a>
 										</div>
 										<div>
 											<a href="/front/center/board/personalHealth/searchForm.web" style="display: block; margin-bottom: 20px; font-size: 20px;">- 안심 조회 서비스</a>
