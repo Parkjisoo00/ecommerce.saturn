@@ -75,61 +75,61 @@
 <%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
-		<div class="content-wrapper">
+<div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
 		고객 센터
 		</h1>
 	</section>
-
 	<!-- Main content -->
-<section class="content">
-	<div class="row">
-		<div class="col-md-3">
-			<div class="box box-solid">
-				<div class="box-header with-border">
-					<h3 class="box-title">맞춤 건강 등록</h3>
-					<div class="box-tools">
-						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-						</button>
+	<section class="content">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="box box-solid">
+					<div class="box-header with-border">
+						<h3 class="box-title">맞춤 건강 등록</h3>
+						<div class="box-tools">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+							</button>
+						</div>
+					</div>
+					<div class="box-body no-padding">
+						<ul class="nav nav-pills nav-stacked">
+							<li class="active"><a href="javascript:consolegoList(4);"><i class="fa fa-circle-o"></i> 새소식</a>
+							<li class="active"><a href="javascript:consolegoList(6);"><i class="fa fa-circle-o"></i> 건강정보</a>
+							<li class="active"><a href="javascript:consolegoList(7);"><i class="fa fa-circle-o"></i> 성분사전</a>
+							</li>
+						</ul>
 					</div>
 				</div>
-				<div class="box-body no-padding">
-					<ul class="nav nav-pills nav-stacked">
-						<li class="active"><a href="javascript:consolegoList(6);"><i class="fa fa-circle-o"></i> 건강정보</a>
-						<li class="active"><a href="javascript:consolegoList(7);"><i class="fa fa-circle-o"></i> 성분사전</a>
-						</li>
-					</ul>
+			</div>
+			<div class="col-md-8">
+				<div class="box box-primary">
+					<div class="box-body no-padding">
+						<div class="mailbox-read-info">
+						<h3 style="font-size:50px; text-align:center">제목:${boardDto.title}</h3>
+						<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자:Bravo My Life
+							<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardDto.dt_reg}</span></h5>
+						</div>
+						<div class="mailbox-read-message"style="font-size:20px">
+						${boardDto.content}
+						<img src="/img/ingred/${boardDto.file_save}" alt="" style="margin-top: 50px;max-width: 50%;" />
+						</div>
+						<div class="box-footer">
+							<div class="pull-right">
+								<button type="button" class="btn btn-primary" onclick="modifyForm(7);"><i class="fa fa-pencil"></i> 수정</button>
+								<button type="button" class="btn btn-default" onclick="goList(7);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
+							</div>
+							<button type="button" onclick="javascript:remove(7);" class="btn btn-default"><i class="fa fa-trash-o"></i> 삭제</button>
+						</div>
+					</div>
+				<!-- /. box -->
 				</div>
+			<!-- /.col -->
 			</div>
 		</div>
-		<div class="col-md-8">
-			<div class="box box-primary">
-				<div class="box-body no-padding">
-					<div class="mailbox-read-info">
-					<h3 style="font-size:50px; text-align:center">제목:${boardDto.title}</h3>
-					<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자:Bravo My Life
-						<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardDto.dt_reg}</span></h5>
-					</div>
-					<div class="mailbox-read-message"style="font-size:20px">
-					${boardDto.content}
-					<img src="/img/ingred/${boardDto.file_save}" alt="" style="margin-top: 50px;max-width: 50%;" />
-					</div>
-					<div class="box-footer">
-						<div class="pull-right">
-							<button type="button" class="btn btn-primary" onclick="modifyForm(7);"><i class="fa fa-pencil"></i> 수정</button>
-							<button type="button" class="btn btn-default" onclick="goList(7);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
-						</div>
-						<button type="button" onclick="javascript:remove(7);" class="btn btn-default"><i class="fa fa-trash-o"></i> 삭제</button>
-					</div>
-				</div>
-			<!-- /. box -->
-			</div>
-		<!-- /.col -->
-	</div>
-	</div>
-	<!-- /.row -->
+		<!-- /.row -->
 	</section>
 	<!-- /.content -->
 </div>

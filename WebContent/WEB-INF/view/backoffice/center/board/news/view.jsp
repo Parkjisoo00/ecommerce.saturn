@@ -75,78 +75,73 @@
 <%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
-		<div class="content-wrapper">
+<div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
 		고객 센터
 		</h1>
 	</section>
-
 	<!-- Main content -->
-<section class="content">
-	<div class="row">
-		<div class="col-md-3">
-		<div class="box box-solid">
-			<div class="box-header with-border">
-				<h3 class="box-title">고객 센터</h3>
-
-			<div class="box-tools">
-				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-				</button>
-			</div>
-			</div>
-			<div class="box-body no-padding">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="javascript:consolegoList(1);"><i class="fa fa-bullhorn"></i> 공지사항</a>
-					<li class="active"><a href="javascript:consolegoList(2);"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
-					<li class="active"><a href="javascript:consolegoList(3);"><i class="fa fa-fw fa-user"></i> 1:1문의</a>
-					<li class="active"><a href="javascript:consolegoList(4);"><i class="fa fa-fw fa-commenting-o"></i> 새소식</a>
-					<li class="active"><a href="javascript:consolegoList(5);"><i class="fa fa-fw fa-comment-o"></i> 소개</a>
-					</li>
-				</ul>
-			</div>
-			<!-- /.box-body -->
-		</div>
-		<!-- /. box -->
-		<!-- /.box -->
-		</div>
-		<div class="col-md-8">
-			<div class="box box-primary">
-			
-			<!-- /.box-header -->
-			<div class="box-body no-padding">
-				<div class="mailbox-read-info">
-				<h3 style="font-size:50px; text-align:center">제목:${boardDto.title}</h3>
-					<input type="checkbox" id= "flg_top" name="flg_top"  value="" disabled
-					<c:if test="${boardDto.flg_top == 'Y'}">checked</c:if>/> 
-					<label>최상위</label>
-				<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자:Bravo My Life
-					<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardDto.dt_reg}</span></h5>
+	<section class="content">
+		<div class="row">
+			<div class="col-md-3">
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">고객 센터</h3>
+	
+				<div class="box-tools">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+					</button>
 				</div>
-				<!-- /.mailbox-read-info -->
-				<!-- /.mailbox-controls -->
-				<div class="mailbox-read-message"style="font-size:20px">
-				${boardDto.content}
-				<img src="/img/news/${boardDto.file_save}" alt="" style="margin-top: 50px;max-width: 50%;" />
 				</div>
-				<!-- /.mailbox-read-message -->
-			<!-- /.box-footer -->
-			<div class="box-footer">
-				<div class="pull-right">
-					<button type="button" class="btn btn-primary" onclick="modifyForm(4);"><i class="fa fa-pencil"></i> 수정</button>
-					<button type="button" class="btn btn-default" onclick="goList(4);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
+				<div class="box-body no-padding">
+					<ul class="nav nav-pills nav-stacked">
+						<li class="active"><a href="javascript:consolegoList(4);"><i class="fa fa-circle-o"></i> 새소식</a>
+						<li class="active"><a href="javascript:consolegoList(6);"><i class="fa fa-circle-o"></i> 건강정보</a>
+						<li class="active"><a href="javascript:consolegoList(7);"><i class="fa fa-circle-o"></i> 성분사전</a>
+						</li>
+					</ul>
 				</div>
-				<button type="button" onclick="javascript:remove(4);" class="btn btn-default"><i class="fa fa-trash-o"></i> 삭제</button>
-			</div>
-			<!-- /.box-footer -->
+				<!-- /.box-body -->
 			</div>
 			<!-- /. box -->
+			<!-- /.box -->
+			</div>
+			<div class="col-md-8">
+				<div class="box box-primary">
+					<div class="box-body no-padding">
+						<div class="mailbox-read-info">
+						<h3 style="font-size:50px; text-align:center">제목:${boardDto.title}</h3>
+							<input type="checkbox" id= "flg_top" name="flg_top"  value="" disabled
+							<c:if test="${boardDto.flg_top == 'Y'}">checked</c:if>/> 
+							<label>최상위</label>
+						<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자:Bravo My Life
+							<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardDto.dt_reg}</span></h5>
+						</div>
+						<!-- /.mailbox-read-info -->
+						<!-- /.mailbox-controls -->
+						<div class="mailbox-read-message"style="font-size:20px">
+						${boardDto.content}
+						<img src="/img/news/${boardDto.file_save}" alt="" style="margin-top: 50px;max-width: 50%;" />
+						</div>
+						<!-- /.mailbox-read-message -->
+						<!-- /.box-footer -->
+						<div class="box-footer">
+							<div class="pull-right">
+								<button type="button" class="btn btn-primary" onclick="modifyForm(4);"><i class="fa fa-pencil"></i> 수정</button>
+								<button type="button" class="btn btn-default" onclick="goList(4);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
+							</div>
+							<button type="button" onclick="javascript:remove(4);" class="btn btn-default"><i class="fa fa-trash-o"></i> 삭제</button>
+						</div>
+					<!-- /.box-footer -->
+					</div>
+					<!-- /. box -->
+				</div>
+			<!-- /.col -->
+			</div>
 		</div>
-		<!-- /.col -->
-	</div>
-	</div>
-	<!-- /.row -->
+		<!-- /.row -->
 	</section>
 	<!-- /.content -->
 </div>

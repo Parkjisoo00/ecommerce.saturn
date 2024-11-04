@@ -76,61 +76,58 @@
 <%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
-	  <div class="content-wrapper">
+	<div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
 		고객 센터
 		</h1>
 	</section>
-
 	<!-- Main content -->
-<section class="content">
-	<div class="row">
-		<div class="col-md-3">
-			<div class="box box-solid">
-				<div class="box-header with-border">
-					<h3 class="box-title">고객 센터</h3>
-				<div class="box-tools">
-					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-					</button>
+	<section class="content">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="box box-solid">
+					<div class="box-header with-border">
+						<h3 class="box-title">고객 센터</h3>
+					<div class="box-tools">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+						</button>
+					</div>
+					</div>
+					<div class="box-body no-padding">
+							<ul class="nav nav-pills nav-stacked">
+								<li class="active"><a href="javascript:consolegoList(4);"><i class="fa fa-circle-o"></i> 새소식</a>
+								<li class="active"><a href="javascript:consolegoList(6);"><i class="fa fa-circle-o"></i> 건강정보</a>
+								<li class="active"><a href="javascript:consolegoList(7);"><i class="fa fa-circle-o"></i> 성분사전</a>
+								</li>
+							</ul>
+					</div>
+					<!-- /.box-body -->
 				</div>
-				</div>
-				<div class="box-body no-padding">
-					<ul class="nav nav-pills nav-stacked">
-						<li class="active"><a href="javascript:consolegoList(1);"><i class="fa fa-bullhorn"></i> 공지사항</a>
-						<li class="active"><a href="javascript:consolegoList(2);"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
-						<li class="active"><a href="javascript:consolegoList(3);"><i class="fa fa-fw fa-user"></i> 1:1문의</a>
-						<li class="active"><a href="javascript:consolegoList(4);"><i class="fa fa-fw fa-commenting-o"></i> 새소식</a>
-						<li class="active"><a href="javascript:consolegoList(5);"><i class="fa fa-fw fa-comment-o"></i> 소개</a>
-						</li>
-					</ul>
-				</div>
-				<!-- /.box-body -->
+			<!-- /. box -->
+			<!-- /.box -->
 			</div>
-		<!-- /. box -->
-		<!-- /.box -->
-		</div>
-		<div class="col-md-8">
-			<div class="box box-primary">
-				<div class="box-header with-border">
-					<h3 class="box-title">등록하기</h3>
-				</div>
-			<!-- /.box-header -->
-			<div class="box-body">
-				<div class="form-group">
-					<label>제목(*)</label>
-					<input type="checkbox" id="flg_top" name="flg_top" style="float: right;margin-right: 5px;" <c:if test="${boardDto.flg_top == 'Y'}">checked</c:if>>
-					<label style="float: right;margin-right: 5px;">최상위</label>
-					<input class="form-control" value="${boardDto.title}" id="title" name="title" required >
-				</div>
-				<div class="form-group" >
-					<label>내용(*)</label> 
-						<textarea id="content" class="form-control" style="height: 250px"id="content" name="content" required>
-						${boardDto.content}
-						</textarea>
-				</div>
-				<div class="form-group">
+			<div class="col-md-8">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">등록하기</h3>
+					</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<div class="form-group">
+						<label>제목(*)</label>
+						<input type="checkbox" id="flg_top" name="flg_top" style="float: right;margin-right: 5px;" <c:if test="${boardDto.flg_top == 'Y'}">checked</c:if>>
+						<label style="float: right;margin-right: 5px;">최상위</label>
+						<input class="form-control" value="${boardDto.title}" id="title" name="title" required >
+					</div>
+					<div class="form-group" >
+						<label>내용(*)</label> 
+							<textarea id="content" class="form-control" style="height: 250px"id="content" name="content" required>
+							${boardDto.content}
+							</textarea>
+					</div>
+					<div class="form-group">
 						<div class="btn btn-default btn-file">
 							<i class="fa fa-paperclip"></i> 첨부 파일:
 							<input type="file" id="files[0]" name="files[0]">
@@ -142,23 +139,23 @@
 						<c:if test="${boardDto.file_orig != ''}">
 							<a href="javascript:download('BbsNews', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
 						</c:if>
+					</div>
 				</div>
+				<!-- /.box-body -->
+					<div class="box-footer">
+						<div class="pull-right">
+							<button type="button" class="btn btn-primary" onclick="modifyProc(4);"><i class="fa fa-pencil"></i> 수정</button>
+							<button type="button" class="btn btn-default" onclick="goList(4);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
+						</div>
+						<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><a>다시쓰기</a></button>
+					</div>
+				<!-- /.box-footer -->
+				</div>
+			<!-- /. box -->
 			</div>
-			<!-- /.box-body -->
-			<div class="box-footer">
-			<div class="pull-right">
-				<button type="button" class="btn btn-primary" onclick="modifyProc(4);"><i class="fa fa-pencil"></i> 수정</button>
-				<button type="button" class="btn btn-default" onclick="goList(4);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
-			</div>
-			<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><a>다시쓰기</a></button>
-			</div>
-			<!-- /.box-footer -->
+			<!-- /.col -->
 		</div>
-		<!-- /. box -->
-		</div>
-		<!-- /.col -->
-		</div>
-</section>
+	</section>
 	<!-- /.content -->
 </div>
 <!-- /Maincontent -->

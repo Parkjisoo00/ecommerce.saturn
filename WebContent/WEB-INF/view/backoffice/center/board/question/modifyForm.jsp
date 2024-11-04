@@ -69,134 +69,130 @@
 <%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
-		<div class="content-wrapper">
+<div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
 		고객 센터
 		</h1>
 	</section>
-
 	<!-- Main content -->
-<section class="content">
-	<div class="row">
-		<div class="col-md-3">
-		<div class="box box-solid">
-			<div class="box-header with-border">
-				<h3 class="box-title">고객 센터</h3>
-
-			<div class="box-tools">
-				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-				</button>
-			</div>
-			</div>
-			<div class="box-body no-padding">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="javascript:consolegoList(1);"><i class="fa fa-bullhorn"></i> 공지사항</a>
-					<li class="active"><a href="javascript:consolegoList(2);"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
-					<li class="active"><a href="javascript:consolegoList(3);"><i class="fa fa-fw fa-user"></i> 1:1문의</a>
-					<li class="active"><a href="javascript:consolegoList(4);"><i class="fa fa-fw fa-commenting-o"></i> 새소식</a>
-					<li class="active"><a href="javascript:consolegoList(5);"><i class="fa fa-fw fa-comment-o"></i> 소개</a>
-					</li>
-				</ul>
-			</div>
-			<!-- /.box-body -->
-		</div>
-		<!-- /. box -->
-		<!-- /.box -->
-		</div>
-		<div class="col-md-8">
-			<div class="box box-primary">
-			
-			<!-- /.box-header -->
-			<div class="box-body no-padding">
-				<div class="mailbox-read-info">
-				<h3 style="font-size:50px; text-align:center">
-					<c:if test="${boardQuestionDto.seq_reply == 0}">[미답변] </c:if>
-					<c:if test="${boardQuestionDto.seq_reply > 0}">[답변 완료] </c:if>제목:${boardQuestionDto.title}</h3>
-				<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자: &nbsp;${boardQuestionDto.register}
-					<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardQuestionDto.dt_reg}</span></h5>
+	<section class="content">
+		<div class="row">
+			<div class="col-md-3">
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">고객 센터</h3>
+	
+				<div class="box-tools">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+					</button>
 				</div>
-
-				<div class="form-group" style="padding: 10px;border-bottom: 1px solid #f4f4f4;margin-bottom: 1px;">
-				<label>카테고리(*)</label>
-					<select class="form-control" id="cd_ctg" name="cd_ctg" style="height: 34px;margin-bottom: 15px;"disabled>
-						<option value="0"<c:if test="${boardQuestionDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
-						<option value="1"<c:if test="${boardQuestionDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
-						<option value="2"<c:if test="${boardQuestionDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
-						<option value="3"<c:if test="${boardQuestionDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
-						<option value="4"<c:if test="${boardQuestionDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
-						<option value="5"<c:if test="${boardQuestionDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
-						<option value="6"<c:if test="${boardQuestionDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
-						<option value="9"<c:if test="${boardQuestionDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
-					</select>
 				</div>
-				<!-- /.mailbox-read-info -->
-				<!-- /.mailbox-controls -->
-				<div class="mailbox-read-message"style="font-size:20px">
-				${boardQuestionDto.content}
-				</div>
-				<c:if test="${boardQuestionDto.file_orig != ''}">	
-					<div class="box-footer">
-						<ul class="mailbox-attachments clearfix" style="text-align:center">	
-							<c:if test="${boardQuestionDto.file_orig != ''}">
-								<a href="javascript:download('BbsQuestion', ${boardQuestionDto.seq_bbs});">[첨부파일 다운로드]</a>
-							</c:if>
+				<div class="box-body no-padding">
+						<ul class="nav nav-pills nav-stacked">
+							<li class="active"><a href="javascript:consolegoList(1);"><i class="fa fa-bullhorn"></i> 공지사항</a>
+							<li class="active"><a href="javascript:consolegoList(2);"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
+							<li class="active"><a href="javascript:consolegoList(3);"><i class="fa fa-fw fa-user"></i> 1:1문의</a>
+							</li>
 						</ul>
 					</div>
-				</c:if>	
+				<!-- /.box-body -->
 			</div>
 			<!-- /. box -->
-		</div>
-		<!-- /.col -->
-	</div>
-	<div class="col-md-3">
-	</div>
-	<div class="col-md-8">
-			<div class="box box-primary">
-				<div class="box-header with-border">
-					<h3 class="box-title">답변 수정</h3>
-				</div>
-			<!-- /.box-header -->
-			<div class="box-body">
-				<div class="form-group">
-					<label>제목(*)</label>
-					<input class="form-control" placeholder=""id="title" name="title" value= "${boardDto.title}"required >
-				</div>
-				<div class="form-group" >
-				<label>내용(*)</label> 
-					<textarea id="content" class="form-control" style="height: 250px"id="content" name="content" required>
-					${boardDto.content}
-					</textarea>
-				</div>
-				<div class="form-group">
-					<div class="btn btn-default btn-file">
-						<i class="fa fa-paperclip"></i> 첨부 파일:
-						<input type="file" id="files[0]" name="files[0]">
+			<!-- /.box -->
+			</div>
+			<div class="col-md-8">
+				<div class="box box-primary">
+				
+				<!-- /.box-header -->
+				<div class="box-body no-padding">
+					<div class="mailbox-read-info">
+					<h3 style="font-size:50px; text-align:center">
+						<c:if test="${boardQuestionDto.seq_reply == 0}">[미답변] </c:if>
+						<c:if test="${boardQuestionDto.seq_reply > 0}">[답변 완료] </c:if>제목:${boardQuestionDto.title}</h3>
+					<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자: &nbsp;${boardQuestionDto.register}
+						<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardQuestionDto.dt_reg}</span></h5>
 					</div>
-					<p class="help-block">최대 10 MB</p>
-					<c:if test="${boardDto.file_orig != ''}">
-						<p>저장됬던 파일: ${boardDto.file_orig}</p>
-					</c:if>
-					<c:if test="${boardDto.file_orig != ''}">
-						<a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
-					</c:if>
+					<div class="form-group" style="padding: 10px;border-bottom: 1px solid #f4f4f4;margin-bottom: 1px;">
+					<label>카테고리(*)</label>
+						<select class="form-control" id="cd_ctg" name="cd_ctg" style="height: 34px;margin-bottom: 15px;"disabled>
+							<option value="0"<c:if test="${boardQuestionDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
+							<option value="1"<c:if test="${boardQuestionDto.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
+							<option value="2"<c:if test="${boardQuestionDto.cd_ctg == '2'}"> selected</c:if>>상품</option>
+							<option value="3"<c:if test="${boardQuestionDto.cd_ctg == '3'}"> selected</c:if>>구매</option>
+							<option value="4"<c:if test="${boardQuestionDto.cd_ctg == '4'}"> selected</c:if>>결제</option>
+							<option value="5"<c:if test="${boardQuestionDto.cd_ctg == '5'}"> selected</c:if>>배송</option>
+							<option value="6"<c:if test="${boardQuestionDto.cd_ctg == '6'}"> selected</c:if>>환불</option>
+							<option value="9"<c:if test="${boardQuestionDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
+						</select>
+					</div>
+					<!-- /.mailbox-read-info -->
+					<!-- /.mailbox-controls -->
+					<div class="mailbox-read-message"style="font-size:20px">
+					${boardQuestionDto.content}
+					</div>
+					<c:if test="${boardQuestionDto.file_orig != ''}">	
+						<div class="box-footer">
+							<ul class="mailbox-attachments clearfix" style="text-align:center">	
+								<c:if test="${boardQuestionDto.file_orig != ''}">
+									<a href="javascript:download('BbsQuestion', ${boardQuestionDto.seq_bbs});">[첨부파일 다운로드]</a>
+								</c:if>
+							</ul>
+						</div>
+					</c:if>	
 				</div>
+				<!-- /. box -->
 			</div>
-			<!-- /.box-body -->
-			<div class="box-footer">
-			<div class="pull-right">
-				<button type="button" class="btn btn-primary" onclick="modifyProc(3);"><i class="fa fa-pencil"></i>저장</button>
-				<button type="button" class="btn btn-default" onclick="goList(3);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
-			</div>
-			<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><a>다시쓰기</a></button>
-			</div>
-			<!-- /.box-footer -->
+			<!-- /.col -->
 		</div>
-		<!-- /. box -->
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-8">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">답변 수정</h3>
+					</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<div class="form-group">
+						<label>제목(*)</label>
+						<input class="form-control" placeholder=""id="title" name="title" value= "${boardDto.title}"required >
+					</div>
+					<div class="form-group" >
+					<label>내용(*)</label> 
+						<textarea id="content" class="form-control" style="height: 250px"id="content" name="content" required>
+						${boardDto.content}
+						</textarea>
+					</div>
+					<div class="form-group">
+						<div class="btn btn-default btn-file">
+							<i class="fa fa-paperclip"></i> 첨부 파일:
+							<input type="file" id="files[0]" name="files[0]">
+						</div>
+						<p class="help-block">최대 10 MB</p>
+						<c:if test="${boardDto.file_orig != ''}">
+							<p>저장됬던 파일: ${boardDto.file_orig}</p>
+						</c:if>
+						<c:if test="${boardDto.file_orig != ''}">
+							<a href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
+						</c:if>
+					</div>
+				</div>
+				<!-- /.box-body -->
+				<div class="box-footer">
+					<div class="pull-right">
+						<button type="button" class="btn btn-primary" onclick="modifyProc(3);"><i class="fa fa-pencil"></i>저장</button>
+						<button type="button" class="btn btn-default" onclick="goList(3);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
+					</div>
+					<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><a>다시쓰기</a></button>
+				</div>
+				<!-- /.box-footer -->
+			</div>
+			<!-- /. box -->
+			</div>
 		</div>
-	</div>
-	<!-- /.row -->
+		<!-- /.row -->
 	</section>
 	<!-- /.content -->
 </div>

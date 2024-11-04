@@ -107,8 +107,6 @@
 						<li><a href="javascript:consolegoList(1)"><i class="fa fa-bullhorn"></i> 공지사항</a></li>
 						<li><a href="javascript:consolegoList(2)"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a></li>
 						<li><a href="javascript:consolegoList(3)"><i class="fa fa-fw fa-user"></i> 1:1문의</a></li>
-						<li><a href="javascript:consolegoList(4)"><i class="fa fa-fw fa-commenting-o"></i> 새소식</a></li>
-						<li><a href="javascript:consolegoList(5)"><i class="fa fa-fw fa-comment-o"></i> 소개</a></li>
 					</ul>
 					</li>
 					<li class="treeview">
@@ -119,9 +117,27 @@
 						</span>
 					</a>
 					<ul class="treeview-menu">
+						<li><a href="javascript:consolegoList(4)"><i class="fa fa-circle-o"></i> 새소식</a></li>
 						<li><a href="javascript:consolegoList(6)"><i class="fa fa-circle-o"></i> 건강정보</a></li>
 						<li><a href="javascript:consolegoList(7)"><i class="fa fa-circle-o"></i> 성분사전</a></li>
 					</ul>
+					</li>
+					<li class="treeview">
+					<a href="javascript:consolegoList(5)">
+						<i class="fa fa-fw fa-commenting-o"></i>
+						<span>소개</span>
+						<span class="pull-right-container">
+						<span class="label label-primary pull-right"></span>
+						</span>
+					</a>
+					<!-- 
+					<ul class="treeview-menu">
+						<li><a href="#"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> Boxed</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> Fixed</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+					</ul>
+					 -->
 					</li>
 					<li class="treeview">
 					<a href="#">
