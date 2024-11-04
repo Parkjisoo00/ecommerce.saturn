@@ -62,7 +62,8 @@
 				</div>
 				<div class="row" style="display: flex; justify-content: center; align-items: center;">
 					<div class="col-lg-12" style="max-width: 670px !important; width: 100% !important; text-align: center;">
-						<h2 id="qTitle" class="ha on" style="text-align: center; font-size: 20px; font-weight: 700;">해당하는 식습관을 선택하세요</h2>
+						<h2 id="qTitle" class="ha on" style="text-align: center; font-size: 20px; font-weight: 700;">해당하는 식습관을 선택하세요.</h2>
+							<span style="display: inline-block;">하나만 선택해 주세요.</span>
 						<br>
 						<br>
 						<div style="width: 100%; max-width: 600px;">
@@ -71,7 +72,7 @@
 								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
 							 <label for="food1" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
 								<i class="fas fa-seedling"></i>
-								<span style="display: block;">곡물류를 자주 먹어요</span>
+								<span style="display: block;">곡물류를 자주 먹어요.</span>
 								<span style="display: block;">주 3회 이상</span>
 							</label>
 						</div>
@@ -82,7 +83,7 @@
 								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
 							 <label for="food2" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
 								<i class="fas fa-fish"></i>
-								<span style="display: block;">생선을 자주 먹어요</span>
+								<span style="display: block;">생선을 자주 먹어요.</span>
 								<span style="display: block;">주 3회 이상</span>
 							</label>
 						</div>
@@ -93,7 +94,7 @@
 								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
 							<label for="food3" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
 								<i class="fas fa-leaf"></i>
-								<span style="display: block;">브로콜리를 자주 먹어요</span>
+								<span style="display: block;">브로콜리를 자주 먹어요.</span>
 								<span style="display: block;">주 3회 이상</span>
 							</label>
 						</div>
@@ -104,7 +105,7 @@
 								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
 							<label for="food4" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
 								<i class="fas fa-glass-martini"></i>
-								<span style="display: block;">요거트를 자주 먹어요</span>
+								<span style="display: block;">요거트를 자주 먹어요.</span>
 								<span style="display: block;">주 3회 이상</span>
 							</label>
 						</div>
@@ -115,7 +116,7 @@
 								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
 							<label for="food5" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
 								<i class="fas fa-anchor"></i>
-								<span style="display: block;">조개류를 자주 먹어요</span>
+								<span style="display: block;">조개류를 자주 먹어요.</span>
 								<span style="display: block;">주 3회 이상</span>
 							</label>
 						</div>
@@ -126,7 +127,7 @@
 								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
 							<label for="food6" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
 								<i class="fas fa-leaf"></i>
-								<span style="display: block;">시금치를 자주 먹어요</span>
+								<span style="display: block;">시금치를 자주 먹어요.</span>
 								<span style="display: block;">주 3회 이상</span>
 							</label>
 						</div>
@@ -137,7 +138,7 @@
 								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
 							<label for="food7" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
 								<i class="fas fa-drumstick-bite"></i>
-								<span style="display: block;">소고기를 자주 먹어요</span>
+								<span style="display: block;">소고기를 자주 먹어요.</span>
 								<span style="display: block;">주 3회 이상</span>
 							</label>
 						</div>
@@ -148,7 +149,7 @@
 								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
 							<label for="food8" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
 								<i class="fas fa-seedling"></i>
-								<span style="display: block;">호두를 자주 먹어요</span>
+								<span style="display: block;">호두를 자주 먹어요.</span>
 								<span style="display: block;">주 3회 이상</span>
 							</label>
 						</div>
@@ -159,7 +160,7 @@
 								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
 							<label for="food9" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
 								<i class="fas fa-capsules"></i>
-								<span style="display: block;">밀크씨슬 씨앗을 자주 먹어요</span>
+								<span style="display: block;">밀크씨슬 씨앗을 자주 먹어요.</span>
 								<span style="display: block;">주 3회 이상</span>
 							</label>
 						</div>
