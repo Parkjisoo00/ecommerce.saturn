@@ -13,6 +13,14 @@
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
 	
+	<c:if test="${empty sessionScope.SEQ_MBR}">
+	var isLogin = false;
+	</c:if>
+	
+	<c:if test="${not empty sessionScope.SEQ_MBR}">
+	var isLogin = true;
+	</c:if>
+	
 	function surveyProc(value) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -20,6 +28,19 @@
 		frmMain.cd_survey_type.setAttribute("value", value);
 		
 		frmMain.action="/front/center/board/surveyProc.web";
+		frmMain.submit();
+	}
+	
+	function servey() {
+		
+		if (!isLogin) {
+			alert("로그인이 필요합니다.");
+			return;
+		}
+		
+		var frmMain = document.getElementById("frmMain");
+		frmMain.action = "/front/center/board/surveyForm.web"
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -55,6 +76,12 @@
 					<div class="col-lg-12" style="max-width: 670px !important; width: 100% !important; text-align: center;">
 						<div class="checkout__form__input">
 							<input type="button" value="설문조사 시작" style="width: 100%; text-align: center;" id="registerId" onClick="surveyProc('2');"/>
+						</div>
+						<div style="position: relative; text-align: center; width: 100%; max-width: 600px; margin: 0 auto;">
+							<img src="/img/personalhealth/servey.png" alt="Local Image" style="width: 100%; height: auto;">
+							<div style="position: absolute; top: calc(95% - 2cm); left: 50%; transform: translate(-50%, -50%); background-color: rgba(130, 130, 130, 0.5); padding: 10px 20px; border-radius: 10px;">
+								<a href="javascript:servey();" style="color: white; text-decoration: none; font-size: 24px; font-weight: bold;">설문 조사 시작</a>
+							</div>
 						</div>
 					</div>
 				</div>
