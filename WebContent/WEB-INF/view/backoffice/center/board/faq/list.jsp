@@ -82,168 +82,159 @@
 <%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
-	  <div class="content-wrapper">
+<div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
 		고객 센터
 		</h1>
 	</section>
-
 	<!-- Main content -->
-<section class="content">
-	<div class="row">
-		<div class="col-md-3">
-		
-
-		<div class="box box-solid">
-			<div class="box-header with-border">
-				<h3 class="box-title">고객 센터</h3>
-
-			<div class="box-tools">
-				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-				</button>
-			</div>
-			</div>
-			<div class="box-body no-padding">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="javascript:consolegoList(1);"><i class="fa fa-bullhorn"></i> 공지사항</a>
-					<li class="active"><a href="javascript:consolegoList(2);"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
-					<li class="active"><a href="javascript:consolegoList(3);"><i class="fa fa-fw fa-user"></i> 1:1문의</a>
-					<li class="active"><a href="javascript:consolegoList(4);"><i class="fa fa-fw fa-commenting-o"></i> 새소식</a>
-					<li class="active"><a href="javascript:consolegoList(5);"><i class="fa fa-fw fa-comment-o"></i> 소개</a>
-					</li>
-				</ul>
-			</div>
-			<!-- /.box-body -->
-		</div>
-		<!-- /. box -->
-		<!-- /.box -->
-		</div>
-		<!-- /.col -->
-		<div class="col-md-8">
-			<div class="box box-primary">
-				<div class="box-header with-border">
-					<h3 class="box-title">자주 찾는 질문</h3>&nbsp;&nbsp;&nbsp;
-					<div class="box-tools pull-right">
-						<div class="has-feedback">
-							<div style="display: flex; align-items: center;">&nbsp;&nbsp;
-								<select class="form-control" name="searchKey" style="height: 30px;">
-									<option value="title" <c:if test="${paging.searchKey == 'title'}">  selected</c:if>>제목</option>
-									<option value="contents" <c:if test="${paging.searchKey == 'contents'}">  selected</c:if>>내용</option>
-									<option value="title+contents" <c:if test="${paging.searchKey == 'title+contents'}">  selected</c:if>>제목 또는 내용</option>
-								</select>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="text" name="searchWord" id="searchWord" class="form-control input-sm" value="${paging.searchWord}" required onKeyPress="if (event.keyCode == 13) search();" />
-								&nbsp;&nbsp;
-								<input type="submit" value="검색"/>
-							</div>
+	<section class="content">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="box box-solid">
+					<div class="box-header with-border">
+						<h3 class="box-title">고객 센터</h3>
+						<div class="box-tools">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+							</button>
 						</div>
 					</div>
-			<!-- /.box-tools -->
+					<div class="box-body no-padding">
+						<ul class="nav nav-pills nav-stacked">
+							<li class="active"><a href="javascript:consolegoList(1);"><i class="fa fa-bullhorn"></i> 공지사항</a>
+							<li class="active"><a href="javascript:consolegoList(2);"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
+							<li class="active"><a href="javascript:consolegoList(3);"><i class="fa fa-fw fa-user"></i> 1:1문의</a>
+							</li>
+						</ul>
+					</div>
 				</div>
-			<!-- /.box-header -->
-			<div class="box-body no-padding">
-				<div class="table-responsive mailbox-messages">
-					<table class="table table-hover table-striped">
-						<tbody>
-							<tr>
-								<th style="text-align: center;width: 5% ">NO</th>
-								<th style="text-align: center;width: 10%">카테고리</th>
-								<th style="text-align: center;">제목</th>
-								<th style="text-align: center;width: 15%">등록일</th>
-								<th style="text-align: center;width: 7%">조회수</th>
-							</tr>
-							<c:choose>
-								<c:when test="${empty list}">
-									<tr>
-										<td colspan="4" style="text-align:center">등록된 글이 없습니다.</td>
-									</tr>
-								</c:when>
-								<c:otherwise>
-									<c:forEach items="${list}" var="list">
+			</div>
+			<!-- /.col -->
+			<div class="col-md-8">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">자주 찾는 질문</h3>&nbsp;&nbsp;&nbsp;
+						<div class="box-tools pull-right">
+							<div class="has-feedback">
+								<div style="display: flex; align-items: center;">&nbsp;&nbsp;
+									<select class="form-control" name="searchKey" style="height: 30px;">
+										<option value="title" <c:if test="${paging.searchKey == 'title'}">  selected</c:if>>제목</option>
+										<option value="contents" <c:if test="${paging.searchKey == 'contents'}">  selected</c:if>>내용</option>
+										<option value="title+contents" <c:if test="${paging.searchKey == 'title+contents'}">  selected</c:if>>제목 또는 내용</option>
+									</select>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="text" name="searchWord" id="searchWord" class="form-control input-sm" value="${paging.searchWord}" required onKeyPress="if (event.keyCode == 13) search();" />
+									&nbsp;&nbsp;
+									<input type="submit" value="검색"/>
+								</div>
+							</div>
+						</div>
+				<!-- /.box-tools -->
+					</div>
+				<!-- /.box-header -->
+				<div class="box-body no-padding">
+					<div class="table-responsive mailbox-messages">
+						<table class="table table-hover table-striped">
+							<tbody>
+								<tr>
+									<th style="text-align: center;width: 5% ">NO</th>
+									<th style="text-align: center;width: 10%">카테고리</th>
+									<th style="text-align: center;">제목</th>
+									<th style="text-align: center;width: 15%">등록일</th>
+									<th style="text-align: center;width: 7%">조회수</th>
+								</tr>
+								<c:choose>
+									<c:when test="${empty list}">
 										<tr>
-											<c:choose>
-												<c:when test="${list.flg_top == 'Y'}">
-													<td style="text-align: center;font-weight: bold;">
-														${list.rnum}
-													</td>
-													<td style="text-align: center;font-weight: bold;">
-														${list.ctg_nm}
-													</td>
-													<td style="text-align: left;font-weight: bold;">
-														<a href="javascript:goView(${list.seq_bbs});">
-															${list.title}
-														</a>
-													</td>
-													<td style="text-align: center;font-weight: bold;">
-														${list.dt_reg}
-													</td>
-													<td style="text-align: center;font-weight: bold;">
-														${list.readed}
-													</td>
-												</c:when>
-												<c:otherwise>
-													<td style="text-align: center;">
-														${list.rnum}
-													</td>
-													<td style="text-align: center;">
-													${list.ctg_nm}
-													</td>
-													<td style="text-align: left">
+											<td colspan="4" style="text-align:center">등록된 글이 없습니다.</td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${list}" var="list">
+											<tr>
+												<c:choose>
+													<c:when test="${list.flg_top == 'Y'}">
+														<td style="text-align: center;font-weight: bold;">
+															${list.rnum}
+														</td>
+														<td style="text-align: center;font-weight: bold;">
+															${list.ctg_nm}
+														</td>
+														<td style="text-align: left;font-weight: bold;">
 															<a href="javascript:goView(${list.seq_bbs});">
 																${list.title}
 															</a>
-													</td>
-													<td style="text-align: center;">
-														${list.dt_reg}
-													</td>
-													<td style="text-align: center;">
-														${list.readed}
-													</td>
-												</c:otherwise>
-											</c:choose>
-										</tr>
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
-						</tbody>
-					</table>
-				<!-- /.table -->
+														</td>
+														<td style="text-align: center;font-weight: bold;">
+															${list.dt_reg}
+														</td>
+														<td style="text-align: center;font-weight: bold;">
+															${list.readed}
+														</td>
+													</c:when>
+													<c:otherwise>
+														<td style="text-align: center;">
+															${list.rnum}
+														</td>
+														<td style="text-align: center;">
+														${list.ctg_nm}
+														</td>
+														<td style="text-align: left">
+																<a href="javascript:goView(${list.seq_bbs});">
+																	${list.title}
+																</a>
+														</td>
+														<td style="text-align: center;">
+															${list.dt_reg}
+														</td>
+														<td style="text-align: center;">
+															${list.readed}
+														</td>
+													</c:otherwise>
+												</c:choose>
+											</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</tbody>
+						</table>
+					<!-- /.table -->
+					</div>
+					<!-- /.mail-box-messages -->
 				</div>
-				<!-- /.mail-box-messages -->
+				<!-- /.box-body -->
+				<div class="box-footer no-padding">
+					<div class="mailbox-controls">
+					<!-- /.btn-group -->
+					<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><i class="fa fa-refresh"></i></button>
+						<span style="float: right;margin-right: 10px;margin-top: 5px;justify-content: center; ">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</span>
+					
+						<div class="pull-right">
+							<div class="btn-group">
+							</div>
+						<!-- /.btn-group -->
+						</div>
+					<!-- /.pull-right -->
+					</div>
+				</div>
+				</div>
+			<!-- /. box -->
 			</div>
-			<!-- /.box-body -->
-			<div class="box-footer no-padding">
-				<div class="mailbox-controls">
-				<!-- /.btn-group -->
-				<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><i class="fa fa-refresh"></i></button>
-					<span style="float: right;margin-right: 10px;margin-top: 5px;justify-content: center; ">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</span>
-				
-				<div class="pull-right">
-				<div class="btn-group">
+			<div class="col-md-3"></div>
+			<div class="col-md-8">
+				<div style="text-align: center;">
+					<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
 				</div>
-				<!-- /.btn-group -->
-				</div>
-				<!-- /.pull-right -->
+				<div style="text-align: center;">
+					<a href="javascript:goWriteForm(2);" class="btn btn-primary" style="width: 150px;">등 록</a>
 				</div>
 			</div>
-			</div>
-		  <!-- /. box -->
+		<!-- /.col -->
 		</div>
-		<div class="col-md-3"></div>
-		<div class="col-md-8">
-			<div style="text-align: center;">
-				<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
-			</div>
-			<div style="text-align: center;">
-				<a href="javascript:goWriteForm(2);" class="btn btn-primary" style="width: 150px;">등 록</a>
-			</div>
-		</div>
-	<!-- /.col -->
-	</div>
-	<!-- /.row -->
-</section>
+		<!-- /.row -->
+	</section>
 	<!-- /.content -->
 </div>
 <!-- /Maincontent -->
