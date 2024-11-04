@@ -13,6 +13,7 @@
 	position: relative;
 	background-size: cover;
 	background-position: center;
+
 	}
 	
 	.categories__item::before {
@@ -208,7 +209,7 @@
 	<!-- Breadcrumb End -->
 
 	<!-- Banner Section Begin -->
-	<section class="banner set-bg" data-setbg="img/banner/banner7.jpg">
+	<section class="banner set-bg" data-setbg="img/banner/banner10.png">
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-7 col-lg-8 ">
@@ -244,71 +245,79 @@
 	<!-- Categories Section Begin -->
 	<section class="categories">
 		<div class="container-fluid">
+		<div class="col-lg-12">
 			<div class="row">
-				<div class="col-lg-6 p-0">
+				<div class="col-lg-7 c p-0" style="height: 50vh; overflow: hidden;">
 					<div class="categories__item categories__large__item set-bg"
-						data-setbg="img/categories/home9.jpg">
-						<div class="categories__text" style="text-align: left;">
-						<div class="categories__text special-background">
-							<h1 style="font-weight: bold; color: black;">나만의 맞춤 <br> 건강 추천</h1>
-							<p style="font-weight: bold; font-size: 20px; ">건강 설문을 진행하고 나에게 맞는 영양제를 추천받아 보세요!</p>
-							<a href="#" style="font-size: 20px;">바로가기</a>
+						data-setbg="img/categories/home9.jpg" style="height: 100%;">
+						<div class="categories__text" style="text-align: left; position: absolute; bottom: -20;">
+						<div class="categories__text special-background" >
+							<h1 style="font-weight: bold; color: black; font-size: 30px;">나만의 맞춤 건강 추천</h1>
+							<p style="font-weight: bold; font-size: 18px; ">건강 설문을 진행하고 나에게 맞는 영양제를 추천받아 보세요!</p>
+							<a href="#" style="font-size: 18px;">바로가기</a>
 						</div>
 					</div>
 				</div>
 				</div>
-				<div class="col-lg-6">
-					<div class="row">
-						<div class="col-lg-6 col-md-6 col-sm-6 p-0" style="border-bottom: 0px !important;">
+				<div class="col-lg-5 c p-0" style="height: 50vh;">
 							<div class="categories__item set-bg"
-								data-setbg="img/categories/home4.jpg">
-								<div class="categories__text">
-								<div class="categories__text special-background">
-									<h4 style="font-weight: bold;">안심 조회 서비스</h4>
-									<p style="font-weight: bold;">구매하고 싶은 영양제가 인증 허가를 받은 <br> 안심상품인지 확인하세요</p>
-									<a href="#">바로가기</a>
+								data-setbg="img/categories/home4.jpg" style="height: 100%;">
+								<div class="categories__text" style="text-align: left; position: absolute; bottom: -20;">
+								<div class="categories__text special-background" >
+									<h4 style="font-weight: bold; font-size: 27px;">안심 조회 서비스</h4>
+									<p style="font-weight: bold; font-size: 18px;">구매하고 싶은 영양제가 인증 허가를 받은 <br> 안심상품인지 확인하세요</p>
+									<a href="/front/center/board/personalHealth/searchForm.web" style="font-size: 18px;">바로가기</a>
 								</div>
 							</div>
 						</div>
 						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6 p-0" style="border-bottom: 0px !important;">
-							<div class="categories__item"
-								style="background-color: #dfd3c3;">
+					</div>
+				</div>		
+				<div class="col-lg-12">
+					<div class="row">
+						
+						<div class="col-lg-4 col-md-6 col-sm-6 p-0" >
+							<div class="categories__item set-bg"
+								data-setbg="img/categories/func9.png">
 								<div class="categories__text">
 									<h4>기능별 건강기능식품 조회</h4>
 									<p>지금 당신에게 필요한 건강 솔루션은?</p>
-									<a href="#">바로가기</a>
+									<a href="/front/sale/function_list.web">바로가기</a>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-lg-6 col-md-6 col-sm-6 p-0" style="border-bottom: 0px !important;">
-							<div class="categories__item"
-								style="background-color: #c7b199;">
+						<div class="col-lg-4 col-md-6 col-sm-6 p-0">
+							<div class="categories__item set-bg"
+								data-setbg="img/categories/func10.png">
 								<div class="categories__text">
 									<h4>성분별 건강기능식품 조회</h4>
 									<p>필요한 영양소를 한눈에! 성분별 영양제 가이드</p>
-									<a href="#">바로가기</a>
+									<a href="/front/sale/ingredient_list.web">바로가기</a>
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6 p-0" style="border-bottom: 0px !important;">
-							<div class="categories__item"
-								style="background-color: #9f8473; border-bottom: 0px !important;">
+						<div class="col-lg-4 col-md-6 col-sm-6 p-0">
+							<div class="categories__item set-bg"
+								data-setbg="img/categories/func11.png">
 								<div class="categories__text">
 									<h4>대상별 건강기능식품 조회</h4>
 									<p>남성과 여성, 당신의 몸에 맞춘 영양제 건강의 시작</p>
-									<a href="#">바로가기</a>
+									<a href="/front/sale/gender_list.web">바로가기</a>
 								</div>
 							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
-		</div>
+		
 	</section>
 	<!-- Categories Section End -->
-
+	<br>
+	<br>
+	<br>
+	<br>
 	<!-- Product Section Begin -->
 	<section class="product" style="width: 70%; margin-left: auto; margin-right: auto;">
 		<div class="container-fluid p-0" style="display: flex; justify-content: center;">
@@ -317,8 +326,8 @@
 					<div class="col-lg-12" style="padding: 0;">
 						<div class="product__details__tab" style="width: 100% !important; padding-top: 0px !important;">
 							<ul class="nav nav-tabs" role="tablist" style="margin-bottom: 30px !important; border: 1px solid #d9d9d9 !important; display: flex !important; justify-content: space-between !important;">
-								<li class="nav-item" style="background-color: #72baf5; margin-bottom: 0px !important; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important; margin-right: 0px !important; border-right: 1px solid #d9d9d9 !important;">
-									<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" style="font-weight: normal !important; background-color: #72baf5; color: white; display: inline-block !important;" >추천 인기상품</a>
+								<li class="nav-item" style="background-color: #f77202; margin-bottom: 0px !important; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important; margin-right: 0px !important; border-right: 1px solid #d9d9d9 !important;">
+									<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" style="font-weight: normal !important; background-color: #f77202; color: white; display: inline-block !important;" >추천 인기상품</a>
 								</li>
 								<li class="nav-item" style="margin-bottom: 0px !important; background-color: #f9f9f9; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important;">
 									<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" style="font-weight: normal !important; color: black; display: inline-block !important;">추천 신상품</a>
