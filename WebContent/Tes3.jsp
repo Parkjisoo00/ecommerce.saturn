@@ -182,5 +182,33 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
+	<script>
+		$(document).ready(function() {
+			$('.customCheckbox').on('click', function() {
+				// 현재 체크박스의 체크 상태를 저장
+				var isChecked = $(this).prop('checked');
+		
+				// 모든 체크박스의 체크를 해제
+				$('.customCheckbox').prop('checked', false);
+		
+				// 현재 체크박스만 다시 체크 상태로 설정
+				$(this).prop('checked', isChecked);
+		
+				// 모든 레이블의 배경색과 글자색을 초기화
+				$('.customCheckbox').next().css({
+					'background-color': '#FFFFFF',
+					'color': '#000000'
+				});
+		
+				// 선택된 체크박스에 대해 스타일 적용
+				if (isChecked) {
+					$(this).next().css({
+						'background-color': '#F77202',
+						'color': '#FFFFFF'
+					});
+				}
+			});
+		});
+</script>
 </body>
 </html>
