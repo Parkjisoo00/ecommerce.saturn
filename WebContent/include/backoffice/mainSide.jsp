@@ -4,7 +4,7 @@
     <!-- Logo -->
     <a href="http://127.0.0.1:8080/console/login/main.web" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>관</b></span>
+      <span class="logo-mini"><b>관리</b></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>BRAVO My Life 관리자</b></span>
     </a>
@@ -109,6 +109,18 @@
 						<li><a href="javascript:consolegoList(3)"><i class="fa fa-fw fa-user"></i> 1:1문의</a></li>
 						<li><a href="javascript:consolegoList(4)"><i class="fa fa-fw fa-commenting-o"></i> 새소식</a></li>
 						<li><a href="javascript:consolegoList(5)"><i class="fa fa-fw fa-comment-o"></i> 소개</a></li>
+					</ul>
+					</li>
+					<li class="treeview">
+					<a href="#">
+						<i class="fa fa-book"></i> <span>맞춤 건강 등록</span>
+						<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+						</span>
+					</a>
+					<ul class="treeview-menu">
+						<li><a href="javascript:consolegoList(6)"><i class="fa fa-circle-o"></i> 건강정보</a></li>
+						<li><a href="javascript:consolegoList(7)"><i class="fa fa-circle-o"></i> 성분사전</a></li>
 					</ul>
 					</li>
 					<li class="treeview">

@@ -156,7 +156,7 @@
 				<ul class="dropdown" style="top: 100%; left: 0; list-style: none;">
 					<li><a href="#">맞춤 건강 추천</a></li>
 					<li><a href="#">안심 조회 서비스</a></li>
-					<li><a href="#">건강 정보</a></li>
+					<li><a href="/front/center/board/health/list.web">건강 정보</a></li>
 					<li><a href="javascript:goList(4)">새소식</a></li>
 					<li><a href="/front/center/board/ingred/list.web">성분 사전</a></li>
 				</ul>

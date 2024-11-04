@@ -71,6 +71,8 @@
 		frmMain.action = "/console/center/board/list.web";
 		frmMain.submit();
 	}
+	
+	
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -98,7 +100,7 @@
 
 		<div class="box box-solid">
 			<div class="box-header with-border">
-				<h3 class="box-title">고객 센터</h3>
+				<h3 class="box-title">맞춤 건강 등록</h3>
 
 			<div class="box-tools">
 				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -107,11 +109,8 @@
 			</div>
 			<div class="box-body no-padding">
 				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="javascript:consolegoList(1);"><i class="fa fa-bullhorn"></i> 공지사항</a>
-					<li class="active"><a href="javascript:consolegoList(2);"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
-					<li class="active"><a href="javascript:consolegoList(3);"><i class="fa fa-fw fa-user"></i> 1:1문의</a>
-					<li class="active"><a href="javascript:consolegoList(4);"><i class="fa fa-fw fa-commenting-o"></i> 새소식</a>
-					<li class="active"><a href="javascript:consolegoList(5);"><i class="fa fa-fw fa-comment-o"></i> 소개</a>
+					<li class="active"><a href="javascript:consolegoList(6);"><i class="fa fa-circle-o"></i> 건강정보</a>
+					<li class="active"><a href="javascript:consolegoList(7);"><i class="fa fa-circle-o"></i> 성분사전</a>
 					</li>
 				</ul>
 			</div>
@@ -124,7 +123,7 @@
 		<div class="col-md-8">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">자주 찾는 질문</h3>&nbsp;&nbsp;&nbsp;
+					<h3 class="box-title">건강정보</h3>&nbsp;&nbsp;&nbsp;
 					<div class="box-tools pull-right">
 						<div class="has-feedback">
 							<div style="display: flex; align-items: center;">&nbsp;&nbsp;
@@ -149,7 +148,6 @@
 						<tbody>
 							<tr>
 								<th style="text-align: center;width: 5% ">NO</th>
-								<th style="text-align: center;width: 10%">카테고리</th>
 								<th style="text-align: center;">제목</th>
 								<th style="text-align: center;width: 15%">등록일</th>
 								<th style="text-align: center;width: 7%">조회수</th>
@@ -163,46 +161,20 @@
 								<c:otherwise>
 									<c:forEach items="${list}" var="list">
 										<tr>
-											<c:choose>
-												<c:when test="${list.flg_top == 'Y'}">
-													<td style="text-align: center;font-weight: bold;">
-														${list.rnum}
-													</td>
-													<td style="text-align: center;font-weight: bold;">
-														${list.ctg_nm}
-													</td>
-													<td style="text-align: left;font-weight: bold;">
-														<a href="javascript:goView(${list.seq_bbs});">
-															${list.title}
-														</a>
-													</td>
-													<td style="text-align: center;font-weight: bold;">
-														${list.dt_reg}
-													</td>
-													<td style="text-align: center;font-weight: bold;">
-														${list.readed}
-													</td>
-												</c:when>
-												<c:otherwise>
-													<td style="text-align: center;">
-														${list.rnum}
-													</td>
-													<td style="text-align: center;">
-													${list.ctg_nm}
-													</td>
-													<td style="text-align: left">
-															<a href="javascript:goView(${list.seq_bbs});">
-																${list.title}
-															</a>
-													</td>
-													<td style="text-align: center;">
-														${list.dt_reg}
-													</td>
-													<td style="text-align: center;">
-														${list.readed}
-													</td>
-												</c:otherwise>
-											</c:choose>
+											<td style="text-align: center;">
+												${list.rnum}
+											</td>
+											<td style="text-align: left">
+												<a href="javascript:goView(${list.seq_bbs});">
+													${list.title}
+												</a>
+											</td>
+											<td style="text-align: center;">
+												${list.dt_reg}
+											</td>
+											<td style="text-align: center;">
+												${list.readed}
+											</td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>
@@ -237,7 +209,7 @@
 				<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
 			</div>
 			<div style="text-align: center;">
-				<a href="javascript:goWriteForm(2);" class="btn btn-primary" style="width: 150px;">등 록</a>
+				<a href="javascript:goWriteForm(6);" class="btn btn-primary" style="width: 150px;">등 록</a>
 			</div>
 		</div>
 	<!-- /.col -->

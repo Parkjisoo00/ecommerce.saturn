@@ -89,13 +89,13 @@
 		<div class="container">
 			<div class="col-lg-12" style="padding: 0 !important;">
 				<div>
-					<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">성분사전</h6>
+					<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">건강정보</h6>
 					<h6 class="coupon__link" style="text-align: center; letter-spacing: 1.5px; border: none">
 						<a href="#" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">맞춤 건강 추천</a>
 						<a href="#" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">안심 조회 서비스</a>
-						<a href="/front/center/board/health/list.web" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">건강정보</a>
+						<a href="/front/center/board/health/list.web" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">건강정보</a>
 						<a href="#" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">새소식</a>
-						<a href="/front/center/board/ingred/list.web" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">성분사전</a>
+						<a href="/front/center/board/ingred/list.web" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">성분사전</a>
 					</h6>
 				</div>
 			</div>
@@ -109,7 +109,7 @@
 						<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;">Bravo My Life </span>
 					</div>
 					<div class="hidden-review" id="reviewForm${status.index + 1}" style="margin-left: auto; margin-right: auto;">
-						<img src="/img/ingred/${boardDto.file_save}" alt="Local Image">
+						<img src="/img/health/${boardDto.file_save}" alt="Local Image">
 					</div>
 				</c:forEach>
 				<div class="row">

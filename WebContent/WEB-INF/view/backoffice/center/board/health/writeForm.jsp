@@ -14,7 +14,6 @@
   <![endif]-->
 <script>
 	function goList(value) {
-		
 		var frmMain = document.getElementById("frmMain");
 		document.getElementById("cd_bbs_type").value = value;
 		frmMain.action="/console/center/board/list.web";
@@ -25,14 +24,17 @@
 		
 		document.getElementById("cd_bbs_type").value = value;
 		var frmMain = document.getElementById("frmMain");
+
 		document.getElementById("content").value =" ";
-		frmMain.action="/console/center/board/writeProc.web";
-		frmMain.submit();
+	
+	frmMain.action="/console/center/board/writeProc.web";
+	frmMain.submit();
 	}
 	
 	function consolegoList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
+		
 		frmMain.cd_bbs_type.setAttribute("value", value);
 		frmMain.action = "/console/center/board/list.web";
 		frmMain.submit();
@@ -60,36 +62,27 @@
 <section class="content">
 	<div class="row">
 		<div class="col-md-3">
-		
-
-		<div class="box box-solid">
-			<div class="box-header with-border">
-				<h3 class="box-title">고객 센터</h3>
-
-			<div class="box-tools">
-				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-				</button>
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">맞춤 건강 등록</h3>
+					<div class="box-tools">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+						</button>
+					</div>
+				</div>
+				<div class="box-body no-padding">
+					<ul class="nav nav-pills nav-stacked">
+						<li class="active"><a href="javascript:consolegoList(6);"><i class="fa fa-circle-o"></i> 건강정보</a>
+						<li class="active"><a href="javascript:consolegoList(7);"><i class="fa fa-circle-o"></i> 성분사전</a>
+						</li>
+					</ul>
+				</div>
 			</div>
-			</div>
-			<div class="box-body no-padding">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="javascript:consolegoList(1);"><i class="fa fa-bullhorn"></i> 공지사항</a>
-					<li class="active"><a href="javascript:consolegoList(2);"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
-					<li class="active"><a href="javascript:consolegoList(3);"><i class="fa fa-fw fa-user"></i> 1:1문의</a>
-					<li class="active"><a href="javascript:consolegoList(4);"><i class="fa fa-fw fa-commenting-o"></i> 새소식</a>
-					<li class="active"><a href="javascript:consolegoList(5);"><i class="fa fa-fw fa-comment-o"></i> 소개</a>
-					</li>
-				</ul>
-			</div>
-			<!-- /.box-body -->
-		</div>
-		<!-- /. box -->
-		<!-- /.box -->
 		</div>
 		<div class="col-md-8">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">등록하기(등록하신 이미지로 소개 페이지가 나옵니다.)</h3>
+					<h3 class="box-title">등록하기</h3>
 				</div>
 			<!-- /.box-header -->
 			<div class="box-body">
@@ -108,8 +101,8 @@
 			<!-- /.box-body -->
 			<div class="box-footer">
 			<div class="pull-right">
-				<button type="submit" class="btn btn-primary" onclick="writeProc(5);"><i class="fa fa-pencil"></i> 등록</button>
-				<button type="button" class="btn btn-default" onclick="goList(5);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
+				<button type="submit" class="btn btn-primary" onclick="writeProc(6);"><i class="fa fa-pencil"></i> 등록</button>
+				<button type="button" class="btn btn-default" onclick="goList(6);"><i class="fa fa-fw fa-align-justify"></i> 목록</button>
 			</div>
 			<button type="button" class="btn btn-default btn-sm" onclick="location.reload();"><a>다시쓰기</a></button>
 			</div>

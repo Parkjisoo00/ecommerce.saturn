@@ -25,6 +25,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -251,7 +252,7 @@ public class BoardWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-10-11
+	 * @since 2024-11-01
 	 * <p>DESCRIPTION:</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
@@ -282,18 +283,23 @@ public class BoardWeb extends Common {
 	 * @param response [응답 서블릿]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-10-10
+	 * @since 2024-11-04
 	 * <p>DESCRIPTION:</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/center/board/ingred/list.web")
-	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/front/center/board/health/list.web")
+	public ModelAndView health(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			mav.setViewName("front/center/board/ingred/list");
+			
+			List<BoardDto> _boardDto = boardSrvc.healthSelect(boardDto);
+			
+			mav.addObject("boardDto", _boardDto);
+			
+			mav.setViewName("front/center/board/health/list");
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".main()] " + e.getMessage(), e);
@@ -303,6 +309,36 @@ public class BoardWeb extends Common {
 		return mav;
 	}
 	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-11-04
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/center/board/ingred/list.web")
+	public ModelAndView ingred(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			List<BoardDto> _boardDto = boardSrvc.ingredSelect(boardDto);
+			
+			mav.addObject("boardDto", _boardDto);
+			
+			mav.setViewName("front/center/board/ingred/list");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".main()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	/**
 	 * @param type

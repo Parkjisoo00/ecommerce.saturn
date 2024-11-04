@@ -76,6 +76,16 @@ public class BoardDao extends BaseDao{
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.center.Board.introduceSelect", boardDto);
 	}
 	
+	public List<BoardDto> healthSelect(BoardDto boardDto) {
+		
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.center.Board.healthSelect", boardDto);
+	}
+	
+	public List<BoardDto> ingredSelect(BoardDto boardDto) {
+		
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.center.Board.ingredSelect", boardDto);
+	}
+	
 	public BoardDto mySelect(BoardDto boardDto) {
 		
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.center.Board.mySelect", boardDto);

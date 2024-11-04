@@ -239,7 +239,6 @@
 			</div>
 			<div style="text-align: center;">
 				<a href="javascript:goWriteForm(1);" class="btn btn-primary" style="width: 150px;">등 록</a>
-				
 			</div>
 		</div>
 	<!-- /.col -->

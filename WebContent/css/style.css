@@ -525,7 +525,7 @@ table.headTop_pd th, table.headTop_pd td {
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
-	transition: max-height 3s ease-out;
+	transition: max-height 1s ease-out;
 }
 
 .hidden-ingredient {
@@ -573,7 +573,7 @@ table.headTop_pd th, table.headTop_pd td {
 }
 
 .visible {
-	max-height: 1000px;
+	max-height: 2000px;
 }
 
 /*----------------------------------------*/

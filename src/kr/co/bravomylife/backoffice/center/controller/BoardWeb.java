@@ -105,6 +105,8 @@ public class BoardWeb extends Common{
 			else if (type.equals("BbsQuestion")) boardDto.setCd_bbs_type(3);
 			else if (type.equals("BbsNews")) boardDto.setCd_bbs_type(4);
 			else if (type.equals("BbsIntroduce")) boardDto.setCd_bbs_type(5);
+			else if (type.equals("BbsHealth")) boardDto.setCd_bbs_type(6);
+			else if (type.equals("BbsIngred")) boardDto.setCd_bbs_type(7);
 			
 			boardDto.setSeq_bbs((int)sequence);
 			
@@ -130,6 +132,14 @@ public class BoardWeb extends Common{
 				}
 			else if (boardDto.getCd_bbs_type() == 5) {
 				String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_introduce", "[UNDEFINED]");
+				file = new File(pathBase + "" + File.separator + boardDto.getFile_save());
+				}
+			else if (boardDto.getCd_bbs_type() == 6) {
+				String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_health", "[UNDEFINED]");
+				file = new File(pathBase + "" + File.separator + boardDto.getFile_save());
+				}
+			else if (boardDto.getCd_bbs_type() == 7) {
+				String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_ingred", "[UNDEFINED]");
 				file = new File(pathBase + "" + File.separator + boardDto.getFile_save());
 				}
 			
@@ -236,6 +246,12 @@ public class BoardWeb extends Common{
 			else if (boardDto.getCd_bbs_type() == 5) {
 				mav.setViewName("backoffice/center/board/introduce/modifyForm");
 			}
+			else if (boardDto.getCd_bbs_type() == 6) {
+				mav.setViewName("backoffice/center/board/health/modifyForm");
+			}
+			else if (boardDto.getCd_bbs_type() == 7) {
+				mav.setViewName("backoffice/center/board/ingred/modifyForm");
+			}
 			else {
 				request.setAttribute("redirect"	, "/");
 				mav.setViewName("forward:/servlet/result.web");
@@ -298,6 +314,16 @@ public class BoardWeb extends Common{
 			
 			else if (boardDto.getCd_bbs_type() == 5) {
 				pathBase	= dynamicProperties.getMessage("backoffice.upload.path_introduce", "[UNDEFINED]");
+				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
+				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+			}
+			else if (boardDto.getCd_bbs_type() == 5) {
+				pathBase	= dynamicProperties.getMessage("backoffice.upload.path_health", "[UNDEFINED]");
+				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
+				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+			}
+			else if (boardDto.getCd_bbs_type() == 5) {
+				pathBase	= dynamicProperties.getMessage("backoffice.upload.path_ingred", "[UNDEFINED]");
 				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
 				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 			}
@@ -411,6 +437,12 @@ public class BoardWeb extends Common{
 			else if (boardDto.getCd_bbs_type() == 5) {
 				mav.setViewName("backoffice/center/board/introduce/writeForm");
 			}
+			else if (boardDto.getCd_bbs_type() == 6) {
+				mav.setViewName("backoffice/center/board/health/writeForm");
+			}
+			else if (boardDto.getCd_bbs_type() == 7) {
+				mav.setViewName("backoffice/center/board/ingred/writeForm");
+			}
 			else {
 				request.setAttribute("redirect"	, "/");
 				mav.setViewName("forward:/servlet/result.web");
@@ -494,6 +526,18 @@ public class BoardWeb extends Common{
 				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
 				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 			}
+			else if (boardDto.getCd_bbs_type() == 6) {
+				
+				pathBase	= dynamicProperties.getMessage("backoffice.upload.path_health", "[UNDEFINED]");
+				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
+				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+			}
+			else if (boardDto.getCd_bbs_type() == 7) {
+				
+				pathBase	= dynamicProperties.getMessage("backoffice.upload.path_ingred", "[UNDEFINED]");
+				maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
+				allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
+			}
 			else {
 				request.setAttribute("script"	, "alert('게시판 타입이 이상합니다.');");
 			}
@@ -545,9 +589,6 @@ public class BoardWeb extends Common{
 				boardDto.setFile_orig(fileNameSrc);
 				boardDto.setFile_save(fileNameSve);
 				
-				
-				
-				
 				if (boardDto.getCd_bbs_type() == 3) {
 					// 답변글(상위 일련번호에 문의글 번호를 저장)
 					boardDto.setSeq_bbs_parent(boardDto.getSeq_bbs());
@@ -555,13 +596,113 @@ public class BoardWeb extends Common{
 				}
 				
 				if (boardSrvc.insert(boardDto)) {
-					if (boardDto.getCd_bbs_type() == 3) {
-						request.setAttribute("script"	, "alert('답변이 등록되었습니다.');");
+					
+					if (boardDto.getCd_bbs_type() == 1) {
+						
+						String[] arrName = new String[1];
+						String[] arrValue = new String[1];
+						
+						arrName[0] = "cd_bbs_type";
+						arrValue[0] = "1";
+						
+						request.setAttribute("script"	, "alert('등록되었습니다.');");
+						request.setAttribute("post"		, "/console/center/board/list.web");
+						request.setAttribute("name"		, arrName);
+						request.setAttribute("value"	, arrValue);
+					}
+					
+					else if (boardDto.getCd_bbs_type() == 2) {
+						
+						String[] arrName = new String[1];
+						String[] arrValue = new String[1];
+						
+						arrName[0] = "cd_bbs_type";
+						arrValue[0] = "2";
+						
+						request.setAttribute("script"	, "alert('등록되었습니다.');");
+						request.setAttribute("post"		, "/console/center/board/list.web");
+						request.setAttribute("name"		, arrName);
+						request.setAttribute("value"	, arrValue);
+
+					}
+					
+					else if (boardDto.getCd_bbs_type() == 3) {
+						
+						String[] arrName = new String[1];
+						String[] arrValue = new String[1];
+						
+						arrName[0] = "cd_bbs_type";
+						arrValue[0] = "3";
+						
+						request.setAttribute("script"	, "alert('답변했습니다.');");
+						request.setAttribute("post"		, "/console/center/board/list.web");
+						request.setAttribute("name"		, arrName);
+						request.setAttribute("value"	, arrValue);
+					}
+					
+					else if (boardDto.getCd_bbs_type() == 4) {
+						
+						String[] arrName = new String[1];
+						String[] arrValue = new String[1];
+						
+						arrName[0] = "cd_bbs_type";
+						arrValue[0] = "4";
+						
+						request.setAttribute("script"	, "alert('등록되었습니다.');");
+						request.setAttribute("post"		, "/console/center/board/list.web");
+						request.setAttribute("name"		, arrName);
+						request.setAttribute("value"	, arrValue);
+
+					}
+					
+					else if (boardDto.getCd_bbs_type() == 5) {
+						
+						String[] arrName = new String[1];
+						String[] arrValue = new String[1];
+						
+						arrName[0] = "cd_bbs_type";
+						arrValue[0] = "5";
+						
+						request.setAttribute("script"	, "alert('등록되었습니다.');");
+						request.setAttribute("post"		, "/console/center/board/list.web");
+						request.setAttribute("name"		, arrName);
+						request.setAttribute("value"	, arrValue);
+					
+					}
+					
+					else if (boardDto.getCd_bbs_type() == 6) {
+						
+						String[] arrName = new String[1];
+						String[] arrValue = new String[1];
+						
+						arrName[0] = "cd_bbs_type";
+						arrValue[0] = "6";
+						
+						request.setAttribute("script"	, "alert('등록되었습니다.');");
+						request.setAttribute("post"		, "/console/center/board/list.web");
+						request.setAttribute("name"		, arrName);
+						request.setAttribute("value"	, arrValue);
+					
+					}
+					
+					else if (boardDto.getCd_bbs_type() == 7) {
+						
+						String[] arrName = new String[1];
+						String[] arrValue = new String[1];
+						
+						arrName[0] = "cd_bbs_type";
+						arrValue[0] = "7";
+						
+						request.setAttribute("script"	, "alert('등록되었습니다.');");
+						request.setAttribute("post"		, "/console/center/board/list.web");
+						request.setAttribute("name"		, arrName);
+						request.setAttribute("value"	, arrValue);
+					
 					}
 					else {
-						request.setAttribute("script"	, "alert('등록되었습니다.');");
+						request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+						request.setAttribute("redirect"	, "/");
 					}
-					request.setAttribute("redirect"	, "/console/center/board/list.web?cd_bbs_type=" + boardDto.getCd_bbs_type());
 				}
 				else {
 					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
@@ -621,6 +762,12 @@ public class BoardWeb extends Common{
 			}
 			else if (pagingDto.getCd_bbs_type() == 5) {
 				mav.setViewName("backoffice/center/board/introduce/list");
+			}
+			else if (pagingDto.getCd_bbs_type() == 6) {
+				mav.setViewName("backoffice/center/board/health/list");
+			}
+			else if (pagingDto.getCd_bbs_type() == 7) {
+				mav.setViewName("backoffice/center/board/ingred/list");
 			}
 			else {
 				request.setAttribute("redirect"	, "/");
@@ -684,6 +831,12 @@ public class BoardWeb extends Common{
 				}
 				else if (boardDto.getCd_bbs_type() == 5) {
 					mav.setViewName("backoffice/center/board/introduce/view");
+				}
+				else if (boardDto.getCd_bbs_type() == 6) {
+					mav.setViewName("backoffice/center/board/health/view");
+				}
+				else if (boardDto.getCd_bbs_type() == 7) {
+					mav.setViewName("backoffice/center/board/ingred/view");
 				}
 				else {
 					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");

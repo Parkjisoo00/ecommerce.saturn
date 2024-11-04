@@ -20,6 +20,8 @@
  */
 package kr.co.bravomylife.front.center.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -148,6 +150,34 @@ public class BoardSrvc {
 		return boardDao.introduceSelect(boardDto);
 	}
 	
+	/**
+	 * @param boardDto [게시판 빈]
+	 * @return BoardDto
+	 * 
+	 * @since 2024-11-04
+	 * <p>DESCRIPTION: 건강정보</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public List<BoardDto> healthSelect(BoardDto boardDto) {
+		return boardDao.healthSelect(boardDto);
+	}
+	
+
+
+	/**
+	 * @param boardDto [게시판 빈]
+	 * @return BoardDto
+	 * 
+	 * @since 2024-11-04
+	 * <p>DESCRIPTION: 성분사전</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	public List<BoardDto> ingredSelect(BoardDto boardDto) {
+		return boardDao.ingredSelect(boardDto);
+	}
+		
 	/**
 	 * @param boardDto [게시판 빈]
 	 * @return BoardDto

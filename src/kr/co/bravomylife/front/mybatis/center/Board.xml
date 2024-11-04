@@ -14,9 +14,42 @@
 				TB_BBS 
 			WHERE
 				CD_BBS_TYPE	= 5
+				AND FLG_DELETE IS NULL
 			ORDER BY
 				seq_bbs desc
 			) WHERE ROWNUM = 1
+	</select>
+	
+	<select id="healthSelect" parameterType="boardDto" resultType="boardDto">
+		SELECT
+			SEQ_BBS
+			, TITLE
+			, FILE_SAVE
+			, FILE_ORIG
+			, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
+		FROM
+			TB_BBS 
+		WHERE
+			CD_BBS_TYPE	= 6
+			AND FLG_DELETE IS NULL
+		ORDER BY
+			seq_bbs desc
+	</select>
+	
+	<select id="ingredSelect" parameterType="boardDto" resultType="boardDto">
+		SELECT
+			SEQ_BBS
+			, TITLE
+			, FILE_SAVE
+			, FILE_ORIG
+			, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
+		FROM
+			TB_BBS 
+		WHERE
+			CD_BBS_TYPE	= 7
+			AND FLG_DELETE IS NULL
+		ORDER BY
+			seq_bbs desc
 	</select>
 	
 	<select id="mySelect" parameterType="boardDto" resultType="boardDto">
