@@ -20,55 +20,84 @@
 			// 월 및 상품명들
 			data.addColumn('number', '월');
 			<c:set var="arrayBest" value="" />
-			<c:forEach var="item" items="${listsellingBestName}" varStatus="status_best">
-				<c:set var="seq_sle">${item.seq_sle}</c:set>
-				<c:if test="${status_best.index == 0}">
-					<c:set var="arrayBest" value="${seq_sle}" />
+			<c:set var="columnCount" value="0" />
+			<c:choose>
+				<c:when test="${empty listsellingBestName}">
+					data.addColumn('number', '상품-1');
+					data.addColumn('number', '상품-2');
+					data.addColumn('number', '상품-3');
+					data.addColumn('number', '상품-4');
+					data.addColumn('number', '상품-5');
+					data.addColumn('number', '상품-6');
+					data.addColumn('number', '상품-7');
+					data.addColumn('number', '상품-8');
+					data.addColumn('number', '상품-9');
+					data.addColumn('number', '상품-10');
+					data.addColumn('number', '상품-11');
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="item" items="${listsellingBestName}" varStatus="status_best">
+						<c:set var="seq_sle">${item.seq_sle}</c:set>
+						<c:if test="${status_best.index == 0}">
+							<c:set var="arrayBest" value="${seq_sle}" />
+						</c:if>
+						<c:if test="${status_best.index != 0}">
+							<c:set var="arrayBest" value="${arrayBest += ',' += seq_sle}" />
+						</c:if>
+						<c:set var="columnCount" value="${status_best.index +1}" />
+						data.addColumn('number', '${status_best.index + 1}. ${fn:substring(item.name, 0, 10)} ...');
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+			
+			// 대상 상품 갯수: <c:out value="${columnCount}" />
+			// 대상 상품 목록: <c:out value="${arrayBest}" />
+			<c:set var="writtenColumnCount" value="0" />
+			<c:set var="rowCount" value="0" />
+			
+			<c:forEach var="list" items="${listsellingBestList}" varStatus="status_list">
+				var list_${status_list.index} = [${list.month}
+				<c:forEach var="row" items="${fn:split(arrayBest, ',')}" varStatus="status_row">
+					<c:if test="${row == list.seq_sle}">
+						, ${list.count}
+					</c:if>
+					<c:if test="${row != list.seq_sle}">
+						, 0
+					</c:if>
+					<c:set var="writtenColumnCount" value="${writtenColumnCount + 1}" />
+				</c:forEach>
+				<c:if test="${writtenColumnCount == columnCount}">
+					]
+					<c:set var="writtenColumnCount" value="0" />
 				</c:if>
-				<c:if test="${status_best.index != 0}">
-					<c:set var="arrayBest" value="${arrayBest += ',' += seq_sle}" />
-				</c:if>
-				data.addColumn('number', '${status_best.index + 1}. ${fn:substring(item.name, 0, 10)} ...');
+				<c:set var="rowCount" value="${status_list.index}" />
 			</c:forEach>
 			
-			// 월 및 상품들의 판매 수량
-			/*
-			data.addRows([
-				[3,  10,   8,   0,   0,   0,   0,   0,   0,   0,  12],
-				[4,   0,   0,   0,   0,   0,   0,   0,   2,   0,   0],
-				[5,   0,   0,   0,   0,   0,   1,   0,   0,   0,   0],
-				[7,   0,   0,   3,   0,   0,   0,   0,   0,   0,   0],
-				[8,   0,   0,   0,   0,   2,   0,   0,   0,   0,   0],
-				[9,   0,   0,   0,   0,   0,   0,   0,   0,   1,   0],
-				[10,  0,   0,   0,  13,   0,  11,  11,   0,   0,  12],
-			]);
-			*/
+			var columns		= ${columnCount + 1};
+			var rowsAll		= ${rowCount + 1};
+			var months		= 0;
+			var monthBefore	= 0;
 			
-			// 대상 상품: <c:out value="${arrayBest}" />
-			data.addRows([
-				<c:forEach var="list" items="${listsellingBestList}" varStatus="status_list">
-					<c:set var="month_before" value="${list.month}" />
-					
-					<c:if test="${month_before != month_after}">
-						[${list.month}
-					</c:if>
-					
-					<c:if test="${month_before == month_after}">
-						${list.month}
-						<c:forEach var="row" items="${fn:split(arrayBest, ',')}" varStatus="status_row">
-							<c:if test="${row == list.seq_sle}">
-							, ${list.count}
-							</c:if>
-							<c:if test="${row != list.seq_sle}">
-							, 0
-							</c:if>
-						</c:forEach>
-						],
-					</c:if>
-						
-					<c:set var="month_after" value="${list.month}" />
-				</c:forEach>
-			]);
+			for (loop = 0; loop < rowsAll - 1; loop++) {
+				monthAfter = eval("list_" + loop + "[0]");
+				if (monthBefore != monthAfter) {
+					months++;				// 중복 제외한 월
+					monthBefore = monthAfter;
+				}
+			}
+			alert(months);
+			
+			var matrixRow = [];
+			
+			matrixRow[0] = [6,  0,   0,   0,   0,   0,   0,   0,  11,   0,   0,    0];
+			matrixRow[1] = [8,  7,   0,   0,   6,   0,   0,   0,   0,   0,   0,    0];
+			matrixRow[2] = [9,  0,   0,   0,   0,   0,   5,   5,   0,   8,   7,    0];
+			matrixRow[3] = [10, 0,  11,   6,   0,   5,   0,   0,   0,   0,   0,    0];
+			matrixRow[4] = [11, 7,   0,   0,   0,   0,   0,   0,   0,   9,   0,   11];
+			
+			data.addRows(
+				matrixRow
+			);
 			
 			var options = {
 				chart: {
