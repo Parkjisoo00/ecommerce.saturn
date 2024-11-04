@@ -487,6 +487,8 @@ public class PayWeb extends Common {
 				map.put("price", detail.getPrice());
 				map.put("count", detail.getCount());
 				map.put("point", detail.getPoint());
+				map.put("cd_ctg_m", detail.getCd_ctg_m());
+				map.put("cd_ctg_b", detail.getCd_ctg_b());
 				map.put("total_price_sum", detail.getTotal_price_sum());
 				map.put("total_point_sum", detail.getTotal_point_sum());
 				
@@ -504,6 +506,8 @@ public class PayWeb extends Common {
 				logger.debug("판매 가격" + detail.getPrice());
 				logger.debug("판매 개수" + detail.getCount());
 				logger.debug("포인트" + detail.getPoint());
+				logger.debug("중분류" + detail.getCd_ctg_m());
+				logger.debug("대분류" + detail.getCd_ctg_b());
 				logger.debug("개별 총 금액" + totalPrice);
 				logger.debug("개별 총 포인트" + totalPoint);
 				

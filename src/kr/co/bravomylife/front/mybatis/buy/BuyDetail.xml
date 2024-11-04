@@ -4,9 +4,9 @@
 		
 	<insert id="insertBestMst" parameterType="buyDetailDto">
 		INSERT INTO TB_BEST
-			(SEQ_BEST, SEQ_SLE, FLG_BEST, DT_REG, COUNT, DT_UPT)
+			(SEQ_BEST, SEQ_SLE, FLG_BEST, DT_REG, COUNT, CD_CTG_B, CD_CTG_M, DT_UPT)
 		VALUES
-			(#{seq_best}, #{seq_sle}, NULL, SYSDATE, #{count}, NULL)
+			(#{seq_best}, #{seq_sle}, NULL, SYSDATE, #{count}, #{cd_ctg_b}, #{cd_ctg_m}, NULL)
 	</insert>
 	
 	<update id="updateBestMst" parameterType="buyDetailDto">
@@ -30,9 +30,9 @@
 	
 	<insert id="insertBest" parameterType="buyDetailDto">
 		INSERT INTO TB_BEST_DTL
-			(SEQ_BEST_DTL, SEQ_BEST, SEQ_SLE, DT_REG)
+			(SEQ_BEST_DTL, SEQ_BEST, SEQ_SLE, CD_CTG_B, CD_CTG_M, DT_REG)
 		VALUES
-			(SQ_SEQ_BEST_DTL.NEXTVAL, #{seq_best}, #{seq_sle}, SYSDATE)
+			(SQ_SEQ_BEST_DTL.NEXTVAL, #{seq_best}, #{seq_sle}, #{cd_ctg_b}, #{cd_ctg_m}, SYSDATE)
 	</insert>
 	
 	<insert id="insert" parameterType="buyDetailDto">

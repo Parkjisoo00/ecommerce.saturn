@@ -338,6 +338,8 @@
 		<input type="hidden" name="buyList[${status.index}].price" value="${list.price}" />
 		<input type="hidden" name="buyList[${status.index}].count" value="${list.count}" />
 		<input type="hidden" name="buyList[${status.index}].point" value="${list.point}" />
+		<input type="hidden" name="buyList[${status.index}].cd_ctg_m" value="${list.cd_ctg_m}" />
+		<input type="hidden" name="buyList[${status.index}].cd_ctg_b" value="${list.cd_ctg_b}" />
 	</c:forEach>
 	<script>
 	$(document).ready(function () {

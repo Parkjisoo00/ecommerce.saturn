@@ -51,8 +51,22 @@ public class BuyMasterDto {
 	private String delivery_request			= "";
 	private List<BuyDataDto> buyDatas		= null;
 	private int seq_sle						= 0;
+	private String cd_ctg_m					= "";
+	private String cd_ctg_b					= "";
 	
 	
+	public String getCd_ctg_m() {
+		return cd_ctg_m;
+	}
+	public void setCd_ctg_m(String cd_ctg_m) {
+		this.cd_ctg_m = cd_ctg_m;
+	}
+	public String getCd_ctg_b() {
+		return cd_ctg_b;
+	}
+	public void setCd_ctg_b(String cd_ctg_b) {
+		this.cd_ctg_b = cd_ctg_b;
+	}
 	public int getSeq_sle() {
 		return seq_sle;
 	}

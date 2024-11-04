@@ -328,6 +328,8 @@
 <input type="hidden" name="currentPage"			id="currentPage"	value="${paging.currentPage}"/>
 <input type="hidden" name="buyList[0].img"							value="${saleDto.img}"/>
 <input type="hidden" name="buyList[0].seq_sle"						value="${saleDto.seq_sle}"/>
+<input type="hidden" name="buyList[0].cd_ctg_m"						value="${saleDto.cd_ctg_m}"/>
+<input type="hidden" name="buyList[0].cd_ctg_b"						value="${saleDto.cd_ctg_b}"/>
 <input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
