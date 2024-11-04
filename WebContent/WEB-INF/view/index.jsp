@@ -244,7 +244,7 @@
 
 	<!-- Categories Section Begin -->
 	<section class="categories">
-		<div class="container-fluid">
+		<div class="container-fluid" style="padding-right: 0px !important; padding-left: 0px !important;">
 		<div class="col-lg-12">
 			<div class="row">
 				<div class="col-lg-7 c p-0" style="height: 40vh; overflow: hidden;">
@@ -307,7 +307,6 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -326,8 +325,8 @@
 					<div class="col-lg-12" style="padding: 0;">
 						<div class="product__details__tab" style="width: 100% !important; padding-top: 0px !important;">
 							<ul class="nav nav-tabs" role="tablist" style="margin-bottom: 30px !important; border: 1px solid #d9d9d9 !important; display: flex !important; justify-content: space-between !important;">
-								<li class="nav-item" style="background-color: #f77202; margin-bottom: 0px !important; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important; margin-right: 0px !important; border-right: 1px solid #d9d9d9 !important;">
-									<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" style="font-weight: normal !important; background-color: #f77202; color: white; display: inline-block !important;" >추천 인기상품</a>
+								<li class="nav-item" style="background-color: rgb(114, 186, 245);; margin-bottom: 0px !important; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important; margin-right: 0px !important; border-right: 1px solid #d9d9d9 !important;">
+									<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" style="font-weight: normal !important; background-color: rgb(114, 186, 245);; color: white; display: inline-block !important;" >추천 인기상품</a>
 								</li>
 								<li class="nav-item" style="margin-bottom: 0px !important; background-color: #f9f9f9; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important;">
 									<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" style="font-weight: normal !important; color: black; display: inline-block !important;">추천 신상품</a>
