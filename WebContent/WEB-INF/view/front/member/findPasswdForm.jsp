@@ -54,7 +54,7 @@
 							</div>
 							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
-									<p>핸드폰 번호</p>
+									<p>휴대폰 번호</p>
 									<div style="display: flex; gap: 5px;">
 										<input type="text" id="phone1" name="phone1"
 											maxlength="3" required
@@ -72,7 +72,7 @@
 							</div>
 							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
-									<input type="submit" value="휴대폰 인증"id = ""/>
+									<input type="button" value="휴대폰 인증"id = ""/>
 								</div>
 								<hr style="border: 1px solid #ccc; margin: 0;">
 								<br>
