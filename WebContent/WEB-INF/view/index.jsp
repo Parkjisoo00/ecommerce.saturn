@@ -247,7 +247,7 @@
 		<div class="container-fluid">
 		<div class="col-lg-12">
 			<div class="row">
-				<div class="col-lg-7 c p-0" style="height: 50vh; overflow: hidden;">
+				<div class="col-lg-7 c p-0" style="height: 40vh; overflow: hidden;">
 					<div class="categories__item categories__large__item set-bg"
 						data-setbg="img/categories/home9.jpg" style="height: 100%;">
 						<div class="categories__text" style="text-align: left; position: absolute; bottom: -20;">
@@ -259,7 +259,7 @@
 					</div>
 				</div>
 				</div>
-				<div class="col-lg-5 c p-0" style="height: 50vh;">
+				<div class="col-lg-5 c p-0" style="height: 40vh;">
 							<div class="categories__item set-bg"
 								data-setbg="img/categories/home4.jpg" style="height: 100%;">
 								<div class="categories__text" style="text-align: left; position: absolute; bottom: -20;">
