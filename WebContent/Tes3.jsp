@@ -62,7 +62,7 @@
 				</div>
 				<div class="row" style="display: flex; justify-content: center; align-items: center;">
 					<div class="col-lg-12" style="max-width: 670px !important; width: 100% !important; text-align: center;">
-						<h2 id="qTitle" class="ha on" style="text-align: center; font-size: 20px; font-weight: 700;">해당하는 식습관을 모두 선택하세요</h2>
+						<h2 id="qTitle" class="ha on" style="text-align: center; font-size: 20px; font-weight: 700;">해당하는 식습관을 선택하세요</h2>
 						<br>
 						<br>
 						<div style="width: 100%; max-width: 600px;">

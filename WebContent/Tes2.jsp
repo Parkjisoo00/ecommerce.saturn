@@ -11,6 +11,11 @@
 
 <head>
 	<%@ include file="/include/common/header.jsp" %>
+	
+	<style>
+
+	
+	</style>
 	<script>
 	
 	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
@@ -22,6 +27,7 @@
 
 	<!-- Css Styles -->
 	<%@ include file="/include/common/css.jsp" %>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 
 <body>
@@ -65,11 +71,141 @@
 			
 			
 			<!-- 각자 담당하는 부분 화면 1개씩 -->
-				<div id="A1" class="row"style="display: flex; justify-content: center; align-items: center;">
+				
+				<div class="row" style="display: flex; justify-content: center; align-items: center;">
 					<div class="col-lg-12" style="max-width: 670px !important; width: 100% !important; text-align: center;">
-						내용1
+						<h2 id="qTitle" class="ha on" style="text-align: center; font-size: 20px; font-weight: 700;">불편하거나 걱정되는 것을 선택하세요</h2>
+						<span id="qContent" class="ha bubble on" style="display: inline-block;">
+						        우선 관리가 필요한 것을 선택하세요
+						    </span>
+						<br>
+						<br>
+						<div style="width: 100%; max-width: 600px;">
+							<input type="checkbox" class="customCheckbox" id="food1" style="display:none" onclick= "
+								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
+								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
+							 <label for="food1" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
+								<i class="fas fa-heart"></i>
+								<span style="display: block;">혈관 · 혈액 순환</span>
+								
+							</label>
+						</div>
+						<br>
+						<div style="width: 100%; max-width: 600px;">
+							<input type="checkbox" class="customCheckbox" id="food2" style="display:none" onclick="
+								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
+								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
+							 <label for="food2" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
+								<i class="fas fa-apple-alt"></i>
+								<span style="display: block;">소화 · 장</span>
+								
+							</label>
+						</div>
+						<br>
+						<div style="width: 100%; max-width: 600px;">
+							<input type="checkbox" class="customCheckbox" id="food3" style="display:none" onclick="
+								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
+								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
+							<label for="food3" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
+								<i class="fas fa-smile"></i>
+								<span style="display: block;">피부</span>
+								
+							</label>
+						</div>
+						<br>
+						<div style="width: 100%; max-width: 600px;">
+							<input type="checkbox" class="customCheckbox" id="food4" style="display:none" onclick="
+								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
+								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
+							<label for="food4" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
+								<i class="fas fa-eye"></i> 
+								<span style="display: block;">눈</span>
+								
+							</label>
+						</div>
+						<br>
+						<div style="width: 100%; max-width: 600px;">
+							<input type="checkbox" class="customCheckbox" id="food5" style="display:none" onclick="
+								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
+								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
+							<label for="food5" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
+								<i class="fas fa-brain"></i>
+								<span style="display: block;">두뇌 활동</span>
+								
+							</label>
+						</div>
+						<br>
+						<div style="width: 100%; max-width: 600px;">
+							<input type="checkbox" class="customCheckbox" id="food6" style="display:none" onclick="
+								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
+								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
+							<label for="food6" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
+								<i class="fas fa-bed"></i>
+								<span style="display: block;">피로감</span>
+								
+							</label>
+						</div>
+						<br>
+						<div style="width: 100%; max-width: 600px;">
+							<input type="checkbox" class="customCheckbox" id="food7" style="display:none" onclick="
+								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
+								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
+							<label for="food7" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
+								<i class="fas fa-bone"></i>
+								<span style="display: block;">뼈 · 관절</span>
+								
+							</label>
+						</div>
+						<br>
+						<div style="width: 100%; max-width: 600px;">
+							<input type="checkbox" class="customCheckbox" id="food8" style="display:none" onclick="
+								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
+								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
+							<label for="food8" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
+								<i class="fas fa-virus"></i>
+								<span style="display: block;">면역</span>
+								
+							</label>
+						</div>
+						<br>
+						<div style="width: 100%; max-width: 600px;">
+							<input type="checkbox" class="customCheckbox" id="food9" style="display:none" onclick="
+								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
+								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
+							<label for="food9" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
+								<i class="fas fa-user"></i>
+								<span style="display: block;">모발</span>
+								
+							</label>
+						</div>
+						<br>
+						<div style="width: 100%; max-width: 600px;">
+							<input type="checkbox" class="customCheckbox" id="food8" style="display:none" onclick="
+								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
+								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
+							<label for="food8" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
+								<i class="fas fa-times"></i> 
+								<span style="display: block;">선택할 것이 없어요</span>
+								
+							</label>
+						</div>
+						<br>
+						<br>
+						<div>
+							<button id="btnNext" class="btn btn-radius btn-dark">
+								<span class="text">다음</span>
+							</button>
+						</div>
 					</div>
 				</div>
+
+
+
+					
+					
+					
+					
+			
 			<!-- 각자 담당하는 부분 화면 1개씩 -->
 				
 			</form>
