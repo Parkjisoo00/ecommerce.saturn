@@ -76,11 +76,6 @@
 	<!-- Css Styles -->
 	<%@ include file="/include/common/css.jsp" %>
 </head>
-<!-- 
-var star = document.querySelector('.fa-star-large');
-var value = star.getAttribute('data-value');
-alert("평점 확인" + value);
- -->
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -231,7 +226,7 @@ alert("평점 확인" + value);
 	<div id="resultModal">
 		<div id="modalMessage" style="font-weight: bold;"></div>
 		<div id="buttonContainer">
-			<button id="closeModalBtn">닫기</button>
+			<button type="button" id="closeModalBtn">닫기</button>
 		</div>
 	</div>
 <!-- Checkout Section end -->

@@ -59,6 +59,11 @@ public class SaleSrvc {
 	@Inject
 	SaleDao saleDao;
 	
+	public SaleDto reviewListCount(SaleDto saleDto) {
+		
+		return saleDao.reviewListCount(saleDto);
+	}
+	
 	public int schedule_best() {
 		
 		int result = 0;

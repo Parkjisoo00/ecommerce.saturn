@@ -91,6 +91,7 @@
 		frmMain.submit();
 	}
 	
+	/*
 	function reviewDelete(value, value2, value3, value4, value5) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -103,6 +104,7 @@
 		frmMain.action="/front/buy/reviewDelete.web";
 		frmMain.submit();
 	}
+	*/
 	
 	function goPages(value) {
 		
@@ -140,11 +142,6 @@
 	<!-- Css Styles -->
 	<%@ include file="/include/common/css.jsp" %>
 </head>
-<!-- 
-var star = document.querySelector('.fa-star-large');
-var value = star.getAttribute('data-value');
-alert("평점 확인" + value);
- -->
 <body>
 <form id="frmMain" method="POST">
 <input type="hidden" name="cd_bbs_type"	id="cd_bbs_type" />
@@ -178,7 +175,7 @@ alert("평점 확인" + value);
 								<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" style="display: inline-block !important;">상품후기 작성(${count})</a>
 							</li>
 							<li class="nav-item" style="background-color: #f9f9f9 !important; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important;">
-								<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" style="display: inline-block !important;">상품후기 목록(${reviwCount})</a>
+								<a id="reviewTabLink" class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" style="display: inline-block !important;">상품후기 목록(${reviwCount})</a>
 							</li>
 						</ul>
 						<div class="tab-content">
@@ -227,7 +224,7 @@ alert("평점 확인" + value);
 							</div>
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
 							<h6 class="cart-title" style="border-top: 1px solid #d9d9d9 !important; padding-top: 40px !important;  font-weight: normal !important; margin-bottom: 0px !important; ">*상품명을 클릭하면 상품으로 이동합니다.</h6>
-							<div class="review-form" style="border-radius: 5px !important; border-left: 1px solid #ddd !important; border-right: 1px solid #ddd !important; display: flex; flex-direction: column; border-bottom: 1px solid #ddd !important; width: 100% !important;">
+							<div class="review-formSub" style="border-radius: 5px !important; border-left: 1px solid #ddd !important; border-right: 1px solid #ddd !important; display: flex; flex-direction: column; border-bottom: 1px solid #ddd !important; width: 100% !important;">
 								<c:choose>
 									<c:when test="${empty reviewList}">
 										<div class="review-name" style="border-bottom: 0px !important; border-top: 0px !important; padding: 20px 20px 20px 30px !important; display: block !important; text-align: center; ">
@@ -238,6 +235,7 @@ alert("평점 확인" + value);
 									</c:when>
 										<c:otherwise>
 											<c:forEach var="review" items="${reviewList}">
+											<div class="reviewTarget" data-seq-review="${review.seq_review}">
 												<div class="review-title" style="border-top: 0px !important; border-bottom: 0px !important; padding-left: 0px !important; padding-top: 0px !important">
 													
 													<div class="review-name" style="border-top: 0px !important; padding: 10px 15px !important; border-top: 0px !important">
@@ -332,22 +330,26 @@ alert("평점 확인" + value);
 															${review.rate_review}
 														</div>
 													</div>
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
-									</div>
-									<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
-										<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
-									</div>
+											</div>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;">
+									<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPages" />
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 		<div id="imageModal" class="modal">
 			<span class="close">&times;</span>
 			<img class="modal-content" id="modalImage">
+		</div>
+		<div id="loadingSpinner" style=" display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">
+			<img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." style="width: 50px; height: 50px;">
 		</div>
 		</section>
 <!-- Checkout Section end -->
@@ -427,6 +429,50 @@ alert("평점 확인" + value);
 			observer.observe(navLink, { attributes: true });
 		});
 	});
+	
+	function reviewDelete(value, value2, value3, value4, value5) {
+		
+		var targetDiv = document.querySelector('.reviewTarget[data-seq-review="' + value5 + '"]');
+		var myData = { seq_sle: value, cd_ctg_m: value2, cd_ctg_b: value3, seq_buy_dtl: value4, seq_review: value5 };
+		
+		$.ajax({
+			type: 'POST',
+			url: '/front/buy/reviewDelete.json',
+			data: JSON.stringify(myData),
+			contentType: 'application/json; charset=UTF-8',
+			beforeSend: function () {
+				$('#loadingSpinner').fadeIn(200);
+			},
+			success: function (response) {
+				
+				if (response.status === "success") {
+					
+					targetDiv.remove();
+					
+					if (document.querySelectorAll('.reviewTarget').length === 0) {
+						
+						var shopCartTable = document.querySelector('.review-formSub');
+						if (shopCartTable) {
+							shopCartTable.innerHTML = 
+								'<div class="review-name" style="border-top: 1px solid #ddd !important; border-bottom: 0px !important; border-top: 0px !important; padding: 20px 20px 20px 30px !important; display: block !important; text-align: center;">' +
+									'<p style="margin-bottom: 200px !important; margin-top: 200px !important; display: inline-block; text-align: center;">' +
+										'등록된 상품후기가 없습니다.' +
+									'</p>' +
+								'</div>';
+						}
+					}
+					
+					var reviewCount = response.reviewCount;
+					$('#reviewTabLink').text('상품후기 목록(' + reviewCount + ')');
+					
+				}
+			},
+			complete: function () {
+				
+				$('#loadingSpinner').fadeOut(200);
+			}
+		});
+	}
 </script>
 </form>
 </body>

@@ -57,11 +57,6 @@
 	<!-- Css Styles -->
 	<%@ include file="/include/common/css.jsp" %>
 </head>
-<!-- 
-var star = document.querySelector('.fa-star-large');
-var value = star.getAttribute('data-value');
-alert("평점 확인" + value);
- -->
 <body>
 <form id="frmMain" method="POST">
 <input type="hidden" name="seq_sle"			id="seq_sle"/>

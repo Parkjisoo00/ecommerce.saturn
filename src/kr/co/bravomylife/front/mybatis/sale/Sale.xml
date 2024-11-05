@@ -2,6 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.sale.Sale">
 
+	<select id="reviewListCount" parameterType="saleDto" resultType="saleDto">
+	SELECT
+		(SELECT COUNT(*)
+			FROM TB_SLE sle
+				LEFT JOIN
+					TB_REVIEW review
+				ON sle.SEQ_SLE = review.SEQ_SLE
+				LEFT JOIN
+					TB_MBR_MST mbr
+				ON review.SEQ_MBR = mbr.SEQ_MBR
+				LEFT JOIN
+					TB_RATE rate
+				ON rate.SEQ_REVIEW = review.SEQ_REVIEW
+				LEFT JOIN
+					TB_BUY_DTL dtl
+				ON dtl.SEQ_REVIEW = review.SEQ_REVIEW
+					AND dtl.SEQ_SLE = review.SEQ_SLE
+					AND dtl.SEQ_MBR = review.SEQ_MBR
+			WHERE review.SEQ_MBR = #{seq_mbr}
+			AND review.FLG_DELETE = 'N'
+		) AS writeReview_count
+	FROM DUAL
+	</select>
+
 	<update id="schedule_best_y">
 	UPDATE
 		TB_BEST
@@ -636,6 +660,7 @@
 			TB_REVIEW
 		WHERE
 			SEQ_SLE			= #{seq_sle}
+			AND FLG_DELETE		= 'N'
 	</select>
 
 	<select id="reviewListImgs" parameterType="pagingDto" resultType="saleDto">
@@ -744,25 +769,31 @@
 			, sle.COUNT_STOCK
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
-			, rate_summary.total_count
+			, NVL(rate_summary.total_count, 0) total_count
 			, ROUND(CASE 
-				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
+				WHEN NVL(rate_summary.total_count, 0) > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
 				ELSE 0
 			END, 0) star
 			, NVL(best.flg_best, 'N') AS FLG_BEST
-		FROM
-			TB_SLE sle
-		LEFT JOIN (
-			SELECT
-				SEQ_SLE
-				, SUM(RATE_STAR) total_star_rate
-				, SUM(COUNT) total_count
 			FROM
-				TB_RATE
-			GROUP BY SEQ_SLE
-		) rate_summary
-		ON
-			sle.SEQ_SLE = rate_summary.SEQ_SLE
+				TB_SLE sle
+			LEFT JOIN (
+				SELECT
+					rate.SEQ_SLE,
+					SUM(rate.RATE_STAR) total_star_rate,
+					NVL(SUM(rate.COUNT), 0) total_count
+				FROM
+					TB_RATE rate
+				INNER JOIN
+					TB_REVIEW review
+				ON rate.SEQ_REVIEW = review.SEQ_REVIEW
+				WHERE
+					review.FLG_DELETE = 'N'
+				GROUP BY
+					rate.SEQ_SLE
+			) rate_summary
+			ON
+				sle.SEQ_SLE = rate_summary.SEQ_SLE
 		LEFT JOIN (
 			SELECT
 				SEQ_SLE,
@@ -801,17 +832,17 @@
 				sle.SEQ_SLE
 				, sle.SLE_NM
 				, sle.DESCES
-				, NVL(sle.POINT_STACK, 0) point_stack
+				, NVL(sle.POINT_STACK, 0) AS point_stack
 				, sle.IMG
 				, sle.PRICE_SALE
-				, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
-				, (sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) * (sle.POINT_STACK / 100)) point_value
-				, DECODE(sle.PRD_TYPE, 1, '액상', 2, '정', 3, '캡슐', 4, '베지캡슐', 5, '젤리', 6, '분말', 7, '츄어블', '미정') prd_type
+				, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) AS discount_sale
+				, (sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) * (sle.POINT_STACK / 100)) AS point_value
+				, DECODE(sle.PRD_TYPE, 1, '액상', 2, '정', 3, '캡슐', 4, '베지캡슐', 5, '젤리', 6, '분말', 7, '츄어블', '미정') AS prd_type
 				, sle.CORP_NM
 				, sle.cd_ctg_m
 				, sle.cd_ctg_b
 				, sle.DISCOUNT
-				, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
+				, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') AS dt_reg
 				, sle.COUNT_STOCK
 			FROM
 				TB_SLE sle
@@ -821,13 +852,19 @@
 		),
 		rate_summary AS (
 			SELECT
-				SEQ_SLE
-				, SUM(RATE_STAR) total_star_rate
-				, SUM(COUNT) total_count
+				rate.SEQ_SLE
+				, NVL(SUM(rate.RATE_STAR), 0) AS total_star_rate
+				, NVL(SUM(rate.COUNT), 0) AS total_count
 			FROM
-				TB_RATE
+				TB_RATE rate
+			INNER JOIN
+				TB_REVIEW review
+			ON
+				rate.SEQ_REVIEW = review.SEQ_REVIEW
+			WHERE
+				review.FLG_DELETE = 'N'
 			GROUP BY
-				SEQ_SLE
+				rate.SEQ_SLE
 		),
 		buy_dtl AS (
 			SELECT
@@ -949,9 +986,9 @@
 			, sle.COUNT_STOCK
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
-			, rate_summary.total_count
+			, NVL(rate_summary.total_count, 0) total_count
 			, ROUND(CASE 
-				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
+				WHEN NVL(rate_summary.total_count, 0) > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
 				ELSE 0
 			END, 0) star
 			, NVL(best.flg_best, 'N') AS FLG_BEST
@@ -959,12 +996,18 @@
 			TB_SLE sle
 		LEFT JOIN (
 			SELECT
-				SEQ_SLE
-				, SUM(RATE_STAR) total_star_rate
-				, SUM(COUNT) total_count
+				rate.SEQ_SLE
+				, SUM(rate.RATE_STAR) total_star_rate
+				, NVL(SUM(rate.COUNT), 0) total_count
 			FROM
-				TB_RATE
-			GROUP BY SEQ_SLE
+				TB_RATE rate
+			INNER JOIN
+				TB_REVIEW review
+			ON
+				rate.SEQ_REVIEW = review.SEQ_REVIEW
+			WHERE
+				review.FLG_DELETE = 'N'
+			GROUP BY rate.SEQ_SLE
 		) rate_summary
 		ON
 			sle.SEQ_SLE = rate_summary.SEQ_SLE
@@ -1071,9 +1114,9 @@
 			, sle.COUNT_STOCK
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
-			, rate_summary.total_count
+			, NVL(rate_summary.total_count, 0) total_count
 			, ROUND(CASE 
-				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
+				WHEN NVL(rate_summary.total_count, 0) > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
 				ELSE 0
 			END, 0) star
 			, NVL(best.flg_best, 'N') AS FLG_BEST
@@ -1081,12 +1124,18 @@
 			TB_SLE sle
 		LEFT JOIN (
 			SELECT
-				SEQ_SLE
-				, SUM(RATE_STAR) total_star_rate
-				, SUM(COUNT) total_count
+				rate.SEQ_SLE
+				, SUM(rate.RATE_STAR) total_star_rate
+				, NVL(SUM(rate.COUNT), 0) total_count
 			FROM
-				TB_RATE
-			GROUP BY SEQ_SLE
+				TB_RATE rate
+			INNER JOIN
+				TB_REVIEW review
+			ON
+				rate.SEQ_REVIEW = review.SEQ_REVIEW
+			WHERE
+				review.FLG_DELETE = 'N'
+			GROUP BY rate.SEQ_SLE
 		) rate_summary
 		ON
 			sle.SEQ_SLE = rate_summary.SEQ_SLE
@@ -1184,9 +1233,9 @@
 			, sle.COUNT_STOCK
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
-			, rate_summary.total_count
+			, NVL(rate_summary.total_count, 0) total_count
 			, ROUND(CASE 
-				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
+				WHEN NVL(rate_summary.total_count, 0) > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
 				ELSE 0
 			END, 0) star
 			, NVL(best.flg_best, 'N') AS FLG_BEST
@@ -1194,12 +1243,18 @@
 			TB_SLE sle
 		LEFT JOIN (
 			SELECT
-				SEQ_SLE
-				, SUM(RATE_STAR) total_star_rate
-				, SUM(COUNT) total_count
+				rate.SEQ_SLE
+				, SUM(rate.RATE_STAR) total_star_rate
+				, NVL(SUM(rate.COUNT), 0) total_count
 			FROM
-				TB_RATE
-			GROUP BY SEQ_SLE
+				TB_RATE rate
+			INNER JOIN
+				TB_REVIEW review
+			ON
+				rate.SEQ_REVIEW = review.SEQ_REVIEW
+			WHERE
+				review.FLG_DELETE = 'N'
+			GROUP BY rate.SEQ_SLE
 		) rate_summary
 		ON
 			sle.SEQ_SLE = rate_summary.SEQ_SLE
@@ -1297,9 +1352,9 @@
 			, sle.COUNT_STOCK
 			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
-			, rate_summary.total_count
+			, NVL(rate_summary.total_count, 0) total_count
 			, ROUND(CASE 
-				WHEN rate_summary.total_count > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
+				WHEN NVL(rate_summary.total_count, 0) > 0 THEN rate_summary.total_star_rate / rate_summary.total_count
 				ELSE 0
 			END, 0) star
 			, NVL(best.flg_best, 'N') AS FLG_BEST
@@ -1307,12 +1362,18 @@
 			TB_SLE sle
 		LEFT JOIN (
 			SELECT
-				SEQ_SLE
-				, SUM(RATE_STAR) total_star_rate
-				, SUM(COUNT) total_count
+				rate.SEQ_SLE
+				, SUM(rate.RATE_STAR) total_star_rate
+				, NVL(SUM(rate.COUNT), 0) total_count
 			FROM
-				TB_RATE
-			GROUP BY SEQ_SLE
+				TB_RATE rate
+			INNER JOIN
+				TB_REVIEW review
+			ON
+				rate.SEQ_REVIEW = review.SEQ_REVIEW
+			WHERE
+				review.FLG_DELETE = 'N'
+			GROUP BY rate.SEQ_SLE
 		) rate_summary
 		ON
 			sle.SEQ_SLE = rate_summary.SEQ_SLE

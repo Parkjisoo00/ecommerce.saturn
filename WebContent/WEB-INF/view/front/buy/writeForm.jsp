@@ -82,8 +82,6 @@
 			data: JSON.stringify(myData),
 			success: function(res) {
 				
-				// alert("받아온 값" + res.flg_like);
-				
 				if (res.flg_like === 'Y') {
 					$('.like-button').attr({
 						'style': 'padding: 5px !important; border-radius: 50% !important; background-color: #ca1515 !important; transition: background-color 1s ease !important;',
@@ -212,11 +210,12 @@
 		
 		var frmMain = document.getElementById("frmMain");
 		
-		frmMain.seq_sle.setAttribute("value", value);
-		frmMain.cd_ctg_m.setAttribute("value", value2);
-		frmMain.cd_ctg_b.setAttribute("value", value3);
+		frmMain.goSeq_sle.setAttribute("value", value);
+		frmMain.goCd_ctg_m.setAttribute("value", value2);
+		frmMain.goCd_ctg_b.setAttribute("value", value3);
+		
 		frmMain.action="/front/buy/writeForm.web";
-		frmMain.target = "";
+		
 		frmMain.submit();
 	}
 	
@@ -313,6 +312,9 @@
 <input type="hidden" name="prd_type"					id="prd_type"		value="${saleDto.prd_type}"/>
 <input type="hidden" name="filter"						id="filter">
 <input type="hidden" name="type"						id="type"/>
+<input type="hidden" name="seq_sle"						id="goSeq_sle"		value="0"/>
+<input type="hidden" name="cd_ctg_m"					id="goCd_ctg_m"		/>
+<input type="hidden" name="cd_ctg_b"					id="goCd_ctg_b"		/>
 <input type="hidden" name="currentPage"					id="currentPage"	value="${paging.currentPage}"/>
 <input type="hidden" name="buyList[0].img"									value="${saleDto.img}"/>
 <input type="hidden" name="buyList[0].seq_sle"								value="${saleDto.seq_sle}"/>

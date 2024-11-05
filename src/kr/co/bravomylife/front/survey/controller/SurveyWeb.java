@@ -177,11 +177,9 @@ public class SurveyWeb extends Common {
 				
 				surveySrvc.insert(surveyDto, surveyListDto);
 				
-				
 				String cd_ctg_mG = surveyListDto.getSurveyList().get(0).getCd_ctg_m();
 				String cd_ctg_mF = surveyListDto.getSurveyList().get(1).getCd_ctg_m();
 				String cd_ctg_mI = surveyListDto.getSurveyList().get(2).getCd_ctg_m();
-				
 				
 				mav.addObject("cd_ctg_mG"	, cd_ctg_mG);
 				mav.addObject("cd_ctg_mF"	, cd_ctg_mF);

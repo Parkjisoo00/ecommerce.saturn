@@ -61,11 +61,6 @@
 	<!-- Css Styles -->
 	<%@ include file="/include/common/css.jsp" %>
 </head>
-<!-- 
-var star = document.querySelector('.fa-star-large');
-var value = star.getAttribute('data-value');
-alert("평점 확인" + value);
- -->
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">

@@ -13,9 +13,9 @@
 		
 		var frmMain = document.getElementById("frmMain");
 		
-		frmMain.seq_sle.setAttribute("value", value);
-		frmMain.cd_ctg_m.setAttribute("value", value2);
-		frmMain.cd_ctg_b.setAttribute("value", value3);
+		frmMain.goSeq_sle.setAttribute("value", value);
+		frmMain.goCd_ctg_m.setAttribute("value", value2);
+		frmMain.goCd_ctg_b.setAttribute("value", value3);
 		
 		frmMain.action="/front/buy/writeForm.web";
 		
@@ -32,25 +32,21 @@
 		frmMain.submit();
 	}
 	
-	function setBasket(value, value2, value3,value4, value5, value6,value7, value8, value9, value10) {
+	function setBasket(value, value2, value3,value4, value5, value6, value7, value8, value9, value10) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
-		frmMain.seq_sle.setAttribute("value", value);
 		frmMain.sle_nm.setAttribute("value", value2);
 		frmMain.discount_sale.setAttribute("value", value3);
-		frmMain.count.setAttribute("value", value4);
+		frmMain.basketCount.setAttribute("value", value4);
 		frmMain.img.setAttribute("value", value5);
 		frmMain.point_stack.setAttribute("value", value6);
-		frmMain.cd_ctg_m.setAttribute("value", value7);
-		frmMain.cd_ctg_b.setAttribute("value", value8);
+		frmMain.basketCd_ctg_m.setAttribute("value", value7);
+		frmMain.basketCd_ctg_b.setAttribute("value", value8);
 		frmMain.price_sale.setAttribute("value", value9);
 		frmMain.discount.setAttribute("value", value10);
+		frmMain.basketSeq_sle.setAttribute("value", value);
 		
-		var item = value + "|" + value2 + "|" + value3 + "|" +1+ "|" + value5 + "|" + value6 + "|" + value7 + "|" + value8 + "|" +  value9 + "|" + value10;
-		document.getElementById("item").value = item;
-		
-		var frmMain = document.getElementById("frmMain");
 		frmMain.action = "/front/basket/setBasket.web";
 		frmMain.target = "frmBlank";
 		frmMain.submit();
@@ -92,6 +88,16 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		document.getElementById("cd_bbs_type").value = value;
+		
+		frmMain.action = "/front/center/board/myPageNotice/list.web";
+		frmMain.submit();
+	}
+	
+	function goMyList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("cd_bbs_type").value = value;
 
 		frmMain.action = "/front/center/board/myPageNotice/list.web";
 		frmMain.submit();
@@ -106,22 +112,24 @@
 
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" name="item"				id="item"/>
-<input type="hidden" name="point_stack"			id="point_stack"		value="0"/>
-<input type="hidden" name="discount_sale"		id="discount_sale"		value="0"/>
-<input type="hidden" name="img"					id="img"				/>
-<input type="hidden" name="seq_sle"				id="seq_sle"			value="0"/>
-<input type="hidden" name="sle_nm"				id="sle_nm"				/>
-<input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"			/>
-<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"			/>
-<input type="hidden" name="count"				id="count"				value="0"/>
-<input type="hidden" name="price_sale"			id="price_sale"			value="0"/>
-<input type="hidden" name="discount"			id="discount"			value="0"/>
-<input type="hidden" name="seq_buy_dtl"			id="seq_buy_dtl"		value="0"/>
-<input type="hidden" name="seq_buy_mst"			id="seq_buy_mst"		/>
-<input type="hidden" name="seq_mbr_addr"		id="seq_mbr_addr"		value="0"/>
-<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		/>
-<input type="hidden" name="currentPage"			id="currentPage"	value="${paging.currentPage}"/>
+<input type="hidden" name="basketList[0].point_stack"	id="point_stack"	value="0"/>
+<input type="hidden" name="basketList[0].discount_sale"	id="discount_sale"	value="0"/>
+<input type="hidden" name="basketList[0].img"			id="img"			/>
+<input type="hidden" name="basketList[0].seq_sle"		id="basketSeq_sle"		value="0"/>
+<input type="hidden" name="basketList[0].sle_nm"		id="sle_nm"			/>
+<input type="hidden" name="basketList[0].cd_ctg_m"		id="basketCd_ctg_m"		/>
+<input type="hidden" name="basketList[0].cd_ctg_b"		id="basketCd_ctg_b"		/>
+<input type="hidden" name="basketList[0].price_sale"	id="price_sale"		value="0"/>
+<input type="hidden" name="basketList[0].discount"		id="discount"		value="0"/>
+<input type="hidden" name="basketList[0].count"			id="basketCount"	value="0"/>
+<input type="hidden" name="seq_sle"						id="goSeq_sle"		value="0"/>
+<input type="hidden" name="cd_ctg_m"					id="goCd_ctg_m"		/>
+<input type="hidden" name="cd_ctg_b"					id="goCd_ctg_b"		/>
+<input type="hidden" name="seq_buy_dtl"					id="seq_buy_dtl"		value="0"/>
+<input type="hidden" name="seq_buy_mst"					id="seq_buy_mst"		/>
+<input type="hidden" name="seq_mbr_addr"				id="seq_mbr_addr"		value="0"/>
+<input type="hidden" name="cd_bbs_type"					id="cd_bbs_type"		/>
+<input type="hidden" name="currentPage"					id="currentPage"	value="${paging.currentPage}"/>
 
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -154,12 +162,13 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="buyList" items="${buyList}">
-									<div class="history-div">
+									<div class="history-div" data-seq-buy-mst="${buyList.seq_buy_mst}">
 										<div class="history-head">
 											<div class="history-head-title">${buyList.dt_reg} 주문</div>
 											<div class="history-head-subtitle">
 												<a href="javascript:delivery('${buyList.seq_buy_mst}', '${buyList.seq_mbr_addr}');" class="cart-btn" style="font-weight: normal; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: rgb(52, 106, 255) !important; border: 1px solid rgb(52, 106, 255);">배송조회 확인</a>
 												<a href="javascript:cancelForm('${buyList.seq_buy_mst}');" class="cart-btn" style="font-weight: normal; margin-right: 10px !important; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: #2c2c2c; border: 1px solid rgb(221, 221, 221);">주문취소 확인</a>
+												<a href="javascript:historyDelete('${buyList.seq_buy_mst}');" class="cart-btn" style="font-weight: normal; margin-right: 10px !important; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: #2c2c2c; border: 1px solid rgb(221, 221, 221);">주문정보 삭제</a>
 											</div>
 										</div>
 										<div class="history-table-div">
@@ -222,6 +231,46 @@
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
 <script>
+function historyDelete(value) {
+	
+	var targetDiv = document.querySelector('.history-div[data-seq-buy-mst="' + value + '"]');
+	var myData = { seq_buy_mst: value };
+	
+	$.ajax({
+		type: 'POST',
+		url: '/front/buy/historyDelete.json',
+		data: JSON.stringify(myData),
+		contentType: 'application/json; charset=UTF-8',
+		beforeSend: function () {
+			$('#loadingSpinner').fadeIn(200);
+		},
+		success: function (response) {
+			
+			if (response.status === "success") {
+				
+				targetDiv.remove();
+				
+				if (document.querySelectorAll('.history-div').length === 0) {
+					
+					var shopCartTable = document.querySelector('.shop__cart__table');
+					if (shopCartTable) {
+						
+						shopCartTable.innerHTML = 
+							'<div class="history-div">' +
+								'<p style="margin-bottom: 100px !important; margin-top: 100px !important; text-align: center;">' +
+									'등록된 취소/교환/환불 정보가 없습니다.' +
+								'</p>' +
+							'</div>';
+					}
+				}
+			}
+		},
+		complete: function () {
+			
+			$('#loadingSpinner').fadeOut(200);
+		}
+	});
+}
 </script>
 </form>
 <iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>

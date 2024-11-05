@@ -114,8 +114,14 @@ public class BuyWeb extends Common {
 			buyDto.setSeq_mbr(seqMbr);
 			buyDto.setUpdater(seqMbr);
 			
-			buySrvc.historyDelete(buyDto);
-			
+			if (buySrvc.historyDelete(buyDto)) {
+				
+				response.put("status", "success");
+			}
+			else {
+				
+				response.put("status", "fail");
+			}
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".historyDelete()] " + e.getMessage(), e);
@@ -289,40 +295,37 @@ public class BuyWeb extends Common {
 	 * <p>DESCRIPTION: 리뷰 관리</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
-	 */
-	@RequestMapping(value = "/front/buy/reviewDelete.web")
-	public ModelAndView reviewDelete(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
+	 */	
+	@RequestMapping(value = "/front/buy/reviewDelete.json",  method = RequestMethod.POST, consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
+	public @ResponseBody Map<String, Object> reviewDelete(HttpServletRequest request, @RequestBody SaleDto saleDto) {
 		
-		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		Map<String, Object> response = new HashMap<>();
 		
-		boolean result = false;
+		int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
 		
 		try {
-			
-			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
 			
 			saleDto.setSeq_mbr(seqMbr);
 			saleDto.setUpdater(seqMbr);
 			
-			result = saleSrvc.reviewDelete(saleDto);
-			
-			if (result) {
+			if (saleSrvc.reviewDelete(saleDto)) {
 				
-				request.setAttribute("script", "alert('상품 후기가 삭제되었습니다.');");
-				request.setAttribute("redirect", "/front/buy/reviewListPage.web");
-			} else {
-				
-				request.setAttribute("script", "alert('시스템 관리자에게 문의하세요.');");
-				request.setAttribute("redirect", "/front/buy/reviewListPage.web");
+				response.put("status", "success");
 			}
-		mav.setViewName("forward:/servlet/result.web");
+			else {
+				
+				response.put("status", "fail");
+			}
+			SaleDto _saleDto = saleSrvc.reviewListCount(saleDto);
+			
+			response.put("reviewCount", _saleDto.getWriteReview_count()); 
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".reviewDelete()] " + e.getMessage(), e);
 		}
 		finally {}
 		
-		return mav;
+		return response;
 	}
 	
 	/**

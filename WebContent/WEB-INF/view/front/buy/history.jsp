@@ -76,7 +76,7 @@
 	function goList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
-	
+		
 		document.getElementById("cd_bbs_type").value = value;
 		
 		frmMain.action = "/front/center/board/myPageNotice/list.web";
@@ -152,12 +152,13 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="buyList" items="${buyList}">
-									<div class="history-div">
+									<div class="history-div" data-seq-buy-mst="${buyList.seq_buy_mst}">
 										<div class="history-head">
 											<div class="history-head-title">${buyList.dt_reg} 주문</div>
 											<div class="history-head-subtitle">
 												<a href="javascript:delivery('${buyList.seq_buy_mst}', '${buyList.seq_mbr_addr}');" class="cart-btn" style="font-weight: normal; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: rgb(52, 106, 255) !important; border: 1px solid rgb(52, 106, 255);">배송조회 확인</a>
-												<a href="javascript:cancelForm('${buyList.seq_buy_mst}');" class="cart-btn" style="font-weight: normal; margin-right: 10px !important; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: #2c2c2c; border: 1px solid rgb(221, 221, 221);">주문취소 신청</a>
+												<a href="javascript:cancelForm('${buyList.seq_buy_mst}');" class="cart-btn" style="font-weight: normal; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: #2c2c2c; border: 1px solid rgb(221, 221, 221);">주문취소 신청</a>
+												<a href="javascript:historyDelete('${buyList.seq_buy_mst}');" class="cart-btn" style="font-weight: normal; margin-right: 10px !important; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: #2c2c2c; border: 1px solid rgb(221, 221, 221);">주문정보 삭제</a>
 											</div>
 										</div>
 										<div class="history-table-div">
@@ -220,6 +221,46 @@
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
 <script>
+function historyDelete(value) {
+	
+	var targetDiv = document.querySelector('.history-div[data-seq-buy-mst="' + value + '"]');
+	var myData = { seq_buy_mst: value };
+	
+	$.ajax({
+		type: 'POST',
+		url: '/front/buy/historyDelete.json',
+		data: JSON.stringify(myData),
+		contentType: 'application/json; charset=UTF-8',
+		beforeSend: function () {
+			$('#loadingSpinner').fadeIn(200);
+		},
+		success: function (response) {
+			
+			if (response.status === "success") {
+				
+				targetDiv.remove();
+				
+				if (document.querySelectorAll('.history-div').length === 0) {
+					
+					var shopCartTable = document.querySelector('.shop__cart__table');
+					if (shopCartTable) {
+						
+						shopCartTable.innerHTML = 
+							'<div class="history-div">' +
+								'<p style="margin-bottom: 100px !important; margin-top: 100px !important; text-align: center;">' +
+									'등록된 주문 정보가 없습니다.' +
+								'</p>' +
+							'</div>';
+					}
+				}
+			}
+		},
+		complete: function () {
+			
+			$('#loadingSpinner').fadeOut(200);
+		}
+	});
+}
 </script>
 </form>
 <iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>

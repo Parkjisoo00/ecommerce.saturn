@@ -15,8 +15,6 @@
 		var rateStarHiddenInput = document.querySelector("input[name='rate_star']");
 		var rateStarValue = rateStarHiddenInput.value;
 		
-		alert("평점 확인: " + rateStarValue);
-		
 		if (!rateStarValue || rateStarValue === "") {
 			alert("평점을 입력하세요.");
 			return;
@@ -37,11 +35,6 @@
 	<!-- Css Styles -->
 	<%@ include file="/include/common/css.jsp" %>
 </head>
-<!-- 
-var star = document.querySelector('.fa-star-large');
-var value = star.getAttribute('data-value');
-alert("평점 확인" + value);
- -->
 <body>
 <form id="frmMain" method="POST" enctype="multipart/form-data">
 	<!-- Page Preloder -->

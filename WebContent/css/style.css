@@ -940,6 +940,12 @@ table.headTop_pd th, table.headTop_pd td {
 	font-size: 14px !important;
 }
 
+.review-formSub {
+	margin: 0 auto !important;
+	border-top: 1px solid #ddd !important;
+	border-bottom: 1px solid #ccc !important;
+}
+
 .review-form {
 	margin: 0 auto !important;
 	border-top: 1px solid #ddd !important;

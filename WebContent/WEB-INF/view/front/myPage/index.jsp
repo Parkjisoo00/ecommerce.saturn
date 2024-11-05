@@ -81,6 +81,7 @@
 										<span class="styled-span" style="width: 34%; display: flex; justify-content: center; align-items: center;font-weight:700;color:#341d08">포인트:&nbsp;
 										<span style="font-size: 25px; font-weight: 700; color: #341d08;">${memberDto.total_point}</span></span>
 									</div>
+					<!-- 
 					<h6 class="lowgnb-title" style="padding-bottom: 5px; text-align: left; font-size: 30px;">찜한 상품</h6>
 					<div class="mypage-header">
 						<h6 class="cart-title" style="font-size:15px">*이미지를 클릭하면 상품으로 이동합니다.</h6>

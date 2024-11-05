@@ -37,9 +37,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h6 class="lowgnb-title" style="padding-bottom: 40px; text-align: left; font-weight: bold; font-size: 36px;">안심 조회 서비스</h6>
+					<h6 class="lowgnb-title" style="padding-bottom: 40px; text-align: left; font-weight: bold; font-size: 36px;">${rowDataDto.prdlst_nm}</h6>
 						<h6 class="cart-title" style="padding-left:4px !important; margin-bottom: 10px !important; font-size: 18px !important; color: rgb(7, 42, 131) !important; font-weight: bold !important;"><span></span>상세정보</h6>
-						<div class="shop__cart__table" style="border-radius: 6px !important; border: 2px solid #e0e0e0 !important;">
+						<div class="shop__cart__table" style="border-radius: 6px !important; border: 1px solid #e0e0e0 !important;">
 							<table class="cart-table">
 								<tbody>
 									<tr>
