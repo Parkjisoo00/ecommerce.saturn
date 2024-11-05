@@ -70,7 +70,7 @@
 							<h1 style="text-align: center; font-size: 30px; font-weight: 700; margin-top: -15px; font-family: 'Noto Sans KR', sans-serif !important;">맞춤 건강 설문</h1>
 						</div>
 						<div class="survey-div" style="text-align: right;">
-							<a href="#" onclick="closeSurvey(); return false;" style="display: inline-block; line-height: 32px;"><span style="position: relative;">X</span></a>
+							<span onclick="closeSurvey(); return false;" style="position: relative; cursor: pointer;">X</span>
 						</div>
 					</div>
 					<div class="survey-progress">
