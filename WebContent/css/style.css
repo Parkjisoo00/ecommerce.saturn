@@ -296,7 +296,7 @@ table.headTop_01 th {
 
 .ctg-link.selected {
 	color: white;
-	background-color: #346aff;
+	background-color: #735048;
 	font-weight: bold;
 }
 
@@ -327,7 +327,7 @@ table.headTop_01 th {
 
 .lowgnb-fontC {
 	font-size: 14px !important;
-	color: #346aff !important;
+	color: #9b805f !important;
 	font-weight: bold !important;
 }
 
@@ -376,7 +376,7 @@ table.headTop_01 th {
 
 .rate {
 	margin-left: 10px !important;
-	color: #346aff !important;
+	color: #f77202 !important;
 	font-size: 14px !important;
 	font-weight: bold !important;
 }
@@ -2303,7 +2303,7 @@ ol {
 }
 
 .product__item__pic .label.new {
-	background: #346aff;
+	background: #f77202;
 }
 
 .product__item__pic .label.stockout {
@@ -2993,7 +2993,7 @@ ol {
 	display: inline-block;
 	font-size: 14px;
 	color: #ffffff;
-	background: #346aff;
+	background: #f77202;
 	font-weight: 600;
 	text-transform: uppercase;
 	padding: 15px 30px 15px;
@@ -3261,7 +3261,7 @@ ol {
 }
 
 .nav-item .nav-link.active {
-	color: #346aff;
+	color: #f77202;
 }
 
 .tab-content .tab-pane h6 {
@@ -3509,7 +3509,7 @@ ol {
 	font-size: 16px;
 	font-weight: 600;
 	color: #ffffff;
-	background: #346aff;
+	background: #f77202;
 	display: inline-block;
 	border-radius: 10px;
 	text-align: center;

@@ -253,8 +253,8 @@
 						<div class="categories__text" style="text-align: left; position: absolute; bottom: -20;">
 						<div class="categories__text special-background" >
 							<h1 style="font-weight: bold; color: black; font-size: 30px;">나만의 맞춤 건강 추천</h1>
-							<p style="font-weight: bold; font-size: 18px; ">건강 설문을 진행하고 나에게 맞는 영양제를 추천받아 보세요!</p>
-							<a href="#" style="font-size: 18px;">바로가기</a>
+							<p style="font-weight: bold; font-size: 18px; ">건강 설문을 진행하고 <br> 나에게 맞는 영양제를 추천받아 보세요!</p>
+							<a href="/front/center/board/surveyForm.web" style="font-size: 18px;">바로가기</a>
 						</div>
 					</div>
 				</div>
@@ -325,11 +325,11 @@
 					<div class="col-lg-12" style="padding: 0;">
 						<div class="product__details__tab" style="width: 100% !important; padding-top: 0px !important;">
 							<ul class="nav nav-tabs" role="tablist" style="margin-bottom: 30px !important; border: 1px solid #d9d9d9 !important; display: flex !important; justify-content: space-between !important;">
-								<li class="nav-item" style="background-color: rgb(114, 186, 245);; margin-bottom: 0px !important; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important; margin-right: 0px !important; border-right: 1px solid #d9d9d9 !important;">
-									<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" style="font-weight: normal !important; background-color: rgb(114, 186, 245);; color: white; display: inline-block !important;" >추천 인기상품</a>
+								<li class="nav-item" style="background-color: #735048; margin-bottom: 0px !important; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important; margin-right: 0px !important; border-right: 1px solid #d9d9d9 !important;">
+									<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" style="font-weight: bord !important; background-color: #735048; color: white; display: inline-block !important;" >추천 인기상품</a>
 								</li>
 								<li class="nav-item" style="margin-bottom: 0px !important; background-color: #f9f9f9; padding-top: 10px !important; padding-bottom: 10px !important; flex: 1 !important; text-align: center !important; align-items: center !important; justify-content: center !important;">
-									<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" style="font-weight: normal !important; color: black; display: inline-block !important;">추천 신상품</a>
+									<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" style="font-weight: bord !important; color: black; display: inline-block !important;">추천 신상품</a>
 								</li>
 							</ul>
 							<div class="tab-content">
@@ -552,9 +552,9 @@
 					
 					if (target.classList.contains("active")) {
 						
-						target.style.backgroundColor = "#72baf5";
+						target.style.backgroundColor = "#735048";
 						target.style.color = "white";
-						target.parentElement.style.backgroundColor = "#72baf5";
+						target.parentElement.style.backgroundColor = "#735048";
 					} else {
 						
 						target.style.backgroundColor = "#f9f9f9";
@@ -581,7 +581,7 @@
 					link.style.color = 'black';
 				}
 			});
-			element.style.backgroundColor = '#72baf5';
+			element.style.backgroundColor = '#735048';
 			var link = element.querySelector('.nav-link');
 			if (link) {
 				

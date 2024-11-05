@@ -31,7 +31,7 @@
 		}
 		
 		button.accordion {
-		background-color: #f3ebe1; /* 기본 버튼 배경색 */
+		background-color: #e7d5bf; /* 기본 버튼 배경색 */
 		color: #000; /* 검정 글자 */
 		cursor: pointer;
 		padding: 10px;
@@ -46,11 +46,11 @@
 		}
 		
 		button.accordion:hover {
-		background-color: #c7b199; /* 마우스 호버 시 색상 */
+		background-color: #f3ebe1; /* 마우스 호버 시 색상 */
 		}
 		
 		button.accordion.active {
-		background-color: #e7d5bf; /* 클릭 시 연한 베이지색 */
+		background-color: #c7b199; /* 클릭 시 연한 베이지색 */
 		}
 		
 		.accordion2 {
@@ -229,20 +229,20 @@
 							<h6 style="text-align: center; letter-spacing: 1.5px; border: none; padding-bottom: 60px; font-size: 30px; font-weight: bold;">공지사항</h6>
 							<h6 class="coupon__link" style="text-align: center;; border: none">
 								<c:if test="${paging.cd_bbs_type == 1}">
-									<a href="javascript:goList(1);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
-									<a href="javascript:goList(2);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
-									<a href="javascript:goList(3);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">1:1 문의</a>
+									<a href="javascript:goList(1);" style="font-size: 15px !important; font-weight: bold; display: inline-block; padding: 10px 15px; color: white; background-color: #735048; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
+									<a href="javascript:goList(2);" style="font-size: 15px !important; font-weight: bold; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
+									<a href="javascript:goList(3);" style="font-size: 15px !important; font-weight: bold; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">1:1 문의</a>
 								</c:if>
 			
 								<c:if test="${paging.cd_bbs_type == 2}">
-									<a href="javascript:goList(1);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
-									<a href="javascript:goList(2);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
-									<a href="javascript:goList(3);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">1:1 문의</a>
+									<a href="javascript:goList(1);" style="font-size: 15px !important; font-weight: bold; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
+									<a href="javascript:goList(2);" style="font-size: 15px !important; font-weight: bold; display: inline-block; padding: 10px 15px; color: white; background-color: #735048; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
+									<a href="javascript:goList(3);" style="font-size: 15px !important; font-weight: bold; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">1:1 문의</a>
 								</c:if>
 								<c:if test="${paging.cd_bbs_type == 3}">
-									<a href="javascript:goList(1);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
-									<a href="javascript:goList(2);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
-									<a href="javascript:goList(3);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">1:1 문의</a>
+									<a href="javascript:goList(1);" style="font-size: 15px !important; font-weight: bold; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
+									<a href="javascript:goList(2);" style="font-size: 15px !important; font-weight: bold; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
+									<a href="javascript:goList(3);" style="font-size: 15px !important; font-weight: bold; display: inline-block; padding: 10px 15px; color: white; background-color: #735048; border: 1px solid #cccccc; border-radius: 10px;">1:1 문의</a>
 								</c:if>
 							</h6>
 						</div>
