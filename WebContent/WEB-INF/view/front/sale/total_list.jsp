@@ -9,11 +9,51 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
-	function goTypeT(value, value2, value3, value4, value5, selectOrValue) {
+	function goTypeTx(value) {
 		
-		var first_cd_ctg		= document.getElementById("first_cd_ctg").value;
-		var second_cd_ctg		= document.getElementById("second_cd_ctg").value;
-		var _searchWord			= document.getElementById("_searchWord").value;
+		var first_cd_ctgDesktop		= document.getElementById("first_cd_ctg").value;
+		var second_cd_ctgDesktop	= document.getElementById("second_cd_ctg").value;
+		
+		var first_cd_ctgAndroid		= document.getElementById("first_cd_ctg_android").value;
+		var second_cd_ctgAndroid	= document.getElementById("second_cd_ctg_android").value;
+		
+		var first_cd_ctg;
+		var second_cd_ctg
+		
+		if (value == 'pc') {
+			
+			first_cd_ctg	= 	first_cd_ctgDesktop
+			second_cd_ctg	= 	second_cd_ctgDesktop
+		}
+		else if (value == 'mobile') {	
+			first_cd_ctg	= 	first_cd_ctgAndroid
+			second_cd_ctg	= 	second_cd_ctgAndroid
+		}	
+		
+		var searchWordDesktop = document.getElementById("_searchWord_desktop").value;
+		var searchWordAndroid = document.getElementById("_searchWord_android").value;
+		
+		var _searchWord;
+		
+		if (value == 'pc') {
+			_searchWord = searchWordDesktop;
+		}
+		else if (value == 'mobile') {
+			_searchWord = searchWordAndroid;
+		}
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+		frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+		frmMain.searchWord.setAttribute("value", _searchWord);
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeT(value, value2, value3, value4, value5, selectOrValue) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
@@ -22,10 +62,8 @@
 		frmMain.filter.setAttribute("value", value2);
 		frmMain.corp_nm.setAttribute("value", value3);
 		frmMain.prd_type.setAttribute("value", value4);
-		
-		frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
-		frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
-		frmMain.searchWord.setAttribute("value", _searchWord);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		frmMain.cd_ctg_b.setAttribute("value", '');
 		
 		if (selectOrValue instanceof HTMLElement && selectOrValue.tagName === 'SELECT') {
 			frmMain.elements["linePerPage"].value = selectOrValue.value;

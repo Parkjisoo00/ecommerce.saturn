@@ -16,7 +16,7 @@
 			<a href="/front/login/loginForm.web">로그인</a>
 			<a href="/front/member/registerForm.web">회원가입</a>
 		</div>
-
+		
 		<select class="search-container" id="first_cd_ctg_android" style=" width: 100px !important; height: 45px !important; font-size: 18px !important; margin-right:5px">
 			<option value="9"<c:if test="${paging.cd_ctg_b == 9}">selected</c:if>>상품명</option>
 			<option value="1"<c:if test="${paging.cd_ctg_b == 1}">selected</c:if>>기능별</option>
@@ -33,7 +33,7 @@
 			검색
 		</a>
 		</div>
-
+		
 	</div>
 <header class="header" style="background-color: #341d08; height: 240px; position: relative;">
 <div class="container-fluid">
@@ -104,7 +104,7 @@
 	<nav class="header__menu" style="margin-bottom: 20px !important;">
 		<ul style="display: inline-block; width: 90%; list-style: none;">
 			<li class="active" style="display: inline-block; margin: 0 57px;">
-				<a href="/front/sale/total_list.web">
+				<a href="javascript:goTypeT('', '', '', '', '', '');">
 					<img src="/img/icon/ctg.png" alt="전체 상품" style="width: 24px; height: 24px;">
 				</a>
 				<ul class="dropdown" style="top: 100%; left: 0; list-style: none;">
@@ -336,5 +336,4 @@ secondSelectAndroid.innerHTML = "";
 });
 
 document.getElementById("first_cd_ctg_android").dispatchEvent(new Event("change"));
-
 </script>

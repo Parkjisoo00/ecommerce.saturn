@@ -48,24 +48,15 @@
 	
 	function goTypeT(value) {
 			
-			var first_cd_ctg		= document.getElementById("first_cd_ctg").value;
-			var second_cd_ctg		= document.getElementById("second_cd_ctg").value;
-			var _searchWord			= document.getElementById("_searchWord").value;
-			
 			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
-			frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
-			frmMain.searchWord.setAttribute("value", _searchWord);
 			
 			frmMain.type.setAttribute("value", value);
 			frmMain.action = "/front/sale/total_list.web";
 			frmMain.submit();
 		}
 	
-	
-		function goTypeTx(value) {
-
+	function goTypeTx(value) {
+			
 		var first_cd_ctgDesktop		= document.getElementById("first_cd_ctg").value;
 		var second_cd_ctgDesktop	= document.getElementById("second_cd_ctg").value;
 		
@@ -89,7 +80,7 @@
 		var searchWordAndroid = document.getElementById("_searchWord_android").value;
 		
 		var _searchWord;
-
+		
 		if (value == 'pc') {
 			_searchWord = searchWordDesktop;
 		}
@@ -107,7 +98,6 @@
 		frmMain.action = "/front/sale/total_list.web";
 		frmMain.submit();
 	}
-
 	
 	function goTypeF(value) {
 		
