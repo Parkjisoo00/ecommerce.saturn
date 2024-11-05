@@ -47,7 +47,7 @@ public class SurveySrvc {
 	@Inject
 	SurveyDao surveyDao;
 	
-	public SurveyListDto selectList(SurveyListDto surveyListDto) {
+	public SurveyListDto select(SurveyListDto surveyListDto) {
 		
 		List<SurveyDto> surveyList = surveyListDto.getSurveyList();
 		List<SurveyDto> _surveyList = new ArrayList<>();

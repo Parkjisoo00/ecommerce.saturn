@@ -3,20 +3,32 @@
 <mapper namespace="kr.co.bravomylife.front.mybatis.survey.Survey">
 
 	<select id="select" parameterType="surveyDto" resultType="surveyDto">
-		SELECT
-			SEQ_SLE
-		FROM (
-			SELECT
+		SELECT 
+			sle.SLE_NM
+			, sle.SEQ_SLE
+			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, sle.IMG
+			, sle.POINT_STACK
+			, sle.PRICE_SALE
+			, sle.DISCOUNT
+		FROM
+			TB_SLE sle
+		JOIN (
+			SELECT 
 				SEQ_SLE
-			FROM
-				TB_BEST
-			WHERE
-				CD_CTG_M = #{cd_ctg_m}
-				AND CD_CTG_B = #{cd_ctg_b}
-			ORDER BY
-				COUNT DESC, SEQ_SLE DESC
-		)
-		WHERE ROWNUM = 1
+			FROM (
+				SELECT 
+					SEQ_SLE
+				FROM 
+					TB_BEST
+				WHERE 
+					CD_CTG_M = #{cd_ctg_m}
+					AND CD_CTG_B = #{cd_ctg_b}
+				ORDER BY 
+					COUNT DESC, SEQ_SLE DESC
+			) 
+			WHERE ROWNUM = 1
+		) best ON sle.SEQ_SLE = best.SEQ_SLE
 	</select>
 
 	<select id="sequence" resultType="java.lang.Integer">

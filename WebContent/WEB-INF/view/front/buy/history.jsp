@@ -13,9 +13,9 @@
 		
 		var frmMain = document.getElementById("frmMain");
 		
-		frmMain.seq_sle.setAttribute("value", value);
-		frmMain.cd_ctg_m.setAttribute("value", value2);
-		frmMain.cd_ctg_b.setAttribute("value", value3);
+		frmMain.goSeq_sle.setAttribute("value", value);
+		frmMain.goCd_ctg_m.setAttribute("value", value2);
+		frmMain.goCd_ctg_b.setAttribute("value", value3);
 		
 		frmMain.action="/front/buy/writeForm.web";
 		
@@ -32,25 +32,21 @@
 		frmMain.submit();
 	}
 	
-	function setBasket(value, value2, value3,value4, value5, value6,value7, value8, value9, value10) {
+	function setBasket(value, value2, value3,value4, value5, value6, value7, value8, value9, value10) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
-		frmMain.seq_sle.setAttribute("value", value);
 		frmMain.sle_nm.setAttribute("value", value2);
 		frmMain.discount_sale.setAttribute("value", value3);
-		frmMain.count.setAttribute("value", value4);
+		frmMain.basketCount.setAttribute("value", value4);
 		frmMain.img.setAttribute("value", value5);
 		frmMain.point_stack.setAttribute("value", value6);
-		frmMain.cd_ctg_m.setAttribute("value", value7);
-		frmMain.cd_ctg_b.setAttribute("value", value8);
+		frmMain.basketCd_ctg_m.setAttribute("value", value7);
+		frmMain.basketCd_ctg_b.setAttribute("value", value8);
 		frmMain.price_sale.setAttribute("value", value9);
 		frmMain.discount.setAttribute("value", value10);
+		frmMain.basketSeq_sle.setAttribute("value", value);
 		
-		var item = value + "|" + value2 + "|" + value3 + "|" +1+ "|" + value5 + "|" + value6 + "|" + value7 + "|" + value8 + "|" +  value9 + "|" + value10;
-		document.getElementById("item").value = item;
-		
-		var frmMain = document.getElementById("frmMain");
 		frmMain.action = "/front/basket/setBasket.web";
 		frmMain.target = "frmBlank";
 		frmMain.submit();
@@ -106,22 +102,24 @@
 
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" name="item"				id="item"/>
-<input type="hidden" name="point_stack"			id="point_stack"		value="0"/>
-<input type="hidden" name="discount_sale"		id="discount_sale"		value="0"/>
-<input type="hidden" name="img"					id="img"				/>
-<input type="hidden" name="seq_sle"				id="seq_sle"			value="0"/>
-<input type="hidden" name="sle_nm"				id="sle_nm"				/>
-<input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"			/>
-<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"			/>
-<input type="hidden" name="count"				id="count"				value="0"/>
-<input type="hidden" name="price_sale"			id="price_sale"			value="0"/>
-<input type="hidden" name="discount"			id="discount"			value="0"/>
-<input type="hidden" name="seq_buy_dtl"			id="seq_buy_dtl"		value="0"/>
-<input type="hidden" name="seq_buy_mst"			id="seq_buy_mst"		/>
-<input type="hidden" name="seq_mbr_addr"		id="seq_mbr_addr"		value="0"/>
-<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		/>
-<input type="hidden" name="currentPage"			id="currentPage"	value="${paging.currentPage}"/>
+<input type="hidden" name="basketList[0].point_stack"	id="point_stack"	value="0"/>
+<input type="hidden" name="basketList[0].discount_sale"	id="discount_sale"	value="0"/>
+<input type="hidden" name="basketList[0].img"			id="img"			/>
+<input type="hidden" name="basketList[0].seq_sle"		id="basketSeq_sle"		value="0"/>
+<input type="hidden" name="basketList[0].sle_nm"		id="sle_nm"			/>
+<input type="hidden" name="basketList[0].cd_ctg_m"		id="basketCd_ctg_m"		/>
+<input type="hidden" name="basketList[0].cd_ctg_b"		id="basketCd_ctg_b"		/>
+<input type="hidden" name="basketList[0].price_sale"	id="price_sale"		value="0"/>
+<input type="hidden" name="basketList[0].discount"		id="discount"		value="0"/>
+<input type="hidden" name="basketList[0].count"			id="basketCount"	value="0"/>
+<input type="hidden" name="seq_sle"						id="goSeq_sle"		value="0"/>
+<input type="hidden" name="cd_ctg_m"					id="goCd_ctg_m"		/>
+<input type="hidden" name="cd_ctg_b"					id="goCd_ctg_b"		/>
+<input type="hidden" name="seq_buy_dtl"					id="seq_buy_dtl"		value="0"/>
+<input type="hidden" name="seq_buy_mst"					id="seq_buy_mst"		/>
+<input type="hidden" name="seq_mbr_addr"				id="seq_mbr_addr"		value="0"/>
+<input type="hidden" name="cd_bbs_type"					id="cd_bbs_type"		/>
+<input type="hidden" name="currentPage"					id="currentPage"	value="${paging.currentPage}"/>
 
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -183,7 +181,7 @@
 																</div>
 															</td>
 															<td class="cart-td" style="text-align: right !important; padding-right: 0px !important; padding-left: 0px !important;">
-																	<a href="javascript:setBasket('${buyDatas.seq_sle}', '${buyDatas.sle_nm}', '${buyDatas.discount_sale}', '${buyDatas.count}'
+																	<a href="javascript:setBasket('${buyDatas.seq_sle}', '${buyDatas.sle_nm}', '${buyDatas.discount_sale}', '1'
 																	, '${buyDatas.img}', '${buyDatas.point_stack}', '${buyDatas.cd_ctg_m}', '${buyDatas.cd_ctg_b}', '${buyDatas.price_sale}', '${buyDatas.discount}');" 
 																	class="cart-btn" style="letter-spacing: -0.5px !important; margin-left:10px !important; margin-right:15px !important; padding: 9px 15px 9px !important; font-weight: normal; font-size: 13px !important; color: #2c2c2c; border: 1px solid rgb(221, 221, 221); margin-top:0px;">장바구니 담기</a>
 															</td>

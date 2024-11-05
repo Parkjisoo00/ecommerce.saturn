@@ -227,21 +227,11 @@
 			return;
 		}
 		
-		var seq_sle			= document.getElementById("seq_sle").value;
-		var sle_nm			= document.getElementById("sle_nm").value;
-		var discount_sale	= document.getElementById("discount_sale").value;
-		var count			= document.getElementById("count").value;
-		var img				= document.getElementById("img").value;
-		var point_stack		= document.getElementById("point_stack").value;
-		var cd_ctg_m		= document.getElementById("cd_ctg_m").value;
-		var cd_ctg_b		= document.getElementById("cd_ctg_b").value;
-		var price_sale		= document.getElementById("price_sale").value;
-		var discount		= document.getElementById("discount").value;
-		
-		var item = seq_sle + "|" + sle_nm + "|" + discount_sale + "|" + count + "|" + img + "|" + point_stack + "|" + cd_ctg_m + "|" + cd_ctg_b + "|" + price_sale + "|" + discount;
-		document.getElementById("item").value = item;
-		
 		var frmMain = document.getElementById("frmMain");
+		
+		var count = document.getElementById("count").value;
+		document.getElementById("basketCount").setAttribute("value", count);
+		
 		frmMain.action = "/front/basket/setBasket.web";
 		frmMain.target = "frmBlank";
 		frmMain.submit();
@@ -309,26 +299,26 @@
 
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" name="item"				id="item"/>
-<input type="hidden" name="point_stack"			id="point_stack"	value="${saleDto.point_stack}"/>
-<input type="hidden" name="discount_sale"		id="discount_sale"	value="${saleDto.discount_sale}"/>
-<input type="hidden" name="img"					id="img"			value="${saleDto.img}"/>
-<input type="hidden" name="seq_sle"				id="seq_sle"		value="${saleDto.seq_sle}"/>
-<input type="hidden" name="sle_nm"				id="sle_nm"			value="${saleDto.sle_nm}"/>
-<input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"		value="${saleDto.cd_ctg_m}"/>
-<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"		value="${saleDto.cd_ctg_b}"/>
-<input type="hidden" name="price_sale"			id="price_sale"		value="${saleDto.price_sale}"/>
-<input type="hidden" name="discount"			id="discount"		value="${saleDto.discount}"/>
-<input type="hidden" name="corp_nm"				id="corp_nm"		value="${saleDto.corp_nm}"/>
-<input type="hidden" name="prd_type"			id="prd_type"		value="${saleDto.prd_type}"/>
-<input type="hidden" name="filter"				id="filter">
-<input type="hidden" name="type"				id="type"/>
-<input type="hidden" name="currentPage"			id="currentPage"	value="${paging.currentPage}"/>
-<input type="hidden" name="buyList[0].img"							value="${saleDto.img}"/>
-<input type="hidden" name="buyList[0].seq_sle"						value="${saleDto.seq_sle}"/>
-<input type="hidden" name="buyList[0].cd_ctg_m"						value="${saleDto.cd_ctg_m}"/>
-<input type="hidden" name="buyList[0].cd_ctg_b"						value="${saleDto.cd_ctg_b}"/>
-<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"/>
+<input type="hidden" name="basketList[0].point_stack"	id="point_stack"	value="${saleDto.point_stack}"/>
+<input type="hidden" name="basketList[0].discount_sale"	id="discount_sale"	value="${saleDto.discount_sale}"/>
+<input type="hidden" name="basketList[0].img"			id="img"			value="${saleDto.img}"/>
+<input type="hidden" name="basketList[0].seq_sle"		id="seq_sle"		value="${saleDto.seq_sle}"/>
+<input type="hidden" name="basketList[0].sle_nm"		id="sle_nm"			value="${saleDto.sle_nm}"/>
+<input type="hidden" name="basketList[0].cd_ctg_m"		id="cd_ctg_m"		value="${saleDto.cd_ctg_m}"/>
+<input type="hidden" name="basketList[0].cd_ctg_b"		id="cd_ctg_b"		value="${saleDto.cd_ctg_b}"/>
+<input type="hidden" name="basketList[0].price_sale"	id="price_sale"		value="${saleDto.price_sale}"/>
+<input type="hidden" name="basketList[0].discount"		id="discount"		value="${saleDto.discount}"/>
+<input type="hidden" name="basketList[0].count"			id="basketCount"/>
+<input type="hidden" name="corp_nm"						id="corp_nm"		value="${saleDto.corp_nm}"/>
+<input type="hidden" name="prd_type"					id="prd_type"		value="${saleDto.prd_type}"/>
+<input type="hidden" name="filter"						id="filter">
+<input type="hidden" name="type"						id="type"/>
+<input type="hidden" name="currentPage"					id="currentPage"	value="${paging.currentPage}"/>
+<input type="hidden" name="buyList[0].img"									value="${saleDto.img}"/>
+<input type="hidden" name="buyList[0].seq_sle"								value="${saleDto.seq_sle}"/>
+<input type="hidden" name="buyList[0].cd_ctg_m"								value="${saleDto.cd_ctg_m}"/>
+<input type="hidden" name="buyList[0].cd_ctg_b"								value="${saleDto.cd_ctg_b}"/>
+<input type="hidden" name="cd_bbs_type"					id="cd_bbs_type"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -483,8 +473,7 @@
 							</ul>
 						</div>
 						</br>
-						<div class="product__details__button" 
-							 style="display: flex !important; justify-content: center !important; gap: 10px !important; width: 100% !important;">
+						<div class="product__details__button" style="display: flex !important; justify-content: center !important; gap: 10px !important; width: 100% !important;">
 						<div class="pro-qty" style="padding: 0px; display: flex !important; align-items: center !important; justify-content: center !important; gap: 10px !important; height: 51px !important;">
 							<input type="text" value="1" name="buyList[0].count" id="count" size="3" style="text-align: center !important; font-size: 14px !important; width: 40px; display: inline-block !important;">
 						</div>

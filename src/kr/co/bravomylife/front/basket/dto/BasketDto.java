@@ -52,8 +52,15 @@ public class BasketDto {
 	private int total_point_sum			= 0;
 	private int point_value				= 0;
 	private int discount				= 0;
+	private int discount_sale			= 0;
 	
 	
+	public int getDiscount_sale() {
+		return discount_sale;
+	}
+	public void setDiscount_sale(int discount_sale) {
+		this.discount_sale = discount_sale;
+	}
 	public int getDiscount() {
 		return discount;
 	}

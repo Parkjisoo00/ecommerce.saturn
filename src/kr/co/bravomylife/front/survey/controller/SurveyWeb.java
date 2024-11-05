@@ -151,7 +151,7 @@ public class SurveyWeb extends Common {
 				
 				surveyList.add(_SurveyDto);
 				
-				SurveyListDto _surveyListDto = surveySrvc.selectList(surveyListDto);
+				SurveyListDto _surveyListDto = surveySrvc.select(surveyListDto);
 				
 				List<SurveyDto> _surveyList = _surveyListDto.getSurveyList();
 				List<SurveyDto> List = new ArrayList<>();
@@ -161,6 +161,12 @@ public class SurveyWeb extends Common {
 					SurveyDto resultSurvey = new SurveyDto();
 					
 					resultSurvey.setSeq_sle(survey.getSeq_sle());
+					resultSurvey.setSle_nm(survey.getSle_nm());
+					resultSurvey.setDiscount_sale(survey.getDiscount_sale());
+					resultSurvey.setImg(survey.getImg());
+					resultSurvey.setPoint_stack(survey.getPoint_stack());
+					resultSurvey.setPrice_sale(survey.getPrice_sale());
+					resultSurvey.setDiscount(survey.getDiscount());
 					resultSurvey.setCd_ctg_m(survey.getCd_ctg_m());
 					resultSurvey.setCd_ctg_b(survey.getCd_ctg_b());
 					

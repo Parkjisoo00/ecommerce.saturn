@@ -36,6 +36,7 @@ public class SurveyDataDto {
 	private int seq_hp_sur				= 0;
 	private int seq_hp_sur_dtl			= 0;
 	private String age					= "";
+	private int user_age				= 0;
 	private String gender				= "";
 	private int register				= 0;
 	private int updater					= 0;
@@ -44,8 +45,70 @@ public class SurveyDataDto {
 	private String cd_ctg_m				= "";
 	private String cd_ctg_b				= "";
 	private String cd_ctg				= "";
+	private String mbr_nm				= "";
+	private String sle_nm				= "";
+	private String img					= "";
+	private int point_stack				= 0;
+	private int price_sale				= 0;
+	private int discount				= 0;
+	private int discount_sale			= 0;
+	private int count					= 0;
 	
 	
+	public String getSle_nm() {
+		return sle_nm;
+	}
+	public void setSle_nm(String sle_nm) {
+		this.sle_nm = sle_nm;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public int getPoint_stack() {
+		return point_stack;
+	}
+	public void setPoint_stack(int point_stack) {
+		this.point_stack = point_stack;
+	}
+	public int getPrice_sale() {
+		return price_sale;
+	}
+	public void setPrice_sale(int price_sale) {
+		this.price_sale = price_sale;
+	}
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+	public int getDiscount_sale() {
+		return discount_sale;
+	}
+	public void setDiscount_sale(int discount_sale) {
+		this.discount_sale = discount_sale;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getUser_age() {
+		return user_age;
+	}
+	public void setUser_age(int user_age) {
+		this.user_age = user_age;
+	}
+	public String getMbr_nm() {
+		return mbr_nm;
+	}
+	public void setMbr_nm(String mbr_nm) {
+		this.mbr_nm = mbr_nm;
+	}
 	public String getCd_ctg() {
 		return cd_ctg;
 	}

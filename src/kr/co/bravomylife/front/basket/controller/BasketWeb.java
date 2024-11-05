@@ -42,6 +42,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.front.basket.controller.BasketWeb;
 import kr.co.bravomylife.front.basket.dto.BasketDto;
+import kr.co.bravomylife.front.basket.dto.BasketListDto;
 import kr.co.bravomylife.front.basket.service.BasketSrvc;
 import kr.co.bravomylife.front.common.Common;
 import kr.co.bravomylife.front.common.component.SessionCmpn;
@@ -90,13 +91,9 @@ public class BasketWeb extends Common {
 			
 			List<Map<String, Object>> items = requestBody.get("items");
 			
-			// logger.debug("삭제할 상품 목록" + items);
-			
 			for (Map<String, Object> item : items) {
 				
 				int seqSle = Integer.parseInt((String) item.get("seq_sle"));
-				
-				// logger.debug("삭제 중인 상품 번호" + seqSle);
 				
 				basketSrvc.removeBasket(seqMbr, seqSle);
 				
@@ -123,38 +120,37 @@ public class BasketWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/basket/setBasket.web")
-	public ModelAndView setBasket(HttpServletRequest request, HttpServletResponse response, String item) {
+	public ModelAndView setBasket(HttpServletRequest request, HttpServletResponse response, BasketListDto basketListDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			// logger.debug("item 확인" + item);
 			
-			String[] arrBasket = item.split("\\|");
-			// logger.debug("받은 장바구니 확인" + arrBasket.length);
+			int seq_mbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
 			
-			BasketDto basketDto = new BasketDto();
-			
-			basketDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
-			basketDto.setSeq_sle(Integer.parseInt(arrBasket[0]));
-			basketDto.setSle_nm(arrBasket[1]);
-			basketDto.setPrice(Integer.parseInt(arrBasket[2]));
-			basketDto.setCount(Integer.parseInt(arrBasket[3]));
-			basketDto.setImg(arrBasket[4]);
-			basketDto.setPoint_stack(Integer.parseInt(arrBasket[5]));
-			basketDto.setCd_ctg_m(arrBasket[6]);
-			basketDto.setCd_ctg_b(arrBasket[7]);
-			basketDto.setPrice_sale(Integer.parseInt(arrBasket[8]));
-			basketDto.setDiscount(Integer.parseInt(arrBasket[9]));
-			
-			if (basketSrvc.insert(basketDto)) {
-				request.setAttribute("script", "alert('장바구니에 저장되었습니다');");
-			}
-			else {
-				request.setAttribute("script", "alert('시스템 관리자에게 문의하세요');");
+			for (BasketDto basket : basketListDto.getBasketList()) {
+				BasketDto basketDto = new BasketDto();
 				
+				basketDto.setSeq_mbr(seq_mbr);
+				basketDto.setSeq_sle(basket.getSeq_sle());
+				basketDto.setSle_nm(basket.getSle_nm());
+				basketDto.setPrice(basket.getDiscount_sale());
+				basketDto.setCount(basket.getCount());
+				basketDto.setImg(basket.getImg());
+				basketDto.setPoint_stack(basket.getPoint_stack());
+				basketDto.setCd_ctg_m(basket.getCd_ctg_m());
+				basketDto.setCd_ctg_b(basket.getCd_ctg_b());
+				basketDto.setPrice_sale(basket.getPrice_sale());
+				basketDto.setDiscount(basket.getDiscount());
+				
+				if (!basketSrvc.insert(basketDto)) {
+					request.setAttribute("script", "alert('시스템 관리자에게 문의하세요');");
+					mav.setViewName("forward:/servlet/result.web");
+				}
 			}
+			request.setAttribute("script", "alert('장바구니에 저장되었습니다');");
 			mav.setViewName("forward:/servlet/result.web");
+			
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".setBasket()] " + e.getMessage(), e);
@@ -191,16 +187,6 @@ public class BasketWeb extends Common {
 			
 			DecimalFormat formatter = new DecimalFormat("#,###");
 			
-			/*
-			 * 주석으로 처리된 코드는 총합 가격과 총합 포인트에 , 를 찍는 기능
-			 * 추후 Controller에서 처리하는 방식과 Jsp에서 처리하는 방식중 하나를 선택
-			 * 이 주석을 작성할 시점에는 장바구니 Jsp에 제이쿼리와 ajax기능을 이용하여 비동기 데이터 전송 및 실시간 UI 변경 코드가 많아 Jsp에서 함께 처리하는 것이 좋다고 판단
-			 * int totalSeqsleSum = 0;
-			 * int totalPointSum = 0;
-			 * int totalPriceSum = 0;
-			 * totalSeqsleSum = basketList.size();
-			*/
-			
 			for (BasketDto item : basketList) {
 				
 				BasketDto formattedItem = new BasketDto();
@@ -223,25 +209,7 @@ public class BasketWeb extends Common {
 				formattedItem.setFormat_total_price(formatter.format(item.getTotal_price()));
 				formattedItem.setFormat_total_point(formatter.format(item.getTotal_point()));
 				formattedList.add(formattedItem);
-				
-				/*
-				 * totalPointSum += item.getTotal_point();
-				 * totalPriceSum += item.getTotal_price();
-				*/
 			}
-			
-			/*
-			 * pagingDto.setSeq_sle_count(totalSeqsleSum);
-			 * pagingDto.setTotal_point_sum(totalPointSum);
-			 * pagingDto.setTotal_price_sum(totalPriceSum);
-			*/
-			
-			/*
-			 * logger.debug("개수 확인" + pagingDto.getSeq_sle_count());
-			 * logger.debug("포인트 확인" + pagingDto.getTotal_point_sum());
-			 * logger.debug("가격 확인" + pagingDto.getTotal_price_sum());
-			*/
-			
 			pagingListDto.setList(formattedList);
 			
 			mav.addObject("paging"	, pagingListDto.getPaging());
@@ -298,13 +266,6 @@ public class BasketWeb extends Common {
 				map.put("seq_sle_count", basket.getSeq_sle_count());
 				map.put("total_price_sum", basket.getTotal_price_sum());
 				map.put("total_point_sum", basket.getTotal_point_sum());
-				
-				/*
-				 * logger.debug("개별 수량" + basket.getCount());
-				 * logger.debug("개별 수량" + basket.getCount());
-				 * logger.debug("개별 총합 가격" + basket.getTotal_price());
-				 * logger.debug("개별 총합 포인트" + basket.getTotal_point());
-				*/
 				
 				responseList.add(map);
 			}

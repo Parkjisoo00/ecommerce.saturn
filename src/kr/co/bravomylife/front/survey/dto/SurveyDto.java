@@ -46,8 +46,57 @@ public class SurveyDto {
 	private String cd_ctg_b				= "";
 	private String cd_ctg				= "";
 	private String mbr_nm				= "";
+	private String sle_nm				= "";
+	private String img					= "";
+	private int point_stack				= 0;
+	private int price_sale				= 0;
+	private int discount				= 0;
+	private int discount_sale			= 0;
+	private int count					= 0;
 	
 	
+	public String getSle_nm() {
+		return sle_nm;
+	}
+	public void setSle_nm(String sle_nm) {
+		this.sle_nm = sle_nm;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public int getPoint_stack() {
+		return point_stack;
+	}
+	public void setPoint_stack(int point_stack) {
+		this.point_stack = point_stack;
+	}
+	public int getPrice_sale() {
+		return price_sale;
+	}
+	public void setPrice_sale(int price_sale) {
+		this.price_sale = price_sale;
+	}
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+	public int getDiscount_sale() {
+		return discount_sale;
+	}
+	public void setDiscount_sale(int discount_sale) {
+		this.discount_sale = discount_sale;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public String getCd_ctg() {
 		return cd_ctg;
 	}
