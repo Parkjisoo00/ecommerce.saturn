@@ -100,9 +100,11 @@
 		
 		var boardFrmMain = document.getElementById("boardFrmMain");
 		if (boardFrmMain) {
-			boardFrmMain.reset();
+			boardFrmMain.ssSearchKey.value = '';
+			boardFrmMain.ssSearchWord.value = '';
 		}
 	}
+	
 	<!--
 	function toggleAnswer(element) {
         var askDiv = element.querySelector('.ask'); // .ask 요소를 찾음

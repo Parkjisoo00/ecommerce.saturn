@@ -28,6 +28,14 @@
 	
 	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
 	
+	window.onload = function() {
+		var boardFrmMain = document.getElementById("boardFrmMain");
+		if (boardFrmMain) {
+			boardFrmMain.ssSearchWord.value = "";
+			boardFrmMain.ssSearchKey.value = "";
+		}
+	};
+	
 	function goWriteForm() {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -171,13 +179,6 @@ function goTypeT(value) {
 		boardFrmMain.submit();
 	}
 	
-	window.onload = function() {
-		var boardFrmMain = document.getElementById("boardFrmMain");
-		if (boardFrmMain) {
-			boardFrmMain.ssSearchWord.value = "";
-			boardFrmMain.ssSearchKey.value = "";
-		}
-	};
 	</script>
 
 	<!-- Google Font -->
