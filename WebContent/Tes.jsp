@@ -8,12 +8,32 @@
 <%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
 <!DOCTYPE html>
 <html lang="kor">
+<style>
+.btn-next {
+	margin-top: 20px;
+	padding: 12px 24px;
+	background-color: #f77202;
+	color: #fff;
+	border: none;
+	border-radius: 20px;
+	cursor: pointer;
+	font-size: 18px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s, background-color 0.3s;
+}
 
+.btn-next:hover {
+	background-color: #e96500;
+	transform: scale(1.05);
+}
+</style>
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
 	
-	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
+	function closeSurvey() {
+		window.location.href = "/front/center/board/personalHealth/index.web";
+	}
 	
 	</script>
 
@@ -41,7 +61,6 @@
 	<section class="checkout spad" >
 		<div class="container">
 			<form id="frmMain" method="POST" class="checkout__form">
-			<!-- 고정 -->
 				<div class="survey">
 					<div class="gnb">
 						<div class="survey-div">
@@ -60,34 +79,24 @@
 						</div>
 					</div>
 			</div>
-			<!-- 고정 -->
-			
-			
-			
 			<!-- 각자 담당하는 부분 화면 1개씩 -->
 			<div id="A1" class="row" style="display: flex; justify-content: center; align-items: center; margin-top: 30px;">
-			    <div class="col-lg-12" style="max-width: 670px !important; width: 100% !important; text-align: center; padding: 20px;">
-			    	<img src="/img/icon.png" alt="회원 이미지" style="width: 150px; height: 150px;  margin-bottom: 10px;">
-			    	<br>
-			    	<br>
-			        <p style="font-size: 30px; font-weight: bold; color: #333; margin-bottom: 5px;">${memberDto.mbr_nm} 토성 님</p>
-			        <br>
-			        <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin: 10px 0; color: #555;">
-			            <p style="font-size: 20px; border-right: 1px solid #ddd; padding-right: 20px;">생년월일: ${memberDto.age} 2017-05-01</p>
-			            <p style="font-size: 20px;">성별: ${memberDto.gender} 여</p>
-			        </div>
-			        <br>
-			        <button style="margin-top: 20px; padding: 12px 24px; background-color: #f77202; color: #fff; border: none; border-radius: 20px; cursor: pointer; font-size: 18px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); transition: transform 0.2s, background-color 0.3s;"
-			                onmouseover="this.style.backgroundColor='#e96500'; this.style.transform='scale(1.05)';"
-			                onmouseout="this.style.backgroundColor='#f77202'; this.style.transform='scale(1)';">
-			            다음
-			        </button>
-			    </div>
+				<div class="col-lg-12" style="max-width: 670px !important; width: 100% !important; text-align: center; padding: 20px;">
+					<img src="/img/icon.png" alt="회원 이미지" style="width: 150px; height: 150px;  margin-bottom: 10px;">
+					<br>
+					<br>
+					<p style="font-size: 30px; font-weight: bold; color: #333; margin-bottom: 5px;">${memberDto.mbr_nm}</p>
+					<br>
+					<div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin: 10px 0; color: #555;">
+						<p style="font-size: 20px; border-right: 1px solid #ddd; padding-right: 20px;">생년월일: ${memberDto.age}</p>
+						<p style="font-size: 20px;">성별: ${memberDto.gender}</p>
+					</div>
+					<br>
+					<button id="btnNext" class="btn-next">
+						다음
+					</button>
+				</div>
 			</div>
-
-
-			<!-- 각자 담당하는 부분 화면 1개씩 -->
-				
 			</form>
 		</div>
 	</section>

@@ -10,18 +10,55 @@
 <html lang="kor">
 
 <head>
+<style>
+.checkbox-container {
+	width: 100%;
+	max-width: 600px;
+}	
+
+.customCheckbox {
+	display: none;
+}
+
+.customLabel {
+	display: block;
+	left: 20px;
+	position: relative;
+	padding: 10px 20px;
+	margin: 5px;
+	background-color: #FFFFFF;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	cursor: pointer;
+	user-select: none;
+	color: #000000;
+	transition: background-color 0.3s, color 0.3s; /* Smooth transition for color and background */
+}
+
+.customCheckbox:checked + .customLabel {
+	background-color: #F77202;
+	color: #FFFFFF;
+}
+.btn-next {
+	margin-top: 20px;
+	padding: 12px 24px;
+	background-color: #f77202;
+	color: #fff;
+	border: none;
+	border-radius: 20px;
+	cursor: pointer;
+	font-size: 18px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s, background-color 0.3s;
+}
+
+.btn-next:hover {
+	background-color: #e96500;
+	transform: scale(1.05);
+}
+</style>
 	<%@ include file="/include/common/header.jsp" %>
 	
-	<style>
-
-	
-	</style>
-	<script>
-	
-	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
-	
-	</script>
-
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
 
@@ -62,152 +99,98 @@
 					</div>
 					<div class="survey-progress">
 						<div class="progress-sub">
-							<div id="progressCurrent" style="width: 10%;"></div>
+							<div id="progressCurrent" style="width: 33%; height: 100%; background-color: #FF4500;"></div>
 						</div>
 					</div>
-			</div>
-			<!-- 고정 -->
-			
-			
-			
-			<!-- 각자 담당하는 부분 화면 1개씩 -->
-				
-				<div class="row" style="display: flex; justify-content: center; align-items: center;">
+				</div>
+				<div id="A2" class="row" style="display: flex; justify-content: center; align-items: center;">
 					<div class="col-lg-12" style="max-width: 670px !important; width: 100% !important; text-align: center;">
-						<h2 id="qTitle" class="ha on" style="text-align: center; font-size: 20px; font-weight: 700;">불편하거나 걱정되는 것을 선택하세요</h2>
+						<h2 id="qTitle" class="ha on" style="text-align: center; font-size: 20px; font-weight: 700;">불편하거나 걱정되는 것을 선택하세요.</h2>
 						<span id="qContent" class="ha bubble on" style="display: inline-block;">
-						        우선 관리가 필요한 것을 선택하세요
-						    </span>
+							하나만 선택해 주세요.
+						</span>
 						<br>
 						<br>
-						<div style="width: 100%; max-width: 600px;">
-							<input type="checkbox" class="customCheckbox" id="food1" style="display:none" onclick= "
-								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
-								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
-							 <label for="food1" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
-								<i class="fas fa-heart"></i>
-								<span style="display: block;">혈관 · 혈액 순환</span>
-								
+						<div class="checkbox-container">
+							<input type="checkbox" class="customCheckbox" id="symptom1" style="display:none">
+							<label for="symptom1" class="customLabel">
+								 <i class="fas fa-heart"></i>
+								 <span style="display: block;">혈관 · 혈액 순환</span>
 							</label>
 						</div>
 						<br>
-						<div style="width: 100%; max-width: 600px;">
-							<input type="checkbox" class="customCheckbox" id="food2" style="display:none" onclick="
-								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
-								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
-							 <label for="food2" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
-								<i class="fas fa-apple-alt"></i>
-								<span style="display: block;">소화 · 장</span>
-								
+						<div class="checkbox-container">
+							<input type="checkbox" class="customCheckbox" id="symptom2" style="display:none">
+							<label for="symptom2" class="customLabel">
+								 <i class="fas fa-apple-alt"></i>
+								 <span style="display: block;">소화 · 장</span>
 							</label>
 						</div>
 						<br>
-						<div style="width: 100%; max-width: 600px;">
-							<input type="checkbox" class="customCheckbox" id="food3" style="display:none" onclick="
-								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
-								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
-							<label for="food3" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
-								<i class="fas fa-smile"></i>
-								<span style="display: block;">피부</span>
-								
+						<div class="checkbox-container">
+							<input type="checkbox" class="customCheckbox" id="symptom3" style="display:none">
+							<label for="symptom3" class="customLabel">
+								 <i class="fas fa-smile"></i>
+								 <span style="display: block;">피부</span>
 							</label>
 						</div>
 						<br>
-						<div style="width: 100%; max-width: 600px;">
-							<input type="checkbox" class="customCheckbox" id="food4" style="display:none" onclick="
-								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
-								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
-							<label for="food4" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
-								<i class="fas fa-eye"></i> 
-								<span style="display: block;">눈</span>
-								
+						<div class="checkbox-container">
+							<input type="checkbox" class="customCheckbox" id="symptom4" style="display:none">
+							<label for="symptom4" class="customLabel">
+								 <i class="fas fa-eye"></i> 
+								 <span style="display: block;">눈</span>
 							</label>
 						</div>
 						<br>
-						<div style="width: 100%; max-width: 600px;">
-							<input type="checkbox" class="customCheckbox" id="food5" style="display:none" onclick="
-								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
-								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
-							<label for="food5" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
-								<i class="fas fa-brain"></i>
-								<span style="display: block;">두뇌 활동</span>
-								
+						<div class="checkbox-container">
+							<input type="checkbox" class="customCheckbox" id="symptom5" style="display:none">
+							<label for="symptom5" class="customLabel">
+								 <i class="fas fa-brain"></i>
+								 <span style="display: block;">두뇌 활동</span>
 							</label>
 						</div>
 						<br>
-						<div style="width: 100%; max-width: 600px;">
-							<input type="checkbox" class="customCheckbox" id="food6" style="display:none" onclick="
-								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
-								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
-							<label for="food6" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
-								<i class="fas fa-bed"></i>
-								<span style="display: block;">피로감</span>
-								
+						<div class="checkbox-container">
+							<input type="checkbox" class="customCheckbox" id="symptom6" style="display:none">
+							<label for="symptom6" class="customLabel">
+								 <i class="fas fa-bed"></i>
+								 <span style="display: block;">피로감</span>
 							</label>
 						</div>
 						<br>
-						<div style="width: 100%; max-width: 600px;">
-							<input type="checkbox" class="customCheckbox" id="food7" style="display:none" onclick="
-								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
-								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
-							<label for="food7" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
-								<i class="fas fa-bone"></i>
-								<span style="display: block;">뼈 · 관절</span>
-								
+						<div class="checkbox-container">
+							<input type="checkbox" class="customCheckbox" id="symptom7" style="display:none">
+							<label for="symptom7" class="customLabel">
+								 <i class="fas fa-bone"></i>
+								 <span style="display: block;">뼈 · 관절</span>
 							</label>
 						</div>
 						<br>
-						<div style="width: 100%; max-width: 600px;">
-							<input type="checkbox" class="customCheckbox" id="food8" style="display:none" onclick="
-								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
-								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
-							<label for="food8" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
-								<i class="fas fa-virus"></i>
-								<span style="display: block;">면역</span>
-								
+						<div class="checkbox-container">
+							<input type="checkbox" class="customCheckbox" id="symptom8" style="display:none">
+							<label for="symptom8" class="customLabel">
+								 <i class="fas fa-virus"></i>
+								 <span style="display: block;">면역</span>
 							</label>
 						</div>
 						<br>
-						<div style="width: 100%; max-width: 600px;">
-							<input type="checkbox" class="customCheckbox" id="food9" style="display:none" onclick="
-								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
-								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
-							<label for="food9" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
-								<i class="fas fa-user"></i>
-								<span style="display: block;">모발</span>
-								
-							</label>
-						</div>
-						<br>
-						<div style="width: 100%; max-width: 600px;">
-							<input type="checkbox" class="customCheckbox" id="food8" style="display:none" onclick="
-								this.nextElementSibling.style.backgroundColor = this.checked ? '#F77202' : '#FFFFFF';
-								this.nextElementSibling.style.color = this.checked ? '#FFFFFF' : '#000000';">
-							<label for="food8" style="display: block; left:20px; position: relative; padding: 10px 20px; margin: 5px; background-color: #FFFFFF; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; user-select: none; color: #000000;">
-								<i class="fas fa-times"></i> 
-								<span style="display: block;">선택할 것이 없어요</span>
-								
+						<div class="checkbox-container">
+							<input type="checkbox" class="customCheckbox" id="symptom9" style="display:none">
+							<label for="symptom9" class="customLabel">
+								 <i class="fas fa-heartbeat"></i>
+								 <span style="display: block;">위 · 간</span>
 							</label>
 						</div>
 						<br>
 						<br>
 						<div>
-							<button id="btnNext" class="btn btn-radius btn-dark">
-								<span class="text">다음</span>
+							<button id="btnNext" class="btn-next">
+								다음
 							</button>
 						</div>
 					</div>
 				</div>
-
-
-
-					
-					
-					
-					
-			
-			<!-- 각자 담당하는 부분 화면 1개씩 -->
-				
 			</form>
 		</div>
 	</section>
@@ -234,18 +217,24 @@
 				// 모든 레이블의 배경색과 글자색을 초기화
 				$('.customCheckbox').next().css({
 					'background-color': '#FFFFFF',
-					'color': '#000000'
+					'color': '#000000',
+					'border-color': '#CCC'
 				});
 		
 				// 선택된 체크박스에 대해 스타일 적용
 				if (isChecked) {
 					$(this).next().css({
 						'background-color': '#F77202',
-						'color': '#FFFFFF'
+						'color': '#FFFFFF',
+						'border-color': '#F77202'
 					});
 				}
 			});
 		});
+		
+		function closeSurvey() {
+			window.location.href = "/front/center/board/personalHealth/index.web";
+		}
 </script>
 </body>
 </html>

@@ -12,34 +12,51 @@
 <head>
 <style>
 .checkbox-container {
-    width: 100%;
-    max-width: 600px;
-}
+	width: 100%;
+	max-width: 600px;
+}	
 
 .customCheckbox {
-    display: none;
+	display: none;
 }
 
 .customLabel {
-    display: block;
-    left: 20px;
-    position: relative;
-    padding: 10px 20px;
-    margin: 5px;
-    background-color: #FFFFFF;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    user-select: none;
-    color: #000000;
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition for color and background */
+	display: block;
+	left: 20px;
+	position: relative;
+	padding: 10px 20px;
+	margin: 5px;
+	background-color: #FFFFFF;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	cursor: pointer;
+	user-select: none;
+	color: #000000;
+	transition: background-color 0.3s, color 0.3s; /* Smooth transition for color and background */
 }
 
 .customCheckbox:checked + .customLabel {
-    background-color: #F77202;
-    color: #FFFFFF;
+	background-color: #F77202;
+	color: #FFFFFF;
 }
-	</style>
+.btn-next {
+	margin-top: 20px;
+	padding: 12px 24px;
+	background-color: #f77202;
+	color: #fff;
+	border: none;
+	border-radius: 20px;
+	cursor: pointer;
+	font-size: 18px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s, background-color 0.3s;
+}
+
+.btn-next:hover {
+	background-color: #e96500;
+	transform: scale(1.05);
+}
+</style>
 	<%@ include file="/include/common/header.jsp" %>
 	
 	<!-- Google Font -->
@@ -81,11 +98,11 @@
 					</div>
 					<div class="survey-progress">
 						<div class="progress-sub">
-							<div id="progressCurrent" style="width: 10%;"></div>
+							<div id="progressCurrent" style="width: 66%; height: 100%; background-color: #FF4500;"></div>
 						</div>
 					</div>
 				</div>
-				<div class="row" style="display: flex; justify-content: center; align-items: center;">
+				<div id="A3" class="row" style="display: flex; justify-content: center; align-items: center;">
 					<div class="col-lg-12" style="max-width: 670px !important; width: 100% !important; text-align: center;">
 						<h2 id="qTitle" class="ha on" style="text-align: center; font-size: 20px; font-weight: 700;">해당하는 식습관을 선택하세요.</h2>
 							<span style="display: inline-block;">하나만 선택해 주세요.</span>
@@ -172,10 +189,9 @@
 							</label>
 						</div>
 						<br>
-						<br>
 						<div>
-							<button id="btnNext" class="btn btn-radius btn-dark">
-								<span class="text">다음</span>
+							<button id="btnNext" class="btn-next">
+								다음
 							</button>
 						</div>
 					</div>
@@ -205,18 +221,24 @@
 				// 모든 레이블의 배경색과 글자색을 초기화
 				$('.customCheckbox').next().css({
 					'background-color': '#FFFFFF',
-					'color': '#000000'
+					'color': '#000000',
+					'border-color': '#CCC'
 				});
 		
 				// 선택된 체크박스에 대해 스타일 적용
 				if (isChecked) {
 					$(this).next().css({
 						'background-color': '#F77202',
-						'color': '#FFFFFF'
+						'color': '#FFFFFF',
+						'border-color': '#F77202' 
 					});
 				}
 			});
 		});
-</script>
+		
+		function closeSurvey() {
+			window.location.href = "/front/center/board/personalHealth/index.web";
+		}
+	</script>
 </body>
 </html>
