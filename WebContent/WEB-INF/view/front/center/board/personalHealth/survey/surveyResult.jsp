@@ -173,19 +173,14 @@
 									<img class="cart-img-wrapper" src="${surveyListDto.img}" alt="Product Image" style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
 								</a>
 							</div>
-							<div class="survey-ingredient-describe" >
-								<span><span style="color: #858585;">#</span> 체내 에너지 생성에 필요</span>
-								<span><span style="color: #858585;">#</span> 지방, 탄수화물, 단백질 대사와 에너지 생성에 필요</span>
-								<span><span style="color: #858585;">#</span> 단백질 및 아미노산 이용에 필요</span>
-							</div>
+							<%@ include file="/include/front/survey3.jsp" %>
 						</div>
 						<span style="display: block; padding-top: 10px;">${surveyListDto.sle_nm}</span>
 						
 						<div class="button-group" style="display: flex; justify-content: space-between;">
 						<input type="button" value="개별 장바구니 담기" class="survey-btnCart" id="btnCart" onClick="setBasketOne('${surveyListDto.seq_sle}', '${surveyListDto.sle_nm}', '${surveyListDto.discount_sale}', '1',
-						 '${surveyListDto.img}', '${surveyListDto.point_stack}', '${surveyListDto.cd_ctg_m}', '${surveyListDto.cd_ctg_b}', '${surveyListDto.price_sale}', '${surveyListDto.discount}');"/>
-						
-						<input type="button" value="제품 정보보기" class="survey-btnCart" id="btnCart" onClick="goWriteForm('${surveyListDto.seq_sle}', '${surveyListDto.cd_ctg_m}', '${surveyListDto.cd_ctg_b}');"/>
+						'${surveyListDto.img}', '${surveyListDto.point_stack}', '${surveyListDto.cd_ctg_m}', '${surveyListDto.cd_ctg_b}', '${surveyListDto.price_sale}', '${surveyListDto.discount}');"/>
+						<input type="button" value="개별 장바구니 담기" class="surver-btnWrite" id="btnCart" onClick="javascript:goWriteForm('${surveyListDto.seq_sle}', '${surveyListDto.cd_ctg_m}', '${surveyListDto.cd_ctg_b}');">
 						</div>
 					</div>
 				</div>
