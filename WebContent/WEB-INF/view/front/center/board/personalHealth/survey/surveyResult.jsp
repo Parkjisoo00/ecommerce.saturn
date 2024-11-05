@@ -185,9 +185,7 @@
 						<input type="button" value="개별 장바구니 담기" class="survey-btnCart" id="btnCart" onClick="setBasketOne('${surveyListDto.seq_sle}', '${surveyListDto.sle_nm}', '${surveyListDto.discount_sale}', '1',
 						 '${surveyListDto.img}', '${surveyListDto.point_stack}', '${surveyListDto.cd_ctg_m}', '${surveyListDto.cd_ctg_b}', '${surveyListDto.price_sale}', '${surveyListDto.discount}');"/>
 						
-						
-						
-						<a href="javascript:goWriteForm('${surveyListDto.seq_sle}', '${surveyListDto.cd_ctg_m}', '${surveyListDto.cd_ctg_b}');">상세보기이동</a>
+						<input type="button" value="제품 정보보기" class="survey-btnCart" id="btnCart" onClick="goWriteForm('${surveyListDto.seq_sle}', '${surveyListDto.cd_ctg_m}', '${surveyListDto.cd_ctg_b}');"/>
 						</div>
 					</div>
 				</div>
