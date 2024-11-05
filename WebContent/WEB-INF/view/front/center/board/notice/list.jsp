@@ -96,7 +96,13 @@
 		for (var i = 0; i < acc.length; i++) { acc[i].addEventListener("click", function() {
 			this.classList.toggle("active"); var panel=this.nextElementSibling; if
 			(panel.style.display==="block" ) { panel.style.display="none" ; } else {
-			panel.style.display="block" ; } }); } }
+			panel.style.display="block" ; } }); } 
+		
+		var boardFrmMain = document.getElementById("boardFrmMain");
+		if (boardFrmMain) {
+			boardFrmMain.reset();
+		}
+	}
 	<!--
 	function toggleAnswer(element) {
         var askDiv = element.querySelector('.ask'); // .ask 요소를 찾음
@@ -174,10 +180,9 @@
 		
 		document.getElementById("searchWord").value = "";
 		document.getElementById("currentPage").value = "1";
-		document.getElementById("cd_bbs_type").value = value;
 		
+		frmMain.cd_bbs_type.setAttribute("value", value);
 		frmMain.action="/front/center/board/list.web";
-		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -191,6 +196,112 @@
 		frmMain.target = "";
 		frmMain.submit();
 	}
+	
+	function goTypeF(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/function_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeI(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/ingredient_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeG(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/gender_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeT(value) {
+		
+		var first_cd_ctg		= document.getElementById("first_cd_ctg").value;
+		var second_cd_ctg		= document.getElementById("second_cd_ctg").value;
+		var _searchWord			= document.getElementById("_searchWord").value;
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+		frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+		frmMain.searchWord.setAttribute("value", _searchWord);
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeTx(value) {
+
+		var first_cd_ctgDesktop		= document.getElementById("first_cd_ctg").value;
+		var second_cd_ctgDesktop	= document.getElementById("second_cd_ctg").value;
+		
+		var first_cd_ctgAndroid		= document.getElementById("first_cd_ctg_android").value;
+		var second_cd_ctgAndroid	= document.getElementById("second_cd_ctg_android").value;
+		
+		var first_cd_ctg;
+		var second_cd_ctg
+		
+		if (value == 'pc') {
+			
+			first_cd_ctg	= 	first_cd_ctgDesktop
+			second_cd_ctg	= 	second_cd_ctgDesktop
+		}
+		else if (value == 'mobile') {	
+			first_cd_ctg	= 	first_cd_ctgAndroid
+			second_cd_ctg	= 	second_cd_ctgAndroid
+		}	
+		
+		var searchWordDesktop = document.getElementById("_searchWord_desktop").value;
+		var searchWordAndroid = document.getElementById("_searchWord_android").value;
+		
+		var _searchWord;
+
+		if (value == 'pc') {
+			_searchWord = searchWordDesktop;
+		}
+		else if (value == 'mobile') {
+			_searchWord = searchWordAndroid;
+		}
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+		frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+		frmMain.searchWord.setAttribute("value", _searchWord);
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+	
+	function boardSearch() {
+		
+		var boardFrmMain = document.getElementById("boardFrmMain");
+		
+		var sSearchWord = document.getElementById("sSearchWord").value;
+		var sSearchKey = document.getElementById("sSearchKey").value;
+		
+		//alert(document.getElementById("sSearchWord").value);
+		
+		boardFrmMain.cd_bbs_type.setAttribute("value", '1');
+		boardFrmMain.ssSearchWord.setAttribute("value", sSearchWord);
+		boardFrmMain.ssSearchKey.setAttribute("value", sSearchKey);
+		
+		boardFrmMain.action="/front/center/board/list.web";
+		boardFrmMain.submit();
+	}
+	
 	</script>
 
 	<!-- Google Font -->
@@ -201,12 +312,21 @@
 </head>
 
 <body>
+<form id="boardFrmMain" method="POST">
+<input type="hidden" name="cd_bbs_type" 	id="cd_bbs_type" value="${paging.cd_bbs_type}" />
+<input type="hidden" name="currentPage" 	id="currentPage" value="${paging.currentPage}" />
+<input type="hidden" name="sSearchKey"		id="ssSearchKey" />
+<input type="hidden" name="sSearchWord"		id="ssSearchWord" />
+</form>
 <form id="frmMain" method="POST">
-<input type="hidden" id="type"			name="type" />
-<input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" name="seq_bbs"		id="seq_bbs" />
-<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
-<input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
+<input type="hidden" name="type"			id="type"/>
+<input type="hidden" name="cd_ctg_m"		id="cd_ctg_m" />
+<input type="hidden" name="cd_ctg_b"		id="cd_ctg_b" />
+<input type="hidden" name="searchWord"		id="searchWord" />
+<input type="hidden" name="_searchWord"		id="_searchWord" />
+<input type="hidden" name="cd_bbs_type" 	id="cd_bbs_type" value="${paging.cd_bbs_type}" />
+<input type="hidden" name="currentPage" 	id="currentPage" value="${paging.currentPage}" />
+
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -233,7 +353,7 @@
 									<a href="javascript:goList(2);" style="font-size: 15px !important; font-weight: bold; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
 									<a href="javascript:goList(3);" style="font-size: 15px !important; font-weight: bold; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">1:1 문의</a>
 								</c:if>
-			
+								
 								<c:if test="${paging.cd_bbs_type == 2}">
 									<a href="javascript:goList(1);" style="font-size: 15px !important; font-weight: bold; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">공지사항</a>
 									<a href="javascript:goList(2);" style="font-size: 15px !important; font-weight: bold; display: inline-block; padding: 10px 15px; color: white; background-color: #735048; border: 1px solid #cccccc; border-radius: 10px;">자주 찾는 질문(FAQ)</a>
@@ -252,13 +372,13 @@
 			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="checkout__form__input">
 					<div style="display: flex; justify-content: flex-end;margin-bottom: 10px;">
-						<select name="searchKey">
-							<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
-							<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
-							<option value="title+contents"<c:if test="${paging.searchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
+						<select name="sSearchKey" id="sSearchKey">
+							<option value="title"<c:if test="${paging.sSearchKey == 'title'}"> selected</c:if>>제목</option>
+							<option value="contents"<c:if test="${paging.sSearchKey == 'contents'}"> selected</c:if>>내용</option>
+							<option value="title+contents"<c:if test="${paging.sSearchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
 						</select>
-						<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> 
-						<input type="submit" value="검색"/>
+						<input type="text" name="sSearchWord" id="sSearchWord" value="${paging.sSearchWord}" /> 
+						<input type="button" onclick="javascript:boardSearch();" value="검색"/>
 					</div>
 				</div>
 			<div class="row">

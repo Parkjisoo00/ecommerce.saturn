@@ -200,15 +200,15 @@
 	<sql id="where">
 			CD_BBS_TYPE = #{cd_bbs_type}
 			AND FLG_DELETE IS NULL
-			<if test="searchWord != null and searchWord != ''">
-				<if test="searchKey == 'title'">
-					AND TITLE LIKE '%' || #{searchWord} || '%'
+			<if test="sSearchWord != null and sSearchWord != ''">
+				<if test="sSearchKey == 'title'">
+					AND TITLE LIKE '%' || #{sSearchWord} || '%'
 				</if>
-				<if test="searchKey == 'contents'">
-					AND CONTENT LIKE '%' || #{searchWord} || '%'
+				<if test="sSearchKey == 'contents'">
+					AND CONTENT LIKE '%' || #{sSearchWord} || '%'
 				</if>
-				<if test="searchKey == 'title+contents'">
-					AND (TITLE LIKE '%' || #{searchWord} || '%' OR CONTENT LIKE '%' || #{searchWord} || '%')
+				<if test="sSearchKey == 'title+contents'">
+					AND (TITLE LIKE '%' || #{sSearchWord} || '%' OR CONTENT LIKE '%' || #{sSearchWord} || '%')
 				</if>
 			</if>
 			<if test="cd_ctg != 0">

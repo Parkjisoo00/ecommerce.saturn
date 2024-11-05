@@ -775,11 +775,13 @@ public class BoardWeb extends Common {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
+		logger.debug("오는거 확인1");
+		
 		try {
 
 			/* 로그인 세션 체크가 정상적으로 동작하지 않던 코드 수정 */
 			/*이 주석을 풀시 이 코드를 사용하거나 아래의 코드 하나만을 사용해야 됨 */
-			
+			logger.debug("오는거 확인2");
 			if (pagingDto.getCd_bbs_type() == 3 && !sessionCmpn.isSession(request)) {
 				request.setAttribute("script"	, "alert('로그인이 필요합니다!');");
 				request.setAttribute("redirect"	, "/front/login/loginForm.web?url=/front/center/board/list.web");
@@ -788,17 +790,19 @@ public class BoardWeb extends Common {
 			else {
 				// 로그인 성공 후 세션에 사용자 정보 저장
 				if (pagingDto.getCd_bbs_type() == 3) {
+					logger.debug("오는거 확인4");
 					HttpSession session = request.getSession();
 					session.setAttribute("sessionUser", "SEQ_MBR");
 				}
 				
 				if (pagingDto.getCd_bbs_type() == 3) {
+					logger.debug("오는거 확인5");
 					pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 
 				}
-				
+				logger.debug("오는거 확인6");
 			}
-			
+			logger.debug("오는거 확인7");
 			logger.debug("게시판 타입 확인" + " + " + pagingDto.getCd_bbs_type());
 			logger.debug("세션 SEQ_MBR 확인" + " + " + getSession(request, "SEQ_MBR"));
 			

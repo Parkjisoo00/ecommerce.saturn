@@ -17,6 +17,8 @@ public class PagingDto {
 	
 	private String searchKey	= "";
 	private String searchWord	= "";
+	private String sSearchKey	= "";
+	private String sSearchWord	= "";
 	
 	private Integer cd_bbs_type	= 0;
 	private int cd_ctg			= 0;
@@ -52,6 +54,18 @@ public class PagingDto {
 	private int discount			= 0;
 	
 	
+	public String getsSearchKey() {
+		return sSearchKey;
+	}
+	public void setsSearchKey(String sSearchKey) {
+		this.sSearchKey = sSearchKey;
+	}
+	public String getsSearchWord() {
+		return sSearchWord;
+	}
+	public void setsSearchWord(String sSearchWord) {
+		this.sSearchWord = sSearchWord;
+	}
 	public String getCd_state() {
 		return cd_state;
 	}
