@@ -102,7 +102,7 @@ public class SurveyWeb extends Common {
 				_surveyDto.setUser_age(Period.between(userAge, today).getYears()+1);
 				
 				mav.addObject("surveyDto"	, _surveyDto);
-				mav.setViewName("front/center/board/personalHealth/survey/Tes2");
+				mav.setViewName("front/center/board/personalHealth/survey/surveyInfo");
 			}
 			else if (surveyDto.getCd_survey_type().equals("3")) {
 				
@@ -116,7 +116,7 @@ public class SurveyWeb extends Common {
 				
 				mav.addObject("surveyListDto"	, surveyListDto.getSurveyList());
 				mav.addObject("surveyDto"	, surveyDto);
-				mav.setViewName("front/center/board/personalHealth/survey/Tes3");
+				mav.setViewName("front/center/board/personalHealth/survey/surveyFunction");
 			}
 			else if (surveyDto.getCd_survey_type().equals("4")) {
 				
@@ -134,7 +134,7 @@ public class SurveyWeb extends Common {
 				
 				mav.addObject("surveyListDto"	, surveyListDto.getSurveyList());
 				mav.addObject("surveyDto"	, surveyDto);
-				mav.setViewName("front/center/board/personalHealth/survey/Tes4");
+				mav.setViewName("front/center/board/personalHealth/survey/surveyIngred");
 			}
 			else if (surveyDto.getCd_survey_type().equals("5")) {
 				
@@ -179,7 +179,7 @@ public class SurveyWeb extends Common {
 				
 				mav.addObject("surveyListDto"	, surveyListDto.getSurveyList());
 				mav.addObject("surveyDto"	, surveyDto);
-				mav.setViewName("front/center/board/personalHealth/survey/Tes5");
+				mav.setViewName("front/center/board/personalHealth/survey/surveyResult");
 			}
 			
 		}
@@ -209,7 +209,7 @@ public class SurveyWeb extends Common {
 		
 		try {
 			
-			mav.setViewName("front/center/board/personalHealth/survey/Tes");
+			mav.setViewName("front/center/board/personalHealth/survey/surveyStart");
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".surveyForm()] " + e.getMessage(), e);

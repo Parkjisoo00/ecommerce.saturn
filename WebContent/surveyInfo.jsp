@@ -35,6 +35,16 @@
 		window.location.href = "/front/center/board/personalHealth/index.web";
 	}
 	
+	function surveyProc(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_survey_type.setAttribute("value", value);
+		
+		frmMain.action="/front/center/board/surveyProc.web";
+		frmMain.submit();
+	}
+	
 	</script>
 
 	<!-- Google Font -->
@@ -61,6 +71,10 @@
 	<section class="checkout spad" >
 		<div class="container">
 			<form id="frmMain" method="POST" class="checkout__form">
+			<input type="hidden" name="cd_survey_type"				id="cd_survey_type"/>
+			<input type="hidden" name="gender"						id="gender"			value="${surveyDto.gender}"/>
+			<input type="hidden" name="mbr_nm"						id="mbr_nm"			value="${surveyDto.mbr_nm}"/>
+			<input type="hidden" name="user_age"					id="user_age"		value="${surveyDto.user_age}"/>
 				<div class="survey">
 					<div class="gnb">
 						<div class="survey-div">
@@ -85,14 +99,19 @@
 					<img src="/img/icon.png" alt="회원 이미지" style="width: 150px; height: 150px;  margin-bottom: 10px;">
 					<br>
 					<br>
-					<p style="font-size: 30px; font-weight: bold; color: #333; margin-bottom: 5px;">${memberDto.mbr_nm}</p>
+					<p style="font-size: 30px; font-weight: bold; color: #333; margin-bottom: 5px;">${surveyDto.mbr_nm}</p>
 					<br>
 					<div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin: 10px 0; color: #555;">
-						<p style="font-size: 20px; border-right: 1px solid #ddd; padding-right: 20px;">생년월일: ${memberDto.age}</p>
-						<p style="font-size: 20px;">성별: ${memberDto.gender}</p>
+						<p style="font-size: 20px; border-right: 1px solid #ddd; padding-right: 20px;">나이: ${surveyDto.user_age}</p>
+						<c:if test="${surveyDto.gender == 'M'}">
+							<p style="font-size: 20px;">성별: 남성</p>
+						</c:if>
+						<c:if test="${surveyDto.gender == 'F'}">
+							<p style="font-size: 20px;">성별: 여성</p>
+						</c:if>
 					</div>
 					<br>
-					<button id="btnNext" class="btn-next">
+					<button id="btnNext" class="btn-next" onClick="surveyProc('3');">
 						다음
 					</button>
 				</div>
