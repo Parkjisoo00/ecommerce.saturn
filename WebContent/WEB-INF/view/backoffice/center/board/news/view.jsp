@@ -112,7 +112,7 @@
 				<div class="box box-primary">
 					<div class="box-body no-padding">
 						<div class="mailbox-read-info">
-						<h3 style="font-size:50px; text-align:center">제목:${boardDto.title}</h3>
+						<h3 style="font-size:40px; text-align:center">제목:${boardDto.title}</h3>
 							<input type="checkbox" id= "flg_top" name="flg_top"  value="" disabled
 							<c:if test="${boardDto.flg_top == 'Y'}">checked</c:if>/> 
 							<label>최상위</label>

@@ -110,7 +110,7 @@
 				<!-- /.box-header -->
 				<div class="box-body no-padding">
 					<div class="mailbox-read-info">
-					<h3 style="font-size:50px; text-align:center">
+					<h3 style="font-size:40px; text-align:center">
 						<c:if test="${boardDto.seq_reply == 0}">[미답변] </c:if>
 						<c:if test="${boardDto.seq_reply > 0}">[답변 완료] </c:if>제목:${boardDto.title}</h3>
 					<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자: &nbsp;${boardDto.register}
@@ -237,7 +237,7 @@
 						<!-- /.box-header -->
 						<div class="box-body no-padding">
 							<div class="mailbox-read-info">
-							<h3 style="font-size:50px; text-align:center">제목:${boardReplyDto.title}</h3>
+							<h3 style="font-size:40px; text-align:center">제목:${boardReplyDto.title}</h3>
 							<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자:Bravo My Life
 								<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardReplyDto.dt_reg}</span></h5>
 							</div>

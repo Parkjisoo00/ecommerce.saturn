@@ -108,7 +108,7 @@
 				<!-- /.box-header -->
 				<div class="box-body no-padding">
 					<div class="mailbox-read-info">
-					<h3 style="font-size:50px; text-align:center">
+					<h3 style="font-size:40px; text-align:center">
 						<c:if test="${boardQuestionDto.seq_reply == 0}">[미답변] </c:if>
 						<c:if test="${boardQuestionDto.seq_reply > 0}">[답변 완료] </c:if>제목:${boardQuestionDto.title}</h3>
 					<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자: &nbsp;${boardQuestionDto.register}

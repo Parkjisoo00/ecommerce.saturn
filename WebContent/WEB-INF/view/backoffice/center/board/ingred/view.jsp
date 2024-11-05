@@ -108,7 +108,7 @@
 				<div class="box box-primary">
 					<div class="box-body no-padding">
 						<div class="mailbox-read-info">
-						<h3 style="font-size:50px; text-align:center">제목:${boardDto.title}</h3>
+						<h3 style="font-size:40px; text-align:center">제목:${boardDto.title}</h3>
 						<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자:Bravo My Life
 							<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardDto.dt_reg}</span></h5>
 						</div>
