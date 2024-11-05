@@ -112,8 +112,7 @@
 							<input type="checkbox" class="customCheckbox" id="food1" style="display:none">
 							<label for="food1" class="customLabel">
 								 <i class="fas fa-seedling"></i>
-								 <span style="display: block;">곡물류를 자주 먹어요.</span>
-								 <span style="display: block;">주 3회 이상</span>
+								 <span style="display: block;">곡물류를 자주 먹지 않아요.</span>
 							</label>
 						</div>
 						<br>
@@ -121,8 +120,7 @@
 							<input type="checkbox" class="customCheckbox" id="food2" style="display:none">
 							<label for="food2" class="customLabel">
 								 <i class="fas fa-fish"></i>
-								 <span style="display: block;">생선을 자주 먹어요.</span>
-								 <span style="display: block;">주 3회 이상</span>
+								 <span style="display: block;">생선을 자주 먹지 않아요.</span>
 							</label>
 						</div>
 						<br>
@@ -130,8 +128,7 @@
 							<input type="checkbox" class="customCheckbox" id="food3" style="display:none">
 							<label for="food3" class="customLabel">
 								 <i class="fas fa-leaf"></i>
-								 <span style="display: block;">브로콜리를 자주 먹어요.</span>
-								 <span style="display: block;">주 3회 이상</span>
+								 <span style="display: block;">브로콜리를 자주 먹지 않아요.</span>
 							</label>
 						</div>
 						<br>
@@ -139,8 +136,7 @@
 							<input type="checkbox" class="customCheckbox" id="food4" style="display:none">
 							<label for="food4" class="customLabel">
 								 <i class="fas fa-glass-martini"></i>
-								 <span style="display: block;">요거트를 자주 먹어요.</span>
-								 <span style="display: block;">주 3회 이상</span>
+								 <span style="display: block;">요거트를 자주 먹지 않아요.</span>
 							</label>
 						</div>
 						<br>
@@ -148,8 +144,7 @@
 							<input type="checkbox" class="customCheckbox" id="food5" style="display:none">
 							<label for="food5" class="customLabel">
 								 <i class="fas fa-anchor"></i>
-								 <span style="display: block;">조개류를 자주 먹어요.</span>
-								 <span style="display: block;">주 3회 이상</span>
+								 <span style="display: block;">조개류를 자주 먹지 않아요.</span>
 							</label>
 						</div>
 						<br>
@@ -157,8 +152,7 @@
 							<input type="checkbox" class="customCheckbox" id="food6" style="display:none">
 							<label for="food6" class="customLabel">
 								 <i class="fas fa-leaf"></i>
-								 <span style="display: block;">시금치를 자주 먹어요.</span>
-								 <span style="display: block;">주 3회 이상</span>
+								 <span style="display: block;">시금치를 자주 먹지 않아요.</span>
 							</label>
 						</div>
 						<br>
@@ -166,8 +160,7 @@
 							<input type="checkbox" class="customCheckbox" id="food7" style="display:none">
 							<label for="food7" class="customLabel">
 								 <i class="fas fa-drumstick-bite"></i>
-								 <span style="display: block;">소고기를 자주 먹어요.</span>
-								 <span style="display: block;">주 3회 이상</span>
+								 <span style="display: block;">소고기를 자주 먹지 않아요.</span>
 							</label>
 						</div>
 						<br>
@@ -175,8 +168,7 @@
 							<input type="checkbox" class="customCheckbox" id="food8" style="display:none">
 							<label for="food8" class="customLabel">
 								 <i class="fas fa-seedling"></i>
-								 <span style="display: block;">호두를 자주 먹어요.</span>
-								 <span style="display: block;">주 3회 이상</span>
+								 <span style="display: block;">호두를 자주 먹지 않아요.</span>
 							</label>
 						</div>
 						<br>
@@ -184,8 +176,7 @@
 							<input type="checkbox" class="customCheckbox" id="food9" style="display:none">
 							<label for="food9" class="customLabel">
 								 <i class="fas fa-capsules"></i>
-								 <span style="display: block;">밀크씨슬 씨앗을 자주 먹어요.</span>
-								 <span style="display: block;">주 3회 이상</span>
+								 <span style="display: block;">밀크씨슬 씨앗을 자주 먹지 않아요.</span>
 							</label>
 						</div>
 						<br>
