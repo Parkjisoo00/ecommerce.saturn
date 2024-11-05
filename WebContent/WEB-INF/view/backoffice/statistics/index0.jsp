@@ -17,7 +17,7 @@
 		function drawChart() {
 			var data = new google.visualization.DataTable();
 			
-			// 월 및 상품명들
+			// 1. [그래프] 월 및 상품명 정보
 			data.addColumn('number', '월');
 			<c:set var="arrayBest" value="" />
 			<c:set var="columnCount" value="0" />
@@ -50,8 +50,8 @@
 				</c:otherwise>
 			</c:choose>
 			
-			// 대상 상품 갯수: <c:out value="${columnCount}" />
-			// 대상 상품 목록: <c:out value="${arrayBest}" />
+			// [참고] 상품 갯수: <c:out value="${columnCount}" />
+			// [참고] 상품 목록: <c:out value="${arrayBest}" />
 			<c:set var="writtenColumnCount" value="0" />
 			<c:set var="rowCount" value="0" />
 			
@@ -78,27 +78,63 @@
 			var months		= 0;
 			var monthBefore	= 0;
 			
+			// [참고] 중복을 제외한 월(=최종 행의 갯수)
 			for (loop = 0; loop < rowsAll - 1; loop++) {
 				monthAfter = eval("list_" + loop + "[0]");
 				if (monthBefore != monthAfter) {
-					months++;				// 중복 제외한 월
+					months++;
 					monthBefore = monthAfter;
 				}
 			}
-			alert(months);
+			//alert(months);
 			
-			var matrixRow = [];
+			// 2. [그래프] 월 및 상품 수량 정보(행=months, 열=columns)
+			var matrixRows	= Array.from(new Array(months), () => new Array(columns).fill(0));
+			var count		= 0;
+			var month		= 0;
 			
-			matrixRow[0] = [6,  0,   0,   0,   0,   0,   0,   0,  11,   0,   0,    0];
-			matrixRow[1] = [8,  7,   0,   0,   6,   0,   0,   0,   0,   0,   0,    0];
-			matrixRow[2] = [9,  0,   0,   0,   0,   0,   5,   5,   0,   8,   7,    0];
-			matrixRow[3] = [10, 0,  11,   6,   0,   5,   0,   0,   0,   0,   0,    0];
-			matrixRow[4] = [11, 7,   0,   0,   0,   0,   0,   0,   0,   9,   0,   11];
+			// [참고] 모든 행
+			// var matrisxAll = Array.from(new Array(rowsAll), () => new Array(columns).fill(0));
+			var rowIndex	= -1;
+			var monthBefore	= 0;
+			for (loop1st = 0; loop1st < rowsAll; loop1st++) {
+				for (loop2nd = 0; loop2nd < columns; loop2nd++) {
+					
+					value = eval("list_" + loop1st + "[" + loop2nd + "]");
+					
+					if (loop2nd == 0) monthThis = value;
+					
+					// 월이 바뀌면 열을 증가
+					if (loop2nd == 0 && monthThis != monthBefore) {
+						// alert("this:before=" + monthThis + ":" + monthBefore);
+						rowIndex++;
+					}
+					
+					// 열에 기록
+					if (value > 0) {
+						// alert("rowIndex=" + rowIndex);
+						matrixRows[rowIndex][loop2nd] = value;
+						// alert(rowIndex + ":" + loop2nd + "=" + matrixRows[rowIndex][loop2nd]);
+					}
+				}
+				monthBefore = matrixRows[rowIndex][0];
+				// alert(monthBefore + ":" + monthBefore);
+			}
 			
+			// alert(matrixRows.length);
+			// alert(matrixRows[0].length);
+			
+			// matrixRows[0] = [11, 8, 6, 9];
+			/*
+			matrixRows[0] = [6,  0,   0,   0,   0,   0,   0,   0,  11,   0,   0,    0];
+			matrixRows[1] = [8,  7,   0,   0,   6,   0,   0,   0,   0,   0,   0,    0];
+			matrixRows[2] = [9,  0,   0,   0,   0,   0,   5,   5,   0,   8,   7,    0];
+			matrixRows[3] = [10, 0,  11,   6,   0,   5,   0,   0,   0,   0,   0,    0];
+			matrixRows[4] = [11, 7,   0,   0,   0,   0,   0,   0,   0,   9,   0,   11];
+			*/
 			data.addRows(
-				matrixRow
+				matrixRows
 			);
-			
 			var options = {
 				chart: {
 					title: '월 판매량 TOP 3 상품',
