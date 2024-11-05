@@ -9,6 +9,59 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>	
+	function goTypeT(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+
+	function goTypeTx(value) {
+		
+	var first_cd_ctgDesktop		= document.getElementById("first_cd_ctg").value;
+	var second_cd_ctgDesktop	= document.getElementById("second_cd_ctg").value;
+	
+	var first_cd_ctgAndroid		= document.getElementById("first_cd_ctg_android").value;
+	var second_cd_ctgAndroid	= document.getElementById("second_cd_ctg_android").value;
+	
+	var first_cd_ctg;
+	var second_cd_ctg
+	
+	if (value == 'pc') {
+		
+		first_cd_ctg	= 	first_cd_ctgDesktop
+		second_cd_ctg	= 	second_cd_ctgDesktop
+	}
+	else if (value == 'mobile') {	
+		first_cd_ctg	= 	first_cd_ctgAndroid
+		second_cd_ctg	= 	second_cd_ctgAndroid
+	}	
+	
+	var searchWordDesktop = document.getElementById("_searchWord_desktop").value;
+	var searchWordAndroid = document.getElementById("_searchWord_android").value;
+	
+	var _searchWord;
+	
+	if (value == 'pc') {
+		_searchWord = searchWordDesktop;
+	}
+	else if (value == 'mobile') {
+		_searchWord = searchWordAndroid;
+	}
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+	frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+	frmMain.searchWord.setAttribute("value", _searchWord);
+	
+	frmMain.type.setAttribute("value", value);
+	frmMain.action = "/front/sale/total_list.web";
+	frmMain.submit();
+	}
+	
 	function searchView(value) {
 		
 		console.log("받아온 값 log 확인" + value);
@@ -32,6 +85,13 @@
 <body>
 <form id="frmMain">
 <input type="hidden" name="prdlst_report_no"	id="prdlst_report_no"/>
+<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="0"/>
+<input type="hidden" name="searchWord" id="searchWord" value="${paging.searchWord}" />
+<input type="hidden" name="currentPage" id="currentPage" value="1" />
+<input type="hidden" id="type"			name="type" />
+<input type="hidden" name="currentPage" id="currentPage" value="1" />
+<input type="hidden" name="cd_ctg_m"		id="cd_ctg_m" />
+<input type="hidden" name="cd_ctg_b"		id="cd_ctg_b" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>

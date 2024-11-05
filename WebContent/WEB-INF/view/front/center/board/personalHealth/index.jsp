@@ -13,8 +13,73 @@
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
 	
-	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
+	function goTypeT(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+
+	function goTypeTx(value) {
+		
+	var first_cd_ctgDesktop		= document.getElementById("first_cd_ctg").value;
+	var second_cd_ctgDesktop	= document.getElementById("second_cd_ctg").value;
 	
+	var first_cd_ctgAndroid		= document.getElementById("first_cd_ctg_android").value;
+	var second_cd_ctgAndroid	= document.getElementById("second_cd_ctg_android").value;
+	
+	var first_cd_ctg;
+	var second_cd_ctg
+	
+	if (value == 'pc') {
+		
+		first_cd_ctg	= 	first_cd_ctgDesktop
+		second_cd_ctg	= 	second_cd_ctgDesktop
+	}
+	else if (value == 'mobile') {	
+		first_cd_ctg	= 	first_cd_ctgAndroid
+		second_cd_ctg	= 	second_cd_ctgAndroid
+	}	
+	
+	var searchWordDesktop = document.getElementById("_searchWord_desktop").value;
+	var searchWordAndroid = document.getElementById("_searchWord_android").value;
+	
+	var _searchWord;
+	
+	if (value == 'pc') {
+		_searchWord = searchWordDesktop;
+	}
+	else if (value == 'mobile') {
+		_searchWord = searchWordAndroid;
+	}
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+	frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+	frmMain.searchWord.setAttribute("value", _searchWord);
+	
+	frmMain.type.setAttribute("value", value);
+	frmMain.action = "/front/sale/total_list.web";
+	frmMain.submit();
+}
+	
+	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("searchWord").value = "";
+		document.getElementById("currentPage").value = "1";
+		document.getElementById("cd_bbs_type").value = value;
+		
+		frmMain.action = "/front/center/board/list.web";
+		frmMain.submit();
+	}
+	
+
 	</script>
 
 	<!-- Google Font -->
@@ -25,6 +90,12 @@
 </head>
 <body>
 <form id="frmMain" method="POST">
+<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="0"/>
+<input type="hidden" name="searchWord" id="searchWord" value="${paging.searchWord}" />
+<input type="hidden" name="currentPage" id="currentPage" value="1" />
+<input type="hidden" name="cd_ctg_m"		id="cd_ctg_m" />
+<input type="hidden" name="cd_ctg_b"		id="cd_ctg_b" />
+<input type="hidden" name="type"			id="type"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -50,19 +121,19 @@
 								<div class="accordion" id="accordionExample">
 									<div class="card">
 										<div>
-											<a href="/front/center/board/surveyForm.web" style="display: block; margin-bottom: 20px; font-size: 20px;">- 맞춤 건강 추천</a>
+											<a href="javascript:goSurvey()" style="display: block; margin-bottom: 20px; font-size: 20px;">- 맞춤 건강 추천</a>
 										</div>
 										<div>
-											<a href="/front/center/board/personalHealth/searchForm.web" style="display: block; margin-bottom: 20px; font-size: 20px;">- 안심 조회 서비스</a>
+											<a href="javascript:goSearch()" style="display: block; margin-bottom: 20px; font-size: 20px;">- 안심 조회 서비스</a>
 										</div>
 										<div>
-											<a href="#" style="display: block; margin-bottom: 20px; font-size: 20px;">- 건강 정보</a>
+											<a href="javascript:goHealthInfo()" style="display: block; margin-bottom: 20px; font-size: 20px;">- 건강 정보</a>
 										</div>
 										<div>
-											<a href="#" style="display: block; margin-bottom: 20px; font-size: 20px;">- 새소식</a>
+											<a href="javascript:goList(4)" style="display: block; margin-bottom: 20px; font-size: 20px;">- 새소식</a>
 										</div>
 										<div>
-											<a href="#" style="display: block; margin-bottom: 20px; font-size: 20px;">- 성분 사전</a>
+											<a href="javascript:goIngredInfo()" style="display: block; margin-bottom: 20px; font-size: 20px;">- 성분 사전</a>
 										</div>
 									</div>
 								</div>
