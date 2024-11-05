@@ -92,14 +92,6 @@
 		<a href="/front/member/registerForm.web" style="color: white; font-size: 15px;">회원가입</a>
 	</c:if>
 </header>
-<!-- "javascript:location.href='front/sale/gender_list.web';" -->
-	<!-- 임시 주석 돋보기 위치 변경
-	</div>
-		<ul class="header__right__widget">
-			<li><span class="icon_search search-switch"></span></li>
-		</ul>
-	</div>
-	 -->
 <div class="col-xl-12 col-lg-12" style="margin: 0 auto; float: none; width: 90%;">
 	<nav class="header__menu" style="margin-bottom: 20px !important;">
 		<ul style="display: inline-block; width: 90%; list-style: none;">
@@ -111,9 +103,9 @@
 					<li><a href="javascript:goTypeF('', '', '', '', '', '');">기능별</a></li>
 					<li><a href="javascript:goTypeI('', '', '', '', '', '');">성분별</a></li>
 					<li><a href="javascript:goTypeG('', '', '', '', '', '');">대상별</a></li>
-					<li><a href="/front/center/board/personalHealth/index.web">맞춤 건강 관리</a></li>
-					<li><a href="#">고객 센터</a></li>
-					<li><a href="#">소개</a></li>
+					<li><a href="javascript:goHealth();">맞춤 건강 관리</a></li>
+					<li><a href="javascript:goList(1);">고객 센터</a></li>
+					<li><a href="javascript:goIntro();">소개</a></li>
 				</ul>
 			</li>
 			<li style="display: inline-block; margin: 0 57px; position: relative;">
@@ -152,13 +144,13 @@
 				</ul>
 			</li>
 			<li style="display: inline-block; margin: 0 57px; position: relative;">
-				<a href="/front/center/board/personalHealth/index.web" style="font-size: 18px; font-weight: bold;">맞춤 건강 관리</a>
+				<a href="javascript:goHealth();" style="font-size: 18px; font-weight: bold;">맞춤 건강 관리</a>
 				<ul class="dropdown" style="top: 100%; left: 0; list-style: none;">
-					<li><a href="#">맞춤 건강 추천</a></li>
-					<li><a href="#">안심 조회 서비스</a></li>
-					<li><a href="/front/center/board/health/list.web">건강 정보</a></li>
+					<li><a href="javascript:goSurvey()">맞춤 건강 추천</a></li>
+					<li><a href="javascript:goSearch()">안심 조회 서비스</a></li>
+					<li><a href="javascript:goHealthInfo()">건강 정보</a></li>
 					<li><a href="javascript:goList(4)">새소식</a></li>
-					<li><a href="/front/center/board/ingred/list.web">성분 사전</a></li>
+					<li><a href="javascript:goIngredInfo()">성분 사전</a></li>
 				</ul>
 			</li>
 			<li style="display: inline-block; margin: 0 57px; position: relative;">
@@ -170,7 +162,7 @@
 				</ul>
 			</li>
 			<li style="display: inline-block; margin: 0 57px;">
-				<a href="/front/center/board/introduce/index.web" 
+				<a href="javascript:goIntro();" 
 				style="font-size: 18px; font-weight: bold;">소개</a>
 			</li>
 		</ul>
@@ -336,4 +328,52 @@ secondSelectAndroid.innerHTML = "";
 });
 
 document.getElementById("first_cd_ctg_android").dispatchEvent(new Event("change"));
+
+function goHealth() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/front/center/board/personalHealth/index.web";
+	frmMain.submit();
+}
+
+function goIntro() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/front/center/board/introduce/index.web";
+	frmMain.submit();
+}
+
+function goHealthInfo() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/front/center/board/health/list.web";
+	frmMain.submit();
+}
+
+function goIngredInfo() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/front/center/board/ingred/list.web";
+	frmMain.submit();
+}
+
+function goSurvey() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/front/center/board/surveyForm.web";
+	frmMain.submit();
+}
+
+function goSearch() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/front/center/board/personalHealth/searchForm.web";
+	frmMain.submit();
+}
 </script>
