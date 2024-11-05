@@ -141,7 +141,7 @@
 						<div class="survay_title_content">
 							<h3> 당신에게 이것을 추천합니다.</h3>
 							<ul>
-							<li>xxxxxx가 필요해요. </li>
+							<li>xxxxxx가 필요해요.${cd_ctg_mG} / ${cd_ctg_mF} / ${cd_ctg_mI}</li>
 							<li>xxxxxxx이 필요해요.</li>
 							<!-- 		<li>남성/여성 추천</li>		 -->
 							</ul>

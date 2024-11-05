@@ -38,9 +38,9 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h6 class="lowgnb-title" style="padding-bottom: 40px; text-align: left; font-weight: bold; font-size: 36px;">안심 조회 서비스</h6>
-						<h6 class="cart-title" style="padding-left:4px !important; margin-bottom: 10px !important; font-size: 18px !important; color: rgb(7, 42, 131) !important; font-weight: bold !important;">상세정보</h6>
-						<div class="shop__cart__table">
-							<table class="cart-table" style="border-bottom: 1px solid #818181; border-top: 1px solid #818181;">
+						<h6 class="cart-title" style="padding-left:4px !important; margin-bottom: 10px !important; font-size: 18px !important; color: rgb(7, 42, 131) !important; font-weight: bold !important;"><span></span>상세정보</h6>
+						<div class="shop__cart__table" style="border-radius: 6px !important; border: 2px solid #e0e0e0 !important;">
+							<table class="cart-table">
 								<tbody>
 									<tr>
 										<th class="health-head">
@@ -139,10 +139,10 @@
 										</td>
 									</tr>
 									<tr>
-										<th class="health-head" style="border-bottom: 1px solid #818181 !important;">
+										<th class="health-head">
 										기능성 원료
 										</th>
-										<td class="health-body" style="border-bottom: 1px solid #818181 !important;">
+										<td class="health-body">
 										${rowDataDto.rawmtrl_nm}
 										</td>
 									</tr>

@@ -61,8 +61,8 @@
 							</div>
 						</div>
 						<h6 class="cart-title" style="margin-bottom: 10px !important; font-size: 14px !important;">* 안심 조회 서비스에서는 모든 건강기능식품 정보(수출용 포함)를 제공합니다</h6>
-						<div class="shop__cart__table">
-							<table class="cart-table" style="border-bottom: 1px solid #818181; border-top: 1px solid #818181;">
+						<div class="shop__cart__table" style="border-radius: 6px !important; border: 1px solid #e0e0e0 !important;">
+							<table class="cart-table">
 								<thead>
 									<tr>
 										<th class="health-head" style="background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">제품명</th>
@@ -73,7 +73,7 @@
 								</thead>
 								<tbody id="dataBody">
 									<tr>
-										<td colspan="4" class="health-body" style="text-align: center !important; line-height: 100px !important;">
+										<td colspan="4" class="health-body" style="text-align: center !important; line-height: 100px !important; border-bottom: 0px !important;">
 											조회를 대기중입니다.
 										</td>
 									</tr>

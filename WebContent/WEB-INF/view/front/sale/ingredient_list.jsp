@@ -9,6 +9,15 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/front/center/board/list.web";
+		frmMain.submit();
+	}
+	
 	function goTypeTx(value) {
 		
 		var first_cd_ctgDesktop		= document.getElementById("first_cd_ctg").value;
@@ -177,6 +186,7 @@
 <input type="hidden" name="type"			id="type"/>
 <input type="hidden" name="currentPage"		id="currentPage"	value="${paging.currentPage}"/>
 <input type="hidden" name="searchWord"		id="searchWord"		value="${paging.searchWord}"/>
+<input type="hidden" name="cd_bbs_type"		id="cd_bbs_type"	value="0"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
