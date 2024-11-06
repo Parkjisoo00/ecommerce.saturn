@@ -489,8 +489,8 @@ table.headTop_01 th {
 }
 
 .ctg-link.selected {
-	color: black;
-	background-color: #e9cdae;
+	color: white;
+	background-color: #346aff;
 	font-weight: bold;
 }
 
@@ -521,7 +521,7 @@ table.headTop_01 th {
 
 .lowgnb-fontC {
 	font-size: 14px !important;
-	color: #ff9434 !important;
+	color: #346aff !important;
 	font-weight: bold !important;
 }
 
@@ -2503,7 +2503,7 @@ ol {
 }
 
 .product__item__pic .label.new {
-	background: #ff9434;
+	background: #346aff;
 }
 
 .product__item__pic .label.stockout {
@@ -3461,7 +3461,7 @@ ol {
 }
 
 .nav-item .nav-link.active {
-	color: #e9cdae;
+	color: #346aff;
 }
 
 .tab-content .tab-pane h6 {
@@ -4898,7 +4898,7 @@ ol {
 }
 	
 	.surveyResult {
-	height: 360px;
+	height: 370px;
 }
 
 	.survey-ingredient-describe{
