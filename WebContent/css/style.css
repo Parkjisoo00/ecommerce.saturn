@@ -115,7 +115,7 @@
 	display: flex; 
 	flex-direction: column; 
 	justify-content: center; 
-	margin-left: 100px;
+	margin-left: 150px;
 }
 
 .survey-btnCart{
@@ -237,6 +237,21 @@
 	font-weight: 600; 
 	font-family: 'Noto Sans KR', sans-serif !important; 
 	padding-left: 20px;
+}
+
+.surveyResult {
+	height: 300px;
+}
+
+.surveyResult-div {
+	-webkit-box-flex: 1;
+	-ms-flex: 1 1 0px;
+	flex: 1 1 0;
+	line-height: 32px;
+}
+
+.surveyTop{
+	height:430px;
 }
 
 .survey {
@@ -4877,6 +4892,23 @@ ol {
 
 
 @media only screen and (max-width: 767px) {
+	
+	.surveyTop{
+	height:530px;
+}
+	
+	.surveyResult {
+	height: 330px;
+}
+
+	.survey-ingredient-describe{
+	display: flex; 
+	flex-direction: column; 
+	justify-content: center; 
+	margin-left: 10px;
+}
+	
+	
 	
 	.my-custom-ul{
 	position: relative;

@@ -144,7 +144,7 @@
 						</div>
 						<br>
 						<div class="checkbox-container">
-							<input type="checkbox" class="customCheckbox" id="symptom2" style="display:none" name="cd_ctg" value="12">
+							<input type="checkbox" class="customCheckbox" id="symptom2" style="display:none" name="cd_ctg" value="17">
 							<label for="symptom2" class="customLabel">
 								 <i class="fas fa-apple-alt"></i>
 								 <span style="display: block;">소화 · 장</span>
@@ -155,12 +155,12 @@
 							<input type="checkbox" class="customCheckbox" id="symptom3" style="display:none" name="cd_ctg" value="13">
 							<label for="symptom3" class="customLabel">
 								 <i class="fas fa-smile"></i>
-								 <span style="display: block;">피부</span>
+								 <span style="display: block;">염증 · 항염</span>
 							</label>
 						</div>
 						<br>
 						<div class="checkbox-container">
-							<input type="checkbox" class="customCheckbox" id="symptom4" style="display:none" name="cd_ctg" value="14">
+							<input type="checkbox" class="customCheckbox" id="symptom4" style="display:none" name="cd_ctg" value="16">
 							<label for="symptom4" class="customLabel">
 								 <i class="fas fa-eye"></i> 
 								 <span style="display: block;">눈</span>
@@ -168,7 +168,7 @@
 						</div>
 						<br>
 						<div class="checkbox-container">
-							<input type="checkbox" class="customCheckbox" id="symptom5" style="display:none" name="cd_ctg" value="15">
+							<input type="checkbox" class="customCheckbox" id="symptom5" style="display:none" name="cd_ctg" value="18">
 							<label for="symptom5" class="customLabel">
 								 <i class="fas fa-brain"></i>
 								 <span style="display: block;">두뇌 활동</span>
@@ -176,7 +176,7 @@
 						</div>
 						<br>
 						<div class="checkbox-container">
-							<input type="checkbox" class="customCheckbox" id="symptom6" style="display:none" name="cd_ctg" value="16">
+							<input type="checkbox" class="customCheckbox" id="symptom6" style="display:none" name="cd_ctg" value="15">
 							<label for="symptom6" class="customLabel">
 								 <i class="fas fa-bed"></i>
 								 <span style="display: block;">피로감</span>
@@ -184,7 +184,7 @@
 						</div>
 						<br>
 						<div class="checkbox-container">
-							<input type="checkbox" class="customCheckbox" id="symptom7" style="display:none" name="cd_ctg" value="17">
+							<input type="checkbox" class="customCheckbox" id="symptom7" style="display:none" name="cd_ctg" value="14">
 							<label for="symptom7" class="customLabel">
 								 <i class="fas fa-bone"></i>
 								 <span style="display: block;">뼈 · 관절</span>
@@ -192,7 +192,7 @@
 						</div>
 						<br>
 						<div class="checkbox-container">
-							<input type="checkbox" class="customCheckbox" id="symptom8" style="display:none" name="cd_ctg" value="18">
+							<input type="checkbox" class="customCheckbox" id="symptom8" style="display:none" name="cd_ctg" value="12">
 							<label for="symptom8" class="customLabel">
 								 <i class="fas fa-virus"></i>
 								 <span style="display: block;">면역</span>

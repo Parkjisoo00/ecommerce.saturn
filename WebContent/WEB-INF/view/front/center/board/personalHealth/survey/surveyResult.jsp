@@ -122,7 +122,7 @@
 			</div>
 			<!-- 고정 -->
 			<div class="row" style="justify-content: center;display:block;background-color: #fff;max-width: 670px !important;width: 100% !important;margin-left: auto;margin-right: auto;">
-				<div class="survey"style="gap: 24px;height:400px">
+				<div class="surveyTop"style="gap: 24px;">
 					<div class="gnb" style="margin: 5px auto 0;display: flex; flex-direction: column;">
 						<div class="survey-div" style="margin-bottom: 20px;">
 							<h1 class="survey-h1-1">${surveyDto.mbr_nm} 님의
@@ -141,9 +141,9 @@
 						<div class="survay_title_content">
 							<h3> 당신에게 이것을 추천합니다.</h3>
 							<ul>
-							<li>xxxxxx가 필요해요.${cd_ctg_mG} / ${cd_ctg_mF} / ${cd_ctg_mI}</li>
-							<li>xxxxxxx이 필요해요.</li>
-							<!-- 		<li>남성/여성 추천</li>		 -->
+							<li><%@ include file="/include/front/survey1-1.jsp" %></li>
+							<li><%@ include file="/include/front/survey1-2.jsp" %></li>
+							<li><%@ include file="/include/front/survey1-3.jsp" %></li>
 							</ul>
 						</div>
 					</div>
@@ -161,11 +161,10 @@
 					<input type="hidden" name="basketList[${status.index}].price_sale"		id="price_sale"		value="${surveyListDto.price_sale}" />
 					<input type="hidden" name="basketList[${status.index}].discount"		id="discount"		value="${surveyListDto.discount}" />
 					<input type="hidden" name="basketList[${status.index}].count"			id="basketCount"	value="1" />
-				<div class="survey" style="gap: 24px; height: 320px; border-top: 16px solid #f4f4f4;">
+				<div class="surveyResult" style="gap: 24px; border-top: 16px solid #f4f4f4;">
 					<div class="gnb" style="margin: 5px auto 0; flex-direction: column;">
 						<div class="survey-div">
-							<h1 class="survey-h1-3">
-								<br>추천 영양성분 <span style="color:rgb(247, 114, 2);">1</span> - *****(폴리코사놀)</h1>
+							<%@ include file="/include/front/survey2.jsp" %>
 						</div>
 						<div style="display: flex; align-items: flex-start; padding-top: 10px; padding-left: 20px;">
 							<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden;">
