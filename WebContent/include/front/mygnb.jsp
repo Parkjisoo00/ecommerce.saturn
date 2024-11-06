@@ -13,3 +13,15 @@
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/withdraw.web" class="menuLnb">회원 탈퇴</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/modifyDelivery.web" class="menuLnb">배송지 관리</a></li>
 </ul>
+<script>
+function goSearch() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/front/center/board/personalHealth/searchForm.web";
+	frmMain.submit();
+}
+
+
+
+</script>
