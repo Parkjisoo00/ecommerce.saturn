@@ -9,6 +9,15 @@
 	<%@ include file="/include/backoffice/css.jsp" %>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script>
+	
+		function consolegoList(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.cd_bbs_type.setAttribute("value", value);
+			frmMain.action = "/console/center/board/list.web";
+			frmMain.submit();
+		}
 		// Google Charts 라이브러리 로드 완료 후 실행
 		google.charts.load('current', {'packages':['corechart']});
 		google.charts.setOnLoadCallback(drawChart);
@@ -66,6 +75,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST">
+<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
 	
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 

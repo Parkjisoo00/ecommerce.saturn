@@ -8,6 +8,15 @@
 	
 	<%@ include file="/include/backoffice/css.jsp" %>
 <script>
+function consolegoList(value) {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.cd_bbs_type.setAttribute("value", value);
+	frmMain.action = "/console/center/board/list.web";
+	frmMain.submit();
+}
+
 function goYear(year) {
 	
 	var frmMain = document.getElementById("frmMain");
@@ -23,6 +32,7 @@ function goYear(year) {
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST">
 <input type="hidden" name="year" id="year" />
+<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
 <%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->

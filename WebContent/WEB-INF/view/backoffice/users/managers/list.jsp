@@ -22,6 +22,15 @@
 	</style>
 	<script>
 	
+	function consolegoList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/console/center/board/list.web";
+		frmMain.submit();
+	}
+	
 	function goModifyForm(value) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -47,6 +56,7 @@
 <input type="hidden" name="seq_mng"		id="seq_mng" />
 <input type="hidden" name="cd_state"	id="cd_state" value="0"/>
 <input type="hidden" name="currentPage"	id="currentPage" value="${paging.currentPage}" />	
+<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->

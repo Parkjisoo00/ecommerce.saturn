@@ -16,6 +16,14 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 	<script>
 
+		function consolegoList(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.cd_bbs_type.setAttribute("value", value);
+			frmMain.action = "/console/center/board/list.web";
+			frmMain.submit();
+		}
 		function commaValue(input) {
 			// 입력된 값에서 콤마를 제거
 			let value = input.value.replace(/,/g, '');
@@ -121,6 +129,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <form action= "/backoffice/product/productRegProc.web"id="frmMain" method="POST" enctype="multipart/form-data">
+<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
 
 <!-- Main content -->
 <div class="content-wrapper">
