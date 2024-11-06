@@ -1,25 +1,115 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <ul class="my-custom-ul" >
 	<li><a style="font-size :30px" href="/front/myPage/" class="menuLnb">마이 페이지</a></li>
-	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/modifyForm.web" class="menuLnb">개인정보 확인/수정</a></li>
-	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/passwd/modifyForm.web" class="menuLnb">비밀번호 수정</a></li>
+	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:myModifyForm();" class="menuLnb">개인정보 확인/수정</a></li>
+	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goPasswd();" class="menuLnb">비밀번호 수정</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goMyList(3);" class="menuLnb">문의 내역</a></li>
-	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/pointHistory.web" class="menuLnb">포인트</a></li>
-	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/surveyModifyForm.web" class="menuLnb">맞춤 건강 결과 조회</a></li>
-	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/myLike.web" class="menuLnb">찜한 상품</a></li>
-	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/reviewListPage.web" class="menuLnb">상품후기 관리</a></li>
-	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/history.web" class="menuLnb">주문목록/배송조회</a></li>
-	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/cancelhistory.web" class="menuLnb">취소/교환/환불내역</a></li>
-	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/withdraw.web" class="menuLnb">회원 탈퇴</a></li>
-	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/modifyDelivery.web" class="menuLnb">배송지 관리</a></li>
+	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goPointHistory();" class="menuLnb">포인트</a></li>
+	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goSurveyModifyForm();" class="menuLnb">맞춤 건강 결과 조회</a></li>
+	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goMyLike();" class="menuLnb">찜한 상품</a></li>
+	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goReviewListPage();" class="menuLnb">상품후기 관리</a></li>
+	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goHistory();" class="menuLnb">주문목록/배송조회</a></li>
+	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goCancelhistory();" class="menuLnb">취소/교환/환불내역</a></li>
+	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goWithdraw();" class="menuLnb">회원 탈퇴</a></li>
+	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goModifyDelivery();" class="menuLnb">배송지 관리</a></li>
 </ul>
 <script>
+	function myModifyForm() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/member/modifyForm.web";
+		frmMain.submit();
+	}
+	
+	function goPasswd() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/member/passwd/modifyForm.web";
+		frmMain.submit();
+	}
+	
+	function goPointHistory() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/buy/pointHistory.web";
+		frmMain.submit();
+	}
+	
+	function goSurveyModifyForm() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/member/surveyModifyForm.web";
+		frmMain.submit();
+	}
+	
+	function goMyLike() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/member/myLike.web";
+		frmMain.submit();
+	}
+	
+	function goReviewListPage() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/buy/reviewListPage.web";
+		frmMain.submit();
+	}
+	
+	function goHistory() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/buy/history.web";
+		frmMain.submit();
+	}
+	
+	function goCancelhistory() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/buy/cancelhistory.web";
+		frmMain.submit();
+	}
+	
+	function goWithdraw() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/member/withdraw.web";
+		frmMain.submit();
+	}
+	
+	function goModifyDelivery() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/member/modifyDelivery.web";
+		frmMain.submit();
+	}
+	
 	function goTypeT(value) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.type.setAttribute("value", value);
 		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+	
+	function goMyList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("cd_bbs_type").value = value;
+		
+		frmMain.action = "/front/center/board/myPageNotice/list.web";
 		frmMain.submit();
 	}
 	

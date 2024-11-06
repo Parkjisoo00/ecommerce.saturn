@@ -47,15 +47,6 @@
 		frmMain.submit();
 	}
 	
-	function goMyList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("cd_bbs_type").value = value;
-		
-		frmMain.action = "/front/center/board/myPageNotice/list.web";
-		frmMain.submit();
-	}
 	function goPage(value) {
 		
 		var frmMain = document.getElementById("frmMain");

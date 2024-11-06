@@ -11,15 +11,14 @@
 	<script>
 	function goWriteForm(value, value2, value3) {
 		
-		var frmMain = document.getElementById("frmMain");
+		var subFrmMain = document.getElementById("subFrmMain");
 		
-		frmMain.goSeq_sle.setAttribute("value", value);
-		frmMain.goCd_ctg_m.setAttribute("value", value2);
-		frmMain.goCd_ctg_b.setAttribute("value", value3);
+		subFrmMain.goSeq_sle.setAttribute("value", value);
+		subFrmMain.goCd_ctg_m.setAttribute("value", value2);
+		subFrmMain.goCd_ctg_b.setAttribute("value", value3);
 		
-		frmMain.action="/front/buy/writeForm.web";
-		
-		frmMain.submit();
+		subFrmMain.action="/front/buy/writeForm.web";
+		subFrmMain.submit();
 	}
 	
 	function goPages(value) {
@@ -76,23 +75,11 @@
 	function goList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
-	
-		document.getElementById("cd_bbs_type").value = value;
 		
-		frmMain.action = "/front/center/board/myPageNotice/list.web";
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/front/center/board/list.web";
 		frmMain.submit();
 	}
-	
-	function goMyList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("cd_bbs_type").value = value;
-		
-		frmMain.action = "/front/center/board/myPageNotice/list.web";
-		frmMain.submit();
-	}
-	
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -102,6 +89,11 @@
 </head>
 
 <body>
+<form id="subFrmMain" method="POST">
+<input type="hidden" name="seq_sle"						id="goSeq_sle"		value="0"/>
+<input type="hidden" name="cd_ctg_m"					id="goCd_ctg_m"		/>
+<input type="hidden" name="cd_ctg_b"					id="goCd_ctg_b"		/>
+</form>
 <form id="frmMain" method="POST">
 <input type="hidden" name="basketList[0].point_stack"	id="point_stack"	value="0"/>
 <input type="hidden" name="basketList[0].discount_sale"	id="discount_sale"	value="0"/>
@@ -116,6 +108,8 @@
 <input type="hidden" name="seq_sle"						id="goSeq_sle"		value="0"/>
 <input type="hidden" name="cd_ctg_m"					id="goCd_ctg_m"		/>
 <input type="hidden" name="cd_ctg_b"					id="goCd_ctg_b"		/>
+<input type="hidden" name="type"						id="type"/>
+<input type="hidden" name="searchWord"					id="searchWord" />
 <input type="hidden" name="seq_buy_dtl"					id="seq_buy_dtl"		value="0"/>
 <input type="hidden" name="seq_buy_mst"					id="seq_buy_mst"		/>
 <input type="hidden" name="seq_mbr_addr"				id="seq_mbr_addr"		value="0"/>

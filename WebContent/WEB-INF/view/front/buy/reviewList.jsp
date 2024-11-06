@@ -91,21 +91,6 @@
 		frmMain.submit();
 	}
 	
-	/*
-	function reviewDelete(value, value2, value3, value4, value5) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.seq_sle.setAttribute("value", value);
-		frmMain.cd_ctg_m.setAttribute("value", value2);
-		frmMain.cd_ctg_b.setAttribute("value", value3);
-		frmMain.seq_buy_dtl.setAttribute("value", value4);
-		frmMain.seq_review.setAttribute("value", value5);
-		frmMain.action="/front/buy/reviewDelete.web";
-		frmMain.submit();
-	}
-	*/
-	
 	function goPages(value) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -123,17 +108,6 @@
 		frmMain.action = "/front/center/board/list.web";
 		frmMain.submit();
 	}
-	
-	function goMyList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("cd_bbs_type").value = value;
-		
-		frmMain.action = "/front/center/board/myPageNotice/list.web";
-		frmMain.submit();
-	}
-	
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>

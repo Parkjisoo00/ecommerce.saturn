@@ -52,17 +52,6 @@
 		frmMain.action = "/front/center/board/list.web";
 		frmMain.submit();
 	}
-	
-	function goMyList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("cd_bbs_type").value = value;
-		
-		frmMain.action = "/front/center/board/myPageNotice/list.web";
-		frmMain.submit();
-	}
-	
 	</script>
 
 	<!-- Google Font -->
@@ -79,7 +68,7 @@
 <input type="hidden" id="cd_ctg_m"		name="cd_ctg_m"/>
 <input type="hidden" id="searchWord"	name="searchWord"/>
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
+<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" value="0"/>
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${boardDto.seq_bbs}" />
 
 	<!-- Page Preloder -->
@@ -133,6 +122,7 @@
 								</select>
 							</li>
 						</ul>
+						<c:if test="${boardDto.seq_sle > 0}">
 						<ul>
 							<li><span style="margin-left: 270px; font-size: 16px;">[상품 대분류]</span></li>
 							<li style="font-size: 16px;">
@@ -150,6 +140,8 @@
 								</c:choose>
 							</li>
 						</ul>
+						</c:if>
+						<c:if test="${boardDto.seq_sle > 0}">
 						<ul>
 							<li><span style="margin-left: 270px; font-size: 16px;">[상품 중분류]</span></li>
 							<li style="font-size: 16px;">
@@ -195,6 +187,8 @@
 					</c:choose>
 							</li>
 						</ul>
+						</c:if>
+						<c:if test="${boardDto.seq_sle > 0}">
 						<ul>
 							<li><span style="margin-left: 270px; font-size: 16px;">[상품 이름]</span></li>
 							<li style="font-size: 16px;">
@@ -208,6 +202,7 @@
 								</c:choose>
 							</li>
 						</ul>
+						</c:if>
 					</div>
 					<br/>
 					<br/>

@@ -35,16 +35,6 @@
 		frmMain.submit();
 	}
 	
-	function goMyList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("cd_bbs_type").value = value;
-		
-		frmMain.action = "/front/center/board/myPageNotice/list.web";
-		frmMain.submit();
-	}
-	
 	function writeFormDelivery(value) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -85,6 +75,13 @@
 	</script>
 </head>
 <body>
+<form id="frmMain" method="POST" class="checkout__form">
+<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"/>
+<input type="hidden" name="type"				id="type"/>
+<input type="hidden" name="searchWord"			id="searchWord"/>
+<input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"/>
+<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"/>
+<input type="hidden" name="seq_mbr_addr"		id="seq_mbr_addr"		value="0"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -101,10 +98,7 @@
 				<!-- Checkout Section Begin -->
 					<section class="checkout spad" >
 						<div class="container">
-							<form id="frmMain" method="POST" class="checkout__form">
-							<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		/>
-							<input type="hidden" name="seq_mbr_addr"		id="seq_mbr_addr"		value="0"/>
-								<div class="row"style="display: flex; justify-content: center; align-items: center;">
+							<div class="row"style="display: flex; justify-content: center; align-items: center;">
 								<div class="col-lg-8">
 									<h5 style="font-size :30px; border-bottom: 0px !important;">배송지 관리</h5>
 									<h6 class="cart-title" style="font-size: 16px !important;">*배송지는 최대 3개까지 등록할 수 있습니다.</h6>
@@ -114,7 +108,7 @@
 												<tr>
 													<th class="health-head" style="width:10% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">주소</th>
 													<th class="health-head" style="background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">도로명</th>
-													<th class="health-head" style="width:18% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">상세</th>
+													<th class="health-head" style="width:13% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">상세</th>
 													<th class="health-head" style="width:28% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">등록일</th>
 												</tr>
 											</thead>
@@ -141,7 +135,7 @@
 																<div style="display: flex; align-items: center;">${list.addr1}</div>
 															</c:if>
 															</td>
-															<td class="health-body" style="text-align: center !important; border-bottom: 0px !important;">
+															<td class="health-body" style="text-align: center !important; border-bottom: 0px !important; padding-left: 0px !important; padding-right: 0px !important;">
 																${list.addr2}
 															</td>
 															<td class="health-body" style="display: flex; align-items: center; justify-content: space-between; text-align: left; border-bottom: 0px !important;">
@@ -186,8 +180,7 @@
 										</div>
 									</div>
 								</div>
-								</div>
-							</form>
+							</div>
 						</div>
 					</section>
 
@@ -245,5 +238,6 @@
 		frmMain.submit();
 	}
 </script>
+</form>
 </body>
 </html>

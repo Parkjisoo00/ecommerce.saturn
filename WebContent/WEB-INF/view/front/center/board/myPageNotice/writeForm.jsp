@@ -28,15 +28,6 @@
 		frmMain.submit();
 	}
 	
-	function goMyList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("cd_bbs_type").value = value;
-		
-		frmMain.action = "/front/center/board/myPageNotice/list.web";
-		frmMain.submit();
-	}
 	function writeProc(value) {
 		var frmMain = document.getElementById("frmMain");
 		document.getElementById("cd_bbs_type").value = value;
@@ -59,11 +50,10 @@
 	<%@ include file="/include/common/css.jsp" %>	
 </head>
 <body>
-
 <form id="frmMain" method="POST" enctype="multipart/form-data" class="checkout__form">
-<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
+<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"/>
 <input type="hidden" id="type"			name="type" />
-<input type="hidden" id="cd_ctg_b"		name="cd_ctg_b"/>
+<input type="hidden" id="cd_ctg_b"		name="cd_ctg_b" value="0"/>
 <input type="hidden" id="searchWord"	name="searchWord"/>
 <input type="hidden" id="cd_ctg_m"		name="cd_ctg_m"/>
 <input type="hidden" id="seq_sle"		name="seq_sle" value= "${boardDto.seq_sle}"/>
@@ -108,16 +98,11 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12">
 					<div class="checkout__form__input">
+					<c:if test="${boardDto.seq_sle > 0}">
 						<p style="font-weight: bold; margin-top: 30px;margin-bottom: 5px; font-size: 16px;">상품이름 </p>
-						<c:choose>
-							<c:when test="${boardDto.seq_sle > 0}">
-								<input type="text" id="sle_nm" name="sle_nm" value="${boardDtoNm.sle_nm}" style="width: 40%; padding: 10px; border: 1px solid #ccc; width:15%;border-radius: 5px; font-size: 14px;"/>
-							</c:when>
-							
-							<c:when test="${boardDto.seq_sle == 0}">
-								<input type="text" id="sle_nm" name="sle_nm" placeholder="않 쓰셔도 됩니다" style="width: 40%; padding: 10px; border: 1px solid #ccc; width:15%;border-radius: 5px; font-size: 14px;"/>
-							</c:when>
-						</c:choose>
+						<input type="text" id="sle_nm" name="sle_nm" value="${boardDtoNm.sle_nm}" style="width: 40%; padding: 10px; border: 1px solid #ccc; width:15%;border-radius: 5px; font-size: 14px;"/>
+					</c:if>
+					<c:if test="${boardDto.seq_sle > 0}">
 					<div class="checkout__form__input">
 						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">상품 대분류</p>
 						<select id="cd_ctg_b" name="cd_ctg_b" style="margin-bottom:10px">
@@ -127,51 +112,51 @@
 							<option value="3"<c:if test="${boardDto.cd_ctg_b == '3'}"> selected</c:if>>대상별</option>
 						</select>
 					</div>
+					</c:if>
+					<c:if test="${boardDto.seq_sle > 0}">
 					<div class="checkout__form__input">
 						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">상품 중분류</p>
-						<c:choose>
-							<c:when test="${boardDto.cd_ctg_b == '1'}">
-								<select id="cd_ctg_m" name="cd_ctg_m">
-									<option value="1" <c:if test="${boardDto.cd_ctg_m == '1'}"> selected</c:if>>혈당/혈행/혈압</option>
-									<option value="2" <c:if test="${boardDto.cd_ctg_m == '2'}"> selected</c:if>>항산화/면역력</option>
-									<option value="3" <c:if test="${boardDto.cd_ctg_m == '3'}"> selected</c:if>>염증/항염</option>
-									<option value="4" <c:if test="${boardDto.cd_ctg_m == '4'}"> selected</c:if>>관절/뼈/치아</option>
-									<option value="5" <c:if test="${boardDto.cd_ctg_m == '5'}"> selected</c:if>>피로회복</option>
-									<option value="6" <c:if test="${boardDto.cd_ctg_m == '6'}"> selected</c:if>>눈 건강</option>
-									<option value="7" <c:if test="${boardDto.cd_ctg_m == '7'}"> selected</c:if>>장 건강</option>
-									<option value="8" <c:if test="${boardDto.cd_ctg_m == '8'}"> selected</c:if>>두뇌/기억력</option>
-									<option value="9" <c:if test="${boardDto.cd_ctg_m == '9'}"> selected</c:if>>위/간/갑상선</option>
-								</select>
-							</c:when>
-											
-							<c:when test="${boardDto.cd_ctg_b == '2'}">
-								<select id="cd_ctg_m" name="cd_ctg_m">
-									<option value="1" <c:if test="${boardDto.cd_ctg_m == '1'}"> selected</c:if>>폴리코사놀</option>
-									<option value="2" <c:if test="${boardDto.cd_ctg_m == '2'}"> selected</c:if>>오메가-3</option>
-									<option value="3" <c:if test="${boardDto.cd_ctg_m == '3'}"> selected</c:if>>비타민/미네랄</option>
-									<option value="4" <c:if test="${boardDto.cd_ctg_m == '4'}"> selected</c:if>>유산균</option>
-									<option value="5" <c:if test="${boardDto.cd_ctg_m == '5'}"> selected</c:if>>글루코사민/MSM</option>
-									<option value="6" <c:if test="${boardDto.cd_ctg_m == '6'}"> selected</c:if>>루테인</option>
-									<option value="7" <c:if test="${boardDto.cd_ctg_m == '7'}"> selected</c:if>>코큐텐</option>
-									<option value="8" <c:if test="${boardDto.cd_ctg_m == '8'}"> selected</c:if>>아르기닌</option>
-									<option value="9" <c:if test="${boardDto.cd_ctg_m == '9'}"> selected</c:if>>밀크씨슬</option>
-								</select>
-							</c:when>
-											
-							<c:when test="${boardDto.cd_ctg_b == '3'}">
-								<select id="cd_ctg_m" name="cd_ctg_m">
-									<option value="1" <c:if test="${boardDto.cd_ctg_m == '1'}"> selected</c:if>>남성</option>
-									<option value="2" <c:if test="${boardDto.cd_ctg_m == '2'}"> selected</c:if>>여성</option>
-								</select>
-							</c:when>
-							
-							<c:when test="${boardDto.cd_ctg_b == ''}">
-								<select id="cd_ctg_m" name="cd_ctg_m">
-									<option value="0">먼저 대분류를 선택하세요</option>
-								</select>
-							</c:when>
-						</c:choose>
-					</div>
+							<c:choose>
+								<c:when test="${boardDto.cd_ctg_b == '1'}">
+									<select id="cd_ctg_m" name="cd_ctg_m">
+										<option value="1" <c:if test="${boardDto.cd_ctg_m == '1'}"> selected</c:if>>혈당/혈행/혈압</option>
+										<option value="2" <c:if test="${boardDto.cd_ctg_m == '2'}"> selected</c:if>>항산화/면역력</option>
+										<option value="3" <c:if test="${boardDto.cd_ctg_m == '3'}"> selected</c:if>>염증/항염</option>
+										<option value="4" <c:if test="${boardDto.cd_ctg_m == '4'}"> selected</c:if>>관절/뼈/치아</option>
+										<option value="5" <c:if test="${boardDto.cd_ctg_m == '5'}"> selected</c:if>>피로회복</option>
+										<option value="6" <c:if test="${boardDto.cd_ctg_m == '6'}"> selected</c:if>>눈 건강</option>
+										<option value="7" <c:if test="${boardDto.cd_ctg_m == '7'}"> selected</c:if>>장 건강</option>
+										<option value="8" <c:if test="${boardDto.cd_ctg_m == '8'}"> selected</c:if>>두뇌/기억력</option>
+										<option value="9" <c:if test="${boardDto.cd_ctg_m == '9'}"> selected</c:if>>위/간/갑상선</option>
+									</select>
+								</c:when>
+								<c:when test="${boardDto.cd_ctg_b == '2'}">
+									<select id="cd_ctg_m" name="cd_ctg_m">
+										<option value="1" <c:if test="${boardDto.cd_ctg_m == '1'}"> selected</c:if>>폴리코사놀</option>
+										<option value="2" <c:if test="${boardDto.cd_ctg_m == '2'}"> selected</c:if>>오메가-3</option>
+										<option value="3" <c:if test="${boardDto.cd_ctg_m == '3'}"> selected</c:if>>비타민/미네랄</option>
+										<option value="4" <c:if test="${boardDto.cd_ctg_m == '4'}"> selected</c:if>>유산균</option>
+										<option value="5" <c:if test="${boardDto.cd_ctg_m == '5'}"> selected</c:if>>글루코사민/MSM</option>
+										<option value="6" <c:if test="${boardDto.cd_ctg_m == '6'}"> selected</c:if>>루테인</option>
+										<option value="7" <c:if test="${boardDto.cd_ctg_m == '7'}"> selected</c:if>>코큐텐</option>
+										<option value="8" <c:if test="${boardDto.cd_ctg_m == '8'}"> selected</c:if>>아르기닌</option>
+										<option value="9" <c:if test="${boardDto.cd_ctg_m == '9'}"> selected</c:if>>밀크씨슬</option>
+									</select>
+								</c:when>
+								<c:when test="${boardDto.cd_ctg_b == '3'}">
+									<select id="cd_ctg_m" name="cd_ctg_m">
+										<option value="1" <c:if test="${boardDto.cd_ctg_m == '1'}"> selected</c:if>>남성</option>
+										<option value="2" <c:if test="${boardDto.cd_ctg_m == '2'}"> selected</c:if>>여성</option>
+									</select>
+								</c:when>
+								<c:when test="${boardDto.cd_ctg_b == ''}">
+									<select id="cd_ctg_m" name="cd_ctg_m">
+										<option value="0">먼저 대분류를 선택하세요</option>
+									</select>
+								</c:when>
+							</c:choose>
+						</div>
+						</c:if>
 					</div>
 				</div>
 				<br/>

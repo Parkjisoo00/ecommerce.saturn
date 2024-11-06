@@ -37,20 +37,16 @@
 		frmMain.action = "/front/center/board/list.web";
 		frmMain.submit();
 	}
-	
-	function goMyList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("cd_bbs_type").value = value;
-		
-		frmMain.action = "/front/center/board/myPageNotice/list.web";
-		frmMain.submit();
-	}
-	
 	</script>
 </head>
 <body>
+<form id="frmMain" method="POST" class="checkout__form">
+<input type="hidden" name="cd_bbs_type"	id="cd_bbs_type"/>
+<input type="hidden" name="phone"		id="phone"/>
+<input type="hidden" name="type"			id="type"/>
+<input type="hidden" name="searchWord"		id="searchWord" />
+<input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>
+<input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -64,12 +60,9 @@
 		<%@ include file="/include/front/mygnb.jsp" %>
 	<!-- Breadcrumb End -->
 
-				<!-- Checkout Section Begin -->
-				<section class="checkout spad" style="min-height: calc(100vh - 100px);">
-					<div class="container">
-						<form id="frmMain" method="POST" class="checkout__form">
-						<input type="hidden" name="cd_bbs_type"	id="cd_bbs_type"				/>
-						<input type="hidden" name="phone" id="phone" />
+					<!-- Checkout Section Begin -->
+					<section class="checkout spad" style="min-height: calc(100vh - 100px);">
+						<div class="container">
 							<div class="row"style="display: flex; justify-content: center; align-items: center;">
 								<div class="col-lg-8">
 									<h5 >회원 탈퇴 </h5>
@@ -106,10 +99,9 @@ BRAVO My Life 탈퇴안내
 										</div>
 									</div>
 								</div>
-								</div>
-							</form>
+							</div>
 						</div>
-			</section>
+					</section>
 
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
@@ -122,5 +114,6 @@ BRAVO My Life 탈퇴안내
 
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
+</form>
 </body>
 </html>
