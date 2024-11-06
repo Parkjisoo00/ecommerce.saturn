@@ -276,8 +276,16 @@
 		$('#modalOverlay').hide();
 		$('#resultModal').hide();
 		
-		// window.location.href = "/front/buy/history.web";
+		cancelHistory();
 	});
+	
+	function cancelHistory(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/buy/cancelhistory.web";
+		frmMain.submit();
+	}
 </script>
 </body>
 </html>

@@ -134,24 +134,6 @@
 		frmMain.action = "/front/center/board/list.web";
 		frmMain.submit();
 	}
-	
-	function consolegoList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.cd_bbs_type.setAttribute("value", value);
-		frmMain.action = "/console/center/board/list.web";
-		frmMain.submit();
-	}
-	
-	function hpSurgoList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.cd_bbs_type.setAttribute("value", value);
-		frmMain.action = "/front/hpSur/ingredient.web";
-		frmMain.submit();
-	}
 	</script>
 <!-- Google Font -->
 <%@ include file="/include/common/webfont.jsp" %>

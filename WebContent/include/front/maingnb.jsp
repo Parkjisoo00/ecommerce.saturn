@@ -376,4 +376,13 @@ function goSearch() {
 	frmMain.action = "/front/center/board/personalHealth/searchForm.web";
 	frmMain.submit();
 }
+
+function hpSurgoList(value) {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.cd_bbs_type.setAttribute("value", value);
+	frmMain.action = "/front/hpSur/ingredient.web";
+	frmMain.submit();
+}
 </script>

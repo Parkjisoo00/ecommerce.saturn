@@ -93,15 +93,6 @@
 		frmMain.submit();
 	}
 	
-	function goMyList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("cd_bbs_type").value = value;
-
-		frmMain.action = "/front/center/board/myPageNotice/list.web";
-		frmMain.submit();
-	}
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -167,7 +158,7 @@
 											<div class="history-head-title">${buyList.dt_reg} 주문</div>
 											<div class="history-head-subtitle">
 												<a href="javascript:delivery('${buyList.seq_buy_mst}', '${buyList.seq_mbr_addr}');" class="cart-btn" style="font-weight: normal; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: rgb(52, 106, 255) !important; border: 1px solid rgb(52, 106, 255);">배송조회 확인</a>
-												<a href="javascript:cancelForm('${buyList.seq_buy_mst}');" class="cart-btn" style="font-weight: normal; margin-right: 10px !important; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: #2c2c2c; border: 1px solid rgb(221, 221, 221);">주문취소 확인</a>
+												<a href="javascript:cancelForm('${buyList.seq_buy_mst}');" class="cart-btn" style="font-weight: normal; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: #2c2c2c; border: 1px solid rgb(221, 221, 221);">주문취소 확인</a>
 												<a href="javascript:historyDelete('${buyList.seq_buy_mst}');" class="cart-btn" style="font-weight: normal; margin-right: 10px !important; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: #2c2c2c; border: 1px solid rgb(221, 221, 221);">주문정보 삭제</a>
 											</div>
 										</div>
