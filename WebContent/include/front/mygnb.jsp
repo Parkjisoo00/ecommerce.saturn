@@ -5,7 +5,7 @@
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/passwd/modifyForm.web" class="menuLnb">비밀번호 수정</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goMyList(3);" class="menuLnb">문의 내역</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/pointHistory.web" class="menuLnb">포인트</a></li>
-	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">맞춤 건강 결과 조회</a></li>
+	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/surveyModifyForm.web" class="menuLnb">맞춤 건강 결과 조회</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/myLike.web" class="menuLnb">찜한 상품</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/reviewListPage.web" class="menuLnb">상품후기 관리</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/history.web" class="menuLnb">주문목록/배송조회</a></li>
