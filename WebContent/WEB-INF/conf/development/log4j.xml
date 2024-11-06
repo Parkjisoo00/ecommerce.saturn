@@ -27,7 +27,7 @@
 	
 	<!-- 2-1. This Application Loggers -->
 	<logger name="kr.co.bravomylife">
-		<level value="debug" />
+		<level value="info" />
 		<appender-ref ref="KR.CO.BRAVOMYLIFE" />
 	</logger>	
 	<!-- 2-2. Other 3rdparty Loggers -->
@@ -61,7 +61,7 @@
 	<!-- 3. Define Loggers -->
 	<root>
 		<!-- [2024-09-30][REPORT: Define Logger Priority Level(all > trace > debug > info > warn > error > fatal > off)] -->
-		<priority value="all" />
+		<priority value="info" />
 		<!-- <priority value="warn" /> -->
 		
 		<!-- 1-1. For CONSOLE Appender -->
