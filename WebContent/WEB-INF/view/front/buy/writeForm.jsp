@@ -142,7 +142,51 @@
 		});
 	}
 		
-	function goTypeT(value, value2, value3, value4, value5) {
+	function goTypeTx(value) {
+		
+		var first_cd_ctgDesktop		= document.getElementById("first_cd_ctg").value;
+		var second_cd_ctgDesktop	= document.getElementById("second_cd_ctg").value;
+		
+		var first_cd_ctgAndroid		= document.getElementById("first_cd_ctg_android").value;
+		var second_cd_ctgAndroid	= document.getElementById("second_cd_ctg_android").value;
+		
+		var first_cd_ctg;
+		var second_cd_ctg
+		
+		if (value == 'pc') {
+			
+			first_cd_ctg	= 	first_cd_ctgDesktop
+			second_cd_ctg	= 	second_cd_ctgDesktop
+		}
+		else if (value == 'mobile') {	
+			first_cd_ctg	= 	first_cd_ctgAndroid
+			second_cd_ctg	= 	second_cd_ctgAndroid
+		}	
+		
+		var searchWordDesktop = document.getElementById("_searchWord_desktop").value;
+		var searchWordAndroid = document.getElementById("_searchWord_android").value;
+		
+		var _searchWord;
+		
+		if (value == 'pc') {
+			_searchWord = searchWordDesktop;
+		}
+		else if (value == 'mobile') {
+			_searchWord = searchWordAndroid;
+		}
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+		frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+		frmMain.searchWord.setAttribute("value", _searchWord);
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeT(value, value2, value3, value4, value5, selectOrValue) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
@@ -152,13 +196,19 @@
 		frmMain.corp_nm.setAttribute("value", value3);
 		frmMain.prd_type.setAttribute("value", value4);
 		frmMain.cd_ctg_m.setAttribute("value", value5);
+		frmMain.cd_ctg_b.setAttribute("value", '');
+		
+		if (selectOrValue instanceof HTMLElement && selectOrValue.tagName === 'SELECT') {
+			frmMain.elements["linePerPage"].value = selectOrValue.value;
+		} else {
+			frmMain.elements["linePerPage"].value = selectOrValue;
+		}
 		
 		frmMain.action = "/front/sale/total_list.web";
-		frmMain.target = "";
 		frmMain.submit();
 	}
 	
-	function goTypeF(value, value2, value3, value4, value5) {
+	function goTypeF(value, value2, value3, value4, value5, selectOrValue) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
@@ -168,13 +218,18 @@
 		frmMain.corp_nm.setAttribute("value", value3);
 		frmMain.prd_type.setAttribute("value", value4);
 		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		if (selectOrValue instanceof HTMLElement && selectOrValue.tagName === 'SELECT') {
+			frmMain.elements["linePerPage"].value = selectOrValue.value;
+		} else {
+			frmMain.elements["linePerPage"].value = selectOrValue;
+		}
 		
 		frmMain.action = "/front/sale/function_list.web";
-		frmMain.target = "";
 		frmMain.submit();
 	}
 	
-	function goTypeI(value, value2, value3, value4, value5) {
+	function goTypeI(value, value2, value3, value4, value5, selectOrValue) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
@@ -184,13 +239,18 @@
 		frmMain.corp_nm.setAttribute("value", value3);
 		frmMain.prd_type.setAttribute("value", value4);
 		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		if (selectOrValue instanceof HTMLElement && selectOrValue.tagName === 'SELECT') {
+			frmMain.elements["linePerPage"].value = selectOrValue.value;
+		} else {
+			frmMain.elements["linePerPage"].value = selectOrValue;
+		}
 		
 		frmMain.action = "/front/sale/ingredient_list.web";
-		frmMain.target = "";
 		frmMain.submit();
 	}
 	
-	function goTypeG(value, value2, value3, value4, value5) {
+	function goTypeG(value, value2, value3, value4, value5, selectOrValue) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
@@ -201,39 +261,54 @@
 		frmMain.prd_type.setAttribute("value", value4);
 		frmMain.cd_ctg_m.setAttribute("value", value5);
 		
+		if (selectOrValue instanceof HTMLElement && selectOrValue.tagName === 'SELECT') {
+			frmMain.elements["linePerPage"].value = selectOrValue.value;
+		} else {
+			frmMain.elements["linePerPage"].value = selectOrValue;
+		}
+		
 		frmMain.action = "/front/sale/gender_list.web";
-		frmMain.target = "";
 		frmMain.submit();
 	}
 	
 	function goWriteForm(value, value2, value3) {
 		
-		var frmMain = document.getElementById("frmMain");
+		var saleFrmMain = document.getElementById("saleFrmMain");
 		
-		frmMain.goSeq_sle.setAttribute("value", value);
-		frmMain.goCd_ctg_m.setAttribute("value", value2);
-		frmMain.goCd_ctg_b.setAttribute("value", value3);
+		saleFrmMain.saleSeq_sle.setAttribute("value", value);
+		saleFrmMain.saleCd_ctg_m.setAttribute("value", value2);
+		saleFrmMain.saleCd_ctg_b.setAttribute("value", value3);
 		
-		frmMain.action="/front/buy/writeForm.web";
+		saleFrmMain.action="/front/buy/writeForm.web";
 		
-		frmMain.submit();
+		saleFrmMain.submit();
 	}
 	
-	function setBasket() {
+	function setBasketOne(value, value2, value3,value4, value5, value6, value7, value8, value9) {
 		
 		if (!isLogin) {
 			alert("로그인이 필요합니다.");
 			return;
 		}
 		
-		var frmMain = document.getElementById("frmMain");
+		var basketFrmMain = document.getElementById("basketFrmMain");
 		
 		var count = document.getElementById("count").value;
-		document.getElementById("basketCount").setAttribute("value", count);
 		
-		frmMain.action = "/front/basket/setBasket.web";
-		frmMain.target = "frmBlank";
-		frmMain.submit();
+		basketFrmMain.sle_nm.setAttribute("value", value);
+		basketFrmMain.discount_sale.setAttribute("value", value2);
+		basketFrmMain.basketCount.setAttribute("value", count);
+		basketFrmMain.img.setAttribute("value", value3);
+		basketFrmMain.point_stack.setAttribute("value", value4);
+		basketFrmMain.basketCd_ctg_m.setAttribute("value", value5);
+		basketFrmMain.basketCd_ctg_b.setAttribute("value", value6);
+		basketFrmMain.price_sale.setAttribute("value", value7);
+		basketFrmMain.discount.setAttribute("value", value8);
+		basketFrmMain.basketSeq_sle.setAttribute("value", value9);
+		
+		basketFrmMain.action = "/front/basket/setBasket.web";
+		basketFrmMain.target = "frmBlank";
+		basketFrmMain.submit();
 	}
 	
 	function checkOut() {
@@ -279,13 +354,22 @@
 		
 		var subFrmMain = document.getElementById("subFrmMain");
 		
-		subFrmMain.cd_bbs_type.setAttribute("value", value);
-		subFrmMain.seq_sle.setAttribute("value", value2);
-		subFrmMain.cd_ctg_b.setAttribute("value", value3);
-		subFrmMain.cd_ctg_m.setAttribute("value", value4);
+		subFrmMain.subCd_bbs_type.setAttribute("value", value);
+		subFrmMain.subSeq_sle.setAttribute("value", value2);
+		subFrmMain.subCd_ctg_b.setAttribute("value", value3);
+		subFrmMain.subCd_ctg_m.setAttribute("value", value4);
 		
 		subFrmMain.action = "/front/center/board/myPageNotice/writeForm.web";
 		subFrmMain.submit();
+	}
+	
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/front/center/board/list.web";
+		frmMain.submit();
 	}
 	</script>
 
@@ -297,36 +381,43 @@
 </head>
 
 <body>
-<form id="subFrmMain" method="POST">
-<input type="hidden" name="cd_bbs_type"					id="type"/>
-<input type="hidden" name="seq_sle"						id="seq_sle"/>
-<input type="hidden" name="cd_ctg_m"					id="cd_ctg_m"/>
-<input type="hidden" name="cd_ctg_b"					id="cd_ctg_b"/>
-</form>
-<form id="frmMain" method="POST">
+<form id="basketFrmMain" method="POST">
 <input type="hidden" name="basketList[0].point_stack"	id="point_stack"	value="${saleDto.point_stack}"/>
 <input type="hidden" name="basketList[0].discount_sale"	id="discount_sale"	value="${saleDto.discount_sale}"/>
 <input type="hidden" name="basketList[0].img"			id="img"			value="${saleDto.img}"/>
-<input type="hidden" name="basketList[0].seq_sle"		id="seq_sle"		value="${saleDto.seq_sle}"/>
+<input type="hidden" name="basketList[0].seq_sle"		id="basketSeq_sle"		value="${saleDto.seq_sle}"/>
 <input type="hidden" name="basketList[0].sle_nm"		id="sle_nm"			value="${saleDto.sle_nm}"/>
-<input type="hidden" name="basketList[0].cd_ctg_m"		id="cd_ctg_m"		value="${saleDto.cd_ctg_m}"/>
-<input type="hidden" name="basketList[0].cd_ctg_b"		id="cd_ctg_b"		value="${saleDto.cd_ctg_b}"/>
+<input type="hidden" name="basketList[0].cd_ctg_m"		id="basketCd_ctg_m"		value="${saleDto.cd_ctg_m}"/>
+<input type="hidden" name="basketList[0].cd_ctg_b"		id="basketCd_ctg_b"		value="${saleDto.cd_ctg_b}"/>
 <input type="hidden" name="basketList[0].price_sale"	id="price_sale"		value="${saleDto.price_sale}"/>
 <input type="hidden" name="basketList[0].discount"		id="discount"		value="${saleDto.discount}"/>
 <input type="hidden" name="basketList[0].count"			id="basketCount"/>
+</form>
+<form id="subFrmMain" method="POST">
+<input type="hidden" name="cd_bbs_type"					id="subCd_bbs_type"/>
+<input type="hidden" name="seq_sle"						id="subSeq_sle"/>
+<input type="hidden" name="cd_ctg_m"					id="subCd_ctg_m"/>
+<input type="hidden" name="cd_ctg_b"					id="subCd_ctg_b"/>
+</form>
+<form id="saleFrmMain" method="POST">
+<input type="hidden" name="seq_sle"						id="saleSeq_sle"/>
+<input type="hidden" name="cd_ctg_m"					id="saleCd_ctg_m"/>
+<input type="hidden" name="cd_ctg_b"					id="saleCd_ctg_b"/>
+</form>
+<form id="frmMain" method="POST">
 <input type="hidden" name="corp_nm"						id="corp_nm"		value="${saleDto.corp_nm}"/>
 <input type="hidden" name="prd_type"					id="prd_type"		value="${saleDto.prd_type}"/>
 <input type="hidden" name="filter"						id="filter">
 <input type="hidden" name="type"						id="type"/>
-<input type="hidden" name="seq_sle"						id="goSeq_sle"		value="0"/>
-<input type="hidden" name="cd_ctg_m"					id="goCd_ctg_m"		/>
-<input type="hidden" name="cd_ctg_b"					id="goCd_ctg_b"		/>
+<input type="hidden" name="searchWord"					id="searchWord" />
+<input type="hidden" name="cd_ctg_m"					id="cd_ctg_m"/>
+<input type="hidden" name="cd_ctg_b"					id="cd_ctg_b"/>
 <input type="hidden" name="currentPage"					id="currentPage"	value="${paging.currentPage}"/>
 <input type="hidden" name="buyList[0].img"									value="${saleDto.img}"/>
 <input type="hidden" name="buyList[0].seq_sle"								value="${saleDto.seq_sle}"/>
 <input type="hidden" name="buyList[0].cd_ctg_m"								value="${saleDto.cd_ctg_m}"/>
 <input type="hidden" name="buyList[0].cd_ctg_b"								value="${saleDto.cd_ctg_b}"/>
-<input type="hidden" name="cd_bbs_type"					id="cd_bbs_type"/>
+<input type="hidden" name="cd_bbs_type"					id="cd_bbs_type"	value="0"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -485,7 +576,7 @@
 						<div class="pro-qty" style="padding: 0px; display: flex !important; align-items: center !important; justify-content: center !important; gap: 10px !important; height: 51px !important;">
 							<input type="text" value="1" name="buyList[0].count" id="count" size="3" style="text-align: center !important; font-size: 14px !important; width: 40px; display: inline-block !important;">
 						</div>
-							<a href="javascript:setBasket();" class="cart-btn" style="display: inline-block !important; margin: 0px !important; background: white; color: #346aff !important; border: 1px solid #346aff">
+							<a href="javascript:setBasketOne('${saleDto.sle_nm}', '${saleDto.discount_sale}', '${saleDto.img}', '${saleDto.point_stack}', '${saleDto.cd_ctg_m}', '${saleDto.cd_ctg_b}', '${saleDto.price_sale}', '${saleDto.discount}', '${saleDto.seq_sle}');" class="cart-btn" style="display: inline-block !important; margin: 0px !important; background: white; color: #346aff !important; border: 1px solid #346aff">
 								<span class="icon_bag_alt"></span> 장바구니 담기
 							</a>
 							<a href="javascript:checkOut();" class="cart-btn" style="display: inline-block !important; margin: 0px !important;">

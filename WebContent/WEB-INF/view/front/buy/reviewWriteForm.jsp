@@ -12,7 +12,8 @@
 	function reviewWriteProc() {
 		
 		var frmMain = document.getElementById("frmMain");
-		var rateStarHiddenInput = document.querySelector("input[name='rate_star']");
+		var rateStarHiddenInput = document.querySelector("input[id='rate_star_check']");
+		var rateStarHiddenInputMain = document.querySelector("input[name='rate_star']");
 		var rateStarValue = rateStarHiddenInput.value;
 		
 		if (!rateStarValue || rateStarValue === "") {
@@ -28,6 +29,15 @@
 		frmMain.action = "/front/buy/reviewWriteProc.web";
 		frmMain.submit();
 	}
+	
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/front/center/board/list.web";
+		frmMain.submit();
+	}
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -37,7 +47,13 @@
 </head>
 <body>
 <form id="frmMain" method="POST" enctype="multipart/form-data">
-<input type="hidden" name="rate_star" id="rate_star" value="">
+<input type="hidden" name="rate_star" 		id="rate_star" value="0">
+<input type="hidden" 						id="rate_star_check">
+<input type="hidden" name="type"			id="type"/>
+<input type="hidden" name="searchWord"		id="searchWord" />
+<input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>
+<input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
+<input type="hidden" name="cd_bbs_type"		id="cd_bbs_type"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -167,7 +183,8 @@
 	$(document).ready(function() {
 		
 		var stars = document.querySelectorAll('.fa-star-large');
-		var rateStarHiddenInput = document.querySelector("input[name='rate_star']");
+		var rateStarHiddenInputMain = document.querySelector("input[name='rate_star']");
+		var rateStarHiddenInput = document.querySelector("input[id='rate_star_check']");
 		
 		stars.forEach(star => {
 			
@@ -187,8 +204,8 @@
 					}
 				});
 				
-				
 				rateStarHiddenInput.value = value;
+				rateStarHiddenInputMain.value = value;
 			});
 		});
 	});

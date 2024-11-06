@@ -28,6 +28,15 @@
 		frmMain.action = "/front/buy/reviewModifyProc.web";
 		frmMain.submit();
 	}
+	
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/front/center/board/list.web";
+		frmMain.submit();
+	}
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -37,6 +46,11 @@
 </head>
 <body>
 <form id="frmMain" method="POST" enctype="multipart/form-data">
+<input type="hidden" name="type"			id="type"/>
+<input type="hidden" name="searchWord"		id="searchWord" />
+<input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>
+<input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
+<input type="hidden" name="cd_bbs_type"		id="cd_bbs_type"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>

@@ -313,7 +313,7 @@ public class SaleWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/front/sale/total_list.web")
-	public ModelAndView totalList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto, String type) {
+	public ModelAndView totalList(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, String type) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		

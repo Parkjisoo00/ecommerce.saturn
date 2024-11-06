@@ -47,7 +47,7 @@
 </head>
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" name="seq_sle"			id="seq_sle"/>
+<input type="hidden" name="seq_sle"			id="seq_sle" value="0"/>
 <input type="hidden" name="type"			id="type"/>
 <input type="hidden" name="searchWord"		id="searchWord" />
 <input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>

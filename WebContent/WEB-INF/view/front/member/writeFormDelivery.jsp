@@ -34,19 +34,16 @@
 		frmMain.action = "/front/center/board/list.web";
 		frmMain.submit();
 	}
-	
-	function goMyList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("cd_bbs_type").value = value;
-		
-		frmMain.action = "/front/center/board/myPageNotice/list.web";
-		frmMain.submit();
-	}
 	</script>
 </head>
 <body>
+<form id="frmMain" method="POST" class="checkout__form">
+<input type="hidden" name="type"				id="type"/>
+<input type="hidden" name="searchWord"			id="searchWord" />
+<input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"/>
+<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"/>
+<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		/>
+<input type="hidden" name="seq_mbr_addr"		id="seq_mbr_addr"		value="${memberDto.seq_mbr_addr}"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -60,50 +57,46 @@
 		<%@ include file="/include/front/mygnb.jsp" %>
 	<!-- Breadcrumb End -->
 
-				<!-- Checkout Section Begin -->
-				<section class="checkout spad" >
-					<div class="container">
-						<form id="frmMain" method="POST" class="checkout__form">
-						<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		/>
-						<input type="hidden" name="seq_mbr_addr"		id="seq_mbr_addr"		value="${memberDto.seq_mbr_addr}"/>
-							<div class="row"style="display: flex; justify-content: center; align-items: center;">
-								<div class="col-lg-8">
-									<h5 style="font-size :30px; border-bottom: 0px !important;">배송지 수정</h5>
-										<c:if test="${memberDto.flg_default == 'Y'}">
-										<div style="padding-bottom: 10px !important; display: flex; align-items: center; justify-content: left;">
-											<input name="deliveryDefault" value="true" type="checkbox" class="delivery_checkbox" checked><span>기본 배송지로 선택</span>
-										</div>
-										</c:if>
-										<c:if test="${memberDto.flg_default == 'N'}">
-										<div style="padding-bottom: 10px !important; display: flex; align-items: center; justify-content: left;">
-											<input name="deliveryDefault" value="true" type="checkbox" class="delivery_checkbox"><span>기본 배송지로 선택</span>
-										</div>
-										</c:if>
-									<div class="row">
-										<!-- 주소 -->
-										<div class="col-lg-12 col-md-6 col-sm-6">
-											<div class="checkout__form__input">
-											<p style="font-family: 'Noto Sans KR', sans-serif !important;">주소 <span>*</span></p>
-												<input type="text" id="post" name="post" size="5" value="${memberDto.post}"/>
-													<label for="addr1">도로명</label>
-												<input type="text"	id="addr1" name="addr1" size="40" value="${memberDto.addr1}"/>
-												<span id="guide" style="color:#999; display:none"></span>
-													<label for="addr2">상세</label>
-												<input type="text"	id="addr2" name="addr2" size="20" value="${memberDto.addr2}"/>
-												<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
-											</div>
-										</div>
-										<!-- 수정 버튼 -->
-										<div class="col-lg-12 col-md-12 col-sm-12">
-											<div class="checkout__form__input">
-												<input type="button" value="배송지 수정하기" style="width: 100%; text-align: center;" id="registerId" onClick="checkModifyDelivery();"/>
-											</div>
-										</div>
+		<!-- Checkout Section Begin -->
+		<section class="checkout spad" >
+			<div class="container">
+					<div class="row"style="display: flex; justify-content: center; align-items: center;">
+						<div class="col-lg-8">
+							<h5 style="font-size :30px; border-bottom: 0px !important;">배송지 수정</h5>
+								<c:if test="${memberDto.flg_default == 'Y'}">
+								<div style="padding-bottom: 10px !important; display: flex; align-items: center; justify-content: left;">
+									<input name="deliveryDefault" value="true" type="checkbox" class="delivery_checkbox" checked><span>기본 배송지로 선택</span>
+								</div>
+								</c:if>
+								<c:if test="${memberDto.flg_default == 'N'}">
+								<div style="padding-bottom: 10px !important; display: flex; align-items: center; justify-content: left;">
+									<input name="deliveryDefault" value="true" type="checkbox" class="delivery_checkbox"><span>기본 배송지로 선택</span>
+								</div>
+								</c:if>
+							<div class="row">
+								<!-- 주소 -->
+								<div class="col-lg-12 col-md-6 col-sm-6">
+									<div class="checkout__form__input">
+									<p style="font-family: 'Noto Sans KR', sans-serif !important;">주소 <span>*</span></p>
+										<input type="text" id="post" name="post" size="5" value="${memberDto.post}"/>
+											<label for="addr1">도로명</label>
+										<input type="text"	id="addr1" name="addr1" size="40" value="${memberDto.addr1}"/>
+										<span id="guide" style="color:#999; display:none"></span>
+											<label for="addr2">상세</label>
+										<input type="text"	id="addr2" name="addr2" size="20" value="${memberDto.addr2}"/>
+										<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
 									</div>
 								</div>
+								<!-- 수정 버튼 -->
+								<div class="col-lg-12 col-md-12 col-sm-12">
+									<div class="checkout__form__input">
+										<input type="button" value="배송지 수정하기" style="width: 100%; text-align: center;" id="registerId" onClick="checkModifyDelivery();"/>
+									</div>
 								</div>
-							</form>
+							</div>
 						</div>
+					</div>
+				</div>
 			</section>
 
 	<!-- Instagram Begin -->
@@ -138,5 +131,6 @@
 		}
 	}
 </script>
+</form>
 </body>
 </html>

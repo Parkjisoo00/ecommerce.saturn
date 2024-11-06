@@ -19,10 +19,82 @@
 	<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript" src="/js/package/tinymce.js"></script>		
 	<script>
-
+	function setBasket() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/basket/setBasket.web";
+		frmMain.target = "frmBlank";
+		frmMain.submit();
+	}
+	
+	function setBasketOne(value, value2, value3,value4, value5, value6, value7, value8, value9, value10) {
+		
+		var subFrmMain = document.getElementById("subFrmMain");
+		
+		subFrmMain.sle_nm.setAttribute("value", value2);
+		subFrmMain.discount_sale.setAttribute("value", value3);
+		subFrmMain.basketCount.setAttribute("value", value4);
+		subFrmMain.img.setAttribute("value", value5);
+		subFrmMain.point_stack.setAttribute("value", value6);
+		subFrmMain.basketCd_ctg_m.setAttribute("value", value7);
+		subFrmMain.basketCd_ctg_b.setAttribute("value", value8);
+		subFrmMain.price_sale.setAttribute("value", value9);
+		subFrmMain.discount.setAttribute("value", value10);
+		subFrmMain.basketSeq_sle.setAttribute("value", value);
+		
+		subFrmMain.action = "/front/basket/setBasket.web";
+		subFrmMain.target = "frmBlank";
+		subFrmMain.submit();
+	}
+	
+	function goWriteForm(value, value2, value3) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.goSeq_sle.setAttribute("value", value);
+		frmMain.goCd_ctg_m.setAttribute("value", value2);
+		frmMain.goCd_ctg_b.setAttribute("value", value3);
+		
+		frmMain.action="/front/buy/writeForm.web";
+		frmMain.target = "";
+		frmMain.submit();
+	}
+	
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/front/center/board/list.web";
+		frmMain.submit();
+	}
 	</script>
 </head>
 <body style="background-color: #f8f8f8;">
+<form id="subFrmMain" method="POST">
+	<input type="hidden" name="basketList[0].point_stack"		id="point_stack"/>
+	<input type="hidden" name="basketList[0].discount_sale"		id="discount_sale"/>
+	<input type="hidden" name="basketList[0].img"				id="img"/>
+	<input type="hidden" name="basketList[0].seq_sle"			id="basketSeq_sle"/>
+	<input type="hidden" name="basketList[0].sle_nm"			id="sle_nm"/>
+	<input type="hidden" name="basketList[0].cd_ctg_m"			id="basketCd_ctg_m"/>
+	<input type="hidden" name="basketList[0].cd_ctg_b"			id="basketCd_ctg_b"/>
+	<input type="hidden" name="basketList[0].price_sale"		id="price_sale"/>
+	<input type="hidden" name="basketList[0].discount"			id="discount"/>
+	<input type="hidden" name="basketList[0].count"				id="basketCount"	value="0" />
+</form>
+<form id="frmMain" method="POST" class="checkout__form">
+	<input type="hidden" name="cd_survey_type"			id="cd_survey_type"/>
+	<input type="hidden" name="gender"					id="gender"				value="${surveyDto.gender}"/>
+	<input type="hidden" name="mbr_nm"					id="mbr_nm"				value="${surveyDto.mbr_nm}"/>
+	<input type="hidden" name="user_age"				id="user_age"			value="${surveyDto.user_age}"/>
+	<input type="hidden" name="seq_sle"					id="goSeq_sle"			value="0"/>
+	<input type="hidden" name="cd_ctg_m"				id="goCd_ctg_m"/>
+	<input type="hidden" name="cd_ctg_b"				id="goCd_ctg_b"/>
+	<input type="hidden" name="cd_bbs_type"				id="cd_bbs_type"/>
+	<input type="hidden" name="type"			id="type"/>
+	<input type="hidden" name="searchWord"		id="searchWord" />
 <!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -38,26 +110,6 @@
 				<!-- Checkout Section Begin -->
 	<section class="checkout spad" style="min-height: calc(100vh - 100px);padding-top: 0px;">
 		<div class="container">
-		<form id="subFrmMain" method="POST">
-			<input type="hidden" name="basketList[0].point_stack"		id="point_stack"/>
-			<input type="hidden" name="basketList[0].discount_sale"		id="discount_sale"/>
-			<input type="hidden" name="basketList[0].img"				id="img"/>
-			<input type="hidden" name="basketList[0].seq_sle"			id="basketSeq_sle"/>
-			<input type="hidden" name="basketList[0].sle_nm"			id="sle_nm"/>
-			<input type="hidden" name="basketList[0].cd_ctg_m"			id="basketCd_ctg_m"/>
-			<input type="hidden" name="basketList[0].cd_ctg_b"			id="basketCd_ctg_b"/>
-			<input type="hidden" name="basketList[0].price_sale"		id="price_sale"/>
-			<input type="hidden" name="basketList[0].discount"			id="discount"/>
-			<input type="hidden" name="basketList[0].count"				id="basketCount"	value="0" />
-		</form>
-			<form id="frmMain" method="POST" class="checkout__form">
-			<input type="hidden" name="cd_survey_type"			id="cd_survey_type"/>
-			<input type="hidden" name="gender"					id="gender"				value="${surveyDto.gender}"/>
-			<input type="hidden" name="mbr_nm"					id="mbr_nm"				value="${surveyDto.mbr_nm}"/>
-			<input type="hidden" name="user_age"				id="user_age"			value="${surveyDto.user_age}"/>
-			<input type="hidden" name="seq_sle"					id="goSeq_sle"			value="0"/>
-			<input type="hidden" name="cd_ctg_m"				id="goCd_ctg_m"/>
-			<input type="hidden" name="cd_ctg_b"				id="goCd_ctg_b"/>
 			<div class="survay_notice">
 				 본 결과는 의사의 처방을 대신하지 않습니다. 
 			</div>
@@ -139,7 +191,6 @@
 					</div>
 				</div>
 			</div>
-			</form>
 		</div>
 	</section>
 
