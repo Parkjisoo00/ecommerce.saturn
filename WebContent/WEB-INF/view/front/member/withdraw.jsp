@@ -61,7 +61,7 @@
 	<!-- Breadcrumb End -->
 
 					<!-- Checkout Section Begin -->
-					<section class="checkout spad" style="min-height: calc(100vh - 100px);">
+					<section class="checkout spad" style="min-height: calc(100vh - 1px);">
 						<div class="container">
 							<div class="row"style="display: flex; justify-content: center; align-items: center;">
 								<div class="col-lg-8">

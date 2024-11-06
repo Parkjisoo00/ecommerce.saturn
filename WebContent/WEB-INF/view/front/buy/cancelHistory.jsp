@@ -130,7 +130,7 @@
 	<!-- Breadcrumb End -->
 
 	<!-- Shop Cart Section Begin -->
-	<section class="shop-cart spad" style="min-height: calc(100vh - 100px);">
+	<section class="shop-cart spad" style="min-height: calc(100vh - 1px);">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">

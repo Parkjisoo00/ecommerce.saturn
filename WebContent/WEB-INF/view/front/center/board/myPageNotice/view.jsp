@@ -84,7 +84,7 @@
 	<!-- Breadcrumb Begin -->
 		<%@ include file="/include/front/mygnb.jsp" %>
 	<!-- Breadcrumb End -->
-<section class="shop spad"style="min-height: calc(100vh - 100px); ">
+<section class="shop spad"style="min-height: calc(100vh - 1px); ">
 	<div class="container">
 		<article class="txtCenter">
 		<div class="col-lg-12 col-md-6">

@@ -108,7 +108,7 @@
 	<!-- Breadcrumb End -->
 
 				<!-- Checkout Section Begin -->
-	<section class="checkout spad" style="min-height: calc(100vh - 100px);padding-top: 0px;">
+	<section class="checkout spad" style="min-height: calc(100vh - 1px);padding-top: 0px;">
 		<div class="container">
 			<div class="survay_notice">
 				 본 결과는 의사의 처방을 대신하지 않습니다. 
