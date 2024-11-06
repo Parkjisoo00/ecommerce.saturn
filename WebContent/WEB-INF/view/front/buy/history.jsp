@@ -18,7 +18,6 @@
 		frmMain.goCd_ctg_b.setAttribute("value", value3);
 		
 		frmMain.action="/front/buy/writeForm.web";
-		
 		frmMain.submit();
 	}
 	

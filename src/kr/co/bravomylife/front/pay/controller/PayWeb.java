@@ -88,7 +88,6 @@ public class PayWeb extends Common {
 	@Inject
 	ApiService apiService;
 	
-	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]

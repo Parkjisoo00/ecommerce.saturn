@@ -51,6 +51,14 @@
 	</script>
 </head>
 <body>
+<form id="frmMain" method="POST" class="checkout__form">
+<input type="hidden" name="seq_sle"				id="seq_sle"/>
+<input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"/>
+<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"/>
+<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"/>
+<input type="hidden" name="phone"				id="phone"/>
+<input type="hidden" name="type"				id="type"/>
+<input type="hidden" name="searchWord"			id="searchWord"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -67,12 +75,6 @@
 				<!-- Checkout Section Begin -->
 				<section class="checkout spad" >
 					<div class="container">
-						<form id="frmMain" method="POST" class="checkout__form">
-						<input type="hidden" name="seq_sle"				id="seq_sle"			/>
-						<input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"			/>
-						<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"			/>
-						<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		/>
-						<input type="hidden" name="phone" id="phone" />
 							<div class="row"style="display: flex; justify-content: center; align-items: center;">
 								<div class="col-lg-12">
 									<div class="mydiv1" id="myDiv1" style="width: 100%; display: flex; justify-content: space-between; align-items: center;margin-bottom:100px">
@@ -194,9 +196,8 @@
 						 -->
 					</div>
 				</div>
-			</form>
-		</div>
-	</section>
+			</div>
+		</section>
 
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
@@ -209,5 +210,6 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
+</form>
 </body>
 </html>

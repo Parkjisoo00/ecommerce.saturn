@@ -20,6 +20,8 @@
  */
 package kr.co.bravomylife.front.survey.dto;
 
+import java.util.List;
+
 /**
  * @version 1.0.0
  * @author cydgate4957@gmail.com
@@ -30,31 +32,38 @@ package kr.co.bravomylife.front.survey.dto;
  */
 public class SurveyDto {
 
-	private int seq_mbr					= 0;
-	private String cd_survey_type		= "";
-	private int seq_sle					= 0;
-	private int seq_hp_sur				= 0;
-	private int seq_hp_sur_dtl			= 0;
-	private String age					= "";
-	private int user_age				= 0;
-	private String gender				= "";
-	private int register				= 0;
-	private int updater					= 0;
-	private String dt_reg				= "";
-	private String dt_upt				= "";
-	private String cd_ctg_m				= "";
-	private String cd_ctg_b				= "";
-	private String cd_ctg				= "";
-	private String mbr_nm				= "";
-	private String sle_nm				= "";
-	private String img					= "";
-	private int point_stack				= 0;
-	private int price_sale				= 0;
-	private int discount				= 0;
-	private int discount_sale			= 0;
-	private int count					= 0;
+	private int seq_mbr							= 0;
+	private String cd_survey_type				= "";
+	private int seq_sle							= 0;
+	private int seq_hp_sur						= 0;
+	private int seq_hp_sur_dtl					= 0;
+	private String age							= "";
+	private int user_age						= 0;
+	private String gender						= "";
+	private int register						= 0;
+	private int updater							= 0;
+	private String dt_reg						= "";
+	private String dt_upt						= "";
+	private String cd_ctg_m						= "";
+	private String cd_ctg_b						= "";
+	private String cd_ctg						= "";
+	private String mbr_nm						= "";
+	private String sle_nm						= "";
+	private String img							= "";
+	private int point_stack						= 0;
+	private int price_sale						= 0;
+	private int discount						= 0;
+	private int discount_sale					= 0;
+	private int count							= 0;
+	private List<SurveyDataDto> surveyDatas		= null;
 	
 	
+	public List<SurveyDataDto> getSurveyDatas() {
+		return surveyDatas;
+	}
+	public void setSurveyDatas(List<SurveyDataDto> surveyDatas) {
+		this.surveyDatas = surveyDatas;
+	}
 	public String getSle_nm() {
 		return sle_nm;
 	}

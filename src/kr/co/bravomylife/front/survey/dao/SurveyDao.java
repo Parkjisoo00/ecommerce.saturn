@@ -20,6 +20,8 @@
  */
 package kr.co.bravomylife.front.survey.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import kr.co.bravomylife.front.common.dao.BaseDao;
@@ -35,6 +37,14 @@ import kr.co.bravomylife.front.survey.dto.SurveyDto;
  */
 @Repository("kr.co.bravomylife.front.survey.dao.SurveyDao")
 public class SurveyDao extends BaseDao{
+	
+	public List<SurveyDto> surveyDtl(SurveyDto surveyDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.survey.Survey.surveyDtl", surveyDto);
+	}
+	
+	public List<SurveyDto> surveyMst(SurveyDto surveyDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.survey.Survey.surveyMst", surveyDto);
+	}
 	
 	public SurveyDto select(SurveyDto surveyDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.survey.Survey.select", surveyDto);

@@ -21,7 +21,9 @@
 package kr.co.bravomylife.front.survey.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -30,6 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import kr.co.bravomylife.front.survey.dao.SurveyDao;
+import kr.co.bravomylife.front.survey.dto.SurveyDataDto;
 import kr.co.bravomylife.front.survey.dto.SurveyDto;
 import kr.co.bravomylife.front.survey.dto.SurveyListDto;
 
@@ -46,6 +49,70 @@ public class SurveySrvc {
 	
 	@Inject
 	SurveyDao surveyDao;
+	
+	@SuppressWarnings("unchecked")
+	public SurveyListDto mergedSurveyList(SurveyListDto surveyListMst, SurveyListDto surveyListDtl) {
+		
+		List<SurveyDto> surveyMst = (List<SurveyDto>) surveyListMst.getList();
+		List<SurveyDto> surveyDtl = (List<SurveyDto>) surveyListDtl.getList();
+		
+		Map<Integer, List<SurveyDataDto>> surveyMap = new HashMap<>();
+		
+		for (SurveyDto listDtl : surveyDtl) {
+			
+			int seqHpSur = listDtl.getSeq_hp_sur();
+			int seqHpSurDtl = listDtl.getSeq_hp_sur_dtl();
+			String cdCtgM = listDtl.getCd_ctg_m();
+			String cdCtgB = listDtl.getCd_ctg_b();
+			int seqSle = listDtl.getSeq_sle();
+			
+			if (!surveyMap.containsKey(seqHpSur)) {
+				
+				surveyMap.put(seqHpSur, new ArrayList<>());
+			}
+			SurveyDataDto surveyDataDto = new SurveyDataDto();
+			surveyDataDto.setSeq_hp_sur_dtl(seqHpSurDtl);
+			surveyDataDto.setCd_ctg_m(cdCtgM);
+			surveyDataDto.setCd_ctg_b(cdCtgB);
+			surveyDataDto.setSeq_sle(seqSle);
+			
+			surveyMap.get(seqHpSur).add(surveyDataDto);
+		}
+		for (SurveyDto listMst : surveyMst) {
+			
+			int seqHpSur = listMst.getSeq_hp_sur();
+			
+			List<SurveyDataDto> surveyResultList = surveyMap.get(seqHpSur);
+			
+			if (surveyResultList != null) {
+				
+				listMst.setSurveyDatas(surveyResultList);
+			}
+		}
+		SurveyListDto mergedSurveyListDto = new SurveyListDto();
+		mergedSurveyListDto.setSurvey(surveyListMst.getSurvey());
+		mergedSurveyListDto.setList(surveyMst);
+		
+		return mergedSurveyListDto;
+	}
+	
+	public SurveyListDto surveyDtl(SurveyDto surveyDto) {
+		
+		SurveyListDto surveyListDto = new SurveyListDto();
+		
+		surveyListDto.setList(surveyDao.surveyDtl(surveyDto));
+		
+		return surveyListDto;
+	}
+	
+	public SurveyListDto surveyMst(SurveyDto surveyDto) {
+		
+		SurveyListDto surveyListDto = new SurveyListDto();
+		
+		surveyListDto.setList(surveyDao.surveyMst(surveyDto));
+		
+		return surveyListDto;
+	}
 	
 	public SurveyListDto select(SurveyListDto surveyListDto) {
 		

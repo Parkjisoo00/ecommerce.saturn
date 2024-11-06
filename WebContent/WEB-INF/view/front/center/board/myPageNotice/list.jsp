@@ -37,8 +37,13 @@
 		
 		var frmMain = document.getElementById("frmMain");
 		
+		document.getElementById("searchWord").value = "";
+		document.getElementById("sSearchWord").value = "";
+		document.getElementById("sSearchKey").value = "";
+		document.getElementById("currentPage").value = "1";
+		
 		frmMain.cd_bbs_type.setAttribute("value", value);
-		frmMain.action = "/front/center/board/list.web";
+		frmMain.action="/front/center/board/list.web";
 		frmMain.submit();
 	}
 	
@@ -61,6 +66,23 @@
 		frmMain.submit();
 	}
 	
+	function boardSearch() {
+		
+		var boardFrmMain = document.getElementById("boardFrmMain");
+		
+		var sSearchWord = document.getElementById("sSearchWord").value;
+		var sSearchKey = document.getElementById("sSearchKey").value;
+		
+		//alert(document.getElementById("sSearchWord").value);
+		
+		boardFrmMain.cd_bbs_type.setAttribute("value", '1');
+		boardFrmMain.ssSearchWord.setAttribute("value", sSearchWord);
+		boardFrmMain.ssSearchKey.setAttribute("value", sSearchKey);
+		
+		boardFrmMain.action="/front/center/board/list.web";
+		boardFrmMain.submit();
+	}
+	
 	</script>
 
 	<!-- Google Font -->
@@ -71,11 +93,6 @@
 </head>
 
 <body>
-<form id="frmMain" method="POST">
-<input type="hidden" name="seq_bbs"		id="seq_bbs" value="0"/>
-<input type="hidden" name="a"		id="a" value="${paging.register}"/>
-<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
-<input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -91,6 +108,21 @@
 	<!-- Breadcrumb End -->
 
 	<section class="shop spad"style="min-height: calc(100vh - 100px); ">
+		<form id="boardFrmMain" method="POST">
+			<input type="hidden" name="cd_bbs_type" 	id="cd_bbs_type" value="${paging.cd_bbs_type}" />
+			<input type="hidden" name="currentPage" 	id="currentPage" value="${paging.currentPage}" />
+			<input type="hidden" name="sSearchKey"		id="ssSearchKey" />
+			<input type="hidden" name="sSearchWord"		id="ssSearchWord" />
+		</form>
+		<form id="frmMain" method="POST">
+			<input type="hidden" name="seq_bbs"		id="seq_bbs" value="0"/>
+			<input type="hidden" name="a"			id="a" value="${paging.register}"/>
+			<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
+			<input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
+			<input type="hidden" name="cd_ctg_b"	id="cd_ctg_b"/>
+			<input type="hidden" name="cd_ctg_m"	id="cd_ctg_m" />
+			<input type="hidden" name="type"		id="type"/>
+			<input type="hidden" name="searchWord"	id="searchWord" />
 		<div class="container">
 			<div class="col-lg-12" style="padding: 0 !important;">
 				<div class="col-lg-12 col-md-12 col-sm-12">
@@ -104,12 +136,12 @@
 		<!-- 로그인 상태일 때만 보이는 영역 -->
 					<div class="brdSearchArea">
 						<div style="display: flex; justify-content: flex-end;margin-bottom: 10px;">
-							<select name="searchKey">
-								<option value="title"<c:if test="${paging.searchKey == 'title'}"> selected</c:if>>제목</option>
-								<option value="contents"<c:if test="${paging.searchKey == 'contents'}"> selected</c:if>>내용</option>
-								<option value="title+contents"<c:if test="${paging.searchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
+							<select name="sSearchKey" id="sSearchKey">
+								<option value="title"<c:if test="${paging.sSearchKey == 'title'}"> selected</c:if>>제목</option>
+								<option value="contents"<c:if test="${paging.sSearchKey == 'contents'}"> selected</c:if>>내용</option>
+								<option value="title+contents"<c:if test="${paging.sSearchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
 							</select>
-							<input type="text" name="searchWord" id="searchWord" value="${paging.searchWord}" /> 
+							<input type="text" name="sSearchWord" id="sSearchWord" value="${paging.sSearchWord}" /> 
 							<input type="submit" value="검색"/>
 						</div>
 					<!-- 게시글 목록 -->
@@ -177,8 +209,9 @@
 							</div>
 						</div>
 					</div>
+				</div>
 			</div>
-		</div>
+		</form>
 	</section>
 
 	<!-- Instagram Begin -->
@@ -192,7 +225,5 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
-
-</form>
 </body>
 </html>

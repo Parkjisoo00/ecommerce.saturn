@@ -48,6 +48,13 @@
 	</script>
 </head>
 <body>
+<form id="frmMain" method="POST" class="checkout__form">
+<input type="hidden" name="phone" id="phone"/>
+<input type="hidden" name="cd_bbs_type"		id="cd_bbs_type"/>
+<input type="hidden" name="type"			id="type"/>
+<input type="hidden" name="searchWord"		id="searchWord"/>
+<input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
+<input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -62,11 +69,8 @@
 	<!-- Breadcrumb End -->
 
 				<!-- Checkout Section Begin -->
-				<section class="checkout spad" >
-					<div class="container">
-						<form id="frmMain" method="POST" class="checkout__form">
-						<input type="hidden" name="phone" id="phone" />
-						<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		/>
+					<section class="checkout spad" >
+						<div class="container">
 							<div class="row"style="display: flex; justify-content: center; align-items: center;">
 								<div class="col-lg-8">
 									<h5 style="font-size :30px">개인 정보</h5>
@@ -160,10 +164,9 @@
 										</div>
 									</div>
 								</div>
-								</div>
-							</form>
+							</div>
 						</div>
-			</section>
+					</section>
 
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
@@ -176,5 +179,6 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
+</form>
 </body>
 </html>

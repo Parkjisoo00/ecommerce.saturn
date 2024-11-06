@@ -5,7 +5,7 @@
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/passwd/modifyForm.web" class="menuLnb">비밀번호 수정</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="javascript:goMyList(3);" class="menuLnb">문의 내역</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/pointHistory.web" class="menuLnb">포인트</a></li>
-	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">맞춤건강 결과 조회</a></li>
+	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="#" class="menuLnb">맞춤 건강 결과 조회</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/myLike.web" class="menuLnb">찜한 상품</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/reviewListPage.web" class="menuLnb">상품후기 관리</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/buy/history.web" class="menuLnb">주문목록/배송조회</a></li>
@@ -14,35 +14,12 @@
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/modifyDelivery.web" class="menuLnb">배송지 관리</a></li>
 </ul>
 <script>
-	function goSearch() {
+	function goTypeT(value) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
-		frmMain.action = "/front/center/board/personalHealth/searchForm.web";
-		frmMain.submit();
-	}
-	
-	function goHealthInfo() {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.action = "/front/center/board/health/list.web";
-		frmMain.submit();
-	}
-	
-	function goIngredInfo() {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.action = "/front/center/board/ingred/list.web";
-		frmMain.submit();
-	}
-	
-	function goIntro() {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.action = "/front/center/board/introduce/index.web";
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
 		frmMain.submit();
 	}
 	
@@ -72,34 +49,7 @@
 		frmMain.action = "/front/sale/gender_list.web";
 		frmMain.submit();
 	}
-	
-	function goTypeT(value) {
 		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.type.setAttribute("value", value);
-		frmMain.action = "/front/sale/total_list.web";
-		frmMain.submit();
-	}
-	
-	function goList(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.cd_bbs_type.setAttribute("value", value);
-		frmMain.action = "/front/center/board/list.web";
-		frmMain.submit();
-	}
-	
-	function goTypeT(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.type.setAttribute("value", value);
-		frmMain.action = "/front/sale/total_list.web";
-		frmMain.submit();
-	}
-	
 	function goTypeTx(value) {
 		
 		var first_cd_ctgDesktop		= document.getElementById("first_cd_ctg").value;
@@ -144,11 +94,3 @@
 		frmMain.submit();
 	}
 </script>
-
-<form id="frmMain" method="POST">
-<input type="hidden" name="type"			id="type"/>
-<input type="hidden" name="cd_bbs_type"		id="cd_bbs_type" value="0"/>
-<input type="hidden" name="cd_ctg_m"		id="cd_ctg_m" />
-<input type="hidden" name="cd_ctg_b"		id="cd_ctg_b" />
-<input type="hidden" name="searchWord"		id="searchWord" />
-</form>

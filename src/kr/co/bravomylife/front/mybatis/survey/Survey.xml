@@ -2,6 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.survey.Survey">
 
+	<select id="surveyDtl" parameterType="surveyDto" resultType="surveyDto">
+		SELECT
+			SEQ_HP_SUR
+			, SEQ_HP_SUR_DTL
+			, CD_CTG_M
+			, CD_CTG_B
+			, SEQ_SLE
+		FROM
+			TB_HP_SUR_DTL
+		WHERE
+			SEQ_HP_SUR IN (
+				SELECT
+					SEQ_HP_SUR
+				FROM
+					TB_HP_SUR
+				WHERE
+					SEQ_MBR = #{seq_mbr}
+					AND SEQ_HP_SUR = #{seq_hp_sur}
+			)
+	</select>
+
+	<select id="surveyMst" parameterType="surveyDto" resultType="surveyDto">
+		SELECT
+			sur.SEQ_HP_SUR
+			, sur.SEQ_MBR
+			, sur.AGE
+			, sur.GENDER
+			, TO_CHAR(sur.DT_REG, 'YYYY-MM-DD') dt_reg
+			, mst.MBR_NM
+		FROM 
+			TB_HP_SUR sur
+		LEFT JOIN
+			TB_MBR_MST mst
+		ON
+			sur.SEQ_MBR = mst.SEQ_MBR
+		WHERE 
+			sur.SEQ_MBR = #{seq_mbr}
+			AND sur.SEQ_HP_SUR = #{seq_hp_sur}
+	</select>
+
 	<select id="select" parameterType="surveyDto" resultType="surveyDto">
 		SELECT 
 			sle.SLE_NM

@@ -65,6 +65,52 @@ public class SurveyWeb extends Common {
 	@Inject
 	private SurveySrvc surveySrvc;
 	
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-11-06
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/front/center/board/surveyModifyForm.web")
+	public ModelAndView surveyModifyForm(HttpServletRequest request, HttpServletResponse response, SurveyDto surveyDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
+		SKwithAES aes		= new SKwithAES(staticKey);
+		
+		try {
+			
+			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
+			
+			surveyDto.setSeq_mbr(seqMbr);
+			
+			SurveyListDto surveyListDtl = surveySrvc.surveyDtl(surveyDto);
+			SurveyListDto surveyListMst = surveySrvc.surveyMst(surveyDto);
+			
+			List<SurveyDto> surveyList = (List<SurveyDto>) surveyListMst.getList();
+			surveyList.get(0).setMbr_nm(aes.decode(surveyList.get(0).getMbr_nm()));
+			
+			SurveyListDto mergedSurvey = surveySrvc.mergedSurveyList(surveyListMst, surveyListDtl);
+			
+			mav.addObject("survey", mergedSurvey.getSurvey());
+			mav.addObject("surveyList", mergedSurvey.getList());
+			mav.setViewName("front/member/surveyModifyForm");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".surveyModifyForm()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]

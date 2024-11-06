@@ -63,8 +63,11 @@
 
 <form id="frmMain" method="POST" enctype="multipart/form-data" class="checkout__form">
 <input type="hidden" id="type"			name="type" />
+<input type="hidden" id="searchWord"	name="searchWord"/>
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_bbs_type" name="cd_bbs_type" />
+<input type="hidden" id="cd_ctg_b"		name="cd_ctg_b"/>
+<input type="hidden" id="cd_ctg_m"		name="cd_ctg_m"/>
+<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${boardDto.seq_bbs}" />
 
 	<!-- Page Preloder -->

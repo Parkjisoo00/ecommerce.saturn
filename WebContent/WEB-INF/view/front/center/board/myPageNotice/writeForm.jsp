@@ -61,8 +61,12 @@
 <body>
 
 <form id="frmMain" method="POST" enctype="multipart/form-data" class="checkout__form">
-<input type="hidden" id="cd_bbs_type" name="cd_bbs_type" />
-<input type="hidden" id="seq_sle" name="seq_sle" value= "${boardDto.seq_sle}"/>
+<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
+<input type="hidden" id="type"			name="type" />
+<input type="hidden" id="cd_ctg_b"		name="cd_ctg_b"/>
+<input type="hidden" id="searchWord"	name="searchWord"/>
+<input type="hidden" id="cd_ctg_m"		name="cd_ctg_m"/>
+<input type="hidden" id="seq_sle"		name="seq_sle" value= "${boardDto.seq_sle}"/>
 
 	<!-- Page Preloder -->
 	<div id="preloder">

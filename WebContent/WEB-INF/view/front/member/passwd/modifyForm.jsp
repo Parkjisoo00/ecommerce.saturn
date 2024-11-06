@@ -17,6 +17,8 @@
 	
 	function checkModify() {
 		
+		var frmMain = document.getElementById("frmMain");
+		
 		var passwd = $("#passwd").val();	// 현재 비밀번호
 		
 		var confirmPasswd	= $("#confirmPasswd").val();
@@ -57,9 +59,9 @@
 			return;
 		}
 		
-		
 		// 폼을 제출
-		$("#frmMain").submit();
+		frmMain.action = "/front/member/passwd/modifyProc.web";
+		frmMain.submit();
 	}
 	
 	function goList(value) {
@@ -93,6 +95,12 @@
 	</style>
 </head>
 <body>
+<form id="frmMain" method="POST" class="checkout__form">
+<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"/>
+<input type="hidden" name="type"				id="type"/>
+<input type="hidden" name="searchWord"			id="searchWord"/>
+<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"/>
+<input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -106,10 +114,8 @@
 	<!-- Breadcrumb Begin -->
 	<!-- Breadcrumb End -->
 
-	<section class="checkout spad" style="min-height: calc(100vh - 100px); ">
-		<div class="container">
-			<form action="/front/member/passwd/modifyProc.web" id="frmMain" method="POST" class="checkout__form">
-			<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		/>
+		<section class="checkout spad" style="min-height: calc(100vh - 100px); ">
+			<div class="container">
 				<div class="row" style="display: flex; justify-content: center; align-items: center;">
 					<div class="col-lg-8">
 						<h5 >비밀번호 변경</h5>
@@ -149,9 +155,8 @@
 						</div>
 					</div>
 				</div>
-			</form>
-		</div>
-	</section>
+			</div>
+		</section>
 
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
@@ -164,5 +169,6 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
+</form>
 </body>
 </html>
