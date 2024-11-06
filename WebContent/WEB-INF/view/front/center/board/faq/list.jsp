@@ -94,13 +94,6 @@
 			panel=this.nextElementSibling; if (panel.style.display==="block" ) { panel.style.display="none"
 			; } else { panel.style.display="block" ; } }); }
 		
-			 var boardFrmMain = document.getElementById("boardFrmMain");
-				if (boardFrmMain) {
-					boardFrmMain.ssSearchKey.value = '';
-					boardFrmMain.ssSearchWord.value = '';
-				}
-			}
-		
 		<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
 		function goView(value) {
 	
@@ -127,6 +120,7 @@
 			var frmMain = document.getElementById("frmMain");
 			
 			document.getElementById("searchWord").value = "";
+			document.getElementById("sSearchWord").value = "";
 			document.getElementById("currentPage").value = "1";
 			
 			frmMain.cd_bbs_type.setAttribute("value", value);

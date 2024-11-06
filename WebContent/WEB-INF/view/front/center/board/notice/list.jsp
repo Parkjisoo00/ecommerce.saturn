@@ -97,13 +97,6 @@
 			this.classList.toggle("active"); var panel=this.nextElementSibling; if
 			(panel.style.display==="block" ) { panel.style.display="none" ; } else {
 			panel.style.display="block" ; } }); } 
-		
-		var boardFrmMain = document.getElementById("boardFrmMain");
-		if (boardFrmMain) {
-			boardFrmMain.ssSearchKey.value = '';
-			boardFrmMain.ssSearchWord.value = '';
-		}
-	}
 	
 	<!--
 	function toggleAnswer(element) {
@@ -181,6 +174,7 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		document.getElementById("searchWord").value = "";
+		document.getElementById("sSearchWord").value = "";
 		document.getElementById("currentPage").value = "1";
 		
 		frmMain.cd_bbs_type.setAttribute("value", value);
