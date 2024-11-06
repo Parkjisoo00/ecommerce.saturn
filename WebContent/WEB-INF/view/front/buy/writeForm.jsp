@@ -270,22 +270,22 @@
 		frmMain.submit();
 	}
 	
-	function WriteForm(value, value2, value3, value4) {
+	function writeForm(value, value2, value3, value4) {
 		
 		if (!isLogin) {
 			alert("로그인이 필요합니다.");
 			return;
 		}
 		
-		var frmMain = document.getElementById("frmMain");
+		var subFrmMain = document.getElementById("subFrmMain");
 		
-		frmMain.cd_bbs_type.setAttribute("value", value);
-		frmMain.seq_sle.setAttribute("value", value2);
-		frmMain.cd_ctg_b.setAttribute("value", value3);
-		frmMain.cd_ctg_m.setAttribute("value", value4);
+		subFrmMain.cd_bbs_type.setAttribute("value", value);
+		subFrmMain.seq_sle.setAttribute("value", value2);
+		subFrmMain.cd_ctg_b.setAttribute("value", value3);
+		subFrmMain.cd_ctg_m.setAttribute("value", value4);
 		
-		frmMain.action = "/front/center/board/myPageNotice/writeForm.web";
-		frmMain.submit();
+		subFrmMain.action = "/front/center/board/myPageNotice/writeForm.web";
+		subFrmMain.submit();
 	}
 	</script>
 
@@ -297,6 +297,12 @@
 </head>
 
 <body>
+<form id="subFrmMain" method="POST">
+<input type="hidden" name="cd_bbs_type"					id="type"/>
+<input type="hidden" name="seq_sle"						id="seq_sle"/>
+<input type="hidden" name="cd_ctg_m"					id="cd_ctg_m"/>
+<input type="hidden" name="cd_ctg_b"					id="cd_ctg_b"/>
+</form>
 <form id="frmMain" method="POST">
 <input type="hidden" name="basketList[0].point_stack"	id="point_stack"	value="${saleDto.point_stack}"/>
 <input type="hidden" name="basketList[0].discount_sale"	id="discount_sale"	value="${saleDto.discount_sale}"/>
@@ -725,7 +731,7 @@
 							<div class="tab-pane" id="tabs-2" role="tabpanel">
 								<div style="display: flex; flex-direction: column; align-items: center;">
 									<h4  style="font-size:25px; margin-top: 50px;margin-bottom: 50px;">*1대1 문의 개시판으로 이동합니다.</h4>
-									<a href="javascript:WriteForm('3','${saleDto.seq_sle}','${saleDto.cd_ctg_b}','${saleDto.cd_ctg_m}');" class="cart-btn" style="display: inline-block; margin: 0px; background: white; color: #346aff; border: 1px solid #346aff; margin-bottom: 10px;">
+									<a href="javascript:writeForm('3','${saleDto.seq_sle}','${saleDto.cd_ctg_b}','${saleDto.cd_ctg_m}');" class="cart-btn" style="display: inline-block; margin: 0px; background: white; color: #346aff; border: 1px solid #346aff; margin-bottom: 10px;">
 										1대1 문의 이동
 									</a>
 								</div>
