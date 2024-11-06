@@ -198,11 +198,13 @@
 		frmMain.cd_ctg_m.setAttribute("value", value5);
 		frmMain.cd_ctg_b.setAttribute("value", '');
 		
+		/*
 		if (selectOrValue instanceof HTMLElement && selectOrValue.tagName === 'SELECT') {
 			frmMain.elements["linePerPage"].value = selectOrValue.value;
 		} else {
 			frmMain.elements["linePerPage"].value = selectOrValue;
 		}
+		*/
 		
 		frmMain.action = "/front/sale/total_list.web";
 		frmMain.submit();
@@ -219,11 +221,13 @@
 		frmMain.prd_type.setAttribute("value", value4);
 		frmMain.cd_ctg_m.setAttribute("value", value5);
 		
+		/*
 		if (selectOrValue instanceof HTMLElement && selectOrValue.tagName === 'SELECT') {
 			frmMain.elements["linePerPage"].value = selectOrValue.value;
 		} else {
 			frmMain.elements["linePerPage"].value = selectOrValue;
 		}
+		*/
 		
 		frmMain.action = "/front/sale/function_list.web";
 		frmMain.submit();
@@ -240,11 +244,13 @@
 		frmMain.prd_type.setAttribute("value", value4);
 		frmMain.cd_ctg_m.setAttribute("value", value5);
 		
+		/*
 		if (selectOrValue instanceof HTMLElement && selectOrValue.tagName === 'SELECT') {
 			frmMain.elements["linePerPage"].value = selectOrValue.value;
 		} else {
 			frmMain.elements["linePerPage"].value = selectOrValue;
 		}
+		*/
 		
 		frmMain.action = "/front/sale/ingredient_list.web";
 		frmMain.submit();
@@ -261,11 +267,13 @@
 		frmMain.prd_type.setAttribute("value", value4);
 		frmMain.cd_ctg_m.setAttribute("value", value5);
 		
+		/*
 		if (selectOrValue instanceof HTMLElement && selectOrValue.tagName === 'SELECT') {
 			frmMain.elements["linePerPage"].value = selectOrValue.value;
 		} else {
 			frmMain.elements["linePerPage"].value = selectOrValue;
 		}
+		*/
 		
 		frmMain.action = "/front/sale/gender_list.web";
 		frmMain.submit();
@@ -405,8 +413,9 @@
 <input type="hidden" name="cd_ctg_b"					id="saleCd_ctg_b"/>
 </form>
 <form id="frmMain" method="POST">
-<input type="hidden" name="corp_nm"						id="corp_nm"		value="${saleDto.corp_nm}"/>
-<input type="hidden" name="prd_type"					id="prd_type"		value="${saleDto.prd_type}"/>
+<input type="hidden" name="corp_nm"						id="corp_nm"/>
+<input type="hidden" name="seq_sle"						id="seq_sle"		value="${saleDto.seq_sle}"/>
+<input type="hidden" name="prd_type"					id="prd_type"/>
 <input type="hidden" name="filter"						id="filter">
 <input type="hidden" name="type"						id="type"/>
 <input type="hidden" name="searchWord"					id="searchWord" />

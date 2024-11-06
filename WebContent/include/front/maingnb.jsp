@@ -269,6 +269,8 @@ function checkEnter(event) {
 	}
 }
 
+
+
 var secondSelectAndroid = document.getElementById("second_cd_ctg_android");
 var selectedSecondValueAndroid = "${paging.cd_ctg_m}";
 
