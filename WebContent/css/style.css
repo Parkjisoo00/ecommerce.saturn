@@ -281,6 +281,25 @@
 	margin-top:20px
 }
 
+.survey-reBtn{
+	display: block;
+	height: 50px;
+	line-height: 46px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;gap: 8px;
+	background-color: #f4f4f4;;
+	border: 2px solid rgb(204, 204, 204);
+	border-radius: 5px;cursor: pointer;
+	user-select: none;color: rgb(255, 255, 255);
+	border-radius: 8px;
+	margin-top:20px;
+	color: black;
+}
+
 .survey-h1-1{
 	text-align: center; 
 	font-size: 24px; 

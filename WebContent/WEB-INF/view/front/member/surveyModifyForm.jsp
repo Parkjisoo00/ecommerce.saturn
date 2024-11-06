@@ -64,8 +64,8 @@
 			<!-- 고정 -->
 			<div class="row" style="justify-content: center;display:block;background-color: #fff;max-width: 670px !important;width: 100% !important;margin-left: auto;margin-right: auto;">
 				<div class="surveyTop"style="gap: 24px;">
-					<div class="gnb" style="margin: 5px auto 0;display: flex; flex-direction: column;">
-						<div class="survey-div" style="margin-bottom: 20px;">XX년XX월XX일에 설문조사를 진행하셨습니다.
+					<div class="gnb" style="margin: 5px auto 0;display: flex; flex-direction: column;"><a style="color: #858585;text-align:center;font-size:28px">XX년XX월XX일에 설문조사를 진행하셨습니다.</a>
+						<div class="survey-div" style="margin-bottom: 20px;">
 							<h1 class="survey-h1-1">${surveyDto.mbr_nm} 님의
 							<br>건강설문 결과표</h1>
 							<h1 class="survey-h1-2">
@@ -130,9 +130,12 @@
 					</div>
 				</div>
 				<!-- 	전체 상품			 -->
-				<div class="survey-sticky" >
+				<div class="survey-sticky" style="height:200px">
 					<div class="gnb" style="margin: 5px auto 0; flex-direction: column;">
 						<input type="button" value="전체 추천 제품 장바구니 담기" class="survey-allBtnCart" id="btnCart" onClick="setBasket();"/>
+					</div>
+					<div class="gnb" style="margin: 5px auto 0; flex-direction: column; ">
+						<input type="button" value="설문조사 다시 쓰기" class="survey-reBtn" id="btnCart" onClick="setBasket();"style="margin-top:50px"/>
 					</div>
 				</div>
 			</div>
