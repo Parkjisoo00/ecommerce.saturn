@@ -1,101 +1,42 @@
-	<!-- html 설정 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<!-- JSP 파일이 위치한 경로 입력 -->
-<%@ page info="/WEB-INF/view/front/sale/function_list.jsp" %>
-<!-- 이 부분은 필요에 따라 추가하는 것이 맞으므로 개별 판단에 따라 추가하거나 삭제해도 되고 사용하지 않더라도 그대로 넣어둬도 무방하다고 판단 -->
-<%@ taglib prefix="fmt"					uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c"					uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="bravomylifeTag"		uri="/WEB-INF/tld/com.bravomylife.util.tld" %>
+<%@ page info="/WEB-INF/view/front/myPage/" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="kor">
 
 <head>
 	<%@ include file="/include/common/header.jsp" %>
-	<script>
-	<c:if test="${empty sessionScope.SEQ_MBR}">
-	var isLogin = false;
-	</c:if>
-	
-	<c:if test="${not empty sessionScope.SEQ_MBR}">
-	var isLogin = true;
-	</c:if>
-	
-	function setBasket() {
-		
-		if (!isLogin) {
-			alert("로그인이 필요합니다.");
-			return;
-		}
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.action = "/front/basket/setBasket.web";
-		frmMain.target = "frmBlank";
-		frmMain.submit();
-	}
-	
-	function setBasketOne(value, value2, value3,value4, value5, value6, value7, value8, value9, value10) {
-		
-		if (!isLogin) {
-			alert("로그인이 필요합니다.");
-			return;
-		}
-		
-		var subFrmMain = document.getElementById("subFrmMain");
-		
-		subFrmMain.sle_nm.setAttribute("value", value2);
-		subFrmMain.discount_sale.setAttribute("value", value3);
-		subFrmMain.basketCount.setAttribute("value", value4);
-		subFrmMain.img.setAttribute("value", value5);
-		subFrmMain.point_stack.setAttribute("value", value6);
-		subFrmMain.basketCd_ctg_m.setAttribute("value", value7);
-		subFrmMain.basketCd_ctg_b.setAttribute("value", value8);
-		subFrmMain.price_sale.setAttribute("value", value9);
-		subFrmMain.discount.setAttribute("value", value10);
-		subFrmMain.basketSeq_sle.setAttribute("value", value);
-		
-		subFrmMain.action = "/front/basket/setBasket.web";
-		subFrmMain.target = "frmBlank";
-		subFrmMain.submit();
-	}
-	
-	function goWriteForm(value, value2, value3) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.goSeq_sle.setAttribute("value", value);
-		frmMain.goCd_ctg_m.setAttribute("value", value2);
-		frmMain.goCd_ctg_b.setAttribute("value", value3);
-		
-		frmMain.action="/front/buy/writeForm.web";
-		frmMain.target = "";
-		frmMain.submit();
-	}
-	
-	</script>
-
-	<!-- Google Font -->
-	<%@ include file="/include/common/webfont.jsp" %>
-
 	<!-- Css Styles -->
 	<%@ include file="/include/common/css.jsp" %>
-</head>
+	
+	<!-- Google Font -->
+	<%@ include file="/include/common/webfont.jsp" %>
+		
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+	<script type="text/javascript" src="/js/front.js"></script>
+	<script type="text/javascript" src="/js/package/tinymce/tinymce.min.js"></script>
+	<script type="text/javascript" src="/js/package/tinymce.js"></script>		
+	<script>
 
+	</script>
+</head>
 <body style="background-color: #f8f8f8;">
-	<!-- Page Preloder -->
+<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
-
 	<!-- Header Section Begin -->
-	<!-- 페이지의 상단에 보이는 로고 및 로그인 / 회원가입 코드 -->
-	<%@ include file="/include/front/bannergnb.jsp" %>
+		<%@ include file="/include/front/maingnb.jsp" %>
 	<!-- Header Section End -->
 
 	<!-- Breadcrumb Begin -->
+		<%@ include file="/include/front/mygnb.jsp" %>
 	<!-- Breadcrumb End -->
 
-	<section class="checkout spad" style="padding-top: 0px;">
+				<!-- Checkout Section Begin -->
+	<section class="checkout spad" style="min-height: calc(100vh - 100px);padding-top: 0px;">
 		<div class="container">
 		<form id="subFrmMain" method="POST">
 			<input type="hidden" name="basketList[0].point_stack"		id="point_stack"/>
@@ -124,7 +65,7 @@
 			<div class="row" style="justify-content: center;display:block;background-color: #fff;max-width: 670px !important;width: 100% !important;margin-left: auto;margin-right: auto;">
 				<div class="surveyTop"style="gap: 24px;">
 					<div class="gnb" style="margin: 5px auto 0;display: flex; flex-direction: column;">
-						<div class="survey-div" style="margin-bottom: 20px;">
+						<div class="survey-div" style="margin-bottom: 20px;">XX년XX월XX일에 설문조사를 진행하셨습니다.
 							<h1 class="survey-h1-1">${surveyDto.mbr_nm} 님의
 							<br>건강설문 결과표</h1>
 							<h1 class="survey-h1-2">
@@ -199,12 +140,17 @@
 		</div>
 	</section>
 
+	<!-- Instagram Begin -->
+	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
+	<%@ include file="/include/common/footerpic.jsp" %>
+	<!-- Instagram End -->
+
 	<!-- Footer Section Begin -->
 	<%@ include file="/include/common/footer.jsp" %>
 	<!-- Footer Section End -->
 
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
-<iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>
+</form>
 </body>
 </html>
