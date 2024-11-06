@@ -9,7 +9,119 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>	
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/front/center/board/list.web";
+		frmMain.submit();
+	}
 	
+	function goTypeTx(value) {
+		
+		var first_cd_ctgDesktop		= document.getElementById("first_cd_ctg").value;
+		var second_cd_ctgDesktop	= document.getElementById("second_cd_ctg").value;
+		
+		var first_cd_ctgAndroid		= document.getElementById("first_cd_ctg_android").value;
+		var second_cd_ctgAndroid	= document.getElementById("second_cd_ctg_android").value;
+		
+		var first_cd_ctg;
+		var second_cd_ctg
+		
+		if (value == 'pc') {
+			
+			first_cd_ctg	= 	first_cd_ctgDesktop
+			second_cd_ctg	= 	second_cd_ctgDesktop
+		}
+		else if (value == 'mobile') {	
+			first_cd_ctg	= 	first_cd_ctgAndroid
+			second_cd_ctg	= 	second_cd_ctgAndroid
+		}	
+		
+		var searchWordDesktop = document.getElementById("_searchWord_desktop").value;
+		var searchWordAndroid = document.getElementById("_searchWord_android").value;
+		
+		var _searchWord;
+		
+		if (value == 'pc') {
+			_searchWord = searchWordDesktop;
+		}
+		else if (value == 'mobile') {
+			_searchWord = searchWordAndroid;
+		}
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+		frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+		frmMain.searchWord.setAttribute("value", _searchWord);
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeT(value, value2, value3, value4, value5) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		frmMain.cd_ctg_b.setAttribute("value", '');
+		
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeF(value, value2, value3, value4, value5) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		frmMain.action = "/front/sale/function_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeI(value, value2, value3, value4, value5) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		frmMain.action = "/front/sale/ingredient_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeG(value, value2, value3, value4, value5) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("currentPage").value = "1";
+		frmMain.type.setAttribute("value", value);
+		frmMain.filter.setAttribute("value", value2);
+		frmMain.corp_nm.setAttribute("value", value3);
+		frmMain.prd_type.setAttribute("value", value4);
+		frmMain.cd_ctg_m.setAttribute("value", value5);
+		
+		frmMain.action = "/front/sale/gender_list.web";
+		frmMain.submit();
+	}
 	</script>
 	
 	<!-- Google Font -->
@@ -21,6 +133,16 @@
 
 <body>
 <form id="frmMain">
+<input type="hidden" name="seq_sle"			id="seq_sle"/>
+<input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"/>
+<input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"/>
+<input type="hidden" name="corp_nm"			id="corp_nm"/>
+<input type="hidden" name="prd_type"		id="prd_type"/>
+<input type="hidden" name="filter"			id="filter"/>
+<input type="hidden" name="type"			id="type"/>
+<input type="hidden" name="currentPage"		id="currentPage"	value="1"/>
+<input type="hidden" name="searchWord"		id="searchWord"/>
+<input type="hidden" name="cd_bbs_type"		id="cd_bbs_type"	value="0"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
