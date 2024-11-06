@@ -13,3 +13,142 @@
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/withdraw.web" class="menuLnb">회원 탈퇴</a></li>
 	<li><img src="/img/mypage/mypage2.png"><a style="font-size :20px"href="/front/member/modifyDelivery.web" class="menuLnb">배송지 관리</a></li>
 </ul>
+<script>
+	function goSearch() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/center/board/personalHealth/searchForm.web";
+		frmMain.submit();
+	}
+	
+	function goHealthInfo() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/center/board/health/list.web";
+		frmMain.submit();
+	}
+	
+	function goIngredInfo() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/center/board/ingred/list.web";
+		frmMain.submit();
+	}
+	
+	function goIntro() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/center/board/introduce/index.web";
+		frmMain.submit();
+	}
+	
+	function goTypeF(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/function_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeI(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/ingredient_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeG(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/gender_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeT(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+	
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_bbs_type.setAttribute("value", value);
+		frmMain.action = "/front/center/board/list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeT(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeTx(value) {
+		
+		var first_cd_ctgDesktop		= document.getElementById("first_cd_ctg").value;
+		var second_cd_ctgDesktop	= document.getElementById("second_cd_ctg").value;
+		
+		var first_cd_ctgAndroid		= document.getElementById("first_cd_ctg_android").value;
+		var second_cd_ctgAndroid	= document.getElementById("second_cd_ctg_android").value;
+		
+		var first_cd_ctg;
+		var second_cd_ctg
+		
+		if (value == 'pc') {
+			
+			first_cd_ctg	= 	first_cd_ctgDesktop
+			second_cd_ctg	= 	second_cd_ctgDesktop
+		}
+		else if (value == 'mobile') {	
+			first_cd_ctg	= 	first_cd_ctgAndroid
+			second_cd_ctg	= 	second_cd_ctgAndroid
+		}	
+		
+		var searchWordDesktop = document.getElementById("_searchWord_desktop").value;
+		var searchWordAndroid = document.getElementById("_searchWord_android").value;
+		
+		var _searchWord;
+		
+		if (value == 'pc') {
+			_searchWord = searchWordDesktop;
+		}
+		else if (value == 'mobile') {
+			_searchWord = searchWordAndroid;
+		}
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+		frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+		frmMain.searchWord.setAttribute("value", _searchWord);
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+</script>
+
+<form id="frmMain" method="POST">
+<input type="hidden" name="type"			id="type"/>
+<input type="hidden" name="cd_bbs_type"		id="cd_bbs_type" value="0"/>
+<input type="hidden" name="cd_ctg_m"		id="cd_ctg_m" />
+<input type="hidden" name="cd_ctg_b"		id="cd_ctg_b" />
+<input type="hidden" name="searchWord"		id="searchWord" />
+</form>

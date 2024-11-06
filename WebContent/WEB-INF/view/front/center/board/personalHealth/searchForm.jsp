@@ -9,6 +9,35 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>	
+
+	function goTypeF(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/function_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeI(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/ingredient_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeG(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/gender_list.web";
+		frmMain.submit();
+	}
+	
+	
 	function goTypeT(value) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -62,6 +91,20 @@
 	frmMain.submit();
 	}
 	
+	function goList(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("searchWord").value = "";
+		document.getElementById("currentPage").value = "1";
+		document.getElementById("cd_bbs_type").value = value;
+		
+		
+		frmMain.action="/front/center/board/list.web";
+		frmMain.target = "";
+		frmMain.submit();
+	}
+	
 	function searchView(value) {
 		
 		console.log("받아온 값 log 확인" + value);
@@ -89,7 +132,6 @@
 <input type="hidden" name="searchWord" id="searchWord" value="${paging.searchWord}" />
 <input type="hidden" name="currentPage" id="currentPage" value="1" />
 <input type="hidden" id="type"			name="type" />
-<input type="hidden" name="currentPage" id="currentPage" value="1" />
 <input type="hidden" name="cd_ctg_m"		id="cd_ctg_m" />
 <input type="hidden" name="cd_ctg_b"		id="cd_ctg_b" />
 	<!-- Page Preloder -->
@@ -108,10 +150,20 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
+				<br>
+					<h6 class="lowgnb-title" style="text-align: center; font-weight: bold; font-size: 36px;">안심 조회 서비스</h6>
+					<br>
+					<br>
+					<h6 class="coupon__link" style="text-align: center; letter-spacing: 1.5px; border: none">
+						<a href="javascript:goSurvey();" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">맞춤 건강 추천</a>
+						<a href="javascript:goSearch()" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #c7b199; border: 1px solid #cccccc; border-radius: 10px;">안심 조회 서비스</a>
+						<a href="javascript:goHealthInfo()" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">건강정보</a>
+						<a href="javascript:goList(4);" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">새소식</a>
+						<a href="javascript:goIngredInfo();" style="font-size: 15px !important; display: inline-block; padding: 10px 15px; color: black; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 10px;">성분사전</a>
+					</h6>
 					<div style="text-align: center; margin-bottom: 30px !important;">
 						<img src="/img/personalhealth/healthSearch.png">
 					</div>
-					<h6 class="lowgnb-title" style="text-align: center; font-weight: bold; font-size: 36px;">안심 조회 서비스</h6>
 						<div style="margin-bottom: 20px !important">
 							<div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 20px !important;">
 								<input class="search-container" type="text" id="prdlst_nm" name="prdlst_nm" onkeydown="checkEnter(event)" />

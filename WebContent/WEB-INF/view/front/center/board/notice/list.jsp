@@ -96,7 +96,7 @@
 		for (var i = 0; i < acc.length; i++) { acc[i].addEventListener("click", function() {
 			this.classList.toggle("active"); var panel=this.nextElementSibling; if
 			(panel.style.display==="block" ) { panel.style.display="none" ; } else {
-			panel.style.display="block" ; } }); } 
+			panel.style.display="block" ; } }); } }
 	
 	<!--
 	function toggleAnswer(element) {
@@ -112,8 +112,8 @@
             askDiv.style.height = '144px'; // 필요한 높이로 설정
         }
     }
-	-->
-	<!--
+	
+	
 	function toggleContent() {
 	    var reviewForm = document.getElementById('reviewForm');
 	    
@@ -175,6 +175,7 @@
 		
 		document.getElementById("searchWord").value = "";
 		document.getElementById("sSearchWord").value = "";
+		document.getElementById("sSearchKey").value = "";
 		document.getElementById("currentPage").value = "1";
 		
 		frmMain.cd_bbs_type.setAttribute("value", value);

@@ -489,8 +489,8 @@ table.headTop_01 th {
 }
 
 .ctg-link.selected {
-	color: white;
-	background-color: #346aff;
+	color: black;
+	background-color: #e9cdae;
 	font-weight: bold;
 }
 
@@ -521,7 +521,7 @@ table.headTop_01 th {
 
 .lowgnb-fontC {
 	font-size: 14px !important;
-	color: #346aff !important;
+	color: #ff9434 !important;
 	font-weight: bold !important;
 }
 
@@ -2503,7 +2503,7 @@ ol {
 }
 
 .product__item__pic .label.new {
-	background: #346aff;
+	background: #ff9434;
 }
 
 .product__item__pic .label.stockout {
@@ -3461,7 +3461,7 @@ ol {
 }
 
 .nav-item .nav-link.active {
-	color: #346aff;
+	color: #e9cdae;
 }
 
 .tab-content .tab-pane h6 {
