@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header class="main-header">
     <!-- Logo -->
-    <a href="http://127.0.0.1:8080/console/login/main.web" class="logo">
+    <a href="/console/login/main.web" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>관리</b></span>
       <!-- logo for regular state and mobile devices -->
