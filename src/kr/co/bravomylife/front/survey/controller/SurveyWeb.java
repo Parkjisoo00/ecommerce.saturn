@@ -77,7 +77,7 @@ public class SurveyWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping("/front/center/board/surveyModifyForm.web")
+	@RequestMapping("/front/member/surveyModifyForm.web")
 	public ModelAndView surveyModifyForm(HttpServletRequest request, HttpServletResponse response, SurveyDto surveyDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -86,7 +86,7 @@ public class SurveyWeb extends Common {
 		SKwithAES aes		= new SKwithAES(staticKey);
 		
 		try {
-			
+			/*
 			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
 			
 			surveyDto.setSeq_mbr(seqMbr);
@@ -101,6 +101,7 @@ public class SurveyWeb extends Common {
 			
 			mav.addObject("survey", mergedSurvey.getSurvey());
 			mav.addObject("surveyList", mergedSurvey.getList());
+			*/
 			mav.setViewName("front/member/surveyModifyForm");
 		}
 		catch (Exception e) {
