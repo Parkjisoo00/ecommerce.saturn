@@ -190,6 +190,7 @@ function goTypeT(value) {
 </form>
 <form id="frmMain" method="POST">
 <input type="hidden" name="type"			id="type"/>
+<input type="hidden" name="seq_bbs"			id="seq_bbs"/>
 <input type="hidden" name="cd_ctg_m"		id="cd_ctg_m" />
 <input type="hidden" name="cd_ctg_b"		id="cd_ctg_b" />
 <input type="hidden" name="searchWord"		id="searchWord" />
