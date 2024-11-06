@@ -50,6 +50,7 @@
 		
 		document.getElementById("searchWord").value = "";
 		document.getElementById("sSearchWord").value = "";
+		document.getElementById("sSearchKey").value = "";
 		document.getElementById("currentPage").value = "1";
 		
 		frmMain.cd_bbs_type.setAttribute("value", value);
