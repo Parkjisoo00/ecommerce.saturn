@@ -168,9 +168,7 @@
 						</div>
 						<div style="display: flex; align-items: flex-start; padding-top: 10px; padding-left: 20px;">
 							<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden;">
-								<a href="#">
-									<img class="cart-img-wrapper" src="${surveyListDto.img}" alt="Product Image" style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
-								</a>
+								<img class="cart-img-wrapper" src="${surveyListDto.img}" alt="Product Image" style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
 							</div>
 							<%@ include file="/include/front/survey3.jsp" %>
 						</div>
@@ -179,7 +177,7 @@
 						<div class="button-group" style="display: flex; justify-content: space-between;">
 						<input type="button" value="개별 장바구니 담기" class="survey-btnCart" id="btnCart" onClick="setBasketOne('${surveyListDto.seq_sle}', '${surveyListDto.sle_nm}', '${surveyListDto.discount_sale}', '1',
 						'${surveyListDto.img}', '${surveyListDto.point_stack}', '${surveyListDto.cd_ctg_m}', '${surveyListDto.cd_ctg_b}', '${surveyListDto.price_sale}', '${surveyListDto.discount}');"/>
-						<input type="button" value="개별 장바구니 담기" class="surver-btnWrite" id="btnCart" onClick="javascript:goWriteForm('${surveyListDto.seq_sle}', '${surveyListDto.cd_ctg_m}', '${surveyListDto.cd_ctg_b}');">
+						<input type="button" value="상품 상세정보 보기" class="surver-btnWrite" id="btnCart" onClick="javascript:goWriteForm('${surveyListDto.seq_sle}', '${surveyListDto.cd_ctg_m}', '${surveyListDto.cd_ctg_b}');">
 						</div>
 					</div>
 				</div>

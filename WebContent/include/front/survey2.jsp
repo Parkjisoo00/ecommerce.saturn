@@ -5,13 +5,15 @@
 
 <c:if test="${surveyListDto.cd_ctg_b == '3' && surveyListDto.cd_ctg_m == '1'}">
 	<h1 class="survey-h1-3">
-		<br>남성이신 고객님께 추천드리는 건강기능 식품
+		<br>남성이신 고객님께
+		<br>추천드리는 건강기능 식품
 	</h1>
 </c:if>
 
 <c:if test="${surveyListDto.cd_ctg_b == '3' && surveyListDto.cd_ctg_m == '2'}">
 	<h1 class="survey-h1-3">
-		<br>여성이신 고객님께 추천드리는 건강기능 식품
+		<br>여성이신 고객님께 
+		<br>추천드리는 건강기능 식품
 	</h1>
 </c:if>
 
