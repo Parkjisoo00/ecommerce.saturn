@@ -553,6 +553,10 @@ public class BoardWeb extends Common {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
+		//logger.debug("오는거 확인");
+		//logger.debug("오는거 확인" + boardDto.getCd_bbs_type());
+		//logger.debug("오는거 확인" + boardDto.getSeq_bbs());
+		
 		try {
 			
 			BoardDto _boardDto = boardSrvc.select(boardDto);
@@ -615,11 +619,11 @@ public class BoardWeb extends Common {
 			
 			contents = contents.replace("<p>", "").replace("</p>", "");
 			
-			logger.debug("작성 내용 확인" + " = " + contents);
+			//logger.debug("작성 내용 확인" + " = " + contents);
 			
 			boardDto.setContent(contents);
 			
-			logger.debug("작성 내용 확인" + " = " + boardDto.getContent());
+			//logger.debug("작성 내용 확인" + " = " + boardDto.getContent());
 			
 			boardDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
@@ -642,7 +646,7 @@ public class BoardWeb extends Common {
 			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 			
 			
-			logger.debug("업로드 경로 확인" + pathBase);
+			//logger.debug("업로드 경로 확인" + pathBase);
 			
 			int countFile = 0;
 			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
@@ -661,7 +665,7 @@ public class BoardWeb extends Common {
 				String fileSize		= "";
 				long totalSize		= 0;
 				
-				logger.debug("countFile=" + countFile);
+				//logger.debug("countFile=" + countFile);
 				for (int loop = 0; loop < countFile; loop++) {
 					fileNameSrc		= (String)hashtable.get("files[" + loop + "]_fileSrcName");
 					fileNameSve		= (String)hashtable.get("files[" + loop + "]_fileSveNameRelative");
@@ -672,9 +676,9 @@ public class BoardWeb extends Common {
 					fileDto[loop].setFileNameOriginal(fileNameSrc);
 					fileDto[loop].setFileNameSave(fileNameSve);
 					fileDto[loop].setFileSize((Long.parseLong(fileSize)));
-					logger.debug("fileNameSrc=" + fileNameSrc);
-					logger.debug("fileNameSve=" + fileNameSve);
-					logger.debug("fileSize=" + fileSize);
+					//logger.debug("fileNameSrc=" + fileNameSrc);
+					//logger.debug("fileNameSve=" + fileNameSve);
+					//logger.debug("fileSize=" + fileSize);
 					
 					totalSize += Long.parseLong(fileSize);
 				}
@@ -775,7 +779,7 @@ public class BoardWeb extends Common {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
-		logger.debug("오는거 확인1");
+		//logger.debug("오는거 확인1");
 		
 		try {
 
@@ -802,9 +806,9 @@ public class BoardWeb extends Common {
 				}
 				logger.debug("오는거 확인6");
 			}
-			logger.debug("오는거 확인7");
-			logger.debug("게시판 타입 확인" + " + " + pagingDto.getCd_bbs_type());
-			logger.debug("세션 SEQ_MBR 확인" + " + " + getSession(request, "SEQ_MBR"));
+			//logger.debug("오는거 확인7");
+			//logger.debug("게시판 타입 확인" + " + " + pagingDto.getCd_bbs_type());
+			//logger.debug("세션 SEQ_MBR 확인" + " + " + getSession(request, "SEQ_MBR"));
 			
 				String check = "[UNDEFINED]";
 				
@@ -816,7 +820,7 @@ public class BoardWeb extends Common {
 				
 				PagingListDto pagingListDto = boardSrvc.list(pagingDto);
 				
-				logger.debug("등록자 번호 확인" + " + " + pagingDto.getRegister());
+				//logger.debug("등록자 번호 확인" + " + " + pagingDto.getRegister());
 				
 				mav.addObject("paging"	, pagingListDto.getPaging());
 				mav.addObject("list"	, pagingListDto.getList());
@@ -866,8 +870,8 @@ public class BoardWeb extends Common {
 		try {
 			pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 
-			logger.debug("게시판 타입 확인" + " + " + pagingDto.getCd_bbs_type());
-			logger.debug("세션 SEQ_MBR 확인" + " + " + getSession(request, "SEQ_MBR"));
+			//logger.debug("게시판 타입 확인" + " + " + pagingDto.getCd_bbs_type());
+			//logger.debug("세션 SEQ_MBR 확인" + " + " + getSession(request, "SEQ_MBR"));
 			
 				
 			PagingListDto pagingListDto = boardSrvc.list(pagingDto);
@@ -1057,11 +1061,11 @@ public class BoardWeb extends Common {
 			
 			contents = contents.replace("<p>", "").replace("</p>", "");
 			
-			logger.debug("작성 내용 확인" + " = " + contents);
+			//logger.debug("작성 내용 확인" + " = " + contents);
 			
 			boardDto.setContent(contents);
 			
-			logger.debug("작성 내용 확인" + " = " + boardDto.getContent());
+			//logger.debug("작성 내용 확인" + " = " + boardDto.getContent());
 			
 			boardDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
@@ -1084,7 +1088,7 @@ public class BoardWeb extends Common {
 			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 			
 			
-			logger.debug("업로드 경로 확인" + pathBase);
+			//logger.debug("업로드 경로 확인" + pathBase);
 			
 			int countFile = 0;
 			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
@@ -1103,7 +1107,7 @@ public class BoardWeb extends Common {
 				String fileSize		= "";
 				long totalSize		= 0;
 				
-				logger.debug("countFile=" + countFile);
+				//logger.debug("countFile=" + countFile);
 				for (int loop = 0; loop < countFile; loop++) {
 					fileNameSrc		= (String)hashtable.get("files[" + loop + "]_fileSrcName");
 					fileNameSve		= (String)hashtable.get("files[" + loop + "]_fileSveNameRelative");
@@ -1114,9 +1118,9 @@ public class BoardWeb extends Common {
 					fileDto[loop].setFileNameOriginal(fileNameSrc);
 					fileDto[loop].setFileNameSave(fileNameSve);
 					fileDto[loop].setFileSize((Long.parseLong(fileSize)));
-					logger.debug("fileNameSrc=" + fileNameSrc);
-					logger.debug("fileNameSve=" + fileNameSve);
-					logger.debug("fileSize=" + fileSize);
+					//logger.debug("fileNameSrc=" + fileNameSrc);
+					//logger.debug("fileNameSve=" + fileNameSve);
+					//logger.debug("fileSize=" + fileSize);
 					
 					totalSize += Long.parseLong(fileSize);
 				}

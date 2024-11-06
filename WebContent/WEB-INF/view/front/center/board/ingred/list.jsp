@@ -14,6 +14,34 @@
 	<script>
 	
 	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
+	function goTypeF(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/function_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeI(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/ingredient_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeG(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/gender_list.web";
+		frmMain.submit();
+	}
+	
+	
 	function goTypeT(value) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -25,46 +53,46 @@
 
 	function goTypeTx(value) {
 		
-	var first_cd_ctgDesktop		= document.getElementById("first_cd_ctg").value;
-	var second_cd_ctgDesktop	= document.getElementById("second_cd_ctg").value;
-	
-	var first_cd_ctgAndroid		= document.getElementById("first_cd_ctg_android").value;
-	var second_cd_ctgAndroid	= document.getElementById("second_cd_ctg_android").value;
-	
-	var first_cd_ctg;
-	var second_cd_ctg
-	
-	if (value == 'pc') {
+		var first_cd_ctgDesktop		= document.getElementById("first_cd_ctg").value;
+		var second_cd_ctgDesktop	= document.getElementById("second_cd_ctg").value;
 		
-		first_cd_ctg	= 	first_cd_ctgDesktop
-		second_cd_ctg	= 	second_cd_ctgDesktop
-	}
-	else if (value == 'mobile') {	
-		first_cd_ctg	= 	first_cd_ctgAndroid
-		second_cd_ctg	= 	second_cd_ctgAndroid
-	}	
-	
-	var searchWordDesktop = document.getElementById("_searchWord_desktop").value;
-	var searchWordAndroid = document.getElementById("_searchWord_android").value;
-	
-	var _searchWord;
-	
-	if (value == 'pc') {
-		_searchWord = searchWordDesktop;
-	}
-	else if (value == 'mobile') {
-		_searchWord = searchWordAndroid;
-	}
-	
-	var frmMain = document.getElementById("frmMain");
-	
-	frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
-	frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
-	frmMain.searchWord.setAttribute("value", _searchWord);
-	
-	frmMain.type.setAttribute("value", value);
-	frmMain.action = "/front/sale/total_list.web";
-	frmMain.submit();
+		var first_cd_ctgAndroid		= document.getElementById("first_cd_ctg_android").value;
+		var second_cd_ctgAndroid	= document.getElementById("second_cd_ctg_android").value;
+		
+		var first_cd_ctg;
+		var second_cd_ctg
+		
+		if (value == 'pc') {
+			
+			first_cd_ctg	= 	first_cd_ctgDesktop
+			second_cd_ctg	= 	second_cd_ctgDesktop
+		}
+		else if (value == 'mobile') {	
+			first_cd_ctg	= 	first_cd_ctgAndroid
+			second_cd_ctg	= 	second_cd_ctgAndroid
+		}	
+		
+		var searchWordDesktop = document.getElementById("_searchWord_desktop").value;
+		var searchWordAndroid = document.getElementById("_searchWord_android").value;
+		
+		var _searchWord;
+		
+		if (value == 'pc') {
+			_searchWord = searchWordDesktop;
+		}
+		else if (value == 'mobile') {
+			_searchWord = searchWordAndroid;
+		}
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+		frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+		frmMain.searchWord.setAttribute("value", _searchWord);
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
 	}
 	
 	
