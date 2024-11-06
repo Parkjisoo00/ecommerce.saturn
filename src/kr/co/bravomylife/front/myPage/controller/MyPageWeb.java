@@ -36,6 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.backoffice.common.Common;
 import kr.co.bravomylife.front.buy.dto.BuyDetailDto;
+import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
 import kr.co.bravomylife.front.buy.service.BuySrvc;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
@@ -82,7 +83,7 @@ public class MyPageWeb extends Common{
 	 */
 	@RequestMapping(value = "/front/myPage/index.web")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, BuyDetailDto buyDetailDto
-			, MemberDto memberDto) {
+			, MemberDto memberDto,BuyMasterDto buyMasterDto ) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
@@ -93,8 +94,11 @@ public class MyPageWeb extends Common{
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
 			
-			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			buyMasterDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			BuyMasterDto _buyMasterDto = memberSrvc.selectBuyMst(buyMasterDto);
+			mav.addObject("buyMasterDto", _buyMasterDto);
 			
+			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			MemberDto _memberDto = memberSrvc.select(memberDto);
 			
 			_memberDto.setMbr_nm(aes.decode(_memberDto.getMbr_nm()));

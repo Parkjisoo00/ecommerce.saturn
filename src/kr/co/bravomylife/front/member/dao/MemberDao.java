@@ -143,6 +143,10 @@ public class MemberDao extends BaseDao {
 		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.member.Member.updateDetail", memberDto);
 	}
 	
+	public BuyMasterDto selectBuyMst(BuyMasterDto buyMasterDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.selectBuyMst", buyMasterDto);
+	}
+	
 	public MemberDto select(MemberDto memberDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.select", memberDto);
 	}

@@ -115,6 +115,10 @@ public class MemberSrvc {
 		return memberDao.writeFomrDelivery(memberDto);
 	}
 	
+	public BuyMasterDto selectBuyMst(BuyMasterDto buyMasterDto) {
+		return memberDao.selectBuyMst(buyMasterDto);
+	}
+	
 	public MemberDto select(MemberDto memberDto) {
 		return memberDao.select(memberDto);
 	}

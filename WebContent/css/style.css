@@ -32,6 +32,72 @@
 /*----------------------------------------*/
 /* mypage
 /*----------------------------------------*/
+.order-total-status{
+	overflow: hidden;
+	padding: 2px 0 2px 20px;
+	border-left: 1px solid #e3e3e3;
+}
+
+.order-total-status-item{
+	border-bottom: 1px dotted #ddd;
+	padding: 4px 0;
+}
+
+.order-step-box{
+	border: 1px solid #e3e3e3;
+	border-top: 1px solid #717171;
+	padding: 20px 20px 20px 0;
+}
+.order-step-box ol{
+	float: left;
+}
+
+.order-step-box ol li{
+	float: left; 
+	list-style-type: none;
+	width: 250px;
+	text-align: center;
+	position: relative;
+}
+
+.order-step-box-text{
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	margin: 10px 0 0;
+}
+
+
+
+.order-step-box-num{
+	margin: 10px 0 0;
+	text-align: center;
+	display: inline-block;
+	padding: 6px 14px;
+	background: #c6c6c6;
+	border-radius: 18px;
+}
+
+.order-step-box-num span{
+	font-size: 14px;
+	font-weight: bold;
+	color: #fff;
+}
+.order-step-box-num-color{
+	margin: 10px 0 0;
+	text-align: center;
+	display: inline-block;
+	padding: 6px 14px;
+	background: #f77202;
+	border-radius: 18px;
+}
+
+.order-step-box-num-color span{
+	font-size: 14px;
+	font-weight: bold;
+	color: #fff;
+}
+
 .my-custom-ul{
 	position: absolute;
 	left: 150px;

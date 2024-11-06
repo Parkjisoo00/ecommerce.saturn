@@ -54,7 +54,59 @@ public class BuyMasterDto {
 	private String cd_ctg_m					= "";
 	private String cd_ctg_b					= "";
 	
+	private int cd_state_total_2			= 0;
+	private int cd_state_total_3			= 0;
+	private int cd_state_total_4			= 0;
+	private int delivery_total_c			= 0;
+	private int delivery_total_p			= 0;
+	private int delivery_total_d			= 0;
+	private int delivery_total_y			= 0;
 	
+	
+	
+	
+	public int getCd_state_total_2() {
+		return cd_state_total_2;
+	}
+	public void setCd_state_total_2(int cd_state_total_2) {
+		this.cd_state_total_2 = cd_state_total_2;
+	}
+	public int getCd_state_total_3() {
+		return cd_state_total_3;
+	}
+	public void setCd_state_total_3(int cd_state_total_3) {
+		this.cd_state_total_3 = cd_state_total_3;
+	}
+	public int getCd_state_total_4() {
+		return cd_state_total_4;
+	}
+	public void setCd_state_total_4(int cd_state_total_4) {
+		this.cd_state_total_4 = cd_state_total_4;
+	}
+	public int getDelivery_total_c() {
+		return delivery_total_c;
+	}
+	public void setDelivery_total_c(int delivery_total_c) {
+		this.delivery_total_c = delivery_total_c;
+	}
+	public int getDelivery_total_p() {
+		return delivery_total_p;
+	}
+	public void setDelivery_total_p(int delivery_total_p) {
+		this.delivery_total_p = delivery_total_p;
+	}
+	public int getDelivery_total_d() {
+		return delivery_total_d;
+	}
+	public void setDelivery_total_d(int delivery_total_d) {
+		this.delivery_total_d = delivery_total_d;
+	}
+	public int getDelivery_total_y() {
+		return delivery_total_y;
+	}
+	public void setDelivery_total_y(int delivery_total_y) {
+		this.delivery_total_y = delivery_total_y;
+	}
 	public String getCd_ctg_m() {
 		return cd_ctg_m;
 	}

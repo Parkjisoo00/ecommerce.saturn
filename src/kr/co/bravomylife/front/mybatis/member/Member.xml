@@ -348,6 +348,21 @@
 			mst.SEQ_MBR = #{seq_mbr}
 			AND addr.FLG_DEFAULT = 'Y'
 	</select>
+	
+	<select id="selectBuyMst" parameterType="buyMasterDto" resultType="buyMasterDto">
+		SELECT
+			COUNT(CASE WHEN CD_STATE = 2 THEN 1 END) AS cd_state_total_2,
+			COUNT(CASE WHEN CD_STATE = 3 THEN 1 END) AS cd_state_total_3,
+			COUNT(CASE WHEN CD_STATE = 4 THEN 1 END) AS cd_state_total_4,
+			COUNT(CASE WHEN CD_STATE_DELIVERY = 'C' THEN 1 END) AS delivery_total_c,
+			COUNT(CASE WHEN CD_STATE_DELIVERY = 'P' THEN 1 END) AS delivery_total_p,
+			COUNT(CASE WHEN CD_STATE_DELIVERY = 'D' THEN 1 END) AS delivery_total_d,
+			COUNT(CASE WHEN CD_STATE_DELIVERY = 'Y' THEN 1 END) AS delivery_total_y
+		FROM 
+			TB_BUY_MST
+		WHERE
+			SEQ_MBR = #{seq_mbr}
+	</select>
 
 	<insert id="insertMaster" parameterType="memberDto">
 		INSERT INTO TB_MBR_MST
