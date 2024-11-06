@@ -114,7 +114,7 @@
 					</div>
 					</c:if>
 					<c:if test="${boardDto.seq_sle > 0}">
-					<div class="checkout__form__input">
+						<div class="checkout__form__input">
 						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">상품 중분류</p>
 							<c:choose>
 								<c:when test="${boardDto.cd_ctg_b == '1'}">
@@ -156,7 +156,7 @@
 								</c:when>
 							</c:choose>
 						</div>
-						</c:if>
+					</c:if>
 					</div>
 				</div>
 				<br/>
@@ -177,7 +177,7 @@
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="checkout__form__input">
 							<input type="button" value="등록" style="width:100px; font-weight: 500; font-size: 16px;" onclick="javascript:writeProc(3);" />
-					 		<input type="button" value="목록" style="width:100px; font-weight: 500; font-size: 16px;" onclick="javascript:goList(3);"/>
+							<input type="button" value="목록" style="width:100px; font-weight: 500; font-size: 16px;" onclick="javascript:goList(3);"/>
 						</div>
 					</div>
 				</div>
