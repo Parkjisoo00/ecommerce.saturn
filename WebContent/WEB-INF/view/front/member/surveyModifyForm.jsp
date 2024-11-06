@@ -92,19 +92,19 @@
 	<input type="hidden" name="basketList[0].cd_ctg_b"			id="basketCd_ctg_b"/>
 	<input type="hidden" name="basketList[0].price_sale"		id="price_sale"/>
 	<input type="hidden" name="basketList[0].discount"			id="discount"/>
-	<input type="hidden" name="basketList[0].count"				id="basketCount"	value="0" />
+	<input type="hidden" name="basketList[0].count"				id="basketCount"		value="0" />
 </form>
 <form id="frmMain" method="POST" class="checkout__form">
-	<input type="hidden" name="cd_survey_type"			id="cd_survey_type"/>
-	<input type="hidden" name="gender"					id="gender"				value="${surveyDto.gender}"/>
-	<input type="hidden" name="mbr_nm"					id="mbr_nm"				value="${surveyDto.mbr_nm}"/>
-	<input type="hidden" name="user_age"				id="user_age"			value="${surveyDto.user_age}"/>
-	<input type="hidden" name="seq_sle"					id="goSeq_sle"			value="0"/>
-	<input type="hidden" name="cd_ctg_m"				id="goCd_ctg_m"/>
-	<input type="hidden" name="cd_ctg_b"				id="goCd_ctg_b"/>
-	<input type="hidden" name="cd_bbs_type"				id="cd_bbs_type"/>
-	<input type="hidden" name="type"					id="type"/>
-	<input type="hidden" name="searchWord"				id="searchWord" />
+	<input type="hidden" name="cd_survey_type"					id="cd_survey_type"/>
+	<input type="hidden" name="gender"							id="gender"				value="${surveyDto.gender}"/>
+	<input type="hidden" name="mbr_nm"							id="mbr_nm"				value="${surveyDto.mbr_nm}"/>
+	<input type="hidden" name="user_age"						id="user_age"			value="${surveyDto.user_age}"/>
+	<input type="hidden" name="seq_sle"							id="goSeq_sle"			value="0"/>
+	<input type="hidden" name="cd_ctg_m"						id="goCd_ctg_m"/>
+	<input type="hidden" name="cd_ctg_b"						id="goCd_ctg_b"/>
+	<input type="hidden" name="cd_bbs_type"						id="cd_bbs_type"/>
+	<input type="hidden" name="type"							id="type"/>
+	<input type="hidden" name="searchWord"						id="searchWord" />
 <!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -144,9 +144,9 @@
 						<div class="survay_title_content">
 							<h3>고객님께 추천드리는 분석결과</h3>
 							<ul>
-							<li><%@ include file="/include/front/survey1-1.jsp" %></li>
-							<li><%@ include file="/include/front/survey1-2.jsp" %></li>
-							<li><%@ include file="/include/front/survey1-3.jsp" %></li>
+							<li><%@ include file="/include/front/surveyCtgG.jsp" %></li>
+							<li><%@ include file="/include/front/surveyCtgF.jsp" %></li>
+							<li><%@ include file="/include/front/surveyCtgI.jsp" %></li>
 							</ul>
 						</div>
 					</div>
@@ -168,13 +168,13 @@
 					<div class="surveyResult" style="gap: 24px; border-top: 16px solid #f4f4f4;">
 						<div class="gnb" style="margin: 5px auto 0; flex-direction: column;">
 							<div class="survey-div">
-								<%@ include file="/include/front/survey2-2.jsp" %>
+								<%@ include file="/include/front/surveyCtgBmodifyMain.jsp" %>
 							</div>
 							<div style="display: flex; align-items: flex-start; padding-top: 10px; padding-left: 20px;">
 								<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden;">
 									<img class="cart-img-wrapper" src="${surveyDatas.img}" alt="Product Image" style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
 								</div>
-								<%@ include file="/include/front/survey3-3.jsp" %>
+								<%@ include file="/include/front/surveyCtgBmodifySub.jsp" %>
 							</div>
 							<span style="display: block; padding-top: 10px;">${surveyDatas.sle_nm}</span>
 							
