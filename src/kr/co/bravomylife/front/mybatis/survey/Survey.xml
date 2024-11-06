@@ -2,15 +2,79 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.survey.Survey">
 
-	<select id="surveyDtl" parameterType="surveyDto" resultType="surveyDto">
+	<select id="selectDtl" parameterType="surveyDto" resultType="surveyDto">
 		SELECT
-			SEQ_HP_SUR
-			, SEQ_HP_SUR_DTL
-			, CD_CTG_M
-			, CD_CTG_B
-			, SEQ_SLE
+			SEQ_HP_SUR_DTL
 		FROM
 			TB_HP_SUR_DTL
+		WHERE
+			SEQ_MBR = #{seq_mbr}
+		ORDER BY
+			SEQ_HP_SUR_DTL
+	</select>
+
+	<update id="update" parameterType="surveyDto">
+		UPDATE
+			TB_HP_SUR
+		SET
+			AGE				= #{age}
+			, GENDER		= #{gender}
+			, DT_UPT		= SYSDATE
+			, UPDATER		= #{seq_mbr}
+		WHERE
+			SEQ_MBR			= #{seq_mbr}
+	</update>
+
+	<update id="updateDtl" parameterType="surveyDto">
+		UPDATE
+			TB_HP_SUR_DTL
+		SET
+			CD_CTG_M		= #{cd_ctg_m}
+			, CD_CTG_B		= #{cd_ctg_b}
+			, SEQ_SLE		= #{seq_sle}
+		WHERE
+			SEQ_MBR			= #{seq_mbr}
+			AND SEQ_HP_SUR_DTL	= #{seq_hp_sur_dtl}
+	</update>
+
+	<select id="insertCheck" parameterType="surveyDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(SEQ_MBR)
+		FROM
+			TB_HP_SUR
+		WHERE
+			SEQ_MBR = #{seq_mbr}
+	</select>
+
+	<select id="selectKey" parameterType="surveyDto" resultType="surveyDto">
+		SELECT 
+			SEQ_HP_SUR
+			, SEQ_MBR
+		FROM
+			TB_HP_SUR
+		WHERE
+			SEQ_MBR = #{seq_mbr}
+	</select>
+
+	<select id="surveyDtl" parameterType="surveyDto" resultType="surveyDto">
+		SELECT
+			dtl.SEQ_HP_SUR
+			, dtl.SEQ_HP_SUR_DTL
+			, dtl.CD_CTG_M
+			, dtl.CD_CTG_B
+			, dtl.SEQ_SLE
+			, sle.IMG
+			, sle.SLE_NM
+			, sle.POINT_STACK
+			, sle.PRICE_SALE
+			, sle.DISCOUNT
+			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+		FROM
+			TB_HP_SUR_DTL dtl
+		LEFT JOIN
+			TB_SLE sle
+		ON
+			dtl.SEQ_SLE = sle.SEQ_SLE
 		WHERE
 			SEQ_HP_SUR IN (
 				SELECT
@@ -21,6 +85,8 @@
 					SEQ_MBR = #{seq_mbr}
 					AND SEQ_HP_SUR = #{seq_hp_sur}
 			)
+			ORDER BY
+				SEQ_HP_SUR_DTL
 	</select>
 
 	<select id="surveyMst" parameterType="surveyDto" resultType="surveyDto">

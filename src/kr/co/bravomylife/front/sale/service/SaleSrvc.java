@@ -27,13 +27,10 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import kr.co.bravomylife.front.buy.controller.BuyWeb;
 import kr.co.bravomylife.front.common.dto.PagingDto;
 import kr.co.bravomylife.front.common.dto.PagingListDto;
 import kr.co.bravomylife.front.sale.dao.SaleDao;
@@ -52,9 +49,6 @@ import kr.co.bravomylife.front.sale.dto.SaleListDto;
  */
 @Service("kr.co.bravomylife.front.sale.service.SaleSrvc")
 public class SaleSrvc {
-	
-	/** Logger */
-	private static Logger logger = LoggerFactory.getLogger(BuyWeb.class);
 	
 	@Inject
 	SaleDao saleDao;
@@ -136,8 +130,6 @@ public class SaleSrvc {
 		boolean totalResult = false;
 		int result = 0;
 		
-		logger.debug("어느 Srvc로 오는지 확인 modifyText" + saleDto.getSeq_mbr());
-		
 		try {
 			
 			result += saleDao.modifyText(saleDto);
@@ -173,8 +165,6 @@ public class SaleSrvc {
 		
 		boolean totalResult = false;
 		int result = 0;
-		
-		logger.debug("어느 Srvc로 오는지 확인 modifyReview" + saleDto.getSeq_mbr());
 		
 		try {
 			
@@ -380,27 +370,6 @@ public class SaleSrvc {
 		
 		return saleListDto;
 	}
-	
-	/*
-	@Transactional("txFront")
-	public boolean insertRate(SaleDto saleDto) {
-		try {
-			
-			saleDto.setSeq_rate(saleDao.rateSequence());
-			
-			int result = saleDao.rateInsert(saleDto);
-			
-			if(result == 1) {
-				
-				return true;
-			}
-			return false;
-		} catch (Exception e) {
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			return false;
-		}
-	}
-	*/
 	
 	@Transactional("txFront")
 	public boolean reviewCheck(SaleDto saleDto) {

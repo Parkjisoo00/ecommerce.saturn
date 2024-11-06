@@ -38,12 +38,32 @@ import kr.co.bravomylife.front.survey.dto.SurveyDto;
 @Repository("kr.co.bravomylife.front.survey.dao.SurveyDao")
 public class SurveyDao extends BaseDao{
 	
-	public List<SurveyDto> surveyDtl(SurveyDto surveyDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.survey.Survey.surveyDtl", surveyDto);
+	public List<SurveyDto> selectDtl(SurveyDto surveyDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.survey.Survey.selectDtl", surveyDto);
 	}
 	
-	public List<SurveyDto> surveyMst(SurveyDto surveyDto) {
-		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.survey.Survey.surveyMst", surveyDto);
+	public int updateDtl(SurveyDto surveyDto) {
+		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.survey.Survey.updateDtl", surveyDto);
+	}
+	
+	public int update(SurveyDto surveyDto) {
+		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.survey.Survey.update", surveyDto);
+	}
+	
+	public int insertCheck(SurveyDto surveyDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.survey.Survey.insertCheck", surveyDto);
+	}
+	
+	public SurveyDto selectKey(SurveyDto surveyDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.survey.Survey.selectKey", surveyDto);
+	}
+	
+	public List<SurveyDto> surveyDtl(SurveyDto _surveyDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.survey.Survey.surveyDtl", _surveyDto);
+	}
+	
+	public List<SurveyDto> surveyMst(SurveyDto _surveyDto) {
+		return sqlSessionFront.selectList("kr.co.bravomylife.front.mybatis.survey.Survey.surveyMst", _surveyDto);
 	}
 	
 	public SurveyDto select(SurveyDto surveyDto) {

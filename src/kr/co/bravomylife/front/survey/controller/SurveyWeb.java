@@ -86,22 +86,44 @@ public class SurveyWeb extends Common {
 		SKwithAES aes		= new SKwithAES(staticKey);
 		
 		try {
-			/*
+			
 			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
 			
 			surveyDto.setSeq_mbr(seqMbr);
 			
-			SurveyListDto surveyListDtl = surveySrvc.surveyDtl(surveyDto);
-			SurveyListDto surveyListMst = surveySrvc.surveyMst(surveyDto);
+			SurveyDto _surveyDto = surveySrvc.selectKey(surveyDto);
 			
-			List<SurveyDto> surveyList = (List<SurveyDto>) surveyListMst.getList();
-			surveyList.get(0).setMbr_nm(aes.decode(surveyList.get(0).getMbr_nm()));
+			SurveyListDto surveyListDtl = surveySrvc.surveyDtl(_surveyDto);
+			
+			List<SurveyDto> ctgList = (List<SurveyDto>) surveyListDtl.getList();
+			
+			String cd_ctg_mG = ctgList.get(0).getCd_ctg_m();
+			String cd_ctg_mF = ctgList.get(1).getCd_ctg_m();
+			String cd_ctg_mI = ctgList.get(2).getCd_ctg_m();
+			
+			SurveyListDto surveyListMst = surveySrvc.surveyMst(_surveyDto);
 			
 			SurveyListDto mergedSurvey = surveySrvc.mergedSurveyList(surveyListMst, surveyListDtl);
 			
-			mav.addObject("survey", mergedSurvey.getSurvey());
-			mav.addObject("surveyList", mergedSurvey.getList());
-			*/
+			List<SurveyDto> mergedList = (List<SurveyDto>) mergedSurvey.getList();
+			
+			String dtReg = mergedList.get(0).getDt_reg();
+			String mbrNm = aes.decode(mergedList.get(0).getMbr_nm());
+			int age = Integer.parseInt(mergedList.get(0).getAge());
+			String gender = mergedList.get(0).getGender();
+			
+			_surveyDto.setMbr_nm(mbrNm);
+			_surveyDto.setDt_reg(dtReg);
+			_surveyDto.setUser_age(age);
+			_surveyDto.setGender(gender);
+			
+			mav.addObject("cd_ctg_mG"	, cd_ctg_mG);
+			mav.addObject("cd_ctg_mF"	, cd_ctg_mF);
+			mav.addObject("cd_ctg_mI"	, cd_ctg_mI);
+			
+			mav.addObject("surveyDto", _surveyDto);
+			mav.addObject("surveyListDto", mergedSurvey.getList());
+			
 			mav.setViewName("front/member/surveyModifyForm");
 		}
 		catch (Exception e) {
@@ -236,7 +258,6 @@ public class SurveyWeb extends Common {
 				mav.addObject("surveyDto"	, surveyDto);
 				mav.setViewName("front/center/board/personalHealth/survey/surveyResult");
 			}
-			
 		}
 		catch (Exception e) {
 			logger.error("[" + this.getClass().getName() + ".surveyProc()] " + e.getMessage(), e);

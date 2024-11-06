@@ -61,6 +61,16 @@
 		frmMain.submit();
 	}
 	
+	function surveyProc(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_survey_type.setAttribute("value", value);
+		
+		frmMain.action="/front/center/board/surveyProc.web";
+		frmMain.submit();
+	}
+	
 	function goList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -93,8 +103,8 @@
 	<input type="hidden" name="cd_ctg_m"				id="goCd_ctg_m"/>
 	<input type="hidden" name="cd_ctg_b"				id="goCd_ctg_b"/>
 	<input type="hidden" name="cd_bbs_type"				id="cd_bbs_type"/>
-	<input type="hidden" name="type"			id="type"/>
-	<input type="hidden" name="searchWord"		id="searchWord" />
+	<input type="hidden" name="type"					id="type"/>
+	<input type="hidden" name="searchWord"				id="searchWord" />
 <!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -116,7 +126,7 @@
 			<!-- 고정 -->
 			<div class="row" style="justify-content: center;display:block;background-color: #fff;max-width: 670px !important;width: 100% !important;margin-left: auto;margin-right: auto;">
 				<div class="surveyTop"style="gap: 24px;">
-					<div class="gnb" style="margin: 5px auto 0;display: flex; flex-direction: column;"><a style="color: #858585;text-align:center;font-size:28px">XX년XX월XX일에 설문조사를 진행하셨습니다.</a>
+					<div class="gnb" style="margin: 5px auto 0;display: flex; flex-direction: column;"><a style="padding-top: 20px !important; color: #858585;text-align:center;font-size:28px">${surveyDto.dt_reg}의 건강설문 결과표</a>
 						<div class="survey-div" style="margin-bottom: 20px;">
 							<h1 class="survey-h1-1">${surveyDto.mbr_nm} 님의
 							<br>건강설문 결과표</h1>
@@ -132,7 +142,7 @@
 						</div>
 						
 						<div class="survay_title_content">
-							<h3> 당신에게 이것을 추천합니다.</h3>
+							<h3>고객님께 추천드리는 분석결과</h3>
 							<ul>
 							<li><%@ include file="/include/front/survey1-1.jsp" %></li>
 							<li><%@ include file="/include/front/survey1-2.jsp" %></li>
@@ -144,36 +154,38 @@
 				
 				<!-- 	1번째 상품			 -->
 				<c:forEach var="surveyListDto" items="${surveyListDto}"	varStatus="status">
-					<input type="hidden" name="basketList[${status.index}].point_stack"		id="point_stack"	value="${surveyListDto.point_stack}" />
-					<input type="hidden" name="basketList[${status.index}].discount_sale"	id="discount_sale"	value="${surveyListDto.discount_sale}" />
-					<input type="hidden" name="basketList[${status.index}].img"				id="img"			value="${surveyListDto.img}" />
-					<input type="hidden" name="basketList[${status.index}].seq_sle"			id="seq_sle"		value="${surveyListDto.seq_sle}" />
-					<input type="hidden" name="basketList[${status.index}].sle_nm"			id="sle_nm"			value="${surveyListDto.sle_nm}" />
-					<input type="hidden" name="basketList[${status.index}].cd_ctg_m"		id="cd_ctg_m"		value="${surveyListDto.cd_ctg_m}" />
-					<input type="hidden" name="basketList[${status.index}].cd_ctg_b"		id="cd_ctg_b"		value="${surveyListDto.cd_ctg_b}" />
-					<input type="hidden" name="basketList[${status.index}].price_sale"		id="price_sale"		value="${surveyListDto.price_sale}" />
-					<input type="hidden" name="basketList[${status.index}].discount"		id="discount"		value="${surveyListDto.discount}" />
+					<c:forEach var="surveyDatas" items="${surveyListDto.surveyDatas}"	varStatus="status">
+					<input type="hidden" name="basketList[${status.index}].point_stack"		id="point_stack"	value="${surveyDatas.point_stack}" />
+					<input type="hidden" name="basketList[${status.index}].discount_sale"	id="discount_sale"	value="${surveyDatas.discount_sale}" />
+					<input type="hidden" name="basketList[${status.index}].img"				id="img"			value="${surveyDatas.img}" />
+					<input type="hidden" name="basketList[${status.index}].seq_sle"			id="seq_sle"		value="${surveyDatas.seq_sle}" />
+					<input type="hidden" name="basketList[${status.index}].sle_nm"			id="sle_nm"			value="${surveyDatas.sle_nm}" />
+					<input type="hidden" name="basketList[${status.index}].cd_ctg_m"		id="cd_ctg_m"		value="${surveyDatas.cd_ctg_m}" />
+					<input type="hidden" name="basketList[${status.index}].cd_ctg_b"		id="cd_ctg_b"		value="${surveyDatas.cd_ctg_b}" />
+					<input type="hidden" name="basketList[${status.index}].price_sale"		id="price_sale"		value="${surveyDatas.price_sale}" />
+					<input type="hidden" name="basketList[${status.index}].discount"		id="discount"		value="${surveyDatas.discount}" />
 					<input type="hidden" name="basketList[${status.index}].count"			id="basketCount"	value="1" />
-				<div class="surveyResult" style="gap: 24px; border-top: 16px solid #f4f4f4;">
-					<div class="gnb" style="margin: 5px auto 0; flex-direction: column;">
-						<div class="survey-div">
-							<%@ include file="/include/front/survey2.jsp" %>
-						</div>
-						<div style="display: flex; align-items: flex-start; padding-top: 10px; padding-left: 20px;">
-							<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden;">
-								<img class="cart-img-wrapper" src="${surveyListDto.img}" alt="Product Image" style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
+					<div class="surveyResult" style="gap: 24px; border-top: 16px solid #f4f4f4;">
+						<div class="gnb" style="margin: 5px auto 0; flex-direction: column;">
+							<div class="survey-div">
+								<%@ include file="/include/front/survey2-2.jsp" %>
 							</div>
-							<%@ include file="/include/front/survey3.jsp" %>
-						</div>
-						<span style="display: block; padding-top: 10px;">${surveyListDto.sle_nm}</span>
-						
-						<div class="button-group" style="display: flex; justify-content: space-between;">
-						<input type="button" value="개별 장바구니 담기" class="survey-btnCart" id="btnCart" onClick="setBasketOne('${surveyListDto.seq_sle}', '${surveyListDto.sle_nm}', '${surveyListDto.discount_sale}', '1',
-						'${surveyListDto.img}', '${surveyListDto.point_stack}', '${surveyListDto.cd_ctg_m}', '${surveyListDto.cd_ctg_b}', '${surveyListDto.price_sale}', '${surveyListDto.discount}');"/>
-						<input type="button" value="상품 상세정보 보기" class="surver-btnWrite" id="btnCart" onClick="javascript:goWriteForm('${surveyListDto.seq_sle}', '${surveyListDto.cd_ctg_m}', '${surveyListDto.cd_ctg_b}');">
+							<div style="display: flex; align-items: flex-start; padding-top: 10px; padding-left: 20px;">
+								<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden;">
+									<img class="cart-img-wrapper" src="${surveyDatas.img}" alt="Product Image" style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
+								</div>
+								<%@ include file="/include/front/survey3-3.jsp" %>
+							</div>
+							<span style="display: block; padding-top: 10px;">${surveyDatas.sle_nm}</span>
+							
+							<div class="button-group" style="display: flex; justify-content: space-between;">
+							<input type="button" value="개별 장바구니 담기" class="survey-btnCart" id="btnCart" onClick="setBasketOne('${surveyDatas.seq_sle}', '${surveyDatas.sle_nm}', '${surveyDatas.discount_sale}', '1',
+							'${surveyDatas.img}', '${surveyDatas.point_stack}', '${surveyDatas.cd_ctg_m}', '${surveyDatas.cd_ctg_b}', '${surveyDatas.price_sale}', '${surveyDatas.discount}');"/>
+							<input type="button" value="상품 상세정보 보기" class="surver-btnWrite" id="btnCart" onClick="javascript:goWriteForm('${surveyDatas.seq_sle}', '${surveyDatas.cd_ctg_m}', '${surveyDatas.cd_ctg_b}');">
+							</div>
 						</div>
 					</div>
-				</div>
+					</c:forEach>
 				</c:forEach>
 				
 				<!-- 	전체 상품 연결한 부분			 -->
@@ -184,10 +196,10 @@
 				<!-- 	전체 상품			 -->
 				<div class="survey-sticky" style="height:200px">
 					<div class="gnb" style="margin: 5px auto 0; flex-direction: column;">
-						<input type="button" value="전체 추천 제품 장바구니 담기" class="survey-allBtnCart" id="btnCart" onClick="setBasket();"/>
+						<input type="button" value="전체 추천 제품 장바구니 담기" class="survey-allBtnCart" id="btnCart" onclick="setBasket();"/>
 					</div>
 					<div class="gnb" style="margin: 5px auto 0; flex-direction: column; ">
-						<input type="button" value="설문조사 다시 쓰기" class="survey-reBtn" id="btnCart" onClick="setBasket();"style="margin-top:50px"/>
+						<input type="button" value="설문조사 다시 하기" class="survey-reBtn" id="btnCart" onclick="surveyProc('2');"style="margin-top:50px"/>
 					</div>
 				</div>
 			</div>
@@ -206,5 +218,6 @@
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
 </form>
+<iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>
 </body>
 </html>

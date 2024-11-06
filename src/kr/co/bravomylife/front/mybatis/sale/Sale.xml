@@ -768,7 +768,7 @@
 		FROM
 		(
 		SELECT
-			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY NVL(best.flg_best, 'N') DESC, sle.DT_REG DESC) rnum
+			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY NVL(best.flg_best, 'N') DESC) rnum
 			, sle.SEQ_SLE
 			, sle.SLE_NM
 			, sle.IMG
@@ -822,7 +822,7 @@
 		<![CDATA[
 		WHERE rnum <= ${linePerPage}
 		]]>
-		ORDER BY rnum
+		ORDER BY DBMS_RANDOM.VALUE
 	</select>
 
 	<sql id="detailwhere">
@@ -1039,16 +1039,17 @@
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]>
-		ORDER BY rnum
+		ORDER BY 
 		<if test="filter == 'LowP'">
-			, DISCOUNT_SALE ASC
+			DISCOUNT_SALE ASC, 
 		</if>
 		<if test="filter == 'HighP'">
-			, DISCOUNT_SALE DESC
+			DISCOUNT_SALE DESC, 
 		</if>
 		<if test="filter == 'DtReg'">
-			, DT_REG DESC
+			DT_REG DESC, 
 		</if>
+		rnum
 	</select>
 
 	<sql id="totalwhere">
@@ -1167,16 +1168,17 @@
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]>
-		ORDER BY rnum
+		ORDER BY 
 		<if test="filter == 'LowP'">
-			, DISCOUNT_SALE ASC
+			DISCOUNT_SALE ASC, 
 		</if>
 		<if test="filter == 'HighP'">
-			, DISCOUNT_SALE DESC
+			DISCOUNT_SALE DESC, 
 		</if>
 		<if test="filter == 'DtReg'">
-			, DT_REG DESC
+			DT_REG DESC, 
 		</if>
+		rnum
 	</select>
 
 	<sql id="ingredientwhere">
@@ -1286,16 +1288,17 @@
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]>
-		ORDER BY rnum
+		ORDER BY 
 		<if test="filter == 'LowP'">
-			, DISCOUNT_SALE ASC
+			DISCOUNT_SALE ASC, 
 		</if>
 		<if test="filter == 'HighP'">
-			, DISCOUNT_SALE DESC
+			DISCOUNT_SALE DESC, 
 		</if>
 		<if test="filter == 'DtReg'">
-			, DT_REG DESC
+			DT_REG DESC, 
 		</if>
+		rnum
 	</select>
 
 	<sql id="functionwhere">
@@ -1405,16 +1408,17 @@
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]>
-		ORDER BY rnum
+		ORDER BY 
 		<if test="filter == 'LowP'">
-			, DISCOUNT_SALE ASC
+			DISCOUNT_SALE ASC, 
 		</if>
 		<if test="filter == 'HighP'">
-			, DISCOUNT_SALE DESC
+			DISCOUNT_SALE DESC, 
 		</if>
 		<if test="filter == 'DtReg'">
-			, DT_REG DESC
+			DT_REG DESC, 
 		</if>
+		rnum
 	</select>
 
 	<sql id="genderwhere">

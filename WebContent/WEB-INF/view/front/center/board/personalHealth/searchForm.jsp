@@ -128,12 +128,12 @@
 <body>
 <form id="frmMain">
 <input type="hidden" name="prdlst_report_no"	id="prdlst_report_no"/>
-<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="0"/>
-<input type="hidden" name="searchWord" id="searchWord" value="${paging.searchWord}" />
-<input type="hidden" name="currentPage" id="currentPage" value="1" />
-<input type="hidden" id="type"			name="type" />
-<input type="hidden" name="cd_ctg_m"		id="cd_ctg_m" />
-<input type="hidden" name="cd_ctg_b"		id="cd_ctg_b" />
+<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type" value="0"/>
+<input type="hidden" name="searchWord"			id="searchWord" value="${paging.searchWord}" />
+<input type="hidden" name="currentPage"			id="currentPage" value="1" />
+<input type="hidden" name="type"				id="type"/>
+<input type="hidden" name="cd_ctg_m"			id="cd_ctg_m" />
+<input type="hidden" name="cd_ctg_b"			id="cd_ctg_b" />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>

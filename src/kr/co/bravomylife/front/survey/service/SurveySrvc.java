@@ -27,10 +27,13 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import kr.co.bravomylife.front.basket.controller.BasketWeb;
 import kr.co.bravomylife.front.survey.dao.SurveyDao;
 import kr.co.bravomylife.front.survey.dto.SurveyDataDto;
 import kr.co.bravomylife.front.survey.dto.SurveyDto;
@@ -47,8 +50,15 @@ import kr.co.bravomylife.front.survey.dto.SurveyListDto;
 @Service("kr.co.bravomylife.front.survey.service.SurveySrvc")
 public class SurveySrvc {
 	
+	/** Logger */
+	private static Logger logger = LoggerFactory.getLogger(BasketWeb.class);
+	
 	@Inject
 	SurveyDao surveyDao;
+	
+	public SurveyDto selectKey(SurveyDto surveyDto) {
+		return surveyDao.selectKey(surveyDto);
+	}
 	
 	@SuppressWarnings("unchecked")
 	public SurveyListDto mergedSurveyList(SurveyListDto surveyListMst, SurveyListDto surveyListDtl) {
@@ -65,6 +75,12 @@ public class SurveySrvc {
 			String cdCtgM = listDtl.getCd_ctg_m();
 			String cdCtgB = listDtl.getCd_ctg_b();
 			int seqSle = listDtl.getSeq_sle();
+			String img = listDtl.getImg();
+			String sleNm = listDtl.getSle_nm();
+			int pointStack = listDtl.getPoint_stack();
+			int priceSale = listDtl.getPrice_sale();
+			int discount = listDtl.getDiscount();
+			int discountSale = listDtl.getDiscount_sale();
 			
 			if (!surveyMap.containsKey(seqHpSur)) {
 				
@@ -75,6 +91,12 @@ public class SurveySrvc {
 			surveyDataDto.setCd_ctg_m(cdCtgM);
 			surveyDataDto.setCd_ctg_b(cdCtgB);
 			surveyDataDto.setSeq_sle(seqSle);
+			surveyDataDto.setImg(img);
+			surveyDataDto.setSle_nm(sleNm);
+			surveyDataDto.setPoint_stack(pointStack);
+			surveyDataDto.setPrice_sale(priceSale);
+			surveyDataDto.setDiscount(discount);
+			surveyDataDto.setDiscount_sale(discountSale);
 			
 			surveyMap.get(seqHpSur).add(surveyDataDto);
 		}
@@ -96,20 +118,20 @@ public class SurveySrvc {
 		return mergedSurveyListDto;
 	}
 	
-	public SurveyListDto surveyDtl(SurveyDto surveyDto) {
+	public SurveyListDto surveyDtl(SurveyDto _surveyDto) {
 		
 		SurveyListDto surveyListDto = new SurveyListDto();
 		
-		surveyListDto.setList(surveyDao.surveyDtl(surveyDto));
+		surveyListDto.setList(surveyDao.surveyDtl(_surveyDto));
 		
 		return surveyListDto;
 	}
 	
-	public SurveyListDto surveyMst(SurveyDto surveyDto) {
+	public SurveyListDto surveyMst(SurveyDto _surveyDto) {
 		
 		SurveyListDto surveyListDto = new SurveyListDto();
 		
-		surveyListDto.setList(surveyDao.surveyMst(surveyDto));
+		surveyListDto.setList(surveyDao.surveyMst(_surveyDto));
 		
 		return surveyListDto;
 	}
@@ -142,28 +164,73 @@ public class SurveySrvc {
 	@Transactional("txFront")
 	public boolean insert(SurveyDto surveyDto, SurveyListDto surveyListDto) {
 		
-		int result = 0;
-		
-		surveyDto.setSeq_hp_sur(surveyDao.sequence());
-		
-		result += surveyDao.insert(surveyDto);
-		
-		List<SurveyDto> surveyList = surveyListDto.getSurveyList();
-		
-		for(SurveyDto survey : surveyList) {
+		try {
 			
-			surveyDto.setCd_ctg_m(survey.getCd_ctg_m());
-			surveyDto.setCd_ctg_b(survey.getCd_ctg_b());
-			surveyDto.setSeq_sle(survey.getSeq_sle());
+			int check = surveyDao.insertCheck(surveyDto);
 			
-			result += surveyDao.insertDtl(surveyDto);
-		}
-		
-		if (result == 1 + surveyList.size()) return true;
-		else {
+			if (check == 1) {
+				
+				int result = 0;
+				
+				result += surveyDao.update(surveyDto);
+				
+				List<SurveyDto> dtlList = surveyDao.selectDtl(surveyDto);
+				List<SurveyDto> surveyList = surveyListDto.getSurveyList();
+				
+				for (int loop = 0; loop < surveyList.size(); loop++) {
+					
+					SurveyDto survey = surveyList.get(loop);
+					SurveyDto dtl = dtlList.get(loop);
+					
+					surveyDto.setCd_ctg_m(survey.getCd_ctg_m());
+					surveyDto.setCd_ctg_b(survey.getCd_ctg_b());
+					surveyDto.setSeq_sle(survey.getSeq_sle());
+					surveyDto.setSeq_hp_sur_dtl(dtl.getSeq_hp_sur_dtl());
+					
+					result += surveyDao.updateDtl(surveyDto);
+				}
+					if (result == 1 + surveyList.size()) {
+						
+						return true;
+					}
+					else {
+						
+					return false;
+				}
+			}
+			else if (check == 0) {
+				
+				int result = 0;
+				
+				surveyDto.setSeq_hp_sur(surveyDao.sequence());
+				
+				result += surveyDao.insert(surveyDto);
+				
+				List<SurveyDto> surveyList = surveyListDto.getSurveyList();
+				
+					for(SurveyDto survey : surveyList) {
+						
+						surveyDto.setCd_ctg_m(survey.getCd_ctg_m());
+						surveyDto.setCd_ctg_b(survey.getCd_ctg_b());
+						surveyDto.setSeq_sle(survey.getSeq_sle());
+						
+						result += surveyDao.insertDtl(surveyDto);
+					}
+					if (result == 1 + surveyList.size()) {
+						
+						return true;
+					}
+					else {
+						
+					return false;
+				}
+			}
+		} catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".surveyProc()] " + e.getMessage(), e);
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return false;
 		}
+		return false;
 	}
 	
 	public SurveyDto userInfo(SurveyDto surveyDto) {

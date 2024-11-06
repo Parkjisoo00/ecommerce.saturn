@@ -139,7 +139,7 @@
 						</div>
 						
 						<div class="survay_title_content">
-							<h3> 당신에게 이것을 추천합니다.</h3>
+							<h3>고객님께 추천드리는 분석결과</h3>
 							<ul>
 							<li><%@ include file="/include/front/survey1-1.jsp" %></li>
 							<li><%@ include file="/include/front/survey1-2.jsp" %></li>
