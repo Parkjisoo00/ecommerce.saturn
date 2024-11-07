@@ -134,6 +134,23 @@
 		frmMain.action = "/front/center/board/list.web";
 		frmMain.submit();
 	}
+	
+	function goEvent() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/popup/event.web";
+		frmMain.submit();
+	}
+	
+	function goArs() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/popup/ars.web";
+		frmMain.submit();
+	}
+
 	</script>
 <!-- Google Font -->
 <%@ include file="/include/common/webfont.jsp" %>
@@ -190,21 +207,21 @@
 							<div class="banner__text">
 								<span>겨울맞이 특별 할인 - 최대 50% OFF! </span>
 								<h1>이벤트</h1>
-								<a href="/front/popup/event.web">바로가기</a>
+								<a href="javascript:goEvent()">바로가기</a>
 							</div>
 						</div>
 						<div class="banner__item">
 							<div class="banner__text">
 								<span>건강 목표 달성! 나만의 맞춤 영양제로 건강을 지키세요</span>
 								<h1>맞춤 건강 관리</h1>
-								<a href="/front/center/board/personalHealth/index.web">바로가기</a>
+								<a href="javascript:goHealth()">바로가기</a>
 							</div>
 						</div>
 						<div class="banner__item">
 							<div class="banner__text">
 								<span>인터넷 주문이 어려우시다면? <br> ※휴대폰에서만 주문가능※</span>
 								<h1>ARS 전화주문</h1>
-								<a href="/front/popup/ars.web">바로가기</a>
+								<a href="javascript:goArs()">바로가기</a>
 							</div>
 						</div>
 					</div>
@@ -226,7 +243,7 @@
 						<div class="categories__text special-background" >
 							<h1 style="font-weight: bold; color: black; font-size: 30px;">나만의 맞춤 건강 추천</h1>
 							<p style="font-weight: bold; font-size: 18px; ">건강 설문을 진행하고 나에게 맞는 영양제를 추천받아 보세요!</p>
-							<a href="#" style="font-size: 18px;">바로가기</a>
+							<a href="javascript:goSurvey()" style="font-size: 18px;">바로가기</a>
 						</div>
 					</div>
 				</div>
@@ -238,7 +255,7 @@
 								<div class="categories__text special-background" >
 									<h4 style="font-weight: bold; font-size: 27px;">안심 조회 서비스</h4>
 									<p style="font-weight: bold; font-size: 18px;">구매하고 싶은 영양제가 인증 허가를 받은 <br> 안심상품인지 확인하세요</p>
-									<a href="/front/center/board/personalHealth/searchForm.web" style="font-size: 18px;">바로가기</a>
+									<a href="javascript:goSearch()" style="font-size: 18px;">바로가기</a>
 								</div>
 							</div>
 						</div>
@@ -254,7 +271,7 @@
 								<div class="categories__text">
 									<h4>기능별 건강기능식품 조회</h4>
 									<p>지금 당신에게 필요한 건강 솔루션은?</p>
-									<a href="/front/sale/function_list.web">바로가기</a>
+									<a href="javascript:goTypeF('', '', '', '', '', '');">바로가기</a>
 								</div>
 							</div>
 						</div>
@@ -265,7 +282,7 @@
 								<div class="categories__text">
 									<h4>성분별 건강기능식품 조회</h4>
 									<p>필요한 영양소를 한눈에! 성분별 영양제 가이드</p>
-									<a href="/front/sale/ingredient_list.web">바로가기</a>
+									<a href="javascript:goTypeI('', '', '', '', '', '');">바로가기</a>
 								</div>
 							</div>
 						</div>
@@ -275,7 +292,7 @@
 								<div class="categories__text">
 									<h4>대상별 건강기능식품 조회</h4>
 									<p>남성과 여성, 당신의 몸에 맞춘 영양제 건강의 시작</p>
-									<a href="/front/sale/gender_list.web">바로가기</a>
+									<a href="javascript:goTypeG('', '', '', '', '', '');">바로가기</a>
 								</div>
 							</div>
 						</div>
