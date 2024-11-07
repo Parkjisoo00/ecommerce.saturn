@@ -621,7 +621,7 @@
 					<div class="col-lg-2 col-md-6" style="padding: 0px !important;">
 						<div class="product__item">
 							<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');" style="display: flex; justify-content: center; align-items: center;">
-								<div style="height: 200px; width: 200px;" class="product__item__pic set-bg" data-setbg="${list.img}">
+								<div style="height: 200px; width: 200px;" class="product__item__pic set-bg" data-setbg="/img/product/${saleDto.img}">
 								<c:if test="${list.flg_best != null && list.flg_best == 'Y'}">
 									<div class="label new">인기상품</div>
 								</c:if>
