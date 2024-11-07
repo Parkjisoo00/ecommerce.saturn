@@ -124,7 +124,7 @@
 				</div>
 				<br/>
 				<br/>
-				<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="col-lg-12 col-md-12 col-sm-12" style="padding-left: 0px;">
 					<div class="blog__details__quote" >
 						<p>${boardDto.content}</p>
 					</div>
@@ -153,7 +153,7 @@
 				</div>
 				<br/>
 				<br/>
-				<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="col-lg-12 col-md-12 col-sm-12" style="padding-left: 0px;">
 				<div class="blog__details__quote" >
 					<p>${boardReplyDto.content}</p>
 				</div>

@@ -96,7 +96,7 @@
 				<div class="col-lg-12 col-md-12 col-sm-12">
 					<div class="checkout__form__input">
 						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">첨부 파일 <span></span></p>
-							<input type="file" id="files[0]" name="files[0]" />
+							<input type="file" id="files[0]" name="files[0]" style="border: 0px solid #e1e1e1;"/>
 					</div>
 				</div>
 				<br/>

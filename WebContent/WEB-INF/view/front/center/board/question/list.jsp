@@ -27,9 +27,11 @@
 	<script>
 	
 	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
-	function goWriteForm() {
+	function goWriteForm(value) {
 		
 		var frmMain = document.getElementById("frmMain");
+		
+		document.getElementById("cd_bbs_type").value = value;
 		
 		frmMain.action="/front/center/board/writeForm.web";
 		frmMain.submit();
@@ -190,7 +192,7 @@ function goTypeT(value) {
 </form>
 <form id="frmMain" method="POST">
 <input type="hidden" name="type"			id="type"/>
-<input type="hidden" name="seq_bbs"			id="seq_bbs"/>
+<input type="hidden" name="seq_bbs"			id="seq_bbs"	 value="0"/>
 <input type="hidden" name="cd_ctg_m"		id="cd_ctg_m" />
 <input type="hidden" name="cd_ctg_b"		id="cd_ctg_b" />
 <input type="hidden" name="searchWord"		id="searchWord" />
@@ -244,7 +246,7 @@ function goTypeT(value) {
 					<!-- 로그인 상태일 때만 보이는 영역 -->
 					<div class="brdSearchArea">
 						<div style="display: flex; justify-content: flex-end;margin-bottom: 10px;">
-							<select name="sSearchKey" id="sSearchKey">
+							<select name="sSearchKey" id="sSearchKey" style="width: 30%;max-width: 130px;">
 								<option value="title"<c:if test="${paging.sSearchWord == 'title'}"> selected</c:if>>제목</option>
 								<option value="contents"<c:if test="${paging.sSearchWord == 'contents'}"> selected</c:if>>내용</option>
 								<option value="title+contents"<c:if test="${paging.sSearchWord == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
@@ -311,7 +313,7 @@ function goTypeT(value) {
 									<br/>
 									<!-- 문의 등록 버튼 -->
 									<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center; margin-top: 30px;">
-										<a href="/front/center/board/writeForm.web?cd_bbs_type=3" class="btnBasic" style="display: inline-block; padding: 10px 20px; background-color: #c7b199; color: black; border: 1px solid #cccccc; border-radius: 10px; text-decoration: none;">문의 등록</a>
+										<a href="javascript:goWriteForm(3)" class="btnBasic" style="display: inline-block; padding: 10px 20px; background-color: #c7b199; color: black; border: 1px solid #cccccc; border-radius: 10px; text-decoration: none;">문의 등록</a>
 									</div>
 								</div>
 							</div>

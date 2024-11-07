@@ -316,7 +316,7 @@
 				<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="checkout__form__input">
 					<div style="display: flex; justify-content: flex-end;margin-bottom: 10px;">
-						<select name="sSearchKey" id="sSearchKey">
+						<select name="sSearchKey" id="sSearchKey" style="width: 30%;max-width: 130px;">
 							<option value="title"<c:if test="${paging.sSearchKey == 'title'}"> selected</c:if>>제목</option>
 							<option value="contents"<c:if test="${paging.sSearchKey == 'contents'}"> selected</c:if>>내용</option>
 							<option value="title+contents"<c:if test="${paging.sSearchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
