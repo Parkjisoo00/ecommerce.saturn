@@ -126,6 +126,53 @@
 /*----------------------------------------*/
 /* Survey
 /*----------------------------------------*/
+
+.checkbox-container {
+	width: 100%;
+	max-width: 600px;
+}	
+
+.customCheckbox {
+	display: none;
+}
+
+.customLabel {
+	left:20px;
+	display: block;
+	position: relative;
+	padding: 10px 20px;
+	margin: 5px;
+	background-color: #FFFFFF;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	cursor: pointer;
+	user-select: none;
+	color: #000000;
+	transition: background-color 0.3s, color 0.3s; /* Smooth transition for color and background */
+}
+
+.customCheckbox:checked + .customLabel {
+	background-color: #F77202;
+	color: #FFFFFF;
+}
+.btn-next {
+	margin-top: 20px;
+	padding: 12px 24px;
+	background-color: #f77202;
+	color: #fff;
+	border: none;
+	border-radius: 20px;
+	cursor: pointer;
+	font-size: 18px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s, background-color 0.3s;
+}
+
+.btn-next:hover {
+	background-color: #e96500;
+	transform: scale(1.05);
+}
+
 .survay_notice {
 	word-break: keep-all;
 	margin: 5px;
@@ -4993,6 +5040,21 @@ ol {
 
 
 @media only screen and (max-width: 767px) {
+	
+	.customLabel {
+	left:0px;
+	display: block;
+	position: relative;
+	padding: 10px 20px;
+	margin: 5px;
+	background-color: #FFFFFF;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	cursor: pointer;
+	user-select: none;
+	color: #000000;
+	transition: background-color 0.3s, color 0.3s; /* Smooth transition for color and background */
+}s
 	
 	.surveyTop{
 	height:530px;

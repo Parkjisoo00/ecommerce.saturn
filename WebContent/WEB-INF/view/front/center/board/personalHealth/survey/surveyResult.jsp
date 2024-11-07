@@ -198,11 +198,10 @@
 			</form>
 		</div>
 	</section>
-
 	<!-- Footer Section Begin -->
 	<%@ include file="/include/common/footer.jsp" %>
+	<%@ include file="/include/common/footer-copyright.jsp" %>
 	<!-- Footer Section End -->
-
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
 <iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>

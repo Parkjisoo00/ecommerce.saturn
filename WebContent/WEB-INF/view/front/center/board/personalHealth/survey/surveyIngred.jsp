@@ -11,57 +11,35 @@
 
 <head>
 <style>
-.checkbox-container {
-	width: 100%;
-	max-width: 600px;
-}	
 
-.customCheckbox {
-	display: none;
-}
-
-.customLabel {
-	display: block;
-	left: 20px;
-	position: relative;
-	padding: 10px 20px;
-	margin: 5px;
-	background-color: #FFFFFF;
-	border: 2px solid #ccc;
-	border-radius: 5px;
-	cursor: pointer;
-	user-select: none;
-	color: #000000;
-	transition: background-color 0.3s, color 0.3s; /* Smooth transition for color and background */
-}
-
-.customCheckbox:checked + .customLabel {
-	background-color: #F77202;
-	color: #FFFFFF;
-}
-.btn-next {
-	margin-top: 20px;
-	padding: 12px 24px;
-	background-color: #f77202;
-	color: #fff;
-	border: none;
-	border-radius: 20px;
-	cursor: pointer;
-	font-size: 18px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	transition: transform 0.2s, background-color 0.3s;
-}
-
-.btn-next:hover {
-	background-color: #e96500;
-	transform: scale(1.05);
-}
 </style>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
 	
+	function checkboxSelected() {
+		
+		var checkboxes = document.getElementsByName('cd_ctg');
+		
+		var oneChecked = false;
+
+		for (var i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i].checked) {
+				oneChecked = true;
+				break;
+			}
+		}
+		 return oneChecked;
+	}
+	
 	function surveyProc(value) {
 		
+		if (!checkboxSelected()) {
+				alert('한가지를 선택해주세요.');
+				if (event) {
+					event.preventDefault();
+				}
+				return;
+			}
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.cd_survey_type.setAttribute("value", value);
@@ -108,7 +86,7 @@
 				<div class="survey">
 					<div class="gnb">
 						<div class="survey-div">
-							<a href="#" style="display: inline-block; line-height: 32px;"><span style="position: relative;">이전</span></a>
+							<a href="#" style="display: inline-block; line-height: 32px;"><span style="position: relative;"></span></a>
 						</div>
 						<div class="survey-div">
 							<h1 style="text-align: center; font-size: 30px; font-weight: 700; margin-top: -15px; font-family: 'Noto Sans KR', sans-serif !important;">맞춤 건강 설문</h1>
@@ -211,11 +189,10 @@
 			</form>
 		</div>
 	</section>
-
 	<!-- Footer Section Begin -->
 	<%@ include file="/include/common/footer.jsp" %>
+	<%@ include file="/include/common/footer-copyright.jsp" %>
 	<!-- Footer Section End -->
-
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>
 	<script>
