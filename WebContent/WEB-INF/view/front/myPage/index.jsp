@@ -53,10 +53,10 @@
 </head>
 <body>
 <form id="frmMain" method="POST" class="checkout__form">
-<input type="hidden" name="seq_sle"				id="seq_sle" value="0"/>
+<input type="hidden" name="seq_sle"				id="seq_sle"			value="0"/>
 <input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"/>
 <input type="hidden" name="cd_ctg_b"			id="cd_ctg_b"/>
-<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"/>
+<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		value="0"/>
 <input type="hidden" name="phone"				id="phone"/>
 <input type="hidden" name="type"				id="type"/>
 <input type="hidden" name="searchWord"			id="searchWord"/>

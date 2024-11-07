@@ -238,9 +238,9 @@
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
 	<%@ include file="/include/common/footerpic.jsp" %>
 	<!-- Instagram End -->
-
-	<!-- Footer Section Begin -->
 	<%@ include file="/include/common/footer.jsp" %>
+	<!-- Footer Section Begin -->
+	<%@ include file="/include/common/footer-copyright.jsp" %>
 	<!-- Footer Section End -->
 
 	<!-- Js Plugins -->
