@@ -125,7 +125,7 @@
 								</a>
 							</td>
 							<td style="text-align: center;">
-								<bravomylifeTag:masking text="${list.mbr_nm}" letter="*" count="1" mode="left" />
+								<bravomylifeTag:masking text="${list.mbr_nm}" letter="*" count="1" mode="right" />
 							</td>
 							<td style="text-align: center;">
 								<select style="background:#F0F0F0" disabled>
