@@ -177,7 +177,7 @@
 
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" name="seq_sle"			id="seq_sle"/>
+<input type="hidden" name="seq_sle"			id="seq_sle"		value="0"/>
 <input type="hidden" name="cd_ctg_m"		id="cd_ctg_m"		value="${paging.cd_ctg_m}"/>
 <input type="hidden" name="cd_ctg_b"		id="cd_ctg_b"		value="${paging.cd_ctg_b}"/>
 <input type="hidden" name="corp_nm"			id="corp_nm"		value="${paging.corp_nm}"/>
