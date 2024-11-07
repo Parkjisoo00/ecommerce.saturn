@@ -210,7 +210,7 @@
 			<div class="col-md-3"></div>
 			<div class="col-md-8">
 				<div style="text-align: center;">
-					<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goList" />
+					<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
 				</div>
 			</div>
 		<!-- /.col -->

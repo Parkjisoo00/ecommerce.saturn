@@ -66,15 +66,6 @@
 			frmMain.submit();
 		}
 		
-		function goPages(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.currentPage.setAttribute("value", value);
-			frmMain.action="/front/sale/gender_list.web";
-			frmMain.submit();
-		}
-		
 		function goWriteForm(value, value2, value3) {
 			
 			var frmMain = document.getElementById("frmMain");
