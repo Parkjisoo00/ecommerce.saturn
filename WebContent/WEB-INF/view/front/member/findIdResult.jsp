@@ -53,7 +53,7 @@
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6" style="padding-left: 8px; padding-right: 8px;">
 								<div class="checkout__form__input">
-									<input type="button" value="회원가입" id="registerId" onClick="goToRegister();"/>
+									<input type="button" value="로그인" onClick="moveToLogin();"/>
 								</div>
 							</div>
 						</div>

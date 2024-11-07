@@ -297,6 +297,12 @@ function goToRegister() {
 function moveToFindId() {
 	window.location.href ="/front/member/findIdForm.web"; // findIdForm.jsp로 이동
 }
+
+function moveToLogin() {
+	window.location.href ="/front/login/loginForm.web"; // loginForm.jsp로 이동
+}
+
+
 function validateForm() {
 	var mbrNm = document.getElementById("mbr_nm").value;
 	if (!mbrNm) {
