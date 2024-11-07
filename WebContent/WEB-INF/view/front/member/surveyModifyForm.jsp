@@ -81,7 +81,7 @@
 	}
 	</script>
 </head>
-<body style="background-color: #f8f8f8;">
+<body >
 <form id="subFrmMain" method="POST">
 	<input type="hidden" name="basketList[0].point_stack"		id="point_stack"/>
 	<input type="hidden" name="basketList[0].discount_sale"		id="discount_sale"/>
@@ -122,11 +122,8 @@
 	<c:choose>
 		<c:when test="${empty surveyListDto}">
 			<div class="container">
-				<div class="survay_notice">
-				 본 결과는 의사의 처방을 대신하지 않습니다. 
-				</div>
 				<div class="row" style="justify-content: center;display:block;background-color: #fff;max-width: 670px !important;width: 100% !important;margin-left: auto;margin-right: auto;">
-					<div class="surveyTop"style="gap: 24px; border-radius: 4px !important;">
+					<div class="mySurveyTop" style=" ">
 						<div class="survey-div" style="margin-bottom: 20px;">
 							<h1 class="survey-h1-1">등록된 건강설문 결과표가 없습니다.</h1>
 						</div>
