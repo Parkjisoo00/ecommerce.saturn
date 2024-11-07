@@ -397,7 +397,7 @@
 					<div class="col-lg-2 col-md-6" style="padding: 0px !important; flex: 0 0 16.6% !important;">
 						<div class="product__item">
 							<a href="javascript:goWriteForm('${subList.seq_sle}', '${subList.cd_ctg_m}', '${subList.cd_ctg_b}');" style="display: flex; justify-content: center; align-items: center;">
-								<div style="height: 200px; width: 200px;" class="product__item__pic set-bg" data-setbg="${subList.img}">
+								<div style="height: 200px; width: 200px;" class="product__item__pic set-bg" data-setbg="/img/product/${subList.img}">
 								<c:if test="${subList.flg_best != null && subList.flg_best == 'Y'}">
 									<div class="label new">인기상품</div>
 								</c:if>
