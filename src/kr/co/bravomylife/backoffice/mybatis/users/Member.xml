@@ -78,7 +78,9 @@
 			)
 		<![CDATA[
 		WHERE
-			rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+			CD_STATE <> 8
+			AND rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
+			
 		]]> 
 		ORDER BY
 			rnum
