@@ -186,7 +186,7 @@
 					<input type="hidden" name="basketList[${status.index}].price_sale"		id="price_sale"		value="${surveyDatas.price_sale}" />
 					<input type="hidden" name="basketList[${status.index}].discount"		id="discount"		value="${surveyDatas.discount}" />
 					<input type="hidden" name="basketList[${status.index}].count"			id="basketCount"	value="1" />
-					<div class="surveyResult" style="gap: 24px; border-top: 16px solid #f4f4f4;">
+					<div class="surveyResult" style="gap: 24px; ">
 						<div class="gnb" style="margin: 5px auto 0; flex-direction: column;">
 							<div class="survey-div">
 								<%@ include file="/include/front/surveyCtgBmodifyMain.jsp" %>
@@ -210,7 +210,7 @@
 				</c:forEach>
 				
 				<!-- 	전체 상품 연결한 부분			 -->
-				<div class="survey" style="gap: 24px; height: 1px; border-top: 16px solid #f4f4f4;">
+				<div class="survey" style="gap: 24px; height: 1px; ">
 					<div class="gnb" style="margin: 5px auto 0; flex-direction: column;">
 					</div>
 				</div>
