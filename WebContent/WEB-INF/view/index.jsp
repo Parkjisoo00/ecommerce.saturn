@@ -183,7 +183,7 @@
 	<!-- Banner Section Begin -->
 	<section class="banner set-bg" data-setbg="img/banner/banner9.png">
 		<div class="container">
-			<div class="row">
+			<div class="row" >
 				<div class="col-xl-7 col-lg-8 ">
 					<div class="banner__slider owl-carousel">
 						<div class="banner__item">
@@ -218,7 +218,7 @@
 	<section class="categories">
 		<div class="container-fluid" style="padding-right: 0px !important; padding-left: 0px !important;">
 		<div class="col-lg-12">
-			<div class="row">
+			<div class="row"style="margin-right: -30px;">
 				<div class="col-lg-7 c p-0" style="height: 40vh; overflow: hidden;">
 					<div class="categories__item categories__large__item set-bg"
 						data-setbg="img/categories/home9.jpg" style="height: 100%;">
@@ -249,7 +249,7 @@
 					<div class="row">
 						
 						<div class="col-lg-4 col-md-6 col-sm-6 p-0" >
-							<div class="categories__item set-bg"
+							<div class="categories__item set-bg" style=" padding-left: 0px;height: 320px;"
 								data-setbg="img/categories/func9.png">
 								<div class="categories__text">
 									<h4>기능별 건강기능식품 조회</h4>
@@ -260,7 +260,7 @@
 						</div>
 
 						<div class="col-lg-4 col-md-6 col-sm-6 p-0">
-							<div class="categories__item set-bg"
+							<div class="categories__item set-bg" style=" padding-left: 0px;height: 320px;"
 								data-setbg="img/categories/func10.png">
 								<div class="categories__text">
 									<h4>성분별 건강기능식품 조회</h4>
@@ -270,7 +270,7 @@
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-6 col-sm-6 p-0">
-							<div class="categories__item set-bg"
+							<div class="categories__item set-bg" style=" padding-left: 0px;height: 320px;"
 								data-setbg="img/categories/func11.png">
 								<div class="categories__text">
 									<h4>대상별 건강기능식품 조회</h4>
