@@ -29,11 +29,11 @@
 		UPDATE
 			TB_HP_SUR_DTL
 		SET
-			CD_CTG_M		= #{cd_ctg_m}
-			, CD_CTG_B		= #{cd_ctg_b}
-			, SEQ_SLE		= #{seq_sle}
+			CD_CTG_M			= #{cd_ctg_m}
+			, CD_CTG_B			= #{cd_ctg_b}
+			, SEQ_SLE			= #{seq_sle}
 		WHERE
-			SEQ_MBR			= #{seq_mbr}
+			SEQ_MBR				= #{seq_mbr}
 			AND SEQ_HP_SUR_DTL	= #{seq_hp_sur_dtl}
 	</update>
 
@@ -96,6 +96,7 @@
 			, sur.AGE
 			, sur.GENDER
 			, TO_CHAR(sur.DT_REG, 'YYYY-MM-DD') dt_reg
+			, TO_CHAR(sur.DT_UPT, 'YYYY-MM-DD') dt_upt
 			, mst.MBR_NM
 		FROM 
 			TB_HP_SUR sur

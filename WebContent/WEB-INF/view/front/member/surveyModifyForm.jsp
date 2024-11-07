@@ -119,6 +119,22 @@
 
 				<!-- Checkout Section Begin -->
 	<section class="checkout spad" style="min-height: calc(100vh - 1px);padding-top: 0px;">
+	<c:choose>
+		<c:when test="${empty surveyListDto}">
+			<div class="container">
+				<div class="survay_notice">
+				 본 결과는 의사의 처방을 대신하지 않습니다. 
+				</div>
+				<div class="row" style="justify-content: center;display:block;background-color: #fff;max-width: 670px !important;width: 100% !important;margin-left: auto;margin-right: auto;">
+					<div class="surveyTop"style="gap: 24px; border-radius: 4px !important;">
+						<div class="survey-div" style="margin-bottom: 20px;">
+							<h1 class="survey-h1-1">등록된 건강설문 결과표가 없습니다.</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		</c:when>
+		<c:otherwise>
 		<div class="container">
 			<div class="survay_notice">
 				 본 결과는 의사의 처방을 대신하지 않습니다. 
@@ -126,7 +142,15 @@
 			<!-- 고정 -->
 			<div class="row" style="justify-content: center;display:block;background-color: #fff;max-width: 670px !important;width: 100% !important;margin-left: auto;margin-right: auto;">
 				<div class="surveyTop"style="gap: 24px;">
-					<div class="gnb" style="margin: 5px auto 0;display: flex; flex-direction: column;"><a style="padding-top: 20px !important; color: #858585;text-align:center;font-size:28px">${surveyDto.dt_reg}의 건강설문 결과표</a>
+					<div class="gnb" style="margin: 5px auto 0;display: flex; flex-direction: column;">
+					<c:choose>
+						<c:when test="${surveyDto.dt_upt == null || surveyDto.dt_upt == ''}">
+							<a style="padding-top: 20px !important; color: #858585;text-align:center;font-size:28px">${surveyDto.dt_reg}의 건강설문 결과표</a>
+						</c:when>
+						<c:otherwise>
+							<a style="padding-top: 20px !important; color: #858585;text-align:center;font-size:28px">${surveyDto.dt_upt}의 수정된 건강설문 결과표</a>
+						</c:otherwise>
+					</c:choose>
 						<div class="survey-div" style="margin-bottom: 20px;">
 							<h1 class="survey-h1-1">${surveyDto.mbr_nm} 님의
 							<br>건강설문 결과표</h1>
@@ -204,6 +228,8 @@
 				</div>
 			</div>
 		</div>
+		</c:otherwise>
+	</c:choose>
 	</section>
 
 	<!-- Instagram Begin -->

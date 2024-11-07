@@ -93,13 +93,28 @@ public class SurveyWeb extends Common {
 			
 			SurveyDto _surveyDto = surveySrvc.selectKey(surveyDto);
 			
+			if (_surveyDto == null) {
+				
+				_surveyDto = new SurveyDto();
+				
+				_surveyDto.setSeq_mbr(seqMbr);
+				_surveyDto.setSeq_hp_sur_dtl(0);
+			}
+			
 			SurveyListDto surveyListDtl = surveySrvc.surveyDtl(_surveyDto);
 			
 			List<SurveyDto> ctgList = (List<SurveyDto>) surveyListDtl.getList();
 			
-			String cd_ctg_mG = ctgList.get(0).getCd_ctg_m();
-			String cd_ctg_mF = ctgList.get(1).getCd_ctg_m();
-			String cd_ctg_mI = ctgList.get(2).getCd_ctg_m();
+			if (ctgList.size() != 0) {
+				
+				String cd_ctg_mG = ctgList.get(0).getCd_ctg_m();
+				String cd_ctg_mF = ctgList.get(1).getCd_ctg_m();
+				String cd_ctg_mI = ctgList.get(2).getCd_ctg_m();
+				
+				mav.addObject("cd_ctg_mG"	, cd_ctg_mG);
+				mav.addObject("cd_ctg_mF"	, cd_ctg_mF);
+				mav.addObject("cd_ctg_mI"	, cd_ctg_mI);
+			}
 			
 			SurveyListDto surveyListMst = surveySrvc.surveyMst(_surveyDto);
 			
@@ -107,19 +122,20 @@ public class SurveyWeb extends Common {
 			
 			List<SurveyDto> mergedList = (List<SurveyDto>) mergedSurvey.getList();
 			
-			String dtReg = mergedList.get(0).getDt_reg();
-			String mbrNm = aes.decode(mergedList.get(0).getMbr_nm());
-			int age = Integer.parseInt(mergedList.get(0).getAge());
-			String gender = mergedList.get(0).getGender();
+			if (mergedList.size() != 0) {
 			
-			_surveyDto.setMbr_nm(mbrNm);
-			_surveyDto.setDt_reg(dtReg);
-			_surveyDto.setUser_age(age);
-			_surveyDto.setGender(gender);
-			
-			mav.addObject("cd_ctg_mG"	, cd_ctg_mG);
-			mav.addObject("cd_ctg_mF"	, cd_ctg_mF);
-			mav.addObject("cd_ctg_mI"	, cd_ctg_mI);
+				String dtReg = mergedList.get(0).getDt_reg();
+				String mbrNm = aes.decode(mergedList.get(0).getMbr_nm());
+				int age = Integer.parseInt(mergedList.get(0).getAge());
+				String gender = mergedList.get(0).getGender();
+				String dtUpt = mergedList.get(0).getDt_upt();
+				
+				_surveyDto.setMbr_nm(mbrNm);
+				_surveyDto.setDt_reg(dtReg);
+				_surveyDto.setUser_age(age);
+				_surveyDto.setGender(gender);
+				_surveyDto.setDt_upt(dtUpt);
+			}
 			
 			mav.addObject("surveyDto", _surveyDto);
 			mav.addObject("surveyListDto", mergedSurvey.getList());

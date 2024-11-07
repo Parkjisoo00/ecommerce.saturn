@@ -338,6 +338,7 @@
 
 .surveyTop{
 	height:490px;
+	border-radius: 40px !important;
 }
 
 .survey {
