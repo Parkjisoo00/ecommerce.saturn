@@ -88,13 +88,13 @@
 <section class="blog-details spad">
 	<div class="container">
 		<div class="col-lg-12 col-md-6">
-			<div class="blog__details__content">
+			<div class="blog__details__content" style=" margin-left: auto; margin-right: auto; width: 80%;">
 				<br/>
 				<br/>
 				<br/>
 				<div class="blog__details__item__title">
-					<span class="tip" style="margin-left: 270px;">문의글 제목</span>
-						<h4 style="margin-left: 270px;">
+					<span class="tip" >문의글 제목</span>
+						<h4 >
 							<c:if test="${boardDto.seq_reply == 0}">
 								<span style="color: red;">[미답변]</span>
 							</c:if>
@@ -103,11 +103,11 @@
 							</c:if>${boardDto.title}
 						</h4>
 						<ul>
-							<li><span style="margin-left: 270px; font-size: 16px;">[등록 일자]</span></li>
+							<li><span style=" font-size: 16px;">[등록 일자]</span></li>
 							<li style="font-size: 16px;">${boardDto.dt_reg}</li>
 						</ul>
 						<ul>
-							<li><span style="margin-left: 270px; font-size: 16px;">[카테고리]</span></li>
+							<li><span style=" font-size: 16px;">[카테고리]</span></li>
 							<li style="font-size: 16px;">
 								<select id="cd_ctg" name="cd_ctg" disabled >
 									<option value="0"<c:if test="${boardDto.cd_ctg == '0'}"> selected</c:if>>선택</option>
@@ -124,8 +124,8 @@
 				</div>
 				<br/>
 				<br/>
-				<div class="col-lg-9 col-md-9 col-sm-9">
-					<div class="blog__details__quote" style="margin-left: 250px;">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="blog__details__quote" >
 						<p>${boardDto.content}</p>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12">
@@ -139,22 +139,22 @@
 				</div>
 			</div>
 			<c:if test="${boardDto.seq_reply > 0}">
-			<div class="blog__details__content">
+			<div class="blog__details__content"style=" margin-left: auto; margin-right: auto; width: 80%;">
 				<br/>
 				<br/>
 				<br/>
 				<div class="blog__details__item__title" style="margin-top:0px">
-					<span class="tip" style="margin-left: 270px;">답변</span>
-					<h4 style="margin-left: 270px;">${boardReplyDto.title}</h4>
+					<span class="tip" >답변</span>
+					<h4 >${boardReplyDto.title}</h4>
 					<ul>
-						<li><span style="margin-left: 270px; font-size: 16px;">[등록 일자]</span></li>
+						<li><span style=" font-size: 16px;">[등록 일자]</span></li>
 						<li style="font-size: 16px;">${boardReplyDto.dt_reg}</li>
 					</ul>
 				</div>
 				<br/>
 				<br/>
-				<div class="col-lg-9 col-md-9 col-sm-9">
-				<div class="blog__details__quote" style="margin-left: 250px;">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="blog__details__quote" >
 					<p>${boardReplyDto.content}</p>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12">
@@ -171,9 +171,9 @@
 			<br/>
 			<br/>
 			<br/>
-			<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
+			<div style=" margin-left: auto; margin-right: auto; text-align: center;">
 				<div class="col-lg-12 col-md-12 col-sm-12">
-					<div class="checkout__form__input" style="margin-left: -100px;">
+					<div class="checkout__form__input" style="margin-left: 0px;">
 					<c:if test="${boardDto.seq_reply == 0}">
 						
 						 <input type="button" value="수정" style="width:100px" onclick="javascript:modifyForm(3);" /> 

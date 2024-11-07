@@ -195,7 +195,7 @@
 			<br />
 			<br />
 			
-			<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
+			<div style=" margin-left: auto; margin-right: auto; text-align: center;">
 				
 				<div class="col-lg-12 col-md-12 col-sm-12">
 					<div class="checkout__form__input">
