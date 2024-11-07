@@ -165,24 +165,24 @@
 						</c:if>
 					</div>
 				</div>
-				<br/>
-				<br/>
-				<br/>
-				<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<div class="checkout__form__input" style="margin-left: 100px;">
-						<c:if test="${boardDto.seq_reply == 0}">
-							
-							 <input type="button" value="수정" style="width:100px" onclick="javascript:modifyForm(3);" /> 
-						</c:if>
-							<input type="button" value="삭제" style="width:100px" onclick="javascript:remove(3);" />
-							<input type="button" value="목록" style="width:100px" onclick="javascript:goList(3);"/>
-						</div>
-					</div>
-				</div>
 				</div>
 			</div>
 			</c:if>
+			<br/>
+			<br/>
+			<br/>
+			<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="checkout__form__input" style="margin-left: -100px;">
+					<c:if test="${boardDto.seq_reply == 0}">
+						
+						 <input type="button" value="수정" style="width:100px" onclick="javascript:modifyForm(3);" /> 
+					</c:if>
+						<input type="button" value="삭제" style="width:100px" onclick="javascript:remove(3);" />
+						<input type="button" value="목록" style="width:100px" onclick="javascript:goList(3);"/>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
