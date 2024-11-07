@@ -191,7 +191,8 @@
 		UPDATE
 			TB_MBR_MST
 		SET
-			EMAIL = '_' || SEQ_MBR || EMAIL
+			MBR_NM = '_' || SEQ_MBR || MBR_NM
+			,EMAIL = '_' || SEQ_MBR || EMAIL
 			, CD_STATE	= 8
 			, DT_UPT	= SYSDATE
 			, REGISTER	= #{register}

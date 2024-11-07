@@ -447,6 +447,13 @@
 	line-height: 32px;
 }
 
+.my-survey-div{
+	-webkit-box-flex: 1;
+	-ms-flex: 1 1 0px;
+	flex: 1 1 0;
+	line-height: 32px;
+}
+
 .progress-sub {
 	background-color: #ffded7;
 	width: 100%;
@@ -5040,6 +5047,22 @@ ol {
 
 
 @media only screen and (max-width: 767px) {
+	
+	.my-survey-div{
+	-webkit-box-flex: 1;
+	-ms-flex: 1 1 0px;
+	flex: 1 1 0;
+	line-height: 32px;
+	margin-top: 200px;
+}
+	
+	.order-step-box ol li{
+	float: left; 
+	list-style-type: none;
+	width: 90px;
+	text-align: center;
+	position: relative;
+}
 	
 	.customLabel {
 	left:0px;
