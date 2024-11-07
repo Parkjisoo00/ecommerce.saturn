@@ -75,7 +75,7 @@
 							</div>
 							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
-									<input type="submit" value="로그인" id="loginId" onClick="checkLogin();"/>
+									<input type="button" value="로그인" id="loginId" onClick="checkLogin();"/>
 								</div>
 								<hr style="border: 1px solid #ccc; margin: 0;">
 								<br>

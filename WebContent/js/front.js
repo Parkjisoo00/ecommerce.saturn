@@ -252,17 +252,42 @@ function checkLogin() {
 		return false;
 	}
 	
-	// 아이디 저장 체크 로직
+	// 아이디 저장 체크 쿠키
 	if (document.getElementById("rememberMe").checked) {
-		localStorage.setItem("savedEmail", document.getElementById("email").value);
+		setCookie("savedEmail", document.getElementById("email").value, 7);
 	} else {
-		localStorage.removeItem("savedEmail"); // 체크 해제 시 저장된 아이디 삭제
+		eraseCookie("savedEmail");
 	}
 	
 	frmMain.action = "/front/login/loginProc.web";
 	frmMain.submit();
 	
 	return true;
+}
+
+function setCookie(name, value, days) {
+	var expires = "";
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+		expires = "; expires=" + date.toUTCString();
+	}
+	document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+function getCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for (var i = 0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+		if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	document.cookie = name + "=; Max-Age=-99999999; path=/";
 }
 
 function goToRegister() {
