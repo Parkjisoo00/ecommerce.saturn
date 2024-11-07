@@ -50,7 +50,7 @@
 <body>
 
 <form id="frmMain" method="POST" enctype="multipart/form-data" class="checkout__form">
-<input type="hidden" id="cd_bbs_type" name="cd_bbs_type" />
+<input type="hidden" id="cd_bbs_type" name="cd_bbs_type" value="0"/>
 
 	<!-- Page Preloder -->
 	<div id="preloder">

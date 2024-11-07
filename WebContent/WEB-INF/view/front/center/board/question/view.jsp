@@ -70,7 +70,7 @@
 <form id="frmMain" method="POST">
 <input type="hidden" id="type"			name="type" />
 <input type="hidden" id="sequence"		name="sequence" />
-<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
+<input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" 	value="0"/>
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${boardDto.seq_bbs}" />
 
 	<!-- Page Preloder -->
@@ -130,7 +130,7 @@
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="checkout__form__input">
-							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 235px;">
+							<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: -20px;">
 						<c:if test="${boardDto.file_orig != ''}">
 							<a style="color:black;"href="javascript:download('BbsQuestion', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
 						</c:if>
@@ -159,7 +159,7 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12">
 					<div class="checkout__form__input">
-						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: 235px;">
+						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; margin-left: -20px;">
 						<c:if test="${boardReplyDto.file_orig != ''}">
 							<a style="color:black;"href="javascript:download('BbsQuestion', ${boardReplyDto.seq_bbs});">[첨부파일 다운로드]</a>
 						</c:if>
