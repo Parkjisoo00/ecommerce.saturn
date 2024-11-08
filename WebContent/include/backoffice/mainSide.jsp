@@ -151,25 +151,22 @@
 						<li><a href="/console/statistics/index.web"><i class="fa fa-circle-o"></i> 회원별 통계</a></li>
 						<li><a href="/console/statistics/index1.web"><i class="fa fa-circle-o"></i> 인기 상품 통계</a></li>
 						<li><a href="/console/statistics/index2.web"><i class="fa fa-circle-o"></i> 수익 통계</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Sliders</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Timeline</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Modals</a></li>
 					</ul>
 					</li>
 					<li>
 					<a href="#">
-						<i class="fa fa-th"></i> <span>page</span>
+						<span style="color: #333;">page</span>
 						<span class="pull-right-container">
-						<small class="label pull-right bg-green">new</small>
+						<small class="label pull-right bg-green"></small>
 						</span>
 					</a>
 					</li>
 					<li class="treeview">
 					<a href="#">
-						<i class="fa fa-pie-chart"></i>
-						<span>page</span>
+						
+						<span style="color: #333;">page</span>
 						<span class="pull-right-container">
-						<i class="fa fa-angle-left pull-right"></i>
+						
 						</span>
 					</a>
 					<ul class="treeview-menu">
@@ -183,28 +180,28 @@
 					
 					<li>
 					<a href="#">
-						<i class="fa fa-calendar"></i> <span>page</span>
+						<span style="color: #333;">page</span>
 						<span class="pull-right-container">
-						<small class="label pull-right bg-red">3</small>
-						<small class="label pull-right bg-blue">17</small>
+						<small class="label pull-right bg-red"></small>
+						<small class="label pull-right bg-blue"></small>
 						</span>
 					</a>
 					</li>
 					<li>
 					<a href="#">
-						<i class="fa fa-envelope"></i> <span>page</span>
+						<span style="color: #333;">page</span>
 						<span class="pull-right-container">
-						<small class="label pull-right bg-yellow">12</small>
-						<small class="label pull-right bg-green">16</small>
-						<small class="label pull-right bg-red">5</small>
+						<small class="label pull-right bg-yellow"></small>
+						<small class="label pull-right bg-green"></small>
+						<small class="label pull-right bg-red"></small>
 						</span>
 					</a>
 					</li>
 					<li class="treeview">
 					<a href="#">
-						<i class="fa fa-folder"></i> <span>page</span>
+						<span style="color: #333;">page</span>
 						<span class="pull-right-container">
-						<i class="fa fa-angle-left pull-right"></i>
+						
 						</span>
 					</a>
 					<ul class="treeview-menu">
@@ -221,9 +218,9 @@
 					</li>
 					<li class="treeview">
 					<a href="#">
-						<i class="fa fa-share"></i> <span>page</span>
+						<span style="color: #333;">page</span>
 						<span class="pull-right-container">
-						<i class="fa fa-angle-left pull-right"></i>
+						
 						</span>
 					</a>
 					<ul class="treeview-menu">
@@ -252,11 +249,11 @@
 						<li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
 					</ul>
 					</li>
-					<li><a href="#"><i class="fa fa-book"></i> <span>page</span></a></li>
+					<li><a href="#"><span style="color: #333;">page</span></a></li>
 					<li class="header">LABELS</li>
-					<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-					<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-					<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+					<li><a href="#"><span style="color: #333;">Important</span></a></li>
+					<li><a href="#"><span style="color: #333;">Warning</span></a></li>
+					<li><a href="#"><span style="color: #333;">Information</span></a></li>
 				</ul>
 				</section>
 				<!-- /.sidebar -->

@@ -384,8 +384,8 @@ public class PayWeb extends Common {
 			String merchantId			= "himedia";
 			String key					= "ac805b30517f4fd08e3e80490e559f8e";
 			String orderNumber			= "HM-" + yyyyMMddHHmmss;
-			String amount				= "100";
-			// String amount			= Integer.toString(Integer.parseInt(param.get("buyList[0].price")) * Integer.parseInt(param.get("buyList[0].count")));
+			//String amount				= "100";
+			String amount			= Integer.toString(Integer.parseInt(param.get("buyList[0].price")) * Integer.parseInt(param.get("buyList[0].count")));
 																			// 금액: param.get("amount");
 			String quota				= "0";								// 할부: param.get("quota")
 			String itemName				= param.get("buyList[0].sle_nm");	// 판매 상품명: param.get("itemName");
