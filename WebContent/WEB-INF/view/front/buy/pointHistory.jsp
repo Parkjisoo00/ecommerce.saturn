@@ -131,7 +131,7 @@
 											<td class="cart-td" style="text-align: center; vertical-align: middle;">
 												<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden; display: inline-block;">
 													<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
-														<img class="cart-img" src="/img/product/${saleDto.img}" class="cart-img">
+														<img class="cart-img" src="/img/product/${list.img}" class="cart-img">
 													</a>
 												</div>
 											</td>

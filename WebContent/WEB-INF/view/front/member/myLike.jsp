@@ -141,7 +141,7 @@
 												<td class="cart-td" style="text-align: center; vertical-align: middle;">
 													<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden; display: inline-block;">
 														<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
-															<img class="cart-img" src="/img/product/${saleDto.img}" class="cart-img">
+															<img class="cart-img" src="/img/product/${list.img}" class="cart-img">
 														</a>
 													</div>
 												</td>
@@ -154,7 +154,7 @@
 												<td class="cart-td">
 													<div style="display: flex; flex-direction: column; align-items: center;">
 														<a href="javascript:setBasket('${list.seq_sle}', '${list.sle_nm}', '${list.discount_sale}', '1'
-																	, '/img/product/${saleDto.img}', '${list.point_stack}', '${list.cd_ctg_m}', '${list.cd_ctg_b}', '${list.price_sale}', '${list.discount}');" 
+																	, '/img/product/${list.img}', '${list.point_stack}', '${list.cd_ctg_m}', '${list.cd_ctg_b}', '${list.price_sale}', '${list.discount}');" 
 														class="cart-btn" style="background: #2c2c2c; color: white !important; border: 1px solid #2c2c2c;margin-top:0px">장바구니 담기</a>
 														<a href="javascript:remove('${list.seq_sle}')" class="cart-btn" style="background: white; color: #2c2c2c; border: 1px solid #2c2c2c;padding: 10px 45px 10px;">삭제</a>
 													</div>
