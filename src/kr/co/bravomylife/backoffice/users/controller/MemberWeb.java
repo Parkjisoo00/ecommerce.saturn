@@ -85,6 +85,8 @@ public class MemberWeb extends Common {
 			MemberDto currentMemberDto = list.get(loop);
 			String encodedEmail = currentMemberDto.getEmail();
 			String decodedEmail = null;
+			String encodedMbr_nm = currentMemberDto.getMbr_nm();
+			String decodedMbr_nm = null;
 		
 			// 이메일이 '_'로 시작하는 경우
 			if (encodedEmail.startsWith("_")) {
@@ -99,16 +101,19 @@ public class MemberWeb extends Common {
 			}
 			currentMemberDto.setEmail(decodedEmail);
 			
-			// 회원 이름 디코딩 처리
-			String encodedMbrNm = currentMemberDto.getMbr_nm();
-			String decodedMbrNm = null;
-			try {
-				decodedMbrNm = aes.decode(encodedMbrNm);
-			} catch (Exception e) {
-				logger.error("회원 이름 디코딩 오류: " + e.getMessage(), e);
-				decodedMbrNm = "디코딩 실패"; // 기본값 설정
+			
+			// 성명이 '_'로 시작하는 경우
+			if (encodedMbr_nm.startsWith("_")) {
+				decodedMbr_nm = encodedMbr_nm; // 기본값 또는 적절한 처리
+			} else {
+				try {
+					decodedMbr_nm = aes.decode(encodedMbr_nm);
+				} catch (Exception e) {
+					logger.error("회원 이름 디코딩 오류: " + e.getMessage(), e);
+					decodedMbr_nm = "디코딩 실패"; // 기본값 설정
+				}
 			}
-			currentMemberDto.setMbr_nm(decodedMbrNm);
+			currentMemberDto.setMbr_nm(decodedMbr_nm);
 			}
 
 			pagingDto.setSearchWord(searchWord);
