@@ -110,13 +110,14 @@
 				<!-- /.box-header -->
 				<div class="box-body no-padding">
 					<div class="mailbox-read-info">
-					<h3 style="font-size:40px; text-align:center">제목:${boardDto.title}</h3>
+					<h3 style="font-size:30px; text-align:center" >${boardDto.title}</h3><br/><br/><br/>
 						<input type="checkbox" id= "flg_top" name="flg_top"  value="" disabled
 						<c:if test="${boardDto.flg_top == 'Y'}">checked</c:if>/> 
 						<label>최상위</label>
-					<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자:Bravo My Life
-						<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardDto.dt_reg}</span></h5>
+					<h5 style="font-size:20px; padding: 20px 0 0 0;">작성자 : Bravo My Life
+						<span class="mailbox-read-time pull-right" style="font-size:18px">작성 일자 : ${boardDto.dt_reg}</span></h5>
 					</div>
+					<br/>
 					<div class="form-group" style="padding: 10px;border-bottom: 1px solid #f4f4f4;margin-bottom: 1px;">
 					<label>카테고리(*)</label>
 						<select class="form-control" id="cd_ctg" name="cd_ctg" style="height: 34px;margin-bottom: 15px;"disabled>
@@ -130,6 +131,7 @@
 							<option value="9"<c:if test="${boardDto.cd_ctg == '9'}"> selected</c:if>>기타</option>
 						</select>
 					</div>
+					<br/>
 					<div class="mailbox-read-message"style="font-size:20px">
 						${boardDto.content}
 					</div>
