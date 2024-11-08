@@ -51,6 +51,67 @@ public class PayCmpn {
 	private static Logger logger = LoggerFactory.getLogger(PayCmpn.class);
 	
 	@SuppressWarnings("unchecked")
+	public Map<String,Object> JsonApi(HttpServletRequest requests, String url, Map<String, String> map, String Authorization) {
+		
+		Map<String,Object> returnMap = new HashMap<>();
+		
+		OkHttpClient client = new OkHttpClient();
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		String jsonBody = "";
+		try {
+			jsonBody = objectMapper.writeValueAsString(map);
+		}
+		catch (JsonProcessingException e) {
+			logger.error("[" + this.getClass().getName() + ".JsonApi().1st] " + e.getMessage(), e);
+		}
+		
+		MediaType JSON = MediaType.get("application/json; charset=utf-8");
+		RequestBody requestBody = RequestBody.create(jsonBody, JSON);
+		
+		Request request = null;
+		
+		String userAgent = "PC";
+		
+		if (kr.co.bravomylife.util.servlet.Request.isDevice(requests, "mobile")) {
+			
+			if (requests.getHeader("User-Agent").indexOf("iPhone") > -1) {
+				userAgent = "iPhone";
+			}
+			else if (requests.getHeader("User-Agent").indexOf("Android") > -1) {
+				userAgent = "Linux Android";
+			}
+			
+			request = new Request.Builder()
+					.url(url)
+					.addHeader("User-Agent", userAgent)
+					.addHeader("Authorization", Authorization)
+					.post(requestBody)
+					.build();
+		}
+		else {
+			request = new Request.Builder()
+					.url(url)
+					.addHeader("Authorization", Authorization)
+					.post(requestBody)
+					.build();
+		}
+		
+		//logger.debug("[" + this.getClass().getName() + ".JsonApi()] userAgent=" + userAgent);
+		
+		try {
+			Response response = client.newCall(request).execute();
+			returnMap = objectMapper.readValue(response.body().string(), Map.class);
+		}
+		catch (IOException e) {
+				logger.error("[" + this.getClass().getName() + ".JsonApi().2nd] " + e.getMessage(), e);
+		}
+		
+		return returnMap;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public Map<String,Object> JsonApi(HttpServletRequest requests, String url, Map<String,String> map) {
 		
 		Map<String,Object> returnMap = new HashMap<>();

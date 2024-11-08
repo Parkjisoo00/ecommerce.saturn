@@ -61,6 +61,30 @@ public class BuySrvc {
 	PayDao payDao;
 	
 	@Transactional("txFront")
+	public boolean updateByDealNum(String deal_num, int updater, String flg_success) {
+		
+		int result = 0;
+		
+		PayDto payDto = new PayDto();
+		payDto.setDeal_num(deal_num);
+		payDto.setFlg_success(flg_success);			// 성공(Y), 실패(N)
+		result += payDao.updateByDealNum(payDto);
+		
+		payDto = payDao.select(payDto);
+		BuyMasterDto buyMasterDto = new BuyMasterDto();
+		buyMasterDto.setSeq_buy_mst(payDto.getSeq_buy_mst());
+		buyMasterDto.setCd_state_pay(flg_success);	// 결제 전(NULL), 결제 완료(Y), 결제 실패(N), 결제 취소(C)
+		buyMasterDto.setUpdater(updater);
+		result += buyDao.update(buyMasterDto);
+		
+		if (result == 2) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+
+	@Transactional("txFront")
 	public boolean historyDelete(BuyDto buyDto) {
 		
 		int result = buyDao.historyDelete(buyDto);

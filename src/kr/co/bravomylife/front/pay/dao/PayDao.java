@@ -36,6 +36,11 @@ import kr.co.bravomylife.front.pay.dto.PayDto;
 @Repository("kr.co.bravomylife.front.pay.dao.PayDao")
 public class PayDao extends BaseDao {
 
+	
+	public int updateByDealNum(PayDto payDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.pay.Pay.updateByDealNum", payDto);
+	}
+	
 	public int insertDetail(PayDto payDto) {
 		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.pay.Pay.insertDetail", payDto);
 	}

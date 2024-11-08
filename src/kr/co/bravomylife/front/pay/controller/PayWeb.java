@@ -32,6 +32,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,8 @@ import kr.co.bravomylife.front.buy.dto.BuyMasterDto;
 import kr.co.bravomylife.front.buy.service.BuySrvc;
 import kr.co.bravomylife.util.Datetime;
 import kr.co.bravomylife.util.servlet.Request;
+import kr.co.bravomylife.front.sale.dto.SaleDto;
+import kr.co.bravomylife.front.sale.service.SaleSrvc;
 
 /**
  * @version 1.0.0
@@ -85,8 +88,100 @@ public class PayWeb extends Common {
 	@Inject
 	private MemberSrvc memberSrvc;
 	
+	@Autowired
+	private SaleSrvc saleSrvc;
+	
 	@Inject
 	ApiService apiService;
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-11-08
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+
+	@RequestMapping(value = "/front/pay/payup/receive.api")
+	public ModelAndView receive(@RequestParam Map<String, String> param, HttpServletRequest request) throws NoSuchAlgorithmException {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		try {
+			
+			if ("0000".equals(param.get("res_cd"))) {
+				
+				String res_cd		= param.get("res_cd");
+				String ordr_idxx	= param.get("ordr_idxx");
+				String res_msg		= param.get("res_msg");
+				String enc_data		= param.get("enc_data");
+				String enc_info		= param.get("enc_info");
+				String tran_cd		= param.get("tran_cd");
+				String buyr_mail	= param.get("buyr_mail");
+				
+				String url = "https://api.testpayup.co.kr/ap/api/payment/" + ordr_idxx + "/pay";
+				Map<String,String> apiMap = new HashMap<>();		
+				apiMap.put("res_cd",res_cd);
+				apiMap.put("ordr_idxx",ordr_idxx);
+				apiMap.put("res_msg",res_msg);
+				apiMap.put("enc_data",enc_data);
+				apiMap.put("enc_info",enc_info);
+				apiMap.put("tran_cd",tran_cd);
+				apiMap.put("buyr_mail",buyr_mail);
+				
+				Map<String,Object> apiResult = new HashMap<>();
+				apiResult = payCmpn.JsonApi(request, url, apiMap);
+				
+				// logger.info("통신 결과[" + this.getClass().getName() + ".receiveOld().RES2nd] " + apiResult.toString());
+				
+				/** 페이업 거래번호 */
+				String deal_num = (String) apiResult.get("transactionId");
+				boolean isResult = true;
+				
+				if ("0000".equals(apiResult.get("responseCode"))) {
+					
+					// logger.info("[" + this.getClass().getName() + ".receiveOld().RES2nd.SUCCESS] " + apiResult.toString());
+					isResult = buySrvc.updateByDealNum(deal_num, Integer.parseInt(getSession(request, "SEQ_MBR")), "Y");
+					
+					request.setAttribute("script"	, "alert('정상적으로 결제되었습니다. 구매해 주셔서 감사합니다.');");
+					request.setAttribute("redirect"	, "/");
+					
+				}
+				else {
+					logger.error("[" + this.getClass().getName() + ".receiveOld().RES2nd.FAILURE] " + apiResult.toString());
+					isResult = buySrvc.updateByDealNum(deal_num, Integer.parseInt(getSession(request, "SEQ_MBR")), "N");
+					
+					request.setAttribute("script"	, "alert('[" + apiResult.get("responseCode") + "]결제가 실패되었습니다. 고객센터(=Payup)로 문의바랍니다!');");
+					request.setAttribute("redirect"	, "/");
+				}
+				
+				// 결제 결과에 대한 업데이트 실패 시
+				if (!isResult) {
+					request.setAttribute("script"	, "alert('[P001]결제 처리에 실패하였습니다. 고객센터로 문의바랍니다!');");
+					request.setAttribute("redirect"	, "/");
+				}
+			}
+			else {
+				logger.error("[" + this.getClass().getName() + ".receiveOld().RES1st.FAILURE] " + param.toString());
+				request.setAttribute("script"	, "alert('[" + param.get("res_cd") + "]결제 처리에 실패하였습니다. 고객센터(=Payup)로 문의바랍니다!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			request.setAttribute("script"	, "alert('[P000]결제 처리에 실패하였습니다. 고객센터로 문의바랍니다!');");
+			request.setAttribute("redirect"	, "/");
+			mav.setViewName("forward:/servlet/result.web");
+			logger.error("[" + this.getClass().getName() + ".receive()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -442,11 +537,24 @@ public class PayWeb extends Common {
 	*/
 	
 	@RequestMapping(value = "/front/pay/index.web")
-	public ModelAndView index(BuyDetailListDto buyDetailListDto, HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+	public ModelAndView index(BuyDetailListDto buyDetailListDto, HttpServletRequest request, HttpServletResponse response, MemberDto memberDto, SaleDto saleDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
+			
+			String flgMobile	= "N";
+			if (Request.isDevice(request, "mobile")) flgMobile = "Y";
+			
+			SaleDto _saleDto	= saleSrvc.select(saleDto);
+			
+			mav.addObject("saleDto"		, _saleDto);
+			mav.addObject("flgMobile"	, flgMobile);
+			
+			
+			//기존 결제 연동(flgMobile 필요)
+			mav.setViewName("/front/pay/index");
+			
 			
 			String staticKey = staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes = new SKwithAES(staticKey);

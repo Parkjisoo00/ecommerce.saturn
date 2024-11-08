@@ -374,6 +374,64 @@
 			finalAmountCell.text(finalPrice.toLocaleString() + '원');
 		});
 	});
+	
+	function changeDeliveryAddress() {
+		$.ajax({
+			type: "POST",
+			url: "/front/buy/deliveryChanges.json",
+			dataType: "json",
+			contentType: "application/json; charset=UTF-8",
+			success: function(res) {
+				
+				var deliveryListContainer = $('#deliveryList');
+				deliveryListContainer.empty();
+				
+				if (res && res.length > 0) {
+					
+					res.forEach(function(item, index) {
+						
+						var seqMbrAddr = item.seq_mbr_addr;
+						var post = item.post;
+						var addr1 = item.addr1;
+						var addr2 = item.addr2;
+						
+						var deliveryDiv = 
+							
+							'<div style="border: 1px solid #e0e0e0; border-radius: 2px; font-family: 돋움, Dotum, sans-serif !important; margin-bottom: 15px;">' +
+								'<div style="padding: 15px;">' +
+									'<div style="font-size: 16px; line-height: 20px; white-space: nowrap; font-weight: bold; margin-bottom: 10px;">배송지 상세 정보</div>' +
+									'<div style="margin-bottom: 5px; font-size: 14px;"> ' + post + '</div>' +
+									'<div style="margin-bottom: 5px; font-size: 14px;"> ' + addr1 + '</div>' +
+									'<div style="margin-bottom: 5px; font-size: 14px;"> ' + addr2 + '</div>' +
+									'<div>' +
+									'<a id="btnPay" class="cart-btn" style="font-weight: normal; cursor: pointer; background: white; color: #346aff !important; border: 1px solid #346aff; margin: 0; display: inline-block; padding: 4px 12px; text-align: center;" ' +
+										'onclick="selectAddress(\'' + seqMbrAddr + '\', \'' + post + '\', \'' + addr1 + '\', \'' + addr2 + '\')">선택</a>' +
+								'</div>' +
+								'</div>' +
+							'</div>';
+							
+						deliveryListContainer.append(deliveryDiv);
+					});
+					$('#deliveryModal').show();
+					$('#modalOverlay').show();
+				}
+			},
+		});
+	}
+	
+	function closeModal() {
+		$('#deliveryModal').hide();
+		$('#modalOverlay').hide();
+	}
+	
+	function selectAddress(seq_mbr_addr, post, addr1, addr2) {
+		$('#seq_mbr_addr').val(seq_mbr_addr);
+		$('#post').val(post);
+		$('#addr1').val(addr1);
+		$('#addr2').val(addr2);
+		
+		closeModal();
+	}
 </script>
 </form>
 <iframe name="frmBlank" id="frmBlank" width="0" height="0"></iframe>
@@ -399,6 +457,7 @@
 		<input type="hidden" name="AppUrl" value="testApp://testURL">
 	</form>
 </c:if>
+
 <c:if test="${flgMobile != 'Y'}">
 	<script type="text/javascript">
 		function m_Completepayment(FormOrJson, closeEvent) {
@@ -423,65 +482,9 @@
 			}
 			catch (e) {	}
 		}
-		
-		function changeDeliveryAddress() {
-			$.ajax({
-				type: "POST",
-				url: "/front/buy/deliveryChanges.json",
-				dataType: "json",
-				contentType: "application/json; charset=UTF-8",
-				success: function(res) {
-					
-					var deliveryListContainer = $('#deliveryList');
-					deliveryListContainer.empty();
-					
-					if (res && res.length > 0) {
-						
-						res.forEach(function(item, index) {
-							
-							var seqMbrAddr = item.seq_mbr_addr;
-							var post = item.post;
-							var addr1 = item.addr1;
-							var addr2 = item.addr2;
-							
-							var deliveryDiv = 
-								
-								'<div style="border: 1px solid #e0e0e0; border-radius: 2px; font-family: 돋움, Dotum, sans-serif !important; margin-bottom: 15px;">' +
-									'<div style="padding: 15px;">' +
-										'<div style="font-size: 16px; line-height: 20px; white-space: nowrap; font-weight: bold; margin-bottom: 10px;">배송지 상세 정보</div>' +
-										'<div style="margin-bottom: 5px; font-size: 14px;"> ' + post + '</div>' +
-										'<div style="margin-bottom: 5px; font-size: 14px;"> ' + addr1 + '</div>' +
-										'<div style="margin-bottom: 5px; font-size: 14px;"> ' + addr2 + '</div>' +
-										'<div>' +
-										'<a id="btnPay" class="cart-btn" style="font-weight: normal; cursor: pointer; background: white; color: #346aff !important; border: 1px solid #346aff; margin: 0; display: inline-block; padding: 4px 12px; text-align: center;" ' +
-											'onclick="selectAddress(\'' + seqMbrAddr + '\', \'' + post + '\', \'' + addr1 + '\', \'' + addr2 + '\')">선택</a>' +
-									'</div>' +
-									'</div>' +
-								'</div>';
-								
-							deliveryListContainer.append(deliveryDiv);
-						});
-						$('#deliveryModal').show();
-						$('#modalOverlay').show();
-					}
-				},
-			});
-		}
-		
-		function closeModal() {
-			$('#deliveryModal').hide();
-			$('#modalOverlay').hide();
-		}
-		
-		function selectAddress(seq_mbr_addr, post, addr1, addr2) {
-			$('#seq_mbr_addr').val(seq_mbr_addr);
-			$('#post').val(post);
-			$('#addr1').val(addr1);
-			$('#addr2').val(addr2);
-			
-			closeModal();
-		}
-	</script>
+	</script>	
+	
+
 	<script type="text/javascript" src="https://testpay.kcp.co.kr/plugin/payplus_web.jsp"></script>
 	<form name="kcp_order_info" method="post" accept-charset="utf-8">
 		<input type="hidden" name="ordr_idxx" value="">

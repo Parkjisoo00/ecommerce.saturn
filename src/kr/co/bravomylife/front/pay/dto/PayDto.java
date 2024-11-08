@@ -43,6 +43,7 @@ public class PayDto {
 	private int register		= 0;
 	
 	
+	
 	public int getSeq_buy_dtl() {
 		return seq_buy_dtl;
 	}
