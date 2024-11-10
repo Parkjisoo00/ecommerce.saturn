@@ -96,7 +96,7 @@
 		frmMain.submit();
 	}
 	
-function goTypeT(value) {
+	function goTypeT(value) {
 		
 		var first_cd_ctg		= document.getElementById("first_cd_ctg").value;
 		var second_cd_ctg		= document.getElementById("second_cd_ctg").value;

@@ -57,6 +57,94 @@
 		
 	}
 	
+	function goTypeF(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/function_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeI(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/ingredient_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeG(value) {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/gender_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeT(value) {
+		
+		var first_cd_ctg		= document.getElementById("first_cd_ctg").value;
+		var second_cd_ctg		= document.getElementById("second_cd_ctg").value;
+		var _searchWord			= document.getElementById("_searchWord").value;
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+		frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+		frmMain.searchWord.setAttribute("value", _searchWord);
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+	
+	function goTypeTx(value) {
+
+		var first_cd_ctgDesktop		= document.getElementById("first_cd_ctg").value;
+		var second_cd_ctgDesktop	= document.getElementById("second_cd_ctg").value;
+		
+		var first_cd_ctgAndroid		= document.getElementById("first_cd_ctg_android").value;
+		var second_cd_ctgAndroid	= document.getElementById("second_cd_ctg_android").value;
+		
+		var first_cd_ctg;
+		var second_cd_ctg
+		
+		if (value == 'pc') {
+			
+			first_cd_ctg	= 	first_cd_ctgDesktop
+			second_cd_ctg	= 	second_cd_ctgDesktop
+		}
+		else if (value == 'mobile') {	
+			first_cd_ctg	= 	first_cd_ctgAndroid
+			second_cd_ctg	= 	second_cd_ctgAndroid
+		}	
+		
+		var searchWordDesktop = document.getElementById("_searchWord_desktop").value;
+		var searchWordAndroid = document.getElementById("_searchWord_android").value;
+		
+		var _searchWord;
+
+		if (value == 'pc') {
+			_searchWord = searchWordDesktop;
+		}
+		else if (value == 'mobile') {
+			_searchWord = searchWordAndroid;
+		}
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+		frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+		frmMain.searchWord.setAttribute("value", _searchWord);
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+	
 	</script>
 
 	<!-- Google Font -->
@@ -72,6 +160,10 @@
 <input type="hidden" id="sequence"		name="sequence" />
 <input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" 	value="0"/>
 <input type="hidden" id="seq_bbs"		name="seq_bbs"		value="${boardDto.seq_bbs}" />
+<input type="hidden" id="cd_ctg_m" 		name="cd_ctg_m"/>
+<input type="hidden" id="cd_ctg_b"		name="cd_ctg_b"/>
+<input type="hidden" id="searchWord"	name="searchWord"/>
+<input type="hidden" id="_searchWord"	name="_searchWord"/>
 
 	<!-- Page Preloder -->
 	<div id="preloder">
