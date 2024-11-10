@@ -86,7 +86,7 @@
 					</li>
 					<li class="treeview">
 					<a href="#">
-						<i class="fa fa-edit"></i> <span>상품</span>
+						<i class="fa fa-edit"></i> <span>상품 관리</span>
 						<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 						</span>
@@ -98,7 +98,7 @@
 					</li>
 					<li class="treeview">
 					<a href="#">
-						<i class="fa fa-fw fa-volume-up"></i> <span>고객 센터</span>
+						<i class="fa fa-fw fa-volume-up"></i> <span>고객 센터 관리</span>
 						<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 						</span>
@@ -111,7 +111,7 @@
 					</li>
 					<li class="treeview">
 					<a href="#">
-						<i class="fa fa-book"></i> <span>맞춤 건강 등록</span>
+						<i class="fa fa-book"></i> <span>맞춤 건강 등록 관리</span>
 						<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 						</span>
@@ -125,7 +125,7 @@
 					<li class="treeview">
 					<a href="javascript:consolegoList(5)">
 						<i class="fa fa-fw fa-commenting-o"></i>
-						<span>소개</span>
+						<span>소개 관리</span>
 						<span class="pull-right-container">
 						<span class="label label-primary pull-right"></span>
 						</span>
