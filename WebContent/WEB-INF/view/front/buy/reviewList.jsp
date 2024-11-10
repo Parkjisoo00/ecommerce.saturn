@@ -170,7 +170,7 @@
 												<div class="review-name" style="border-top: 0px !important; padding: 20px 20px 20px 30px !important;">
 													<div class="photoreview" style="padding: 0px !important;">
 														<a href="javascript:goWriteForm('${list.seq_sle}', '${list.cd_ctg_m}', '${list.cd_ctg_b}');">
-															<img src="/img/product/${saleDto.img}" style="height: 100px !important;">
+															<img src="/img/product/${list.img}" style="height: 100px !important;">
 														</a>
 													</div>
 													<div class="product-name" style="flex-grow: 1; padding: 0px !important; display: flex; justify-content: space-between; align-items: center; margin-left: 20px !important; margin-right: 0px !important;">
