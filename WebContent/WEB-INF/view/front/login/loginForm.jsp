@@ -26,6 +26,17 @@
 				document.getElementById("rememberMe").checked = true;
 			}
 		}
+		
+		document.addEventListener('DOMContentLoaded', function () {
+			const loginInput = document.getElementById('passwd');
+			const loginButton = document.getElementById('loginId');
+
+			loginInput.addEventListener('keydown', function(event) {
+				if (event.key === "Enter") {
+					loginButton.click();
+				}
+			});
+		});
 	</script>
 	<style>
 	
