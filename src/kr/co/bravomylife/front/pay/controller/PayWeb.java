@@ -411,7 +411,8 @@ public class PayWeb extends Common {
 			}
 
 			// 계산된 총 금액을 문자열로 변환하여 amount에 저장
-			String amount 				= Integer.toString(totalAmount);
+			String amount 				= Integer.toString(totalAmount - usePoint);
+
 			//String amount				= "100";
 			//String amount				= Integer.toString(Integer.parseInt(param.get("buyList[0].price")) * Integer.parseInt(param.get("buyList[0].count")));
 																			// 금액: param.get("amount");
@@ -438,6 +439,7 @@ public class PayWeb extends Common {
 			int totalCount = 0;			// 총 갯수
 			int totalPrice = 0;			// 총 가격
 			int totalPoint = 0;
+			
 			
 			String serverUrl = "";
 			if (staticProperties.getProperty("common.mode", "[UNDEFINED]").equalsIgnoreCase("LOCAL")) {
