@@ -59,6 +59,7 @@
 		frmMain.seq_mbr_addr.setAttribute("value", value2);
 		
 		frmMain.action="/front/buy/buyDelivertView.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -69,6 +70,7 @@
 		frmMain.seq_buy_mst.setAttribute("value", value);
 		
 		frmMain.action="/front/pay/cancelForm.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -78,6 +80,7 @@
 		
 		frmMain.cd_bbs_type.setAttribute("value", value);
 		frmMain.action = "/front/center/board/list.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	</script>
@@ -113,7 +116,7 @@
 <input type="hidden" name="seq_buy_dtl"					id="seq_buy_dtl"		value="0"/>
 <input type="hidden" name="seq_buy_mst"					id="seq_buy_mst"		value="0"/>
 <input type="hidden" name="seq_mbr_addr"				id="seq_mbr_addr"		value="0"/>
-<input type="hidden" name="cd_bbs_type"					id="cd_bbs_type"		/>
+<input type="hidden" name="cd_bbs_type"					id="cd_bbs_type"		value="0"/>
 <input type="hidden" name="currentPage"					id="currentPage"	value="${paging.currentPage}"/>
 
 	<!-- Page Preloder -->
@@ -151,9 +154,15 @@
 										<div class="history-head">
 											<div class="history-head-title">${buyList.dt_reg} 주문</div>
 											<div class="history-head-subtitle">
-												<a href="javascript:delivery('${buyList.seq_buy_mst}', '${buyList.seq_mbr_addr}');" class="cart-btn" style="font-weight: normal; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: rgb(52, 106, 255) !important; border: 1px solid rgb(52, 106, 255);">배송조회 확인</a>
+											<c:if test="${buyList.cd_state == 3}">
+												<a href="javascript:delivery('${buyList.seq_buy_mst}', '${buyList.seq_mbr_addr}');" class="cart-btn" style="font-weight: normal; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: rgb(52, 106, 255) !important; border: 1px solid rgb(52, 106, 255);">교환배송 확인</a>
 												<a href="javascript:cancelForm('${buyList.seq_buy_mst}');" class="cart-btn" style="font-weight: normal; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: #2c2c2c; border: 1px solid rgb(221, 221, 221);">주문취소 확인</a>
 												<a href="javascript:historyDelete('${buyList.seq_buy_mst}');" class="cart-btn" style="font-weight: normal; margin-right: 10px !important; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: #2c2c2c; border: 1px solid rgb(221, 221, 221);">주문정보 삭제</a>
+											</c:if>
+											<c:if test="${buyList.cd_state == 2 || buyList.cd_state == 4}">
+												<a href="javascript:cancelForm('${buyList.seq_buy_mst}');" class="cart-btn" style="font-weight: normal; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: #2c2c2c; border: 1px solid rgb(221, 221, 221);">주문취소 확인</a>
+												<a href="javascript:historyDelete('${buyList.seq_buy_mst}');" class="cart-btn" style="font-weight: normal; margin-right: 10px !important; padding: 9px 15px 9px !important; font-size: 15px !important; margin-top: 0px !important; background: white; color: #2c2c2c; border: 1px solid rgb(221, 221, 221);">주문정보 삭제</a>
+											</c:if>
 											</div>
 										</div>
 										<div class="history-table-div">

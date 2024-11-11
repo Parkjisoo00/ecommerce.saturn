@@ -992,7 +992,22 @@
 		FROM
 		(
 		SELECT
-			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY sle.DT_REG DESC) rnum
+		/*+ first_rows(10) */ 
+		ROW_NUMBER() OVER (
+			ORDER BY
+			<if test="filter == 'LowP'">
+				ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) ASC
+			</if>
+			<if test="filter == 'HighP'">
+				ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) DESC
+			</if>
+			<if test="filter == 'DtReg'">
+				sle.DT_REG DESC
+			</if>
+			<if test="filter != 'LowP' and filter != 'HighP' and filter != 'DtReg'">
+				sle.DT_REG DESC
+			</if>
+		) rnum
 			, sle.SEQ_SLE
 			, sle.SLE_NM
 			, sle.IMG
@@ -1046,17 +1061,7 @@
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]>
-		ORDER BY 
-		<if test="filter == 'LowP'">
-			DISCOUNT_SALE ASC, 
-		</if>
-		<if test="filter == 'HighP'">
-			DISCOUNT_SALE DESC, 
-		</if>
-		<if test="filter == 'DtReg'">
-			DT_REG DESC, 
-		</if>
-		rnum
+		ORDER BY rnum
 	</select>
 
 	<sql id="totalwhere">
@@ -1121,7 +1126,22 @@
 		FROM
 		(
 		SELECT
-			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY sle.DT_REG DESC) rnum
+		/*+ first_rows(10) */ 
+		ROW_NUMBER() OVER (
+			ORDER BY
+			<if test="filter == 'LowP'">
+				ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) ASC
+			</if>
+			<if test="filter == 'HighP'">
+				ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) DESC
+			</if>
+			<if test="filter == 'DtReg'">
+				sle.DT_REG DESC
+			</if>
+			<if test="filter != 'LowP' and filter != 'HighP' and filter != 'DtReg'">
+				sle.DT_REG DESC
+			</if>
+		) rnum
 			, sle.SEQ_SLE
 			, sle.SLE_NM
 			, sle.IMG
@@ -1175,17 +1195,7 @@
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]>
-		ORDER BY 
-		<if test="filter == 'LowP'">
-			DISCOUNT_SALE ASC, 
-		</if>
-		<if test="filter == 'HighP'">
-			DISCOUNT_SALE DESC, 
-		</if>
-		<if test="filter == 'DtReg'">
-			DT_REG DESC, 
-		</if>
-		rnum
+		ORDER BY rnum
 	</select>
 
 	<sql id="ingredientwhere">
@@ -1241,7 +1251,22 @@
 		FROM
 		(
 		SELECT
-			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY sle.DT_REG DESC) rnum
+		/*+ first_rows(10) */ 
+		ROW_NUMBER() OVER (
+			ORDER BY
+			<if test="filter == 'LowP'">
+				ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) ASC
+			</if>
+			<if test="filter == 'HighP'">
+				ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) DESC
+			</if>
+			<if test="filter == 'DtReg'">
+				sle.DT_REG DESC
+			</if>
+			<if test="filter != 'LowP' and filter != 'HighP' and filter != 'DtReg'">
+				sle.DT_REG DESC
+			</if>
+		) rnum
 			, sle.SEQ_SLE
 			, sle.SLE_NM
 			, sle.IMG
@@ -1295,17 +1320,7 @@
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]>
-		ORDER BY 
-		<if test="filter == 'LowP'">
-			DISCOUNT_SALE ASC, 
-		</if>
-		<if test="filter == 'HighP'">
-			DISCOUNT_SALE DESC, 
-		</if>
-		<if test="filter == 'DtReg'">
-			DT_REG DESC, 
-		</if>
-		rnum
+		ORDER BY rnum
 	</select>
 
 	<sql id="functionwhere">
@@ -1361,7 +1376,22 @@
 		FROM
 		(
 		SELECT
-			/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY sle.DT_REG DESC) rnum
+		/*+ first_rows(10) */ 
+		ROW_NUMBER() OVER (
+			ORDER BY
+			<if test="filter == 'LowP'">
+				ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) ASC
+			</if>
+			<if test="filter == 'HighP'">
+				ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) DESC
+			</if>
+			<if test="filter == 'DtReg'">
+				sle.DT_REG DESC
+			</if>
+			<if test="filter != 'LowP' and filter != 'HighP' and filter != 'DtReg'">
+				sle.DT_REG DESC
+			</if>
+		) rnum
 			, sle.SEQ_SLE
 			, sle.SLE_NM
 			, sle.IMG
@@ -1415,17 +1445,7 @@
 		<![CDATA[
 		WHERE rnum >= (${currentPage} - 1) * ${linePerPage} + 1 AND rnum <= ${currentPage} * ${linePerPage}
 		]]>
-		ORDER BY 
-		<if test="filter == 'LowP'">
-			DISCOUNT_SALE ASC, 
-		</if>
-		<if test="filter == 'HighP'">
-			DISCOUNT_SALE DESC, 
-		</if>
-		<if test="filter == 'DtReg'">
-			DT_REG DESC, 
-		</if>
-		rnum
+		ORDER BY rnum
 	</select>
 
 	<sql id="genderwhere">

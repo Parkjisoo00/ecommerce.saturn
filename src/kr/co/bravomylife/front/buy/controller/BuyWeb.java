@@ -894,7 +894,7 @@ public class BuyWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/buy/history.web", method = RequestMethod.POST)
+	@RequestMapping(value = "/front/buy/history.web")
 	public ModelAndView history(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");

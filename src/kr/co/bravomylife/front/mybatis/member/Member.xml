@@ -25,6 +25,7 @@
 			, mst.DELIVERY_REQUEST
 			, mbr_mst.MBR_NM
 			, TO_CHAR(SYSDATE, 'MM"월"" "DD"일"') dt_reg
+			, mst.CD_STATE AS cd_state_mst
 		FROM
 			TB_MBR_ADDR addr
 		LEFT JOIN

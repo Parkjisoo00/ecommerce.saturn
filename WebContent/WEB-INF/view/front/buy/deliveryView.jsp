@@ -79,25 +79,32 @@
 						<div style="font-size: 28px !important;">
 						${memberDto.dt_reg} <span style="font-size: 18px !important;"> 주문하신</span>
 						</div>
-						<c:if test="${memberDto.cd_state_delivery == 'C'}">
-						<div style="margin-top: 8px !important; font-size: 18px !important;">
-						고객님의 상품이 <span style="font-size: 28px !important;">판매 확인중</span>입니다.
-						</div>
+						<c:if test="${memberDto.cd_state_mst == '3'}">
+							<div style="margin-top: 8px !important; font-size: 18px !important;">
+								고객님의 상품이 <span style="font-size: 28px !important;">교환 확인중</span>입니다.
+							</div>
 						</c:if>
-						<c:if test="${memberDto.cd_state_delivery == 'P'}">
-						<div style="margin-top: 8px !important; font-size: 18px !important;">
-						고객님의 상품이 <span style="font-size: 28px !important;">배송 준비중</span>입니다.
-						</div>
-						</c:if>
-						<c:if test="${memberDto.cd_state_delivery == 'D'}">
-						<div style="margin-top: 8px !important; font-size: 18px !important;">
-						고객님의 상품이 <span style="font-size: 28px !important;">배송중</span>입니다.
-						</div>
-						</c:if>
-						<c:if test="${memberDto.cd_state_delivery == 'Y'}">
-						<div style="margin-top: 8px !important; font-size: 18px !important;">
-						고객님의 상품이 <span style="font-size: 28px !important;">배송 완료</span> 되었습니다.
-						</div>
+						<c:if test="${memberDto.cd_state_mst != '3'}">
+							<c:if test="${memberDto.cd_state_delivery == 'C'}">
+								<div style="margin-top: 8px !important; font-size: 18px !important;">
+									고객님의 상품이 <span style="font-size: 28px !important;">판매 확인중</span>입니다.
+								</div>
+							</c:if>
+							<c:if test="${memberDto.cd_state_delivery == 'P'}">
+								<div style="margin-top: 8px !important; font-size: 18px !important;">
+									고객님의 상품이 <span style="font-size: 28px !important;">배송 준비중</span>입니다.
+								</div>
+							</c:if>
+							<c:if test="${memberDto.cd_state_delivery == 'D'}">
+								<div style="margin-top: 8px !important; font-size: 18px !important;">
+									고객님의 상품이 <span style="font-size: 28px !important;">배송중</span>입니다.
+								</div>
+							</c:if>
+							<c:if test="${memberDto.cd_state_delivery == 'Y'}">
+								<div style="margin-top: 8px !important; font-size: 18px !important;">
+									고객님의 상품이 <span style="font-size: 28px !important;">배송 완료</span> 되었습니다.
+								</div>
+							</c:if>
 						</c:if>
 					</div>
 					<div class="delivery_div_head" style="background: white !important; padding: 15px 10px 10px !important; border-radius: 2px !important;">

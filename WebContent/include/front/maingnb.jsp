@@ -336,6 +336,7 @@ function goHealth() {
 	var frmMain = document.getElementById("frmMain");
 	
 	frmMain.action = "/front/center/board/personalHealth/index.web";
+	frmMain.target = "";
 	frmMain.submit();
 }
 
@@ -344,6 +345,7 @@ function goIntro() {
 	var frmMain = document.getElementById("frmMain");
 	
 	frmMain.action = "/front/center/board/introduce/index.web";
+	frmMain.target = "";
 	frmMain.submit();
 }
 
@@ -352,6 +354,7 @@ function goHealthInfo() {
 	var frmMain = document.getElementById("frmMain");
 	
 	frmMain.action = "/front/center/board/health/list.web";
+	frmMain.target = "";
 	frmMain.submit();
 }
 
@@ -360,6 +363,7 @@ function goIngredInfo() {
 	var frmMain = document.getElementById("frmMain");
 	
 	frmMain.action = "/front/center/board/ingred/list.web";
+	frmMain.target = "";
 	frmMain.submit();
 }
 
@@ -368,6 +372,7 @@ function goSurvey() {
 	var frmMain = document.getElementById("frmMain");
 	
 	frmMain.action = "/front/center/board/surveyForm.web";
+	frmMain.target = "";
 	frmMain.submit();
 }
 
@@ -376,6 +381,7 @@ function goSearch() {
 	var frmMain = document.getElementById("frmMain");
 	
 	frmMain.action = "/front/center/board/personalHealth/searchForm.web";
+	frmMain.target = "";
 	frmMain.submit();
 }
 
@@ -385,10 +391,9 @@ function hpSurgoList(value) {
 	
 	frmMain.cd_bbs_type.setAttribute("value", value);
 	frmMain.action = "/front/hpSur/ingredient.web";
+	frmMain.target = "";
 	frmMain.submit();
 }
-
-
 
 function goLogin() {
 	
@@ -403,6 +408,7 @@ function goLogout() {
 	var frmMain = document.getElementById("frmMain");
 	
 	frmMain.action = "/front/login/logout.web";
+	frmMain.target = "";
 	frmMain.submit();
 }
 
@@ -419,6 +425,7 @@ function goMyPage() {
 	var frmMain = document.getElementById("frmMain");
 	
 	frmMain.action = "/front/myPage/index.web";
+	frmMain.target = "";
 	frmMain.submit();
 }
 
@@ -427,6 +434,7 @@ function goBasket() {
 	var frmMain = document.getElementById("frmMain");
 	
 	frmMain.action = "/front/basket/main.web";
+	frmMain.target = "";
 	frmMain.submit();
 }
 </script>

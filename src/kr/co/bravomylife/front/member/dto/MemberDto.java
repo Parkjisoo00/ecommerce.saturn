@@ -68,8 +68,15 @@ public class MemberDto {
 	private String dt_delivery	= "";
 	private String cd_state_delivery	= "";
 	private String delivery_request		= "";
+	private String cd_state_mst			= "";
 	
 	
+	public String getCd_state_mst() {
+		return cd_state_mst;
+	}
+	public void setCd_state_mst(String cd_state_mst) {
+		this.cd_state_mst = cd_state_mst;
+	}
 	public String getDelivery_request() {
 		return delivery_request;
 	}

@@ -194,6 +194,7 @@
 			, buy_mst.SEQ_MBR
 			, TO_CHAR(buy_mst.DT_REG, 'YYYY-MM-DD') dt_reg
 			, buy_mst.DELIVERY_REQUEST
+			, buy_mst.CD_STATE
 		FROM
 			TB_BUY_MST buy_mst
 		WHERE

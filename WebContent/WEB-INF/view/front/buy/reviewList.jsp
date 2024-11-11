@@ -96,7 +96,7 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.currentPage.setAttribute("value", value);
-		frmMain.action="/front/sale/ingredient_list.web";
+		frmMain.action="/front/buy/reviewListPage.web";
 		frmMain.submit();
 	}
 	

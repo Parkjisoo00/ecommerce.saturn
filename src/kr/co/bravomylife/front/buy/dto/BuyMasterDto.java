@@ -53,6 +53,7 @@ public class BuyMasterDto {
 	private int seq_sle						= 0;
 	private String cd_ctg_m					= "";
 	private String cd_ctg_b					= "";
+	private String cd_state					= "";
 	
 	private int cd_state_total_2			= 0;
 	private int cd_state_total_3			= 0;
@@ -63,8 +64,12 @@ public class BuyMasterDto {
 	private int delivery_total_y			= 0;
 	
 	
-	
-	
+	public String getCd_state() {
+		return cd_state;
+	}
+	public void setCd_state(String cd_state) {
+		this.cd_state = cd_state;
+	}
 	public int getCd_state_total_2() {
 		return cd_state_total_2;
 	}

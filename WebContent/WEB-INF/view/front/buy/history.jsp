@@ -28,6 +28,7 @@
 		frmMain.currentPage.setAttribute("value", value);
 		
 		frmMain.action="/front/member/myLike.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -78,6 +79,7 @@
 		
 		frmMain.cd_bbs_type.setAttribute("value", value);
 		frmMain.action = "/front/center/board/list.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	</script>
@@ -110,9 +112,9 @@
 <input type="hidden" name="cd_ctg_b"					id="cd_ctg_b"/>
 <input type="hidden" name="type"						id="type"/>
 <input type="hidden" name="seq_buy_dtl"					id="seq_buy_dtl"		value="0"/>
-<input type="hidden" name="seq_buy_mst"					id="seq_buy_mst"		/>
+<input type="hidden" name="seq_buy_mst"					id="seq_buy_mst"		value="0"/>
 <input type="hidden" name="seq_mbr_addr"				id="seq_mbr_addr"		value="0"/>
-<input type="hidden" name="cd_bbs_type"					id="cd_bbs_type"		/>
+<input type="hidden" name="cd_bbs_type"					id="cd_bbs_type"		value="0"/>
 <input type="hidden" name="currentPage"					id="currentPage"	value="${paging.currentPage}"/>
 
 	<!-- Page Preloder -->
