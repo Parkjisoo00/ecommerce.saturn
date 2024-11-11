@@ -48,7 +48,7 @@
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">이메일</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off" value="liqingmin@naver.com">
+										<input type="text" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off" value="@naver.com">
 									</div>
 							</div>
 							<div class="form-group">
