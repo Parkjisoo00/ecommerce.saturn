@@ -38,6 +38,14 @@
 		frmMain.action = "/front/center/board/list.web";
 		frmMain.submit();
 	}
+	
+	function goReviewListPage() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/buy/reviewListPage.web";
+		frmMain.submit();
+	}
 	</script>
 	<!-- Google Font -->
 	<%@ include file="/include/common/webfont.jsp" %>
@@ -151,7 +159,7 @@
 									<div style="height: 100% !important; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; width: 100%;">
 										<textarea id="rate_review" name="rate_review" class="review-text" placeholder="다른 고객님께 도움이 되도록 후기를 남겨주세요."></textarea>
 										<div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; width: 100%;">
-											<a href="#" class="cart-btn" style="background: #fff; color: #111 !important; border: 1px solid #ccc !important; margin: 0; padding: 10px 10px 10px !important;">
+											<a href="javascript:goReviewListPage();" class="cart-btn" style="background: #fff; color: #111 !important; border: 1px solid #ccc !important; margin: 0; padding: 10px 10px 10px !important;">
 												취소하기
 											</a>
 											<a href="javascript:reviewWriteProc();" class="cart-btn" style="background: #346aff; color: white !important; border: 1px solid #346aff !important; margin: 0 ; padding: 10px 10px 10px !important;">
