@@ -550,9 +550,16 @@
 		ON 
 			sle.SEQ_SLE = buy_dtl.SEQ_SLE
 			AND buy_dtl.SEQ_MBR = #{seq_mbr}
+		LEFT JOIN
+			TB_BUY_MST buy_mst
+		ON
+			buy_dtl.SEQ_MBR = buy_mst.SEQ_MBR
+			AND buy_dtl.SEQ_BUY_MST = buy_mst.SEQ_BUY_MST
 		WHERE 
 			buy_dtl.SEQ_MBR = #{seq_mbr}
 			AND FLG_REVIEW = 'N'
+			AND buy_mst.CD_STATE = '1'
+			AND buy_mst.CD_STATE_PAY = 'Y'
 	</select>
 
 	<insert id="rateInsert" parameterType="saleDto">
