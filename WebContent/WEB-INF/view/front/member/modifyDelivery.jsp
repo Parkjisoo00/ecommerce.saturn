@@ -18,13 +18,15 @@
 	<script type="text/javascript" src="/js/package/tinymce.js"></script>		
 	<script>
 	function execDaumPostcode() {
-			new daum.Postcode({
-				oncomplete: function(data) {
-					document.getElementById('post').value = data.zonecode;
-					document.getElementById('addr1').value = data.roadAddress;
-				}
-			}).open();
-		}
+		
+		new daum.Postcode({
+			oncomplete: function(data) {
+				
+				document.getElementById('post').value = data.zonecode;
+				document.getElementById('addr1').value = data.roadAddress;
+			}
+		}).open();
+	}
 	
 	function goList(value) {
 		
@@ -48,10 +50,8 @@
 	function deleteDelivery(value) {
 		
 		var frmMain = document.getElementById("frmMain");
-		
-		document.getElementById("seq_mbr_addr").value = value;
-		
-		var myData = {seq_mbr_addr: $("#seq_mbr_addr").val()};
+		var targetTr = document.querySelector('.addrTarget[data-seq-mbr-addr="' + value + '"]');
+		var myData = { seq_mbr_addr: value };
 		
 		$.ajax({
 			type: "POST",
@@ -66,10 +66,42 @@
 					alert("기본 배송지는 삭제할 수 없습니다.");
 				} else {
 					
-					frmMain.action = "/front/member/deleteDelivery.web";
-					frmMain.submit();
+					$.ajax({
+						type: "POST",
+						url: "/front/member/deliveryDelete.json",
+						data: JSON.stringify(myData),
+						contentType: "application/json; charset=UTF-8",
+						beforeSend: function () {
+							$('#loadingSpinner').fadeIn(200);
+						},
+						success: function(res) {
+							
+							if (res.status === "success") {
+								
+								targetTr.remove();
+								
+								if (document.querySelectorAll('.addrTarget').length === 0) {
+									
+									var shopCartTable = document.querySelector('.addrTbody');
+									
+									if (shopCartTable) {
+										
+										shopCartTable.innerHTML = 
+											'<tr>' +
+											'<td colspan="4" class="health-body" style="text-align: center !important; line-height: 100px !important;">' +
+												'등록된 배송지가 없습니다.' +
+											'</td>' +
+											'</tr>';
+									}
+								}
+							}
+						},
+						complete: function () {
+							$('#loadingSpinner').fadeOut(200);
+						}
+					});
 				}
-			},
+			}
 		});
 	}
 	</script>
@@ -112,7 +144,7 @@
 													<th class="health-head" style="width:28% !important; background: #F6F6F6 !important; border-bottom: 1px solid #e0e0e0 !important;">등록일</th>
 												</tr>
 											</thead>
-											<tbody id="dataBody">
+											<tbody id="dataBody" class="addrTbody">
 												<c:choose>
 													<c:when test="${empty list}">
 														<tr>
@@ -123,7 +155,7 @@
 													</c:when>
 													<c:otherwise>
 														<c:forEach var="list" items="${list}">
-															<tr style="border-bottom: 0px !important;">
+															<tr class="addrTarget" data-seq-mbr-addr="${list.seq_mbr_addr}" style="border-bottom: 0px !important;">
 															<td class="health-body" style="text-align: center !important; border-bottom: 0px !important;">
 																${list.post}
 															</td>
@@ -183,7 +215,9 @@
 							</div>
 						</div>
 					</section>
-
+					<div id="loadingSpinner" style=" display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">
+						<img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." style="width: 50px; height: 50px;">
+					</div>
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
 	<%@ include file="/include/common/footerpic.jsp" %>

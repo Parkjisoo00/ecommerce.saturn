@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bravomylife.front.mybatis.member.Member">
 	
+	<update id="deliveryDelete" parameterType="memberDto">
+		UPDATE
+			TB_MBR_ADDR
+		SET
+			FLG_DELETE	= 'Y'
+			, FLG_DEFAULT = 'N'
+			, DT_UPT	= SYSDATE
+			, UPDATER	= #{seq_mbr}
+		WHERE
+			SEQ_MBR		= #{seq_mbr}
+			AND SEQ_MBR_ADDR = #{seq_mbr_addr}
+	</update>
+	
 	<select id="buyDelivertView" parameterType="memberDto" resultType="memberDto">
 		SELECT
 			addr.POST
@@ -120,6 +133,17 @@
 		VALUES
 			(SQ_SEQ_MBR_ADDR.NEXTVAL, #{seq_mbr}, #{post}, #{addr1}, #{addr2}, 'N', 'N', SYSDATE, #{seq_mbr}, NULL, NULL)
 	</insert>
+	
+	<select id="deliveryDefaultCheck" parameterType="memberDto" resultType="java.lang.Integer">
+		SELECT
+			COUNT(seq_mbr)
+		FROM
+			TB_MBR_ADDR
+		WHERE
+			SEQ_MBR = #{seq_mbr}
+			AND FLG_DELETE = 'N'
+			AND FLG_DEFAULT = 'Y'
+	</select>
 	
 	<select id="deliveryCheck" parameterType="memberDto" resultType="java.lang.Integer">
 		SELECT

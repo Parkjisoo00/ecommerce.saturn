@@ -122,38 +122,45 @@ public class MemberWeb extends Common {
 		return response;
 	}
 	
+	
 	/**
 	 * @param request [요청 서블릿]
 	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
-	 * @since 2024-10-28
-	 * <p>DESCRIPTION:마이 페이지 수정</p>
+	 * @since 2024-011-11
+	 * <p>DESCRIPTION: 리뷰 관리</p>
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
-	 */
-	@RequestMapping(value = "/front/member/deleteDelivery.web", method = RequestMethod.POST)
-	public ModelAndView deleteDelivery(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+	 */	
+	@RequestMapping(value = "/front/member/deliveryDelete.json",  method = RequestMethod.POST, consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
+	public @ResponseBody Map<String, Object> deliveryDelete(HttpServletRequest request, @RequestBody MemberDto memberDto) {
 		
-		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		Map<String, Object> response = new HashMap<>();
+		
+		int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
 		
 		try {
 			
-			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			memberDto.setSeq_mbr(seqMbr);
+			memberDto.setUpdater(seqMbr);
 			
-			memberSrvc.deleteDelivery(memberDto);
-			
-			request.setAttribute("script"	, "alert('배송지가 삭제되었습니다.');");
-			request.setAttribute("redirect"	, "/front/member/modifyDelivery.web");
-			
-			mav.setViewName("forward:/servlet/result.web");
+			if (memberSrvc.deliveryDelete(memberDto)) {
+				
+				response.put("status", "success");
+			}
+			else {
+				
+				response.put("status", "fail");
+			}
 		}
 		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".deleteDelivery()] " + e.getMessage(), e);
+			logger.error("[" + this.getClass().getName() + ".deliveryDelete()] " + e.getMessage(), e);
 		}
 		finally {}
 		
-		return mav;
+		return response;
 	}
 	
 	/**
@@ -286,6 +293,41 @@ public class MemberWeb extends Common {
 		finally {}
 		
 		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @return ModelAndView
+	 * 
+	 * @since 2024-11-11
+	 * <p>DESCRIPTION:</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	 
+	@RequestMapping(value = "/front/member/deliveryDefaultCheck.json", method = RequestMethod.POST, headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
+	public @ResponseBody Map<String, Object> deliveryDefaultCheck(HttpServletRequest request) {
+		
+		Map<String, Object> response = new HashMap<>();
+		MemberDto memberDto = new MemberDto();
+		
+		boolean check = true;
+		
+		try {
+			
+			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
+			
+			check = memberSrvc.deliveryDefaultCheck(memberDto);
+			
+			response.put("check", check);
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".deliveryDefaultCheck()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return response;
 	}
 	
 	/**

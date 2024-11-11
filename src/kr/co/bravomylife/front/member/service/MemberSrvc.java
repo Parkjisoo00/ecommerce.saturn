@@ -57,6 +57,18 @@ public class MemberSrvc {
 	}
 	
 	@Transactional("txFront")
+	public boolean deliveryDelete(MemberDto memberDto) {
+		
+		int result = memberDao.deliveryDelete(memberDto);
+		
+		if (result == 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	@Transactional("txFront")
 	public boolean deliveryDelCheck(MemberDto memberDto) {
 		
 		int result = 0;
@@ -133,6 +145,23 @@ public class MemberSrvc {
 		int result = 0;
 		
 		result = memberDao.modifyDeliveryProc(memberDto);
+		
+		if(result == 1) {
+			
+			return true;
+		}
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
+	@Transactional("txFront")
+	public boolean deliveryDefaultCheck(MemberDto memberDto) {
+		
+		int result = 0;
+		
+		result = memberDao.deliveryDefaultCheck(memberDto);
 		
 		if(result == 1) {
 			

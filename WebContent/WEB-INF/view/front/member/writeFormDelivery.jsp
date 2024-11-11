@@ -131,25 +131,13 @@
 		}
 	}
 	
-	
-	
-	
-	/*
-	function checkModifyDelivery() {
+	$(document).ready(function() {
 		
-		
-		
-		var isSubmit	= true;
-		var frmMain		= document.getElementById("frmMain");
-		
-		if (document.getElementById("post").value == ""
-				|| document.getElementById("addr1").value == ""
-				|| document.getElementById("addr2").value == "") {
-			alert("필수 항목을 입력하세요!");
-			isSubmit = false;
-		}
-		
-			if (isSubmit) {
+		$('.delivery_checkbox').on('change', function() {
+			
+			if ($(this).is(':checked')) {
+				
+				var $checkbox = $(this);
 				
 				$.ajax({
 					type: "POST",
@@ -160,25 +148,17 @@
 						
 						if (res.check) {
 							
-							ModifyDeliveryProc();
-						}
-						else {
+							alert("이미 기본 배송지로 설정된 주소가 있습니다.");
+							$checkbox.prop('checked', false);
+						} else {
 							
-							alert("배송지는 3개까지 추가할 수 있습니다.");
+							alert("기본 배송지로 설정되었습니다.");
 						}
 					},
 				});
 			}
-		}
-		
-		function ModifyDeliveryProc() {
-			
-			var frmMain = document.getElementById("frmMain");
-					
-			frmMain.action = "/front/member/modifyDeliveryProc.web";
-			frmMain.submit();
-		}
-		*/
+		});
+	});
 </script>
 </form>
 </body>

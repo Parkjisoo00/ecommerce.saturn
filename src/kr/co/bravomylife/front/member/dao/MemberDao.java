@@ -39,6 +39,10 @@ import kr.co.bravomylife.front.member.dto.MemberDto;
 @Repository("kr.co.bravomylife.front.member.dao.MemberDao")
 public class MemberDao extends BaseDao {
 	
+	public int deliveryDelete(MemberDto memberDto) {
+		return sqlSessionFront.update("kr.co.bravomylife.front.mybatis.member.Member.deliveryDelete", memberDto);
+	}
+	
 	public MemberDto buyDelivertView(MemberDto memberDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.buyDelivertView", memberDto);
 	}
@@ -69,6 +73,10 @@ public class MemberDao extends BaseDao {
 	
 	public int modifyDeliveryProc(MemberDto memberDto) {
 		return sqlSessionFront.insert("kr.co.bravomylife.front.mybatis.member.Member.modifyDeliveryProc", memberDto);
+	}
+	
+	public int deliveryDefaultCheck(MemberDto memberDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.deliveryDefaultCheck", memberDto);
 	}
 	
 	public int deliveryCheck(MemberDto memberDto) {
