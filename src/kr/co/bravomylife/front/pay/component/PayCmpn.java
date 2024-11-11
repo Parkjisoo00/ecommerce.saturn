@@ -101,6 +101,10 @@ public class PayCmpn {
 		//logger.debug("[" + this.getClass().getName() + ".JsonApi()] userAgent=" + userAgent);
 		
 		try {
+			client.newBuilder().setConnectTimeout$okhttp(30000);
+			client.newBuilder().setReadTimeout$okhttp(30000);
+			client.newBuilder().setWriteTimeout$okhttp(30000);
+			
 			Response response = client.newCall(request).execute();
 			returnMap = objectMapper.readValue(response.body().string(), Map.class);
 		}
@@ -160,6 +164,10 @@ public class PayCmpn {
 		//logger.debug("[" + this.getClass().getName() + ".JsonApi()] userAgent=" + userAgent);
 		
 		try {
+			client.newBuilder().setConnectTimeout$okhttp(30000);
+			client.newBuilder().setReadTimeout$okhttp(30000);
+			client.newBuilder().setWriteTimeout$okhttp(30000);
+			
 			Response response = client.newCall(request).execute();
 			returnMap = objectMapper.readValue(response.body().string(), Map.class);
 		}

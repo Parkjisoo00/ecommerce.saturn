@@ -13,8 +13,8 @@
 		<div id="mobile-menu-wrap" style="text-align:left; margin-left: -60px;display: flex;flex-wrap:wrap"></div>
 		
 		<div class="offcanvas__auth" style="text-align: left;">
-			<a href="/front/login/loginForm.web">로그인</a>
-			<a href="/front/member/registerForm.web">회원가입</a>
+			<a href="javascript:goLogin()">로그인</a>
+			<a href="javascript:goRegisterForm()">회원가입</a>
 		</div>
 		
 		<select class="search-container" id="first_cd_ctg_android" style=" width: 100px !important; height: 45px !important; font-size: 18px !important; margin-right:5px">
@@ -67,13 +67,13 @@
 <div class="header__right" style="position: absolute; bottom: -10px; right: 19%;">
 <div class="header__right__auth" style="display: flex; align-items: center; gap: 5px;">
 	<c:if test="${not empty sessionScope.SEQ_MBR}">
-		<a href="/front/myPage/" title="${sessionScope.NAME}" style="color: white; font-size: 15px;">
+		<a href="javascript:goMyPage()" title="${sessionScope.NAME}" style="color: white; font-size: 15px;">
 			마이페이지
 		</a>
-		<a href="/front/login/logout.web" style="color: white; font-size: 15px;">
+		<a href="javascript:goLogout()" style="color: white; font-size: 15px;">
 			로그아웃
 		</a>
-		<a href="/front/basket/main.web" style="color: white; font-size: 15px;">
+		<a href="javascript:goBasket()" style="color: white; font-size: 15px;">
 			장바구니
 		</a>
 		<ul class="header__right__widget" style="list-style: none; margin: 0; padding: 0; display: flex; align-items: center;">
@@ -88,8 +88,8 @@
 		</ul>
 	</c:if>	 
 	<c:if test="${empty sessionScope.SEQ_MBR}">
-		<a href="/front/login/loginForm.web" style="color: white; font-size: 15px;">로그인</a>
-		<a href="/front/member/registerForm.web" style="color: white; font-size: 15px;">회원가입</a>
+		<a href="javascript:goLogin()" style="color: white; font-size: 15px;">로그인</a>
+		<a href="javascript:goRegisterForm()" style="color: white; font-size: 15px;">회원가입</a>
 	</c:if>
 </header>
 <div class="col-xl-12 col-lg-12" style="margin: 0 auto; float: none; width: 90%;">
@@ -385,6 +385,48 @@ function hpSurgoList(value) {
 	
 	frmMain.cd_bbs_type.setAttribute("value", value);
 	frmMain.action = "/front/hpSur/ingredient.web";
+	frmMain.submit();
+}
+
+
+
+function goLogin() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/front/login/loginForm.web";
+	frmMain.submit();
+}
+
+function goLogout() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/front/login/logout.web";
+	frmMain.submit();
+}
+
+function goRegisterForm() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/front/member/registerForm.web";
+	frmMain.submit();
+}
+
+function goMyPage() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/front/myPage/index.web";
+	frmMain.submit();
+}
+
+function goBasket() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/front/basket/main.web";
 	frmMain.submit();
 }
 </script>

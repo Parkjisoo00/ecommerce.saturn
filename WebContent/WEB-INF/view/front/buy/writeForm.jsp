@@ -581,34 +581,36 @@
 							</ul>
 						</div>
 						</br>
-						<div class="product__details__button" style="display: flex !important; justify-content: center !important; gap: 10px !important; width: 100% !important;">
+						<div class="product__details__button" >
 						<div class="pro-qty" style="padding: 0px; display: flex !important; align-items: center !important; justify-content: center !important; gap: 10px !important; height: 51px !important;">
 							<input type="text" value="1" name="buyList[0].count" id="count" size="3" style="text-align: center !important; font-size: 14px !important; width: 40px; display: inline-block !important;">
 						</div>
-							<a href="javascript:setBasketOne('${saleDto.sle_nm}', '${saleDto.discount_sale}', '${saleDto.img}', '${saleDto.point_stack}', '${saleDto.cd_ctg_m}', '${saleDto.cd_ctg_b}', '${saleDto.price_sale}', '${saleDto.discount}', '${saleDto.seq_sle}');" class="cart-btn" style="white-space: nowrap; display: inline-block !important; margin: 0px !important; background: white; color: #346aff !important; border: 1px solid #346aff">
-								<span class="icon_bag_alt"></span> 장바구니 담기
-							</a>
-							<a href="javascript:checkOut();" class="cart-btn" style="display: inline-block !important; margin: 0px !important;">
-								바로구매
-							</a>
-							<ul style="list-style: none !important; padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; gap: 10px !important;">
-								<c:choose>
-									<c:when test="${saleDto.flg_like == 'Y'}">
-										<li>
-											<a class="like-button" href="javascript:delLike('N');" style="background-color: #ca1515 !important; padding: 5px !important; border-radius: 50% !important;">
-												<span class="icon_heart_alt" style="color: white !important;"></span>
-											</a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li>
-											<a class="like-button" href="javascript:setLike('Y');"  style="padding: 5px !important; border-radius: 50% !important;">
-												<span class="icon_heart_alt"></span>
-											</a>
-										</li>
-									</c:otherwise>
-								</c:choose>
-							</ul>
+							<div class="buttons-container" style="display: flex; gap: 10px;">
+								<a href="javascript:setBasketOne('${saleDto.sle_nm}', '${saleDto.discount_sale}', '${saleDto.img}', '${saleDto.point_stack}', '${saleDto.cd_ctg_m}', '${saleDto.cd_ctg_b}', '${saleDto.price_sale}', '${saleDto.discount}', '${saleDto.seq_sle}');" class="cart-btn cart-btn-bsk" style="white-space: nowrap; display: inline-block !important; margin: 0px !important; background: white; color: #346aff !important; border: 1px solid #346aff">
+									<span class="icon_bag_alt"></span> 장바구니 담기
+								</a>
+								<a href="javascript:checkOut();" class="cart-btn cart-btn-buy" style="display: inline-block !important; margin: 0px !important;">
+									바로구매
+								</a>
+								<ul style="list-style: none !important; padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; gap: 10px !important;">
+									<c:choose>
+										<c:when test="${saleDto.flg_like == 'Y'}">
+											<li>
+												<a class="like-button" href="javascript:delLike('N');" style="background-color: #ca1515 !important; padding: 5px !important; border-radius: 50% !important;">
+													<span class="icon_heart_alt" style="color: white !important;"></span>
+												</a>
+											</li>
+										</c:when>
+										<c:otherwise>
+											<li>
+												<a class="like-button" href="javascript:setLike('Y');"  style="padding: 5px !important; border-radius: 50% !important;">
+													<span class="icon_heart_alt"></span>
+												</a>
+											</li>
+										</c:otherwise>
+									</c:choose>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
