@@ -22,6 +22,7 @@ package kr.co.bravomylife.front.member.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
@@ -66,7 +67,7 @@ public class PasswdWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/member/passwd/modifyForm.web")
+	@RequestMapping(value = "/front/member/passwd/modifyForm.web", method = RequestMethod.POST)
 	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -82,7 +83,7 @@ public class PasswdWeb extends Common {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/front/member/passwd/modifyProc.web")
+	@RequestMapping(value = "/front/member/passwd/modifyProc.web", method = RequestMethod.POST)
 	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto, String confirmPasswd) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -106,8 +107,6 @@ public class PasswdWeb extends Common {
 				
 				// 신규 비밀번호 암호화
 				memberDto.setPasswd(HSwithSHA.encode(confirmPasswd));
-				logger.debug("게시판 타입 확인" + " + " + memberDto.getPasswd());
-				
 				
 				if (memberSrvc.updateMyPasswd(memberDto)){
 					request.setAttribute("script"	, "alert('비밀번호가 수정되었습니다.');");

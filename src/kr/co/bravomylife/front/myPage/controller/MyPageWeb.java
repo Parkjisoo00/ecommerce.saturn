@@ -87,8 +87,6 @@ public class MyPageWeb extends Common{
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
-		
-		
 		try {
 			
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");

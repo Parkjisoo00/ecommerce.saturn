@@ -19,6 +19,15 @@
 			.container, .container-lg, .container-md, .container-sm {max-width:700px;}
 		}
 	</style>
+	<script>
+	function findIdResult() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/member/findIdResult.web";
+		frmMain.submit();
+	}
+	</script>
 </head>
 <body>
 	<!-- Page Preloder -->
@@ -36,7 +45,7 @@
 
 	<section class="checkout spad">
 		<div class="container">
-			<form action="/front/member/findIdResult.web" id="frmMain" method="POST" class="checkout__form">
+			<form id="frmMain" method="POST" class="checkout__form">
 				<div class="row" style="display: flex; justify-content: center; align-items: center;">
 					<div class="col-lg-8">
 						<h5 >회원 아이디 찾기</h5>
@@ -73,7 +82,7 @@
 							</div>
 							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
-									<input type="submit" value="아이디 찾기" id = "findId"/>
+									<input type="button" onclick="findIdResult();" value="아이디 찾기" id = "findId"/>
 									<span>${findId.email}</span>
 								</div>
 								<hr style="border: 1px solid #ccc; margin: 0;">

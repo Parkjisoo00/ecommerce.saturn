@@ -36,6 +36,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.front.basket.controller.BasketWeb;
@@ -77,7 +78,7 @@ public class SurveyWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping("/front/member/surveyModifyForm.web")
+	@RequestMapping(value="/front/member/surveyModifyForm.web", method = RequestMethod.POST)
 	public ModelAndView surveyModifyForm(HttpServletRequest request, HttpServletResponse response, SurveyDto surveyDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -160,7 +161,7 @@ public class SurveyWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/center/board/surveyProc.web")
+	@RequestMapping(value = "/front/center/board/surveyProc.web", method = RequestMethod.POST)
 	public ModelAndView surveyProc(HttpServletRequest request, HttpServletResponse response, SurveyDto surveyDto, SurveyListDto surveyListDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -294,7 +295,7 @@ public class SurveyWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/center/board/surveyForm.web")
+	@RequestMapping(value = "/front/center/board/surveyForm.web", method = RequestMethod.POST)
 	public ModelAndView surveyForm(HttpServletRequest request, HttpServletResponse response, SurveyDto surveyDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");

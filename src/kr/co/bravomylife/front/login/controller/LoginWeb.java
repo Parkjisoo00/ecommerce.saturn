@@ -75,7 +75,7 @@ import kr.co.bravomylife.util.servlet.Request;
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/login/logout.web")
+	@RequestMapping(value = "/front/login/logout.web", method = RequestMethod.POST)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -149,13 +149,11 @@ import kr.co.bravomylife.util.servlet.Request;
 			SKwithAES aes		= new SKwithAES(staticKey);
 		
 			loginDto.setEmail(aes.encode(loginDto.getEmail()));
-			logger.debug("암호화 후(Email): " + loginDto.getEmail());
 			
 			MemberDto memberDto = loginSrvc.exist(loginDto);
 			
 			if (memberDto != null
 					&& HSwithSHA.encode(loginDto.getPasswd()).equals(memberDto.getPasswd())) {
-				//logger.debug("이메일과 암호가 일치함");
 				
 				/** 최종 접속한 IP와 시간을 업데이트 */
 				memberDto.setLast_ip(Request.getRemoteAddr(request));
@@ -163,14 +161,9 @@ import kr.co.bravomylife.util.servlet.Request;
 				if (!loginSrvc.updateLast(memberDto))
 					logger.info("[ERROR] 최종 접속한 IP와 시간을 업데이트에 실패하였습니다!");
 				
-				
 				/** 정상적인 회원일 경우 세션에 이름과 아이디를 저장 */
 				HttpSession session = request.getSession(true);
-				//logger.debug(memberDto.getMbr_nm());
-				//logger.debug(memberDto.getSeq_mbr() + "");
-				//logger.debug(memberDto.getPasswd());
-				//logger.debug("복호화 후(Name): " + aes.decode(memberDto.getMbr_nm()));
-				//logger.debug("복호화 후(Email): " + aes.decode(memberDto.getEmail()));
+				
 				session.setAttribute("SEQ_MBR", Integer.toString(memberDto.getSeq_mbr()));
 				session.setAttribute("NAME", aes.decode(memberDto.getMbr_nm()));
 				session.setAttribute("EMAIL", aes.decode(memberDto.getEmail()));
@@ -185,7 +178,6 @@ import kr.co.bravomylife.util.servlet.Request;
 				request.setAttribute("redirect"	, "/index.web");
 			}
 			else {
-				// logger.debug("해당 회원이 없거나 암호가 일치하지 않음");
 				request.setAttribute("script", "alert('이메일(아이디)과 비밀번호를 확인하세요!')");
 				request.setAttribute("redirect"	, "/front/login/loginForm.web");
 			}			

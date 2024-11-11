@@ -66,11 +66,11 @@
 		
 		//alert(document.getElementById("sSearchWord").value);
 		
-		boardFrmMain.cd_bbs_type.setAttribute("value", '1');
+		boardFrmMain.cd_bbs_type.setAttribute("value", '3');
 		boardFrmMain.ssSearchWord.setAttribute("value", sSearchWord);
 		boardFrmMain.ssSearchKey.setAttribute("value", sSearchKey);
 		
-		boardFrmMain.action="/front/center/board/list.web";
+		boardFrmMain.action="/front/center/board/myPageNotice/list.web";
 		boardFrmMain.submit();
 	}
 	
@@ -133,7 +133,7 @@
 								<option value="title+contents"<c:if test="${paging.sSearchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
 							</select>
 							<input type="text" name="sSearchWord" id="sSearchWord" value="${paging.sSearchWord}" /> 
-							<input type="submit" value="검색"/>
+							<input type="button" value="검색" onclick="boardSearch();"/>
 						</div>
 					<!-- 게시글 목록 -->
 					<div class="row">
