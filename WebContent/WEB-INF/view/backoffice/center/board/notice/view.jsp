@@ -132,7 +132,7 @@
 						</select>
 					</div>
 					<br/>
-					<div class="mailbox-read-message"style="font-size:20px">
+					<div class="mailbox-read-message"style="font-size:18px">
 						${boardDto.content}
 					</div>
 				<c:if test="${boardDto.file_orig != ''}">	

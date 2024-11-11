@@ -108,12 +108,13 @@
 				<!-- /.box-header -->
 				<div class="box-body no-padding">
 					<div class="mailbox-read-info">
-					<h3 style="font-size:40px; text-align:center">
+					<h3 style="font-size:30px; text-align:center">
 						<c:if test="${boardQuestionDto.seq_reply == 0}">[미답변] </c:if>
-						<c:if test="${boardQuestionDto.seq_reply > 0}">[답변 완료] </c:if>제목:${boardQuestionDto.title}</h3>
-					<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자: &nbsp;${boardQuestionDto.register}
-						<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardQuestionDto.dt_reg}</span></h5>
+						<c:if test="${boardQuestionDto.seq_reply > 0}">[답변 완료] </c:if>${boardQuestionDto.title}</h3><br/><br/><br/>
+					<h5 style="font-size:20px; padding: 20px 0 0 0;">작성자: &nbsp;${boardQuestionDto.register}
+						<span class="mailbox-read-time pull-right" style="font-size:18px">작성 일자:${boardQuestionDto.dt_reg}</span></h5>
 					</div>
+					<br/>
 					<div class="form-group" style="padding: 10px;border-bottom: 1px solid #f4f4f4;margin-bottom: 1px;">
 					<label>카테고리(*)</label>
 						<select class="form-control" id="cd_ctg" name="cd_ctg" style="height: 34px;margin-bottom: 15px;"disabled>
@@ -129,7 +130,8 @@
 					</div>
 					<!-- /.mailbox-read-info -->
 					<!-- /.mailbox-controls -->
-					<div class="mailbox-read-message"style="font-size:20px">
+					<br/>
+					<div class="mailbox-read-message"style="font-size:18px">
 					${boardQuestionDto.content}
 					</div>
 					<c:if test="${boardQuestionDto.file_orig != ''}">	

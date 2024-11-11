@@ -114,8 +114,6 @@
 					<li class="active"><a href="javascript:consolegoList(1);"><i class="fa fa-bullhorn"></i> 공지사항</a>
 					<li class="active"><a href="javascript:consolegoList(2);"><i class="fa fa-fw fa-users"></i> 자주찾는 질문(FAQ)</a>
 					<li class="active"><a href="javascript:consolegoList(3);"><i class="fa fa-fw fa-user"></i> 1:1문의</a>
-					<li class="active"><a href="javascript:consolegoList(4);"><i class="fa fa-fw fa-commenting-o"></i> 새소식</a>
-					<li class="active"><a href="javascript:consolegoList(5);"><i class="fa fa-fw fa-comment-o"></i> 소개</a>
 					</li>
 				</ul>
 			</div>
@@ -130,13 +128,13 @@
 			<!-- /.box-header -->
 			<div class="box-body no-padding">
 				<div class="mailbox-read-info">
-				<h3 style="font-size:40px; text-align:center">
+				<h3 style="font-size:30px; text-align:center">
 					<c:if test="${boardDto.seq_reply == 0}">[미답변] </c:if>
-					<c:if test="${boardDto.seq_reply > 0}">[답변 완료] </c:if>제목:${boardDto.title}</h3>
-				<h5 style="font-size:25px; padding: 20px 0 0 0;">작성자: &nbsp;${boardDto.register}
-					<span class="mailbox-read-time pull-right" style="font-size:25px">작성 시간:${boardDto.dt_reg}</span></h5>
+					<c:if test="${boardDto.seq_reply > 0}">[답변 완료] </c:if>${boardDto.title}</h3><br/><br/><br/>
+				<h5 style="font-size:20px; padding: 20px 0 0 0;">작성자: &nbsp;${boardDto.register}
+					<span class="mailbox-read-time pull-right" style="font-size:18px">작성 일자:${boardDto.dt_reg}</span></h5>
 				</div>
-
+				<br/>
 				<div class="form-group" style="padding: 10px;border-bottom: 1px solid #f4f4f4;margin-bottom: 1px;">
 				<label>카테고리(*)</label>
 					<select class="form-control" id="cd_ctg" name="cd_ctg" style="height: 34px;margin-bottom: 15px;"disabled>
@@ -216,7 +214,7 @@
 				</div>
 				
 
-				<div class="mailbox-read-message"style="font-size:20px">
+				<div class="mailbox-read-message"style="font-size:18px">
 				${boardDto.content}
 				</div>
 				<c:if test="${boardDto.file_orig != ''}">	
