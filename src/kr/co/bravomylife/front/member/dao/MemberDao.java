@@ -147,6 +147,10 @@ public class MemberDao extends BaseDao {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.selectBuyMst", buyMasterDto);
 	}
 	
+	public MemberDto selectIndex(MemberDto memberDto) {
+		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.selectIndex", memberDto);
+	}
+	
 	public MemberDto select(MemberDto memberDto) {
 		return sqlSessionFront.selectOne("kr.co.bravomylife.front.mybatis.member.Member.select", memberDto);
 	}

@@ -97,7 +97,7 @@ public class MyPageWeb extends Common{
 			mav.addObject("buyMasterDto", _buyMasterDto);
 			
 			memberDto.setSeq_mbr(Integer.parseInt(getSession(request, "SEQ_MBR")));
-			MemberDto _memberDto = memberSrvc.select(memberDto);
+			MemberDto _memberDto = memberSrvc.selectIndex(memberDto);
 			
 			_memberDto.setMbr_nm(aes.decode(_memberDto.getMbr_nm()));
 			mav.addObject("memberDto", _memberDto);

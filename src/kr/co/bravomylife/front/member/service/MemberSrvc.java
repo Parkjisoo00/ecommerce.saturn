@@ -119,6 +119,10 @@ public class MemberSrvc {
 		return memberDao.selectBuyMst(buyMasterDto);
 	}
 	
+	public MemberDto selectIndex(MemberDto memberDto) {
+		return memberDao.selectIndex(memberDto);
+	}
+	
 	public MemberDto select(MemberDto memberDto) {
 		return memberDao.select(memberDto);
 	}

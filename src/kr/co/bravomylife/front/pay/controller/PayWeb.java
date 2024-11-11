@@ -60,7 +60,6 @@ import kr.co.bravomylife.front.buy.service.BuySrvc;
 import kr.co.bravomylife.util.Datetime;
 import kr.co.bravomylife.util.servlet.Request;
 import kr.co.bravomylife.front.sale.dto.SaleDto;
-import kr.co.bravomylife.front.sale.service.SaleSrvc;
 
 /**
  * @version 1.0.0
@@ -87,9 +86,6 @@ public class PayWeb extends Common {
 	
 	@Inject
 	private MemberSrvc memberSrvc;
-	
-	@Autowired
-	private SaleSrvc saleSrvc;
 	
 	@Inject
 	ApiService apiService;
@@ -554,15 +550,7 @@ public class PayWeb extends Common {
 			String flgMobile	= "N";
 			if (Request.isDevice(request, "mobile")) flgMobile = "Y";
 			
-			SaleDto _saleDto	= saleSrvc.select(saleDto);
-			
-			mav.addObject("saleDto"		, _saleDto);
 			mav.addObject("flgMobile"	, flgMobile);
-			
-			
-			//기존 결제 연동(flgMobile 필요)
-			mav.setViewName("/front/pay/index");
-			
 			
 			String staticKey = staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes = new SKwithAES(staticKey);
@@ -592,6 +580,10 @@ public class PayWeb extends Common {
 			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
 			
 			for (BuyDetailDto detail : _buyDetailListDto) {
+				
+				if (detail.getCount() == 0) {
+					continue;
+				}
 				
 				detail.setSeq_mbr(seqMbr);
 				
