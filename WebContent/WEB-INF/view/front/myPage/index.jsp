@@ -173,7 +173,10 @@
 		</div>
 	</div>
 </section>
-
+<br/>
+<br/>
+<br/>
+<br/>
 	<!-- Instagram Begin -->
 	<!-- 페이지 하단 이미지가 나열 되는 곳 data-setbg="/img/instagram/insta-1.jpg" 이 부분을 우리 상품 이미지로 -->
 	<%@ include file="/include/common/footerpic.jsp" %>

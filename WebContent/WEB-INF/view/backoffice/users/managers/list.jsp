@@ -119,7 +119,7 @@
 								</td>
 								<td class="txtRight" style="text-align: center;">
 								<a href="javascript:goModifyForm(${list.seq_mng});">
-									${list.email}"
+									${list.email}
 								</a>
 							</td>
 							<td style="text-align: center;">

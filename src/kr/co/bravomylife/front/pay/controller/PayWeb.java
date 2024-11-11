@@ -411,9 +411,27 @@ public class PayWeb extends Common {
 			int totalPrice = 0;			// 총 가격
 			int totalPoint = 0;
 			
+			String serverUrl = "";
+			if (staticProperties.getProperty("common.mode", "[UNDEFINED]").equalsIgnoreCase("LOCAL")) {
+				serverUrl = "http://119.71.96.251:"
+							+ staticProperties.getProperty("common.server.port", "[UNDEFINED]");
+			}
+			else if (staticProperties.getProperty("common.mode", "[UNDEFINED]").equalsIgnoreCase("DEVELOPMENT")) {
+				 // moon(8080), jupiter(8081), saturn(8082), uranus(8083)
+				serverUrl = "http://saturn.plutozone.com";
+			}
+			else {
+				serverUrl = "[UNDEFINED]";
+			}
+			/*
 			if (Request.isDevice(request, "mobile")) {
 				apiMap.put("auth_return","http://119.71.96.251:"
 						+ staticProperties.getProperty("common.server.port", "[UNDEFINED]") + "/front/pay/payup/receive.api");
+			}
+			*/
+			
+			if (Request.isDevice(request, "mobile")) {
+				apiMap.put("auth_return", serverUrl + "/front/pay/payup/receive.api");
 			}
 			else {
 				apiMap.put("userAgent", userAgent);
