@@ -305,7 +305,7 @@
 														</a>
 													</div>
 												</td>
-												<td class="cart-td" style="text-align: left !important;">
+												<td class="cart-td" style="white-space: normal !important; text-align: left !important;">
 													${list.sle_nm}
 													<input type="hidden" name="buyList[${status.index}].sle_nm" value="${list.sle_nm}">
 												</td>
