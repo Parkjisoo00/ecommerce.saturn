@@ -108,7 +108,7 @@
 						<div class="shop__cart__table">
 						<c:choose>
 							<c:when test="${empty buyList}">
-								<div class="history-div">
+								<div class="history-div" style="width: 1170px !important;">
 									<p style="margin-bottom: 100px !important; margin-top: 100px !important; text-align: center;">
 										포인트 사용내역이 없습니다.
 									</p>
@@ -116,7 +116,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="buyList" items="${buyList}">
-									<div class="history-div" data-seq-buy-mst="${buyList.seq_buy_mst}">
+									<div class="history-div" data-seq-buy-mst="${buyList.seq_buy_mst}" style="width: 1170px !important;">
 										<div class="history-head">
 											<div class="history-head-title">
 												<span style="font-weight: normal !important; font-size: 24px !important;">${buyList.dt_reg}</span>
@@ -133,7 +133,7 @@
 												<tbody>
 													<c:forEach var="buyDatas" items="${buyList.buyDatas}">
 														<tr style="border: 0;">
-															<td class="cart-td" style="text-align: center; vertical-align: middle;">
+															<td class="cart-td" style="text-align: center; vertical-align: middle; width: 200px !important;">
 																<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden; display: inline-block;">
 																	<a href="javascript:goWriteForm('${buyDatas.seq_sle}', '${buyDatas.cd_ctg_m}', '${buyDatas.cd_ctg_b}');">
 																		<img class="cart-img" src="/img/product/${buyDatas.img}" class="cart-img">
