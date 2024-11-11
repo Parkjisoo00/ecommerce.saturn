@@ -168,7 +168,7 @@
 						</div>
 						<div style="display: flex; align-items: flex-start; padding-top: 10px; padding-left: 20px;">
 							<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden;">
-								<img class="cart-img-wrapper" src="${surveyListDto.img}" alt="Product Image" style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
+								<img class="cart-img-wrapper" src="/img/product/${surveyListDto.img}" alt="Product Image" style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
 							</div>
 							<%@ include file="/include/front/surveyCtgBsub.jsp" %>
 						</div>
