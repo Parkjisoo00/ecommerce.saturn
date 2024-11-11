@@ -4,7 +4,8 @@
 	<li>-<a style="font-size :19px"href="javascript:myModifyForm();" class="menuLnb">개인정보 확인/수정</a></li>
 	<li>-<a style="font-size :19px"href="javascript:goPasswd();" class="menuLnb">비밀번호 수정</a></li>
 	<li>-<a style="font-size :19px"href="javascript:goMyList(3);" class="menuLnb">문의 내역</a></li>
-	<li>-<a style="font-size :19px"href="javascript:goPointHistory();" class="menuLnb">포인트</a></li>
+	<li>-<a style="font-size :19px"href="javascript:goPointHistory();" class="menuLnb">포인트 적립조회</a></li>
+	<li>-<a style="font-size :19px"href="javascript:goPointUseHistory();" class="menuLnb">포인트 사용내역</a></li>
 	<li>-<a style="font-size :19px"href="javascript:goSurveyModifyForm();" class="menuLnb">맞춤 건강 결과 조회</a></li>
 	<li>-<a style="font-size :19px"href="javascript:goMyLike();" class="menuLnb">찜한 상품</a></li>
 	<li>-<a style="font-size :19px"href="javascript:goReviewListPage();" class="menuLnb">상품후기 관리</a></li>
@@ -32,6 +33,7 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.action = "/front/member/modifyForm.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -40,6 +42,7 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.action = "/front/member/passwd/modifyForm.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -48,6 +51,16 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.action = "/front/buy/pointHistory.web";
+		frmMain.target = "";
+		frmMain.submit();
+	}
+	
+	function goPointUseHistory() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/buy/pointUseHistory.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -56,6 +69,7 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.action = "/front/member/surveyModifyForm.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -64,6 +78,7 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.action = "/front/member/myLike.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -72,6 +87,7 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.action = "/front/buy/reviewListPage.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -80,6 +96,7 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.action = "/front/buy/history.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -88,6 +105,7 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.action = "/front/buy/cancelhistory.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -96,6 +114,7 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.action = "/front/member/withdraw.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -104,6 +123,7 @@
 		var frmMain = document.getElementById("frmMain");
 		
 		frmMain.action = "/front/member/modifyDelivery.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -113,6 +133,7 @@
 		
 		frmMain.type.setAttribute("value", value);
 		frmMain.action = "/front/sale/total_list.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -123,6 +144,7 @@
 		document.getElementById("cd_bbs_type").value = value;
 		
 		frmMain.action = "/front/center/board/myPageNotice/list.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -132,6 +154,7 @@
 		
 		frmMain.type.setAttribute("value", value);
 		frmMain.action = "/front/sale/function_list.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -141,6 +164,7 @@
 		
 		frmMain.type.setAttribute("value", value);
 		frmMain.action = "/front/sale/ingredient_list.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 	
@@ -150,6 +174,7 @@
 		
 		frmMain.type.setAttribute("value", value);
 		frmMain.action = "/front/sale/gender_list.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 		
@@ -194,6 +219,7 @@
 		
 		frmMain.type.setAttribute("value", value);
 		frmMain.action = "/front/sale/total_list.web";
+		frmMain.target = "";
 		frmMain.submit();
 	}
 </script>

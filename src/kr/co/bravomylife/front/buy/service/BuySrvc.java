@@ -60,6 +60,10 @@ public class BuySrvc {
 	@Inject
 	PayDao payDao;
 	
+	public BuyMasterDto pointUseHistoryMain(BuyMasterDto buyMasterDto) {
+		return buyDao.pointUseHistoryMain(buyMasterDto);
+	}
+	
 	@Transactional("txFront")
 	public boolean updateByDealNum(String deal_num, int updater, String flg_success) {
 		
@@ -245,6 +249,102 @@ public class BuySrvc {
 		buyListDto.setList(buyDao.deliveryListMst(buyDto));
 		
 		return buyListDto;
+	}
+	
+	public PagingListDto pointListDtl(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		int totalLine = buyDao.buyPointCount(pagingDto);
+		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(buyDao.pointListDtl(pagingDto));
+		
+		return pagingListDto;
+	}
+	
+	public PagingListDto pointListMst(PagingDto pagingDto) {
+		
+		PagingListDto pagingListDto = new PagingListDto();
+		
+		int totalLine = buyDao.buyPointCount(pagingDto);
+		int totalPage = (int)Math.ceil((double)totalLine / (double)pagingDto.getLinePerPage());
+		pagingDto.setTotalLine(totalLine);
+		pagingDto.setTotalPage(totalPage);
+		if (totalPage == 0) pagingDto.setCurrentPage(1);
+		
+		pagingListDto.setPaging(pagingDto);
+		pagingListDto.setList(buyDao.pointListMst(pagingDto));
+		
+		return pagingListDto;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public PagingListDto mergedPointList(PagingListDto pointListMst, PagingListDto pointListDtl) {
+		
+		List<BuyMasterDto> pointListMstList = (List<BuyMasterDto>) pointListMst.getList();
+		List<BuyDetailDto> pointListDtlList = (List<BuyDetailDto>) pointListDtl.getList();
+		
+		Map<Integer, List<BuyDataDto>> pointMap = new HashMap<>();
+		
+		for (BuyDetailDto pointDtl : pointListDtlList) {
+			
+			int seqBuyMst = pointDtl.getSeq_buy_mst();
+			int seqBuyDtl = pointDtl.getSeq_buy_dtl();
+			int seqSle = pointDtl.getSeq_sle();
+			String sleNm = pointDtl.getSle_nm();
+			int count = pointDtl.getCount();
+			int price = pointDtl.getPrice();
+			String dtReg = pointDtl.getDt_reg();
+			String img = pointDtl.getImg();
+			int discount_sale = pointDtl.getDiscount_sale();
+			int point_stack = pointDtl.getPoint_stack();
+			String cd_ctg_m = pointDtl.getCd_ctg_m();
+			String cd_ctg_b = pointDtl.getCd_ctg_b();
+			int price_sale = pointDtl.getPrice_sale();
+			int discount = pointDtl.getDiscount();
+			
+			if (!pointMap.containsKey(seqBuyMst)) {
+				
+				pointMap.put(seqBuyMst, new ArrayList<>());
+			}
+			BuyDataDto buyDataDto = new BuyDataDto();
+			buyDataDto.setSeq_buy_dtl(seqBuyDtl);
+			buyDataDto.setSeq_sle(seqSle);
+			buyDataDto.setSle_nm(sleNm);
+			buyDataDto.setCount(count);
+			buyDataDto.setPrice(price);
+			buyDataDto.setDt_reg(dtReg);
+			buyDataDto.setImg(img);
+			buyDataDto.setDiscount_sale(discount_sale);
+			buyDataDto.setPoint_stack(point_stack);
+			buyDataDto.setCd_ctg_m(cd_ctg_m);
+			buyDataDto.setCd_ctg_b(cd_ctg_b);
+			buyDataDto.setPrice_sale(price_sale);
+			buyDataDto.setDiscount(discount);
+			
+			pointMap.get(seqBuyMst).add(buyDataDto);
+		}
+		for (BuyMasterDto pointMst : pointListMstList) {
+			
+			int seqBuyMst = pointMst.getSeq_buy_mst();
+			
+			List<BuyDataDto> buyDataList = pointMap.get(seqBuyMst);
+			
+			if (buyDataList != null) {
+				
+				pointMst.setBuyDatas(buyDataList);
+			}
+		}
+		PagingListDto mergedPointListDto = new PagingListDto();
+		mergedPointListDto.setPaging(pointListMst.getPaging());
+		mergedPointListDto.setList(pointListMstList);
+		
+		return mergedPointListDto;
 	}
 	
 	@SuppressWarnings("unchecked")

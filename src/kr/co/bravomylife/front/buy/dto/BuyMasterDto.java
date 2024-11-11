@@ -54,6 +54,11 @@ public class BuyMasterDto {
 	private String cd_ctg_m					= "";
 	private String cd_ctg_b					= "";
 	private String cd_state					= "";
+	private String earliest_date			= "";
+	private String latest_date				= "";
+	private int mst_count					= 0;
+	private int total_use_point				= 0;
+	
 	
 	private int cd_state_total_2			= 0;
 	private int cd_state_total_3			= 0;
@@ -64,6 +69,30 @@ public class BuyMasterDto {
 	private int delivery_total_y			= 0;
 	
 	
+	public String getEarliest_date() {
+		return earliest_date;
+	}
+	public void setEarliest_date(String earliest_date) {
+		this.earliest_date = earliest_date;
+	}
+	public String getLatest_date() {
+		return latest_date;
+	}
+	public void setLatest_date(String latest_date) {
+		this.latest_date = latest_date;
+	}
+	public int getMst_count() {
+		return mst_count;
+	}
+	public void setMst_count(int mst_count) {
+		this.mst_count = mst_count;
+	}
+	public int getTotal_use_point() {
+		return total_use_point;
+	}
+	public void setTotal_use_point(int total_use_point) {
+		this.total_use_point = total_use_point;
+	}
 	public String getCd_state() {
 		return cd_state;
 	}

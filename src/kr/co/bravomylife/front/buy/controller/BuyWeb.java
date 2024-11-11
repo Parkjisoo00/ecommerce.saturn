@@ -236,6 +236,71 @@ public class BuyWeb extends Common {
 	 * @param boardDto [게시판 빈]
 	 * @return ModelAndView
 	 * 
+	 * @since 2024-11-12
+	 * <p>DESCRIPTION: 구매 이력</p>
+	 * <p>IMPORTANT:</p>
+	 * <p>EXAMPLE:</p>
+	 */
+	@RequestMapping(value = "/front/buy/pointUseHistory.web")
+	public ModelAndView pointUseHistory(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
+		
+		try {
+			
+			BuyMasterDto buyMasterDto = new BuyMasterDto();
+			
+			buyMasterDto.setSeq_mbr(seqMbr);
+			
+			BuyMasterDto _buyMasterDto = buySrvc.pointUseHistoryMain(buyMasterDto);
+			
+			int tPoint = 0;
+			int pCount = 0;
+			String eDate = "";
+			String lDate = "";
+			
+			if (_buyMasterDto != null) {
+			
+			tPoint		= _buyMasterDto.getTotal_use_point();
+			pCount		= _buyMasterDto.getMst_count();
+			eDate		= _buyMasterDto.getEarliest_date();
+			lDate		= _buyMasterDto.getLatest_date();
+			}
+			
+			mav.addObject("pCount"	, pCount);
+			mav.addObject("tPoint"	, tPoint);
+			mav.addObject("eDate"	, eDate);
+			mav.addObject("lDate"	, lDate);
+			
+			pagingDto.setSeq_mbr(seqMbr);
+			pagingDto.setCd_state("1");
+			
+			PagingListDto pointListDtl = buySrvc.pointListDtl(pagingDto);
+			PagingListDto pointListMst = buySrvc.pointListMst(pagingDto);
+			
+			PagingListDto mergedPointList = buySrvc.mergedPointList(pointListMst, pointListDtl);
+			
+			mav.addObject("paging", mergedPointList.getPaging());
+			mav.addObject("buyList", mergedPointList.getList());
+			
+			mav.setViewName("front/buy/pointUseHistory");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".pointUseHistory()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+	
+	/**
+	 * @param request [요청 서블릿]
+	 * @param response [응답 서블릿]
+	 * @param boardDto [게시판 빈]
+	 * @return ModelAndView
+	 * 
 	 * @since 2024-010-24
 	 * <p>DESCRIPTION: 리뷰 관리</p>
 	 * <p>IMPORTANT:</p>
