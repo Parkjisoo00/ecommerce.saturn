@@ -80,20 +80,20 @@
 
 <body>
 <form id="frmMain" method="POST">
-<input type="hidden" name="basketList[0].point_stack"	id="point_stack"	value="0"/>
-<input type="hidden" name="basketList[0].discount_sale"	id="discount_sale"	value="0"/>
+<input type="hidden" name="basketList[0].point_stack"	id="point_stack"		value="0"/>
+<input type="hidden" name="basketList[0].discount_sale"	id="discount_sale"		value="0"/>
 <input type="hidden" name="basketList[0].img"			id="img"			/>
 <input type="hidden" name="basketList[0].seq_sle"		id="basketSeq_sle"		value="0"/>
 <input type="hidden" name="basketList[0].sle_nm"		id="sle_nm"			/>
 <input type="hidden" name="basketList[0].cd_ctg_m"		id="basketCd_ctg_m"		/>
 <input type="hidden" name="basketList[0].cd_ctg_b"		id="basketCd_ctg_b"		/>
-<input type="hidden" name="basketList[0].price_sale"	id="price_sale"		value="0"/>
-<input type="hidden" name="basketList[0].discount"		id="discount"		value="0"/>
-<input type="hidden" name="basketList[0].count"			id="basketCount"	value="0"/>
+<input type="hidden" name="basketList[0].price_sale"	id="price_sale"			value="0"/>
+<input type="hidden" name="basketList[0].discount"		id="discount"			value="0"/>
+<input type="hidden" name="basketList[0].count"			id="basketCount"		value="0"/>
 <input type="hidden" name="cd_bbs_type"					id="cd_bbs_type"/>
 <input type="hidden" name="type"						id="type"/>
 <input type="hidden" name="searchWord"					id="searchWord"/>
-<input type="hidden" name="seq_sle"						id="seq_sle"			/>
+<input type="hidden" name="seq_sle"						id="seq_sle"			value="0"/>
 <input type="hidden" name="cd_ctg_m"					id="cd_ctg_m"			/>
 <input type="hidden" name="cd_ctg_b"					id="cd_ctg_b"			/>
 <input type="hidden" name="count"						id="count"				value="0"/>

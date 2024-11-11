@@ -15,7 +15,7 @@
 				<div class="footer__widget">
 					<h6 style="font-size:25px;  margin-top:5px;">고객센터 
 					<br><span style="font-size:20px">010.5893.2731</span></h6>
-					<p style="line-height: 35px;">운영시간 : 오전 10시 ~ 오후 5시
+					<p style="line-height: 30px;">운영시간 : 오전 10시 ~ 오후 5시
 					<br>점심시간 : 12시 - 1시
 					<br>토,일,공휴일 휴무
 					<br>Email : BRAVOMyLife@gmail.com
@@ -30,7 +30,7 @@
 					<br>판매자가 등록한 상품정보 및 거래에 대해 트리오브라이프는 일체 책임을 지지 않습니다.
 					<br>COMPANY : 하이미디어IT인재개발학원 / 대표이사: 이석미
 					<br>ADDRESS : 경기 성남시 중원구 성남대로 1133 메트로칸 빌딩 5층	
-					<br>사업자등록번호 : 226-88-02480 / 통신판매업 신고번호 : 제2017-성남중원-0111호[사업자정보확인]
+					<br>사업자등록번호 : 226-88-02480 / 통신판매업 신고번호 : 제2017-성남중원-0111호
 					</p>
 				</div>
 			</div>
