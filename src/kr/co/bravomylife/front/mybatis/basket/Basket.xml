@@ -96,7 +96,7 @@
 			, bsk.PRICE
 			, bsk.COUNT
 			, bsk.IMG
-			, bsk.PRICE * (bsk.POINT_STACK / 100) POINT_VALUE
+			, ROUND(bsk.PRICE * (bsk.POINT_STACK / 100), -1) AS point_value
 			, bsk.CD_CTG_M
 			, bsk.CD_CTG_B
 			, (bsk.PRICE * bsk.COUNT) TOTAL_PRICE
@@ -137,7 +137,7 @@
 			, COUNT
 			, IMG
 			, POINT_STACK
-			, PRICE * (POINT_STACK / 100) POINT_VALUE
+			, ROUND(PRICE * (POINT_STACK / 100), -1) AS point_value
 			, CD_CTG_M
 			, CD_CTG_B
 			, PRICE_SALE
