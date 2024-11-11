@@ -98,8 +98,6 @@ public class PayCmpn {
 					.build();
 		}
 		
-		//logger.debug("[" + this.getClass().getName() + ".JsonApi()] userAgent=" + userAgent);
-		
 		try {
 			client.newBuilder().setConnectTimeout$okhttp(30000);
 			client.newBuilder().setReadTimeout$okhttp(30000);
@@ -160,8 +158,6 @@ public class PayCmpn {
 					.post(requestBody)
 					.build();
 		}
-		
-		//logger.debug("[" + this.getClass().getName() + ".JsonApi()] userAgent=" + userAgent);
 		
 		try {
 			client.newBuilder().setConnectTimeout$okhttp(30000);

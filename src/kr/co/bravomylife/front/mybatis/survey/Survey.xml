@@ -68,7 +68,7 @@
 			, sle.POINT_STACK
 			, sle.PRICE_SALE
 			, sle.DISCOUNT
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) AS discount_sale
 		FROM
 			TB_HP_SUR_DTL dtl
 		LEFT JOIN
@@ -113,7 +113,7 @@
 		SELECT 
 			sle.SLE_NM
 			, sle.SEQ_SLE
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) AS discount_sale
 			, sle.IMG
 			, sle.POINT_STACK
 			, sle.PRICE_SALE

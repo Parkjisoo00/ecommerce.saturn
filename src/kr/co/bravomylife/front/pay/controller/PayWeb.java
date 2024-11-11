@@ -105,7 +105,7 @@ public class PayWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 
-	@RequestMapping(value = "/front/pay/payup/receive.api")
+	@RequestMapping(value = "/front/pay/payup/receive.api", method = RequestMethod.POST)
 	public ModelAndView receive(@RequestParam Map<String, String> param, HttpServletRequest request) throws NoSuchAlgorithmException {
 		
 		ModelAndView mav = new ModelAndView();
@@ -134,8 +134,6 @@ public class PayWeb extends Common {
 				
 				Map<String,Object> apiResult = new HashMap<>();
 				apiResult = payCmpn.JsonApi(request, url, apiMap);
-				
-				// logger.info("통신 결과[" + this.getClass().getName() + ".receiveOld().RES2nd] " + apiResult.toString());
 				
 				/** 페이업 거래번호 */
 				String deal_num = (String) apiResult.get("transactionId");
@@ -193,7 +191,7 @@ public class PayWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping("/front/pay/cancelForm.web")
+	@RequestMapping(value="/front/pay/cancelForm.web", method = RequestMethod.POST)
 	public ModelAndView cancelForm(HttpServletRequest request, HttpServletResponse response, BuyDto buyDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -273,7 +271,7 @@ public class PayWeb extends Common {
 		else {
 			
 			response.put("code", "fail");
-			response.put("message", "주문 취소중 시스템 문제가 발생했습니다. 관리자에게 문의해주십시오.");
+			response.put("message", "결제 시스템 문제가 발생했습니다. 관리자에게 문의해주십시오.");
 		}
 		
 		response.putAll(apiResult);
@@ -286,13 +284,12 @@ public class PayWeb extends Common {
 		return response;
 	}
 	
-	@RequestMapping(value = "/front/pay/payup/pay.web")
+	@RequestMapping(value = "/front/pay/payup/pay.web", method = RequestMethod.POST)
 	public ModelAndView pay(@RequestParam Map<String,String> param, HttpServletRequest request) throws NoSuchAlgorithmException {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		try {
-			logger.info("화면에서 넘어온값[" + this.getClass().getName() + ".pay().REQ] " + param.toString());
 			
 			String res_cd		= param.get("res_cd");
 			String ordr_idxx	= param.get("ordr_idxx");
@@ -315,13 +312,9 @@ public class PayWeb extends Common {
 			Map<String,Object> apiResult = new HashMap<>();
 			apiResult = payCmpn.JsonApi(request, url, apiMap);
 			
-			logger.info("통신 결과[" + this.getClass().getName() + ".pay().RES] " + apiResult.toString());
-			
 			/** 페이업 거래번호 */
 			String deal_num = (String) apiResult.get("transactionId");
 			boolean isResult = true;
-			
-			logger.debug("deal_num 확인" + deal_num);
 			
 			if ("0000".equals(apiResult.get("responseCode"))) {
 				
@@ -369,9 +362,6 @@ public class PayWeb extends Common {
 	
 	@RequestMapping(value = "/front/pay/payup/order.json", method = RequestMethod.POST)
 	public @ResponseBody Map<String,Object> order(@RequestParam Map<String, String> param, HttpServletRequest request, BuyDetailListDto buyDetailListDto, MemberDto memberDto) throws NoSuchAlgorithmException {
-		
-		logger.debug("post 값 확인" + memberDto.getPost());
-		logger.debug("요청사항 값 확인" + memberDto.getDelivery_request());
 		
 		Map<String,Object> returnMap = new HashMap<>();
 		// Map<String,String> map = new HashMap<>();
@@ -482,8 +472,6 @@ public class PayWeb extends Common {
 					
 					if (buyDetailListDto.getBuyList().get(loop).getCount() >= 1) {
 						
-						// logger.debug(loop + " : seq_sle(" + buyDetailListDto.getBuyList().get(loop).getSeq_sle() + ")" + " + count(" + buyDetailListDto.getBuyList().get(loop).getCount() + ")");
-						
 						// 갯수가 1개 이상인 상품
 						listBuyDetailDto.add(buyDetailListDto.getBuyList().get(loop));
 						
@@ -556,35 +544,7 @@ public class PayWeb extends Common {
 		return returnMap;
 	}
 	
-	/**
-	 * @param request [요청 서블릿]
-	 * @param response [응답 서블릿]
-	 * @return ModelAndView
-	 * 
-	 * @since 2024-09-30
-	 * <p>DESCRIPTION:</p>
-	 * <p>IMPORTANT:</p>
-	 * <p>EXAMPLE:</p>
-	 */
-	/*
-	@RequestMapping(value = "/front/pay/index.web")
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
-		
-		ModelAndView mav = new ModelAndView("redirect:/error.web");
-		
-		try {
-			mav.setViewName("front/pay/index");
-		}
-		catch (Exception e) {
-			logger.error("[" + this.getClass().getName() + ".index()] " + e.getMessage(), e);
-		}
-		finally {}
-		
-		return mav;
-	}
-	*/
-	
-	@RequestMapping(value = "/front/pay/index.web")
+	@RequestMapping(value = "/front/pay/index.web", method = RequestMethod.POST)
 	public ModelAndView index(BuyDetailListDto buyDetailListDto, HttpServletRequest request, HttpServletResponse response, MemberDto memberDto, SaleDto saleDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -647,27 +607,11 @@ public class PayWeb extends Common {
 				map.put("total_price_sum", detail.getTotal_price_sum());
 				map.put("total_point_sum", detail.getTotal_point_sum());
 				
-				logger.debug("수량" + detail.getCount());
-				logger.debug("포인트" + detail.getPoint());
-				
 				totalPrice = detail.getPrice() * detail.getCount();
 				totalPoint = detail.getPoint() * detail.getCount();
 				
 				totalPriceSum += totalPrice;
 				totalPointSum += totalPoint;
-				
-				logger.debug("판매 일련번호" + detail.getSeq_sle());
-				logger.debug("판매명" + detail.getSle_nm());
-				logger.debug("판매 가격" + detail.getPrice());
-				logger.debug("판매 개수" + detail.getCount());
-				logger.debug("포인트" + detail.getPoint());
-				logger.debug("중분류" + detail.getCd_ctg_m());
-				logger.debug("대분류" + detail.getCd_ctg_b());
-				logger.debug("개별 총 금액" + totalPrice);
-				logger.debug("개별 총 포인트" + totalPoint);
-				
-				logger.debug("금액 총합" + totalPriceSum);
-				logger.debug("포인트 총합" + totalPointSum);
 				
 				formatTotalPriceSum = formatter.format(totalPriceSum);
 				formatTotalPointSum = formatter.format(totalPointSum);

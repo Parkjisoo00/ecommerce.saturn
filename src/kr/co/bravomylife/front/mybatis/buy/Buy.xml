@@ -138,7 +138,7 @@
 			, dtl.PRICE
 			, TO_CHAR(dtl.DT_REG, 'YYYY-MM-DD') dt_reg
 			, sle.IMG
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) AS discount_sale
 			, sle.POINT_STACK
 			, sle.CD_CTG_M
 			, sle.CD_CTG_B
@@ -247,7 +247,7 @@
 				, mst.SEQ_MBR
 				, dtl.POINT
 				, dtl.PRICE
-				, dtl.POINT * dtl.COUNT point_value
+				, ROUND(dtl.POINT * dtl.COUNT, -1) AS point_value
 				, dtl.COUNT
 				, dtl.SLE_NM
 				, dtl.SEQ_SLE
@@ -315,7 +315,7 @@
 					, sle.IMG
 					, sle.DISCOUNT
 					, sle.PRICE_SALE
-					, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+					, ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) AS discount_sale
 					, sle.cd_ctg_m
 					, sle.cd_ctg_b	
 					, sle.FLG_DELETE

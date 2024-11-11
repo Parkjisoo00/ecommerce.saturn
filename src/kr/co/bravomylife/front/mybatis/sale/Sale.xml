@@ -94,7 +94,7 @@
 			, sle.CORP_NM
 			, sle.DISCOUNT
 			, sle.COUNT_STOCK
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) AS discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
 			, NVL(rate_summary.total_count, 0) total_count
 			, ROUND(CASE 
@@ -178,7 +178,7 @@
 			, sle.CORP_NM
 			, sle.DISCOUNT
 			, sle.COUNT_STOCK
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) AS discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
 			, NVL(rate_summary.total_count, 0) total_count
 			, ROUND(CASE 
@@ -779,7 +779,7 @@
 			, sle.CORP_NM
 			, sle.DISCOUNT
 			, sle.COUNT_STOCK
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) AS discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
 			, NVL(rate_summary.total_count, 0) total_count
 			, ROUND(CASE 
@@ -847,8 +847,8 @@
 				, NVL(sle.POINT_STACK, 0) AS point_stack
 				, sle.IMG
 				, sle.PRICE_SALE
-				, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) AS discount_sale
-				, (sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) * (sle.POINT_STACK / 100)) AS point_value
+				, ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) AS discount_sale
+				, ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) * (sle.POINT_STACK / 100), -1) AS point_value
 				, DECODE(sle.PRD_TYPE, 1, '액상', 2, '정', 3, '캡슐', 4, '베지캡슐', 5, '젤리', 6, '분말', 7, '츄어블', '미정') AS prd_type
 				, sle.CORP_NM
 				, sle.cd_ctg_m
@@ -921,8 +921,8 @@
 			, base.point_stack
 			, base.IMG
 			, base.PRICE_SALE
-			, base.discount_sale
-			, base.POINT_VALUE
+			, ROUND(base.discount_sale, -1) AS discount_sale
+			, ROUND(base.POINT_VALUE, -1) AS point_value
 			, base.PRD_TYPE
 			, base.CORP_NM
 			, base.cd_ctg_m
@@ -996,7 +996,7 @@
 			, sle.CORP_NM
 			, sle.DISCOUNT
 			, sle.COUNT_STOCK
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) AS discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
 			, NVL(rate_summary.total_count, 0) total_count
 			, ROUND(CASE 
@@ -1125,7 +1125,7 @@
 			, sle.CORP_NM
 			, sle.DISCOUNT
 			, sle.COUNT_STOCK
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) AS discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
 			, NVL(rate_summary.total_count, 0) total_count
 			, ROUND(CASE 
@@ -1245,7 +1245,7 @@
 			, sle.CORP_NM
 			, sle.DISCOUNT
 			, sle.COUNT_STOCK
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) AS discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
 			, NVL(rate_summary.total_count, 0) total_count
 			, ROUND(CASE 
@@ -1365,7 +1365,7 @@
 			, sle.CORP_NM
 			, sle.DISCOUNT
 			, sle.COUNT_STOCK
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)) discount_sale
+			, ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) AS discount_sale
 			, TO_CHAR(sle.DT_REG, 'YYYY-MM-DD') dt_reg
 			, NVL(rate_summary.total_count, 0) total_count
 			, ROUND(CASE 
@@ -1465,7 +1465,7 @@
 				, NVL(sle.POINT_STACK, 0)						point_stack
 				, sle.IMG										img
 				, sle.PRICE_SALE								price_sale
-				, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100))	discount_sale
+				, ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) AS discount_sale
 				, sle.CORP_NM									corp_nm
 				, sle.cd_ctg_m									cd_ctg_m
 				, sle.cd_ctg_b									cd_ctg_b
@@ -1520,7 +1520,7 @@
 			, NVL(sle.POINT_STACK, 0)						point_stack
 			, sle.IMG										img
 			, sle.PRICE_SALE								price_sale
-			, sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100))	discount_sale
+			, ROUND(sle.PRICE_SALE * (1 - (sle.DISCOUNT / 100)), -1) AS discount_sale
 			, sle.CORP_NM									corp_nm
 			, sle.cd_ctg_m									cd_ctg_m
 			, sle.cd_ctg_b									cd_ctg_b
