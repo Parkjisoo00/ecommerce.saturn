@@ -119,7 +119,7 @@ public class BasketWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/basket/setBasket.web")
+	@RequestMapping(value = "/front/basket/setBasket.web", method = RequestMethod.POST)
 	public ModelAndView setBasket(HttpServletRequest request, HttpServletResponse response, BasketListDto basketListDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -171,7 +171,7 @@ public class BasketWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/front/basket/main.web")
+	@RequestMapping(value = "/front/basket/main.web", method = RequestMethod.POST)
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");

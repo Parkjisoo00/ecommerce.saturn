@@ -19,6 +19,15 @@
 			.container, .container-lg, .container-md, .container-sm {max-width:800px;}
 		}
 	</style>
+	<script>
+	function findPasswProc() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/member/findPasswProc.web";
+		frmMain.submit();
+	}
+	</script>
 </head>
 <body>
 <input type="hidden" name="phone" id="phone" />
@@ -37,7 +46,7 @@
 
 	<section class="checkout spad">
 		<div class="container">
-			<form action="/front/member/findPasswProc.web" id="frmMain" method="POST" class="checkout__form">
+			<form id="frmMain" method="POST" class="checkout__form">
 				<div class="row" style="display: flex; justify-content: center; align-items: center;">
 					<div class="col-lg-8">
 						<h5 >회원 비밀번호 찾기</h5>
@@ -79,7 +88,7 @@
 							</div>
 							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
-									<input type="submit" value="임시 비밀번호 발송"id = "findPasswd"/>
+									<input type="button" onclick="findPasswProc();" value="임시 비밀번호 발송"id = "findPasswd"/>
 								</div>
 								<hr style="border: 1px solid #ccc; margin: 0;">
 								<br>

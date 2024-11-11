@@ -137,7 +137,7 @@ public class SaleWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/sale/function_list.web")
+	@RequestMapping(value = "/front/sale/function_list.web", method = RequestMethod.POST)
 	public ModelAndView functionList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto, String type) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -170,16 +170,6 @@ public class SaleWeb extends Common {
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
 			
-			
-			  logger.debug("type 확인" + " = " + type);
-			  logger.debug("대분류 확인" + " = " + pagingDto.getCd_ctg_b());
-			  logger.debug("중분류 확인" + " = " + pagingDto.getCd_ctg_m());
-			  logger.debug("필터 확인" + " = " + pagingDto.getFilter());
-			  logger.debug("브랜드명 확인" + " = " + pagingDto.getCorp_nm());
-			  logger.debug("제품 타입 확인" + " = " + pagingDto.getPrd_type());
-			  logger.debug("검색어 확인" + " = " + pagingDto.getSearchWord());
-			
-			
 			mav.setViewName("front/sale/function_list");
 		}
 		catch (Exception e) {
@@ -200,7 +190,7 @@ public class SaleWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/sale/ingredient_list.web")
+	@RequestMapping(value = "/front/sale/ingredient_list.web", method = RequestMethod.POST)
 	public ModelAndView ingredientList(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto, String type) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -233,16 +223,6 @@ public class SaleWeb extends Common {
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
 			
-			
-			  logger.debug("type 확인" + " = " + type);
-			  logger.debug("대분류 확인" + " = " + pagingDto.getCd_ctg_b());
-			  logger.debug("중분류 확인" + " = " + pagingDto.getCd_ctg_m());
-			  logger.debug("필터 확인" + " = " + pagingDto.getFilter());
-			  logger.debug("브랜드명 확인" + " = " + pagingDto.getCorp_nm());
-			  logger.debug("제품 타입 확인" + " = " + pagingDto.getPrd_type());
-			  logger.debug("검색어 확인" + " = " + pagingDto.getSearchWord());
-			
-			
 			mav.setViewName("front/sale/ingredient_list");
 		}
 		catch (Exception e) {
@@ -263,7 +243,7 @@ public class SaleWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/sale/gender_list.web")
+	@RequestMapping(value = "/front/sale/gender_list.web", method = RequestMethod.POST)
 	public ModelAndView genderList(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, SaleDto saleDto, String type) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -281,16 +261,6 @@ public class SaleWeb extends Common {
 			PagingListDto pagingListDto = saleSrvc.genderList(pagingDto);
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
-			
-			
-			  logger.debug("type 확인" + " = " + type);
-			  logger.debug("대분류 확인" + " = " + pagingDto.getCd_ctg_b());
-			  logger.debug("중분류 확인" + " = " + pagingDto.getCd_ctg_m());
-			  logger.debug("필터 확인" + " = " + pagingDto.getFilter());
-			  logger.debug("브랜드명 확인" + " = " + pagingDto.getCorp_nm());
-			  logger.debug("제품 타입 확인" + " = " + pagingDto.getPrd_type());
-			  logger.debug("검색어 확인" + " = " + pagingDto.getSearchWord());
-			
 			
 			mav.setViewName("front/sale/gender_list");
 		}
@@ -312,7 +282,7 @@ public class SaleWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/sale/total_list.web")
+	@RequestMapping(value = "/front/sale/total_list.web", method = RequestMethod.POST)
 	public ModelAndView totalList(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, String type) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -383,15 +353,6 @@ public class SaleWeb extends Common {
 				
 				mav.setViewName("front/sale/total_list");
 			}
-			
-			
-			  logger.debug("type 확인" + " = " + type);
-			  logger.debug("대분류 확인" + " = " + pagingDto.getCd_ctg_b());
-			  logger.debug("중분류 확인" + " = " + pagingDto.getCd_ctg_m());
-			  logger.debug("필터 확인" + " = " + pagingDto.getFilter());
-			  logger.debug("브랜드명 확인" + " = " + pagingDto.getCorp_nm());
-			  logger.debug("제품 타입 확인" + " = " + pagingDto.getPrd_type());
-			  logger.debug("검색어 확인" + " = " + pagingDto.getSearchWord());
 			
 		}
 		catch (Exception e) {

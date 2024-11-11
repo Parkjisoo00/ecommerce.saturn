@@ -142,7 +142,7 @@ public class BuyWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/buy/buyDelivertView.web")
+	@RequestMapping(value = "/front/buy/buyDelivertView.web", method = RequestMethod.POST)
 	public ModelAndView buyDelivertView(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto, BuyDto buyDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -242,7 +242,7 @@ public class BuyWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/front/buy/pointHistory.web")
+	@RequestMapping(value = "/front/buy/pointHistory.web", method = RequestMethod.POST)
 	public ModelAndView pointHistory(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -378,7 +378,6 @@ public class BuyWeb extends Common {
 				String fileNameSrc	= "";
 				String fileNameSve	= "";
 				String fileSize		= "";
-				// long totalSize		= 0;
 				
 					for (int loop = 0; loop < countFile; loop++) {
 						
@@ -404,7 +403,6 @@ public class BuyWeb extends Common {
 						saleFileDto[loop].setFile_orig(fileNameSrc);
 						saleFileDto[loop].setFile_save(fileNameSve);
 						
-						// totalSize += Long.parseLong(fileSize);
 					}
 				}
 				if (review_imgs != null && !review_imgs.isEmpty()) {
@@ -414,11 +412,6 @@ public class BuyWeb extends Common {
 				SaleFileDto[] _saleFileDto = new SaleFileDto[_review_imgs];
 				
 				if (flg_del != null) {
-					
-					logger.debug("review_imgs 번호 크기" + review_imgs.size());
-					logger.debug("review_imgs 번호" + review_imgs);
-					logger.debug("삭제 번호 크기" + flg_del.size());
-					logger.debug("삭제 번호" + flg_del);
 					
 					for (int loop = 0; loop < review_imgs.size(); loop++) {
 						
@@ -484,8 +477,6 @@ public class BuyWeb extends Common {
 		
 		try {
 			
-			logger.debug("평점 확인" + saleDto.getRate_star());
-			
 			int seqMbr = Integer.parseInt(getSession(request, "SEQ_MBR"));
 			
 			saleDto.setSeq_mbr(seqMbr);
@@ -510,7 +501,6 @@ public class BuyWeb extends Common {
 				String fileNameSrc	= "";
 				String fileNameSve	= "";
 				String fileSize		= "";
-				// long totalSize		= 0;
 				
 				for (int loop = 0; loop < countFile; loop++) {
 					
@@ -531,7 +521,6 @@ public class BuyWeb extends Common {
 					saleFileDto[loop].setFile_orig(fileNameSrc);
 					saleFileDto[loop].setFile_save(fileNameSve);
 					
-					// totalSize += Long.parseLong(fileSize);
 				}
 				
 				boolean result = false;
@@ -547,7 +536,6 @@ public class BuyWeb extends Common {
 					
 					request.setAttribute("script", "alert('상품 후기가 등록되었습니다.');");
 					request.setAttribute("redirect", "/front/buy/reviewListPage.web");
-					// 추후 코드 완성시 마이 페이지 리뷰 관리 페이지로 이동
 				} else {
 					
 					request.setAttribute("script", "alert('시스템 관리자에게 문의하세요.');");
@@ -614,21 +602,6 @@ public class BuyWeb extends Common {
 			
 			mav.addObject("reviewList", mergedPagingList.getList());
 			mav.addObject("paging"	, mergedPagingList.getPaging());
-			/*
-			List<SaleDto> saleList = (List<SaleDto>) saleListDto.getList();
-			
-			for (SaleDto dto : saleList) {
-				logger.debug("SLE_NM : " + dto.getSle_nm());
-				logger.debug("IMG : " + dto.getImg());
-				logger.debug("CD_CTG_B : " + dto.getCd_ctg_b());
-				logger.debug("CD_CTG_M : " + dto.getCd_ctg_m());
-				logger.debug("SEQ_BUY_DTL : " + dto.getSeq_buy_dtl());
-				logger.debug("SEQ_SLE : " + dto.getSeq_sle());
-				logger.debug("COUNT : " + dto.getCount());
-				logger.debug("DT_REG : " + dto.getDt_reg());
-			}
-			원하는 데이터를 가지고 오는 것 까지 확인
-			*/
 			
 			mav.addObject("reviwCount"	, reviwCount);
 			mav.addObject("count"	, count);
@@ -655,7 +628,7 @@ public class BuyWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/buy/reviewModifyForm.web")
+	@RequestMapping(value = "/front/buy/reviewModifyForm.web", method = RequestMethod.POST)
 	public ModelAndView reviewModifyForm(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -694,7 +667,7 @@ public class BuyWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/buy/reviewWriteForm.web")
+	@RequestMapping(value = "/front/buy/reviewWriteForm.web", method = RequestMethod.POST)
 	public ModelAndView reviewWriteForm(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -727,14 +700,12 @@ public class BuyWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/buy/writeProc.web")
+	@RequestMapping(value = "/front/buy/writeProc.web", method = RequestMethod.POST)
 	public ModelAndView writeProc(HttpServletRequest request, HttpServletResponse response, BuyDetailListDto buyDetailListDto, int usePoint, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			// logger.debug("" + buyDetailListDto.getBuyList().size());
-			// logger.debug("사용한 포인트" + usePoint);
 			
 			String finalSleName = "";	// 마지막 판매 상품명
 			
@@ -749,8 +720,6 @@ public class BuyWeb extends Common {
 				for (int loop = 0; loop < buyDetailListDto.getBuyList().size(); loop++) {
 					
 					if (buyDetailListDto.getBuyList().get(loop).getCount() >= 1) {
-						
-						// logger.debug(loop + " : seq_sle(" + buyDetailListDto.getBuyList().get(loop).getSeq_sle() + ")" + " + count(" + buyDetailListDto.getBuyList().get(loop).getCount() + ")");
 						
 						// 갯수가 1개 이상인 상품
 						listBuyDetailDto.add(buyDetailListDto.getBuyList().get(loop));
@@ -771,8 +740,6 @@ public class BuyWeb extends Common {
 					}
 				}
 			}
-			// logger.debug("count=" + listBuyDetailDto.size());
-			
 			// 선택된 상품이 1개 이상을 경우만 구매 실행
 			if (listBuyDetailDto.size() > 0) {
 				
@@ -822,7 +789,7 @@ public class BuyWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/front/buy/writeForm.web")
+	@RequestMapping(value = "/front/buy/writeForm.web", method = RequestMethod.POST)
 	public ModelAndView writeForm(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, PagingDto reviewpagingDto, SaleDto saleDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -889,7 +856,7 @@ public class BuyWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/buy/cancelhistory.web")
+	@RequestMapping(value = "/front/buy/cancelhistory.web", method = RequestMethod.POST)
 	public ModelAndView cancelhistory(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -927,7 +894,7 @@ public class BuyWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/buy/history.web")
+	@RequestMapping(value = "/front/buy/history.web", method = RequestMethod.POST)
 	public ModelAndView history(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");

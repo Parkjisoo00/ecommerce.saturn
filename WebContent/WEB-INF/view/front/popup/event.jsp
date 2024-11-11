@@ -166,7 +166,7 @@
 	<div style="position: relative; text-align: center; width: 100%; max-width: 600px; margin: 0 auto;">
 		<img src="/img/popup/event.jpg" alt="Local Image" style="width: 100%; height: auto;">
 		 <div style="position: absolute; top: calc(50% - 2cm); left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5); padding: 10px 20px; border-radius: 10px;">
-			<a href="/front/sale/total_list.web" style="color: white; text-decoration: none; font-size: 24px; font-weight: bold;">상품으로 바로이동!</a>
+			<a href="javascript:goTypeT('', '', '', '', '', '');" style="color: white; text-decoration: none; font-size: 24px; font-weight: bold;">상품으로 바로이동!</a>
 		</div>
 	</div>
 	<!-- Blog Section End -->

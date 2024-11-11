@@ -15,7 +15,11 @@
 	<script>
 	
 	function closeSurvey() {
-		window.location.href = "/front/center/board/personalHealth/index.web";
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/center/board/personalHealth/index.web";
+		frmMain.submit();
 	}
 	
 	function surveyProc(value) {

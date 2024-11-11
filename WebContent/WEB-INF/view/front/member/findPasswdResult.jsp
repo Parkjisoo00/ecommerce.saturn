@@ -20,6 +20,15 @@
 			.container, .container-lg, .container-md, .container-sm {max-width:700px;}
 		}
 	</style>
+	<script>
+	function findPasswdResultProc() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/member/findPasswdResultProc.web";
+		frmMain.submit();
+	}
+	</script>
 </head>
 <body>
 	<!-- Page Preloder -->
@@ -37,7 +46,7 @@
 
 	<section class="checkout spad">
 		<div class="container">
-			<form action="/front/member/findPasswdResultProc.web" method="POST" id="frmMain" class="checkout__form">
+			<form method="POST" id="frmMain" class="checkout__form">
 			<input type="hidden" id="email" name="email" value="${email}" />
 			<input type="hidden" id="passwd_temp" name="passwd_temp" value="${passwd_temp}" />
 				<div class="row" style="display: flex; justify-content: center; align-items: center;">

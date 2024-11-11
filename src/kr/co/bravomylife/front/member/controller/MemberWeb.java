@@ -132,7 +132,7 @@ public class MemberWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/member/deleteDelivery.web")
+	@RequestMapping(value = "/front/member/deleteDelivery.web", method = RequestMethod.POST)
 	public ModelAndView deleteDelivery(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -166,12 +166,10 @@ public class MemberWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/member/writeProcDelivery.web")
+	@RequestMapping(value = "/front/member/writeProcDelivery.web", method = RequestMethod.POST)
 	public ModelAndView writeProcDelivery(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto, String deliveryDefault) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
-		
-		logger.debug("deliveryDefault 값 확인" + deliveryDefault);
 		
 		try {
 			
@@ -186,7 +184,6 @@ public class MemberWeb extends Common {
 				
 				memberDto.setFlg_default("N");
 			}
-			
 			
 			memberDto.setPost(aes.encode(memberDto.getPost()));
 			memberDto.setAddr1(aes.encode(memberDto.getAddr1()));
@@ -219,7 +216,7 @@ public class MemberWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/member/writeFormDelivery.web")
+	@RequestMapping(value = "/front/member/writeFormDelivery.web", method = RequestMethod.POST)
 	public ModelAndView writeFormDelivery(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -260,7 +257,7 @@ public class MemberWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/member/modifyDeliveryProc.web")
+	@RequestMapping(value = "/front/member/modifyDeliveryProc.web", method = RequestMethod.POST)
 	public ModelAndView modifyDeliveryProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -464,7 +461,7 @@ public class MemberWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/member/likeRemove.web")
+	@RequestMapping(value = "/front/member/likeRemove.web", method = RequestMethod.POST)
 	public ModelAndView likeRemove(HttpServletRequest request, HttpServletResponse response, SaleDto saleDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -500,7 +497,7 @@ public class MemberWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/member/withdraw.web")
+	@RequestMapping(value = "/front/member/withdraw.web", method = RequestMethod.POST)
 	public ModelAndView withdraw(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -526,7 +523,7 @@ public class MemberWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/member/withdrawProc.web")
+	@RequestMapping(value = "/front/member/withdrawProc.web", method = RequestMethod.POST)
 	public ModelAndView withdrawProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -566,7 +563,7 @@ public class MemberWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/member/modifyForm.web")
+	@RequestMapping(value = "/front/member/modifyForm.web", method = RequestMethod.POST)
 	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -612,7 +609,7 @@ public class MemberWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	
-	@RequestMapping(value = "/front/member/modifyProc.web")
+	@RequestMapping(value = "/front/member/modifyProc.web", method = RequestMethod.POST)
 	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto, String _hobbys, String _flg_sms, String _flg_email) {
 
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -669,8 +666,7 @@ public class MemberWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@SuppressWarnings("deprecation")
-	@RequestMapping(value = "/front/member/findPasswdResultProc.web")
+	@RequestMapping(value = "/front/member/findPasswdResultProc.web", method = RequestMethod.POST)
 	public ModelAndView findPasswdResultProc(HttpServletRequest request, HttpServletResponse response
 			, MemberDto memberDto
 			, String passwd_temp
@@ -688,14 +684,6 @@ public class MemberWeb extends Common {
 			
 			// - 새 비밀번호(newPasswd)와 새 비밀번호(newPasswd_) 확인이 같은지는 폼에서 처리
 			// - 폼에서 암호화된 이메일(memberDto.getEmail())과 임시 비밀번호(randomPassword)를 제공하여야 함
-			logger.debug("암호화된 이메일(복호화)=" + memberDto.getEmail() + "(" + memberDto.getEmail() + ")");
-			logger.debug("암호화된 임시 비밀번호 URL (복호화)=" + URLDecoder.decode(passwd_temp));
-			logger.debug("암호화된 임시 비밀번호 (복호화) 함" + aes.decode(passwd_temp));
-			logger.debug("암호화된 임시 비밀번호(복호화)=" + passwd_temp + "(" + aes.decode(URLDecoder.decode(passwd_temp)) + ")");
-			
-			logger.debug("회원이 입력한 임시 비밀번호=" + passwd_input);
-			logger.debug("회원이 입력한 신규 비밀번호=" + newPasswd);
-			
 			String randomPassword = aes.decode(passwd_temp);
 						
 			// 1. 회원이 입력한 임시 비밀번호(passwd_input)와 복호화한 임시 비밀번호가 같으면
@@ -778,7 +766,7 @@ public class MemberWeb extends Common {
 	 */
 	
 	@SuppressWarnings("deprecation")
-	@RequestMapping(value = "/front/member/findPasswProc.web")
+	@RequestMapping(value = "/front/member/findPasswProc.web", method = RequestMethod.POST)
 	public ModelAndView findPasswProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -786,10 +774,7 @@ public class MemberWeb extends Common {
 		try {
 			mav.setViewName("front/member/findPasswdForm");
 			
-			logger.debug("받아온 이메일" + " = " + memberDto.getEmail());
-			logger.debug("받아온 이름"+ " = " + memberDto.getMbr_nm());
 			// [2024-10-10][whslsl88#gmail.com][TODO-개선: 핸드폰 인증 처리]
-			//logger.debug("받아온 핸드폰" + " = " + memberDto.getPhone());
 			
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
@@ -799,9 +784,6 @@ public class MemberWeb extends Common {
 			//memberDto.setPhone(aes.encode(memberDto.getPhone()));
 			
 			int check = memberSrvc.findPasswd(memberDto);
-			
-			logger.debug("받아온 check 값" + " = " + check);
-			logger.debug("받아온 이메일 = " + memberDto.getEmail());
 			
 			if (check == 1) {
 				
@@ -915,13 +897,12 @@ public class MemberWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	
-	@RequestMapping(value = "/front/member/findIdResult.web")
+	@RequestMapping(value = "/front/member/findIdResult.web", method = RequestMethod.POST)
 	public ModelAndView findId(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			logger.debug("받아온 이름" + " = " + memberDto.getMbr_nm());
 			
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
@@ -930,13 +911,9 @@ public class MemberWeb extends Common {
 			
 			MemberDto memberDto_ = memberSrvc.findId(memberDto);
 			
-			//memberDto.setEmail(aes.decode(memberDto_.getEmail()));
-			//logger.debug("JSP에 보내는 이메일" + " = " + memberDto.getEmail());
-			
 			if (memberDto_ != null && memberDto_.getEmail() != null) {
 				// 이메일 복호화 후 DTO에 설정
 				memberDto.setEmail(aes.decode(memberDto_.getEmail()));
-				logger.debug("JSP에 보내는 이메일 = " + memberDto.getEmail());
 			
 				// 아이디 찾기에 성공했을 때
 				mav.addObject("findId", memberDto);
@@ -980,13 +957,6 @@ public class MemberWeb extends Common {
 			SKwithAES aes		= new SKwithAES(staticKey);
 			
 			memberDto.setEmail(URLDecoder.decode(memberDto.getEmail()));
-			
-			/*
-			 *URLDecoder로 %2B가 +로 변환되어야 하는데 제대로 작동하지 않고 공백 ""으로 인식함
-			memberDto.setEmail(URLDecoder.decode(email));
-			String emailC = memberDto.getEmail();
-			logger.debug("이메일" + emailC);
-			*/
 			
 			if (memberSrvc.updateState(memberDto)) {
 				request.setAttribute("script"	, "alert('이메일 인증이 완료되어 정상적으로 서비스를 이용할 있습니다.');");
@@ -1106,7 +1076,7 @@ public class MemberWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	
-	@RequestMapping(value = "/front/member/registerForm.web")
+	@RequestMapping(value = "/front/member/registerForm.web", method = RequestMethod.POST)
 	public ModelAndView registerForm(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -1140,8 +1110,6 @@ public class MemberWeb extends Common {
 			, String term_2
 			, String term_3) {
 		
-		logger.debug(memberDto.getAge()+"");
-		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
@@ -1149,32 +1117,14 @@ public class MemberWeb extends Common {
 			if (term_2 == null || term_2.equals("")) term_2 = "N";
 			if (term_3 == null || term_3.equals("")) term_3 = "N";
 			
-			//logger.debug(term_1);
-			//logger.debug(term_2);
-			//logger.debug(term_3);
-			
 			// [2024-10-01][TODO: 약관 갯수(JSP)에 무관하게 처리될 수 있도록 개선]
 			String[] arrTermAgreement = {term_1, term_2, term_3};
 			
-			/*
-			logger.debug("암호화 전: " + memberDto.getEmail());
-			logger.debug("암호화 전: " + memberDto.getPasswd());
-			logger.debug("암호화 전: " + memberDto.getMbr_nm());
-			logger.debug("암호화 전: " + memberDto.getAge());
-			logger.debug("암호화 전: " + memberDto.getGender());
-			logger.debug("암호화 전: " + memberDto.getPhone());
-			logger.debug("암호화 전: " + memberDto.getPost() + " " + memberDto.getAddr1() + " " + memberDto.getAddr2());
-			*/
 			if (memberDto.getFlg_email() == null || memberDto.getFlg_email().equals("")) memberDto.setFlg_email("N");
 			if (memberDto.getFlg_sms() == null || memberDto.getFlg_sms().equals("")) memberDto.setFlg_sms("N");
 			
-			//logger.debug(memberDto.getFlg_email());
-			//logger.debug(memberDto.getFlg_sms());
-			
 			// 해쉬 암호화(SHA-256)
 			memberDto.setPasswd(HSwithSHA.encode(memberDto.getPasswd()));
-			//logger.debug("암호화 후(Passwd): " + memberDto.getPasswd());
-			
 			// 대칭키 암호화(AES-256)
 			String staticKey	= staticProperties.getProperty("front.enc.user.aes256.key", "[UNDEFINED]");
 			SKwithAES aes		= new SKwithAES(staticKey);
@@ -1185,16 +1135,10 @@ public class MemberWeb extends Common {
 			memberDto.setPost(aes.encode(memberDto.getPost()));
 			memberDto.setAddr1(aes.encode(memberDto.getAddr1()));
 			memberDto.setAddr2(aes.encode(memberDto.getAddr2()));
-			//logger.debug("암호화 후(Email): " + memberDto.getEmail());
-			//logger.debug("암호화 후(Name): " + memberDto.getName());
-			//logger.debug("암호화 후(Phone): " + memberDto.getPhone());
-			//logger.debug("암호화 후(Post + Addr1 + Addr2): " + memberDto.getPost() + " " + memberDto.getAddr1() + " " + memberDto.getAddr2());
 			
 			boolean insert = memberSrvc.insert(memberDto, arrTermAgreement, aes.decode(memberDto.getPost()));
 			
 			if (insert) {
-				
-				logger.debug("가입 성공");
 				
 				// 인증 이메일 발송
 				EmailDto emailDto = new EmailDto();
@@ -1220,8 +1164,6 @@ public class MemberWeb extends Common {
 				emailCmpn.send(emailDto);
 				*/
 			}
-			else logger.debug("가입 실패");
-			
 			
 			request.setAttribute("redirect"	, "/");
 			

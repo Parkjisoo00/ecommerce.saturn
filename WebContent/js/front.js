@@ -291,15 +291,21 @@ function eraseCookie(name) {
 }
 
 function goToRegister() {
-	window.location.href = "/front/member/registerForm.web"; // 회원가입 페이지 URL
+	
+	frmMain.action = "/front/member/registerForm.web";
+	frmMain.submit();
 }
 
 function moveToFindId() {
-	window.location.href ="/front/member/findIdForm.web"; // findIdForm.jsp로 이동
+	
+	frmMain.action = "/front/member/findIdForm.web";
+	frmMain.submit();
 }
 
 function moveToLogin() {
-	window.location.href ="/front/login/loginForm.web"; // loginForm.jsp로 이동
+	
+	frmMain.action = "/front/login/loginForm.web";
+	frmMain.submit();
 }
 
 
@@ -312,7 +318,9 @@ function validateForm() {
 	return true; // 폼 제출 진행
 }
 function moveToFindPasswd() {
-	window.location.href ="/front/member/findPasswdForm.web"; // findPasswdForm.jsp로 이동
+	
+	frmMain.action = "/front/member/findPasswdForm.web";
+	frmMain.submit();
 }
 
 function resetPasswd() {

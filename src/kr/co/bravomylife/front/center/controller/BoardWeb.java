@@ -92,12 +92,10 @@ public class BoardWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/center/board/personalHealth/searchView.web")
+	@RequestMapping(value = "/front/center/board/personalHealth/searchView.web", method = RequestMethod.POST)
 	public ModelAndView searchView(HttpServletRequest request, HttpServletResponse response, String prdlst_report_no) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
-		
-		logger.debug("받아온 prdlst_report_no 값 확인" + prdlst_report_no);
 		
 		try {
 			
@@ -109,8 +107,6 @@ public class BoardWeb extends Common {
 			String _prdlst_report_no = URLEncoder.encode(prdlst_report_no, "UTF-8");
 			
 			String url = "http://openapi.foodsafetykorea.go.kr/api/" + keyId + "/" + serviceId + "/" + dataType + "/" + startIdx + "/" + endIdx + "/PRDLST_REPORT_NO=" + _prdlst_report_no;
-			
-			logger.debug("보내는 URL 값 확인" + url);
 			
 			ResponseInfosDto responseDto = (ResponseInfosDto) JsonItrf.connectGet(
 					null, 
@@ -175,8 +171,6 @@ public class BoardWeb extends Common {
 			
 			String url = "http://openapi.foodsafetykorea.go.kr/api/" + keyId + "/" + serviceId + "/" + dataType + "/" + startIdx + "/" + endIdx + "/PRDLST_NM=" + prdlst_nm;
 			
-			logger.debug("보내는 URL 값 확인" + url);
-			
 			ResponseInfosDto responseDto = (ResponseInfosDto) JsonItrf.connectGet(
 					null, 
 					new TypeReference<ResponseInfosDto>() {}, 
@@ -205,7 +199,7 @@ public class BoardWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/center/board/personalHealth/searchForm.web")
+	@RequestMapping(value = "/front/center/board/personalHealth/searchForm.web", method = RequestMethod.POST)
 	public ModelAndView searchForm(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -231,7 +225,7 @@ public class BoardWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/center/board/personalHealth/index.web")
+	@RequestMapping(value = "/front/center/board/personalHealth/index.web", method = RequestMethod.POST)
 	public ModelAndView personalHealth(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -257,7 +251,7 @@ public class BoardWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/center/board/introduce/index.web")
+	@RequestMapping(value = "/front/center/board/introduce/index.web", method = RequestMethod.POST)
 	public ModelAndView introduce(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -288,7 +282,7 @@ public class BoardWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/center/board/health/list.web")
+	@RequestMapping(value = "/front/center/board/health/list.web", method = RequestMethod.POST)
 	public ModelAndView health(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -319,7 +313,7 @@ public class BoardWeb extends Common {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/front/center/board/ingred/list.web")
+	@RequestMapping(value = "/front/center/board/ingred/list.web", method = RequestMethod.POST)
 	public ModelAndView ingred(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -382,15 +376,10 @@ public class BoardWeb extends Common {
 			
 			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_question", "[UNDEFINED]");
 			
-			logger.debug("경로 확인" +pathBase);
-			
 			file = new File(pathBase + "" + File.separator + boardDto.getFile_save());
 			
 			fileDownloadDto.setFile_original(boardDto.getFile_orig());
 			fileDownloadDto.setFile_size(file.length());
-			
-			logger.debug("파일 확인" + boardDto.getFile_orig());
-			logger.debug("파일 사이즈 확인" + file.length());
 			
 			if (file == null || file.exists() == false ) {
 				mav.setViewName("redirect:/error.web?code=404");
@@ -553,10 +542,6 @@ public class BoardWeb extends Common {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
-		//logger.debug("오는거 확인");
-		//logger.debug("오는거 확인" + boardDto.getCd_bbs_type());
-		//logger.debug("오는거 확인" + boardDto.getSeq_bbs());
-		
 		try {
 			
 			BoardDto _boardDto = boardSrvc.select(boardDto);
@@ -619,11 +604,7 @@ public class BoardWeb extends Common {
 			
 			contents = contents.replace("<p>", "").replace("</p>", "");
 			
-			//logger.debug("작성 내용 확인" + " = " + contents);
-			
 			boardDto.setContent(contents);
-			
-			//logger.debug("작성 내용 확인" + " = " + boardDto.getContent());
 			
 			boardDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
@@ -645,9 +626,6 @@ public class BoardWeb extends Common {
 			String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
 			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 			
-			
-			//logger.debug("업로드 경로 확인" + pathBase);
-			
 			int countFile = 0;
 			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
 			
@@ -665,7 +643,6 @@ public class BoardWeb extends Common {
 				String fileSize		= "";
 				long totalSize		= 0;
 				
-				//logger.debug("countFile=" + countFile);
 				for (int loop = 0; loop < countFile; loop++) {
 					fileNameSrc		= (String)hashtable.get("files[" + loop + "]_fileSrcName");
 					fileNameSve		= (String)hashtable.get("files[" + loop + "]_fileSveNameRelative");
@@ -676,10 +653,6 @@ public class BoardWeb extends Common {
 					fileDto[loop].setFileNameOriginal(fileNameSrc);
 					fileDto[loop].setFileNameSave(fileNameSve);
 					fileDto[loop].setFileSize((Long.parseLong(fileSize)));
-					//logger.debug("fileNameSrc=" + fileNameSrc);
-					//logger.debug("fileNameSve=" + fileNameSve);
-					//logger.debug("fileSize=" + fileSize);
-					
 					totalSize += Long.parseLong(fileSize);
 				}
 				
@@ -699,9 +672,6 @@ public class BoardWeb extends Common {
 					request.setAttribute("post"		, "/front/center/board/list.web");
 					request.setAttribute("name"		, arrName);
 					request.setAttribute("value"	, arrValue);
-					
-					// request.setAttribute("script"	, "alert('등록되었습니다.');");
-					// request.setAttribute("redirect"	, "/front/center/board/list.web?cd_bbs_type=" + boardDto.getCd_bbs_type());
 				}
 				else {
 					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
@@ -721,7 +691,6 @@ public class BoardWeb extends Common {
 		
 		return mav;
 	}
-	
 	
 	/**
 	 * @param request [요청 서블릿]
@@ -779,13 +748,11 @@ public class BoardWeb extends Common {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
-		//logger.debug("오는거 확인1");
-		
 		try {
-
+			
 			/* 로그인 세션 체크가 정상적으로 동작하지 않던 코드 수정 */
 			/*이 주석을 풀시 이 코드를 사용하거나 아래의 코드 하나만을 사용해야 됨 */
-			logger.debug("오는거 확인2");
+			
 			if (pagingDto.getCd_bbs_type() == 3 && !sessionCmpn.isSession(request)) {
 				request.setAttribute("script"	, "alert('로그인이 필요합니다!');");
 				request.setAttribute("redirect"	, "/front/login/loginForm.web?url=/front/center/board/list.web");
@@ -794,22 +761,16 @@ public class BoardWeb extends Common {
 			else {
 				// 로그인 성공 후 세션에 사용자 정보 저장
 				if (pagingDto.getCd_bbs_type() == 3) {
-					logger.debug("오는거 확인4");
+					
 					HttpSession session = request.getSession();
 					session.setAttribute("sessionUser", "SEQ_MBR");
 				}
 				
 				if (pagingDto.getCd_bbs_type() == 3) {
-					logger.debug("오는거 확인5");
 					pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
-
+					
 				}
-				logger.debug("오는거 확인6");
 			}
-			//logger.debug("오는거 확인7");
-			//logger.debug("게시판 타입 확인" + " + " + pagingDto.getCd_bbs_type());
-			//logger.debug("세션 SEQ_MBR 확인" + " + " + getSession(request, "SEQ_MBR"));
-			
 				String check = "[UNDEFINED]";
 				
 				if (pagingDto.getCd_bbs_type() == 3 && check.equals(getSession(request, "SEQ_MBR"))) {
@@ -819,8 +780,6 @@ public class BoardWeb extends Common {
 				}
 				
 				PagingListDto pagingListDto = boardSrvc.list(pagingDto);
-				
-				//logger.debug("등록자 번호 확인" + " + " + pagingDto.getRegister());
 				
 				mav.addObject("paging"	, pagingListDto.getPaging());
 				mav.addObject("list"	, pagingListDto.getList());
@@ -864,19 +823,12 @@ public class BoardWeb extends Common {
 	@RequestMapping(value = "/front/center/board/myPageNotice/list.web")
 	public ModelAndView myPageNoticeList(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
 		
-
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
 			pagingDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
-
-			//logger.debug("게시판 타입 확인" + " + " + pagingDto.getCd_bbs_type());
-			//logger.debug("세션 SEQ_MBR 확인" + " + " + getSession(request, "SEQ_MBR"));
 			
-				
 			PagingListDto pagingListDto = boardSrvc.list(pagingDto);
-				
-			logger.debug("등록자 번호 확인" + " + " + pagingDto.getRegister());
 				
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
@@ -1061,11 +1013,7 @@ public class BoardWeb extends Common {
 			
 			contents = contents.replace("<p>", "").replace("</p>", "");
 			
-			//logger.debug("작성 내용 확인" + " = " + contents);
-			
 			boardDto.setContent(contents);
-			
-			//logger.debug("작성 내용 확인" + " = " + boardDto.getContent());
 			
 			boardDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MBR")));
 			
@@ -1087,9 +1035,6 @@ public class BoardWeb extends Common {
 			String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max10MB"			, "[UNDEFINED]");
 			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.doc"	, "[UNDEFINED]");
 			
-			
-			//logger.debug("업로드 경로 확인" + pathBase);
-			
 			int countFile = 0;
 			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
 			
@@ -1107,7 +1052,6 @@ public class BoardWeb extends Common {
 				String fileSize		= "";
 				long totalSize		= 0;
 				
-				//logger.debug("countFile=" + countFile);
 				for (int loop = 0; loop < countFile; loop++) {
 					fileNameSrc		= (String)hashtable.get("files[" + loop + "]_fileSrcName");
 					fileNameSve		= (String)hashtable.get("files[" + loop + "]_fileSveNameRelative");
@@ -1118,9 +1062,6 @@ public class BoardWeb extends Common {
 					fileDto[loop].setFileNameOriginal(fileNameSrc);
 					fileDto[loop].setFileNameSave(fileNameSve);
 					fileDto[loop].setFileSize((Long.parseLong(fileSize)));
-					//logger.debug("fileNameSrc=" + fileNameSrc);
-					//logger.debug("fileNameSve=" + fileNameSve);
-					//logger.debug("fileSize=" + fileSize);
 					
 					totalSize += Long.parseLong(fileSize);
 				}
@@ -1141,9 +1082,6 @@ public class BoardWeb extends Common {
 					request.setAttribute("post"		, "/front/center/board/myPageNotice/list.web");
 					request.setAttribute("name"		, arrName);
 					request.setAttribute("value"	, arrValue);
-					
-					// request.setAttribute("script"	, "alert('등록되었습니다.');");
-					// request.setAttribute("redirect"	, "/front/center/board/list.web?cd_bbs_type=" + boardDto.getCd_bbs_type());
 				}
 				else {
 					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
