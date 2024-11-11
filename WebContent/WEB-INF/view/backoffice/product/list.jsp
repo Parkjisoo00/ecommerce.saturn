@@ -78,6 +78,17 @@
 				cd_ctg_m.appendChild(newOption);
 			});
 		}
+		
+		function goView(value) {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.seq_sle.setAttribute("value", value);
+			
+			frmMain.action = "/console/product/view.web";
+			frmMain.submit();
+		}
+		
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -85,6 +96,7 @@
 <input type="hidden" name="currentPage" id="currentPage" value="${paging.currentPage}" />
 <input type="hidden" name="corp_nm" id="corp_nm" value="${paging.corp_nm}" />
 <input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
+<input type="hidden" name="seq_sle" id="seq_sle" value="0" />
 	
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 
@@ -167,7 +179,7 @@
 										${list.rnum}
 									</td>
 									<td>
-										<a href="/console/product/view.web?seq_sle=${list.seq_sle}" style="color: black;">
+										<a href="javascript:goView(${list.seq_sle});" style="color: black;">
 											<bravomylifeTag:substring text="${fn:escapeXml(list.sle_nm)}" length="60" />
 										</a>
 									</td>
@@ -206,7 +218,7 @@
 					</div>
 					<br>
 						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
-						<a href="/console/product/productReg.web" class="btn btn-primary" style="width: 150px;">상품 등록</a>
+						<a href="javascript:goProductReg()" class="btn btn-primary" style="width: 150px;">상품 등록</a>
 						</div>
 					<br>
 				</div>

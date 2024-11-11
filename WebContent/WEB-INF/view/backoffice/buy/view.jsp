@@ -24,84 +24,92 @@
 		frmMain.action = "/console/center/board/list.web";
 		frmMain.submit();
 	}
+	
+	function goBuyList() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/console/buy/list.web";
+		frmMain.submit();
+	}
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<form id="frmMain" method="POST" action="/console/buy/view.web">
-<input type="hidden" name="seq_buy_mst" id="seq_buy_mst" value="${buyDto.seq_buy_mst}"/>
-<input type="hidden" name="seq_mbr" id="seq_mbr" value="${buyDto.seq_mbr}"/>
-<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
+<form id="frmMain" method="POST" >
+<input type="hidden" name="seq_buy_mst" id="seq_buy_mst" value="0"/>
+<input type="hidden" name="seq_mbr" id="seq_mbr" value="0"/>
+<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="0" />
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header" style="display: flex; align-items: center; margin-left: 215px;">
-		 <h1>
-        판매 상품 상세 페이지
-      </h1>
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header" style="display: flex; align-items: center; margin-left: 215px;">
+		<h1>
+		판매 상품 상세 페이지
+		</h1>
 	</section>
-       
-        <!-- Main content -->
-        <section class="content" style="display: flex; justify-content: center; align-items: center;">
-            <div class="col-md-9">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                    	<c:set var="firstItem" value="${buyDtoList[0]}" />
+
+		<!-- Main content -->
+		<section class="content" style="display: flex; justify-content: center; align-items: center;">
+			<div class="col-md-9">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<c:set var="firstItem" value="${buyDtoList[0]}" />
 						<h3 class="box-title">회원번호 ${firstItem.seq_mbr}번 고객님의 상품 상세 목록</h3>
-                    </div>
-                    <div class="box-body no-padding">
-                        <div class="table-responsive mailbox-messages">
-                            <table class="table table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 5%; text-align: center;">NO</th>
-                                        <th style="text-align: center;">판매 상품명</th>
-                                        <th style="width: 15%; text-align: center;">판매 상품 개수</th>
-                                        <th style="width: 15%; text-align: center;">판매 상품 가격</th>
-                                        <th style="width: 15%; text-align: center;">개별 포인트</th>
-                                        <th style="width: 15%; text-align: center;">리뷰 작성 유무</th>
-                                        <th style="width: 15%; text-align: center;">구매 일자</th>
-                                    </tr>
-                                </thead>
-                                	<c:forEach items="${buyDtoList}" var="item">
-                                        <tr>
-                                            <td style="text-align: center;">
-                                                ${item.rnum}
-                                            </td>
-                                            <td style="text-align: center;">
-                                                ${item.sle_nm}
-                                            </td>
-                                            <td style="text-align: center;">
-                                                ${item.count}
-                                            </td>
-                                            <td style="text-align: center;">
-                                                ${item.price}
-                                            </td>
-                                            <td style="text-align: center;">
-                                                ${item.point}
-                                            </td>
-                                            <td style="text-align: center;">
-                                                <c:choose>
-                                                    <c:when test="${item.flg_review == 'Y'}">YES</c:when>
-                                                    <c:otherwise>NO</c:otherwise>
-                                                </c:choose>
-                                            </td>
-                                            <td style="text-align: center;">
-                                                ${item.dt_reg}
-                                            </td>
-                                        </tr>
-                               </c:forEach>
-                            </table>
-                        </div>
-                        <div class="modal-footer" style="text-align: center; padding-top: 10px; padding-bottom: 10px;">
-                            <input type="button" value="목록" class="btn btn-primary" onclick="location.href='/console/buy/list.web';" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-    <%@ include file="/include/backoffice/footer.jsp" %>
+					</div>
+					<div class="box-body no-padding">
+						<div class="table-responsive mailbox-messages">
+							<table class="table table-hover table-striped">
+								<thead>
+									<tr>
+										<th style="width: 5%; text-align: center;">NO</th>
+										<th style="text-align: center;">판매 상품명</th>
+										<th style="width: 15%; text-align: center;">판매 상품 개수</th>
+										<th style="width: 15%; text-align: center;">판매 상품 가격</th>
+										<th style="width: 15%; text-align: center;">개별 포인트</th>
+										<th style="width: 15%; text-align: center;">리뷰 작성 유무</th>
+										<th style="width: 15%; text-align: center;">구매 일자</th>
+									</tr>
+								</thead>
+									<c:forEach items="${buyDtoList}" var="item">
+										<tr>
+											<td style="text-align: center;">
+												${item.rnum}
+											</td>
+											<td style="text-align: center;">
+												${item.sle_nm}
+											</td>
+											<td style="text-align: center;">
+												${item.count}
+											</td>
+											<td style="text-align: center;">
+												${item.price}
+											</td>
+											<td style="text-align: center;">
+												${item.point}
+											</td>
+											<td style="text-align: center;">
+												<c:choose>
+													<c:when test="${item.flg_review == 'Y'}">YES</c:when>
+													<c:otherwise>NO</c:otherwise>
+												</c:choose>
+											</td>
+											<td style="text-align: center;">
+												${item.dt_reg}
+											</td>
+										</tr>
+							   </c:forEach>
+							</table>
+						</div>
+						<div class="modal-footer" style="text-align: center; padding-top: 10px; padding-bottom: 10px;">
+							<input type="button" value="목록" class="btn btn-primary" onclick="javascript:goBuyList()" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<%@ include file="/include/backoffice/footer.jsp" %>
 
 	<%@ include file="/include/backoffice/sideBar.jsp" %>
 

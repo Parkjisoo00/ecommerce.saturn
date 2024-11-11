@@ -243,6 +243,14 @@
 			frmMain.action="/console/product/modifyProc.web";
 			frmMain.submit();
 		}
+		
+		function goProductList() {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.action = "/console/product/list.web";
+			frmMain.submit();
+		}
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -361,7 +369,7 @@
 				<div class="mailbox-controls">
 					<div class="btn-group" style="display: flex; justify-content: center; gap: 10px;">
 						<input type="button" value="수정" class="btn btn-primary" style="width: 150px" onclick="javascript:modifyProc();" />
-						<input type="button" value="목록" class="btn btn-primary" style="width: 150px" onclick="javascript:location.href='/console/product/list.web';"/>
+						<input type="button" value="목록" class="btn btn-primary" style="width: 150px" onclick="javascript:goProductList();"/>
 					</div>
 				</div>
 			</div>

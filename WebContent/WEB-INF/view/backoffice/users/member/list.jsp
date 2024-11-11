@@ -52,8 +52,8 @@
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<form id="frmMain" method="POST" action="/console/users/member/list.web">
-<input type="hidden" name="seq_mbr"		id="seq_mbr" />
+<form id="frmMain" method="POST">
+<input type="hidden" name="seq_mbr"		id="seq_mbr" value="0"/>
 <input type="hidden" name="cd_state"	id="cd_state" value="0"/>
 <input type="hidden" name="currentPage"	id="currentPage" value="${paging.currentPage}" />	
 <input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
@@ -82,7 +82,7 @@
 							<div style="display: flex; align-items: center;">&nbsp;&nbsp;
 								<select class="form-control" name="searchKey" style="height: 30px;">
 									<option value="email"<c:if test="${paging.searchKey == 'email'}"> selected</c:if>>이메일</option>
-									<option value="mbr_nm"<c:if test="${paging.searchKey == 'mbr_nm'}"> selected</c:if>>성명</option>
+									<option value="mng_nm"<c:if test="${paging.searchKey == 'mng_nm'}"> selected</c:if>>성명</option>
 								</select>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<input type="text" name="searchWord" id="searchWord" class="form-control input-sm" value="${paging.searchWord}"  />
