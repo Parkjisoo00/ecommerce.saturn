@@ -163,7 +163,7 @@
 															<td class="cart-td" style="text-align: center; vertical-align: middle;">
 																<div class="cart-div" style="width: 80px; height: 80px; overflow: hidden; display: inline-block;">
 																	<a href="javascript:goWriteForm('${buyDatas.seq_sle}', '${buyDatas.cd_ctg_m}', '${buyDatas.cd_ctg_b}');">
-																		<img class="cart-img" src="${buyDatas.img}" class="cart-img">
+																		<img class="cart-img" src="/img/product/${buyDatas.img}" class="cart-img">
 																	</a>
 																</div>
 															</td>

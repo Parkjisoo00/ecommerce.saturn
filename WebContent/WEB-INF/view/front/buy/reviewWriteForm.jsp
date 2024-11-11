@@ -85,7 +85,7 @@
 							</div>
 							<div class="review-name" style="border-bottom: 0px !important;">
 								<div class="photoreview" style="padding: 20px 10px !important;">
-									<img src="${saleDto.img}" style="height: 100px !important; ">
+									<img src="/img/product/${saleDto.img}" style="height: 100px !important; ">
 								</div>
 								<div class="product-name" style="flex-grow: 1; padding-right: 0px !important">
 									<div class="product-name" style="padding: 0px !important; font-weight: bold !important;">

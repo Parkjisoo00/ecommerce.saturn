@@ -216,7 +216,7 @@
 													<div class="review-name" style="border-top: 0px !important; padding: 10px 15px !important; border-top: 0px !important">
 														<div class="photoreview" style="width: unset !important; display: inline-block; padding: 0 !important;">
 															<a href="javascript:goWriteForm('${review.seq_sle}', '${review.cd_ctg_m}', '${review.cd_ctg_b}');">
-																<img src="${review.img}" style="width: 50px !important; height: 50px !important; vertical-align: middle !important;">
+																<img src="/img/product/${review.img}" style="width: 50px !important; height: 50px !important; vertical-align: middle !important;">
 															</a>
 														</div>
 														<div class="product-name" style="flex-grow: 1; display: flex; justify-content: space-between; align-items: center; padding: 0px !important">

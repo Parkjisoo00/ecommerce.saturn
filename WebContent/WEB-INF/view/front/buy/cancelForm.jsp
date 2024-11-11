@@ -126,7 +126,7 @@
 								<c:forEach var="cancelDatas" items="${cancelList.buyDatas}">
 									<div style="display: flex !important; flex-direction: row !important;">
 										<div style="position: relative !important; width: 64px !important; margin-right: 16px !important;">
-											<img style="width: 64px !important; height: 64px !important;" src="${cancelDatas.img}">
+											<img style="width: 64px !important; height: 64px !important;" src="/img/product/${cancelDatas.img}">
 										</div>
 										<div style="flex: 1 1 0% !important; display: flex !important; user-select: none !important; overflow: hidden !important; align-items: normal !important;">
 											<div style="display: flex !important; flex-direction: column !important;">
