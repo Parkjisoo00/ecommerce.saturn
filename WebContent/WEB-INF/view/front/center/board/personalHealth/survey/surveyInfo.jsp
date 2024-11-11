@@ -65,7 +65,7 @@
 				<div class="survey">
 					<div class="gnb">
 						<div class="survey-div">
-							<a href="#" style="display: inline-block; line-height: 32px;"><span style="position: relative;">이전</span></a>
+							<a href="#" onclick="window.history.back(); return false;" style="display: inline-block; line-height: 32px;"><span style="position: relative;">이전</span></a>
 						</div>
 						<div class="survey-div">
 							<h1 style="text-align: center; font-size: 30px; font-weight: 700; margin-top: -15px; font-family: 'Noto Sans KR', sans-serif !important;">맞춤 건강 설문</h1>
