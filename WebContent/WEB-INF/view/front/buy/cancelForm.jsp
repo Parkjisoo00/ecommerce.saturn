@@ -246,49 +246,52 @@
 	<!-- Js Plugins -->
 	<%@ include file="/include/common/js.jsp" %>	
 <script>
-	function cancelOrder(value) {
-		
-		var cd_state = value;
-		
-		var myData = {
-				
-			deal_num: $("#deal_num").val(),
-			seq_buy_mst: $("#seq_buy_mst").val(),
-			seq_pay: $("#seq_pay").val(),
-			cd_state: cd_state
-		};
-		
-		$.ajax({
+var shouldCancelHistory = false;
+
+function cancelOrder(value) {
+	var cd_state = value;
+	
+	var myData = {
+		deal_num: $("#deal_num").val(),
+		seq_buy_mst: $("#seq_buy_mst").val(),
+		seq_pay: $("#seq_pay").val(),
+		cd_state: cd_state
+	};
+	
+	$.ajax({
+		type: "POST",
+		url: "/front/pay/cancleOrder.json",
+		dataType: "json",
+		contentType: "application/json; charset=UTF-8",
+		data: JSON.stringify(myData),
+		success: function(res) {
 			
-			type: "POST",
-			url: "/front/pay/cancleOrder.json",
-			dataType: "json",
-			contentType: "application/json; charset=UTF-8",
-			data: JSON.stringify(myData),
-			success: function(res) {
-				
-				$("#modalMessage").text(res.message);
-				$("#modalOverlay").show();
-				$("#resultModal").show();
-			},
-		});
-	}
-	
-	$(document).on('click', '#closeModalBtn', function() {
-		
-		$('#modalOverlay').hide();
-		$('#resultModal').hide();
-		
-		cancelHistory();
+			$("#modalMessage").text(res.message);
+			$("#modalOverlay").show();
+			$("#resultModal").show();
+			
+			if (res.code === "success") {
+				shouldCancelHistory = true;
+			} else {
+				shouldCancelHistory = false;
+			}
+		},
 	});
+}
+$(document).on('click', '#closeModalBtn', function() {
+	$('#modalOverlay').hide();
+	$('#resultModal').hide();
 	
-	function cancelHistory(value) {
-		
-		var frmMain = document.getElementById("frmMain");
-		
-		frmMain.action = "/front/buy/cancelhistory.web";
-		frmMain.submit();
+	if (shouldCancelHistory) {
+		cancelHistory();
 	}
+});
+
+function cancelHistory() {
+	var frmMain = document.getElementById("frmMain");
+	frmMain.action = "/front/buy/cancelhistory.web";
+	frmMain.submit();
+}
 </script>
 </form>
 </body>

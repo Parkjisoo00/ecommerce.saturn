@@ -266,10 +266,13 @@ public class PayWeb extends Common {
 		if (apiResult.get("responseCode").equals("0000")) {
 			
 			buySrvc.updateCancle(buyDetailDto);
+			
+			response.put("code", "success");
 			response.put("message", "주문 취소가 신청되었습니다.");
 		}
 		else {
 			
+			response.put("code", "fail");
 			response.put("message", "주문 취소중 시스템 문제가 발생했습니다. 관리자에게 문의해주십시오.");
 		}
 		
