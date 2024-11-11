@@ -19,6 +19,50 @@
 		tinymce.init({selector:'textarea'});
 	}
 	
+	function goTypeTx(value) {
+		
+		var first_cd_ctgDesktop		= document.getElementById("first_cd_ctg").value;
+		var second_cd_ctgDesktop	= document.getElementById("second_cd_ctg").value;
+		
+		var first_cd_ctgAndroid		= document.getElementById("first_cd_ctg_android").value;
+		var second_cd_ctgAndroid	= document.getElementById("second_cd_ctg_android").value;
+		
+		var first_cd_ctg;
+		var second_cd_ctg
+		
+		if (value == 'pc') {
+			
+			first_cd_ctg	= 	first_cd_ctgDesktop
+			second_cd_ctg	= 	second_cd_ctgDesktop
+		}
+		else if (value == 'mobile') {	
+			first_cd_ctg	= 	first_cd_ctgAndroid
+			second_cd_ctg	= 	second_cd_ctgAndroid
+		}	
+		
+		var searchWordDesktop = document.getElementById("_searchWord_desktop").value;
+		var searchWordAndroid = document.getElementById("_searchWord_android").value;
+		
+		var _searchWord;
+		
+		if (value == 'pc') {
+			_searchWord = searchWordDesktop;
+		}
+		else if (value == 'mobile') {
+			_searchWord = searchWordAndroid;
+		}
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+		frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+		frmMain.searchWord.setAttribute("value", _searchWord);
+		
+		frmMain.type.setAttribute("value", value);
+		frmMain.action = "/front/sale/total_list.web";
+		frmMain.submit();
+	}
+	
 	function goList(value) {
 		
 		var frmMain = document.getElementById("frmMain");
@@ -28,7 +72,7 @@
 		frmMain.submit();
 	}
 	
-	function writeProc(value) {
+	function writeProc(value, value2, value3) {
 		var frmMain = document.getElementById("frmMain");
 		document.getElementById("cd_bbs_type").value = value;
 		
@@ -38,6 +82,10 @@
 			alert("필수 항목을 입력하세요!");
 			return;
 		}
+		
+		frmMain.cd_ctg_b.setAttribute("value", value2);
+		frmMain.cd_ctg_m.setAttribute("value", value3);
+		
 		frmMain.action="/front/center/board/myPageNotice/writeProc.web";
 		frmMain.submit();
 	}
@@ -52,10 +100,10 @@
 <body>
 <form id="frmMain" method="POST" enctype="multipart/form-data" class="checkout__form">
 <input type="hidden" id="cd_bbs_type"	name="cd_bbs_type"/>
-<input type="hidden" id="type"			name="type" />
-<input type="hidden" id="cd_ctg_b"		name="cd_ctg_b" value="0"/>
-<input type="hidden" id="searchWord"	name="searchWord"/>
+<input type="hidden" id="cd_ctg_b"		name="cd_ctg_b"/>
 <input type="hidden" id="cd_ctg_m"		name="cd_ctg_m"/>
+<input type="hidden" id="type"			name="type" />
+<input type="hidden" id="searchWord"	name="searchWord"/>
 <input type="hidden" id="seq_sle"		name="seq_sle" value= "${boardDto.seq_sle}"/>
 
 	<!-- Page Preloder -->
@@ -105,7 +153,7 @@
 					<c:if test="${boardDto.seq_sle > 0}">
 					<div class="checkout__form__input">
 						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">상품 대분류</p>
-						<select id="cd_ctg_b" name="cd_ctg_b" style="margin-bottom:10px">
+						<select id="cd_ctg_bs" style="margin-bottom:10px" disabled>
 							<option value="0">대분류를 선택하세요</option>
 							<option value="1"<c:if test="${boardDto.cd_ctg_b == '1'}"> selected</c:if>>기능별</option>
 							<option value="2"<c:if test="${boardDto.cd_ctg_b == '2'}"> selected</c:if>>성분별</option>
@@ -118,7 +166,7 @@
 						<p style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">상품 중분류</p>
 							<c:choose>
 								<c:when test="${boardDto.cd_ctg_b == '1'}">
-									<select id="cd_ctg_m" name="cd_ctg_m">
+									<select id="cd_ctg_ms" disabled>
 										<option value="1" <c:if test="${boardDto.cd_ctg_m == '1'}"> selected</c:if>>혈당/혈행/혈압</option>
 										<option value="2" <c:if test="${boardDto.cd_ctg_m == '2'}"> selected</c:if>>항산화/면역력</option>
 										<option value="3" <c:if test="${boardDto.cd_ctg_m == '3'}"> selected</c:if>>염증/항염</option>
@@ -131,7 +179,7 @@
 									</select>
 								</c:when>
 								<c:when test="${boardDto.cd_ctg_b == '2'}">
-									<select id="cd_ctg_m" name="cd_ctg_m">
+									<select id="cd_ctg_ms" disabled>
 										<option value="1" <c:if test="${boardDto.cd_ctg_m == '1'}"> selected</c:if>>폴리코사놀</option>
 										<option value="2" <c:if test="${boardDto.cd_ctg_m == '2'}"> selected</c:if>>오메가-3</option>
 										<option value="3" <c:if test="${boardDto.cd_ctg_m == '3'}"> selected</c:if>>비타민/미네랄</option>
@@ -144,13 +192,13 @@
 									</select>
 								</c:when>
 								<c:when test="${boardDto.cd_ctg_b == '3'}">
-									<select id="cd_ctg_m" name="cd_ctg_m">
+									<select id="cd_ctg_ms" disabled>
 										<option value="1" <c:if test="${boardDto.cd_ctg_m == '1'}"> selected</c:if>>남성</option>
 										<option value="2" <c:if test="${boardDto.cd_ctg_m == '2'}"> selected</c:if>>여성</option>
 									</select>
 								</c:when>
 								<c:when test="${boardDto.cd_ctg_b == ''}">
-									<select id="cd_ctg_m" name="cd_ctg_m">
+									<select id="cd_ctg_ms" disabled>
 										<option value="0">먼저 대분류를 선택하세요</option>
 									</select>
 								</c:when>
@@ -176,8 +224,8 @@
 				<div style="width: 900px; margin-left: auto; margin-right: auto; text-align: center;width: 100%;">
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="checkout__form__input">
-							<input type="button" value="등록" style="width:100px; font-weight: 500; font-size: 16px;" onclick="javascript:writeProc(3);" />
-							<input type="button" value="목록" style="width:100px; font-weight: 500; font-size: 16px;" onclick="javascript:goList(3);"/>
+							<input type="button" value="등록" style="width:100px; font-weight: 500; font-size: 16px;" onclick="writeProc(3, '${boardDto.cd_ctg_b}', '${boardDto.cd_ctg_m}');" />
+							<input type="button" value="목록" style="width:100px; font-weight: 500; font-size: 16px;" onclick="goList(3);"/>
 						</div>
 					</div>
 				</div>
@@ -198,9 +246,9 @@
 	<%@ include file="/include/common/js.jsp" %>
 	<script>
 	$(document).ready(function() {
-		$('#cd_ctg_b').change(function() {
+		$('#cd_ctg_bs').change(function() {
 			var selected = $(this).val();
-			var select = $('#cd_ctg_m');
+			var select = $('#cd_ctg_ms');
 
 			select.empty(); 
 
