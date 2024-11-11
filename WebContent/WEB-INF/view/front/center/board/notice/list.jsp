@@ -98,52 +98,6 @@
 			(panel.style.display==="block" ) { panel.style.display="none" ; } else {
 			panel.style.display="block" ; } }); } }
 	
-	<!--
-	function toggleAnswer(element) {
-        var askDiv = element.querySelector('.ask'); // .ask 요소를 찾음
-        
-        if (element.classList.contains('open')) {
-            // 'open' 클래스가 있으면, 닫기
-            element.classList.remove('open');
-            askDiv.style.height = '0px';
-        } else {
-            // 'open' 클래스가 없으면, 열기
-            element.classList.add('open');
-            askDiv.style.height = '144px'; // 필요한 높이로 설정
-        }
-    }
-	
-	
-	function toggleContent() {
-	    var reviewForm = document.getElementById('reviewForm');
-	    
-	    // 요소가 존재하는지 확인
-	    if (reviewForm) {
-	        if (reviewForm.classList.contains('visible')) {
-	            reviewForm.classList.remove('visible');
-	        } else {
-	            reviewForm.classList.add('visible');
-	        }
-	    } else {
-	        alert("reviewForm 요소를 찾을 수 없습니다.");
-	    }
-	}
-	
-	<!-- 각 페이지의 기능에 따라 스크립트 추가 -->
-	<!--
-	function toggleContent(seq_bbs) {
-	// 공지글 내용을 담은 tr 요소를 가져옴
-		var contentRow = document.getElementById("content_" + seq_bbs);
-
-	// 현재 display 상태에 따라 토글
-		if (contentRow.style.display === "none") {
-			contentRow.style.display = "table-row"; // 내용을 보여줌
-		}else{
-			contentRow.style.display = "none"; // 내용을 숨김
-			}
-		}
-	-->
-	
 	function download(type, sequence) {
 		
 		
@@ -288,8 +242,6 @@
 		
 		var sSearchWord = document.getElementById("sSearchWord").value;
 		var sSearchKey = document.getElementById("sSearchKey").value;
-		
-		//alert(document.getElementById("sSearchWord").value);
 		
 		boardFrmMain.cd_bbs_type.setAttribute("value", '1');
 		boardFrmMain.ssSearchWord.setAttribute("value", sSearchWord);

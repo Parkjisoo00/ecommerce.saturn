@@ -31,7 +31,6 @@
 				$(this).focus();
 			},
 			onSelect: function(dateText) {
-				//alert("선택된 생년월일: " + dateText); // 날짜 선택 시 자동 처리
 			}
 		});
 
@@ -43,7 +42,6 @@
 			if (value.length === 8) {
 				var formattedDate = value.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
 				$(this).val(formattedDate);
-				//alert("입력된 생년월일: " + $(this).val()); // 자동 처리
 			}
 		});
 	});
@@ -86,19 +84,9 @@
 					alert("이메일/아이디를(@ 포함) 8자리 이상으로 입력하세요!");
 					return false;
 				}
-
-				// var myData = $frm.serialize();
-				// var myData = "email=" + $("#email").val();
-
-				// var myData = {email: "plutomsw@gmail.com", passwd: "123456"};
+				
 				var myData = { email: $("#email").val() };
-				//alert(JSON.stringify(myData));
-
-				/*
-				var myData = "{\"email\": \"plutomsw@gmail.com\", \"passwd\": \"12345678\"}";
-				alert(myData);
-				*/
-
+				
 				$.ajax({
 					type: "POST",
 					async: false,
@@ -107,8 +95,6 @@
 					contentType: "application/json; charset=UTF-8",
 					data: JSON.stringify(myData),
 					success: function (res) {
-						// alert(JSON.stringify(res));
-						// var jsonData = JSON.parse(res);
 						// 중복이 안 될 경우
 						if (res != true) {
 							isDuplicate = false;

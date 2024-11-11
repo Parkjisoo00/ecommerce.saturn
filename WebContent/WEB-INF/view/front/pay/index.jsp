@@ -37,18 +37,11 @@
 							$("input[name=good_mny]").val(data.good_mny);
 							$("input[name=buyr_name]").val(data.buyr_name);
 							$("input[name=site_cd]").val(data.site_cd);
-							
-							//alert(data.pay_url);
-							// $("form[name=form]").action.val(data.pay_url);
-							//alert(data.Ret_URL);
 							$("input[name=Ret_URL]").val(data.Ret_URL);
-							//alert(data.approval_key);
 							$("input[name=approval_key]").val(data.approval_key);
-							//alert(data.AppUrl);
 							$("input[name=AppUrl]").val(data.AppUrl);
 							
 							document.form.submit();
-							//alert("submit");
 						},
 						error: function(data) {
 							alert("[ERROR]결제 연동!");
@@ -470,7 +463,6 @@
 				closeEvent();
 			}
 			else {
-				alert("[" + frm.res_cd.value + "] " + frm.res_msg.value);
 				closeEvent();
 			}
 		}

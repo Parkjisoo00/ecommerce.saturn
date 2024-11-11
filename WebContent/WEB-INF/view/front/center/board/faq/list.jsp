@@ -238,8 +238,6 @@
 			var sSearchWord = document.getElementById("sSearchWord").value;
 			var sSearchKey = document.getElementById("sSearchKey").value;
 			
-			//alert(document.getElementById("sSearchWord").value);
-			
 			boardFrmMain.cd_bbs_type.setAttribute("value", '2');
 			boardFrmMain.ssSearchWord.setAttribute("value", sSearchWord);
 			boardFrmMain.ssSearchKey.setAttribute("value", sSearchKey);
