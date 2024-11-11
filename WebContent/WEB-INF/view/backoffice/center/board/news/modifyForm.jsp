@@ -80,7 +80,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-		고객 센터
+		맞춤 건강 등록
 		</h1>
 	</section>
 	<!-- Main content -->
@@ -89,7 +89,7 @@
 			<div class="col-md-3">
 				<div class="box box-solid">
 					<div class="box-header with-border">
-						<h3 class="box-title">고객 센터</h3>
+						<h3 class="box-title">맞춤 건강 등록</h3>
 					<div class="box-tools">
 						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
 						</button>
@@ -111,7 +111,7 @@
 			<div class="col-md-8">
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title">등록하기</h3>
+						<h3 class="box-title">수정하기</h3>
 					</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -136,9 +136,7 @@
 						<c:if test="${boardDto.file_orig != ''}">
 							<p>저장됬던 파일: ${boardDto.file_orig}</p>
 						</c:if>
-						<c:if test="${boardDto.file_orig != ''}">
-							<a href="javascript:download('BbsNews', ${boardDto.seq_bbs});">[첨부파일 다운로드]</a>
-						</c:if>
+						
 					</div>
 				</div>
 				<!-- /.box-body -->

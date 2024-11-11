@@ -440,7 +440,7 @@
 	<%
 	// <script type="text/javascript" src="https://pay.kcp.co.kr/plugin/payplus_web.jsp"></script>
 	%>
-	<form name="form" action="https://testsmpay.kcp.co.kr/pay/mobileGW.kcp" method="post" accept-charset="utf-8">
+	<form name="form" action="https://testsmpay.kcp.co.kr/pay/mobileGW.kcp" method="post" accept-charset="euc-kr">
 		<input type="hidden" name="ordr_idxx" value="">
 		<input type="hidden" name="good_name" value="">
 		<input type="hidden" name="good_mny" value="">

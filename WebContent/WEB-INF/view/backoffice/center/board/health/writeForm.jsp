@@ -54,7 +54,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-		고객 센터
+		맞춤 건강 등록
 		</h1>
 	</section>
 	<!-- Main content -->

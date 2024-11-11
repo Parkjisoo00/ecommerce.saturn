@@ -110,7 +110,7 @@
 			<div class="col-md-8">
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title">등록하기</h3>
+						<h3 class="box-title">수정하기</h3>
 					</div>
 				<!-- /.box-header -->
 				<div class="box-body">

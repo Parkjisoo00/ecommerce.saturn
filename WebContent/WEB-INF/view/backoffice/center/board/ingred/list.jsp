@@ -88,7 +88,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-		고객 센터
+		맞춤 건강 등록
 		</h1>
 	</section>
 	<!-- Main content -->
@@ -120,7 +120,7 @@
 			<div class="col-md-8">
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title">건강정보</h3>&nbsp;&nbsp;&nbsp;
+						<h3 class="box-title">성분사전</h3>&nbsp;&nbsp;&nbsp;
 						<div class="box-tools pull-right">
 							<div class="has-feedback">
 								<div style="display: flex; align-items: center;">&nbsp;&nbsp;

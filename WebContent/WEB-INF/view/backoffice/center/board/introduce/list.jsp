@@ -88,7 +88,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-		고객 센터
+		소개
 		</h1>
 	</section>
 	<!-- Main content -->
@@ -97,7 +97,7 @@
 			<div class="col-md-3">
 				<div class="box box-solid">
 					<div class="box-header with-border">
-						<h3 class="box-title">고객 센터</h3>
+						<h3 class="box-title">소개</h3>
 						<div class="box-tools">
 							<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
 							</button>
