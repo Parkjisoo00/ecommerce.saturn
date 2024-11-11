@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.backoffice.common.Common;
@@ -66,7 +67,7 @@ public class StatisticsWeb extends Common{
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/console/statistics/index1.web")
+	@RequestMapping(value = "/console/statistics/index1.web", method = RequestMethod.POST)
 	public ModelAndView index1(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -98,7 +99,7 @@ public class StatisticsWeb extends Common{
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/console/statistics/index.web")
+	@RequestMapping(value = "/console/statistics/index.web", method = RequestMethod.POST)
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -128,7 +129,7 @@ public class StatisticsWeb extends Common{
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/console/statistics/index2.web")
+	@RequestMapping(value = "/console/statistics/index2.web", method = RequestMethod.POST)
 	public ModelAndView index2(HttpServletRequest request, HttpServletResponse response, MemberIncomeDto memberIncomeDto) {
 		
 		ModelAndView mav = new ModelAndView();

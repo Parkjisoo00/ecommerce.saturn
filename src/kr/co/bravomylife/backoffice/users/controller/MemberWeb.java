@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.backoffice.common.Common;
@@ -130,7 +131,7 @@ public class MemberWeb extends Common {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/console/users/member/modifyForm.web")
+	@RequestMapping(value = "/console/users/member/modifyForm.web", method = RequestMethod.POST)
 	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
 		ModelAndView mav	= new ModelAndView("redirect:/error.web");
@@ -163,7 +164,7 @@ public class MemberWeb extends Common {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/console/users/member/modifyProc.web")
+	@RequestMapping(value = "/console/users/member/modifyProc.web", method = RequestMethod.POST)
 	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");

@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.backoffice.common.Common;
@@ -81,7 +82,7 @@ public class PasswdWeb extends Common {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/console/manager/passwd/modifyProc.web")
+	@RequestMapping(value = "/console/manager/passwd/modifyProc.web", method = RequestMethod.POST)
 	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, ManagerDto managerDto, String confirmPasswd) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");

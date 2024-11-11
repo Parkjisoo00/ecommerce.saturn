@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header class="main-header">
     <!-- Logo -->
-    <a href="/console/login/main.web" class="logo">
+    <a href="javascript:goMain()" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>관리</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -33,13 +33,13 @@
         <!-- 세션이 있으면 -->
         <c:if test="${not empty sessionScope.SEQ_MNG}">
           <li class="dropdown user user-menu">
-            <a href="/console/myPage/index.web"  title="<%=session.getAttribute("NAME")%>" style="font-weight: bold; font-size: 1.2em;">[마이페이지]</a>
+            <a href="javascript:goMyPage()"  title="<%=session.getAttribute("NAME")%>" style="font-weight: bold; font-size: 1.2em;">[마이페이지]</a>
               <span class="hidden-xs">          
               </span>
             </a>
           </li>
           <li class="dropdown user user-menu">
-            <a href="/console/login/logout.web" class="menuTop" style="font-weight: bold; font-size: 1.2em;">[로그아웃]</a>
+            <a href="javascript:goLogout()" class="menuTop" style="font-weight: bold; font-size: 1.2em;">[로그아웃]</a>
               <span class="hidden-xs">          
               </span>
             </a>
@@ -56,19 +56,19 @@
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
 					<li class="treeview">
-					<a href="#">
+					<a href="">
 						<i class="fa fa-dashboard"></i> <span>사용자 관리</span>
 						<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 						</span>
 					</a>
 					<ul class="treeview-menu">
-						<li class="active"><a href="/console/users/member/list.web"><i class="fa fa-circle-o"></i> 회원 관리</a></li>
-						<li><a href="/console/users/managers/list.web"><i class="fa fa-circle-o"></i> 관리자 관리</a></li>
+						<li class="active"><a href="javascript:goMemberList()"><i class="fa fa-circle-o"></i> 회원 관리</a></li>
+						<li><a href="javascript:goManagersList()"><i class="fa fa-circle-o"></i> 관리자 관리</a></li>
 					</ul>
 					</li>
 					<li class="treeview">
-					<a href="/console/buy/list.web">
+					<a href="javascript:goBuyList()">
 						<i class="fa fa-files-o"></i>
 						<span>주문관리</span>
 						<span class="pull-right-container">
@@ -92,12 +92,12 @@
 						</span>
 					</a>
 					<ul class="treeview-menu">
-						<li><a href="/console/product/list.web"><i class="fa fa-circle-o"></i> 상품 목록</a></li>
-						<li><a href="/console/product/productReg.web"><i class="fa fa-circle-o"></i> 상품 등록</a></li>
+						<li><a href="javascript:goProductList()"><i class="fa fa-circle-o"></i> 상품 목록</a></li>
+						<li><a href="javascript:goProductReg()"><i class="fa fa-circle-o"></i> 상품 등록</a></li>
 					</ul>
 					</li>
 					<li class="treeview">
-					<a href="#">
+					<a href="">
 						<i class="fa fa-fw fa-volume-up"></i> <span>고객 센터 관리</span>
 						<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
@@ -140,7 +140,7 @@
 					 -->
 					</li>
 					<li class="treeview">
-					<a href="#">
+					<a href="">
 						<i class="fa fa-laptop"></i>
 						<span>통계</span>
 						<span class="pull-right-container">
@@ -148,9 +148,9 @@
 						</span>
 					</a>
 					<ul class="treeview-menu">
-						<li><a href="/console/statistics/index.web"><i class="fa fa-circle-o"></i> 회원별 통계</a></li>
-						<li><a href="/console/statistics/index1.web"><i class="fa fa-circle-o"></i> 인기 상품 통계</a></li>
-						<li><a href="/console/statistics/index2.web"><i class="fa fa-circle-o"></i> 수익 통계</a></li>
+						<li><a href="javascript:goStatistics()"><i class="fa fa-circle-o"></i> 회원별 통계</a></li>
+						<li><a href="javascript:goStatistics1()"><i class="fa fa-circle-o"></i> 인기 상품 통계</a></li>
+						<li><a href="javascript:goStatistics2()"><i class="fa fa-circle-o"></i> 수익 통계</a></li>
 					</ul>
 					</li>
 					<li>
@@ -263,3 +263,93 @@
 	<c:if test="${empty sessionScope.SEQ_MNG}">
 	</c:if>
 </span>
+<script>
+function goMain() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/console/login/main.web";
+	frmMain.submit();
+}
+
+function goMyPage() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/console/myPage/index.web";
+	frmMain.submit();
+}
+
+function goLogout() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/console/login/logout.web";
+	frmMain.submit();
+}
+
+function goMemberList() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/console/users/member/list.web";
+	frmMain.submit();
+}
+
+function goManagersList() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/console/users/managers/list.web";
+	frmMain.submit();
+}
+
+function goBuyList() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/console/buy/list.web";
+	frmMain.submit();
+}
+
+function goProductList() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/console/product/list.web";
+	frmMain.submit();
+}
+
+function goProductReg() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/console/product/productReg.web";
+	frmMain.submit();
+}
+
+function goStatistics() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/console/statistics/index.web";
+	frmMain.submit();
+}
+
+function goStatistics1() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/console/statistics/index1.web";
+	frmMain.submit();
+}
+
+function goStatistics2() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/console/statistics/index2.web";
+	frmMain.submit();
+}
+
+</script>

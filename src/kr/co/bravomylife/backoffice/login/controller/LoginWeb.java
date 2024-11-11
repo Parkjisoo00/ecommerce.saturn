@@ -79,7 +79,7 @@ public class LoginWeb extends Common{
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/console/login/logout.web")
+	@RequestMapping(value = "/console/login/logout.web", method = RequestMethod.POST)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");

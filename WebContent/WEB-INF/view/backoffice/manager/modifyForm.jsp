@@ -32,6 +32,13 @@
 		}).open();
 	}	
 	
+	function goMyPage() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/console/myPage/index.web";
+		frmMain.submit();
+	}
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -121,7 +128,7 @@
 					
 						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px; position: relative; top: -20px;">
 							<input type="button" value="수정" class="btn btn-primary" style="width: 150px" onclick="checkModify();" />
-							<input type="button" value="뒤로가기" class="btn btn-primary" style="width: 150px" onclick="javascript:location.href='/console/myPage/index.web';"/>
+							<input type="button" value="뒤로가기" class="btn btn-primary" style="width: 150px" onclick="javascript:goMyPage()"/>
 						</div>
 					
 				</div>

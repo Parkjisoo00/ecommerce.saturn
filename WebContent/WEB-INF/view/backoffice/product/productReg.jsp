@@ -128,7 +128,7 @@
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<form action= "/backoffice/product/productRegProc.web"id="frmMain" method="POST" enctype="multipart/form-data">
+<form id="frmMain" method="POST" enctype="multipart/form-data">
 <input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
 
 <!-- Main content -->

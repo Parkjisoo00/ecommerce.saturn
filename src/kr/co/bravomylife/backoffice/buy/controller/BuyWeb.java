@@ -114,7 +114,7 @@ public class BuyWeb extends Common {
 		return response;
 	}
 	
-	@RequestMapping(value = "/console/buy/view.web")
+	@RequestMapping(value = "/console/buy/view.web", method = RequestMethod.POST)
 	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, BuyDto buyDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -217,7 +217,7 @@ public class BuyWeb extends Common {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/console/buy/modifyForm.web")
+	@RequestMapping(value = "/console/buy/modifyForm.web", method = RequestMethod.POST)
 	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, BuyDto buyDto) {
 		
 		ModelAndView mav	= new ModelAndView("redirect:/error.web");
@@ -246,7 +246,7 @@ public class BuyWeb extends Common {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/console/buy/modifyProc.web")
+	@RequestMapping(value = "/console/buy/modifyProc.web", method = RequestMethod.POST)
 	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, BuyDto buyDto, @RequestParam("seq_buy_mst") List<Integer> seq_buy_mst) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");

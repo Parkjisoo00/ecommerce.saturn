@@ -17,9 +17,9 @@
 	<script type="text/javascript" src="/js/backoffice.js"></script>
 	<style>
 	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    padding: 25px;
-    line-height: 1.42857143;
-    vertical-align: top;
+	padding: 25px;
+	line-height: 1.42857143;
+	vertical-align: top;
 	</style>
 	<script>
 
@@ -75,8 +75,15 @@ function checkModify() {
 		frmMain.action = "/console/manager/passwd/modifyProc.web";
 		frmMain.submit();
 		}
-	}
+}
 	
+function goMyPage() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.action = "/console/myPage/index.web";
+	frmMain.submit();
+}
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -140,12 +147,10 @@ function checkModify() {
 					<br>
 					<br>
 					<br>
-					
-						<div class="btn-group" style="display: flex; justify-content: center; gap: 10px; position: relative; top: -20px;">
-							<input type="button" value="수정" class="btn btn-primary" style="width: 150px" onclick="checkModify();" />
-							<input type="button" value="뒤로가기" class="btn btn-primary" style="width: 150px" onclick="javascript:location.href='/console/myPage/index.web';"/>
-						</div>
-					
+					<div class="btn-group" style="display: flex; justify-content: center; gap: 10px; position: relative; top: -20px;">
+						<input type="button" value="수정" class="btn btn-primary" style="width: 150px" onclick="checkModify();" />
+						<input type="button" value="뒤로가기" class="btn btn-primary" style="width: 150px" onclick="javascript:goMyPage()"/>
+					</div>
 				</div>
 			</div>
 		</div>

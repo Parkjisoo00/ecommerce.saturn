@@ -87,7 +87,7 @@
                </tr>
            	</table>
            	<div class="modal-footer" style="text-align: center; padding-top: 10px; padding-bottom: 10px;">
-			    <input type="submit" value="수정 하기" class="btn btn-default" data-dismiss="modal" />
+			    <input type="button" value="수정 하기" class="btn btn-default" data-dismiss="modal" />
 			    <input type="button" value="목록" class="btn btn-primary" onclick="location.href='/console/users/managers/list.web';" />
 			</div>
           	</div>

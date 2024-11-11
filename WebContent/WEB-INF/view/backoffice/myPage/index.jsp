@@ -18,11 +18,12 @@
 	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 	<script type="text/javascript" src="/js/backoffice.js"></script>
 	<style>
+	
 	.content-header>h1 {
-    font-size: 24px;
-    text-align: center;
-    padding-top: 50px;
-}
+	font-size: 24px;
+	text-align: center;
+	padding-top: 50px;
+	}
 	</style>
 	<script>
 	
@@ -32,6 +33,22 @@
 		
 		frmMain.cd_bbs_type.setAttribute("value", value);
 		frmMain.action = "/console/center/board/list.web";
+		frmMain.submit();
+	}
+	
+	function goModifyForm() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/console/manager/modifyForm.web";
+		frmMain.submit();
+	}
+	
+	function goPasswdModifyForm() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/console/manager/passwd/modifyForm.web";
 		frmMain.submit();
 	}
 	
@@ -68,8 +85,8 @@
 					</div>
 					<div class="box-body no-padding">
 						<ul class="nav nav-pills nav-stacked">
-							<li class="active"><a href="/console/manager/modifyForm.web"><i class="fa fa-fw fa-user"></i> 개인정보 확인/수정</a>
-							<li class="active"><a href="/console/manager/passwd/modifyForm.web"><i class="fa fa-fw fa-user"></i> 비밀번호 변경</a>
+							<li class="active"><a href="javascript:goModifyForm()"><i class="fa fa-fw fa-user"></i> 개인정보 확인/수정</a>
+							<li class="active"><a href="javascript:goPasswdModifyForm()"><i class="fa fa-fw fa-user"></i> 비밀번호 변경</a>
 							</li>
 						</ul>
 					</div>

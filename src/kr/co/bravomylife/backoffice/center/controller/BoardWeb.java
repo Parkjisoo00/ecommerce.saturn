@@ -180,7 +180,7 @@ public class BoardWeb extends Common{
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/console/center/board/remove.web")
+	@RequestMapping(value = "/console/center/board/remove.web", method = RequestMethod.POST)
 	public ModelAndView remove(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -217,7 +217,7 @@ public class BoardWeb extends Common{
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/console/center/board/modifyForm.web")
+	@RequestMapping(value = "/console/center/board/modifyForm.web", method = RequestMethod.POST)
 	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -278,7 +278,7 @@ public class BoardWeb extends Common{
 	 * <p>EXAMPLE:</p>
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes", "unused" })
-	@RequestMapping(value = "/console/center/board/modifyProc.web")
+	@RequestMapping(value = "/console/center/board/modifyProc.web", method = RequestMethod.POST)
 	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto,FileUploadDto fileUploadDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -412,7 +412,7 @@ public class BoardWeb extends Common{
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/console/center/board/writeForm.web")
+	@RequestMapping(value = "/console/center/board/writeForm.web", method = RequestMethod.POST)
 	public ModelAndView writeForm(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -471,7 +471,7 @@ public class BoardWeb extends Common{
 	 * <p>EXAMPLE:</p>
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes", "unused" })
-	@RequestMapping(value = "/console/center/board/writeProc.web")
+	@RequestMapping(value = "/console/center/board/writeProc.web", method = RequestMethod.POST)
 	public ModelAndView writeProc(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto, FileUploadDto fileUploadDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -793,7 +793,7 @@ public class BoardWeb extends Common{
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/console/center/board/view.web")
+	@RequestMapping(value = "/console/center/board/view.web", method = RequestMethod.POST)
 	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");

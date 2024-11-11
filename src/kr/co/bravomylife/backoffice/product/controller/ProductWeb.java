@@ -33,6 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bravomylife.backoffice.common.dto.PagingDto;
@@ -75,10 +76,8 @@ public class ProductWeb {
 	 * <p>EXAMPLE:</p>
 	 */
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value = "/console/product/modifyProc.web")
-	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response
-																, ProductDto productDto
-																, FileUploadDto fileUploadDto) {
+	@RequestMapping(value = "/console/product/modifyProc.web", method = RequestMethod.POST)
+	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, ProductDto productDto, FileUploadDto fileUploadDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
@@ -177,7 +176,7 @@ public class ProductWeb {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/console/product/modifyForm.web")
+	@RequestMapping(value = "/console/product/modifyForm.web", method = RequestMethod.POST)
 	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, ProductDto productDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -210,7 +209,7 @@ public class ProductWeb {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/console/product/out.web")
+	@RequestMapping(value = "/console/product/out.web", method = RequestMethod.POST)
 	public ModelAndView out(HttpServletRequest request, HttpServletResponse response, ProductDto productDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -249,7 +248,7 @@ public class ProductWeb {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/console/product/re.web")
+	@RequestMapping(value = "/console/product/re.web", method = RequestMethod.POST)
 	public ModelAndView re(HttpServletRequest request, HttpServletResponse response, ProductDto productDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -288,7 +287,7 @@ public class ProductWeb {
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/console/product/stop.web")
+	@RequestMapping(value = "/console/product/stop.web", method = RequestMethod.POST)
 	public ModelAndView stop(HttpServletRequest request, HttpServletResponse response, ProductDto productDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -327,7 +326,7 @@ public class ProductWeb {
 	 * <p>EXAMPLE:</p>
 	 */
 	
-	@RequestMapping(value = "/console/product/view.web")
+	@RequestMapping(value = "/console/product/view.web", method = RequestMethod.POST)
 	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, ProductDto productDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -394,8 +393,8 @@ public class ProductWeb {
 	 */
 	
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value = "/backoffice/product/productRegProc.web")
-	public ModelAndView writeProc(HttpServletRequest request, HttpServletResponse response, ProductDto productDto, FileUploadDto fileUploadDto) {
+	@RequestMapping(value = "/backoffice/product/productRegProc.web", method = RequestMethod.POST)
+	public ModelAndView productRegProc(HttpServletRequest request, HttpServletResponse response, ProductDto productDto, FileUploadDto fileUploadDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
@@ -463,7 +462,7 @@ public class ProductWeb {
 				
 				
 				//상품 DTO에 파일 정보 설정
-				 
+				
 				//상품 등록 처리
 				if (productSrvc.insert(productDto)) {
 					request.setAttribute("script"	, "alert('등록되었습니다.');");
@@ -472,12 +471,12 @@ public class ProductWeb {
 				}
 				else {
 					request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
-					request.setAttribute("redirect"	, "backoffice/product/productReg.web");
+					request.setAttribute("redirect"	, "/console/product/productReg.web");
 				}
 			}
-			else {
+			else{
 				request.setAttribute("script"	, "alert('상품이미지를 입력해주세요!');");
-				request.setAttribute("redirect"	, "backoffice/product/productReg.web");
+				request.setAttribute("redirect"	, "/console/product/productReg.web");
 			}
 			
 			mav.setViewName("forward:/servlet/result.web");
@@ -502,7 +501,7 @@ public class ProductWeb {
 	 */
 	
 	@RequestMapping(value = "/console/product/productReg.web")
-	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView productReg(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		

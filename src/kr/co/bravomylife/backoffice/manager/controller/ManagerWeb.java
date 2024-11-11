@@ -35,6 +35,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -78,7 +79,7 @@ public class ManagerWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	
-	@RequestMapping(value = "/console/manager/modifyProc.web")
+	@RequestMapping(value = "/console/manager/modifyProc.web", method = RequestMethod.POST)
 	public ModelAndView modifyProc(HttpServletRequest request, HttpServletResponse response, ManagerDto managerDto) {
 
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -120,7 +121,7 @@ public class ManagerWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	
-	@RequestMapping(value = "/console/manager/modifyForm.web")
+	@RequestMapping(value = "/console/manager/modifyForm.web", method = RequestMethod.POST)
 	public ModelAndView modifyForm(HttpServletRequest request, HttpServletResponse response, ManagerDto managerDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -161,16 +162,13 @@ public class ManagerWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 */
 	 
-	@RequestMapping(value = "/console/manager/checkDuplicate.json", headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
+	@RequestMapping(value = "/console/manager/checkDuplicate.json", method = RequestMethod.POST, headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
 	public @ResponseBody boolean checkDuplicate(@RequestBody ManagerDto managerDto) {
 		
 		boolean isDuplicate = true;
 		
 		try {
-			
 
-			
-			
 			int count = managerSrvc.selectDuplicate(managerDto);
 			
 			if (count == 0) isDuplicate = false;
@@ -183,7 +181,7 @@ public class ManagerWeb extends Common {
 		return isDuplicate;
 	}
 	
-	@RequestMapping(value = "/console/manager/registerForm.web")
+	@RequestMapping(value = "/console/manager/registerForm.web", method = RequestMethod.POST)
 	public ModelAndView registerForm(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
@@ -199,7 +197,7 @@ public class ManagerWeb extends Common {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/console/manager/registerProc.web")
+	@RequestMapping(value = "/console/manager/registerProc.web", method = RequestMethod.POST)
 	public ModelAndView registerProc(HttpServletRequest request, HttpServletResponse response, ManagerDto managerDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");

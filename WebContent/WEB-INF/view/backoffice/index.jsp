@@ -21,6 +21,14 @@
 				document.getElementById("rememberMe").checked = true;
 			}
 		}
+		
+		function goRegisterForm() {
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.action = "/console/manager/registerForm.web";
+			frmMain.submit();
+		}
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -60,8 +68,8 @@
 							</div>
 						</div>
 							<div class="box-footer">
-								<input type="submit" value="로그인" class="btn btn-info pull-right" id="loginId" onClick="checkLogin();"/>
-								<a href="/console/manager/registerForm.web" class="btn btn-info pull-right" style="margin-right: 10px;">회원 가입</a>
+								<input type="button" value="로그인" class="btn btn-info pull-right" id="loginId" onClick="checkLogin();"/>
+								<a href="javascript:goRegisterForm()" class="btn btn-info pull-right" style="margin-right: 10px;">회원 가입</a>
 								
 							</div>
 					</form>
