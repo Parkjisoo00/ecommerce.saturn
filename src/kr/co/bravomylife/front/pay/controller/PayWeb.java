@@ -387,8 +387,33 @@ public class PayWeb extends Common {
 			String merchantId			= "himedia";
 			String key					= "ac805b30517f4fd08e3e80490e559f8e";
 			String orderNumber			= "HM-" + yyyyMMddHHmmss;
+			
+			// 여러 상품의 총 금액 계산
+			int totalAmount = 0;
+			int i = 0;
+
+			// 반복문을 통해 각 상품의 가격과 수량을 곱한 총합을 계산
+			while (param.containsKey("buyList[" + i + "].price") && param.containsKey("buyList[" + i + "].count")) {
+				String priceStr = param.get("buyList[" + i + "].price");
+				String countStr = param.get("buyList[" + i + "].count");
+
+				// 가격과 수량이 null이 아닌 경우에만 계산
+				if (priceStr != null && !priceStr.isEmpty() && countStr != null && !countStr.isEmpty()) {
+					try {
+						int price = Integer.parseInt(priceStr);
+						int count = Integer.parseInt(countStr);
+						totalAmount += price * count;
+					} catch (NumberFormatException e) {
+						logger.warn("숫자로 변환할 수 없는 값이 발견되었습니다: " + priceStr + ", " + countStr);
+					}
+				}
+				i++; // 다음 상품으로 이동
+			}
+
+			// 계산된 총 금액을 문자열로 변환하여 amount에 저장
+			String amount 				= Integer.toString(totalAmount);
 			//String amount				= "100";
-			String amount			= Integer.toString(Integer.parseInt(param.get("buyList[0].price")) * Integer.parseInt(param.get("buyList[0].count")));
+			//String amount				= Integer.toString(Integer.parseInt(param.get("buyList[0].price")) * Integer.parseInt(param.get("buyList[0].count")));
 																			// 금액: param.get("amount");
 			String quota				= "0";								// 할부: param.get("quota")
 			String itemName				= param.get("buyList[0].sle_nm");	// 판매 상품명: param.get("itemName");
