@@ -6,6 +6,50 @@
 <head>
 	<%@ include file="/include/common/header.jsp" %>
 	<script>
+		function goTypeTx(value) {
+			
+			var first_cd_ctgDesktop		= document.getElementById("first_cd_ctg").value;
+			var second_cd_ctgDesktop	= document.getElementById("second_cd_ctg").value;
+			
+			var first_cd_ctgAndroid		= document.getElementById("first_cd_ctg_android").value;
+			var second_cd_ctgAndroid	= document.getElementById("second_cd_ctg_android").value;
+			
+			var first_cd_ctg;
+			var second_cd_ctg
+			
+			if (value == 'pc') {
+				
+				first_cd_ctg	= 	first_cd_ctgDesktop
+				second_cd_ctg	= 	second_cd_ctgDesktop
+			}
+			else if (value == 'mobile') {	
+				first_cd_ctg	= 	first_cd_ctgAndroid
+				second_cd_ctg	= 	second_cd_ctgAndroid
+			}	
+			
+			var searchWordDesktop = document.getElementById("_searchWord_desktop").value;
+			var searchWordAndroid = document.getElementById("_searchWord_android").value;
+			
+			var _searchWord;
+			
+			if (value == 'pc') {
+				_searchWord = searchWordDesktop;
+			}
+			else if (value == 'mobile') {
+				_searchWord = searchWordAndroid;
+			}
+			
+			var frmMain = document.getElementById("frmMain");
+			
+			frmMain.cd_ctg_b.setAttribute("value", first_cd_ctg);
+			frmMain.cd_ctg_m.setAttribute("value", second_cd_ctg);
+			frmMain.searchWord.setAttribute("value", _searchWord);
+			
+			frmMain.type.setAttribute("value", value);
+			frmMain.action = "/front/sale/total_list.web";
+			frmMain.submit();
+		}
+		
 		function goTypeT(value, value2, value3, value4, value5) {
 			
 			var frmMain = document.getElementById("frmMain");
@@ -249,6 +293,7 @@
 <input type="hidden" name="prd_type"		id="prd_type"/>
 <input type="hidden" name="filter"			id="filter"/>
 <input type="hidden" name="type"			id="type"/>
+<input type="hidden" name="searchWord"		id="searchWord"		value="${paging.searchWord}"/>
 <input type="hidden" name="currentPage"		id="currentPage"		value="${paging.currentPage}"/>
 	<!-- Page Preloder -->
 	<div id="preloder">
