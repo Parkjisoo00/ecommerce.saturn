@@ -333,21 +333,12 @@
 			, mst.MBR_NM
 			, mst.GENDER
 			, mst.PHONE
-			, addr.POST
-			, addr.ADDR1
-			, addr.ADDR2
-			, addr.SEQ_MBR_ADDR
 			, mst.TOTAL_POINT
 			, TO_CHAR(SYSDATE + 3, 'MM"월"" "DD"일"') dt_reg
 		FROM
 			TB_MBR_MST mst
-		LEFT JOIN
-			TB_MBR_ADDR addr
-		ON
-			mst.SEQ_MBR = addr.SEQ_MBR
 		WHERE
 			mst.SEQ_MBR = #{seq_mbr}
-			AND addr.FLG_DEFAULT = 'Y'
 	</select>
 	
 	<select id="selectBuyMst" parameterType="buyMasterDto" resultType="buyMasterDto">
