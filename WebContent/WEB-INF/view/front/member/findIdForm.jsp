@@ -57,31 +57,6 @@
 							</div>
 							<div class="col-lg-12 col-md-6 col-sm-6">
 								<div class="checkout__form__input">
-									<p>휴대폰 번호</p>
-									<div style="display: flex; gap: 5px;">
-										<input type="text" id="phone1" name="phone1"
-											maxlength="3" required
-											oninput="this.value = this.value.replace(/[^0-9.]/g, '')" autocomplete="off"/>
-										-
-										<input type="text" id="phone2" name="phone2"
-											maxlength="4" required
-											oninput="this.value = this.value.replace(/[^0-9.]/g, '')" autocomplete="off"/>
-										-
-										<input type="text" id="phone3" name="phone3"
-											maxlength="4" required
-											oninput="this.value = this.value.replace(/[^0-9.]/g, '')" autocomplete="off"/>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-12 col-md-6 col-sm-6">
-								<div class="checkout__form__input">
-									<input type="button" value="휴대폰 인증"id = ""/>
-								</div>
-								<hr style="border: 1px solid #ccc; margin: 0;">
-								<br>
-							</div>
-							<div class="col-lg-12 col-md-6 col-sm-6">
-								<div class="checkout__form__input">
 									<input type="button" onclick="findIdResult();" value="아이디 찾기" id = "findId"/>
 									<span>${findId.email}</span>
 								</div>
