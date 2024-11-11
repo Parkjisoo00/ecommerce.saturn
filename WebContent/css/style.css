@@ -32,6 +32,90 @@
 /*----------------------------------------*/
 /* mypage
 /*----------------------------------------*/
+
+.categories__text_2 p {
+	margin-bottom: 10px;
+}
+
+.categories__text_2 a {
+	font-size: 14px;
+	color: #111111;
+	text-transform: uppercase;
+	font-weight: 600;
+	position: relative;
+	padding: 0 0 3px;
+	display: inline-block;
+	position: absolute;
+	bottom: -180px;
+	left: 135px;
+}
+
+.categories__text_2 a:after {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 2px;
+	width: 100%;
+	background: #ca1515;
+	content: "";
+}
+
+.categories__text_3 p {
+	margin-bottom: 10px;
+}
+
+.categories__text_3 a {
+	font-size: 14px;
+	color: #111111;
+	text-transform: uppercase;
+	font-weight: 600;
+	position: relative;
+	padding: 0 0 3px;
+	display: inline-block;
+	position: absolute;
+	bottom: -180px;
+	left: 147px;
+}
+
+.categories__text_3 a:after {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 2px;
+	width: 100%;
+	background: #ca1515;
+	content: "";
+}
+
+.categories__text_4 p {
+	margin-bottom: 10px;
+}
+
+.categories__text_4 a {
+	font-size: 14px;
+	color: #111111;
+	text-transform: uppercase;
+	font-weight: 600;
+	position: relative;
+	padding: 0 0 3px;
+	display: inline-block;
+	position: absolute;
+	bottom: -180px;
+	left: 170px;
+}
+
+.categories__text_4 a:after {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 2px;
+	width: 100%;
+	background: #ca1515;
+	content: "";
+}
+/*----------------------------------------*/
+/* mypage
+/*----------------------------------------*/
 .order-total-status{
 	overflow: hidden;
 	padding: 2px 0 2px 20px;
@@ -5047,6 +5131,45 @@ ol {
 
 
 @media only screen and (max-width: 767px) {
+	
+	.categories__text_2 a {
+	font-size: 14px;
+	color: #111111;
+	text-transform: uppercase;
+	font-weight: 600;
+	position: relative;
+	padding: 0 0 3px;
+	display: inline-block;
+	position: absolute;
+	bottom: -140px;
+	left: 112px;
+}
+
+	.categories__text_3 a {
+	font-size: 14px;
+	color: #111111;
+	text-transform: uppercase;
+	font-weight: 600;
+	position: relative;
+	padding: 0 0 3px;
+	display: inline-block;
+	position: absolute;
+	bottom: -140px;
+	left: 112px;
+}
+
+	.categories__text_4 a {
+	font-size: 14px;
+	color: #111111;
+	text-transform: uppercase;
+	font-weight: 600;
+	position: relative;
+	padding: 0 0 3px;
+	display: inline-block;
+	position: absolute;
+	bottom: -129px;
+	left: 112px;
+}
 	
 	.my-survey-div{
 	-webkit-box-flex: 1;

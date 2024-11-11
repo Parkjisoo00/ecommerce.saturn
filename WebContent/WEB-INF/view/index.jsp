@@ -31,6 +31,21 @@
 		position: relative;
 		z-index: 2; /* 텍스트를 덮어씌운 반투명 레이어 위에 표시 */
 	}
+	
+	.categories__text_2 {
+		position: relative;
+		z-index: 2; /* 텍스트를 덮어씌운 반투명 레이어 위에 표시 */
+	}
+	
+	.categories__text_3 {
+		position: relative;
+		z-index: 2; /* 텍스트를 덮어씌운 반투명 레이어 위에 표시 */
+	}
+	
+	.categories__text_4 {
+		position: relative;
+		z-index: 2; /* 텍스트를 덮어씌운 반투명 레이어 위에 표시 */
+	}
 		
 	
 	</style>
@@ -266,32 +281,38 @@
 					<div class="row">
 						
 						<div class="col-lg-4 col-md-6 col-sm-6 p-0" >
-							<div class="categories__item set-bg" style=" padding-left: 0px;height: 320px;"
+							<div class="categories__item set-bg" style=" padding-left: 0px;height: 320px;align-items: start;display: flex;flex-direction: column;"
 								data-setbg="img/categories/func9.png">
-								<div class="categories__text">
-									<h4>기능별 건강기능식품 조회</h4>
-									<p>지금 당신에게 필요한 건강 솔루션은?</p>
-									<a href="javascript:goTypeF('', '', '', '', '', '');">바로가기</a>
+								<div class="categories__text" style="margin-top: 70px; margin-left: auto;margin-right: auto;">
+									<h4 style="margin-bottom: 15px;">기능별 건강기능식품 조회</h4>
+								</div>
+								<div class="categories__text_2" style="margin-left: auto;margin-right: auto;">
+									<p style="font-weight: bold;">지금 당신에게 필요한 맞춤형 건강 솔루션은?</p>
+									<a  href="javascript:goTypeF('', '', '', '', '', '');">바로가기</a>
 								</div>
 							</div>
 						</div>
 
 						<div class="col-lg-4 col-md-6 col-sm-6 p-0">
-							<div class="categories__item set-bg" style=" padding-left: 0px;height: 320px;"
-								data-setbg="img/categories/func10.png">
-								<div class="categories__text">
-									<h4>성분별 건강기능식품 조회</h4>
-									<p>필요한 영양소를 한눈에! 성분별 영양제 가이드</p>
+							<div class="categories__item set-bg" style=" padding-left: 0px;height: 320px;align-items: start;display: flex;flex-direction: column;"								
+    							data-setbg="img/categories/func10.png">
+								<div class="categories__text" style="margin-top: 70px;margin-left: auto;margin-right: auto;">
+									<h4 style="margin-bottom: 15px;">성분별 건강기능식품 조회</h4>
+								</div>
+								<div class="categories__text_3" style="margin-left: auto;margin-right: auto;">
+									<p style="font-weight: bold;">필요한 영양소를 한눈에! 성분별 영양제 가이드</p>
 									<a href="javascript:goTypeI('', '', '', '', '', '');">바로가기</a>
 								</div>
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-6 col-sm-6 p-0">
-							<div class="categories__item set-bg" style=" padding-left: 0px;height: 320px;"
+							<div class="categories__item set-bg" style=" padding-left: 0px;height: 320px;align-items: start;display: flex;flex-direction: column;"								
 								data-setbg="img/categories/func11.png">
-								<div class="categories__text">
-									<h4>대상별 건강기능식품 조회</h4>
-									<p>남성과 여성, 당신의 몸에 맞춘 영양제 건강의 시작</p>
+								<div class="categories__text" style="margin-top: 70px;margin-left: auto;margin-right: auto;">
+									<h4 style="margin-bottom: 15px;">대상별 건강기능식품 조회</h4>
+								</div>
+								<div class="categories__text_4" style="margin-left: auto;margin-right: auto;">
+									<p style="font-weight: bold;">남성과 여성, 당신의 몸에 맞춘 영양제 건강의 시작</p>
 									<a href="javascript:goTypeG('', '', '', '', '', '');">바로가기</a>
 								</div>
 							</div>
