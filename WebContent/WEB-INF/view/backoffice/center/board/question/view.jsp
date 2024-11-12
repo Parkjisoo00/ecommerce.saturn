@@ -215,7 +215,7 @@
 						<c:if test="${boardDto.seq_reply == 0}">
 							<a href="/console/center/board/writeForm.web?cd_bbs_type=3&seq_bbs=${boardDto.seq_bbs}" style="padding: 6px 12px;
 							text-decoration: none;color: #ffffff;background-color: #3c8dbc;border: 1px solid #007BFF;border-radius: 4px;
-							font-size: 14px;cursor: pointer;text-align:center">답변 등록</a>
+							font-size: 14px;cursor: pointer;text-align:center;display: inline-block;margin-top: 1px; ">답변 등록</a>
 						</c:if>
 						<c:if test="${boardDto.seq_reply > 0}">
 							
