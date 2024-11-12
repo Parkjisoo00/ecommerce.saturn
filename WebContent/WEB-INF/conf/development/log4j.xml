@@ -27,7 +27,7 @@
 	
 	<!-- 2-1. This Application Loggers -->
 	<logger name="kr.co.bravomylife">
-		<level value="info" />
+		<level value="debug" />
 		<appender-ref ref="KR.CO.BRAVOMYLIFE" />
 	</logger>	
 	<!-- 2-2. Other 3rdparty Loggers -->
