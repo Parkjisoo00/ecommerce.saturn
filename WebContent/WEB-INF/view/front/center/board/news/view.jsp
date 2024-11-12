@@ -170,9 +170,7 @@
 						<br />
 						<br />
 						<br />
-						<br />
-						<br />
-						<br />
+
 							
 						<div class="blog__details__item__title">
 							<span class="tip">게시글 제목</span>
@@ -187,8 +185,8 @@
 			</div>
 			<div class="blog__details__quote">
 			<div class="icon"><i class="fa fa-quote-left"></i></div>
+				<img src="/img/news/${boardDto.file_save}" alt="" style="margin-top: 100px;" /><br/><br/><br/><br/>
 				<p>${boardDto.content}</p>
-				<img src="/img/news/${boardDto.file_save}" alt="" style="margin-top: 100px;" />
 			</div>
 			<br />
 			<br />
