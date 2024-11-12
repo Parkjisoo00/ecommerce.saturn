@@ -5,35 +5,35 @@
 			<div class="col-five p-0">
 				<div class="instagram__item set-bg" data-setbg="/img/footerpic/old5.png">
 					<div class="instagram__text">
-						<a>임시</a>
+						<a>건강</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-five p-0">
 				<div class="instagram__item set-bg" data-setbg="/img/footerpic/old4.png">
 					<div class="instagram__text">
-						<a>임시</a>
+						<a>행복</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-five p-0">
 				<div class="instagram__item set-bg" data-setbg="/img/footerpic/old3.png">
 					<div class="instagram__text">
-						<a>임시</a>
+						<a>긍정</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-five p-0">
 				<div class="instagram__item set-bg" data-setbg="/img/footerpic/old2.png">
 					<div class="instagram__text">
-						<a>임시</a>
+						<a>멋진</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-five p-0">
 				<div class="instagram__item set-bg" data-setbg="/img/footerpic/old1.png">
 					<div class="instagram__text">
-						<a>임시</a>
+						<a>장수</a>
 					</div>
 				</div>
 			</div>
