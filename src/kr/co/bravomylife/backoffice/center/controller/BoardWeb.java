@@ -412,7 +412,7 @@ public class BoardWeb extends Common{
 	 * <p>IMPORTANT:</p>
 	 * <p>EXAMPLE:</p>
 	 */
-	@RequestMapping(value = "/console/center/board/writeForm.web", method = RequestMethod.POST)
+	@RequestMapping(value = "/console/center/board/writeForm.web")
 	public ModelAndView writeForm(HttpServletRequest request, HttpServletResponse response, BoardDto boardDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");

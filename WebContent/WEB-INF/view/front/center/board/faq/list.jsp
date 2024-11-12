@@ -107,7 +107,7 @@
 		
 		function goPage(value) {
 			
-			var frmMain = document.getElementById("frmMain");
+			var frmMain = document.getElementById("boardFrmMain");
 			
 			document.getElementById("currentPage").value = value;
 			
@@ -132,7 +132,7 @@
 		function download(type, sequence) {
 			
 			
-			var frmMain = document.getElementById("frmMain");
+			var frmMain = document.getElementById("boardFrmMain");
 			
 			frmMain.type.setAttribute("value", type);
 			frmMain.sequence.setAttribute("value", sequence);

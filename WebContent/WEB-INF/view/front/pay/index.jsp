@@ -447,7 +447,7 @@
 		<input type="hidden" name="pay_method" value="CARD">
 		<input type="hidden" name="currency" value="410">
 		<input type="hidden" name="escw_used" value="N">
-		<input type="hidden" name="AppUrl" value="testApp://testURL">
+		<input type="hidden" name="AppUrl" value="testApp://kr.co.himedia.ecommerce.buyer.activity.WebViewActivity">
 	</form>
 </c:if>
 

@@ -101,7 +101,7 @@
 	function download(type, sequence) {
 		
 		
-		var frmMain = document.getElementById("frmMain");
+		var frmMain = document.getElementById("boardFrmMain");
 		
 		frmMain.type.setAttribute("value", type);
 		frmMain.sequence.setAttribute("value", sequence);
@@ -139,7 +139,7 @@
 	
 	function goPage(value) {
 		
-		var frmMain = document.getElementById("frmMain");
+		var frmMain = document.getElementById("boardFrmMain");
 		
 		document.getElementById("currentPage").value = value;
 		
@@ -262,6 +262,8 @@
 
 <body>
 <form id="boardFrmMain" method="POST">
+<input type="hidden" id="type"		name="type" />
+<input type="hidden" id="sequence"	name="sequence" />
 <input type="hidden" name="cd_bbs_type" 	id="cd_bbs_type" value="${paging.cd_bbs_type}" />
 <input type="hidden" name="currentPage" 	id="currentPage" value="${paging.currentPage}" />
 <input type="hidden" name="sSearchKey"		id="ssSearchKey" />
