@@ -107,8 +107,7 @@
 					<div class="form-group">
 					<div class="box-body">
 						<label>성명 * </label>
-						<input type="text" id="mng_nm" name="mng_nm" required
-											style="width: 100%;" autocomplete="off"/>
+						<input type="text" id="mng_nm" name="mng_nm" required style="width: 25%;" autocomplete="off"/>
 					</div>
 					</div>
 					<div class="form-group">
