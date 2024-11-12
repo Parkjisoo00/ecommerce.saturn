@@ -163,7 +163,7 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header with-border">
 							<h3 class="box-title">매출과 원가를 통한 판매 수익 추이</h3>
@@ -180,7 +180,7 @@
 				<div class="col-md-6">
 					<div class="box box-primary">
 						<div class="box-body chart-responsive">
-							<div class="chart" id="linechart_material" style="height: 340px;"></div>
+							<div class="chart" id="linechart_material" style="height: 400px;"></div>
 						</div>
 					</div>
 				</div>
