@@ -1031,7 +1031,7 @@ public class MemberWeb extends Common {
 	 * <p>EXAMPLE:</p>
 	 **/
 	@SuppressWarnings("deprecation")
-	@RequestMapping(value = "/front/member/checkEmail.json", method = RequestMethod.POST, headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
+	@RequestMapping(value = "/front/member/checkEmail.json", headers = {"content-type=application/json; charset=UTF-8", "accept=application/json"}, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
 	public @ResponseBody boolean checkEmail(@RequestBody MemberDto memberDto) {
 		
 		boolean isDuplicate = true;
