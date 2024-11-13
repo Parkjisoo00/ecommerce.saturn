@@ -115,17 +115,22 @@
 		FROM
 			(
 			SELECT
-				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY FLG_TOP, FLG_REPLY DESC, DT_REG DESC) rnum
-				, SEQ_BBS
-				, (SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = TB_BBS.SEQ_BBS) seq_reply
-				, TITLE
-				, DECODE(CD_CTG, 1, '가입 및 탈퇴', 2, '상품', 3, '구매', 4, '결제', 5, '배송', 6, '환불', 9, '기타' ) CTG_NM
-				, FLG_TOP
-				, REGISTER
-				, TO_CHAR(DT_REG, 'YYYY-MM-DD') dt_reg
-				, READED
+				/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY bbs.FLG_TOP, bbs.FLG_REPLY DESC, bbs.DT_REG DESC) rnum,
+				bbs.SEQ_BBS,
+				(SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = bbs.SEQ_BBS) AS seq_reply,
+				bbs.TITLE,
+				DECODE(bbs.CD_CTG, 1, '가입 및 탈퇴', 2, '상품', 3, '구매', 4, '결제', 5, '배송', 6, '환불', 9, '기타') AS CTG_NM,
+				bbs.FLG_TOP,
+				bbs.REGISTER,
+				TO_CHAR(bbs.DT_REG, 'YYYY-MM-DD') AS dt_reg,
+				bbs.READED,
+				mst.MBR_NM
 			FROM
-				TB_BBS
+				TB_BBS bbs
+			LEFT JOIN
+				TB_MBR_MST mst
+			ON
+				bbs.REGISTER = mst.SEQ_MBR
 			WHERE
 				<include refid="where" />
 			)

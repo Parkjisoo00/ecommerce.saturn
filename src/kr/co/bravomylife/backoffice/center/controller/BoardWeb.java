@@ -25,6 +25,8 @@ package kr.co.bravomylife.backoffice.center.controller;
 import java.io.File;
 import java.util.Hashtable;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Properties;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -46,10 +48,12 @@ import kr.co.bravomylife.backoffice.common.Common;
 import kr.co.bravomylife.backoffice.common.component.SessionCmpn;
 import kr.co.bravomylife.backoffice.common.dto.PagingDto;
 import kr.co.bravomylife.backoffice.common.dto.PagingListDto;
+
 import kr.co.bravomylife.common.dto.FileDownloadDto;
 import kr.co.bravomylife.common.dto.FileDto;
 import kr.co.bravomylife.common.dto.FileUploadDto;
 import kr.co.bravomylife.common.file.FileUpload;
+import kr.co.bravomylife.util.security.SKwithAES;
 
 
 
@@ -66,6 +70,10 @@ public class BoardWeb extends Common{
 	
 	/** Logger */
 	private static Logger logger = LoggerFactory.getLogger(BoardWeb.class);
+	
+	@Autowired
+	Properties staticProperties;
+	
 	
 	@Autowired
 	SessionCmpn sessionCmpn;
@@ -719,13 +727,33 @@ public class BoardWeb extends Common{
 	 * <p>EXAMPLE:</p>
 	 */
 	@RequestMapping(value = "/console/center/board/list.web")
-	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto) {
+	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, BoardDto boardDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
 			
+			// 대칭키 암호화(AES-256)
+			String staticKey = staticProperties.getProperty("backoffice.enc.user.aes256.key", "[UNDEFINED]");
+			SKwithAES aes = new SKwithAES(staticKey);
+
+			// 페이징 리스트 조회
 			PagingListDto pagingListDto = boardSrvc.list(pagingDto);
+
+			// BoardDto 리스트 가져오기
+			@SuppressWarnings("unchecked")
+			List<BoardDto> list = (List<BoardDto>) pagingListDto.getList();
+
+			for (int loop = 0; loop < list.size(); loop++) {
+				BoardDto _boardDto = list.get(loop);
+
+				if (_boardDto != null && _boardDto.getMbr_nm() != null) {
+					// mbr_nm 복호화하여 설정
+					_boardDto.setMbr_nm(aes.decode(_boardDto.getMbr_nm()));
+				} else {
+					logger.debug("loop " + loop + ": _boardDto 또는 mbr_nm이 null입니다. 복호화를 수행하지 않습니다.");
+				}
+			}
 			
 			mav.addObject("paging"	, pagingListDto.getPaging());
 			mav.addObject("list"	, pagingListDto.getList());
