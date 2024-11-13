@@ -102,7 +102,7 @@
 	<input type="hidden" name="seq_sle"							id="goSeq_sle"			value="0"/>
 	<input type="hidden" name="cd_ctg_m"						id="goCd_ctg_m"/>
 	<input type="hidden" name="cd_ctg_b"						id="goCd_ctg_b"/>
-	<input type="hidden" name="cd_bbs_type"						id="cd_bbs_type"/>
+	<input type="hidden" name="cd_bbs_type"						id="cd_bbs_type" 		value = "0"/>
 	<input type="hidden" name="type"							id="type"/>
 	<input type="hidden" name="searchWord"						id="searchWord" />
 <!-- Page Preloder -->

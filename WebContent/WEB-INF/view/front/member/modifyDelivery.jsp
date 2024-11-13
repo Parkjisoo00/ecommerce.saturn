@@ -108,7 +108,7 @@
 </head>
 <body>
 <form id="frmMain" method="POST" class="checkout__form">
-<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"/>
+<input type="hidden" name="cd_bbs_type"			id="cd_bbs_type"		value="0"/>
 <input type="hidden" name="type"				id="type"/>
 <input type="hidden" name="searchWord"			id="searchWord"/>
 <input type="hidden" name="cd_ctg_m"			id="cd_ctg_m"/>

@@ -90,7 +90,7 @@
 <input type="hidden" name="basketList[0].price_sale"	id="price_sale"			value="0"/>
 <input type="hidden" name="basketList[0].discount"		id="discount"			value="0"/>
 <input type="hidden" name="basketList[0].count"			id="basketCount"		value="0"/>
-<input type="hidden" name="cd_bbs_type"					id="cd_bbs_type"/>
+<input type="hidden" name="cd_bbs_type"					id="cd_bbs_type"		value="0"/>
 <input type="hidden" name="type"						id="type"/>
 <input type="hidden" name="searchWord"					id="searchWord"/>
 <input type="hidden" name="seq_sle"						id="seq_sle"			value="0"/>
