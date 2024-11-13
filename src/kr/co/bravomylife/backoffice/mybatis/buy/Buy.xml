@@ -13,6 +13,16 @@
 			AND CD_STATE_DELIVERY = 'C'
 	</update>
 	
+	<update id="updateDeliveryStatusAll" parameterType="buyDto">
+		UPDATE 
+			TB_BUY_MST
+		SET 
+			CD_STATE_DELIVERY = 'P'
+		WHERE
+			CD_STATE = 1
+			AND CD_STATE_DELIVERY = 'C'
+	</update>
+	
 	<select id="selectList" parameterType="buyDto" resultType="buyDto">
 		SELECT
 		/*+ first_rows(10) */ ROW_NUMBER() OVER (ORDER BY buy_dtl.DT_REG DESC) rnum

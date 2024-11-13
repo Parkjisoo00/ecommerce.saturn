@@ -304,14 +304,6 @@ function goManagersList() {
 	frmMain.submit();
 }
 
-function goBuyList() {
-	
-	var frmMain = document.getElementById("frmMain");
-	
-	frmMain.action = "/console/buy/list.web";
-	frmMain.submit();
-}
-
 function goProductList() {
 	
 	var frmMain = document.getElementById("frmMain");
@@ -352,4 +344,22 @@ function goStatistics2() {
 	frmMain.submit();
 }
 
+
+function goBuyList() {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	document.getElementById("cd_state").value = "";
+	frmMain.action = "/console/buy/list.web";
+	frmMain.submit();
+}
+
+function consolegoList(value) {
+	
+	var frmMain = document.getElementById("frmMain");
+	
+	frmMain.cd_bbs_type.setAttribute("value", value);
+	frmMain.action = "/console/center/board/list.web";
+	frmMain.submit();
+}
 </script>

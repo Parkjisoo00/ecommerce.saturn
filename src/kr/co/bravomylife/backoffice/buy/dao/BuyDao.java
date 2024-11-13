@@ -52,6 +52,9 @@ public class BuyDao extends BaseDao {
 		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.buy.Buy.update", buyDto); 
 	}
 	
+	public int updateDeliveryStatusAll(BuyDto buyDto) {
+		return sqlSessionBackoffice.update("kr.co.bravomylife.backoffice.mybatis.buy.Buy.updateDeliveryStatusAll", buyDto); 
+	}
 	
 	public List<BuyDto> selectList(BuyDto buyDto) {
 		return sqlSessionBackoffice.selectList("kr.co.bravomylife.backoffice.mybatis.buy.Buy.selectList", buyDto);

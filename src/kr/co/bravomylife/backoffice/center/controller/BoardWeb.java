@@ -362,20 +362,8 @@ public class BoardWeb extends Common{
 					totalSize += Long.parseLong(fileSize);
 				}
 				
-				/*
-				if (totalSize > 0) {
-					boardSrvc.insert(boardDto, boardFileDto);
-				}
-				else {
-					boardSrvc.insert(boardDto);
-				}
-				*/
-				
 				boardDto.setFile_orig(fileNameSrc);
 				boardDto.setFile_save(fileNameSve);
-			
-				//logger.debug("+++++++++++++++++++++++++++++++++작성 SEQ_MNG 확인" + " = " + boardDto.getFile_orig());
-				//logger.debug("+++++++++++++++++++++++++++++++++작성 SEQ_MNG 확인" + " = " + boardDto.getFile_save());
 			
 			if (boardSrvc.update(boardDto)) {
 				request.setAttribute("script"	, "alert('수정되었습니다.');");
@@ -485,12 +473,7 @@ public class BoardWeb extends Common{
 			//contents = contents.replaceAll("<\\s*/?\\s*p\\s*>", "");
 			//contents = contents.replace("<p>", "").replace("</p>", "");
 			//contents = contents.replace("<span>", "").replace("</span>", "");
-			
-			
-			logger.debug("작성 내용 확인" + " = " + boardDto.getCd_bbs_type());
 			boardDto.setRegister(Integer.parseInt(getSession(request, "SEQ_MNG")));
-			logger.debug("작성 SEQ_MNG 확인" + " = " + boardDto.getRegister());
-			
 			// **************************
 			// For Board File
 			// **************************
@@ -741,7 +724,6 @@ public class BoardWeb extends Common{
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
 		
 		try {
-			logger.debug("게시판 타입 확인" + " + " + pagingDto.getCd_bbs_type());
 			
 			PagingListDto pagingListDto = boardSrvc.list(pagingDto);
 			

@@ -114,6 +114,32 @@ public class BuyWeb extends Common {
 		return response;
 	}
 	
+	@RequestMapping(value = "/console/buy/updateDeliveryStatusAll.web", method = RequestMethod.POST)
+	public ModelAndView updateDeliveryStatusAll(HttpServletRequest request, HttpServletResponse response, BuyDto buyDto) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/error.web");
+		
+		try {
+			
+			if (buySrvc.updateDeliveryStatusAll(buyDto)) {
+				request.setAttribute("script"	, "alert('수정되었습니다.');");
+				request.setAttribute("redirect"	, "/console/buy/list.web");
+			}
+			else {
+				request.setAttribute("script"	, "alert('시스템 관리자에게 문의하세요!');");
+				request.setAttribute("redirect"	, "/");
+			}
+			mav.setViewName("forward:/servlet/result.web");
+		}
+		catch (Exception e) {
+			logger.error("[" + this.getClass().getName() + ".modifyProc()] " + e.getMessage(), e);
+		}
+		finally {}
+		
+		return mav;
+	}
+
+	
 	@RequestMapping(value = "/console/buy/view.web", method = RequestMethod.POST)
 	public ModelAndView view(HttpServletRequest request, HttpServletResponse response, BuyDto buyDto) {
 		
@@ -145,14 +171,6 @@ public class BuyWeb extends Common {
 	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, PagingDto pagingDto, BuyDto buyDto) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/error.web");
-		
-		logger.debug("Controller로 오는지 확인");
-		
-		logger.debug("확인" + pagingDto.getSearchKey());
-		logger.debug("확인" + pagingDto.getSearchWord());
-		logger.debug("확인" + pagingDto.getCd_state());
-		logger.debug("확인" + pagingDto.getCd_state_pay());
-		logger.debug("확인" + pagingDto.getCd_state_delivery());
 		
 		try {
 			
@@ -254,10 +272,6 @@ public class BuyWeb extends Common {
 		try {
 			
 			buyDto.setUpdater(Integer.parseInt(getSession(request, "SEQ_MNG")));
-			
-			logger.debug("cd_state 확인" + buyDto.getCd_state());
-			logger.debug("cd_state_delivery 확인" + buyDto.getCd_state_delivery());
-			logger.debug("cd_state_Seq_buy_mst 확인" + buyDto.getSeq_buy_mst());
 			
 			if (buyDto.getCd_state().equals("NULL")) {
 				

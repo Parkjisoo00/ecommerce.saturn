@@ -255,8 +255,9 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST" enctype="multipart/form-data">
-<input type="hidden" id="seq_sle"		name="seq_sle"			value="${productDto.seq_sle}"/>
-<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
+<input type="hidden" name="seq_sle"		id="seq_sle"					value="${productDto.seq_sle}"/>
+<input type="hidden" name="cd_bbs_type"	id="cd_bbs_type"				value="${paging.cd_bbs_type}" />
+<input type="hidden" name="cd_state"	id="cd_state"					value="0"/>
 
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 

@@ -255,31 +255,30 @@
 					<div class="categories__item categories__large__item set-bg"
 						data-setbg="img/categories/home9.jpg" style="height: 100%;">
 						<div class="categories__text" style="text-align: left; position: absolute; bottom: -20;">
-						<div class="categories__text special-background" >
-							<h1 style="font-weight: bold; color: black; font-size: 30px;">나만의 맞춤 건강 추천</h1>
-							<p style="font-weight: bold; font-size: 18px; ">건강 설문을 진행하고 나에게 맞는 영양제를 추천받아 보세요!</p>
-							<a href="javascript:goSurvey()" style="font-size: 18px;">바로가기</a>
+							<div class="categories__text special-background" >
+								<h1 style="font-weight: bold; color: black; font-size: 30px;">나만의 맞춤 건강 추천</h1>
+								<p style="font-weight: bold; font-size: 18px; ">건강 설문을 진행하고 나에게 맞는 영양제를 추천받아 보세요!</p>
+								<a href="javascript:goSurvey()" style="font-size: 18px;">바로가기</a>
+							</div>
 						</div>
 					</div>
-				</div>
 				</div>
 				<div class="col-lg-5 c p-0" style="height: 40vh;">
 							<div class="categories__item set-bg"
 								data-setbg="img/categories/home4.jpg" style="height: 100%;">
 								<div class="categories__text" style="text-align: left; position: absolute; bottom: -20;">
-								<div class="categories__text special-background" >
-									<h4 style="font-weight: bold; font-size: 27px;">안심 조회 서비스</h4>
-									<p style="font-weight: bold; font-size: 18px;">구매하고 싶은 영양제가 인증 허가를 받은 <br> 안심상품인지 확인하세요</p>
-									<a href="javascript:goSearch()" style="font-size: 18px;">바로가기</a>
+									<div class="categories__text special-background" >
+										<h4 style="font-weight: bold; font-size: 27px;">안심 조회 서비스</h4>
+										<p style="font-weight: bold; font-size: 18px;">구매하고 싶은 영양제가 인증 허가를 받은 <br> 안심상품인지 확인하세요</p>
+										<a href="javascript:goSearch()" style="font-size: 18px;">바로가기</a>
+									</div>
 								</div>
 							</div>
-						</div>
 						</div>
 					</div>
 				</div>		
 				<div class="col-lg-12">
 					<div class="row">
-						
 						<div class="col-lg-4 col-md-6 col-sm-6 p-0" >
 							<div class="categories__item set-bg" style=" padding-left: 0px;height: 320px;align-items: start;display: flex;flex-direction: column;"
 								data-setbg="img/categories/func9.png">
@@ -288,20 +287,20 @@
 								</div>
 								<div class="categories__text_2" style="margin-left: auto;margin-right: auto;">
 									<p style="font-weight: bold;">지금 당신에게 필요한 맞춤형 건강 솔루션은?</p>
-									<a  href="javascript:goTypeF('', '', '', '', '', '');">바로가기</a>
+									<a class="red-line" href="javascript:goTypeF('', '', '', '', '', '');">바로가기</a>
 								</div>
 							</div>
 						</div>
 
 						<div class="col-lg-4 col-md-6 col-sm-6 p-0">
 							<div class="categories__item set-bg" style=" padding-left: 0px;height: 320px;align-items: start;display: flex;flex-direction: column;"								
-    							data-setbg="img/categories/func10.png">
+								data-setbg="img/categories/func10.png">
 								<div class="categories__text" style="margin-top: 70px;margin-left: auto;margin-right: auto;">
 									<h4 style="margin-bottom: 15px;">성분별 건강기능식품 조회</h4>
 								</div>
 								<div class="categories__text_3" style="margin-left: auto;margin-right: auto;">
 									<p style="font-weight: bold;">필요한 영양소를 한눈에! 성분별 영양제 가이드</p>
-									<a href="javascript:goTypeI('', '', '', '', '', '');">바로가기</a>
+									<a class="red-line" href="javascript:goTypeI('', '', '', '', '', '');">바로가기</a>
 								</div>
 							</div>
 						</div>
@@ -313,7 +312,7 @@
 								</div>
 								<div class="categories__text_4" style="margin-left: auto;margin-right: auto;">
 									<p style="font-weight: bold;">남성과 여성, 당신의 몸에 맞춘 영양제 건강의 시작</p>
-									<a href="javascript:goTypeG('', '', '', '', '', '');">바로가기</a>
+									<a class="red-line" href="javascript:goTypeG('', '', '', '', '', '');">바로가기</a>
 								</div>
 							</div>
 						</div>

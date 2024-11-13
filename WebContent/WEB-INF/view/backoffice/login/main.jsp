@@ -116,14 +116,7 @@
 			chartFemale.draw(femaleData, optionsFemale);
 		}
 		
-		function consolegoList(value) {
-			
-			var frmMain = document.getElementById("frmMain");
-			
-			frmMain.cd_bbs_type.setAttribute("value", value);
-			frmMain.action = "/console/center/board/list.web";
-			frmMain.submit();
-		}
+
 	
 		function goYear(year) {
 			
@@ -140,7 +133,8 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST">
-<input type="hidden" name="year" id="year" />
+<input type="hidden" name="year" id="year" value="0" />
+<input type="hidden" name="cd_state"	id="cd_state" value="0"/>
 <input type="hidden" name="cd_bbs_type" id="cd_bbs_type" />
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 
