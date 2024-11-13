@@ -403,6 +403,7 @@
 			TB_BUY_MST
 		WHERE
 			SEQ_MBR = #{seq_mbr}
+			AND DT_REG >= SYSDATE - 30
 	</select>
 
 	<insert id="insertMaster" parameterType="memberDto">
