@@ -261,7 +261,6 @@
 										<th style="width: 5%">NO</th>
 										<th style="width: 18%">카테고리</th>
 										<th>제목</th>
-										<th style="width: 15%">작성자</th>
 										<th style="width: 15%">등록일</th>
 									</tr>
 									<c:choose>
@@ -289,9 +288,6 @@
 															</c:if>
 															${list.title}
 														</a>
-													</td>
-													<td>
-														${list.register}
 													</td>
 													<td>
 														${list.dt_reg}

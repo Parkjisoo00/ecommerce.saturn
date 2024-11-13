@@ -177,7 +177,7 @@
 											</a>
 										</td>
 										<td style="text-align: center;">
-											${list.register}
+											${list.mbr_nm}
 										</td>
 										<td style="text-align: center;">
 											${list.dt_reg}

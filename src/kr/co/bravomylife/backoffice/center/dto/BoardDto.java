@@ -50,7 +50,6 @@ public class BoardDto {
 	private String dt_upt		= "";		// 수정 일시
 	private int updater			= 0;		// 수정자
 	
-	
 	private int count_flg_reply_null = 0;	//미답변 개수
 	private int seq_bbs_question = 0;
 	

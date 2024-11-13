@@ -37,7 +37,15 @@ public class PagingDto {
 	private String cd_state_pay			= "";
 	private String cd_state_delivery	= "";
 	
+	private String mbr_nm		= "";
 	
+	
+	public String getMbr_nm() {
+		return mbr_nm;
+	}
+	public void setMbr_nm(String mbr_nm) {
+		this.mbr_nm = mbr_nm;
+	}
 	public String getCd_state() {
 		return cd_state;
 	}

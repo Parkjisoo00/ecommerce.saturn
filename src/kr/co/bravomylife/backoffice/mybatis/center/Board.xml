@@ -163,26 +163,31 @@
 
 	<select id="select" parameterType="boardDto" resultType="boardDto">
 		SELECT
-			SEQ_BBS
-			, CD_BBS_TYPE
-			, TITLE
-			, (SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = TB_BBS.SEQ_BBS) seq_reply
-			, CD_CTG
-			, CONTENT
-			, FLG_TOP
-			, FILE_SAVE
-			, FILE_ORIG
-			, SEQ_SLE
-			, CD_CTG_B
-			, CD_CTG_M			
-			, READED
-			, REGISTER
-			, TO_CHAR(DT_REG, 'YYYY-MM-DD HH24:MI:SS') dt_reg
+			bbs.SEQ_BBS
+			, bbs.CD_BBS_TYPE
+			, bbs.TITLE
+			, (SELECT tb_reply.SEQ_BBS FROM TB_BBS tb_reply WHERE tb_reply.SEQ_BBS_PARENT = bbs.SEQ_BBS) AS seq_reply
+			, bbs.CD_CTG
+			, bbs.CONTENT
+			, bbs.FLG_TOP
+			, bbs.FILE_SAVE
+			, bbs.FILE_ORIG
+			, bbs.SEQ_SLE
+			, bbs.CD_CTG_B
+			, bbs.CD_CTG_M			
+			, bbs.READED
+			, bbs.REGISTER
+			, TO_CHAR(bbs.DT_REG, 'YYYY-MM-DD HH24:MI:SS') dt_reg
+			, mst.MBR_NM
 		FROM
-			TB_BBS
+			TB_BBS bbs
+		LEFT JOIN
+			TB_MBR_MST mst
+		ON
+			bbs.REGISTER = mst.SEQ_MBR
 		WHERE
-			CD_BBS_TYPE		= #{cd_bbs_type}
-			AND SEQ_BBS		= #{seq_bbs}
+			bbs.CD_BBS_TYPE		= #{cd_bbs_type}
+			AND bbs.SEQ_BBS		= #{seq_bbs}
 	</select>
 
 	<update id="readed" parameterType ="boardDto">

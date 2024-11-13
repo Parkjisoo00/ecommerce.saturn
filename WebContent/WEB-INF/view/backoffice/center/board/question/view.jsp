@@ -114,7 +114,7 @@
 					<h3 style="font-size:30px; text-align:center">
 						<c:if test="${boardDto.seq_reply == 0}">[미답변] </c:if>
 						<c:if test="${boardDto.seq_reply > 0}">[답변 완료] </c:if>${boardDto.title}</h3><br/><br/><br/>
-					<h5 style="font-size:20px; padding: 20px 0 0 0;">작성자: &nbsp;${boardDto.register}
+					<h5 style="font-size:20px; padding: 20px 0 0 0;">작성자: &nbsp;${boardDto.mbr_nm}
 						<span class="mailbox-read-time pull-right" style="font-size:18px">작성 일자:${boardDto.dt_reg}</span></h5>
 					</div>
 					<br/>
