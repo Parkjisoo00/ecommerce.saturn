@@ -129,7 +129,7 @@
 				) order by seq_sle
 			) top
 		where
-			top.rank &lt; 4
+			top.rank &lt; 2
 		order by seq_sle
 	</select>
 	
