@@ -24,13 +24,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import kr.co.bravomylife.backoffice.buy.controller.BuyWeb;
 import kr.co.bravomylife.backoffice.buy.dao.BuyDao;
 import kr.co.bravomylife.backoffice.common.dto.PagingDto;
 import kr.co.bravomylife.backoffice.common.dto.PagingListDto;
@@ -46,9 +43,6 @@ import kr.co.bravomylife.backoffice.buy.dto.BuyDto;
  */
 @Service("kr.co.bravomylife.backoffice.buy.service.BuySrvc")
 public class BuySrvc {
-	
-	/** Logger */
-	private static Logger logger = LoggerFactory.getLogger(BuyWeb.class);
 	
 	@Inject
 	BuyDao buyDao;
