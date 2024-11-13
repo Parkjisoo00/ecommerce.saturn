@@ -138,7 +138,8 @@ public class PayWeb extends Common {
 				if ("0000".equals(apiResult.get("responseCode"))) {
 					
 					// logger.info("[" + this.getClass().getName() + ".receiveOld().RES2nd.SUCCESS] " + apiResult.toString());
-					isResult = buySrvc.updateByDealNum(deal_num, Integer.parseInt(getSession(request, "SEQ_MBR")), "Y");
+					//isResult = buySrvc.updateByDealNum(deal_num, Integer.parseInt(getSession(request, "SEQ_MBR")), "Y");
+					isResult = buySrvc.updateByDealNum(deal_num, -1, "Y");
 					
 					request.setAttribute("script"	, "alert('정상적으로 결제되었습니다. 구매해 주셔서 감사합니다.');");
 					request.setAttribute("redirect"	, "/");
@@ -146,7 +147,8 @@ public class PayWeb extends Common {
 				}
 				else {
 					logger.error("[" + this.getClass().getName() + ".receiveOld().RES2nd.FAILURE] " + apiResult.toString());
-					isResult = buySrvc.updateByDealNum(deal_num, Integer.parseInt(getSession(request, "SEQ_MBR")), "N");
+					//isResult = buySrvc.updateByDealNum(deal_num, Integer.parseInt(getSession(request, "SEQ_MBR")), "N");
+					isResult = buySrvc.updateByDealNum(deal_num, -1, "N");
 					
 					request.setAttribute("script"	, "alert('[" + apiResult.get("responseCode") + "]결제가 실패되었습니다. 고객센터(=Payup)로 문의바랍니다!');");
 					request.setAttribute("redirect"	, "/");
@@ -434,7 +436,7 @@ public class PayWeb extends Common {
 			}
 			else if (staticProperties.getProperty("common.mode", "[UNDEFINED]").equalsIgnoreCase("DEVELOPMENT")) {
 				 // moon(8080), jupiter(8081), saturn(8082), uranus(8083)
-				serverUrl = "http://saturn.plutozone.com";
+				serverUrl = "http://119.71.96.251:8082";
 			}
 			else {
 				serverUrl = "[UNDEFINED]";

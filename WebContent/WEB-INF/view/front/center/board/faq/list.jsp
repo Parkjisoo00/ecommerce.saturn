@@ -312,79 +312,79 @@
 				</div>
 				<br/>
 				<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<div style="display: flex; justify-content: flex-end;margin-bottom: 10px;">
-						<select name="sSearchKey" id="sSearchKey" style="width: 30%;max-width: 130px;">
-							<option value="title"<c:if test="${paging.sSearchKey == 'title'}"> selected</c:if>>제목</option>
-							<option value="contents"<c:if test="${paging.sSearchKey == 'contents'}"> selected</c:if>>내용</option>
-							<option value="title+contents"<c:if test="${paging.sSearchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
-						</select>
-						<input type="text" name="sSearchWord" id="sSearchWord" value="${paging.sSearchWord}" /> 
-						<input type="button" onclick="javascript:boardSearch();" value="검색"/>
+					<div class="checkout__form__input">
+						<div style="display: flex; justify-content: flex-end;margin-bottom: 10px;">
+							<select name="sSearchKey" id="sSearchKey" style="width: 30%;max-width: 130px;">
+								<option value="title"<c:if test="${paging.sSearchKey == 'title'}"> selected</c:if>>제목</option>
+								<option value="contents"<c:if test="${paging.sSearchKey == 'contents'}"> selected</c:if>>내용</option>
+								<option value="title+contents"<c:if test="${paging.sSearchKey == 'title+contents'}"> selected</c:if>>제목 또는 내용</option>
+							</select>
+							<input type="text" name="sSearchWord" id="sSearchWord" value="${paging.sSearchWord}" /> 
+							<input type="button" onclick="javascript:boardSearch();" value="검색"/>
+						</div>
 					</div>
-				</div>
-				<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="checkout__form__input">
-					<div class="brdInfo">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</div>
-				<br/>
-						<!-- faq 리스트를 반복문으로 출력 -->
-											<c:forEach items="${list}" var="list">
-						<c:choose>
-							<c:when test="${list.flg_top == 'Y'}">
-							<button class="accordion" type="button" style="font-weight: bold;">[공지]${list.title}</button>
-								<div class="panel">
-									<select class="form-control" id="cd_ctg" name="cd_ctg" style="margin-bottom: 6px;"disabled>
-										<option value="0"<c:if test="${list.cd_ctg == '0'}"> selected</c:if>>선택</option>
-										<option value="1"<c:if test="${list.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
-										<option value="2"<c:if test="${list.cd_ctg == '2'}"> selected</c:if>>상품</option>
-										<option value="3"<c:if test="${list.cd_ctg == '3'}"> selected</c:if>>구매</option>
-										<option value="4"<c:if test="${list.cd_ctg == '4'}"> selected</c:if>>결제</option>
-										<option value="5"<c:if test="${list.cd_ctg == '5'}"> selected</c:if>>배송</option>
-										<option value="6"<c:if test="${list.cd_ctg == '6'}"> selected</c:if>>환불</option>
-										<option value="9"<c:if test="${list.cd_ctg == '9'}"> selected</c:if>>기타</option>
-									</select>
-									<div class="accordion2" >
-										<c:if test="${list.file_orig != ''}">
-											<a style="color:blue" href="javascript:download('BbsFaq', ${list.seq_bbs});">[첨부파일 다운로드]</a>
-										</c:if>
-											${list.content}
-									</div>
-								</div>
-							</c:when>
-							<c:otherwise>
-							<button class="accordion" type="button">[공지]${list.title}</button>
-								<div class="panel">
-									<select class="form-control" id="cd_ctg" name="cd_ctg" style="margin-bottom: 6px;"disabled>
-										<option value="0"<c:if test="${list.cd_ctg == '0'}"> selected</c:if>>선택</option>
-										<option value="1"<c:if test="${list.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
-										<option value="2"<c:if test="${list.cd_ctg == '2'}"> selected</c:if>>상품</option>
-										<option value="3"<c:if test="${list.cd_ctg == '3'}"> selected</c:if>>구매</option>
-										<option value="4"<c:if test="${list.cd_ctg == '4'}"> selected</c:if>>결제</option>
-										<option value="5"<c:if test="${list.cd_ctg == '5'}"> selected</c:if>>배송</option>
-										<option value="6"<c:if test="${list.cd_ctg == '6'}"> selected</c:if>>환불</option>
-										<option value="9"<c:if test="${list.cd_ctg == '9'}"> selected</c:if>>기타</option>
-									</select>
-									<div class="accordion2" >
-										<c:if test="${list.file_orig != ''}">
-											<a style="color:blue" href="javascript:download('BbsFaq', ${list.seq_bbs});">[첨부파일 다운로드]</a>
-										</c:if>
-											${list.content}
-									</div>
-								</div>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-						<br/>
-						<br/>
 					<div class="row">
-					<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;" >
-						<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="checkout__form__input">
+								<div class="brdInfo">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</div>
+							<br/>
+									<!-- faq 리스트를 반복문으로 출력 -->
+								<c:forEach items="${list}" var="list">
+									<c:choose>
+										<c:when test="${list.flg_top == 'Y'}">
+										<button class="accordion" type="button" style="font-weight: bold;">${list.title}</button>
+											<div class="panel">
+												<select class="form-control" id="cd_ctg" name="cd_ctg" style="margin-bottom: 6px;"disabled>
+													<option value="0"<c:if test="${list.cd_ctg == '0'}"> selected</c:if>>선택</option>
+													<option value="1"<c:if test="${list.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
+													<option value="2"<c:if test="${list.cd_ctg == '2'}"> selected</c:if>>상품</option>
+													<option value="3"<c:if test="${list.cd_ctg == '3'}"> selected</c:if>>구매</option>
+													<option value="4"<c:if test="${list.cd_ctg == '4'}"> selected</c:if>>결제</option>
+													<option value="5"<c:if test="${list.cd_ctg == '5'}"> selected</c:if>>배송</option>
+													<option value="6"<c:if test="${list.cd_ctg == '6'}"> selected</c:if>>환불</option>
+													<option value="9"<c:if test="${list.cd_ctg == '9'}"> selected</c:if>>기타</option>
+												</select>
+												<div class="accordion2" >
+													<c:if test="${list.file_orig != ''}">
+														<a style="color:blue" href="javascript:download('BbsFaq', ${list.seq_bbs});">[첨부파일 다운로드]</a>
+													</c:if>
+														${list.content}
+												</div>
+											</div>
+										</c:when>
+										<c:otherwise>
+										<button class="accordion" type="button">${list.title}</button>
+											<div class="panel">
+												<select class="form-control" id="cd_ctg" name="cd_ctg" style="margin-bottom: 6px;"disabled>
+													<option value="0"<c:if test="${list.cd_ctg == '0'}"> selected</c:if>>선택</option>
+													<option value="1"<c:if test="${list.cd_ctg == '1'}"> selected</c:if>>가입 및 탈퇴</option>
+													<option value="2"<c:if test="${list.cd_ctg == '2'}"> selected</c:if>>상품</option>
+													<option value="3"<c:if test="${list.cd_ctg == '3'}"> selected</c:if>>구매</option>
+													<option value="4"<c:if test="${list.cd_ctg == '4'}"> selected</c:if>>결제</option>
+													<option value="5"<c:if test="${list.cd_ctg == '5'}"> selected</c:if>>배송</option>
+													<option value="6"<c:if test="${list.cd_ctg == '6'}"> selected</c:if>>환불</option>
+													<option value="9"<c:if test="${list.cd_ctg == '9'}"> selected</c:if>>기타</option>
+												</select>
+												<div class="accordion2" >
+													<c:if test="${list.file_orig != ''}">
+														<a style="color:blue" href="javascript:download('BbsFaq', ${list.seq_bbs});">[첨부파일 다운로드]</a>
+													</c:if>
+														${list.content}
+												</div>
+											</div>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+									<br/>
+									<br/>
+								<div class="row">
+									<div style="text-align: center; width: 100%; margin-top: 20px; color: black !important;" >
+										<bravomylifeTag:page styleID="front_image" currentPage="${paging.currentPage}" linePerPage="${paging.linePerPage}" totalLine="${paging.totalLine}" scriptFunction="goPage" />
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-					</div>
-				</div>
-				</div>
-				</div>
 				</div>
 			</article>
 		</div>
