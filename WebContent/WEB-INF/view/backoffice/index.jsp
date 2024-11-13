@@ -44,6 +44,7 @@
 				<h3 class="box-title">로그인</h3>
 				</div>
 					<form id="frmMain" method="POST" class="form-horizontal" >
+					<input type="hidden" name="cd_state"	id="cd_state" value="0"/>
 						<div class="box-body">
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">이메일</label>

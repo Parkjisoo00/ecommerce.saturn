@@ -129,12 +129,13 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST" enctype="multipart/form-data">
-<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
-<input type="hidden" name="count_stock" id="count_stock" value= "0"/>
-<input type="hidden" name="discount" id="discount" value= "0"/>
-<input type="hidden" name="margin_rate" id="margin_rate" value= "0"/>
-<input type="hidden" name="origin_sale" id="origin_sale" value= "0"/>
-<input type="hidden" name="point_stack" id="point_stack" value= "0"/>
+<input type="hidden" name="cd_bbs_type" id="cd_bbs_type"	value="${paging.cd_bbs_type}" />
+<input type="hidden" name="count_stock" id="count_stock"	value= "0"/>
+<input type="hidden" name="discount" id="discount"			value= "0"/>
+<input type="hidden" name="margin_rate" id="margin_rate"	value= "0"/>
+<input type="hidden" name="origin_sale" id="origin_sale"	value= "0"/>
+<input type="hidden" name="point_stack" id="point_stack"	value= "0"/>
+<input type="hidden" name="cd_state"	id="cd_state"		value= "0"/>
 
 <!-- Main content -->
 <div class="content-wrapper">

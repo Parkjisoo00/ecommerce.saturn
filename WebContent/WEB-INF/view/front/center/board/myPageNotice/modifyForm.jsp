@@ -99,7 +99,7 @@
 					<div class="checkout__form__input">
 					<c:if test="${boardDto.seq_sle > 0}">
 						<p style="font-weight: bold; margin-top: 30px;margin-bottom: 5px; font-size: 16px;">상품이름 </p>
-						<input type="text" id="sle_nm" name="sle_nm" value="${boardDtoNm.sle_nm}" style="width: 40%; padding: 10px; border: 1px solid #ccc; width:15%;border-radius: 5px; font-size: 14px;"/>
+						<input type="text" id="sle_nm" name="sle_nm" value="${boardDto.sle_nm}" style="width: 40%; padding: 10px; border: 1px solid #ccc; width:15%;border-radius: 5px; font-size: 14px;"/>
 					</c:if>
 					<c:if test="${boardDto.seq_sle > 0}">
 					<div class="checkout__form__input">

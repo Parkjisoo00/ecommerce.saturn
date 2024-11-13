@@ -204,8 +204,6 @@ public class ManagerWeb extends Common {
 		
 		try {
 			
-			logger.debug("managerDto.getEmail() = " + managerDto.getEmail());
-			
 			boolean result = managerSrvc.insert(managerDto);
 			
 			if (result) {

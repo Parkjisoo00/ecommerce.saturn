@@ -64,6 +64,7 @@
 <input type="hidden" id="cd_bbs_type"	name="cd_bbs_type" />
 <input type="hidden" id="seq_bbs"		name="seq_bbs" value="${boardDto.seq_bbs}" />
 <input type="hidden" id="content"		name="content" />
+<input type="hidden" id="cd_state"		name="cd_state"	 value="0"/>
 <%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->

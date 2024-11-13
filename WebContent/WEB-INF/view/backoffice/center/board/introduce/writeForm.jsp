@@ -42,8 +42,9 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST" enctype="multipart/form-data" >
-<input type="hidden" id="cd_bbs_type" name="cd_bbs_type" />
-<input type="hidden" id="content" name="content" />
+<input type="hidden" name="cd_bbs_type"	id="cd_bbs_type" />
+<input type="hidden" name="cd_state"	id="cd_state" 		value="0"/>
+<input type="hidden" name="content"		id="content"  />
 <%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->

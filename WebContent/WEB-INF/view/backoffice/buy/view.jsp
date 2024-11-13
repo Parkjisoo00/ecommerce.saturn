@@ -36,9 +36,10 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <form id="frmMain" method="POST" >
-<input type="hidden" name="seq_buy_mst" id="seq_buy_mst" value="0"/>
-<input type="hidden" name="seq_mbr" id="seq_mbr" value="0"/>
-<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="0" />
+<input type="hidden" name="seq_buy_mst" id="seq_buy_mst" 		value="0"/>
+<input type="hidden" name="seq_mbr" id="seq_mbr" 				value="0"/>
+<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" 		value="0" />
+<input type="hidden" name="cd_state"	id="cd_state" 			value="0"/>
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 
 	<div class="content-wrapper">

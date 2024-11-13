@@ -2572,6 +2572,22 @@ ol {
 	content: "";
 }
 
+.red-line {
+	position: relative;
+	text-decoration: none; 
+	display: inline-block; 
+}
+
+.red-line:after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: -2px; 
+	width: 100%; 
+	height: 2px; 
+	background-color: #CA1515; 
+}
+
 /*---------------------
   Product
 -----------------------*/

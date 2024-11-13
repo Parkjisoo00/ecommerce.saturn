@@ -269,42 +269,7 @@
 					</div>
 				</div>
 				</c:if>
-			
-		</div>
-	<!-- 답변 부분 추후 작업 
-				<c:if test="${boardDto.seq_reply > 0}">
-				<br/>
-				<div style="color: #369; font-size: 10pt; font-weight: bold;">[답변]</div>
-				<table class="headLeft_01" style="width: 900px; margin-left: auto; margin-right: auto">
-					<tr>
-						<th style="width: 150px;">제목</th>
-						<td>
-							${boardReplyDto.title}
-						</td>
-					</tr>
-					<tr>
-						<th>내용</th>
-						<td>
-							${boardReplyDto.content}
-						</td>
-					</tr>
-					<c:if test="${boardReplyDto.file_orig != ''}">
-					<tr>
-						<th>첨부 파일</th>
-						<td>
-							<a href="javascript:download('BbsQuestion', ${boardReplyDto.seq_bbs});">다운로드</a>
-						</td>
-					</tr>
-					</c:if>
-					<tr>
-						<th>등록 일시</th>
-						<td>
-							${boardReplyDto.dt_reg}
-						</td>
-					</tr>
-				</table>
-			</c:if>
-	 -->
+			</div>
 		</article>
 	</div>
 </section>

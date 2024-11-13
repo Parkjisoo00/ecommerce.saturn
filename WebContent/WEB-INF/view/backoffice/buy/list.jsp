@@ -87,7 +87,7 @@
 			seq_buy_mst: seqBuyMstArray
 		};
 		
-		if (confirm("해당 조건에 맞는 모든 항목을 업데이트하시겠습니까?")) {
+		if (confirm("해당 페이지의 상품을 배송 준비 상태로 변경하시겠습니까?")) {
 			
 			$.ajax({
 				type: "POST",
@@ -203,6 +203,15 @@
 		frmMain.submit();
 	}
 	
+	function updateDeliveryStatusAll() {
+	
+		if (confirm("전체 상품을 배송 준비 상태로 변경하시겠습니까?")) {
+		var frmMain = document.getElementById("frmMain");
+
+		frmMain.action="/console/buy/updateDeliveryStatusAll.web";
+		frmMain.submit();
+		}
+	}
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -275,7 +284,7 @@
 									<option value="Y" <c:if test="${paging.cd_state_delivery == 'Y'}">selected</c:if>>배송완료</option>
 								</select>
 								&nbsp;&nbsp;
-								<input type="button" onclick="validateSearch()" value="검색"/>	
+								<input type="submit" onclick="validateSearch()" value="검색"/>	
 							</div>	
 							</div>
 						</div>
@@ -375,7 +384,8 @@
 				<!-- /.btn-group -->
 				<button type="button" class="btn btn-default btn-sm" onclick="reload();"><i class="fa fa-refresh"></i></button>
 				&nbsp;&nbsp;
-				<button type="button" onclick="updateDeliveryStatus()">배송 상태 변경</button>
+				<button type="button" onclick="updateDeliveryStatus()">현재 페이지 배송 상태 변경</button>
+				<button type="button" onclick="updateDeliveryStatusAll()" style="margin-left:10px">전체 상품 배송 상태 변경</button>
 					<span style="float: right;margin-right: 10px;margin-top: 5px;justify-content: center; ">전체 ${paging.totalLine}개 [${paging.currentPage}/${paging.totalPage} 페이지]</span>
 				<div class="pull-right">
 				<div class="btn-group">

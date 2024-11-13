@@ -34,7 +34,6 @@ import kr.co.bravomylife.backoffice.buy.controller.BuyWeb;
 import kr.co.bravomylife.backoffice.buy.dao.BuyDao;
 import kr.co.bravomylife.backoffice.common.dto.PagingDto;
 import kr.co.bravomylife.backoffice.common.dto.PagingListDto;
-
 import kr.co.bravomylife.backoffice.buy.dto.BuyDto;
 
 /**
@@ -108,16 +107,23 @@ public class BuySrvc {
 		pagingDto.setTotalLine(totalLine);
 		pagingDto.setTotalPage(totalPage);
 		if (totalPage == 0) pagingDto.setCurrentPage(1);
-		
-		logger.debug("확인" + pagingDto.getSearchKey());
-		logger.debug("확인" + pagingDto.getSearchWord());
-		logger.debug("확인" + pagingDto.getCd_state());
-		logger.debug("확인" + pagingDto.getCd_state_pay());
-		logger.debug("확인" + pagingDto.getCd_state_delivery());
-		
+
 		pagingListDto.setPaging(pagingDto);
 		pagingListDto.setList(buyDao.list(pagingDto));
 		
 		return pagingListDto;
 	}
+	
+	@Transactional("txBackoffice")
+	public boolean updateDeliveryStatusAll(BuyDto buyDto) {
+		
+		int result = buyDao.updateDeliveryStatusAll(buyDto);
+		
+		if (result >= 1) return true;
+		else {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return false;
+		}
+	}
+	
 }
