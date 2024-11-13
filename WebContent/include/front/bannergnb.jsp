@@ -13,8 +13,8 @@
 		<div id="mobile-menu-wrap" style="text-align:left; margin-left: -60px;display: flex;flex-wrap:wrap"></div>
 		
 		<div class="offcanvas__auth" style="text-align: left;">
-			<a href="/front/login/loginForm.web">로그인</a>
-			<a href="/front/member/registerForm.web">회원가입</a>
+			<a href="javascript:goLogin()">로그인</a>
+			<a href="javascript:goRegisterForm()">회원가입</a>
 		</div>
 	</div>
 <header class="header" style="background-color: #341d08; height: 240px; position: relative;">
@@ -30,13 +30,13 @@
 <div class="header__right" style="position: absolute; bottom: -10px; right: 19%;">
 <div class="header__right__auth" style="display: flex; align-items: center; gap: 5px;">
 	<c:if test="${not empty sessionScope.SEQ_MBR}">
-		<a href="/front/myPage/" title="${sessionScope.NAME}" style="color: white; font-size: 15px;">
+		<a href="javascript:goMyPage()" title="${sessionScope.NAME}" style="color: white; font-size: 15px;">
 			마이페이지
 		</a>
-		<a href="/front/login/logout.web" style="color: white; font-size: 15px;">
+		<a href="javascript:goLogout()" style="color: white; font-size: 15px;">
 			로그아웃
 		</a>
-		<a href="/front/basket/main.web" style="color: white; font-size: 15px;">
+		<a href="javascript:goBasket()" style="color: white; font-size: 15px;">
 			장바구니
 		</a>
 		<ul class="header__right__widget" style="list-style: none; margin: 0; padding: 0; display: flex; align-items: center;">
@@ -51,8 +51,8 @@
 		</ul>
 	</c:if>	 
 	<c:if test="${empty sessionScope.SEQ_MBR}">
-		<a href="/front/login/loginForm.web" style="color: white; font-size: 15px;">로그인</a>
-		<a href="/front/member/registerForm.web" style="color: white; font-size: 15px;">회원가입</a>
+		<a href="javascript:goLogin()" style="color: white; font-size: 15px;">로그인</a>
+		<a href="javascript:goRegisterForm()" style="color: white; font-size: 15px;">회원가입</a>
 	</c:if>
 </header>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -80,4 +80,50 @@ $(document).ready(function () {
 	}
 	basketData();
 });
+
+
+
+
+	function goLogin() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/login/loginForm.web";
+		frmMain.submit();
+	}
+	
+	function goLogout() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/login/logout.web";
+		frmMain.target = "";
+		frmMain.submit();
+	}
+	
+	function goRegisterForm() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/member/registerForm.web";
+		frmMain.submit();
+	}
+	
+	function goMyPage() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/myPage/index.web";
+		frmMain.target = "";
+		frmMain.submit();
+	}
+	
+	function goBasket() {
+		
+		var frmMain = document.getElementById("frmMain");
+		
+		frmMain.action = "/front/basket/main.web";
+		frmMain.target = "";
+		frmMain.submit();
+	}
 </script>
