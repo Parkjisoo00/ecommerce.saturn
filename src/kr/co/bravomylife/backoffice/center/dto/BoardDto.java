@@ -31,7 +31,7 @@ package kr.co.bravomylife.backoffice.center.dto;
 public class BoardDto {
 	
 	private int rnum			= 0;		// 글 순번
-	private int seq_bbs			= 0;		// 글 일련번호
+	private Integer seq_bbs			= 0;		// 글 일련번호
 	private int seq_bbs_parent	= 0;		// 글 상위 일련번호
 	private int seq_reply		= 0;		// 답변 일련번호
 	private int cd_bbs_type		= 0;		// 게시판 종류: 공지사항(1), 자주 찾는 질문(2), 질의 응답(3)
@@ -58,11 +58,23 @@ public class BoardDto {
 	private String cd_ctg_m			= "";	// 대분류
 	private Integer seq_sle			= 0;	// 판매 상품 일련번호
 	
-	
+	private String mbr_nm			="";
 	
 
 
 	
+	public Integer getSeq_bbs() {
+		return seq_bbs;
+	}
+	public void setSeq_bbs(Integer seq_bbs) {
+		this.seq_bbs = seq_bbs;
+	}
+	public String getMbr_nm() {
+		return mbr_nm;
+	}
+	public void setMbr_nm(String mbr_nm) {
+		this.mbr_nm = mbr_nm;
+	}
 	public String getCd_ctg_b() {
 		return cd_ctg_b;
 	}
@@ -111,12 +123,7 @@ public class BoardDto {
 	public void setRnum(int rnum) {
 		this.rnum = rnum;
 	}
-	public int getSeq_bbs() {
-		return seq_bbs;
-	}
-	public void setSeq_bbs(int seq_bbs) {
-		this.seq_bbs = seq_bbs;
-	}
+
 	public int getSeq_bbs_parent() {
 		return seq_bbs_parent;
 	}
