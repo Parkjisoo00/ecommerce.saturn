@@ -113,7 +113,7 @@
 						<div style="display: flex; gap: 10px;">
 							<div class="input-group input-group-sm" style="width: 150px;">
 								<div class="form-group">
-									<select class="form-control" id="searchKey" name="searchKey" style="height: 30px;">
+									<select class="form-control" id="searchKey" name="searchKey" style="height: 35px;">
 										<option value="sle_nm">상품명</option>
 										<option value="corp_nm">브랜드명</option>
 										<option value="sle_nm_and_corp_nm">상품명 및 브랜드명</option>
@@ -122,7 +122,7 @@
 							</div>
 							<div class="input-group input-group-sm" style="width: 150px;">
 								<div class="form-group">
-									<select  class="form-control" id="cd_ctg_b" name="cd_ctg_b" onchange="updateCategoryMinor()" style="height: 30px;">
+									<select  class="form-control" id="cd_ctg_b" name="cd_ctg_b" onchange="updateCategoryMinor()" style="height: 35px;">
 										<option value="0">카테고리 대분류</option>
 										<option value="1">기능별</option>
 										<option value="2">성분별</option>
@@ -132,14 +132,14 @@
 							</div>
 							<div class="input-group input-group-sm" style="width: 150px;">
 								<div class="form-group">
-									<select class="form-control" id="cd_ctg_m" name="cd_ctg_m" style="height: 30px;">
+									<select class="form-control" id="cd_ctg_m" name="cd_ctg_m" style="height: 35px;">
 										<option value="0">카테고리 중분류</option>
 									</select>
 								</div>
 							</div>
 							<div class="input-group input-group-sm" style="width: 150px;">
 								<div class="form-group">
-									<select class="form-control" id="cd_state_sale" name="cd_state_sale" style="height: 30px;">
+									<select class="form-control" id="cd_state_sale" name="cd_state_sale" style="height: 35px;">
 										<option value="0">상품 상태</option>
 										<option value="1">대기</option>
 										<option value="2">판매</option>
