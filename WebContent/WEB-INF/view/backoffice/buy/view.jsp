@@ -54,8 +54,7 @@
 			<div class="col-md-9">
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<c:set var="firstItem" value="${buyDtoList[0]}" />
-						<h3 class="box-title">회원번호 ${firstItem.seq_mbr}번 고객님의 상품 상세 목록</h3>
+						<h3 class="box-title">${param.mbr_nm} 고객님의 상품 상세 목록</h3>
 					</div>
 					<div class="box-body no-padding">
 						<div class="table-responsive mailbox-messages">
@@ -98,7 +97,7 @@
 												${item.dt_reg}
 											</td>
 										</tr>
-							   </c:forEach>
+								</c:forEach>
 							</table>
 						</div>
 						<div class="modal-footer" style="text-align: center; padding-top: 10px; padding-bottom: 10px;">

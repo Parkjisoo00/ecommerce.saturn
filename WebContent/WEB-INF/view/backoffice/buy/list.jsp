@@ -146,11 +146,12 @@
 		frmMain.submit();
 	}
 	
-	function goView(value) {
+	function goView(seq_buy_mst, mbr_nm) {
 		
 		var frmMain = document.getElementById("frmMain");
 		
-		document.getElementById("seq_buy_mst").value = value;
+		document.getElementById("seq_buy_mst").value = seq_buy_mst;
+		document.getElementById("mbr_nm").value = mbr_nm;
 		
 		frmMain.action="/console/buy/view.web";
 		frmMain.submit();
@@ -212,7 +213,9 @@
 <input type="hidden" name="cd_state_delivery"	id="cd_state_delivery" />
 <input type="hidden" name="searchKey"			id="searchKey" />
 <input type="hidden" name="currentPage"			id="currentPage" value="${paging.currentPage}" />	
-<input type="hidden" name="cd_bbs_type" id="cd_bbs_type" value="${paging.cd_bbs_type}" />
+<input type="hidden" name="cd_bbs_type" 		id="cd_bbs_type" value="${paging.cd_bbs_type}" />
+<input type="hidden" name="mbr_nm" 				id="mbr_nm" value="" />
+
 	<%@ include file="/include/backoffice/mainSide.jsp" %>
 
 <!-- Main content -->
@@ -309,7 +312,7 @@
 									<input type="hidden" name="seq_buy_mst" value="${list.seq_buy_mst}"/>
 								</td>
 								<td class="txtRight" style="text-align: center;">
-									<a href="javascript:goView(${list.seq_buy_mst});">
+									<a href="javascript:goView(${list.seq_buy_mst}, '${list.mbr_nm}');">
 										<bravomylifeTag:masking text="${list.email}" letter="*" count="13" mode="right" />
 									</a>
 								</td>
