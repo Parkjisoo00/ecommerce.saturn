@@ -170,7 +170,6 @@
 			
 			document.getElementById("seq_buy_mst").value = seq_buy_mst;
 			// select_1의 선택된 value
-			// alert(cd_state)
 			document.getElementById("cd_state").value = cd_state;
 			// select_3의 선택된 value
 			document.getElementById("cd_state_delivery").value = cd_state_delivery;

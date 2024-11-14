@@ -91,8 +91,6 @@ public class ProductWeb {
 			String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max5MB"			, "[UNDEFINED]");
 			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.image"	, "[UNDEFINED]");
 			
-			logger.debug("업로드 경로 확인" + pathBase);
-			
 			//파일 개수 확인
 			int countFile = 0;
 			if (null != fileUploadDto.getFiles()) countFile = fileUploadDto.getFiles().size();
@@ -404,8 +402,6 @@ public class ProductWeb {
 			String pathBase		= dynamicProperties.getMessage("backoffice.upload.path_product", "[UNDEFINED]");
 			String maxSize		= dynamicProperties.getMessage("backoffice.upload.file.max5MB"			, "[UNDEFINED]");
 			String allowedExt	= dynamicProperties.getMessage("backoffice.upload.file.extension.image"	, "[UNDEFINED]");
-			
-			logger.debug("업로드 경로 확인" + pathBase);
 			
 			//파일 개수 확인
 			int countFile = 0;

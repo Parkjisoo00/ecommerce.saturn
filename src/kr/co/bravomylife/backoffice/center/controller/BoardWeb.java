@@ -756,8 +756,6 @@ public class BoardWeb extends Common{
 				if (_boardDto != null && _boardDto.getMbr_nm() != null) {
 					// mbr_nm 복호화하여 설정
 					_boardDto.setMbr_nm(aes.decode(_boardDto.getMbr_nm()));
-				} else {
-					logger.debug("loop " + loop + ": _boardDto 또는 mbr_nm이 null입니다. 복호화를 수행하지 않습니다.");
 				}
 			}
 			
