@@ -12,11 +12,20 @@
 		
 		<div id="mobile-menu-wrap" style="text-align:left; margin-left: -60px;display: flex;flex-wrap:wrap"></div>
 		
-		<div class="offcanvas__auth" style="text-align: left;">
-			<a href="javascript:goLogin()">로그인</a>
-			<a href="javascript:goRegisterForm()">회원가입</a>
-		</div>
+		<c:if test="${not empty sessionScope.SEQ_MBR}">	
+			<div class="offcanvas__auth" style="text-align: left;">
+				<a href="javascript:goMyPage()">마이페이지</a>
+				<a href="javascript:goLogout()">로그아웃</a>
+				<a href="javascript:goBasket()">장바구니</a>
+			</div>
+		</c:if>	
 		
+		<c:if test="${empty sessionScope.SEQ_MBR}">
+			<div class="offcanvas__auth" style="text-align: left;">
+				<a href="javascript:goLogin()">로그인</a>
+				<a href="javascript:goRegisterForm()">회원가입</a>
+			</div>
+		</c:if>
 		<select class="search-container" id="first_cd_ctg_android" style=" width: 100px !important; height: 45px !important; font-size: 18px !important; margin-right:5px">
 			<option value="9"<c:if test="${paging.cd_ctg_b == 9}">selected</c:if>>상품명</option>
 			<option value="1"<c:if test="${paging.cd_ctg_b == 1}">selected</c:if>>기능별</option>
