@@ -1,4 +1,4 @@
-# ecommerce7th
+# jisoo
 
 <summary>
  📖: <width="2%" /> Tech stack
